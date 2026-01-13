@@ -25,2805 +25,2828 @@ THE SOFTWARE.
 using SEC = blas::BLAS_API_SECTIONS;
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP {
+const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
+  std::map<llvm::StringRef, hipCounter> m;
   // Blas management functions
-  {"cublasInit",                                           {"hipblasInit",                                               "rocblas_initialize",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, HIP_UNSUPPORTED}},
-  {"cublasShutdown",                                       {"hipblasShutdown",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetVersion",                                     {"hipblasGetVersion",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetError",                                       {"hipblasGetError",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasAlloc",                                          {"hipblasAlloc",                                              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasFree",                                           {"hipblasFree",                                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetKernelStream",                                {"hipblasSetKernelStream",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetAtomicsMode",                                 {"hipblasGetAtomicsMode",                                     "rocblas_get_atomics_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetAtomicsMode",                                 {"hipblasSetAtomicsMode",                                     "rocblas_set_atomics_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetMathMode",                                    {"hipblasGetMathMode",                                        "rocblas_get_math_mode",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetMathMode",                                    {"hipblasSetMathMode",                                        "rocblas_set_math_mode",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasMigrateComputeType",                             {"hipblasMigrateComputeType",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetSmCountTarget",                               {"hipblasGetSmCountTarget",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetSmCountTarget",                               {"hipblasSetSmCountTarget",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetEmulationStrategy",                           {"hipblasGetEmulationStrategy",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetEmulationStrategy",                           {"hipblasSetEmulationStrategy",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetEmulationSpecialValuesSupport",               {"hipblasGetEmulationSpecialValuesSupport",                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetEmulationSpecialValuesSupport",               {"hipblasSetEmulationSpecialValuesSupport",                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetStatusName",                                  {"hipblasGetStatusName",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetStatusString",                                {"hipblasGetStatusString",                                    "rocblas_status_to_string",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, HIP_UNSUPPORTED}},
-  {"cublasGetFixedPointEmulationMantissaControl",          {"hipblasGetFixedPointEmulationMantissaControl",              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetFixedPointEmulationMantissaControl",          {"hipblasSetFixedPointEmulationMantissaControl",              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetFixedPointEmulationMaxMantissaBitCount",      {"hipblasGetFixedPointEmulationMaxMantissaBitCount",          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetFixedPointEmulationMaxMantissaBitCount",      {"hipblasSetFixedPointEmulationMaxMantissaBitCount",          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetFixedPointEmulationMantissaBitOffset",        {"hipblasGetFixedPointEmulationMantissaBitOffset",            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetFixedPointEmulationMantissaBitOffset",        {"hipblasSetFixedPointEmulationMantissaBitOffset",            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetFixedPointEmulationMantissaBitCountPointer",  {"hipblasGetFixedPointEmulationMantissaBitCountPointer",      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetFixedPointEmulationMantissaBitCountPointer",  {"hipblasSetFixedPointEmulationMantissaBitCountPointer",      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  m["cublasInit"]                                                   = {"hipblasInit",                                               "rocblas_initialize",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, HIP_UNSUPPORTED};
+  m["cublasShutdown"]                                               = {"hipblasShutdown",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetVersion"]                                             = {"hipblasGetVersion",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetError"]                                               = {"hipblasGetError",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasAlloc"]                                                  = {"hipblasAlloc",                                              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasFree"]                                                   = {"hipblasFree",                                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetKernelStream"]                                        = {"hipblasSetKernelStream",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetAtomicsMode"]                                         = {"hipblasGetAtomicsMode",                                     "rocblas_get_atomics_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetAtomicsMode"]                                         = {"hipblasSetAtomicsMode",                                     "rocblas_set_atomics_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetMathMode"]                                            = {"hipblasGetMathMode",                                        "rocblas_get_math_mode",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetMathMode"]                                            = {"hipblasSetMathMode",                                        "rocblas_set_math_mode",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasMigrateComputeType"]                                     = {"hipblasMigrateComputeType",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetSmCountTarget"]                                       = {"hipblasGetSmCountTarget",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetSmCountTarget"]                                       = {"hipblasSetSmCountTarget",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetEmulationStrategy"]                                   = {"hipblasGetEmulationStrategy",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetEmulationStrategy"]                                   = {"hipblasSetEmulationStrategy",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetEmulationSpecialValuesSupport"]                       = {"hipblasGetEmulationSpecialValuesSupport",                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetEmulationSpecialValuesSupport"]                       = {"hipblasSetEmulationSpecialValuesSupport",                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetStatusName"]                                          = {"hipblasGetStatusName",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetStatusString"]                                        = {"hipblasGetStatusString",                                    "rocblas_status_to_string",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, HIP_UNSUPPORTED};
+  m["cublasGetFixedPointEmulationMantissaControl"]                  = {"hipblasGetFixedPointEmulationMantissaControl",              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetFixedPointEmulationMantissaControl"]                  = {"hipblasSetFixedPointEmulationMantissaControl",              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetFixedPointEmulationMaxMantissaBitCount"]              = {"hipblasGetFixedPointEmulationMaxMantissaBitCount",          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetFixedPointEmulationMaxMantissaBitCount"]              = {"hipblasSetFixedPointEmulationMaxMantissaBitCount",          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetFixedPointEmulationMantissaBitOffset"]                = {"hipblasGetFixedPointEmulationMantissaBitOffset",            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetFixedPointEmulationMantissaBitOffset"]                = {"hipblasSetFixedPointEmulationMantissaBitOffset",            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetFixedPointEmulationMantissaBitCountPointer"]          = {"hipblasGetFixedPointEmulationMantissaBitCountPointer",      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetFixedPointEmulationMantissaBitCountPointer"]          = {"hipblasSetFixedPointEmulationMantissaBitCountPointer",      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
 
   // Blas logging
-  {"cublasLogCallback",                                    {"hipblasLogCallback",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasLoggerConfigure",                                {"hipblasLoggerConfigure",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetLoggerCallback",                              {"hipblasSetLoggerCallback",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetLoggerCallback",                              {"hipblasGetLoggerCallback",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  m["cublasLogCallback"]                                            = {"hipblasLogCallback",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasLoggerConfigure"]                                        = {"hipblasLoggerConfigure",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetLoggerCallback"]                                      = {"hipblasSetLoggerCallback",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetLoggerCallback"]                                      = {"hipblasGetLoggerCallback",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
 
   // Blas1 (v1) Routines
-  {"cublasCreate",                                         {"hipblasCreate",                                             "rocblas_create_handle",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasDestroy",                                        {"hipblasDestroy",                                            "rocblas_destroy_handle",                             CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetStream",                                      {"hipblasSetStream",                                          "rocblas_set_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetStream",                                      {"hipblasGetStream",                                          "rocblas_get_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetPointerMode",                                 {"hipblasSetPointerMode",                                     "rocblas_set_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetPointerMode",                                 {"hipblasGetPointerMode",                                     "rocblas_get_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetVector",                                      {"hipblasSetVector",                                          "rocblas_set_vector",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetVector_64",                                   {"hipblasSetVector_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetVector",                                      {"hipblasGetVector",                                          "rocblas_get_vector",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetVector_64",                                   {"hipblasGetVector_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetVectorAsync",                                 {"hipblasSetVectorAsync",                                     "rocblas_set_vector_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetVectorAsync_64",                              {"hipblasSetVectorAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetVectorAsync",                                 {"hipblasGetVectorAsync",                                     "rocblas_get_vector_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetVectorAsync_64",                              {"hipblasGetVectorAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetMatrix",                                      {"hipblasSetMatrix",                                          "rocblas_set_matrix",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetMatrix_64",                                   {"hipblasSetMatrix_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetMatrix",                                      {"hipblasGetMatrix",                                          "rocblas_get_matrix",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetMatrix_64",                                   {"hipblasGetMatrix_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetMatrixAsync",                                 {"hipblasSetMatrixAsync",                                     "rocblas_set_matrix_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetMatrixAsync_64",                              {"hipblasSetMatrixAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetMatrixAsync",                                 {"hipblasGetMatrixAsync",                                     "rocblas_get_matrix_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetMatrixAsync_64",                              {"hipblasGetMatrixAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasXerbla",                                         {"hipblasXerbla",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetWorkspace",                                   {"hipblasSetWorkspace",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetWorkspace_v2",                                {"hipblasSetWorkspace",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
+  m["cublasCreate"]                                                 = {"hipblasCreate",                                             "rocblas_create_handle",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasDestroy"]                                                = {"hipblasDestroy",                                            "rocblas_destroy_handle",                             CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetStream"]                                              = {"hipblasSetStream",                                          "rocblas_set_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetStream"]                                              = {"hipblasGetStream",                                          "rocblas_get_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetPointerMode"]                                         = {"hipblasSetPointerMode",                                     "rocblas_set_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetPointerMode"]                                         = {"hipblasGetPointerMode",                                     "rocblas_get_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetVector"]                                              = {"hipblasSetVector",                                          "rocblas_set_vector",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetVector_64"]                                           = {"hipblasSetVector_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetVector"]                                              = {"hipblasGetVector",                                          "rocblas_get_vector",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetVector_64"]                                           = {"hipblasGetVector_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetVectorAsync"]                                         = {"hipblasSetVectorAsync",                                     "rocblas_set_vector_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetVectorAsync_64"]                                      = {"hipblasSetVectorAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetVectorAsync"]                                         = {"hipblasGetVectorAsync",                                     "rocblas_get_vector_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetVectorAsync_64"]                                      = {"hipblasGetVectorAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetMatrix"]                                              = {"hipblasSetMatrix",                                          "rocblas_set_matrix",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetMatrix_64"]                                           = {"hipblasSetMatrix_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetMatrix"]                                              = {"hipblasGetMatrix",                                          "rocblas_get_matrix",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetMatrix_64"]                                           = {"hipblasGetMatrix_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetMatrixAsync"]                                         = {"hipblasSetMatrixAsync",                                     "rocblas_set_matrix_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetMatrixAsync_64"]                                      = {"hipblasSetMatrixAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetMatrixAsync"]                                         = {"hipblasGetMatrixAsync",                                     "rocblas_get_matrix_async",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetMatrixAsync_64"]                                      = {"hipblasGetMatrixAsync_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasXerbla"]                                                 = {"hipblasXerbla",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetWorkspace"]                                           = {"hipblasSetWorkspace",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetWorkspace_v2"]                                        = {"hipblasSetWorkspace",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
 
   // Blas2 (v2) Routines
-  {"cublasCreate_v2",                                      {"hipblasCreate",                                             "rocblas_create_handle",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasDestroy_v2",                                     {"hipblasDestroy",                                            "rocblas_destroy_handle",                             CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetVersion_v2",                                  {"hipblasGetVersion",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasGetProperty",                                    {"hipblasGetProperty",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
-  {"cublasSetStream_v2",                                   {"hipblasSetStream",                                          "rocblas_set_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetStream_v2",                                   {"hipblasGetStream",                                          "rocblas_get_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasSetPointerMode_v2",                              {"hipblasSetPointerMode",                                     "rocblas_set_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetPointerMode_v2",                              {"hipblasGetPointerMode",                                     "rocblas_get_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER}},
-  {"cublasGetCudartVersion",                               {"hipblasGetCudartVersion",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED}},
+  m["cublasCreate_v2"]                                              = {"hipblasCreate",                                             "rocblas_create_handle",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasDestroy_v2"]                                             = {"hipblasDestroy",                                            "rocblas_destroy_handle",                             CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetVersion_v2"]                                          = {"hipblasGetVersion",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetProperty"]                                            = {"hipblasGetProperty",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasSetStream_v2"]                                           = {"hipblasSetStream",                                          "rocblas_set_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetStream_v2"]                                           = {"hipblasGetStream",                                          "rocblas_get_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasSetPointerMode_v2"]                                      = {"hipblasSetPointerMode",                                     "rocblas_set_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetPointerMode_v2"]                                      = {"hipblasGetPointerMode",                                     "rocblas_get_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
+  m["cublasGetCudartVersion"]                                       = {"hipblasGetCudartVersion",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
 
   // NRM2
   // NRM2 functions' signatures differ from _v2 ones, hipblas and rocblas NRM2 functions have mapping to NRM2_v2 functions only
-  {"cublasSnrm2",                                          {"hipblasSnrm2",                                              "rocblas_snrm2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSnrm2_64",                                       {"hipblasSnrm2_64",                                           "rocblas_snrm2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDnrm2",                                          {"hipblasDnrm2",                                              "rocblas_dnrm2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDnrm2_64",                                       {"hipblasDnrm2_64",                                           "rocblas_dnrm2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasScnrm2",                                         {"hipblasScnrm2",                                             "rocblas_scnrm2",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasScnrm2_64",                                      {"hipblasScnrm2_64",                                          "rocblas_scnrm2_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDznrm2",                                         {"hipblasDznrm2",                                             "rocblas_dznrm2",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDznrm2_64",                                      {"hipblasDznrm2_64",                                          "rocblas_dznrm2_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasNrm2Ex",                                         {"hipblasNrm2Ex",                                             "rocblas_nrm2_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasNrm2Ex_64",                                      {"hipblasNrm2Ex_64",                                          "rocblas_nrm2_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSnrm2"]                                                  = {"hipblasSnrm2",                                              "rocblas_snrm2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSnrm2_64"]                                               = {"hipblasSnrm2_64",                                           "rocblas_snrm2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDnrm2"]                                                  = {"hipblasDnrm2",                                              "rocblas_dnrm2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDnrm2_64"]                                               = {"hipblasDnrm2_64",                                           "rocblas_dnrm2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasScnrm2"]                                                 = {"hipblasScnrm2",                                             "rocblas_scnrm2",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasScnrm2_64"]                                              = {"hipblasScnrm2_64",                                          "rocblas_scnrm2_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDznrm2"]                                                 = {"hipblasDznrm2",                                             "rocblas_dznrm2",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDznrm2_64"]                                              = {"hipblasDznrm2_64",                                          "rocblas_dznrm2_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasNrm2Ex"]                                                 = {"hipblasNrm2Ex",                                             "rocblas_nrm2_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasNrm2Ex_64"]                                              = {"hipblasNrm2Ex_64",                                          "rocblas_nrm2_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // DOT
   // DOT functions' signatures differ from _v2 ones, hipblas and rocblas DOT functions have mapping to DOT_v2 functions only
-  {"cublasSdot",                                           {"hipblasSdot",                                               "rocblas_sdot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSdot_64",                                        {"hipblasSdot_64",                                            "rocblas_sdot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDdot",                                           {"hipblasDdot",                                               "rocblas_ddot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDdot_64",                                        {"hipblasDdot_64",                                            "rocblas_ddot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCdotu",                                          {"hipblasCdotu",                                              "rocblas_cdotu",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCdotu_64",                                       {"hipblasCdotu_64",                                           "rocblas_cdotu_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCdotc",                                          {"hipblasCdotc",                                              "rocblas_cdotc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCdotc_64",                                       {"hipblasCdotc_64",                                           "rocblas_cdotc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdotu",                                          {"hipblasZdotu",                                              "rocblas_zdotu",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZdotu_64",                                       {"hipblasZdotu_64",                                           "rocblas_zdotu_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdotc",                                          {"hipblasZdotc",                                              "rocblas_zdotc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZdotc_64",                                       {"hipblasZdotc_64",                                           "rocblas_zdotc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSdot"]                                                   = {"hipblasSdot",                                               "rocblas_sdot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSdot_64"]                                                = {"hipblasSdot_64",                                            "rocblas_sdot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDdot"]                                                   = {"hipblasDdot",                                               "rocblas_ddot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDdot_64"]                                                = {"hipblasDdot_64",                                            "rocblas_ddot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCdotu"]                                                  = {"hipblasCdotu",                                              "rocblas_cdotu",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCdotu_64"]                                               = {"hipblasCdotu_64",                                           "rocblas_cdotu_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCdotc"]                                                  = {"hipblasCdotc",                                              "rocblas_cdotc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCdotc_64"]                                               = {"hipblasCdotc_64",                                           "rocblas_cdotc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdotu"]                                                  = {"hipblasZdotu",                                              "rocblas_zdotu",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZdotu_64"]                                               = {"hipblasZdotu_64",                                           "rocblas_zdotu_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdotc"]                                                  = {"hipblasZdotc",                                              "rocblas_zdotc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZdotc_64"]                                               = {"hipblasZdotc_64",                                           "rocblas_zdotc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // SCAL
   // SCAL functions' signatures differ from _v2 ones, hipblas and rocblas SCAL functions have mapping to SCAL_v2 functions only
-  {"cublasSscal",                                          {"hipblasSscal",                                              "rocblas_sscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSscal_64",                                       {"hipblasSscal_64",                                           "rocblas_sscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDscal",                                          {"hipblasDscal",                                              "rocblas_dscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDscal_64",                                       {"hipblasDscal_64",                                           "rocblas_dscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCscal",                                          {"hipblasCscal",                                              "rocblas_cscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCscal_64",                                       {"hipblasCscal_64",                                           "rocblas_cscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCsscal",                                         {"hipblasCsscal",                                             "rocblas_csscal",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsscal_64",                                      {"hipblasCsscal_64",                                          "rocblas_csscal_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZscal",                                          {"hipblasZscal",                                              "rocblas_zscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZscal_64",                                       {"hipblasZscal_64",                                           "rocblas_zscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdscal",                                         {"hipblasZdscal",                                             "rocblas_zdscal",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZdscal_64",                                      {"hipblasZdscal_64",                                          "rocblas_zdscal_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSscal"]                                                  = {"hipblasSscal",                                              "rocblas_sscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSscal_64"]                                               = {"hipblasSscal_64",                                           "rocblas_sscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDscal"]                                                  = {"hipblasDscal",                                              "rocblas_dscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDscal_64"]                                               = {"hipblasDscal_64",                                           "rocblas_dscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCscal"]                                                  = {"hipblasCscal",                                              "rocblas_cscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCscal_64"]                                               = {"hipblasCscal_64",                                           "rocblas_cscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCsscal"]                                                 = {"hipblasCsscal",                                             "rocblas_csscal",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCsscal_64"]                                              = {"hipblasCsscal_64",                                          "rocblas_csscal_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZscal"]                                                  = {"hipblasZscal",                                              "rocblas_zscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZscal_64"]                                               = {"hipblasZscal_64",                                           "rocblas_zscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdscal"]                                                 = {"hipblasZdscal",                                             "rocblas_zdscal",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZdscal_64"]                                              = {"hipblasZdscal_64",                                          "rocblas_zdscal_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // AXPY
-  {"cublasSaxpy",                                          {"hipblasSaxpy",                                              "rocblas_saxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSaxpy_64",                                       {"hipblasSaxpy_64",                                           "rocblas_saxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDaxpy",                                          {"hipblasDaxpy",                                              "rocblas_daxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDaxpy_64",                                       {"hipblasDaxpy_64",                                           "rocblas_daxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCaxpy",                                          {"hipblasCaxpy",                                              "rocblas_caxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCaxpy_64",                                       {"hipblasCaxpy_64",                                           "rocblas_caxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZaxpy",                                          {"hipblasZaxpy",                                              "rocblas_zaxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZaxpy_64",                                       {"hipblasZaxpy_64",                                           "rocblas_zaxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSaxpy"]                                                  = {"hipblasSaxpy",                                              "rocblas_saxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSaxpy_64"]                                               = {"hipblasSaxpy_64",                                           "rocblas_saxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDaxpy"]                                                  = {"hipblasDaxpy",                                              "rocblas_daxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDaxpy_64"]                                               = {"hipblasDaxpy_64",                                           "rocblas_daxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCaxpy"]                                                  = {"hipblasCaxpy",                                              "rocblas_caxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCaxpy_64"]                                               = {"hipblasCaxpy_64",                                           "rocblas_caxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZaxpy"]                                                  = {"hipblasZaxpy",                                              "rocblas_zaxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZaxpy_64"]                                               = {"hipblasZaxpy_64",                                           "rocblas_zaxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // COPY
-  {"cublasScopy",                                          {"hipblasScopy",                                              "rocblas_scopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasScopy_64",                                       {"hipblasScopy_64",                                           "rocblas_scopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDcopy",                                          {"hipblasDcopy",                                              "rocblas_dcopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDcopy_64",                                       {"hipblasDcopy_64",                                           "rocblas_dcopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCcopy",                                          {"hipblasCcopy",                                              "rocblas_ccopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCcopy_64",                                       {"hipblasCcopy_64",                                           "rocblas_ccopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZcopy",                                          {"hipblasZcopy",                                              "rocblas_zcopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZcopy_64",                                       {"hipblasZcopy_64",                                           "rocblas_zcopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasScopy"]                                                  = {"hipblasScopy",                                              "rocblas_scopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasScopy_64"]                                               = {"hipblasScopy_64",                                           "rocblas_scopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDcopy"]                                                  = {"hipblasDcopy",                                              "rocblas_dcopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDcopy_64"]                                               = {"hipblasDcopy_64",                                           "rocblas_dcopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCcopy"]                                                  = {"hipblasCcopy",                                              "rocblas_ccopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCcopy_64"]                                               = {"hipblasCcopy_64",                                           "rocblas_ccopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZcopy"]                                                  = {"hipblasZcopy",                                              "rocblas_zcopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZcopy_64"]                                               = {"hipblasZcopy_64",                                           "rocblas_zcopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // SWAP
-  {"cublasSswap",                                          {"hipblasSswap",                                              "rocblas_sswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSswap_64",                                       {"hipblasSswap_64",                                           "rocblas_sswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDswap",                                          {"hipblasDswap",                                              "rocblas_dswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDswap_64",                                       {"hipblasDswap_64",                                           "rocblas_dswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCswap",                                          {"hipblasCswap",                                              "rocblas_cswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCswap_64",                                       {"hipblasCswap_64",                                           "rocblas_cswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZswap",                                          {"hipblasZswap",                                              "rocblas_zswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZswap_64",                                       {"hipblasZswap_64",                                           "rocblas_zswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSswap"]                                                  = {"hipblasSswap",                                              "rocblas_sswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSswap_64"]                                               = {"hipblasSswap_64",                                           "rocblas_sswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDswap"]                                                  = {"hipblasDswap",                                              "rocblas_dswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDswap_64"]                                               = {"hipblasDswap_64",                                           "rocblas_dswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCswap"]                                                  = {"hipblasCswap",                                              "rocblas_cswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCswap_64"]                                               = {"hipblasCswap_64",                                           "rocblas_cswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZswap"]                                                  = {"hipblasZswap",                                              "rocblas_zswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZswap_64"]                                               = {"hipblasZswap_64",                                           "rocblas_zswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // AMAX
-  {"cublasIsamax",                                         {"hipblasIsamax",                                             "rocblas_isamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasIsamax_64",                                      {"hipblasIsamax_64",                                          "rocblas_isamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIdamax",                                         {"hipblasIdamax",                                             "rocblas_idamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasIdamax_64",                                      {"hipblasIdamax_64",                                          "rocblas_idamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIcamax",                                         {"hipblasIcamax",                                             "rocblas_icamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasIcamax_64",                                      {"hipblasIcamax_64",                                          "rocblas_icamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIzamax",                                         {"hipblasIzamax",                                             "rocblas_izamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasIzamax_64",                                      {"hipblasIzamax_64",                                          "rocblas_izamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasIsamax"]                                                 = {"hipblasIsamax",                                             "rocblas_isamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasIsamax_64"]                                              = {"hipblasIsamax_64",                                          "rocblas_isamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIdamax"]                                                 = {"hipblasIdamax",                                             "rocblas_idamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasIdamax_64"]                                              = {"hipblasIdamax_64",                                          "rocblas_idamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIcamax"]                                                 = {"hipblasIcamax",                                             "rocblas_icamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasIcamax_64"]                                              = {"hipblasIcamax_64",                                          "rocblas_icamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIzamax"]                                                 = {"hipblasIzamax",                                             "rocblas_izamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasIzamax_64"]                                              = {"hipblasIzamax_64",                                          "rocblas_izamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // AMIN
-  {"cublasIsamin",                                         {"hipblasIsamin",                                             "rocblas_isamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasIsamin_64",                                      {"hipblasIsamin_64",                                          "rocblas_isamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIdamin",                                         {"hipblasIdamin",                                             "rocblas_idamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasIdamin_64",                                      {"hipblasIdamin_64",                                          "rocblas_idamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIcamin",                                         {"hipblasIcamin",                                             "rocblas_icamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasIcamin_64",                                      {"hipblasIcamin_64",                                          "rocblas_icamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIzamin",                                         {"hipblasIzamin",                                             "rocblas_izamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasIzamin_64",                                      {"hipblasIzamin_64",                                          "rocblas_izamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasIsamin"]                                                 = {"hipblasIsamin",                                             "rocblas_isamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasIsamin_64"]                                              = {"hipblasIsamin_64",                                          "rocblas_isamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIdamin"]                                                 = {"hipblasIdamin",                                             "rocblas_idamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasIdamin_64"]                                              = {"hipblasIdamin_64",                                          "rocblas_idamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIcamin"]                                                 = {"hipblasIcamin",                                             "rocblas_icamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasIcamin_64"]                                              = {"hipblasIcamin_64",                                          "rocblas_icamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIzamin"]                                                 = {"hipblasIzamin",                                             "rocblas_izamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasIzamin_64"]                                              = {"hipblasIzamin_64",                                          "rocblas_izamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ASUM
-  {"cublasSasum",                                          {"hipblasSasum",                                              "rocblas_sasum",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSasum_64",                                       {"hipblasSasum_64",                                           "rocblas_sasum_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDasum",                                          {"hipblasDasum",                                              "rocblas_dasum",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDasum_64",                                       {"hipblasDasum_64",                                           "rocblas_dasum_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasScasum",                                         {"hipblasScasum",                                             "rocblas_scasum",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasScasum_64",                                      {"hipblasScasum_64",                                          "rocblas_scasum_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDzasum",                                         {"hipblasDzasum",                                             "rocblas_dzasum",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDzasum_64",                                      {"hipblasDzasum_64",                                          "rocblas_dzasum_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSasum"]                                                  = {"hipblasSasum",                                              "rocblas_sasum",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSasum_64"]                                               = {"hipblasSasum_64",                                           "rocblas_sasum_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDasum"]                                                  = {"hipblasDasum",                                              "rocblas_dasum",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDasum_64"]                                               = {"hipblasDasum_64",                                           "rocblas_dasum_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasScasum"]                                                 = {"hipblasScasum",                                             "rocblas_scasum",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasScasum_64"]                                              = {"hipblasScasum_64",                                          "rocblas_scasum_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDzasum"]                                                 = {"hipblasDzasum",                                             "rocblas_dzasum",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDzasum_64"]                                              = {"hipblasDzasum_64",                                          "rocblas_dzasum_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ROT
-  {"cublasSrot",                                           {"hipblasSrot",                                               "rocblas_srot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSrot_64",                                        {"hipblasSrot_64",                                            "rocblas_srot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDrot",                                           {"hipblasDrot",                                               "rocblas_drot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDrot_64",                                        {"hipblasDrot_64",                                            "rocblas_drot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCrot",                                           {"hipblasCrot",                                               "rocblas_crot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCrot_64",                                        {"hipblasCrot_64",                                            "rocblas_crot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCsrot",                                          {"hipblasCsrot",                                              "rocblas_csrot",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsrot_64",                                       {"hipblasCsrot_64",                                           "rocblas_csrot_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZrot",                                           {"hipblasZrot",                                               "rocblas_zrot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZrot_64",                                        {"hipblasZrot_64",                                            "rocblas_zrot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdrot",                                          {"hipblasZdrot",                                              "rocblas_zdrot",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZdrot_64",                                       {"hipblasZdrot_64",                                           "rocblas_zdrot_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSrot"]                                                   = {"hipblasSrot",                                               "rocblas_srot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSrot_64"]                                                = {"hipblasSrot_64",                                            "rocblas_srot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDrot"]                                                   = {"hipblasDrot",                                               "rocblas_drot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDrot_64"]                                                = {"hipblasDrot_64",                                            "rocblas_drot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCrot"]                                                   = {"hipblasCrot",                                               "rocblas_crot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCrot_64"]                                                = {"hipblasCrot_64",                                            "rocblas_crot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCsrot"]                                                  = {"hipblasCsrot",                                              "rocblas_csrot",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCsrot_64"]                                               = {"hipblasCsrot_64",                                           "rocblas_csrot_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZrot"]                                                   = {"hipblasZrot",                                               "rocblas_zrot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZrot_64"]                                                = {"hipblasZrot_64",                                            "rocblas_zrot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdrot"]                                                  = {"hipblasZdrot",                                              "rocblas_zdrot",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZdrot_64"]                                               = {"hipblasZdrot_64",                                           "rocblas_zdrot_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ROTG
-  {"cublasSrotg",                                          {"hipblasSrotg",                                              "rocblas_srotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDrotg",                                          {"hipblasDrotg",                                              "rocblas_drotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCrotg",                                          {"hipblasCrotg",                                              "rocblas_crotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZrotg",                                          {"hipblasZrotg",                                              "rocblas_zrotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
+  m["cublasSrotg"]                                                  = {"hipblasSrotg",                                              "rocblas_srotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDrotg"]                                                  = {"hipblasDrotg",                                              "rocblas_drotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCrotg"]                                                  = {"hipblasCrotg",                                              "rocblas_crotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZrotg"]                                                  = {"hipblasZrotg",                                              "rocblas_zrotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
 
   // ROTM
-  {"cublasSrotm",                                          {"hipblasSrotm",                                              "rocblas_srotm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSrotm_64",                                       {"hipblasSrotm_64",                                           "rocblas_srotm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDrotm",                                          {"hipblasDrotm",                                              "rocblas_drotm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDrotm_64",                                       {"hipblasDrotm_64",                                           "rocblas_drotm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSrotm"]                                                  = {"hipblasSrotm",                                              "rocblas_srotm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSrotm_64"]                                               = {"hipblasSrotm_64",                                           "rocblas_srotm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDrotm"]                                                  = {"hipblasDrotm",                                              "rocblas_drotm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDrotm_64"]                                               = {"hipblasDrotm_64",                                           "rocblas_drotm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ROTMG
-  {"cublasSrotmg",                                         {"hipblasSrotmg",                                             "rocblas_srotmg",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDrotmg",                                         {"hipblasDrotmg",                                             "rocblas_drotmg",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY}},
+  m["cublasSrotmg"]                                                 = {"hipblasSrotmg",                                             "rocblas_srotmg",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDrotmg"]                                                 = {"hipblasDrotmg",                                             "rocblas_drotmg",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1, HIP_SUPPORTED_V2_ONLY};
 
   // GEMV
-  {"cublasSgemv",                                          {"hipblasSgemv",                                              "rocblas_sgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSgemv_64",                                       {"hipblasSgemv_64",                                           "rocblas_sgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDgemv",                                          {"hipblasDgemv",                                              "rocblas_dgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDgemv_64",                                       {"hipblasDgemv_64",                                           "rocblas_dgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgemv",                                          {"hipblasCgemv",                                              "rocblas_cgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCgemv_64",                                       {"hipblasCgemv_64",                                           "rocblas_cgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgemv",                                          {"hipblasZgemv",                                              "rocblas_zgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZgemv_64",                                       {"hipblasZgemv_64",                                           "rocblas_zgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSgemv"]                                                  = {"hipblasSgemv",                                              "rocblas_sgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSgemv_64"]                                               = {"hipblasSgemv_64",                                           "rocblas_sgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDgemv"]                                                  = {"hipblasDgemv",                                              "rocblas_dgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDgemv_64"]                                               = {"hipblasDgemv_64",                                           "rocblas_dgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgemv"]                                                  = {"hipblasCgemv",                                              "rocblas_cgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCgemv_64"]                                               = {"hipblasCgemv_64",                                           "rocblas_cgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgemv"]                                                  = {"hipblasZgemv",                                              "rocblas_zgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZgemv_64"]                                               = {"hipblasZgemv_64",                                           "rocblas_zgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // GBMV
-  {"cublasSgbmv",                                          {"hipblasSgbmv",                                              "rocblas_sgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSgbmv_64",                                       {"hipblasSgbmv_64",                                           "rocblas_sgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDgbmv",                                          {"hipblasDgbmv",                                              "rocblas_dgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDgbmv_64",                                       {"hipblasDgbmv_64",                                           "rocblas_dgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgbmv",                                          {"hipblasCgbmv",                                              "rocblas_cgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCgbmv_64",                                       {"hipblasCgbmv_64",                                           "rocblas_cgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgbmv",                                          {"hipblasZgbmv",                                              "rocblas_zgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZgbmv_64",                                       {"hipblasZgbmv_64",                                           "rocblas_zgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSgbmv"]                                                  = {"hipblasSgbmv",                                              "rocblas_sgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSgbmv_64"]                                               = {"hipblasSgbmv_64",                                           "rocblas_sgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDgbmv"]                                                  = {"hipblasDgbmv",                                              "rocblas_dgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDgbmv_64"]                                               = {"hipblasDgbmv_64",                                           "rocblas_dgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgbmv"]                                                  = {"hipblasCgbmv",                                              "rocblas_cgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCgbmv_64"]                                               = {"hipblasCgbmv_64",                                           "rocblas_cgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgbmv"]                                                  = {"hipblasZgbmv",                                              "rocblas_zgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZgbmv_64"]                                               = {"hipblasZgbmv_64",                                           "rocblas_zgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TRMV
-  {"cublasStrmv",                                          {"hipblasStrmv",                                              "rocblas_strmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasStrmv_64",                                       {"hipblasStrmv_64",                                           "rocblas_strmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtrmv",                                          {"hipblasDtrmv",                                              "rocblas_dtrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDtrmv_64",                                       {"hipblasDtrmv_64",                                           "rocblas_dtrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtrmv",                                          {"hipblasCtrmv",                                              "rocblas_ctrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCtrmv_64",                                       {"hipblasCtrmv_64",                                           "rocblas_ctrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtrmv",                                          {"hipblasZtrmv",                                              "rocblas_ztrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZtrmv_64",                                       {"hipblasZtrmv_64",                                           "rocblas_ztrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStrmv"]                                                  = {"hipblasStrmv",                                              "rocblas_strmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasStrmv_64"]                                               = {"hipblasStrmv_64",                                           "rocblas_strmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtrmv"]                                                  = {"hipblasDtrmv",                                              "rocblas_dtrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDtrmv_64"]                                               = {"hipblasDtrmv_64",                                           "rocblas_dtrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtrmv"]                                                  = {"hipblasCtrmv",                                              "rocblas_ctrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCtrmv_64"]                                               = {"hipblasCtrmv_64",                                           "rocblas_ctrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtrmv"]                                                  = {"hipblasZtrmv",                                              "rocblas_ztrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZtrmv_64"]                                               = {"hipblasZtrmv_64",                                           "rocblas_ztrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TBMV
-  {"cublasStbmv",                                          {"hipblasStbmv",                                              "rocblas_stbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasStbmv_64",                                       {"hipblasStbmv_64",                                           "rocblas_stbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtbmv",                                          {"hipblasDtbmv",                                              "rocblas_dtbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDtbmv_64",                                       {"hipblasDtbmv_64",                                           "rocblas_dtbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtbmv",                                          {"hipblasCtbmv",                                              "rocblas_ctbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCtbmv_64",                                       {"hipblasCtbmv_64",                                           "rocblas_ctbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtbmv",                                          {"hipblasZtbmv",                                              "rocblas_ztbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZtbmv_64",                                       {"hipblasZtbmv_64",                                           "rocblas_ztbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStbmv"]                                                  = {"hipblasStbmv",                                              "rocblas_stbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasStbmv_64"]                                               = {"hipblasStbmv_64",                                           "rocblas_stbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtbmv"]                                                  = {"hipblasDtbmv",                                              "rocblas_dtbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDtbmv_64"]                                               = {"hipblasDtbmv_64",                                           "rocblas_dtbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtbmv"]                                                  = {"hipblasCtbmv",                                              "rocblas_ctbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCtbmv_64"]                                               = {"hipblasCtbmv_64",                                           "rocblas_ctbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtbmv"]                                                  = {"hipblasZtbmv",                                              "rocblas_ztbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZtbmv_64"]                                               = {"hipblasZtbmv_64",                                           "rocblas_ztbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TPMV
-  {"cublasStpmv",                                          {"hipblasStpmv",                                              "rocblas_stpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasStpmv_64",                                       {"hipblasStpmv_64",                                           "rocblas_stpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtpmv",                                          {"hipblasDtpmv",                                              "rocblas_dtpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDtpmv_64",                                       {"hipblasDtpmv_64",                                           "rocblas_dtpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtpmv",                                          {"hipblasCtpmv",                                              "rocblas_ctpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCtpmv_64",                                       {"hipblasCtpmv_64",                                           "rocblas_ctpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtpmv",                                          {"hipblasZtpmv",                                              "rocblas_ztpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZtpmv_64",                                       {"hipblasZtpmv_64",                                           "rocblas_ztpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStpmv"]                                                  = {"hipblasStpmv",                                              "rocblas_stpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasStpmv_64"]                                               = {"hipblasStpmv_64",                                           "rocblas_stpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtpmv"]                                                  = {"hipblasDtpmv",                                              "rocblas_dtpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDtpmv_64"]                                               = {"hipblasDtpmv_64",                                           "rocblas_dtpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtpmv"]                                                  = {"hipblasCtpmv",                                              "rocblas_ctpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCtpmv_64"]                                               = {"hipblasCtpmv_64",                                           "rocblas_ctpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtpmv"]                                                  = {"hipblasZtpmv",                                              "rocblas_ztpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZtpmv_64"]                                               = {"hipblasZtpmv_64",                                           "rocblas_ztpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TRSV
-  {"cublasStrsv",                                          {"hipblasStrsv",                                              "rocblas_strsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasStrsv_64",                                       {"hipblasStrsv_64",                                           "rocblas_strsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtrsv",                                          {"hipblasDtrsv",                                              "rocblas_dtrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDtrsv_64",                                       {"hipblasDtrsv_64",                                           "rocblas_dtrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtrsv",                                          {"hipblasCtrsv",                                              "rocblas_ctrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCtrsv_64",                                       {"hipblasCtrsv_64",                                           "rocblas_ctrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtrsv",                                          {"hipblasZtrsv",                                              "rocblas_ztrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZtrsv_64",                                       {"hipblasZtrsv_64",                                           "rocblas_ztrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStrsv"]                                                  = {"hipblasStrsv",                                              "rocblas_strsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasStrsv_64"]                                               = {"hipblasStrsv_64",                                           "rocblas_strsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtrsv"]                                                  = {"hipblasDtrsv",                                              "rocblas_dtrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDtrsv_64"]                                               = {"hipblasDtrsv_64",                                           "rocblas_dtrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtrsv"]                                                  = {"hipblasCtrsv",                                              "rocblas_ctrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCtrsv_64"]                                               = {"hipblasCtrsv_64",                                           "rocblas_ctrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtrsv"]                                                  = {"hipblasZtrsv",                                              "rocblas_ztrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZtrsv_64"]                                               = {"hipblasZtrsv_64",                                           "rocblas_ztrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TPSV
-  {"cublasStpsv",                                          {"hipblasStpsv",                                              "rocblas_stpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasStpsv_64",                                       {"hipblasStpsv_64",                                           "rocblas_stpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtpsv",                                          {"hipblasDtpsv",                                              "rocblas_dtpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDtpsv_64",                                       {"hipblasDtpsv_64",                                           "rocblas_dtpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtpsv",                                          {"hipblasCtpsv",                                              "rocblas_ctpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCtpsv_64",                                       {"hipblasCtpsv_64",                                           "rocblas_ctpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtpsv",                                          {"hipblasZtpsv",                                              "rocblas_ztpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZtpsv_64",                                       {"hipblasZtpsv_64",                                           "rocblas_ztpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStpsv"]                                                  = {"hipblasStpsv",                                              "rocblas_stpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasStpsv_64"]                                               = {"hipblasStpsv_64",                                           "rocblas_stpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtpsv"]                                                  = {"hipblasDtpsv",                                              "rocblas_dtpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDtpsv_64"]                                               = {"hipblasDtpsv_64",                                           "rocblas_dtpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtpsv"]                                                  = {"hipblasCtpsv",                                              "rocblas_ctpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCtpsv_64"]                                               = {"hipblasCtpsv_64",                                           "rocblas_ctpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtpsv"]                                                  = {"hipblasZtpsv",                                              "rocblas_ztpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZtpsv_64"]                                               = {"hipblasZtpsv_64",                                           "rocblas_ztpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TBSV
-  {"cublasStbsv",                                          {"hipblasStbsv",                                              "rocblas_stbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasStbsv_64",                                       {"hipblasStbsv_64",                                           "rocblas_stbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtbsv",                                          {"hipblasDtbsv",                                              "rocblas_dtbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDtbsv_64",                                       {"hipblasDtbsv_64",                                           "rocblas_dtbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtbsv",                                          {"hipblasCtbsv",                                              "rocblas_ctbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCtbsv_64",                                       {"hipblasCtbsv_64",                                           "rocblas_ctbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtbsv",                                          {"hipblasZtbsv",                                              "rocblas_ztbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZtbsv_64",                                       {"hipblasZtbsv_64",                                           "rocblas_ztbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStbsv"]                                                  = {"hipblasStbsv",                                              "rocblas_stbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasStbsv_64"]                                               = {"hipblasStbsv_64",                                           "rocblas_stbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtbsv"]                                                  = {"hipblasDtbsv",                                              "rocblas_dtbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDtbsv_64"]                                               = {"hipblasDtbsv_64",                                           "rocblas_dtbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtbsv"]                                                  = {"hipblasCtbsv",                                              "rocblas_ctbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCtbsv_64"]                                               = {"hipblasCtbsv_64",                                           "rocblas_ctbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtbsv"]                                                  = {"hipblasZtbsv",                                              "rocblas_ztbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZtbsv_64"]                                               = {"hipblasZtbsv_64",                                           "rocblas_ztbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SYMV/HEMV
-  {"cublasSsymv",                                          {"hipblasSsymv",                                              "rocblas_ssymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSsymv_64",                                       {"hipblasSsymv_64",                                           "rocblas_ssymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsymv",                                          {"hipblasDsymv",                                              "rocblas_dsymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDsymv_64",                                       {"hipblasDsymv_64",                                           "rocblas_dsymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsymv",                                          {"hipblasCsymv",                                              "rocblas_csymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsymv_64",                                       {"hipblasCsymv_64",                                           "rocblas_csymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsymv",                                          {"hipblasZsymv",                                              "rocblas_zsymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZsymv_64",                                       {"hipblasZsymv_64",                                           "rocblas_zsymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChemv",                                          {"hipblasChemv",                                              "rocblas_chemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasChemv_64",                                       {"hipblasChemv_64",                                           "rocblas_chemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhemv",                                          {"hipblasZhemv",                                              "rocblas_zhemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZhemv_64",                                       {"hipblasZhemv_64",                                           "rocblas_zhemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSsymv"]                                                  = {"hipblasSsymv",                                              "rocblas_ssymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSsymv_64"]                                               = {"hipblasSsymv_64",                                           "rocblas_ssymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsymv"]                                                  = {"hipblasDsymv",                                              "rocblas_dsymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDsymv_64"]                                               = {"hipblasDsymv_64",                                           "rocblas_dsymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsymv"]                                                  = {"hipblasCsymv",                                              "rocblas_csymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCsymv_64"]                                               = {"hipblasCsymv_64",                                           "rocblas_csymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsymv"]                                                  = {"hipblasZsymv",                                              "rocblas_zsymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZsymv_64"]                                               = {"hipblasZsymv_64",                                           "rocblas_zsymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChemv"]                                                  = {"hipblasChemv",                                              "rocblas_chemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasChemv_64"]                                               = {"hipblasChemv_64",                                           "rocblas_chemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhemv"]                                                  = {"hipblasZhemv",                                              "rocblas_zhemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZhemv_64"]                                               = {"hipblasZhemv_64",                                           "rocblas_zhemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SBMV/HBMV
-  {"cublasSsbmv",                                          {"hipblasSsbmv",                                              "rocblas_ssbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSsbmv_64",                                       {"hipblasSsbmv_64",                                           "rocblas_ssbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsbmv",                                          {"hipblasDsbmv",                                              "rocblas_dsbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDsbmv_64",                                       {"hipblasDsbmv_64",                                           "rocblas_dsbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChbmv",                                          {"hipblasChbmv",                                              "rocblas_chbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasChbmv_64",                                       {"hipblasChbmv_64",                                           "rocblas_chbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhbmv",                                          {"hipblasZhbmv",                                              "rocblas_zhbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZhbmv_64",                                       {"hipblasZhbmv_64",                                           "rocblas_zhbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSsbmv"]                                                  = {"hipblasSsbmv",                                              "rocblas_ssbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSsbmv_64"]                                               = {"hipblasSsbmv_64",                                           "rocblas_ssbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsbmv"]                                                  = {"hipblasDsbmv",                                              "rocblas_dsbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDsbmv_64"]                                               = {"hipblasDsbmv_64",                                           "rocblas_dsbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChbmv"]                                                  = {"hipblasChbmv",                                              "rocblas_chbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasChbmv_64"]                                               = {"hipblasChbmv_64",                                           "rocblas_chbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhbmv"]                                                  = {"hipblasZhbmv",                                              "rocblas_zhbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZhbmv_64"]                                               = {"hipblasZhbmv_64",                                           "rocblas_zhbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SPMV/HPMV
-  {"cublasSspmv",                                          {"hipblasSspmv",                                              "rocblas_sspmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSspmv_64",                                       {"hipblasSspmv_64",                                           "rocblas_sspmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspmv",                                          {"hipblasDspmv",                                              "rocblas_dspmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDspmv_64",                                       {"hipblasDspmv_64",                                           "rocblas_dspmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpmv",                                          {"hipblasChpmv",                                              "rocblas_chpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasChpmv_64",                                       {"hipblasChpmv_64",                                           "rocblas_chpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpmv",                                          {"hipblasZhpmv",                                              "rocblas_zhpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZhpmv_64",                                       {"hipblasZhpmv_64",                                           "rocblas_zhpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSspmv"]                                                  = {"hipblasSspmv",                                              "rocblas_sspmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSspmv_64"]                                               = {"hipblasSspmv_64",                                           "rocblas_sspmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspmv"]                                                  = {"hipblasDspmv",                                              "rocblas_dspmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDspmv_64"]                                               = {"hipblasDspmv_64",                                           "rocblas_dspmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpmv"]                                                  = {"hipblasChpmv",                                              "rocblas_chpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasChpmv_64"]                                               = {"hipblasChpmv_64",                                           "rocblas_chpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpmv"]                                                  = {"hipblasZhpmv",                                              "rocblas_zhpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZhpmv_64"]                                               = {"hipblasZhpmv_64",                                           "rocblas_zhpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // GER
-  {"cublasSger",                                           {"hipblasSger",                                               "rocblas_sger",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSger_64",                                        {"hipblasSger_64",                                            "rocblas_sger_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDger",                                           {"hipblasDger",                                               "rocblas_dger",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDger_64",                                        {"hipblasDger_64",                                            "rocblas_dger_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgeru",                                          {"hipblasCgeru",                                              "rocblas_cgeru",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCgeru_64",                                       {"hipblasCgeru_64",                                           "rocblas_cgeru_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgerc",                                          {"hipblasCgerc",                                              "rocblas_cgerc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCgerc_64",                                       {"hipblasCgerc_64",                                           "rocblas_cgerc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgeru",                                          {"hipblasZgeru",                                              "rocblas_zgeru",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZgeru_64",                                       {"hipblasZgeru_64",                                           "rocblas_zgeru_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgerc",                                          {"hipblasZgerc",                                              "rocblas_zgerc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZgerc_64",                                       {"hipblasZgerc_64",                                           "rocblas_zgerc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSger"]                                                   = {"hipblasSger",                                               "rocblas_sger",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSger_64"]                                                = {"hipblasSger_64",                                            "rocblas_sger_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDger"]                                                   = {"hipblasDger",                                               "rocblas_dger",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDger_64"]                                                = {"hipblasDger_64",                                            "rocblas_dger_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgeru"]                                                  = {"hipblasCgeru",                                              "rocblas_cgeru",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCgeru_64"]                                               = {"hipblasCgeru_64",                                           "rocblas_cgeru_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgerc"]                                                  = {"hipblasCgerc",                                              "rocblas_cgerc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCgerc_64"]                                               = {"hipblasCgerc_64",                                           "rocblas_cgerc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgeru"]                                                  = {"hipblasZgeru",                                              "rocblas_zgeru",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZgeru_64"]                                               = {"hipblasZgeru_64",                                           "rocblas_zgeru_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgerc"]                                                  = {"hipblasZgerc",                                              "rocblas_zgerc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZgerc_64"]                                               = {"hipblasZgerc_64",                                           "rocblas_zgerc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SYR/HER
-  {"cublasSsyr",                                           {"hipblasSsyr",                                               "rocblas_ssyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSsyr_64",                                        {"hipblasSsyr_64",                                            "rocblas_ssyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsyr",                                           {"hipblasDsyr",                                               "rocblas_dsyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDsyr_64",                                        {"hipblasDsyr_64",                                            "rocblas_dsyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsyr",                                           {"hipblasCsyr",                                               "rocblas_csyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsyr_64",                                        {"hipblasCsyr_64",                                            "rocblas_csyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsyr",                                           {"hipblasZsyr",                                               "rocblas_zsyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZsyr_64",                                        {"hipblasZsyr_64",                                            "rocblas_zsyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCher",                                           {"hipblasCher",                                               "rocblas_cher",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCher_64",                                        {"hipblasCher_64",                                            "rocblas_cher_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZher",                                           {"hipblasZher",                                               "rocblas_zher",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZher_64",                                        {"hipblasZher_64",                                            "rocblas_zher_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSsyr"]                                                   = {"hipblasSsyr",                                               "rocblas_ssyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSsyr_64"]                                                = {"hipblasSsyr_64",                                            "rocblas_ssyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsyr"]                                                   = {"hipblasDsyr",                                               "rocblas_dsyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDsyr_64"]                                                = {"hipblasDsyr_64",                                            "rocblas_dsyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsyr"]                                                   = {"hipblasCsyr",                                               "rocblas_csyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCsyr_64"]                                                = {"hipblasCsyr_64",                                            "rocblas_csyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsyr"]                                                   = {"hipblasZsyr",                                               "rocblas_zsyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZsyr_64"]                                                = {"hipblasZsyr_64",                                            "rocblas_zsyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCher"]                                                   = {"hipblasCher",                                               "rocblas_cher",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCher_64"]                                                = {"hipblasCher_64",                                            "rocblas_cher_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZher"]                                                   = {"hipblasZher",                                               "rocblas_zher",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZher_64"]                                                = {"hipblasZher_64",                                            "rocblas_zher_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SPR/HPR
-  {"cublasSspr",                                           {"hipblasSspr",                                               "rocblas_sspr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSspr_64",                                        {"hipblasSspr_64",                                            "rocblas_sspr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspr",                                           {"hipblasDspr",                                               "rocblas_dspr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDspr_64",                                        {"hipblasDspr_64",                                            "rocblas_dspr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpr",                                           {"hipblasChpr",                                               "rocblas_chpr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasChpr_64",                                        {"hipblasChpr_64",                                            "rocblas_chpr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpr",                                           {"hipblasZhpr",                                               "rocblas_zhpr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZhpr_64",                                        {"hipblasZhpr_64",                                            "rocblas_zhpr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSspr"]                                                   = {"hipblasSspr",                                               "rocblas_sspr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSspr_64"]                                                = {"hipblasSspr_64",                                            "rocblas_sspr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspr"]                                                   = {"hipblasDspr",                                               "rocblas_dspr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDspr_64"]                                                = {"hipblasDspr_64",                                            "rocblas_dspr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpr"]                                                   = {"hipblasChpr",                                               "rocblas_chpr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasChpr_64"]                                                = {"hipblasChpr_64",                                            "rocblas_chpr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpr"]                                                   = {"hipblasZhpr",                                               "rocblas_zhpr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZhpr_64"]                                                = {"hipblasZhpr_64",                                            "rocblas_zhpr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SYR2/HER2
-  {"cublasSsyr2",                                          {"hipblasSsyr2",                                              "rocblas_ssyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSsyr2_64",                                       {"hipblasSsyr2_64",                                           "rocblas_ssyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsyr2",                                          {"hipblasDsyr2",                                              "rocblas_dsyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDsyr2_64",                                       {"hipblasDsyr2_64",                                           "rocblas_dsyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsyr2",                                          {"hipblasCsyr2",                                              "rocblas_csyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsyr2_64",                                       {"hipblasCsyr2_64",                                           "rocblas_csyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsyr2",                                          {"hipblasZsyr2",                                              "rocblas_zsyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZsyr2_64",                                       {"hipblasZsyr2_64",                                           "rocblas_zsyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCher2",                                          {"hipblasCher2",                                              "rocblas_cher2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCher2_64",                                       {"hipblasCher2_64",                                           "rocblas_cher2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZher2",                                          {"hipblasZher2",                                              "rocblas_zher2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZher2_64",                                       {"hipblasZher2_64",                                           "rocblas_zher2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSsyr2"]                                                  = {"hipblasSsyr2",                                              "rocblas_ssyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSsyr2_64"]                                               = {"hipblasSsyr2_64",                                           "rocblas_ssyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsyr2"]                                                  = {"hipblasDsyr2",                                              "rocblas_dsyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDsyr2_64"]                                               = {"hipblasDsyr2_64",                                           "rocblas_dsyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsyr2"]                                                  = {"hipblasCsyr2",                                              "rocblas_csyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCsyr2_64"]                                               = {"hipblasCsyr2_64",                                           "rocblas_csyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsyr2"]                                                  = {"hipblasZsyr2",                                              "rocblas_zsyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZsyr2_64"]                                               = {"hipblasZsyr2_64",                                           "rocblas_zsyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCher2"]                                                  = {"hipblasCher2",                                              "rocblas_cher2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCher2_64"]                                               = {"hipblasCher2_64",                                           "rocblas_cher2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZher2"]                                                  = {"hipblasZher2",                                              "rocblas_zher2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZher2_64"]                                               = {"hipblasZher2_64",                                           "rocblas_zher2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SPR2/HPR2
-  {"cublasSspr2",                                          {"hipblasSspr2",                                              "rocblas_sspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSspr2_64",                                       {"hipblasSspr2_64",                                           "rocblas_sspr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspr2",                                          {"hipblasDspr2",                                              "rocblas_dspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDspr2_64",                                       {"hipblasDspr2_64",                                           "rocblas_dspr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpr2",                                          {"hipblasChpr2",                                              "rocblas_chpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasChpr2_64",                                       {"hipblasChpr2_64",                                           "rocblas_chpr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpr2",                                          {"hipblasZhpr2",                                              "rocblas_zhpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZhpr2_64",                                       {"hipblasZhpr2_64",                                           "rocblas_zhpr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSspr2"]                                                  = {"hipblasSspr2",                                              "rocblas_sspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSspr2_64"]                                               = {"hipblasSspr2_64",                                           "rocblas_sspr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspr2"]                                                  = {"hipblasDspr2",                                              "rocblas_dspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDspr2_64"]                                               = {"hipblasDspr2_64",                                           "rocblas_dspr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpr2"]                                                  = {"hipblasChpr2",                                              "rocblas_chpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasChpr2_64"]                                               = {"hipblasChpr2_64",                                           "rocblas_chpr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpr2"]                                                  = {"hipblasZhpr2",                                              "rocblas_zhpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZhpr2_64"]                                               = {"hipblasZhpr2_64",                                           "rocblas_zhpr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // Blas3 (v1) Routines
   // GEMM
-  {"cublasSgemm",                                          {"hipblasSgemm",                                              "rocblas_sgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSgemm_64",                                       {"hipblasSgemm_64",                                           "rocblas_sgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemm",                                          {"hipblasDgemm",                                              "rocblas_dgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDgemm_64",                                       {"hipblasDgemm_64",                                           "rocblas_dgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemm",                                          {"hipblasCgemm",                                              "rocblas_cgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCgemm_64",                                       {"hipblasCgemm_64",                                           "rocblas_cgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemm",                                          {"hipblasZgemm",                                              "rocblas_zgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZgemm_64",                                       {"hipblasZgemm_64",                                           "rocblas_zgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasHgemm",                                          {"hipblasHgemm",                                              "rocblas_hgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasHgemm_64",                                       {"hipblasHgemm_64",                                           "rocblas_hgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasSgemm"]                                                  = {"hipblasSgemm",                                              "rocblas_sgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSgemm_64"]                                               = {"hipblasSgemm_64",                                           "rocblas_sgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemm"]                                                  = {"hipblasDgemm",                                              "rocblas_dgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDgemm_64"]                                               = {"hipblasDgemm_64",                                           "rocblas_dgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemm"]                                                  = {"hipblasCgemm",                                              "rocblas_cgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCgemm_64"]                                               = {"hipblasCgemm_64",                                           "rocblas_cgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemm"]                                                  = {"hipblasZgemm",                                              "rocblas_zgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZgemm_64"]                                               = {"hipblasZgemm_64",                                           "rocblas_zgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasHgemm"]                                                  = {"hipblasHgemm",                                              "rocblas_hgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasHgemm_64"]                                               = {"hipblasHgemm_64",                                           "rocblas_hgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // BATCH GEMM
-  {"cublasSgemmBatched",                                   {"hipblasSgemmBatched",                                       "rocblas_sgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSgemmBatched_64",                                {"hipblasSgemmBatched_64",                                    "rocblas_sgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSgemmGroupedBatched",                            {"hipblasSgemmGroupedBatched",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasSgemmGroupedBatched_64",                         {"hipblasSgemmGroupedBatched_64",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasDgemmBatched",                                   {"hipblasDgemmBatched",                                       "rocblas_dgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemmBatched_64",                                {"hipblasDgemmBatched_64",                                    "rocblas_dgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemmGroupedBatched",                            {"hipblasDgemmGroupedBatched",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasDgemmGroupedBatched_64",                         {"hipblasDgemmGroupedBatched_64",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasHgemmBatched",                                   {"hipblasHgemmBatched",                                       "rocblas_hgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasHgemmBatched_64",                                {"hipblasHgemmBatched_64",                                    "rocblas_hgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSgemmStridedBatched",                            {"hipblasSgemmStridedBatched",                                "rocblas_sgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSgemmStridedBatched_64",                         {"hipblasSgemmStridedBatched_64",                             "rocblas_sgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemmStridedBatched",                            {"hipblasDgemmStridedBatched",                                "rocblas_dgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemmStridedBatched_64",                         {"hipblasDgemmStridedBatched_64",                             "rocblas_dgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemmBatched",                                   {"hipblasCgemmBatched",                                       "rocblas_cgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemmBatched_64",                                {"hipblasCgemmBatched_64",                                    "rocblas_cgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemm3mBatched",                                 {"hipblasCgemm3mBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasCgemm3mBatched_64",                              {"hipblasCgemm3mBatched_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasZgemmBatched",                                   {"hipblasZgemmBatched",                                       "rocblas_zgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemmBatched_64",                                {"hipblasZgemmBatched_64",                                    "rocblas_zgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemmStridedBatched",                            {"hipblasCgemmStridedBatched",                                "rocblas_cgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemmStridedBatched_64",                         {"hipblasCgemmStridedBatched_64",                             "rocblas_cgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemm3mStridedBatched",                          {"hipblasCgemm3mStridedBatched",                              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasCgemm3mStridedBatched_64",                       {"hipblasCgemm3mStridedBatched_64",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasZgemmStridedBatched",                            {"hipblasZgemmStridedBatched",                                "rocblas_zgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemmStridedBatched_64",                         {"hipblasZgemmStridedBatched_64",                             "rocblas_zgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasHgemmStridedBatched",                            {"hipblasHgemmStridedBatched",                                "rocblas_hgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasHgemmStridedBatched_64",                         {"hipblasHgemmStridedBatched_64",                             "rocblas_hgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasGemmGroupedBatchedEx",                           {"hipblasGemmGroupedBatchedEx",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasGemmGroupedBatchedEx_64",                        {"hipblasGemmGroupedBatchedEx_64",                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
+  m["cublasSgemmBatched"]                                           = {"hipblasSgemmBatched",                                       "rocblas_sgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSgemmBatched_64"]                                        = {"hipblasSgemmBatched_64",                                    "rocblas_sgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSgemmGroupedBatched"]                                    = {"hipblasSgemmGroupedBatched",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasSgemmGroupedBatched_64"]                                 = {"hipblasSgemmGroupedBatched_64",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasDgemmBatched"]                                           = {"hipblasDgemmBatched",                                       "rocblas_dgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemmBatched_64"]                                        = {"hipblasDgemmBatched_64",                                    "rocblas_dgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemmGroupedBatched"]                                    = {"hipblasDgemmGroupedBatched",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasDgemmGroupedBatched_64"]                                 = {"hipblasDgemmGroupedBatched_64",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasHgemmBatched"]                                           = {"hipblasHgemmBatched",                                       "rocblas_hgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasHgemmBatched_64"]                                        = {"hipblasHgemmBatched_64",                                    "rocblas_hgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSgemmStridedBatched"]                                    = {"hipblasSgemmStridedBatched",                                "rocblas_sgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSgemmStridedBatched_64"]                                 = {"hipblasSgemmStridedBatched_64",                             "rocblas_sgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemmStridedBatched"]                                    = {"hipblasDgemmStridedBatched",                                "rocblas_dgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemmStridedBatched_64"]                                 = {"hipblasDgemmStridedBatched_64",                             "rocblas_dgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemmBatched"]                                           = {"hipblasCgemmBatched",                                       "rocblas_cgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemmBatched_64"]                                        = {"hipblasCgemmBatched_64",                                    "rocblas_cgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemm3mBatched"]                                         = {"hipblasCgemm3mBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasCgemm3mBatched_64"]                                      = {"hipblasCgemm3mBatched_64",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasZgemmBatched"]                                           = {"hipblasZgemmBatched",                                       "rocblas_zgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemmBatched_64"]                                        = {"hipblasZgemmBatched_64",                                    "rocblas_zgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemmStridedBatched"]                                    = {"hipblasCgemmStridedBatched",                                "rocblas_cgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemmStridedBatched_64"]                                 = {"hipblasCgemmStridedBatched_64",                             "rocblas_cgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemm3mStridedBatched"]                                  = {"hipblasCgemm3mStridedBatched",                              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasCgemm3mStridedBatched_64"]                               = {"hipblasCgemm3mStridedBatched_64",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasZgemmStridedBatched"]                                    = {"hipblasZgemmStridedBatched",                                "rocblas_zgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemmStridedBatched_64"]                                 = {"hipblasZgemmStridedBatched_64",                             "rocblas_zgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasHgemmStridedBatched"]                                    = {"hipblasHgemmStridedBatched",                                "rocblas_hgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasHgemmStridedBatched_64"]                                 = {"hipblasHgemmStridedBatched_64",                             "rocblas_hgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasGemmGroupedBatchedEx"]                                   = {"hipblasGemmGroupedBatchedEx",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasGemmGroupedBatchedEx_64"]                                = {"hipblasGemmGroupedBatchedEx_64",                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
 
   // BATCH GEMV
-  {"cublasSgemvBatched",                                   {"hipblasSgemvBatched",                                       "rocblas_sgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSgemvBatched_64",                                {"hipblasSgemvBatched_64",                                    "rocblas_sgemv_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemvBatched",                                   {"hipblasDgemvBatched",                                       "rocblas_dgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemvBatched_64",                                {"hipblasDgemvBatched_64",                                    "rocblas_dgemv_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemvBatched",                                   {"hipblasCgemvBatched",                                       "rocblas_cgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemvBatched_64",                                {"hipblasCgemvBatched_64",                                    "rocblas_cgemv_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemvBatched",                                   {"hipblasZgemvBatched",                                       "rocblas_zgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemvBatched_64",                                {"hipblasZgemvBatched_64",                                    "rocblas_zgemv_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasHSHgemvBatched",                                 {"hipblasHSHgemvBatched",                                     "rocblas_hshgemv_batched",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasHSHgemvBatched_64",                              {"hipblasHSHgemvBatched_64",                                  "rocblas_hshgemv_batched_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasHSSgemvBatched",                                 {"hipblasHSSgemvBatched",                                     "rocblas_hssgemv_batched",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasHSSgemvBatched_64",                              {"hipblasHSSgemvBatched_64",                                  "rocblas_hssgemv_batched_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasTSTgemvBatched",                                 {"hipblasTSTgemvBatched",                                     "rocblas_tstgemv_batched",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasTSTgemvBatched_64",                              {"hipblasTSTgemvBatched_64",                                  "rocblas_tstgemv_batched_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasTSSgemvBatched",                                 {"hipblasTSSgemvBatched",                                     "rocblas_tssgemv_batched",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasTSSgemvBatched_64",                              {"hipblasTSSgemvBatched_64",                                  "rocblas_tssgemv_batched_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasSgemvStridedBatched",                            {"hipblasSgemvStridedBatched",                                "rocblas_sgemv_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSgemvStridedBatched_64",                         {"hipblasSgemvStridedBatched_64",                             "rocblas_sgemv_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemvStridedBatched",                            {"hipblasDgemvStridedBatched",                                "rocblas_dgemv_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemvStridedBatched_64",                         {"hipblasDgemvStridedBatched_64",                             "rocblas_dgemv_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemvStridedBatched",                            {"hipblasCgemvStridedBatched",                                "rocblas_cgemv_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemvStridedBatched_64",                         {"hipblasCgemvStridedBatched_64",                             "rocblas_cgemv_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemvStridedBatched",                            {"hipblasZgemvStridedBatched",                                "rocblas_zgemv_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemvStridedBatched_64",                         {"hipblasZgemvStridedBatched_64",                             "rocblas_zgemv_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasHSHgemvStridedBatched",                          {"hipblasHSHgemvStridedBatched",                              "rocblas_hshgemv_strided_batched",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasHSHgemvStridedBatched_64",                       {"hipblasHSHgemvStridedBatched_64",                           "rocblas_hshgemv_strided_batched_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasHSSgemvStridedBatched",                          {"hipblasHSSgemvStridedBatched",                              "rocblas_hssgemv_strided_batched",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasHSSgemvStridedBatched_64",                       {"hipblasHSSgemvStridedBatched_64",                           "rocblas_hssgemv_strided_batched_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasTSTgemvStridedBatched",                          {"hipblasTSTgemvStridedBatched",                              "rocblas_tstgemv_strided_batched",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasTSTgemvStridedBatched_64",                       {"hipblasTSTgemvStridedBatched_64",                           "rocblas_tstgemv_strided_batched_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasTSSgemvStridedBatched",                          {"hipblasTSSgemvStridedBatched",                              "rocblas_tssgemv_strided_batched",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
-  {"cublasTSSgemvStridedBatched_64",                       {"hipblasTSSgemvStridedBatched_64",                           "rocblas_tssgemv_strided_batched_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED}},
+  m["cublasSgemvBatched"]                                           = {"hipblasSgemvBatched",                                       "rocblas_sgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSgemvBatched_64"]                                        = {"hipblasSgemvBatched_64",                                    "rocblas_sgemv_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemvBatched"]                                           = {"hipblasDgemvBatched",                                       "rocblas_dgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemvBatched_64"]                                        = {"hipblasDgemvBatched_64",                                    "rocblas_dgemv_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemvBatched"]                                           = {"hipblasCgemvBatched",                                       "rocblas_cgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemvBatched_64"]                                        = {"hipblasCgemvBatched_64",                                    "rocblas_cgemv_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemvBatched"]                                           = {"hipblasZgemvBatched",                                       "rocblas_zgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemvBatched_64"]                                        = {"hipblasZgemvBatched_64",                                    "rocblas_zgemv_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasHSHgemvBatched"]                                         = {"hipblasHSHgemvBatched",                                     "rocblas_hshgemv_batched",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasHSHgemvBatched_64"]                                      = {"hipblasHSHgemvBatched_64",                                  "rocblas_hshgemv_batched_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasHSSgemvBatched"]                                         = {"hipblasHSSgemvBatched",                                     "rocblas_hssgemv_batched",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasHSSgemvBatched_64"]                                      = {"hipblasHSSgemvBatched_64",                                  "rocblas_hssgemv_batched_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasTSTgemvBatched"]                                         = {"hipblasTSTgemvBatched",                                     "rocblas_tstgemv_batched",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasTSTgemvBatched_64"]                                      = {"hipblasTSTgemvBatched_64",                                  "rocblas_tstgemv_batched_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasTSSgemvBatched"]                                         = {"hipblasTSSgemvBatched",                                     "rocblas_tssgemv_batched",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasTSSgemvBatched_64"]                                      = {"hipblasTSSgemvBatched_64",                                  "rocblas_tssgemv_batched_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasSgemvStridedBatched"]                                    = {"hipblasSgemvStridedBatched",                                "rocblas_sgemv_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSgemvStridedBatched_64"]                                 = {"hipblasSgemvStridedBatched_64",                             "rocblas_sgemv_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemvStridedBatched"]                                    = {"hipblasDgemvStridedBatched",                                "rocblas_dgemv_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemvStridedBatched_64"]                                 = {"hipblasDgemvStridedBatched_64",                             "rocblas_dgemv_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemvStridedBatched"]                                    = {"hipblasCgemvStridedBatched",                                "rocblas_cgemv_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemvStridedBatched_64"]                                 = {"hipblasCgemvStridedBatched_64",                             "rocblas_cgemv_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemvStridedBatched"]                                    = {"hipblasZgemvStridedBatched",                                "rocblas_zgemv_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemvStridedBatched_64"]                                 = {"hipblasZgemvStridedBatched_64",                             "rocblas_zgemv_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasHSHgemvStridedBatched"]                                  = {"hipblasHSHgemvStridedBatched",                              "rocblas_hshgemv_strided_batched",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasHSHgemvStridedBatched_64"]                               = {"hipblasHSHgemvStridedBatched_64",                           "rocblas_hshgemv_strided_batched_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasHSSgemvStridedBatched"]                                  = {"hipblasHSSgemvStridedBatched",                              "rocblas_hssgemv_strided_batched",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasHSSgemvStridedBatched_64"]                               = {"hipblasHSSgemvStridedBatched_64",                           "rocblas_hssgemv_strided_batched_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasTSTgemvStridedBatched"]                                  = {"hipblasTSTgemvStridedBatched",                              "rocblas_tstgemv_strided_batched",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasTSTgemvStridedBatched_64"]                               = {"hipblasTSTgemvStridedBatched_64",                           "rocblas_tstgemv_strided_batched_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasTSSgemvStridedBatched"]                                  = {"hipblasTSSgemvStridedBatched",                              "rocblas_tssgemv_strided_batched",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
+  m["cublasTSSgemvStridedBatched_64"]                               = {"hipblasTSSgemvStridedBatched_64",                           "rocblas_tssgemv_strided_batched_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_UNSUPPORTED};
 
   // SYRK
-  {"cublasSsyrk",                                          {"hipblasSsyrk",                                              "rocblas_ssyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSsyrk_64",                                       {"hipblasSsyrk_64",                                           "rocblas_ssyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsyrk",                                          {"hipblasDsyrk",                                              "rocblas_dsyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDsyrk_64",                                       {"hipblasDsyrk_64",                                           "rocblas_dsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsyrk",                                          {"hipblasCsyrk",                                              "rocblas_csyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsyrk_64",                                       {"hipblasCsyrk_64",                                           "rocblas_csyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsyrk",                                          {"hipblasZsyrk",                                              "rocblas_zsyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZsyrk_64",                                       {"hipblasZsyrk_64",                                           "rocblas_zsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasSsyrk"]                                                  = {"hipblasSsyrk",                                              "rocblas_ssyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSsyrk_64"]                                               = {"hipblasSsyrk_64",                                           "rocblas_ssyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsyrk"]                                                  = {"hipblasDsyrk",                                              "rocblas_dsyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDsyrk_64"]                                               = {"hipblasDsyrk_64",                                           "rocblas_dsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsyrk"]                                                  = {"hipblasCsyrk",                                              "rocblas_csyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCsyrk_64"]                                               = {"hipblasCsyrk_64",                                           "rocblas_csyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsyrk"]                                                  = {"hipblasZsyrk",                                              "rocblas_zsyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZsyrk_64"]                                               = {"hipblasZsyrk_64",                                           "rocblas_zsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // HERK
-  {"cublasCherk",                                          {"hipblasCherk",                                              "rocblas_cherk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCherk_64",                                       {"hipblasCherk_64",                                           "rocblas_cherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZherk",                                          {"hipblasZherk",                                              "rocblas_zherk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZherk_64",                                       {"hipblasZherk_64",                                           "rocblas_zherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasCherk"]                                                  = {"hipblasCherk",                                              "rocblas_cherk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCherk_64"]                                               = {"hipblasCherk_64",                                           "rocblas_cherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZherk"]                                                  = {"hipblasZherk",                                              "rocblas_zherk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZherk_64"]                                               = {"hipblasZherk_64",                                           "rocblas_zherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // SYR2K
-  {"cublasSsyr2k",                                         {"hipblasSsyr2k",                                             "rocblas_ssyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSsyr2k_64",                                      {"hipblasSsyr2k_64",                                          "rocblas_ssyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsyr2k",                                         {"hipblasDsyr2k",                                             "rocblas_dsyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDsyr2k_64",                                      {"hipblasDsyr2k_64",                                          "rocblas_dsyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsyr2k",                                         {"hipblasCsyr2k",                                             "rocblas_csyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsyr2k_64",                                      {"hipblasCsyr2k_64",                                          "rocblas_csyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsyr2k",                                         {"hipblasZsyr2k",                                             "rocblas_zsyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZsyr2k_64",                                      {"hipblasZsyr2k_64",                                          "rocblas_zsyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasSsyr2k"]                                                 = {"hipblasSsyr2k",                                             "rocblas_ssyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSsyr2k_64"]                                              = {"hipblasSsyr2k_64",                                          "rocblas_ssyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsyr2k"]                                                 = {"hipblasDsyr2k",                                             "rocblas_dsyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDsyr2k_64"]                                              = {"hipblasDsyr2k_64",                                          "rocblas_dsyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsyr2k"]                                                 = {"hipblasCsyr2k",                                             "rocblas_csyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCsyr2k_64"]                                              = {"hipblasCsyr2k_64",                                          "rocblas_csyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsyr2k"]                                                 = {"hipblasZsyr2k",                                             "rocblas_zsyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZsyr2k_64"]                                              = {"hipblasZsyr2k_64",                                          "rocblas_zsyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // SYRKX - eXtended SYRK
-  {"cublasSsyrkx",                                         {"hipblasSsyrkx",                                             "rocblas_ssyrkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSsyrkx_64",                                      {"hipblasSsyrkx_64",                                          "rocblas_ssyrkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsyrkx",                                         {"hipblasDsyrkx",                                             "rocblas_dsyrkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsyrkx_64",                                      {"hipblasDsyrkx_64",                                          "rocblas_dsyrkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsyrkx",                                         {"hipblasCsyrkx",                                             "rocblas_csyrkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsyrkx_64",                                      {"hipblasCsyrkx_64",                                          "rocblas_csyrkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsyrkx",                                         {"hipblasZsyrkx",                                             "rocblas_zsyrkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsyrkx_64",                                      {"hipblasZsyrkx_64",                                          "rocblas_zsyrkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasSsyrkx"]                                                 = {"hipblasSsyrkx",                                             "rocblas_ssyrkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSsyrkx_64"]                                              = {"hipblasSsyrkx_64",                                          "rocblas_ssyrkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsyrkx"]                                                 = {"hipblasDsyrkx",                                             "rocblas_dsyrkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsyrkx_64"]                                              = {"hipblasDsyrkx_64",                                          "rocblas_dsyrkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsyrkx"]                                                 = {"hipblasCsyrkx",                                             "rocblas_csyrkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsyrkx_64"]                                              = {"hipblasCsyrkx_64",                                          "rocblas_csyrkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsyrkx"]                                                 = {"hipblasZsyrkx",                                             "rocblas_zsyrkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsyrkx_64"]                                              = {"hipblasZsyrkx_64",                                          "rocblas_zsyrkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // HER2K
-  {"cublasCher2k",                                         {"hipblasCher2k",                                             "rocblas_cher2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCher2k_64",                                      {"hipblasCher2k_64",                                          "rocblas_cher2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZher2k",                                         {"hipblasZher2k",                                             "rocblas_zher2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZher2k_64",                                      {"hipblasZher2k_64",                                          "rocblas_zher2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasCher2k"]                                                 = {"hipblasCher2k",                                             "rocblas_cher2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCher2k_64"]                                              = {"hipblasCher2k_64",                                          "rocblas_cher2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZher2k"]                                                 = {"hipblasZher2k",                                             "rocblas_zher2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZher2k_64"]                                              = {"hipblasZher2k_64",                                          "rocblas_zher2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // HERKX - eXtended HERK
-  {"cublasCherkx",                                         {"hipblasCherkx",                                             "rocblas_cherkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCherkx_64",                                      {"hipblasCherkx_64",                                          "rocblas_cherkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZherkx",                                         {"hipblasZherkx",                                             "rocblas_zherkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZherkx_64",                                      {"hipblasZherkx_64",                                          "rocblas_zherkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasCherkx"]                                                 = {"hipblasCherkx",                                             "rocblas_cherkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCherkx_64"]                                              = {"hipblasCherkx_64",                                          "rocblas_cherkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZherkx"]                                                 = {"hipblasZherkx",                                             "rocblas_zherkx",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZherkx_64"]                                              = {"hipblasZherkx_64",                                          "rocblas_zherkx_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // SYMM
-  {"cublasSsymm",                                          {"hipblasSsymm",                                              "rocblas_ssymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasSsymm_64",                                       {"hipblasSsymm_64",                                           "rocblas_ssymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsymm",                                          {"hipblasDsymm",                                              "rocblas_dsymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDsymm_64",                                       {"hipblasDsymm_64",                                           "rocblas_dsymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsymm",                                          {"hipblasCsymm",                                              "rocblas_csymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCsymm_64",                                       {"hipblasCsymm_64",                                           "rocblas_csymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsymm",                                          {"hipblasZsymm",                                              "rocblas_zsymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZsymm_64",                                       {"hipblasZsymm_64",                                           "rocblas_zsymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasSsymm"]                                                  = {"hipblasSsymm",                                              "rocblas_ssymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasSsymm_64"]                                               = {"hipblasSsymm_64",                                           "rocblas_ssymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsymm"]                                                  = {"hipblasDsymm",                                              "rocblas_dsymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDsymm_64"]                                               = {"hipblasDsymm_64",                                           "rocblas_dsymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsymm"]                                                  = {"hipblasCsymm",                                              "rocblas_csymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCsymm_64"]                                               = {"hipblasCsymm_64",                                           "rocblas_csymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsymm"]                                                  = {"hipblasZsymm",                                              "rocblas_zsymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZsymm_64"]                                               = {"hipblasZsymm_64",                                           "rocblas_zsymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // HEMM
-  {"cublasChemm",                                          {"hipblasChemm",                                              "rocblas_chemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasChemm_64",                                       {"hipblasChemm_64",                                           "rocblas_chemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZhemm",                                          {"hipblasZhemm",                                              "rocblas_zhemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZhemm_64",                                       {"hipblasZhemm_64",                                           "rocblas_zhemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasChemm"]                                                  = {"hipblasChemm",                                              "rocblas_chemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasChemm_64"]                                               = {"hipblasChemm_64",                                           "rocblas_chemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZhemm"]                                                  = {"hipblasZhemm",                                              "rocblas_zhemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZhemm_64"]                                               = {"hipblasZhemm_64",                                           "rocblas_zhemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // TRSM
-  {"cublasStrsm",                                          {"hipblasStrsm",                                              "rocblas_strsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasStrsm_64",                                       {"hipblasStrsm_64",                                           "rocblas_strsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDtrsm",                                          {"hipblasDtrsm",                                              "rocblas_dtrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDtrsm_64",                                       {"hipblasDtrsm_64",                                           "rocblas_dtrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCtrsm",                                          {"hipblasCtrsm",                                              "rocblas_ctrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCtrsm_64",                                       {"hipblasCtrsm_64",                                           "rocblas_ctrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZtrsm",                                          {"hipblasZtrsm",                                              "rocblas_ztrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZtrsm_64",                                       {"hipblasZtrsm_64",                                           "rocblas_ztrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasStrsm"]                                                  = {"hipblasStrsm",                                              "rocblas_strsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasStrsm_64"]                                               = {"hipblasStrsm_64",                                           "rocblas_strsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDtrsm"]                                                  = {"hipblasDtrsm",                                              "rocblas_dtrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDtrsm_64"]                                               = {"hipblasDtrsm_64",                                           "rocblas_dtrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCtrsm"]                                                  = {"hipblasCtrsm",                                              "rocblas_ctrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCtrsm_64"]                                               = {"hipblasCtrsm_64",                                           "rocblas_ctrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZtrsm"]                                                  = {"hipblasZtrsm",                                              "rocblas_ztrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZtrsm_64"]                                               = {"hipblasZtrsm_64",                                           "rocblas_ztrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // TRMM
-  {"cublasStrmm",                                          {"hipblasStrmm",                                              "rocblas_strmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasStrmm_64",                                       {"hipblasStrmm_64",                                           "rocblas_strmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDtrmm",                                          {"hipblasDtrmm",                                              "rocblas_dtrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasDtrmm_64",                                       {"hipblasDtrmm_64",                                           "rocblas_dtrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCtrmm",                                          {"hipblasCtrmm",                                              "rocblas_ctrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasCtrmm_64",                                       {"hipblasCtrmm_64",                                           "rocblas_ctrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZtrmm",                                          {"hipblasZtrmm",                                              "rocblas_ztrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY}},
-  {"cublasZtrmm_64",                                       {"hipblasZtrmm_64",                                           "rocblas_ztrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasStrmm"]                                                  = {"hipblasStrmm",                                              "rocblas_strmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasStrmm_64"]                                               = {"hipblasStrmm_64",                                           "rocblas_strmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDtrmm"]                                                  = {"hipblasDtrmm",                                              "rocblas_dtrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasDtrmm_64"]                                               = {"hipblasDtrmm_64",                                           "rocblas_dtrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCtrmm"]                                                  = {"hipblasCtrmm",                                              "rocblas_ctrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasCtrmm_64"]                                               = {"hipblasCtrmm_64",                                           "rocblas_ctrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZtrmm"]                                                  = {"hipblasZtrmm",                                              "rocblas_ztrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, HIP_SUPPORTED_V2_ONLY};
+  m["cublasZtrmm_64"]                                               = {"hipblasZtrmm_64",                                           "rocblas_ztrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // ------------------------ CUBLAS BLAS - like extension (cublas_api.h)
   // GEAM
-  {"cublasSgeam",                                          {"hipblasSgeam",                                              "rocblas_sgeam",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasSgeam_64",                                       {"hipblasSgeam_64",                                           "rocblas_sgeam_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDgeam",                                          {"hipblasDgeam",                                              "rocblas_dgeam",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDgeam_64",                                       {"hipblasDgeam_64",                                           "rocblas_dgeam_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasCgeam",                                          {"hipblasCgeam",                                              "rocblas_cgeam",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasCgeam_64",                                       {"hipblasCgeam_64",                                           "rocblas_cgeam_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasZgeam",                                          {"hipblasZgeam",                                              "rocblas_zgeam",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasZgeam_64",                                       {"hipblasZgeam_64",                                           "rocblas_zgeam_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
+  m["cublasSgeam"]                                                  = {"hipblasSgeam",                                              "rocblas_sgeam",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasSgeam_64"]                                               = {"hipblasSgeam_64",                                           "rocblas_sgeam_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDgeam"]                                                  = {"hipblasDgeam",                                              "rocblas_dgeam",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDgeam_64"]                                               = {"hipblasDgeam_64",                                           "rocblas_dgeam_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasCgeam"]                                                  = {"hipblasCgeam",                                              "rocblas_cgeam",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasCgeam_64"]                                               = {"hipblasCgeam_64",                                           "rocblas_cgeam_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasZgeam"]                                                  = {"hipblasZgeam",                                              "rocblas_zgeam",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasZgeam_64"]                                               = {"hipblasZgeam_64",                                           "rocblas_zgeam_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
 
   // GETRF - Batched LU
-  {"cublasSgetrfBatched",                                  {"hipblasSgetrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasDgetrfBatched",                                  {"hipblasDgetrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasCgetrfBatched",                                  {"hipblasCgetrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasZgetrfBatched",                                  {"hipblasZgetrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
+  m["cublasSgetrfBatched"]                                          = {"hipblasSgetrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasDgetrfBatched"]                                          = {"hipblasDgetrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasCgetrfBatched"]                                          = {"hipblasCgetrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasZgetrfBatched"]                                          = {"hipblasZgetrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
 
   // Batched inversion based on LU factorization from getrf
-  {"cublasSgetriBatched",                                  {"hipblasSgetriBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasDgetriBatched",                                  {"hipblasDgetriBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasCgetriBatched",                                  {"hipblasCgetriBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasZgetriBatched",                                  {"hipblasZgetriBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
+  m["cublasSgetriBatched"]                                          = {"hipblasSgetriBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasDgetriBatched"]                                          = {"hipblasDgetriBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasCgetriBatched"]                                          = {"hipblasCgetriBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasZgetriBatched"]                                          = {"hipblasZgetriBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
 
   // Batched solver based on LU factorization from getrf
-  {"cublasSgetrsBatched",                                  {"hipblasSgetrsBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasDgetrsBatched",                                  {"hipblasDgetrsBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasCgetrsBatched",                                  {"hipblasCgetrsBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasZgetrsBatched",                                  {"hipblasZgetrsBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
+  m["cublasSgetrsBatched"]                                          = {"hipblasSgetrsBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasDgetrsBatched"]                                          = {"hipblasDgetrsBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasCgetrsBatched"]                                          = {"hipblasCgetrsBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasZgetrsBatched"]                                          = {"hipblasZgetrsBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
 
   // TRSM - Batched Triangular Solver
-  {"cublasStrsmBatched",                                   {"hipblasStrsmBatched",                                       "rocblas_strsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasStrsmBatched_64",                                {"hipblasStrsmBatched_64",                                    "rocblas_strsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDtrsmBatched",                                   {"hipblasDtrsmBatched",                                       "rocblas_dtrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDtrsmBatched_64",                                {"hipblasDtrsmBatched_64",                                    "rocblas_dtrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasCtrsmBatched",                                   {"hipblasCtrsmBatched",                                       "rocblas_ctrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasCtrsmBatched_64",                                {"hipblasCtrsmBatched_64",                                    "rocblas_ctrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasZtrsmBatched",                                   {"hipblasZtrsmBatched",                                       "rocblas_ztrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasZtrsmBatched_64",                                {"hipblasZtrsmBatched_64",                                    "rocblas_ztrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
+  m["cublasStrsmBatched"]                                           = {"hipblasStrsmBatched",                                       "rocblas_strsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasStrsmBatched_64"]                                        = {"hipblasStrsmBatched_64",                                    "rocblas_strsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDtrsmBatched"]                                           = {"hipblasDtrsmBatched",                                       "rocblas_dtrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDtrsmBatched_64"]                                        = {"hipblasDtrsmBatched_64",                                    "rocblas_dtrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasCtrsmBatched"]                                           = {"hipblasCtrsmBatched",                                       "rocblas_ctrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasCtrsmBatched_64"]                                        = {"hipblasCtrsmBatched_64",                                    "rocblas_ctrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasZtrsmBatched"]                                           = {"hipblasZtrsmBatched",                                       "rocblas_ztrsm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasZtrsmBatched_64"]                                        = {"hipblasZtrsmBatched_64",                                    "rocblas_ztrsm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
 
   // MATINV - Batched
-  {"cublasSmatinvBatched",                                 {"hipblasSmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasDmatinvBatched",                                 {"hipblasDmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCmatinvBatched",                                 {"hipblasCmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasZmatinvBatched",                                 {"hipblasZmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  m["cublasSmatinvBatched"]                                         = {"hipblasSmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasDmatinvBatched"]                                         = {"hipblasDmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCmatinvBatched"]                                         = {"hipblasCmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasZmatinvBatched"]                                         = {"hipblasZmatinvBatched",                                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
 
   // Batch QR Factorization
-  {"cublasSgeqrfBatched",                                  {"hipblasSgeqrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasDgeqrfBatched",                                  {"hipblasDgeqrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasCgeqrfBatched",                                  {"hipblasCgeqrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasZgeqrfBatched",                                  {"hipblasZgeqrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
+  m["cublasSgeqrfBatched"]                                          = {"hipblasSgeqrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasDgeqrfBatched"]                                          = {"hipblasDgeqrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasCgeqrfBatched"]                                          = {"hipblasCgeqrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasZgeqrfBatched"]                                          = {"hipblasZgeqrfBatched",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
 
   // Least Square Min only m >= n and Non-transpose supported
-  {"cublasSgelsBatched",                                   {"hipblasSgelsBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasDgelsBatched",                                   {"hipblasDgelsBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasCgelsBatched",                                   {"hipblasCgelsBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasZgelsBatched",                                   {"hipblasZgelsBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
+  m["cublasSgelsBatched"]                                           = {"hipblasSgelsBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasDgelsBatched"]                                           = {"hipblasDgelsBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasCgelsBatched"]                                           = {"hipblasCgelsBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasZgelsBatched"]                                           = {"hipblasZgelsBatched",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
 
   // DGMM
-  {"cublasSdgmm",                                          {"hipblasSdgmm",                                              "rocblas_sdgmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasSdgmm_64",                                       {"hipblasSdgmm_64",                                           "rocblas_sdgmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDdgmm",                                          {"hipblasDdgmm",                                              "rocblas_ddgmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDdgmm_64",                                       {"hipblasDdgmm_64",                                           "rocblas_ddgmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasCdgmm",                                          {"hipblasCdgmm",                                              "rocblas_cdgmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasCdgmm_64",                                       {"hipblasCdgmm_64",                                           "rocblas_cdgmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasZdgmm",                                          {"hipblasZdgmm",                                              "rocblas_zdgmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasZdgmm_64",                                       {"hipblasZdgmm_64",                                           "rocblas_zdgmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
+  m["cublasSdgmm"]                                                  = {"hipblasSdgmm",                                              "rocblas_sdgmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasSdgmm_64"]                                               = {"hipblasSdgmm_64",                                           "rocblas_sdgmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDdgmm"]                                                  = {"hipblasDdgmm",                                              "rocblas_ddgmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDdgmm_64"]                                               = {"hipblasDdgmm_64",                                           "rocblas_ddgmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasCdgmm"]                                                  = {"hipblasCdgmm",                                              "rocblas_cdgmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasCdgmm_64"]                                               = {"hipblasCdgmm_64",                                           "rocblas_cdgmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasZdgmm"]                                                  = {"hipblasZdgmm",                                              "rocblas_zdgmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasZdgmm_64"]                                               = {"hipblasZdgmm_64",                                           "rocblas_zdgmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
 
   // TPTTR - Triangular Pack format to Triangular format
-  {"cublasStpttr",                                         {"hipblasStpttr",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasDtpttr",                                         {"hipblasDtpttr",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCtpttr",                                         {"hipblasCtpttr",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasZtpttr",                                         {"hipblasZtpttr",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  m["cublasStpttr"]                                                 = {"hipblasStpttr",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasDtpttr"]                                                 = {"hipblasDtpttr",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCtpttr"]                                                 = {"hipblasCtpttr",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasZtpttr"]                                                 = {"hipblasZtpttr",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
 
   // TRTTP - Triangular format to Triangular Pack format
-  {"cublasStrttp",                                         {"hipblasStrttp",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasDtrttp",                                         {"hipblasDtrttp",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCtrttp",                                         {"hipblasCtrttp",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasZtrttp",                                         {"hipblasZtrttp",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  m["cublasStrttp"]                                                 = {"hipblasStrttp",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasDtrttp"]                                                 = {"hipblasDtrttp",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCtrttp"]                                                 = {"hipblasCtrttp",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasZtrttp"]                                                 = {"hipblasZtrttp",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
 
   // GEMV
-  {"cublasSgemv_v2",                                       {"hipblasSgemv",                                              "rocblas_sgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSgemv_v2_64",                                    {"hipblasSgemv_64",                                           "rocblas_sgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDgemv_v2",                                       {"hipblasDgemv",                                              "rocblas_dgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDgemv_v2_64",                                    {"hipblasDgemv_64",                                           "rocblas_dgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgemv_v2",                                       {"hipblasCgemv",                                              "rocblas_cgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgemv_v2_64",                                    {"hipblasCgemv_64",                                           "rocblas_cgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgemv_v2",                                       {"hipblasZgemv",                                              "rocblas_zgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgemv_v2_64",                                    {"hipblasZgemv_64",                                           "rocblas_zgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSgemv_v2"]                                               = {"hipblasSgemv",                                              "rocblas_sgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSgemv_v2_64"]                                            = {"hipblasSgemv_64",                                           "rocblas_sgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDgemv_v2"]                                               = {"hipblasDgemv",                                              "rocblas_dgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDgemv_v2_64"]                                            = {"hipblasDgemv_64",                                           "rocblas_dgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgemv_v2"]                                               = {"hipblasCgemv",                                              "rocblas_cgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgemv_v2_64"]                                            = {"hipblasCgemv_64",                                           "rocblas_cgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgemv_v2"]                                               = {"hipblasZgemv",                                              "rocblas_zgemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgemv_v2_64"]                                            = {"hipblasZgemv_64",                                           "rocblas_zgemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // GBMV
-  {"cublasSgbmv_v2",                                       {"hipblasSgbmv",                                              "rocblas_sgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSgbmv_v2_64",                                    {"hipblasSgbmv_64",                                           "rocblas_sgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDgbmv_v2",                                       {"hipblasDgbmv",                                              "rocblas_dgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDgbmv_v2_64",                                    {"hipblasDgbmv_64",                                           "rocblas_dgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgbmv_v2",                                       {"hipblasCgbmv",                                              "rocblas_cgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgbmv_v2_64",                                    {"hipblasCgbmv_64",                                           "rocblas_cgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgbmv_v2",                                       {"hipblasZgbmv",                                              "rocblas_zgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgbmv_v2_64",                                    {"hipblasZgbmv_64",                                           "rocblas_zgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSgbmv_v2"]                                               = {"hipblasSgbmv",                                              "rocblas_sgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSgbmv_v2_64"]                                            = {"hipblasSgbmv_64",                                           "rocblas_sgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDgbmv_v2"]                                               = {"hipblasDgbmv",                                              "rocblas_dgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDgbmv_v2_64"]                                            = {"hipblasDgbmv_64",                                           "rocblas_dgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgbmv_v2"]                                               = {"hipblasCgbmv",                                              "rocblas_cgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgbmv_v2_64"]                                            = {"hipblasCgbmv_64",                                           "rocblas_cgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgbmv_v2"]                                               = {"hipblasZgbmv",                                              "rocblas_zgbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgbmv_v2_64"]                                            = {"hipblasZgbmv_64",                                           "rocblas_zgbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TRMV
-  {"cublasStrmv_v2",                                       {"hipblasStrmv",                                              "rocblas_strmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasStrmv_v2_64",                                    {"hipblasStrmv_64",                                           "rocblas_strmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtrmv_v2",                                       {"hipblasDtrmv",                                              "rocblas_dtrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtrmv_v2_64",                                    {"hipblasDtrmv_64",                                           "rocblas_dtrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtrmv_v2",                                       {"hipblasCtrmv",                                              "rocblas_ctrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtrmv_v2_64",                                    {"hipblasCtrmv_64",                                           "rocblas_ctrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtrmv_v2",                                       {"hipblasZtrmv",                                              "rocblas_ztrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtrmv_v2_64",                                    {"hipblasZtrmv_64",                                           "rocblas_ztrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStrmv_v2"]                                               = {"hipblasStrmv",                                              "rocblas_strmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasStrmv_v2_64"]                                            = {"hipblasStrmv_64",                                           "rocblas_strmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtrmv_v2"]                                               = {"hipblasDtrmv",                                              "rocblas_dtrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtrmv_v2_64"]                                            = {"hipblasDtrmv_64",                                           "rocblas_dtrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtrmv_v2"]                                               = {"hipblasCtrmv",                                              "rocblas_ctrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtrmv_v2_64"]                                            = {"hipblasCtrmv_64",                                           "rocblas_ctrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtrmv_v2"]                                               = {"hipblasZtrmv",                                              "rocblas_ztrmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtrmv_v2_64"]                                            = {"hipblasZtrmv_64",                                           "rocblas_ztrmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TBMV
-  {"cublasStbmv_v2",                                       {"hipblasStbmv",                                              "rocblas_stbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasStbmv_v2_64",                                    {"hipblasStbmv_64",                                           "rocblas_stbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtbmv_v2",                                       {"hipblasDtbmv",                                              "rocblas_dtbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtbmv_v2_64",                                    {"hipblasDtbmv_64",                                           "rocblas_dtbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtbmv_v2",                                       {"hipblasCtbmv",                                              "rocblas_ctbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtbmv_v2_64",                                    {"hipblasCtbmv_64",                                           "rocblas_ctbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtbmv_v2",                                       {"hipblasZtbmv",                                              "rocblas_ztbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtbmv_v2_64",                                    {"hipblasZtbmv_64",                                           "rocblas_ztbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStbmv_v2"]                                               = {"hipblasStbmv",                                              "rocblas_stbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasStbmv_v2_64"]                                            = {"hipblasStbmv_64",                                           "rocblas_stbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtbmv_v2"]                                               = {"hipblasDtbmv",                                              "rocblas_dtbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtbmv_v2_64"]                                            = {"hipblasDtbmv_64",                                           "rocblas_dtbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtbmv_v2"]                                               = {"hipblasCtbmv",                                              "rocblas_ctbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtbmv_v2_64"]                                            = {"hipblasCtbmv_64",                                           "rocblas_ctbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtbmv_v2"]                                               = {"hipblasZtbmv",                                              "rocblas_ztbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtbmv_v2_64"]                                            = {"hipblasZtbmv_64",                                           "rocblas_ztbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TPMV
-  {"cublasStpmv_v2",                                       {"hipblasStpmv",                                              "rocblas_stpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasStpmv_v2_64",                                    {"hipblasStpmv_64",                                           "rocblas_stpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtpmv_v2",                                       {"hipblasDtpmv",                                              "rocblas_dtpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtpmv_v2_64",                                    {"hipblasDtpmv_64",                                           "rocblas_dtpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtpmv_v2",                                       {"hipblasCtpmv",                                              "rocblas_ctpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtpmv_v2_64",                                    {"hipblasCtpmv_64",                                           "rocblas_ctpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtpmv_v2",                                       {"hipblasZtpmv",                                              "rocblas_ztpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtpmv_v2_64",                                    {"hipblasZtpmv_64",                                           "rocblas_ztpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStpmv_v2"]                                               = {"hipblasStpmv",                                              "rocblas_stpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasStpmv_v2_64"]                                            = {"hipblasStpmv_64",                                           "rocblas_stpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtpmv_v2"]                                               = {"hipblasDtpmv",                                              "rocblas_dtpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtpmv_v2_64"]                                            = {"hipblasDtpmv_64",                                           "rocblas_dtpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtpmv_v2"]                                               = {"hipblasCtpmv",                                              "rocblas_ctpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtpmv_v2_64"]                                            = {"hipblasCtpmv_64",                                           "rocblas_ctpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtpmv_v2"]                                               = {"hipblasZtpmv",                                              "rocblas_ztpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtpmv_v2_64"]                                            = {"hipblasZtpmv_64",                                           "rocblas_ztpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TRSV
-  {"cublasStrsv_v2",                                       {"hipblasStrsv",                                              "rocblas_strsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasStrsv_v2_64",                                    {"hipblasStrsv_64",                                           "rocblas_strsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtrsv_v2",                                       {"hipblasDtrsv",                                              "rocblas_dtrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtrsv_v2_64",                                    {"hipblasDtrsv_64",                                           "rocblas_dtrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtrsv_v2",                                       {"hipblasCtrsv",                                              "rocblas_ctrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtrsv_v2_64",                                    {"hipblasCtrsv_64",                                           "rocblas_ctrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtrsv_v2",                                       {"hipblasZtrsv",                                              "rocblas_ztrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtrsv_v2_64",                                    {"hipblasZtrsv_64",                                           "rocblas_ztrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStrsv_v2"]                                               = {"hipblasStrsv",                                              "rocblas_strsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasStrsv_v2_64"]                                            = {"hipblasStrsv_64",                                           "rocblas_strsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtrsv_v2"]                                               = {"hipblasDtrsv",                                              "rocblas_dtrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtrsv_v2_64"]                                            = {"hipblasDtrsv_64",                                           "rocblas_dtrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtrsv_v2"]                                               = {"hipblasCtrsv",                                              "rocblas_ctrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtrsv_v2_64"]                                            = {"hipblasCtrsv_64",                                           "rocblas_ctrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtrsv_v2"]                                               = {"hipblasZtrsv",                                              "rocblas_ztrsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtrsv_v2_64"]                                            = {"hipblasZtrsv_64",                                           "rocblas_ztrsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TPSV
-  {"cublasStpsv_v2",                                       {"hipblasStpsv",                                              "rocblas_stpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasStpsv_v2_64",                                    {"hipblasStpsv_64",                                           "rocblas_stpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtpsv_v2",                                       {"hipblasDtpsv",                                              "rocblas_dtpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtpsv_v2_64",                                    {"hipblasDtpsv_64",                                           "rocblas_dtpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtpsv_v2",                                       {"hipblasCtpsv",                                              "rocblas_ctpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtpsv_v2_64",                                    {"hipblasCtpsv_64",                                           "rocblas_ctpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtpsv_v2",                                       {"hipblasZtpsv",                                              "rocblas_ztpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtpsv_v2_64",                                    {"hipblasZtpsv_64",                                           "rocblas_ztpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStpsv_v2"]                                               = {"hipblasStpsv",                                              "rocblas_stpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasStpsv_v2_64"]                                            = {"hipblasStpsv_64",                                           "rocblas_stpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtpsv_v2"]                                               = {"hipblasDtpsv",                                              "rocblas_dtpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtpsv_v2_64"]                                            = {"hipblasDtpsv_64",                                           "rocblas_dtpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtpsv_v2"]                                               = {"hipblasCtpsv",                                              "rocblas_ctpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtpsv_v2_64"]                                            = {"hipblasCtpsv_64",                                           "rocblas_ctpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtpsv_v2"]                                               = {"hipblasZtpsv",                                              "rocblas_ztpsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtpsv_v2_64"]                                            = {"hipblasZtpsv_64",                                           "rocblas_ztpsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // TBSV
-  {"cublasStbsv_v2",                                       {"hipblasStbsv",                                              "rocblas_stbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasStbsv_v2_64",                                    {"hipblasStbsv_64",                                           "rocblas_stbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtbsv_v2",                                       {"hipblasDtbsv",                                              "rocblas_dtbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDtbsv_v2_64",                                    {"hipblasDtbsv_64",                                           "rocblas_dtbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtbsv_v2",                                       {"hipblasCtbsv",                                              "rocblas_ctbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCtbsv_v2_64",                                    {"hipblasCtbsv_64",                                           "rocblas_ctbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtbsv_v2",                                       {"hipblasZtbsv",                                              "rocblas_ztbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZtbsv_v2_64",                                    {"hipblasZtbsv_64",                                           "rocblas_ztbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasStbsv_v2"]                                               = {"hipblasStbsv",                                              "rocblas_stbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasStbsv_v2_64"]                                            = {"hipblasStbsv_64",                                           "rocblas_stbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtbsv_v2"]                                               = {"hipblasDtbsv",                                              "rocblas_dtbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDtbsv_v2_64"]                                            = {"hipblasDtbsv_64",                                           "rocblas_dtbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtbsv_v2"]                                               = {"hipblasCtbsv",                                              "rocblas_ctbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCtbsv_v2_64"]                                            = {"hipblasCtbsv_64",                                           "rocblas_ctbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtbsv_v2"]                                               = {"hipblasZtbsv",                                              "rocblas_ztbsv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZtbsv_v2_64"]                                            = {"hipblasZtbsv_64",                                           "rocblas_ztbsv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SYMV/HEMV
-  {"cublasSsymv_v2",                                       {"hipblasSsymv",                                              "rocblas_ssymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSsymv_v2_64",                                    {"hipblasSsymv_64",                                           "rocblas_ssymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsymv_v2",                                       {"hipblasDsymv",                                              "rocblas_dsymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsymv_v2_64",                                    {"hipblasDsymv_64",                                           "rocblas_dsymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsymv_v2",                                       {"hipblasCsymv",                                              "rocblas_csymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsymv_v2_64",                                    {"hipblasCsymv_64",                                           "rocblas_csymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsymv_v2",                                       {"hipblasZsymv",                                              "rocblas_zsymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsymv_v2_64",                                    {"hipblasZsymv_64",                                           "rocblas_zsymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChemv_v2",                                       {"hipblasChemv",                                              "rocblas_chemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChemv_v2_64",                                    {"hipblasChemv_64",                                           "rocblas_chemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhemv_v2",                                       {"hipblasZhemv",                                              "rocblas_zhemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhemv_v2_64",                                    {"hipblasZhemv_64",                                           "rocblas_zhemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSsymv_v2"]                                               = {"hipblasSsymv",                                              "rocblas_ssymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSsymv_v2_64"]                                            = {"hipblasSsymv_64",                                           "rocblas_ssymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsymv_v2"]                                               = {"hipblasDsymv",                                              "rocblas_dsymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsymv_v2_64"]                                            = {"hipblasDsymv_64",                                           "rocblas_dsymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsymv_v2"]                                               = {"hipblasCsymv",                                              "rocblas_csymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsymv_v2_64"]                                            = {"hipblasCsymv_64",                                           "rocblas_csymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsymv_v2"]                                               = {"hipblasZsymv",                                              "rocblas_zsymv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsymv_v2_64"]                                            = {"hipblasZsymv_64",                                           "rocblas_zsymv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChemv_v2"]                                               = {"hipblasChemv",                                              "rocblas_chemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChemv_v2_64"]                                            = {"hipblasChemv_64",                                           "rocblas_chemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhemv_v2"]                                               = {"hipblasZhemv",                                              "rocblas_zhemv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhemv_v2_64"]                                            = {"hipblasZhemv_64",                                           "rocblas_zhemv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SBMV/HBMV
-  {"cublasSsbmv_v2",                                       {"hipblasSsbmv",                                              "rocblas_ssbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSsbmv_v2_64",                                    {"hipblasSsbmv_64",                                           "rocblas_ssbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsbmv_v2",                                       {"hipblasDsbmv",                                              "rocblas_dsbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsbmv_v2_64",                                    {"hipblasDsbmv_64",                                           "rocblas_dsbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChbmv_v2",                                       {"hipblasChbmv",                                              "rocblas_chbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChbmv_v2_64",                                    {"hipblasChbmv_64",                                           "rocblas_chbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhbmv_v2",                                       {"hipblasZhbmv",                                              "rocblas_zhbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhbmv_v2_64",                                    {"hipblasZhbmv_64",                                           "rocblas_zhbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSsbmv_v2"]                                               = {"hipblasSsbmv",                                              "rocblas_ssbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSsbmv_v2_64"]                                            = {"hipblasSsbmv_64",                                           "rocblas_ssbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsbmv_v2"]                                               = {"hipblasDsbmv",                                              "rocblas_dsbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsbmv_v2_64"]                                            = {"hipblasDsbmv_64",                                           "rocblas_dsbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChbmv_v2"]                                               = {"hipblasChbmv",                                              "rocblas_chbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChbmv_v2_64"]                                            = {"hipblasChbmv_64",                                           "rocblas_chbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhbmv_v2"]                                               = {"hipblasZhbmv",                                              "rocblas_zhbmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhbmv_v2_64"]                                            = {"hipblasZhbmv_64",                                           "rocblas_zhbmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SPMV/HPMV
-  {"cublasSspmv_v2",                                       {"hipblasSspmv",                                              "rocblas_sspmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSspmv_v2_64",                                    {"hipblasSspmv_64",                                           "rocblas_sspmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspmv_v2",                                       {"hipblasDspmv",                                              "rocblas_dspmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspmv_v2_64",                                    {"hipblasDspmv_64",                                           "rocblas_dspmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpmv_v2",                                       {"hipblasChpmv",                                              "rocblas_chpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpmv_v2_64",                                    {"hipblasChpmv_64",                                           "rocblas_chpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpmv_v2",                                       {"hipblasZhpmv",                                              "rocblas_zhpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpmv_v2_64",                                    {"hipblasZhpmv_64",                                           "rocblas_zhpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSspmv_v2"]                                               = {"hipblasSspmv",                                              "rocblas_sspmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSspmv_v2_64"]                                            = {"hipblasSspmv_64",                                           "rocblas_sspmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspmv_v2"]                                               = {"hipblasDspmv",                                              "rocblas_dspmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspmv_v2_64"]                                            = {"hipblasDspmv_64",                                           "rocblas_dspmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpmv_v2"]                                               = {"hipblasChpmv",                                              "rocblas_chpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpmv_v2_64"]                                            = {"hipblasChpmv_64",                                           "rocblas_chpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpmv_v2"]                                               = {"hipblasZhpmv",                                              "rocblas_zhpmv",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpmv_v2_64"]                                            = {"hipblasZhpmv_64",                                           "rocblas_zhpmv_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // GER
-  {"cublasSger_v2",                                        {"hipblasSger",                                               "rocblas_sger",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSger_v2_64",                                     {"hipblasSger_64",                                            "rocblas_sger_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDger_v2",                                        {"hipblasDger",                                               "rocblas_dger",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDger_v2_64",                                     {"hipblasDger_64",                                            "rocblas_dger_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgeru_v2",                                       {"hipblasCgeru",                                              "rocblas_cgeru",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgeru_v2_64",                                    {"hipblasCgeru_64",                                           "rocblas_cgeru_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgerc_v2",                                       {"hipblasCgerc",                                              "rocblas_cgerc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCgerc_v2_64",                                    {"hipblasCgerc_64",                                           "rocblas_cgerc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgeru_v2",                                       {"hipblasZgeru",                                              "rocblas_zgeru",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgeru_v2_64",                                    {"hipblasZgeru_64",                                           "rocblas_zgeru_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgerc_v2",                                       {"hipblasZgerc",                                              "rocblas_zgerc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZgerc_v2_64",                                    {"hipblasZgerc_64",                                           "rocblas_zgerc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSger_v2"]                                                = {"hipblasSger",                                               "rocblas_sger",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSger_v2_64"]                                             = {"hipblasSger_64",                                            "rocblas_sger_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDger_v2"]                                                = {"hipblasDger",                                               "rocblas_dger",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDger_v2_64"]                                             = {"hipblasDger_64",                                            "rocblas_dger_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgeru_v2"]                                               = {"hipblasCgeru",                                              "rocblas_cgeru",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgeru_v2_64"]                                            = {"hipblasCgeru_64",                                           "rocblas_cgeru_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgerc_v2"]                                               = {"hipblasCgerc",                                              "rocblas_cgerc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCgerc_v2_64"]                                            = {"hipblasCgerc_64",                                           "rocblas_cgerc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgeru_v2"]                                               = {"hipblasZgeru",                                              "rocblas_zgeru",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgeru_v2_64"]                                            = {"hipblasZgeru_64",                                           "rocblas_zgeru_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgerc_v2"]                                               = {"hipblasZgerc",                                              "rocblas_zgerc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZgerc_v2_64"]                                            = {"hipblasZgerc_64",                                           "rocblas_zgerc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SYR/HER
-  {"cublasSsyr_v2",                                        {"hipblasSsyr",                                               "rocblas_ssyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSsyr_v2_64",                                     {"hipblasSsyr_64",                                            "rocblas_ssyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsyr_v2",                                        {"hipblasDsyr",                                               "rocblas_dsyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsyr_v2_64",                                     {"hipblasDsyr_64",                                            "rocblas_dsyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsyr_v2",                                        {"hipblasCsyr",                                               "rocblas_csyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsyr_v2_64",                                     {"hipblasCsyr_64",                                            "rocblas_csyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsyr_v2",                                        {"hipblasZsyr",                                               "rocblas_zsyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsyr_v2_64",                                     {"hipblasZsyr_64",                                            "rocblas_zsyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCher_v2",                                        {"hipblasCher",                                               "rocblas_cher",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCher_v2_64",                                     {"hipblasCher_64",                                            "rocblas_cher_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZher_v2",                                        {"hipblasZher",                                               "rocblas_zher",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZher_v2_64",                                     {"hipblasZher_64",                                            "rocblas_zher_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSsyr_v2"]                                                = {"hipblasSsyr",                                               "rocblas_ssyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSsyr_v2_64"]                                             = {"hipblasSsyr_64",                                            "rocblas_ssyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsyr_v2"]                                                = {"hipblasDsyr",                                               "rocblas_dsyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsyr_v2_64"]                                             = {"hipblasDsyr_64",                                            "rocblas_dsyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsyr_v2"]                                                = {"hipblasCsyr",                                               "rocblas_csyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsyr_v2_64"]                                             = {"hipblasCsyr_64",                                            "rocblas_csyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsyr_v2"]                                                = {"hipblasZsyr",                                               "rocblas_zsyr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsyr_v2_64"]                                             = {"hipblasZsyr_64",                                            "rocblas_zsyr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCher_v2"]                                                = {"hipblasCher",                                               "rocblas_cher",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCher_v2_64"]                                             = {"hipblasCher_64",                                            "rocblas_cher_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZher_v2"]                                                = {"hipblasZher",                                               "rocblas_zher",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZher_v2_64"]                                             = {"hipblasZher_64",                                            "rocblas_zher_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SPR/HPR
-  {"cublasSspr_v2",                                        {"hipblasSspr",                                               "rocblas_sspr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSspr_v2_64",                                     {"hipblasSspr_64",                                            "rocblas_sspr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspr_v2",                                        {"hipblasDspr",                                               "rocblas_dspr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspr_v2_64",                                     {"hipblasDspr_64",                                            "rocblas_dspr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpr_v2",                                        {"hipblasChpr",                                               "rocblas_chpr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpr_v2_64",                                     {"hipblasChpr_64",                                            "rocblas_chpr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpr_v2",                                        {"hipblasZhpr",                                               "rocblas_zhpr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpr_v2_64",                                     {"hipblasZhpr_64",                                            "rocblas_zhpr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSspr_v2"]                                                = {"hipblasSspr",                                               "rocblas_sspr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSspr_v2_64"]                                             = {"hipblasSspr_64",                                            "rocblas_sspr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspr_v2"]                                                = {"hipblasDspr",                                               "rocblas_dspr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspr_v2_64"]                                             = {"hipblasDspr_64",                                            "rocblas_dspr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpr_v2"]                                                = {"hipblasChpr",                                               "rocblas_chpr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpr_v2_64"]                                             = {"hipblasChpr_64",                                            "rocblas_chpr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpr_v2"]                                                = {"hipblasZhpr",                                               "rocblas_zhpr",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpr_v2_64"]                                             = {"hipblasZhpr_64",                                            "rocblas_zhpr_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SYR2/HER2
-  {"cublasSsyr2_v2",                                       {"hipblasSsyr2",                                              "rocblas_ssyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSsyr2_v2_64",                                    {"hipblasSsyr2_64",                                           "rocblas_ssyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsyr2_v2",                                       {"hipblasDsyr2",                                              "rocblas_dsyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDsyr2_v2_64",                                    {"hipblasDsyr2_64",                                           "rocblas_dsyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsyr2_v2",                                       {"hipblasCsyr2",                                              "rocblas_csyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCsyr2_v2_64",                                    {"hipblasCsyr2_64",                                           "rocblas_csyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsyr2_v2",                                       {"hipblasZsyr2",                                              "rocblas_zsyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZsyr2_v2_64",                                    {"hipblasZsyr2_64",                                           "rocblas_zsyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCher2_v2",                                       {"hipblasCher2",                                              "rocblas_cher2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasCher2_v2_64",                                    {"hipblasCher2_64",                                           "rocblas_cher2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZher2_v2",                                       {"hipblasZher2",                                              "rocblas_zher2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZher2_v2_64",                                    {"hipblasZher2_64",                                           "rocblas_zher2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSsyr2_v2"]                                               = {"hipblasSsyr2",                                              "rocblas_ssyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSsyr2_v2_64"]                                            = {"hipblasSsyr2_64",                                           "rocblas_ssyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsyr2_v2"]                                               = {"hipblasDsyr2",                                              "rocblas_dsyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDsyr2_v2_64"]                                            = {"hipblasDsyr2_64",                                           "rocblas_dsyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsyr2_v2"]                                               = {"hipblasCsyr2",                                              "rocblas_csyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCsyr2_v2_64"]                                            = {"hipblasCsyr2_64",                                           "rocblas_csyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsyr2_v2"]                                               = {"hipblasZsyr2",                                              "rocblas_zsyr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZsyr2_v2_64"]                                            = {"hipblasZsyr2_64",                                           "rocblas_zsyr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCher2_v2"]                                               = {"hipblasCher2",                                              "rocblas_cher2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasCher2_v2_64"]                                            = {"hipblasCher2_64",                                           "rocblas_cher2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZher2_v2"]                                               = {"hipblasZher2",                                              "rocblas_zher2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZher2_v2_64"]                                            = {"hipblasZher2_64",                                           "rocblas_zher2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // SPR2/HPR2
-  {"cublasSspr2_v2",                                       {"hipblasSspr2",                                              "rocblas_sspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasSspr2_v2_64",                                    {"hipblasSspr2_64",                                           "rocblas_sspr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspr2_v2",                                       {"hipblasDspr2",                                              "rocblas_dspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasDspr2_v2_64",                                    {"hipblasDspr2_64",                                           "rocblas_dspr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpr2_v2",                                       {"hipblasChpr2",                                              "rocblas_chpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasChpr2_v2_64",                                    {"hipblasChpr2_64",                                           "rocblas_chpr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpr2_v2",                                       {"hipblasZhpr2",                                              "rocblas_zhpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
-  {"cublasZhpr2_v2_64",                                    {"hipblasZhpr2_64",                                           "rocblas_zhpr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2}},
+  m["cublasSspr2_v2"]                                               = {"hipblasSspr2",                                              "rocblas_sspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasSspr2_v2_64"]                                            = {"hipblasSspr2_64",                                           "rocblas_sspr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspr2_v2"]                                               = {"hipblasDspr2",                                              "rocblas_dspr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasDspr2_v2_64"]                                            = {"hipblasDspr2_64",                                           "rocblas_dspr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpr2_v2"]                                               = {"hipblasChpr2",                                              "rocblas_chpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasChpr2_v2_64"]                                            = {"hipblasChpr2_64",                                           "rocblas_chpr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpr2_v2"]                                               = {"hipblasZhpr2",                                              "rocblas_zhpr2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
+  m["cublasZhpr2_v2_64"]                                            = {"hipblasZhpr2_64",                                           "rocblas_zhpr2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_2};
 
   // Blas3 (v2) Routines
   // GEMM
-  {"cublasSgemm_v2",                                       {"hipblasSgemm",                                              "rocblas_sgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSgemm_v2_64",                                    {"hipblasSgemm_64",                                           "rocblas_sgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemm_v2",                                       {"hipblasDgemm",                                              "rocblas_dgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDgemm_v2_64",                                    {"hipblasDgemm_64",                                           "rocblas_dgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemm_v2",                                       {"hipblasCgemm",                                              "rocblas_cgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemm_v2_64",                                    {"hipblasCgemm_64",                                           "rocblas_cgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCgemm3m",                                        {"hipblasCgemm3m",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasCgemm3m_64",                                     {"hipblasCgemm3m_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasCgemm3mEx",                                      {"hipblasCgemm3mEx",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasCgemm3mEx_64",                                   {"hipblasCgemm3mEx_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasZgemm_v2",                                       {"hipblasZgemm",                                              "rocblas_zgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemm_v2_64",                                    {"hipblasZgemm_64",                                           "rocblas_zgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZgemm3m",                                        {"hipblasZgemm3m",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
-  {"cublasZgemm3m_64",                                     {"hipblasZgemm3m_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED}},
+  m["cublasSgemm_v2"]                                               = {"hipblasSgemm",                                              "rocblas_sgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSgemm_v2_64"]                                            = {"hipblasSgemm_64",                                           "rocblas_sgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemm_v2"]                                               = {"hipblasDgemm",                                              "rocblas_dgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemm_v2_64"]                                            = {"hipblasDgemm_64",                                           "rocblas_dgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemm_v2"]                                               = {"hipblasCgemm",                                              "rocblas_cgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemm_v2_64"]                                            = {"hipblasCgemm_64",                                           "rocblas_cgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCgemm3m"]                                                = {"hipblasCgemm3m",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasCgemm3m_64"]                                             = {"hipblasCgemm3m_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasCgemm3mEx"]                                              = {"hipblasCgemm3mEx",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasCgemm3mEx_64"]                                           = {"hipblasCgemm3mEx_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasZgemm_v2"]                                               = {"hipblasZgemm",                                              "rocblas_zgemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemm_v2_64"]                                            = {"hipblasZgemm_64",                                           "rocblas_zgemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZgemm3m"]                                                = {"hipblasZgemm3m",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasZgemm3m_64"]                                             = {"hipblasZgemm3m_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
 
   //IO in FP16 / FP32, computation in float
-  {"cublasSgemmEx",                                        {"hipblasSgemmEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasSgemmEx_64",                                     {"hipblasSgemmEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasGemmEx",                                         {"hipblasGemmEx",                                             "rocblas_gemm_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasGemmEx_64",                                      {"hipblasGemmEx_64",                                          "rocblas_gemm_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasGemmBatchedEx",                                  {"hipblasGemmBatchedEx",                                      "rocblas_gemm_batched_ex",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasGemmBatchedEx_64",                               {"hipblasGemmBatchedEx_64",                                   "rocblas_gemm_batched_ex_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
-  {"cublasGemmStridedBatchedEx",                           {"hipblasGemmStridedBatchedEx",                               "rocblas_gemm_strided_batched_ex",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasGemmStridedBatchedEx_64",                        {"hipblasGemmStridedBatchedEx_64",                            "rocblas_gemm_strided_batched_ex_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED}},
+  m["cublasSgemmEx"]                                                = {"hipblasSgemmEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasSgemmEx_64"]                                             = {"hipblasSgemmEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasGemmEx"]                                                 = {"hipblasGemmEx",                                             "rocblas_gemm_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasGemmEx_64"]                                              = {"hipblasGemmEx_64",                                          "rocblas_gemm_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasGemmBatchedEx"]                                          = {"hipblasGemmBatchedEx",                                      "rocblas_gemm_batched_ex",                            CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasGemmBatchedEx_64"]                                       = {"hipblasGemmBatchedEx_64",                                   "rocblas_gemm_batched_ex_64",                         CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+  m["cublasGemmStridedBatchedEx"]                                   = {"hipblasGemmStridedBatchedEx",                               "rocblas_gemm_strided_batched_ex",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasGemmStridedBatchedEx_64"]                                = {"hipblasGemmStridedBatchedEx_64",                            "rocblas_gemm_strided_batched_ex_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, ROC_UNSUPPORTED};
+
   // IO in Int8 complex/cuComplex, computation in cuComplex
-  {"cublasCgemmEx",                                        {"hipblasCgemmEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCgemmEx_64",                                     {"hipblasCgemmEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasUint8gemmBias",                                  {"hipblasUint8gemmBias",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  m["cublasCgemmEx"]                                                = {"hipblasCgemmEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCgemmEx_64"]                                             = {"hipblasCgemmEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasUint8gemmBias"]                                          = {"hipblasUint8gemmBias",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
 
   // SYRK
-  {"cublasSsyrk_v2",                                       {"hipblasSsyrk",                                              "rocblas_ssyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSsyrk_v2_64",                                    {"hipblasSsyrk_64",                                           "rocblas_ssyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsyrk_v2",                                       {"hipblasDsyrk",                                              "rocblas_dsyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsyrk_v2_64",                                    {"hipblasDsyrk_64",                                           "rocblas_dsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsyrk_v2",                                       {"hipblasCsyrk",                                              "rocblas_csyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsyrk_v2_64",                                    {"hipblasCsyrk_64",                                           "rocblas_csyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsyrk_v2",                                       {"hipblasZsyrk",                                              "rocblas_zsyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsyrk_v2_64",                                    {"hipblasZsyrk_64",                                           "rocblas_zsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasSsyrk_v2"]                                               = {"hipblasSsyrk",                                              "rocblas_ssyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSsyrk_v2_64"]                                            = {"hipblasSsyrk_64",                                           "rocblas_ssyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsyrk_v2"]                                               = {"hipblasDsyrk",                                              "rocblas_dsyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsyrk_v2_64"]                                            = {"hipblasDsyrk_64",                                           "rocblas_dsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsyrk_v2"]                                               = {"hipblasCsyrk",                                              "rocblas_csyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsyrk_v2_64"]                                            = {"hipblasCsyrk_64",                                           "rocblas_csyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsyrk_v2"]                                               = {"hipblasZsyrk",                                              "rocblas_zsyrk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsyrk_v2_64"]                                            = {"hipblasZsyrk_64",                                           "rocblas_zsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // IO in Int8 complex/cuComplex, computation in cuComplex
-  {"cublasCsyrkEx",                                        {"hipblasCsyrkEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCsyrkEx_64",                                     {"hipblasCsyrkEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  m["cublasCsyrkEx"]                                                = {"hipblasCsyrkEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCsyrkEx_64"]                                             = {"hipblasCsyrkEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+
   // IO in Int8 complex/cuComplex, computation in cuComplex, Gaussian math
-  {"cublasCsyrk3mEx",                                      {"hipblasCsyrk3mEx",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCsyrk3mEx_64",                                   {"hipblasCsyrk3mEx_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  m["cublasCsyrk3mEx"]                                              = {"hipblasCsyrk3mEx",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCsyrk3mEx_64"]                                           = {"hipblasCsyrk3mEx_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
 
   // HERK
-  {"cublasCherk_v2",                                       {"hipblasCherk",                                              "rocblas_cherk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCherk_v2_64",                                    {"hipblasCherk_64",                                           "rocblas_cherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasCherk_v2"]                                               = {"hipblasCherk",                                              "rocblas_cherk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCherk_v2_64"]                                            = {"hipblasCherk_64",                                           "rocblas_cherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+
   // IO in Int8 complex/cuComplex, computation in cuComplex
-  {"cublasCherkEx",                                        {"hipblasCherkEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCherkEx_64",                                     {"hipblasCherkEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
+  m["cublasCherkEx"]                                                = {"hipblasCherkEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCherkEx_64"]                                             = {"hipblasCherkEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+
   // IO in Int8 complex/cuComplex, computation in cuComplex, Gaussian math
-  {"cublasCherk3mEx",                                      {"hipblasCherk3mEx",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCherk3mEx_64",                                   {"hipblasCherk3mEx_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasZherk_v2",                                       {"hipblasZherk",                                              "rocblas_zherk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZherk_v2_64",                                    {"hipblasZherk_64",                                           "rocblas_zherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasCherk3mEx"]                                              = {"hipblasCherk3mEx",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCherk3mEx_64"]                                           = {"hipblasCherk3mEx_64",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasZherk_v2"]                                               = {"hipblasZherk",                                              "rocblas_zherk",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZherk_v2_64"]                                            = {"hipblasZherk_64",                                           "rocblas_zherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // SYR2K
-  {"cublasSsyr2k_v2",                                      {"hipblasSsyr2k",                                             "rocblas_ssyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSsyr2k_v2_64",                                   {"hipblasSsyr2k_64",                                          "rocblas_ssyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsyr2k_v2",                                      {"hipblasDsyr2k",                                             "rocblas_dsyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsyr2k_v2_64",                                   {"hipblasDsyr2k_64",                                          "rocblas_dsyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsyr2k_v2",                                      {"hipblasCsyr2k",                                             "rocblas_csyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsyr2k_v2_64",                                   {"hipblasCsyr2k_64",                                          "rocblas_csyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsyr2k_v2",                                      {"hipblasZsyr2k",                                             "rocblas_zsyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsyr2k_v2_64",                                   {"hipblasZsyr2k_64",                                          "rocblas_zsyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasSsyr2k_v2"]                                              = {"hipblasSsyr2k",                                             "rocblas_ssyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSsyr2k_v2_64"]                                           = {"hipblasSsyr2k_64",                                          "rocblas_ssyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsyr2k_v2"]                                              = {"hipblasDsyr2k",                                             "rocblas_dsyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsyr2k_v2_64"]                                           = {"hipblasDsyr2k_64",                                          "rocblas_dsyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsyr2k_v2"]                                              = {"hipblasCsyr2k",                                             "rocblas_csyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsyr2k_v2_64"]                                           = {"hipblasCsyr2k_64",                                          "rocblas_csyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsyr2k_v2"]                                              = {"hipblasZsyr2k",                                             "rocblas_zsyr2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsyr2k_v2_64"]                                           = {"hipblasZsyr2k_64",                                          "rocblas_zsyr2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // HER2K
-  {"cublasCher2k_v2",                                      {"hipblasCher2k",                                             "rocblas_cher2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCher2k_v2_64",                                   {"hipblasCher2k_64",                                          "rocblas_cher2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZher2k_v2",                                      {"hipblasZher2k",                                             "rocblas_zher2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZher2k_v2_64",                                   {"hipblasZher2k_64",                                          "rocblas_zher2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasCher2k_v2"]                                              = {"hipblasCher2k",                                             "rocblas_cher2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCher2k_v2_64"]                                           = {"hipblasCher2k_64",                                          "rocblas_cher2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZher2k_v2"]                                              = {"hipblasZher2k",                                             "rocblas_zher2k",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZher2k_v2_64"]                                           = {"hipblasZher2k_64",                                          "rocblas_zher2k_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // SYMM
-  {"cublasSsymm_v2",                                       {"hipblasSsymm",                                              "rocblas_ssymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasSsymm_v2_64",                                    {"hipblasSsymm_64",                                           "rocblas_ssymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsymm_v2",                                       {"hipblasDsymm",                                              "rocblas_dsymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDsymm_v2_64",                                    {"hipblasDsymm_64",                                           "rocblas_dsymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsymm_v2",                                       {"hipblasCsymm",                                              "rocblas_csymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCsymm_v2_64",                                    {"hipblasCsymm_64",                                           "rocblas_csymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsymm_v2",                                       {"hipblasZsymm",                                              "rocblas_zsymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZsymm_v2_64",                                    {"hipblasZsymm_64",                                           "rocblas_zsymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasSsymm_v2"]                                               = {"hipblasSsymm",                                              "rocblas_ssymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSsymm_v2_64"]                                            = {"hipblasSsymm_64",                                           "rocblas_ssymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsymm_v2"]                                               = {"hipblasDsymm",                                              "rocblas_dsymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDsymm_v2_64"]                                            = {"hipblasDsymm_64",                                           "rocblas_dsymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsymm_v2"]                                               = {"hipblasCsymm",                                              "rocblas_csymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCsymm_v2_64"]                                            = {"hipblasCsymm_64",                                           "rocblas_csymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsymm_v2"]                                               = {"hipblasZsymm",                                              "rocblas_zsymm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZsymm_v2_64"]                                            = {"hipblasZsymm_64",                                           "rocblas_zsymm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // HEMM
-  {"cublasChemm_v2",                                       {"hipblasChemm",                                              "rocblas_chemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasChemm_v2_64",                                    {"hipblasChemm_64",                                           "rocblas_chemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZhemm_v2",                                       {"hipblasZhemm",                                              "rocblas_zhemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZhemm_v2_64",                                    {"hipblasZhemm_64",                                           "rocblas_zhemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasChemm_v2"]                                               = {"hipblasChemm",                                              "rocblas_chemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasChemm_v2_64"]                                            = {"hipblasChemm_64",                                           "rocblas_chemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZhemm_v2"]                                               = {"hipblasZhemm",                                              "rocblas_zhemm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZhemm_v2_64"]                                            = {"hipblasZhemm_64",                                           "rocblas_zhemm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // TRSM
-  {"cublasStrsm_v2",                                       {"hipblasStrsm",                                              "rocblas_strsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasStrsm_v2_64",                                    {"hipblasStrsm_64",                                           "rocblas_strsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDtrsm_v2",                                       {"hipblasDtrsm",                                              "rocblas_dtrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDtrsm_v2_64",                                    {"hipblasDtrsm_64",                                           "rocblas_dtrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCtrsm_v2",                                       {"hipblasCtrsm",                                              "rocblas_ctrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCtrsm_v2_64",                                    {"hipblasCtrsm_64",                                           "rocblas_ctrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZtrsm_v2",                                       {"hipblasZtrsm",                                              "rocblas_ztrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZtrsm_v2_64",                                    {"hipblasZtrsm_64",                                           "rocblas_ztrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasStrsm_v2"]                                               = {"hipblasStrsm",                                              "rocblas_strsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasStrsm_v2_64"]                                            = {"hipblasStrsm_64",                                           "rocblas_strsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDtrsm_v2"]                                               = {"hipblasDtrsm",                                              "rocblas_dtrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDtrsm_v2_64"]                                            = {"hipblasDtrsm_64",                                           "rocblas_dtrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCtrsm_v2"]                                               = {"hipblasCtrsm",                                              "rocblas_ctrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCtrsm_v2_64"]                                            = {"hipblasCtrsm_64",                                           "rocblas_ctrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZtrsm_v2"]                                               = {"hipblasZtrsm",                                              "rocblas_ztrsm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZtrsm_v2_64"]                                            = {"hipblasZtrsm_64",                                           "rocblas_ztrsm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // TRMM
-  {"cublasStrmm_v2",                                       {"hipblasStrmm",                                              "rocblas_strmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasStrmm_v2_64",                                    {"hipblasStrmm_64",                                           "rocblas_strmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDtrmm_v2",                                       {"hipblasDtrmm",                                              "rocblas_dtrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasDtrmm_v2_64",                                    {"hipblasDtrmm_64",                                           "rocblas_dtrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCtrmm_v2",                                       {"hipblasCtrmm",                                              "rocblas_ctrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasCtrmm_v2_64",                                    {"hipblasCtrmm_64",                                           "rocblas_ctrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZtrmm_v2",                                       {"hipblasZtrmm",                                              "rocblas_ztrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
-  {"cublasZtrmm_v2_64",                                    {"hipblasZtrmm_64",                                           "rocblas_ztrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3}},
+  m["cublasStrmm_v2"]                                               = {"hipblasStrmm",                                              "rocblas_strmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasStrmm_v2_64"]                                            = {"hipblasStrmm_64",                                           "rocblas_strmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDtrmm_v2"]                                               = {"hipblasDtrmm",                                              "rocblas_dtrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDtrmm_v2_64"]                                            = {"hipblasDtrmm_64",                                           "rocblas_dtrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCtrmm_v2"]                                               = {"hipblasCtrmm",                                              "rocblas_ctrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasCtrmm_v2_64"]                                            = {"hipblasCtrmm_64",                                           "rocblas_ctrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZtrmm_v2"]                                               = {"hipblasZtrmm",                                              "rocblas_ztrmm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasZtrmm_v2_64"]                                            = {"hipblasZtrmm_64",                                           "rocblas_ztrmm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // NRM2
-  {"cublasSnrm2_v2",                                       {"hipblasSnrm2",                                              "rocblas_snrm2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasSnrm2_v2_64",                                    {"hipblasSnrm2_64",                                           "rocblas_snrm2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDnrm2_v2",                                       {"hipblasDnrm2",                                              "rocblas_dnrm2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDnrm2_v2_64",                                    {"hipblasDnrm2_64",                                           "rocblas_dnrm2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasScnrm2_v2",                                      {"hipblasScnrm2",                                             "rocblas_scnrm2",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasScnrm2_v2_64",                                   {"hipblasScnrm2_64",                                          "rocblas_scnrm2_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDznrm2_v2",                                      {"hipblasDznrm2",                                             "rocblas_dznrm2",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDznrm2_v2_64",                                   {"hipblasDznrm2_64",                                          "rocblas_dznrm2_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSnrm2_v2"]                                               = {"hipblasSnrm2",                                              "rocblas_snrm2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasSnrm2_v2_64"]                                            = {"hipblasSnrm2_64",                                           "rocblas_snrm2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDnrm2_v2"]                                               = {"hipblasDnrm2",                                              "rocblas_dnrm2",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDnrm2_v2_64"]                                            = {"hipblasDnrm2_64",                                           "rocblas_dnrm2_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasScnrm2_v2"]                                              = {"hipblasScnrm2",                                             "rocblas_scnrm2",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasScnrm2_v2_64"]                                           = {"hipblasScnrm2_64",                                          "rocblas_scnrm2_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDznrm2_v2"]                                              = {"hipblasDznrm2",                                             "rocblas_dznrm2",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDznrm2_v2_64"]                                           = {"hipblasDznrm2_64",                                          "rocblas_dznrm2_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // DOT
-  {"cublasDotEx",                                          {"hipblasDotEx",                                              "rocblas_dot_ex",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDotEx_64",                                       {"hipblasDotEx_64",                                           "rocblas_dot_ex_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDotcEx",                                         {"hipblasDotcEx",                                             "rocblas_dotc_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasDotcEx_64",                                      {"hipblasDotcEx_64",                                          "rocblas_dotc_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
+  m["cublasDotEx"]                                                  = {"hipblasDotEx",                                              "rocblas_dot_ex",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDotEx_64"]                                               = {"hipblasDotEx_64",                                           "rocblas_dot_ex_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDotcEx"]                                                 = {"hipblasDotcEx",                                             "rocblas_dotc_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasDotcEx_64"]                                              = {"hipblasDotcEx_64",                                          "rocblas_dotc_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
 
-  {"cublasSdot_v2",                                        {"hipblasSdot",                                               "rocblas_sdot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasSdot_v2_64",                                     {"hipblasSdot_64",                                            "rocblas_sdot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDdot_v2",                                        {"hipblasDdot",                                               "rocblas_ddot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDdot_v2_64",                                     {"hipblasDdot_64",                                            "rocblas_ddot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSdot_v2"]                                                = {"hipblasSdot",                                               "rocblas_sdot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasSdot_v2_64"]                                             = {"hipblasSdot_64",                                            "rocblas_sdot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDdot_v2"]                                                = {"hipblasDdot",                                               "rocblas_ddot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDdot_v2_64"]                                             = {"hipblasDdot_64",                                            "rocblas_ddot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
-  {"cublasCdotu_v2",                                       {"hipblasCdotu",                                              "rocblas_cdotu",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCdotu_v2_64",                                    {"hipblasCdotu_64",                                           "rocblas_cdotu_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCdotc_v2",                                       {"hipblasCdotc",                                              "rocblas_cdotc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCdotc_v2_64",                                    {"hipblasCdotc_64",                                           "rocblas_cdotc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdotu_v2",                                       {"hipblasZdotu",                                              "rocblas_zdotu",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdotu_v2_64",                                    {"hipblasZdotu_64",                                           "rocblas_zdotu_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdotc_v2",                                       {"hipblasZdotc",                                              "rocblas_zdotc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdotc_v2_64",                                    {"hipblasZdotc_64",                                           "rocblas_zdotc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasCdotu_v2"]                                               = {"hipblasCdotu",                                              "rocblas_cdotu",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCdotu_v2_64"]                                            = {"hipblasCdotu_64",                                           "rocblas_cdotu_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCdotc_v2"]                                               = {"hipblasCdotc",                                              "rocblas_cdotc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCdotc_v2_64"]                                            = {"hipblasCdotc_64",                                           "rocblas_cdotc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdotu_v2"]                                               = {"hipblasZdotu",                                              "rocblas_zdotu",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdotu_v2_64"]                                            = {"hipblasZdotu_64",                                           "rocblas_zdotu_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdotc_v2"]                                               = {"hipblasZdotc",                                              "rocblas_zdotc",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdotc_v2_64"]                                            = {"hipblasZdotc_64",                                           "rocblas_zdotc_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // SCAL
-  {"cublasScalEx",                                         {"hipblasScalEx",                                             "rocblas_scal_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasScalEx_64",                                      {"hipblasScalEx_64",                                          "rocblas_scal_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasSscal_v2",                                       {"hipblasSscal",                                              "rocblas_sscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasSscal_v2_64",                                    {"hipblasSscal_64",                                           "rocblas_sscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDscal_v2",                                       {"hipblasDscal",                                              "rocblas_dscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDscal_v2_64",                                    {"hipblasDscal_64",                                           "rocblas_dscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCscal_v2",                                       {"hipblasCscal",                                              "rocblas_cscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCscal_v2_64",                                    {"hipblasCscal_64",                                           "rocblas_cscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCsscal_v2",                                      {"hipblasCsscal",                                             "rocblas_csscal",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCsscal_v2_64",                                   {"hipblasCsscal_64",                                          "rocblas_csscal_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZscal_v2",                                       {"hipblasZscal",                                              "rocblas_zscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZscal_v2_64",                                    {"hipblasZscal_64",                                           "rocblas_zscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdscal_v2",                                      {"hipblasZdscal",                                             "rocblas_zdscal",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdscal_v2_64",                                   {"hipblasZdscal_64",                                          "rocblas_zdscal_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasScalEx"]                                                 = {"hipblasScalEx",                                             "rocblas_scal_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasScalEx_64"]                                              = {"hipblasScalEx_64",                                          "rocblas_scal_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasSscal_v2"]                                               = {"hipblasSscal",                                              "rocblas_sscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasSscal_v2_64"]                                            = {"hipblasSscal_64",                                           "rocblas_sscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDscal_v2"]                                               = {"hipblasDscal",                                              "rocblas_dscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDscal_v2_64"]                                            = {"hipblasDscal_64",                                           "rocblas_dscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCscal_v2"]                                               = {"hipblasCscal",                                              "rocblas_cscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCscal_v2_64"]                                            = {"hipblasCscal_64",                                           "rocblas_cscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCsscal_v2"]                                              = {"hipblasCsscal",                                             "rocblas_csscal",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCsscal_v2_64"]                                           = {"hipblasCsscal_64",                                          "rocblas_csscal_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZscal_v2"]                                               = {"hipblasZscal",                                              "rocblas_zscal",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZscal_v2_64"]                                            = {"hipblasZscal_64",                                           "rocblas_zscal_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdscal_v2"]                                              = {"hipblasZdscal",                                             "rocblas_zdscal",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdscal_v2_64"]                                           = {"hipblasZdscal_64",                                          "rocblas_zdscal_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // AXPY
-  {"cublasAxpyEx",                                         {"hipblasAxpyEx",                                             "rocblas_axpy_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasAxpyEx_64",                                      {"hipblasAxpyEx_64",                                          "rocblas_axpy_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasSaxpy_v2",                                       {"hipblasSaxpy",                                              "rocblas_saxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasSaxpy_v2_64",                                    {"hipblasSaxpy_64",                                           "rocblas_saxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDaxpy_v2",                                       {"hipblasDaxpy",                                              "rocblas_daxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDaxpy_v2_64",                                    {"hipblasDaxpy_64",                                           "rocblas_daxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCaxpy_v2",                                       {"hipblasCaxpy",                                              "rocblas_caxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCaxpy_v2_64",                                    {"hipblasCaxpy_64",                                           "rocblas_caxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZaxpy_v2",                                       {"hipblasZaxpy",                                              "rocblas_zaxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZaxpy_v2_64",                                    {"hipblasZaxpy_64",                                           "rocblas_zaxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasAxpyEx"]                                                 = {"hipblasAxpyEx",                                             "rocblas_axpy_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasAxpyEx_64"]                                              = {"hipblasAxpyEx_64",                                          "rocblas_axpy_ex_64",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasSaxpy_v2"]                                               = {"hipblasSaxpy",                                              "rocblas_saxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasSaxpy_v2_64"]                                            = {"hipblasSaxpy_64",                                           "rocblas_saxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDaxpy_v2"]                                               = {"hipblasDaxpy",                                              "rocblas_daxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDaxpy_v2_64"]                                            = {"hipblasDaxpy_64",                                           "rocblas_daxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCaxpy_v2"]                                               = {"hipblasCaxpy",                                              "rocblas_caxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCaxpy_v2_64"]                                            = {"hipblasCaxpy_64",                                           "rocblas_caxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZaxpy_v2"]                                               = {"hipblasZaxpy",                                              "rocblas_zaxpy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZaxpy_v2_64"]                                            = {"hipblasZaxpy_64",                                           "rocblas_zaxpy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // COPY
-  {"cublasCopyEx",                                         {"hipblasCopyEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasCopyEx_64",                                      {"hipblasCopyEx_64",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasScopy_v2",                                       {"hipblasScopy",                                              "rocblas_scopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasScopy_v2_64",                                    {"hipblasScopy_64",                                           "rocblas_scopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDcopy_v2",                                       {"hipblasDcopy",                                              "rocblas_dcopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDcopy_v2_64",                                    {"hipblasDcopy_64",                                           "rocblas_dcopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCcopy_v2",                                       {"hipblasCcopy",                                              "rocblas_ccopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCcopy_v2_64",                                    {"hipblasCcopy_64",                                           "rocblas_ccopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZcopy_v2",                                       {"hipblasZcopy",                                              "rocblas_zcopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZcopy_v2_64",                                    {"hipblasZcopy_64",                                           "rocblas_zcopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasCopyEx"]                                                 = {"hipblasCopyEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCopyEx_64"]                                              = {"hipblasCopyEx_64",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasScopy_v2"]                                               = {"hipblasScopy",                                              "rocblas_scopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasScopy_v2_64"]                                            = {"hipblasScopy_64",                                           "rocblas_scopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDcopy_v2"]                                               = {"hipblasDcopy",                                              "rocblas_dcopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDcopy_v2_64"]                                            = {"hipblasDcopy_64",                                           "rocblas_dcopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCcopy_v2"]                                               = {"hipblasCcopy",                                              "rocblas_ccopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCcopy_v2_64"]                                            = {"hipblasCcopy_64",                                           "rocblas_ccopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZcopy_v2"]                                               = {"hipblasZcopy",                                              "rocblas_zcopy",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZcopy_v2_64"]                                            = {"hipblasZcopy_64",                                           "rocblas_zcopy_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // SWAP
-  {"cublasSwapEx",                                         {"hipblasSwapEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasSwapEx_64",                                      {"hipblasSwapEx_64",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasSswap_v2",                                       {"hipblasSswap",                                              "rocblas_sswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasSswap_v2_64",                                    {"hipblasSswap_64",                                           "rocblas_sswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDswap_v2",                                       {"hipblasDswap",                                              "rocblas_dswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDswap_v2_64",                                    {"hipblasDswap_64",                                           "rocblas_dswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCswap_v2",                                       {"hipblasCswap",                                              "rocblas_cswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCswap_v2_64",                                    {"hipblasCswap_64",                                           "rocblas_cswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZswap_v2",                                       {"hipblasZswap",                                              "rocblas_zswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZswap_v2_64",                                    {"hipblasZswap_64",                                           "rocblas_zswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasSwapEx"]                                                 = {"hipblasSwapEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasSwapEx_64"]                                              = {"hipblasSwapEx_64",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasSswap_v2"]                                               = {"hipblasSswap",                                              "rocblas_sswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasSswap_v2_64"]                                            = {"hipblasSswap_64",                                           "rocblas_sswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDswap_v2"]                                               = {"hipblasDswap",                                              "rocblas_dswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDswap_v2_64"]                                            = {"hipblasDswap_64",                                           "rocblas_dswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCswap_v2"]                                               = {"hipblasCswap",                                              "rocblas_cswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCswap_v2_64"]                                            = {"hipblasCswap_64",                                           "rocblas_cswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZswap_v2"]                                               = {"hipblasZswap",                                              "rocblas_zswap",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZswap_v2_64"]                                            = {"hipblasZswap_64",                                           "rocblas_zswap_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // AMAX
-  {"cublasIamaxEx",                                        {"hipblasIamaxEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasIamaxEx_64",                                     {"hipblasIamaxEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasIsamax_v2",                                      {"hipblasIsamax",                                             "rocblas_isamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIsamax_v2_64",                                   {"hipblasIsamax_64",                                          "rocblas_isamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIdamax_v2",                                      {"hipblasIdamax",                                             "rocblas_idamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIdamax_v2_64",                                   {"hipblasIdamax_64",                                          "rocblas_idamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIcamax_v2",                                      {"hipblasIcamax",                                             "rocblas_icamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIcamax_v2_64",                                   {"hipblasIcamax_64",                                          "rocblas_icamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIzamax_v2",                                      {"hipblasIzamax",                                             "rocblas_izamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIzamax_v2_64",                                   {"hipblasIzamax_64",                                          "rocblas_izamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasIamaxEx"]                                                = {"hipblasIamaxEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasIamaxEx_64"]                                             = {"hipblasIamaxEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasIsamax_v2"]                                              = {"hipblasIsamax",                                             "rocblas_isamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIsamax_v2_64"]                                           = {"hipblasIsamax_64",                                          "rocblas_isamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIdamax_v2"]                                              = {"hipblasIdamax",                                             "rocblas_idamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIdamax_v2_64"]                                           = {"hipblasIdamax_64",                                          "rocblas_idamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIcamax_v2"]                                              = {"hipblasIcamax",                                             "rocblas_icamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIcamax_v2_64"]                                           = {"hipblasIcamax_64",                                          "rocblas_icamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIzamax_v2"]                                              = {"hipblasIzamax",                                             "rocblas_izamax",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIzamax_v2_64"]                                           = {"hipblasIzamax_64",                                          "rocblas_izamax_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // AMIN
-  {"cublasIaminEx",                                        {"hipblasIaminEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasIaminEx_64",                                     {"hipblasIaminEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasIsamin_v2",                                      {"hipblasIsamin",                                             "rocblas_isamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIsamin_v2_64",                                   {"hipblasIsamin_64",                                          "rocblas_isamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIdamin_v2",                                      {"hipblasIdamin",                                             "rocblas_idamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIdamin_v2_64",                                   {"hipblasIdamin_64",                                          "rocblas_idamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIcamin_v2",                                      {"hipblasIcamin",                                             "rocblas_icamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIcamin_v2_64",                                   {"hipblasIcamin_64",                                          "rocblas_icamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIzamin_v2",                                      {"hipblasIzamin",                                             "rocblas_izamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasIzamin_v2_64",                                   {"hipblasIzamin_64",                                          "rocblas_izamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasIaminEx"]                                                = {"hipblasIaminEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasIaminEx_64"]                                             = {"hipblasIaminEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasIsamin_v2"]                                              = {"hipblasIsamin",                                             "rocblas_isamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIsamin_v2_64"]                                           = {"hipblasIsamin_64",                                          "rocblas_isamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIdamin_v2"]                                              = {"hipblasIdamin",                                             "rocblas_idamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIdamin_v2_64"]                                           = {"hipblasIdamin_64",                                          "rocblas_idamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIcamin_v2"]                                              = {"hipblasIcamin",                                             "rocblas_icamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIcamin_v2_64"]                                           = {"hipblasIcamin_64",                                          "rocblas_icamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIzamin_v2"]                                              = {"hipblasIzamin",                                             "rocblas_izamin",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasIzamin_v2_64"]                                           = {"hipblasIzamin_64",                                          "rocblas_izamin_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ASUM
-  {"cublasAsumEx",                                         {"hipblasAsumEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasAsumEx_64",                                      {"hipblasAsumEx_64",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasSasum_v2",                                       {"hipblasSasum",                                              "rocblas_sasum",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasSasum_v2_64",                                    {"hipblasSasum_64",                                           "rocblas_sasum_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDasum_v2",                                       {"hipblasDasum",                                              "rocblas_dasum",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDasum_v2_64",                                    {"hipblasDasum_64",                                           "rocblas_dasum_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasScasum_v2",                                      {"hipblasScasum",                                             "rocblas_scasum",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasScasum_v2_64",                                   {"hipblasScasum_64",                                          "rocblas_scasum_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDzasum_v2",                                      {"hipblasDzasum",                                             "rocblas_dzasum",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDzasum_v2_64",                                   {"hipblasDzasum_64",                                          "rocblas_dzasum_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasAsumEx"]                                                 = {"hipblasAsumEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasAsumEx_64"]                                              = {"hipblasAsumEx_64",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasSasum_v2"]                                               = {"hipblasSasum",                                              "rocblas_sasum",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasSasum_v2_64"]                                            = {"hipblasSasum_64",                                           "rocblas_sasum_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDasum_v2"]                                               = {"hipblasDasum",                                              "rocblas_dasum",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDasum_v2_64"]                                            = {"hipblasDasum_64",                                           "rocblas_dasum_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasScasum_v2"]                                              = {"hipblasScasum",                                             "rocblas_scasum",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasScasum_v2_64"]                                           = {"hipblasScasum_64",                                          "rocblas_scasum_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDzasum_v2"]                                              = {"hipblasDzasum",                                             "rocblas_dzasum",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDzasum_v2_64"]                                           = {"hipblasDzasum_64",                                          "rocblas_dzasum_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ROT
-  {"cublasRotEx",                                          {"hipblasRotEx",                                              "rocblas_rot_ex",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasRotEx_64",                                       {"hipblasRotEx_64",                                           "rocblas_rot_ex_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT}},
-  {"cublasSrot_v2",                                        {"hipblasSrot",                                               "rocblas_srot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasSrot_v2_64",                                     {"hipblasSrot_64",                                            "rocblas_srot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDrot_v2",                                        {"hipblasDrot",                                               "rocblas_drot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDrot_v2_64",                                     {"hipblasDrot_64",                                            "rocblas_drot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCrot_v2",                                        {"hipblasCrot",                                               "rocblas_crot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCrot_v2_64",                                     {"hipblasCrot_64",                                            "rocblas_crot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCsrot_v2",                                       {"hipblasCsrot",                                              "rocblas_csrot",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCsrot_v2_64",                                    {"hipblasCsrot_64",                                           "rocblas_csrot_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZrot_v2",                                        {"hipblasZrot",                                               "rocblas_zrot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZrot_v2_64",                                     {"hipblasZrot_64",                                            "rocblas_zrot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdrot_v2",                                       {"hipblasZdrot",                                              "rocblas_zdrot",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZdrot_v2_64",                                    {"hipblasZdrot_64",                                           "rocblas_zdrot_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasRotEx"]                                                  = {"hipblasRotEx",                                              "rocblas_rot_ex",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasRotEx_64"]                                               = {"hipblasRotEx_64",                                           "rocblas_rot_ex_64",                                  CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
+  m["cublasSrot_v2"]                                                = {"hipblasSrot",                                               "rocblas_srot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasSrot_v2_64"]                                             = {"hipblasSrot_64",                                            "rocblas_srot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDrot_v2"]                                                = {"hipblasDrot",                                               "rocblas_drot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDrot_v2_64"]                                             = {"hipblasDrot_64",                                            "rocblas_drot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCrot_v2"]                                                = {"hipblasCrot",                                               "rocblas_crot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCrot_v2_64"]                                             = {"hipblasCrot_64",                                            "rocblas_crot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCsrot_v2"]                                               = {"hipblasCsrot",                                              "rocblas_csrot",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCsrot_v2_64"]                                            = {"hipblasCsrot_64",                                           "rocblas_csrot_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZrot_v2"]                                                = {"hipblasZrot",                                               "rocblas_zrot",                                       CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZrot_v2_64"]                                             = {"hipblasZrot_64",                                            "rocblas_zrot_64",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdrot_v2"]                                               = {"hipblasZdrot",                                              "rocblas_zdrot",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZdrot_v2_64"]                                            = {"hipblasZdrot_64",                                           "rocblas_zdrot_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ROTG
-  {"cublasRotgEx",                                         {"hipblasRotgEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasSrotg_v2",                                       {"hipblasSrotg",                                              "rocblas_srotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDrotg_v2",                                       {"hipblasDrotg",                                              "rocblas_drotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasCrotg_v2",                                       {"hipblasCrotg",                                              "rocblas_crotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasZrotg_v2",                                       {"hipblasZrotg",                                              "rocblas_zrotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasRotgEx"]                                                 = {"hipblasRotgEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasSrotg_v2"]                                               = {"hipblasSrotg",                                              "rocblas_srotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDrotg_v2"]                                               = {"hipblasDrotg",                                              "rocblas_drotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasCrotg_v2"]                                               = {"hipblasCrotg",                                              "rocblas_crotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasZrotg_v2"]                                               = {"hipblasZrotg",                                              "rocblas_zrotg",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ROTM
-  {"cublasRotmEx",                                         {"hipblasRotmEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasRotmEx_64",                                      {"hipblasRotmEx_64",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasSrotm_v2",                                       {"hipblasSrotm",                                              "rocblas_srotm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasSrotm_v2_64",                                    {"hipblasSrotm_64",                                           "rocblas_srotm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDrotm_v2",                                       {"hipblasDrotm",                                              "rocblas_drotm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDrotm_v2_64",                                    {"hipblasDrotm_64",                                           "rocblas_drotm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasRotmEx"]                                                 = {"hipblasRotmEx",                                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasRotmEx_64"]                                              = {"hipblasRotmEx_64",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasSrotm_v2"]                                               = {"hipblasSrotm",                                              "rocblas_srotm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasSrotm_v2_64"]                                            = {"hipblasSrotm_64",                                           "rocblas_srotm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDrotm_v2"]                                               = {"hipblasDrotm",                                              "rocblas_drotm",                                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDrotm_v2_64"]                                            = {"hipblasDrotm_64",                                           "rocblas_drotm_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // ROTMG
-  {"cublasRotmgEx",                                        {"hipblasRotmgEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED}},
-  {"cublasSrotmg_v2",                                      {"hipblasSrotmg",                                             "rocblas_srotmg",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
-  {"cublasDrotmg_v2",                                      {"hipblasDrotmg",                                             "rocblas_drotmg",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1}},
+  m["cublasRotmgEx"]                                                = {"hipblasRotmgEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasSrotmg_v2"]                                              = {"hipblasSrotmg",                                             "rocblas_srotmg",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
+  m["cublasDrotmg_v2"]                                              = {"hipblasDrotmg",                                             "rocblas_drotmg",                                     CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_1};
 
   // BLASLt functions
-  {"cublasLtCreate",                                       {"hipblasLtCreate",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT}},
-  {"cublasLtDestroy",                                      {"hipblasLtDestroy",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT}},
-  {"cublasLtGetStatusName",                                {"hipblasLtGetStatusName",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtGetStatusString",                              {"hipblasLtGetStatusString",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  m["cublasLtCreate"]                                               = {"hipblasLtCreate",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT};
+  m["cublasLtDestroy"]                                              = {"hipblasLtDestroy",                                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT};
+  m["cublasLtGetStatusName"]                                        = {"hipblasLtGetStatusName",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtGetStatusString"]                                      = {"hipblasLtGetStatusString",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+
   // TODO: make hipblasLtGetVersion(hipblasLtHandle_t handle, int* version) hipblasLtGetVersion(void)
-  {"cublasLtGetVersion",                                   {"hipblasLtGetVersion",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtGetCudartVersion",                             {"hipblasLtGetCudartVersion",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtGetProperty",                                  {"hipblasLtGetProperty",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtHeuristicsCacheGetCapacity",                   {"hipblasLtHeuristicsCacheGetCapacity",                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtHeuristicsCacheSetCapacity",                   {"hipblasLtHeuristicsCacheSetCapacity",                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtDisableCpuInstructionsSetMask",                {"hipblasLtDisableCpuInstructionsSetMask",                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatmul",                                       {"hipblasLtMatmul",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixTransform",                              {"hipblasLtMatrixTransform",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixLayoutInit",                             {"hipblasLtMatrixLayoutInit",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatrixLayoutCreate",                           {"hipblasLtMatrixLayoutCreate",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixLayoutDestroy",                          {"hipblasLtMatrixLayoutDestroy",                              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixLayoutSetAttribute",                     {"hipblasLtMatrixLayoutSetAttribute",                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixLayoutGetAttribute",                     {"hipblasLtMatrixLayoutGetAttribute",                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulDescInit",                               {"hipblasLtMatmulDescInit",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
+  m["cublasLtGetVersion"]                                           = {"hipblasLtGetVersion",                                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtGetCudartVersion"]                                     = {"hipblasLtGetCudartVersion",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtGetProperty"]                                          = {"hipblasLtGetProperty",                                      "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtHeuristicsCacheGetCapacity"]                           = {"hipblasLtHeuristicsCacheGetCapacity",                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtHeuristicsCacheSetCapacity"]                           = {"hipblasLtHeuristicsCacheSetCapacity",                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtDisableCpuInstructionsSetMask"]                        = {"hipblasLtDisableCpuInstructionsSetMask",                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatmul"]                                               = {"hipblasLtMatmul",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixTransform"]                                      = {"hipblasLtMatrixTransform",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixLayoutInit"]                                     = {"hipblasLtMatrixLayoutInit",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatrixLayoutCreate"]                                   = {"hipblasLtMatrixLayoutCreate",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixLayoutDestroy"]                                  = {"hipblasLtMatrixLayoutDestroy",                              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixLayoutSetAttribute"]                             = {"hipblasLtMatrixLayoutSetAttribute",                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixLayoutGetAttribute"]                             = {"hipblasLtMatrixLayoutGetAttribute",                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulDescInit"]                                       = {"hipblasLtMatmulDescInit",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+
   // [hipBLASLt] TODO: Use hipblasComputeType_t instead of incompatible hipblasLtComputeType_t
   // [HIPIFY] TODO: For CUDA < 11.0 throw an error cublasLtMatmulDescCreate is not supported by HIP, please use the newer version of cublasLtMatmulDescCreate (>=11.0)
   // [Reason] The signature change in 11.0.1 from cublasLtMatmulDescCreate(cublasLtMatmulDesc_t *matmulDesc, cudaDataType computeType);
-  {"cublasLtMatmulDescCreate",                             {"hipblasLtMatmulDescCreate",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulDescDestroy",                            {"hipblasLtMatmulDescDestroy",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulDescSetAttribute",                       {"hipblasLtMatmulDescSetAttribute",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulDescGetAttribute",                       {"hipblasLtMatmulDescGetAttribute",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixTransformDescInit",                      {"hipblasLtMatrixTransformDescInit",                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatrixTransformDescCreate",                    {"hipblasLtMatrixTransformDescCreate",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixTransformDescDestroy",                   {"hipblasLtMatrixTransformDescDestroy",                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixTransformDescSetAttribute",              {"hipblasLtMatrixTransformDescSetAttribute",                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatrixTransformDescGetAttribute",              {"hipblasLtMatrixTransformDescGetAttribute",                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulPreferenceInit",                         {"hipblasLtMatmulPreferenceInit",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatmulPreferenceCreate",                       {"hipblasLtMatmulPreferenceCreate",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulPreferenceDestroy",                      {"hipblasLtMatmulPreferenceDestroy",                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulPreferenceSetAttribute",                 {"hipblasLtMatmulPreferenceSetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulPreferenceGetAttribute",                 {"hipblasLtMatmulPreferenceGetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulAlgoGetHeuristic",                       {"hipblasLtMatmulAlgoGetHeuristic",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED}},
-  {"cublasLtMatmulAlgoGetIds",                             {"hipblasLtMatmulAlgoGetIds",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatmulAlgoInit",                               {"hipblasLtMatmulAlgoInit",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatmulAlgoCheck",                              {"hipblasLtMatmulAlgoCheck",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatmulAlgoCapGetAttribute",                    {"hipblasLtMatmulAlgoCapGetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatmulAlgoConfigSetAttribute",                 {"hipblasLtMatmulAlgoConfigSetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtMatmulAlgoConfigGetAttribute",                 {"hipblasLtMatmulAlgoConfigGetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtLoggerSetCallback",                            {"hipblasLtLoggerSetCallback",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtLoggerSetFile",                                {"hipblasLtLoggerSetFile",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtLoggerOpenFile",                               {"hipblasLtLoggerOpenFile",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtLoggerSetLevel",                               {"hipblasLtLoggerSetLevel",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtLoggerSetMask",                                {"hipblasLtLoggerSetMask",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtLoggerForceDisable",                           {"hipblasLtLoggerForceDisable",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtEmulationDescInit",                            {"hipblasLtEmulationDescInit",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtEmulationDescDestroy",                         {"hipblasLtEmulationDescDestroy",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtEmulationDescSetAttribute",                    {"hipblasLtEmulationDescSetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-  {"cublasLtEmulationDescGetAttribute",                    {"hipblasLtEmulationDescGetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED}},
-};
+  m["cublasLtMatmulDescCreate"]                                     = {"hipblasLtMatmulDescCreate",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulDescDestroy"]                                    = {"hipblasLtMatmulDescDestroy",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulDescSetAttribute"]                               = {"hipblasLtMatmulDescSetAttribute",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulDescGetAttribute"]                               = {"hipblasLtMatmulDescGetAttribute",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixTransformDescInit"]                              = {"hipblasLtMatrixTransformDescInit",                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatrixTransformDescCreate"]                            = {"hipblasLtMatrixTransformDescCreate",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixTransformDescDestroy"]                           = {"hipblasLtMatrixTransformDescDestroy",                       "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixTransformDescSetAttribute"]                      = {"hipblasLtMatrixTransformDescSetAttribute",                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatrixTransformDescGetAttribute"]                      = {"hipblasLtMatrixTransformDescGetAttribute",                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulPreferenceInit"]                                 = {"hipblasLtMatmulPreferenceInit",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatmulPreferenceCreate"]                               = {"hipblasLtMatmulPreferenceCreate",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulPreferenceDestroy"]                              = {"hipblasLtMatmulPreferenceDestroy",                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulPreferenceSetAttribute"]                         = {"hipblasLtMatmulPreferenceSetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulPreferenceGetAttribute"]                         = {"hipblasLtMatmulPreferenceGetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulAlgoGetHeuristic"]                               = {"hipblasLtMatmulAlgoGetHeuristic",                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
+  m["cublasLtMatmulAlgoGetIds"]                                     = {"hipblasLtMatmulAlgoGetIds",                                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatmulAlgoInit"]                                       = {"hipblasLtMatmulAlgoInit",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatmulAlgoCheck"]                                      = {"hipblasLtMatmulAlgoCheck",                                  "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatmulAlgoCapGetAttribute"]                            = {"hipblasLtMatmulAlgoCapGetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatmulAlgoConfigSetAttribute"]                         = {"hipblasLtMatmulAlgoConfigSetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtMatmulAlgoConfigGetAttribute"]                         = {"hipblasLtMatmulAlgoConfigGetAttribute",                     "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtLoggerSetCallback"]                                    = {"hipblasLtLoggerSetCallback",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtLoggerSetFile"]                                        = {"hipblasLtLoggerSetFile",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtLoggerOpenFile"]                                       = {"hipblasLtLoggerOpenFile",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtLoggerSetLevel"]                                       = {"hipblasLtLoggerSetLevel",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtLoggerSetMask"]                                        = {"hipblasLtLoggerSetMask",                                    "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtLoggerForceDisable"]                                   = {"hipblasLtLoggerForceDisable",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtEmulationDescInit"]                                    = {"hipblasLtEmulationDescInit",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtEmulationDescDestroy"]                                 = {"hipblasLtEmulationDescDestroy",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtEmulationDescSetAttribute"]                            = {"hipblasLtEmulationDescSetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtEmulationDescGetAttribute"]                            = {"hipblasLtEmulationDescGetAttribute",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP {
-  {"cublasGetMathMode",                                    {CUDA_90,  CUDA_0,   CUDA_0   }},
-  {"cublasSetMathMode",                                    {CUDA_90,  CUDA_0,   CUDA_0   }},
-  {"cublasMigrateComputeType",                             {CUDA_110, CUDA_0,   CUDA_0   }},
-  {"cublasLogCallback",                                    {CUDA_92,  CUDA_0,   CUDA_0   }},
-  {"cublasLoggerConfigure",                                {CUDA_92,  CUDA_0,   CUDA_0   }},
-  {"cublasSetLoggerCallback",                              {CUDA_92,  CUDA_0,   CUDA_0   }},
-  {"cublasGetLoggerCallback",                              {CUDA_92,  CUDA_0,   CUDA_0   }},
-  {"cublasGetCudartVersion",                               {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasNrm2Ex",                                         {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasHgemm",                                          {CUDA_75,  CUDA_0,   CUDA_0   }},
-  {"cublasHgemmBatched",                                   {CUDA_90,  CUDA_0,   CUDA_0   }},
-  {"cublasSgemmStridedBatched",                            {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasDgemmStridedBatched",                            {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCgemm3mBatched",                                 {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCgemmStridedBatched",                            {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCgemm3mStridedBatched",                          {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasZgemmStridedBatched",                            {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasHgemmStridedBatched",                            {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCgemm3m",                                        {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCgemm3mEx",                                      {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasZgemm3m",                                        {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasSgemmEx",                                        {CUDA_75,  CUDA_0,   CUDA_0   }},
-  {"cublasGemmEx",                                         {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasGemmBatchedEx",                                  {CUDA_91,  CUDA_0,   CUDA_0   }},
-  {"cublasGemmStridedBatchedEx",                           {CUDA_91,  CUDA_0,   CUDA_0   }},
-  {"cublasCgemmEx",                                        {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasUint8gemmBias",                                  {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCsyrkEx",                                        {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCsyrk3mEx",                                      {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCherkEx",                                        {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCherk3mEx",                                      {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasDotEx",                                          {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasDotcEx",                                         {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasScalEx",                                         {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasAxpyEx",                                         {CUDA_80,  CUDA_0,   CUDA_0   }},
-  {"cublasCopyEx",                                         {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasSwapEx",                                         {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasIamaxEx",                                        {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasIaminEx",                                        {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasAsumEx",                                         {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasRotEx",                                          {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasRotgEx",                                         {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasRotmEx",                                         {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasRotmgEx",                                        {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasGetSmCountTarget",                               {CUDA_113, CUDA_0,   CUDA_0   }},
-  {"cublasSetSmCountTarget",                               {CUDA_113, CUDA_0,   CUDA_0   }},
-  {"cublasGetStatusName",                                  {CUDA_114, CUDA_0,   CUDA_0   }},
-  {"cublasGetStatusString",                                {CUDA_114, CUDA_0,   CUDA_0   }},
-  {"cublasSetVector_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasGetVector_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSetMatrix_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasGetMatrix_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSetVectorAsync_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasGetVectorAsync_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSetMatrixAsync_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasGetMatrixAsync_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasNrm2Ex_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSnrm2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSnrm2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDnrm2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDnrm2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasScnrm2_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasScnrm2_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDznrm2_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDznrm2_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDotEx_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDotcEx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSdot_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSdot_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDdot_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDdot_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCdotu_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCdotu_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCdotc_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCdotc_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdotu_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdotu_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdotc_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdotc_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasScalEx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSscal_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSscal_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDscal_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDscal_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCscal_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCscal_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZscal_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZscal_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsscal_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsscal_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdscal_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdscal_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasAxpyEx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSaxpy_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSaxpy_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDaxpy_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDaxpy_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCaxpy_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCaxpy_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZaxpy_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZaxpy_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCopyEx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasScopy_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasScopy_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDcopy_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDcopy_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCcopy_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCcopy_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZcopy_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZcopy_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSswap_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSswap_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDswap_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDswap_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCswap_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCswap_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZswap_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZswap_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSwapEx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIsamax_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIsamax_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIdamax_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIdamax_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIcamax_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIcamax_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIzamax_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIzamax_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIamaxEx_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIsamin_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIsamin_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIdamin_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIdamin_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIcamin_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIcamin_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIzamin_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIzamin_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasIaminEx_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasAsumEx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSasum_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSasum_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDasum_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDasum_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasScasum_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasScasum_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDzasum_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDzasum_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSrot_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSrot_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDrot_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDrot_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCrot_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCrot_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsrot_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsrot_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZrot_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZrot_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdrot_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdrot_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasRotEx_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSrotm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSrotm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDrotm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDrotm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasRotmEx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgemv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgemv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStpmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStpmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtpmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtpmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtpmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtpmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtpmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtpmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStpsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStpsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtpsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtpsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtpsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtpsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtpsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtpsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStbsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStbsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtbsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtbsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtbsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtbsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtbsv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtbsv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsymv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsymv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsymv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsymv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsymv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsymv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsymv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsymv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChemv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChemv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhemv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhemv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhbmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhbmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSspmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSspmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDspmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDspmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChpmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChpmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhpmv_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhpmv_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSger_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSger_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDger_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDger_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgeru_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgeru_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgerc_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgerc_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgeru_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgeru_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgerc_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgerc_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyr_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyr_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyr_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyr_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyr_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyr_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyr_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyr_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCher_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCher_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZher_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZher_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSspr_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSspr_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDspr_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDspr_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChpr_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChpr_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhpr_64",                                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhpr_v2_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyr2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyr2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyr2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyr2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyr2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyr2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyr2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyr2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCher2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCher2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZher2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZher2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSspr2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSspr2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDspr2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDspr2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChpr2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChpr2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhpr2_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhpr2_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemvBatched",                                   {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasSgemvBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgemvBatched",                                   {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasDgemvBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemvBatched",                                   {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasCgemvBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemvBatched",                                   {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasZgemvBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasHSHgemvBatched",                                 {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasHSHgemvBatched_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasHSSgemvBatched",                                 {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasHSSgemvBatched_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasTSTgemvBatched",                                 {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasTSTgemvBatched_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasTSSgemvBatched",                                 {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasTSSgemvBatched_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemvStridedBatched",                            {CUDA_116, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11062, CUBLAS_VERSION 110902, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 9 CUBLAS_VER_PATCH 2
-  {"cublasSgemvStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgemvStridedBatched",                            {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasDgemvStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemvStridedBatched",                            {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasCgemvStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemvStridedBatched",                            {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasZgemvStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasHSHgemvStridedBatched",                          {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasHSHgemvStridedBatched_64",                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasHSSgemvStridedBatched",                          {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasHSSgemvStridedBatched_64",                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasTSTgemvStridedBatched",                          {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasTSTgemvStridedBatched_64",                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasTSSgemvStridedBatched",                          {CUDA_116, CUDA_0,   CUDA_0   }},
-  {"cublasTSSgemvStridedBatched_64",                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgemm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgemm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemm3m_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemm3mEx_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemm3m_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasHgemm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemmEx_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasGemmEx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemmEx_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyrk_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyrk_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyrk_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyrk_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyrk_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyrk_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyrk_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyrk_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyrkEx_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyrk3mEx_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCherk_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCherk_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZherk_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZherk_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCherkEx_64",                                     {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCherk3mEx_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyr2k_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyr2k_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyr2k_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyr2k_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyr2k_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyr2k_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyr2k_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyr2k_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCher2k_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCher2k_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZher2k_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZher2k_v2_64",                                   {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsyrkx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsyrkx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsyrkx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsyrkx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCherkx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZherkx_64",                                      {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsymm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSsymm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsymm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDsymm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsymm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCsymm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsymm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZsymm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChemm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasChemm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhemm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZhemm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrsm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrsm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrsm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrsm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrsm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrsm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrsm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrsm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrmm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrmm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrmm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrmm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrmm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrmm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrmm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrmm_v2_64",                                    {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasHgemmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgemmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemm3mBatched_64",                              {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasHgemmStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemmStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgemmStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemmStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgemm3mStridedBatched_64",                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgemmStridedBatched_64",                         {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasGemmBatchedEx_64",                               {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasGemmStridedBatchedEx_64",                        {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgeam_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDgeam_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCgeam_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZgeam_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasStrsmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDtrsmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCtrsmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZtrsmBatched_64",                                {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSdgmm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasDdgmm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasCdgmm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasZdgmm_64",                                       {CUDA_120, CUDA_0,   CUDA_0   }},
-  {"cublasSgemmGroupedBatched",                            {CUDA_124, CUDA_0,   CUDA_0   }},
-  {"cublasSgemmGroupedBatched_64",                         {CUDA_124, CUDA_0,   CUDA_0   }},
-  {"cublasDgemmGroupedBatched",                            {CUDA_124, CUDA_0,   CUDA_0   }},
-  {"cublasDgemmGroupedBatched_64",                         {CUDA_124, CUDA_0,   CUDA_0   }},
-  {"cublasLtCreate",                                       {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtDestroy",                                      {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtGetStatusName",                                {CUDA_114, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11042, CUBLAS_VERSION 110601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6
-  {"cublasLtGetStatusString",                              {CUDA_114, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11042, CUBLAS_VERSION 110601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6
-  {"cublasLtGetVersion",                                   {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtGetCudartVersion",                             {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtGetProperty",                                  {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtHeuristicsCacheGetCapacity",                   {CUDA_118, CUDA_0,   CUDA_0   }},
-  {"cublasLtHeuristicsCacheSetCapacity",                   {CUDA_118, CUDA_0,   CUDA_0   }},
-  {"cublasLtDisableCpuInstructionsSetMask",                {CUDA_121, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 12011, CUBLAS_VERSION 120103, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 3
-  {"cublasLtMatmul",                                       {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixTransform",                              {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixLayoutInit",                             {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
-  {"cublasLtMatrixLayoutCreate",                           {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixLayoutDestroy",                          {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixLayoutSetAttribute",                     {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixLayoutGetAttribute",                     {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulDescInit",                               {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
-  {"cublasLtMatmulDescCreate",                             {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulDescDestroy",                            {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulDescSetAttribute",                       {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulDescGetAttribute",                       {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixTransformDescInit",                      {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
-  {"cublasLtMatrixTransformDescCreate",                    {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixTransformDescDestroy",                   {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixTransformDescSetAttribute",              {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatrixTransformDescGetAttribute",              {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulPreferenceInit",                         {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
-  {"cublasLtMatmulPreferenceCreate",                       {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulPreferenceDestroy",                      {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulPreferenceSetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulPreferenceGetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulAlgoGetHeuristic",                       {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulAlgoGetIds",                             {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulAlgoInit",                               {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulAlgoCheck",                              {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulAlgoCapGetAttribute",                    {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulAlgoConfigSetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtMatmulAlgoConfigGetAttribute",                 {CUDA_101, CUDA_0,   CUDA_0   }},
-  {"cublasLtLoggerSetCallback",                            {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
-  {"cublasLtLoggerSetFile",                                {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
-  {"cublasLtLoggerOpenFile",                               {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
-  {"cublasLtLoggerSetLevel",                               {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
-  {"cublasLtLoggerSetMask",                                {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
-  {"cublasLtLoggerForceDisable",                           {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
-  {"cublasGemmGroupedBatchedEx",                           {CUDA_125, CUDA_0,   CUDA_0   }},
-  {"cublasGemmGroupedBatchedEx_64",                        {CUDA_125, CUDA_0,   CUDA_0   }},
-  {"cublasGetEmulationStrategy",                           {CUDA_129, CUDA_0,   CUDA_0   }},
-  {"cublasSetEmulationStrategy",                           {CUDA_129, CUDA_0,   CUDA_0   }},
-  {"cublasSetWorkspace",                                   {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
-  {"cublasSetWorkspace_v2",                                {CUDA_110, CUDA_0,   CUDA_0   }}, // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
-  {"cublasLtEmulationDescInit",                            {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasLtEmulationDescDestroy",                         {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasLtEmulationDescSetAttribute",                    {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasLtEmulationDescGetAttribute",                    {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasGetEmulationSpecialValuesSupport",               {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasSetEmulationSpecialValuesSupport",               {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasGetFixedPointEmulationMantissaControl",          {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasSetFixedPointEmulationMantissaControl",          {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasGetFixedPointEmulationMaxMantissaBitCount",      {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasSetFixedPointEmulationMaxMantissaBitCount",      {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasGetFixedPointEmulationMantissaBitOffset",        {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasSetFixedPointEmulationMantissaBitOffset",        {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasGetFixedPointEmulationMantissaBitCountPointer",  {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  {"cublasGetFixedPointEmulationMantissaBitCountPointer",  {CUDA_130, CUDA_0,   CUDA_0   }}, // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-};
+  return m;
+}();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP {
-  {"hipblasGetAtomicsMode",                                {HIP_3100, HIP_0,    HIP_0   }},
-  {"hipblasSetAtomicsMode",                                {HIP_3100, HIP_0,    HIP_0   }},
-  {"hipblasCreate",                                        {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDestroy",                                       {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSetStream",                                     {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasGetStream",                                     {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSetPointerMode",                                {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasGetPointerMode",                                {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSetVector",                                     {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasGetVector",                                     {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSetVectorAsync",                                {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipblasGetVectorAsync",                                {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipblasSetMatrix",                                     {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasGetMatrix",                                     {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSetMatrixAsync",                                {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipblasGetMatrixAsync",                                {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipblasSnrm2",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDnrm2",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSdot",                                          {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDdot",                                          {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSscal",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDscal",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSaxpy",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDaxpy",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasScopy",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDcopy",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSswap",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDswap",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasIsamax",                                        {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasIdamax",                                        {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasIsamin",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasIdamin",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSasum",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDasum",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSrot",                                          {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDrot",                                          {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSrotg",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDrotg",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSrotm",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDrotm",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSrotmg",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDrotmg",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSgemv",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDgemv",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSgbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDgbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasStrmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDtrmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasStbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDtbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasStpmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDtpmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasStrsv",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDtrsv",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasStpsv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDtpsv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasStbsv",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasDtbsv",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasSsymv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDsymv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSsbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDsbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSspmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDspmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSger",                                          {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDger",                                          {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSsyr",                                          {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDsyr",                                          {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSspr",                                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDspr",                                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSsyr2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDsyr2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSspr2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDspr2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSgemm",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDgemm",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasHgemm",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSgemmBatched",                                  {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDgemmBatched",                                  {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasHgemmBatched",                                  {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSgemmStridedBatched",                           {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDgemmStridedBatched",                           {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasHgemmStridedBatched",                           {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSsyrk",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDsyrk",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSsyr2k",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDsyr2k",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSsyrkx",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDsyrkx",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSsymm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasDsymm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasStrsm",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDtrsm",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasStrmm",                                         {HIP_3020, HIP_0,    HIP_0   }},
-  {"hipblasDtrmm",                                         {HIP_3020, HIP_0,    HIP_0   }},
-  {"hipblasSgeam",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasDgeam",                                         {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasSgetrfBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDgetrfBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSgetriBatched",                                 {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipblasDgetriBatched",                                 {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipblasSgetrsBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDgetrsBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasStrsmBatched",                                  {HIP_3020, HIP_0,    HIP_0   }},
-  {"hipblasDtrsmBatched",                                  {HIP_3020, HIP_0,    HIP_0   }},
-  {"hipblasSgeqrfBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasDgeqrfBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSdgmm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasDdgmm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasIcamax",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasIzamax",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasIcamin",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasIzamin",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasScasum",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDzasum",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCaxpy",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZaxpy",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCcopy",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZcopy",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCdotc",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCdotu",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZdotc",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZdotu",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasScnrm2",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDznrm2",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCrot",                                          {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCsrot",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZrot",                                          {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZdrot",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCrotg",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZrotg",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCscal",                                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipblasCsscal",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZscal",                                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipblasZdscal",                                        {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCswap",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZswap",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCgbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZgbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCgemv",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZgemv",                                         {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCgemvBatched",                                  {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZgemvBatched",                                  {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCgemvStridedBatched",                           {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZgemvStridedBatched",                           {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCgeru",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCgerc",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZgeru",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZgerc",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasChbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZhbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasChemv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZhemv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCher",                                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZher",                                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCher2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZher2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasChpmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZhpmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasChpr",                                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZhpr",                                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasChpr2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZhpr2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCsymv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZsymv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCsyr",                                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZsyr",                                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCsyr2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZsyr2",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCtbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZtbmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCtbsv",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasZtbsv",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasCtpmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZtpmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCtpsv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZtpsv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCtrmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZtrmv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCtrsv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZtrsv",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCgemm",                                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipblasZgemm",                                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipblasCgemmBatched",                                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipblasZgemmBatched",                                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipblasCgemmStridedBatched",                           {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasZgemmStridedBatched",                           {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasCherk",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZherk",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCherkx",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZherkx",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCher2k",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZher2k",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCsymm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasZsymm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasCsyrk",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZsyrk",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCsyr2k",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZsyr2k",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCsyrkx",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZsyrkx",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCgeam",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasZgeam",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasChemm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasZhemm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasCtrmm",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZtrmm",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCtrsm",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZtrsm",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCtrsmBatched",                                  {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZtrsmBatched",                                  {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCdgmm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasZdgmm",                                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasCgetrfBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZgetrfBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCgetrsBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZgetrsBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasCgetriBatched",                                 {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipblasZgetriBatched",                                 {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipblasCgelsBatched",                                  {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipblasZgelsBatched",                                  {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipblasCgeqrfBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasZgeqrfBatched",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasGemmEx",                                        {HIP_1082, HIP_0,    HIP_0   }},
-  {"hipblasGemmBatchedEx",                                 {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasGemmStridedBatchedEx",                          {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipblasAxpyEx",                                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipblasDotEx",                                         {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipblasDotcEx",                                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipblasNrm2Ex",                                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipblasRotEx",                                         {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipblasScalEx",                                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipblasSetMathMode",                                   {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasGetMathMode",                                   {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasIsamax_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasIdamax_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasIcamax_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasIzamax_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasIsamin_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasIdamin_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasIcamin_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasIzamin_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasSasum_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDasum_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasScasum_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDzasum_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasSaxpy_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDaxpy_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCaxpy_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZaxpy_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasScopy_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDcopy_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCcopy_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZcopy_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasSdot_64",                                       {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDdot_64",                                       {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCdotc_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCdotu_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZdotc_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZdotu_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasSnrm2_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDnrm2_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasScnrm2_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDznrm2_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasSrot_64",                                       {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDrot_64",                                       {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCrot_64",                                       {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCsrot_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZrot_64",                                       {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZdrot_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasSrotm_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDrotm_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasSscal_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDscal_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCscal_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCsscal_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZscal_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZdscal_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasSswap_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasDswap_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasCswap_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasZswap_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipblasLtCreate",                                      {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtDestroy",                                     {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmul",                                      {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixTransform",                             {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixLayoutCreate",                          {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixLayoutDestroy",                         {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixLayoutSetAttribute",                    {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixLayoutGetAttribute",                    {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulDescCreate",                            {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulDescDestroy",                           {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulDescSetAttribute",                      {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulDescGetAttribute",                      {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixTransformDescCreate",                   {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixTransformDescDestroy",                  {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixTransformDescSetAttribute",             {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipblasLtMatrixTransformDescGetAttribute",             {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulPreferenceCreate",                      {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulPreferenceDestroy",                     {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulPreferenceSetAttribute",                {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulPreferenceGetAttribute",                {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasLtMatmulAlgoGetHeuristic",                      {HIP_5050, HIP_0,    HIP_0   }},
-  {"hipblasSgbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDgbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCgbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZgbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSgemv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDgemv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCgemv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZgemv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSgemvBatched_64",                               {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDgemvBatched_64",                               {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCgemvBatched_64",                               {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZgemvBatched_64",                               {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSgemvStridedBatched",                           {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasDgemvStridedBatched",                           {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSgemvBatched",                                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipblasDgemvBatched",                                  {HIP_3000, HIP_0,    HIP_0   }},
-  {"hipblasSgemvStridedBatched_64",                        {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDgemvStridedBatched_64",                        {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCgemvStridedBatched_64",                        {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZgemvStridedBatched_64",                        {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSger_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDger_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCgeru_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCgerc_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZgeru_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZgerc_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasChbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZhbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasChemv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZhemv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCher_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZher_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCher2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZher2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasChpmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZhpmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasChpr_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZhpr_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasChpr2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZhpr2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSsbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDsbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSspmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDspmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSspr_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDspr_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSspr2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDspr2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSsymv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDsymv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCsymv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZsymv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSsyr_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDsyr_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCsyr_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZsyr_64",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasSsyr2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDsyr2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCsyr2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZsyr2_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasStbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDtbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCtbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZtbmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasStbsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDtbsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCtbsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZtbsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasStpmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDtpmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCtpmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZtpmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasStpsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDtpsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCtpsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZtpsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasStrmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDtrmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCtrmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZtrmv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasStrsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDtrsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasCtrsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasZtrsv_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasAxpyEx_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDotEx_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasDotcEx_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasNrm2Ex_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasRotEx_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasScalEx_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipblasHgemm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSgemm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDgemm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCgemm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZgemm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasHgemmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSgemmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDgemmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCgemmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZgemmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasHgemmStridedBatched_64",                        {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSgemmStridedBatched_64",                        {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDgemmStridedBatched_64",                        {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCgemmStridedBatched_64",                        {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZgemmStridedBatched_64",                        {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCherk_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZherk_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCherkx_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZherkx_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCher2k_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZher2k_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSsymm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDsymm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCsymm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZsymm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSsyrk_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDsyrk_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCsyrk_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZsyrk_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSsyr2k_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDsyr2k_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCsyr2k_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZsyr2k_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSsyrkx_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDsyrkx_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCsyrkx_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZsyrkx_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSgeam_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDgeam_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCgeam_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZgeam_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasChemm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZhemm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasStrmm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDtrmm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCtrmm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZtrmm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasStrsm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDtrsm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCtrsm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZtrsm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasStrsmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDtrsmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCtrsmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZtrsmBatched_64",                               {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSdgmm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasDdgmm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasCdgmm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasZdgmm_64",                                      {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasGemmEx_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasGemmBatchedEx_64",                              {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasGemmStridedBatchedEx_64",                       {HIP_6030, HIP_0,    HIP_0   }},
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIversions> m;
+  m["cublasGetMathMode"]                                            = {CUDA_90,  CUDA_0,   CUDA_0   };
+  m["cublasSetMathMode"]                                            = {CUDA_90,  CUDA_0,   CUDA_0   };
+  m["cublasMigrateComputeType"]                                     = {CUDA_110, CUDA_0,   CUDA_0   };
+  m["cublasLogCallback"]                                            = {CUDA_92,  CUDA_0,   CUDA_0   };
+  m["cublasLoggerConfigure"]                                        = {CUDA_92,  CUDA_0,   CUDA_0   };
+  m["cublasSetLoggerCallback"]                                      = {CUDA_92,  CUDA_0,   CUDA_0   };
+  m["cublasGetLoggerCallback"]                                      = {CUDA_92,  CUDA_0,   CUDA_0   };
+  m["cublasGetCudartVersion"]                                       = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasNrm2Ex"]                                                 = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasHgemm"]                                                  = {CUDA_75,  CUDA_0,   CUDA_0   };
+  m["cublasHgemmBatched"]                                           = {CUDA_90,  CUDA_0,   CUDA_0   };
+  m["cublasSgemmStridedBatched"]                                    = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasDgemmStridedBatched"]                                    = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCgemm3mBatched"]                                         = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCgemmStridedBatched"]                                    = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCgemm3mStridedBatched"]                                  = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasZgemmStridedBatched"]                                    = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasHgemmStridedBatched"]                                    = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCgemm3m"]                                                = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCgemm3mEx"]                                              = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasZgemm3m"]                                                = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasSgemmEx"]                                                = {CUDA_75,  CUDA_0,   CUDA_0   };
+  m["cublasGemmEx"]                                                 = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasGemmBatchedEx"]                                          = {CUDA_91,  CUDA_0,   CUDA_0   };
+  m["cublasGemmStridedBatchedEx"]                                   = {CUDA_91,  CUDA_0,   CUDA_0   };
+  m["cublasCgemmEx"]                                                = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasUint8gemmBias"]                                          = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCsyrkEx"]                                                = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCsyrk3mEx"]                                              = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCherkEx"]                                                = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCherk3mEx"]                                              = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasDotEx"]                                                  = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasDotcEx"]                                                 = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasScalEx"]                                                 = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasAxpyEx"]                                                 = {CUDA_80,  CUDA_0,   CUDA_0   };
+  m["cublasCopyEx"]                                                 = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasSwapEx"]                                                 = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasIamaxEx"]                                                = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasIaminEx"]                                                = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasAsumEx"]                                                 = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasRotEx"]                                                  = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasRotgEx"]                                                 = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasRotmEx"]                                                 = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasRotmgEx"]                                                = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasGetSmCountTarget"]                                       = {CUDA_113, CUDA_0,   CUDA_0   };
+  m["cublasSetSmCountTarget"]                                       = {CUDA_113, CUDA_0,   CUDA_0   };
+  m["cublasGetStatusName"]                                          = {CUDA_114, CUDA_0,   CUDA_0   };
+  m["cublasGetStatusString"]                                        = {CUDA_114, CUDA_0,   CUDA_0   };
+  m["cublasSetVector_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasGetVector_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSetMatrix_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasGetMatrix_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSetVectorAsync_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasGetVectorAsync_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSetMatrixAsync_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasGetMatrixAsync_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasNrm2Ex_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSnrm2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSnrm2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDnrm2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDnrm2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasScnrm2_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasScnrm2_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDznrm2_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDznrm2_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDotEx_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDotcEx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSdot_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSdot_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDdot_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDdot_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCdotu_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCdotu_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCdotc_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCdotc_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdotu_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdotu_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdotc_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdotc_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasScalEx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSscal_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSscal_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDscal_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDscal_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCscal_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCscal_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZscal_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZscal_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsscal_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsscal_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdscal_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdscal_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasAxpyEx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSaxpy_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSaxpy_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDaxpy_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDaxpy_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCaxpy_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCaxpy_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZaxpy_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZaxpy_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCopyEx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasScopy_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasScopy_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDcopy_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDcopy_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCcopy_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCcopy_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZcopy_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZcopy_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSswap_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSswap_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDswap_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDswap_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCswap_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCswap_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZswap_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZswap_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSwapEx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIsamax_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIsamax_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIdamax_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIdamax_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIcamax_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIcamax_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIzamax_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIzamax_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIamaxEx_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIsamin_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIsamin_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIdamin_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIdamin_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIcamin_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIcamin_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIzamin_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIzamin_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasIaminEx_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasAsumEx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSasum_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSasum_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDasum_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDasum_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasScasum_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasScasum_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDzasum_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDzasum_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSrot_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSrot_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDrot_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDrot_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCrot_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCrot_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsrot_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsrot_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZrot_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZrot_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdrot_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdrot_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasRotEx_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSrotm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSrotm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDrotm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDrotm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasRotmEx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgemv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgemv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStpmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStpmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtpmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtpmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtpmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtpmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtpmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtpmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStpsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStpsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtpsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtpsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtpsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtpsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtpsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtpsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStbsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStbsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtbsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtbsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtbsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtbsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtbsv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtbsv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsymv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsymv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsymv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsymv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsymv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsymv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsymv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsymv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChemv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChemv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhemv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhemv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhbmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhbmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSspmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSspmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDspmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDspmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChpmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChpmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhpmv_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhpmv_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSger_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSger_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDger_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDger_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgeru_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgeru_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgerc_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgerc_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgeru_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgeru_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgerc_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgerc_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyr_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyr_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyr_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyr_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyr_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyr_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyr_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyr_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCher_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCher_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZher_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZher_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSspr_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSspr_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDspr_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDspr_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChpr_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChpr_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhpr_64"]                                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhpr_v2_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyr2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyr2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyr2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyr2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyr2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyr2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyr2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyr2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCher2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCher2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZher2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZher2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSspr2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSspr2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDspr2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDspr2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChpr2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChpr2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhpr2_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhpr2_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemvBatched"]                                           = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasSgemvBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgemvBatched"]                                           = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasDgemvBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemvBatched"]                                           = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasCgemvBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemvBatched"]                                           = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasZgemvBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasHSHgemvBatched"]                                         = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasHSHgemvBatched_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasHSSgemvBatched"]                                         = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasHSSgemvBatched_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasTSTgemvBatched"]                                         = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasTSTgemvBatched_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasTSSgemvBatched"]                                         = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasTSSgemvBatched_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemvStridedBatched"]                                    = {CUDA_116, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11062, CUBLAS_VERSION 110902, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 9 CUBLAS_VER_PATCH 2
+  m["cublasSgemvStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgemvStridedBatched"]                                    = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasDgemvStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemvStridedBatched"]                                    = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasCgemvStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemvStridedBatched"]                                    = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasZgemvStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasHSHgemvStridedBatched"]                                  = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasHSHgemvStridedBatched_64"]                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasHSSgemvStridedBatched"]                                  = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasHSSgemvStridedBatched_64"]                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasTSTgemvStridedBatched"]                                  = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasTSTgemvStridedBatched_64"]                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasTSSgemvStridedBatched"]                                  = {CUDA_116, CUDA_0,   CUDA_0   };
+  m["cublasTSSgemvStridedBatched_64"]                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgemm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgemm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemm3m_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemm3mEx_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemm3m_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasHgemm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemmEx_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasGemmEx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemmEx_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyrk_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyrk_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyrk_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyrk_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyrk_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyrk_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyrk_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyrk_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyrkEx_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyrk3mEx_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCherk_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCherk_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZherk_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZherk_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCherkEx_64"]                                             = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCherk3mEx_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyr2k_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyr2k_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyr2k_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyr2k_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyr2k_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyr2k_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyr2k_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyr2k_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCher2k_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCher2k_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZher2k_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZher2k_v2_64"]                                           = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsyrkx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsyrkx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsyrkx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsyrkx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCherkx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZherkx_64"]                                              = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsymm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSsymm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsymm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDsymm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsymm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCsymm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsymm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZsymm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChemm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasChemm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhemm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZhemm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrsm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrsm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrsm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrsm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrsm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrsm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrsm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrsm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrmm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrmm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrmm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrmm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrmm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrmm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrmm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrmm_v2_64"]                                            = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasHgemmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgemmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemm3mBatched_64"]                                      = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasHgemmStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemmStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgemmStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemmStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgemm3mStridedBatched_64"]                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgemmStridedBatched_64"]                                 = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasGemmBatchedEx_64"]                                       = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasGemmStridedBatchedEx_64"]                                = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgeam_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDgeam_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCgeam_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZgeam_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasStrsmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDtrsmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCtrsmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZtrsmBatched_64"]                                        = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSdgmm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasDdgmm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasCdgmm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasZdgmm_64"]                                               = {CUDA_120, CUDA_0,   CUDA_0   };
+  m["cublasSgemmGroupedBatched"]                                    = {CUDA_124, CUDA_0,   CUDA_0   };
+  m["cublasSgemmGroupedBatched_64"]                                 = {CUDA_124, CUDA_0,   CUDA_0   };
+  m["cublasDgemmGroupedBatched"]                                    = {CUDA_124, CUDA_0,   CUDA_0   };
+  m["cublasDgemmGroupedBatched_64"]                                 = {CUDA_124, CUDA_0,   CUDA_0   };
+  m["cublasLtCreate"]                                               = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtDestroy"]                                              = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtGetStatusName"]                                        = {CUDA_114, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11042, CUBLAS_VERSION 110601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6
+  m["cublasLtGetStatusString"]                                      = {CUDA_114, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11042, CUBLAS_VERSION 110601, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 6
+  m["cublasLtGetVersion"]                                           = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtGetCudartVersion"]                                     = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtGetProperty"]                                          = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtHeuristicsCacheGetCapacity"]                           = {CUDA_118, CUDA_0,   CUDA_0   };
+  m["cublasLtHeuristicsCacheSetCapacity"]                           = {CUDA_118, CUDA_0,   CUDA_0   };
+  m["cublasLtDisableCpuInstructionsSetMask"]                        = {CUDA_121, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 12011, CUBLAS_VERSION 120103, CUBLAS_VER_MAJOR 12 CUBLAS_VER_MINOR 3
+  m["cublasLtMatmul"]                                               = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixTransform"]                                      = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixLayoutInit"]                                     = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  m["cublasLtMatrixLayoutCreate"]                                   = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixLayoutDestroy"]                                  = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixLayoutSetAttribute"]                             = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixLayoutGetAttribute"]                             = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulDescInit"]                                       = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  m["cublasLtMatmulDescCreate"]                                     = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulDescDestroy"]                                    = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulDescSetAttribute"]                               = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulDescGetAttribute"]                               = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixTransformDescInit"]                              = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  m["cublasLtMatrixTransformDescCreate"]                            = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixTransformDescDestroy"]                           = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixTransformDescSetAttribute"]                      = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatrixTransformDescGetAttribute"]                      = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulPreferenceInit"]                                 = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11001, CUBLAS_VERSION 11000, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 0
+  m["cublasLtMatmulPreferenceCreate"]                               = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulPreferenceDestroy"]                              = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulPreferenceSetAttribute"]                         = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulPreferenceGetAttribute"]                         = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulAlgoGetHeuristic"]                               = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulAlgoGetIds"]                                     = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulAlgoInit"]                                       = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulAlgoCheck"]                                      = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulAlgoCapGetAttribute"]                            = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulAlgoConfigSetAttribute"]                         = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtMatmulAlgoConfigGetAttribute"]                         = {CUDA_101, CUDA_0,   CUDA_0   };
+  m["cublasLtLoggerSetCallback"]                                    = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  m["cublasLtLoggerSetFile"]                                        = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  m["cublasLtLoggerOpenFile"]                                       = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  m["cublasLtLoggerSetLevel"]                                       = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  m["cublasLtLoggerSetMask"]                                        = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  m["cublasLtLoggerForceDisable"]                                   = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  m["cublasGemmGroupedBatchedEx"]                                   = {CUDA_125, CUDA_0,   CUDA_0   };
+  m["cublasGemmGroupedBatchedEx_64"]                                = {CUDA_125, CUDA_0,   CUDA_0   };
+  m["cublasGetEmulationStrategy"]                                   = {CUDA_129, CUDA_0,   CUDA_0   };
+  m["cublasSetEmulationStrategy"]                                   = {CUDA_129, CUDA_0,   CUDA_0   };
+  m["cublasSetWorkspace"]                                           = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  m["cublasSetWorkspace_v2"]                                        = {CUDA_110, CUDA_0,   CUDA_0   }; // A: CUDA_VERSION 11003, CUBLAS_VERSION 11200, CUBLAS_VER_MAJOR 11 CUBLAS_VER_MINOR 2
+  m["cublasLtEmulationDescInit"]                                    = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasLtEmulationDescDestroy"]                                 = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasLtEmulationDescSetAttribute"]                            = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasLtEmulationDescGetAttribute"]                            = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasGetEmulationSpecialValuesSupport"]                       = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasSetEmulationSpecialValuesSupport"]                       = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasGetFixedPointEmulationMantissaControl"]                  = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasSetFixedPointEmulationMantissaControl"]                  = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasGetFixedPointEmulationMaxMantissaBitCount"]              = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasSetFixedPointEmulationMaxMantissaBitCount"]              = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasGetFixedPointEmulationMantissaBitOffset"]                = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasSetFixedPointEmulationMantissaBitOffset"]                = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasGetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasGetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  return m;
+}();
 
-  {"rocblas_status_to_string",                             {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sscal",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dscal",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_cscal",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zscal",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_csscal",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zdscal",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_scopy",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dcopy",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_ccopy",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zcopy",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_sdot",                                         {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_ddot",                                         {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_hdot",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cdotu",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zdotu",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_cdotc",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zdotc",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sswap",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dswap",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_cswap",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zswap",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_saxpy",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_daxpy",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_caxpy",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zaxpy",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_sasum",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dasum",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_scasum",                                       {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dzasum",                                       {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_snrm2",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dnrm2",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_scnrm2",                                       {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dznrm2",                                       {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_isamax",                                       {HIP_1064, HIP_0,    HIP_0   }},
-  {"rocblas_idamax",                                       {HIP_1064, HIP_0,    HIP_0   }},
-  {"rocblas_icamax",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_izamax",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_isamin",                                       {HIP_1064, HIP_0,    HIP_0   }},
-  {"rocblas_idamin",                                       {HIP_1064, HIP_0,    HIP_0   }},
-  {"rocblas_icamin",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_izamin",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_srot",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_drot",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_crot",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_csrot",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zrot",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zdrot",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_srotg",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_drotg",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_crotg",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zrotg",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_srotm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_drotm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_srotmg",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_drotmg",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sgbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dgbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cgbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zgbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sgemv",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dgemv",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_cgemv",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zgemv",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_chbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zhbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_chemv",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zhemv",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_cher",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zher",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cher2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zher2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_chpmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zhpmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_chpr",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zhpr",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_chpr2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zhpr2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_strmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dtrmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ctrmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztrmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_stpmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dtpmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ctpmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztpmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_stbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dtbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ctbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_stbsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dtbsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ctbsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztbsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_strsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dtrsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ctrsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztrsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_stpsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dtpsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ctpsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztpsv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ssymv",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dsymv",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_csymv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zsymv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sspmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dspmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ssbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dsbmv",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sger",                                         {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dger",                                         {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_cgeru",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zgeru",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cgerc",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zgerc",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sspr",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dspr",                                         {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sspr2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dspr2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ssyr",                                         {HIP_1071, HIP_0,    HIP_0   }},
-  {"rocblas_dsyr",                                         {HIP_1071, HIP_0,    HIP_0   }},
-  {"rocblas_csyr",                                         {HIP_1071, HIP_0,    HIP_0   }},
-  {"rocblas_zsyr",                                         {HIP_1071, HIP_0,    HIP_0   }},
-  {"rocblas_ssyr2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dsyr2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_csyr2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zsyr2",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_chemm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zhemm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cherk",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zherk",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cher2k",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zher2k",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cherkx",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zherkx",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ssymm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dsymm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_csymm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zsymm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ssyrk",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dsyrk",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_csyrk",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zsyrk",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ssyr2k",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dsyr2k",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_csyr2k",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zsyr2k",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ssyrkx",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dsyrkx",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_csyrkx",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zsyrkx",                                       {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_strmm_outofplace",                             {HIP_5000, HIP_5060, HIP_6000}},
-  {"rocblas_dtrmm_outofplace",                             {HIP_5000, HIP_5060, HIP_6000}},
-  {"rocblas_ctrmm_outofplace",                             {HIP_5000, HIP_5060, HIP_6000}},
-  {"rocblas_ztrmm_outofplace",                             {HIP_5000, HIP_5060, HIP_6000}},
-  {"rocblas_strsm",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dtrsm",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_ctrsm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztrsm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_strsm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dtrsm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ctrsm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztrsm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sgemm",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dgemm",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_hgemm",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_cgemm",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zgemm",                                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_sgemm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dgemm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_hgemm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cgemm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zgemm_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sgemm_strided_batched",                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_dgemm_strided_batched",                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_hgemm_strided_batched",                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_cgemm_strided_batched",                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_zgemm_strided_batched",                        {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_sdgmm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ddgmm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cdgmm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zdgmm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sgeam",                                        {HIP_1064, HIP_0,    HIP_0   }},
-  {"rocblas_dgeam",                                        {HIP_1064, HIP_0,    HIP_0   }},
-  {"rocblas_cgeam",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zgeam",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_gemm_ex",                                      {HIP_1082, HIP_0,    HIP_0   }},
-  {"rocblas_gemm_batched_ex",                              {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_gemm_strided_batched_ex",                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocblas_axpy_ex",                                      {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocblas_dot_ex",                                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocblas_dotc_ex",                                      {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocblas_nrm2_ex",                                      {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocblas_rot_ex",                                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocblas_scal_ex",                                      {HIP_4000, HIP_0,    HIP_0   }},
-  {"rocblas_initialize",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_create_handle",                                {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_destroy_handle",                               {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_set_stream",                                   {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_get_stream",                                   {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_set_pointer_mode",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"rocblas_get_pointer_mode",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"rocblas_set_atomics_mode",                             {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocblas_get_atomics_mode",                             {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocblas_set_vector",                                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"rocblas_get_vector",                                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"rocblas_set_matrix",                                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"rocblas_get_matrix",                                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"rocblas_set_vector_async",                             {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_get_vector_async",                             {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_set_matrix_async",                             {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_get_matrix_async",                             {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipblasSgelsBatched",                                  {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipblasDgelsBatched",                                  {HIP_5040, HIP_0,    HIP_0   }},
-  {"rocblas_get_math_mode",                                {HIP_5070, HIP_0,    HIP_0   }},
-  {"rocblas_set_math_mode",                                {HIP_5070, HIP_0,    HIP_0   }},
-  {"rocblas_cgemv_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zgemv_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_cgemv_strided_batched",                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_zgemv_strided_batched",                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_strmm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dtrmm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ctrmm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_ztrmm",                                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_hshgemv_batched",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocblas_hssgemv_batched",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocblas_tstgemv_batched",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocblas_tssgemv_batched",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocblas_hshgemv_strided_batched",                      {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocblas_hssgemv_strided_batched",                      {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocblas_tstgemv_strided_batched",                      {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocblas_tssgemv_strided_batched",                      {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocblas_isamax_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_idamax_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_icamax_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_izamax_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_isamin_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_idamin_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_icamin_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_izamin_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_sasum_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dasum_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_scasum_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dzasum_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_saxpy_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_daxpy_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_caxpy_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zaxpy_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_scopy_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dcopy_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_ccopy_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zcopy_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_sdot_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_ddot_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_cdotc_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_cdotu_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zdotc_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zdotu_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_snrm2_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dnrm2_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_scnrm2_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dznrm2_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_srot_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_drot_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_crot_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_csrot_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zrot_64",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zdrot_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_srotm_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_drotm_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_sscal_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dscal_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_cscal_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_csscal_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zscal_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zdscal_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_sswap_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dswap_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_cswap_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_zswap_64",                                     {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_axpy_ex_64",                                   {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dot_ex_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_dotc_ex_64",                                   {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_nrm2_ex_64",                                   {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_rot_ex_64",                                    {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_scal_ex_64",                                   {HIP_6010, HIP_0,    HIP_0   }},
-  {"rocblas_sgbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dgbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_cgbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zgbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_sgemv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dgemv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_cgemv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zgemv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_sgemv_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dgemv_batched",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sgemv_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dgemv_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_cgemv_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zgemv_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_hshgemv_batched_64",                           {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_hssgemv_batched_64",                           {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_tstgemv_batched_64",                           {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_tssgemv_batched_64",                           {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_sgemv_strided_batched",                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_dgemv_strided_batched",                        {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_sgemv_strided_batched_64",                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dgemv_strided_batched_64",                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_cgemv_strided_batched_64",                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zgemv_strided_batched_64",                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_hshgemv_strided_batched_64",                   {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_hssgemv_strided_batched_64",                   {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_tstgemv_strided_batched_64",                   {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_tssgemv_strided_batched_64",                   {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ssbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dsbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_chbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zhbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ssymv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dsymv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_csymv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zsymv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_chemv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zhemv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ssyr_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dsyr_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_csyr_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zsyr_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_cher_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zher_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ssyr2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dsyr2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_csyr2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zsyr2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_cher2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zher2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_sspmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dspmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_chpmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zhpmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_sspr_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dspr_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_chpr_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zhpr_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_sspr2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dspr2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_chpr2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zhpr2_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_strmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dtrmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ctrmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ztrmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_stpmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dtpmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ctpmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ztpmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_stbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dtbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ctbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ztbmv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_stbsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dtbsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ctbsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ztbsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_strsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dtrsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ctrsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ztrsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_stpsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dtpsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ctpsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ztpsv_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_sger_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dger_64",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_cgeru_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zgeru_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_cgerc_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_zgerc_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_strsm_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dtrsm_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ctrsm_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ztrsm_64",                                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_strsm_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_dtrsm_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ctrsm_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_ztrsm_batched_64",                             {HIP_6020, HIP_0,    HIP_0   }},
-  {"rocblas_hgemm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_sgemm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dgemm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_cgemm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zgemm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_hgemm_batched_64",                             {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_sgemm_batched_64",                             {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dgemm_batched_64",                             {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_cgemm_batched_64",                             {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zgemm_batched_64",                             {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_hgemm_strided_batched_64",                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_sgemm_strided_batched_64",                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dgemm_strided_batched_64",                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_cgemm_strided_batched_64",                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zgemm_strided_batched_64",                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_cherk_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zherk_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_cherkx_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zherkx_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_cher2k_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zher2k_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_ssymm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dsymm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_csymm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zsymm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_ssyrk_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dsyrk_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_csyrk_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zsyrk_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_ssyr2k_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dsyr2k_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_csyr2k_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zsyr2k_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_ssyrkx_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dsyrkx_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_csyrkx_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zsyrkx_64",                                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_sgeam_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dgeam_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_cgeam_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zgeam_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_chemm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zhemm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_strmm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_dtrmm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_ctrmm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_ztrmm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_sdgmm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_ddgmm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_cdgmm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_zdgmm_64",                                     {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_gemm_ex_64",                                   {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_gemm_batched_ex_64",                           {HIP_6030, HIP_0,    HIP_0   }},
-  {"rocblas_gemm_strided_batched_ex_64",                   {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipblasSetWorkspace",                                  {HIP_7000, HIP_0,    HIP_0   }},
-};
+const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
+  std::map<llvm::StringRef, hipAPIversions> m;
+  m["hipblasGetAtomicsMode"]                                        = {HIP_3100, HIP_0,    HIP_0   };
+  m["hipblasSetAtomicsMode"]                                        = {HIP_3100, HIP_0,    HIP_0   };
+  m["hipblasCreate"]                                                = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDestroy"]                                               = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSetStream"]                                             = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasGetStream"]                                             = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSetPointerMode"]                                        = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasGetPointerMode"]                                        = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSetVector"]                                             = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasGetVector"]                                             = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSetVectorAsync"]                                        = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipblasGetVectorAsync"]                                        = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipblasSetMatrix"]                                             = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasGetMatrix"]                                             = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSetMatrixAsync"]                                        = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipblasGetMatrixAsync"]                                        = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipblasSnrm2"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDnrm2"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSdot"]                                                  = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDdot"]                                                  = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSscal"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDscal"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSaxpy"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDaxpy"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasScopy"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDcopy"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSswap"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDswap"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasIsamax"]                                                = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasIdamax"]                                                = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasIsamin"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasIdamin"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSasum"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDasum"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSrot"]                                                  = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDrot"]                                                  = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSrotg"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDrotg"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSrotm"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDrotm"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSrotmg"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDrotmg"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSgemv"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDgemv"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSgbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDgbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasStrmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDtrmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasStbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDtbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasStpmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDtpmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasStrsv"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDtrsv"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasStpsv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDtpsv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasStbsv"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasDtbsv"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasSsymv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDsymv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSsbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDsbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSspmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDspmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSger"]                                                  = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDger"]                                                  = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSsyr"]                                                  = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDsyr"]                                                  = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSspr"]                                                  = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDspr"]                                                  = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSsyr2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDsyr2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSspr2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDspr2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSgemm"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDgemm"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasHgemm"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSgemmBatched"]                                          = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDgemmBatched"]                                          = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasHgemmBatched"]                                          = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSgemmStridedBatched"]                                   = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDgemmStridedBatched"]                                   = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasHgemmStridedBatched"]                                   = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSsyrk"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDsyrk"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSsyr2k"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDsyr2k"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSsyrkx"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDsyrkx"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSsymm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasDsymm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasStrsm"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDtrsm"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasStrmm"]                                                 = {HIP_3020, HIP_0,    HIP_0   };
+  m["hipblasDtrmm"]                                                 = {HIP_3020, HIP_0,    HIP_0   };
+  m["hipblasSgeam"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasDgeam"]                                                 = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasSgetrfBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDgetrfBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSgetriBatched"]                                         = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipblasDgetriBatched"]                                         = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipblasSgetrsBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDgetrsBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasStrsmBatched"]                                          = {HIP_3020, HIP_0,    HIP_0   };
+  m["hipblasDtrsmBatched"]                                          = {HIP_3020, HIP_0,    HIP_0   };
+  m["hipblasSgeqrfBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasDgeqrfBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSdgmm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasDdgmm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasIcamax"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasIzamax"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasIcamin"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasIzamin"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasScasum"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDzasum"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCaxpy"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZaxpy"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCcopy"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZcopy"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCdotc"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCdotu"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZdotc"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZdotu"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasScnrm2"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDznrm2"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCrot"]                                                  = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCsrot"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZrot"]                                                  = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZdrot"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCrotg"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZrotg"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCscal"]                                                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipblasCsscal"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZscal"]                                                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipblasZdscal"]                                                = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCswap"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZswap"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCgbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZgbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCgemv"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZgemv"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCgemvBatched"]                                          = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZgemvBatched"]                                          = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCgemvStridedBatched"]                                   = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZgemvStridedBatched"]                                   = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCgeru"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCgerc"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZgeru"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZgerc"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasChbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZhbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasChemv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZhemv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCher"]                                                  = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZher"]                                                  = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCher2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZher2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasChpmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZhpmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasChpr"]                                                  = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZhpr"]                                                  = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasChpr2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZhpr2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCsymv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZsymv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCsyr"]                                                  = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZsyr"]                                                  = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCsyr2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZsyr2"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCtbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZtbmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCtbsv"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasZtbsv"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasCtpmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZtpmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCtpsv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZtpsv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCtrmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZtrmv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCtrsv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZtrsv"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCgemm"]                                                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipblasZgemm"]                                                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipblasCgemmBatched"]                                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipblasZgemmBatched"]                                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipblasCgemmStridedBatched"]                                   = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasZgemmStridedBatched"]                                   = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasCherk"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZherk"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCherkx"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZherkx"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCher2k"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZher2k"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCsymm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasZsymm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasCsyrk"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZsyrk"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCsyr2k"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZsyr2k"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCsyrkx"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZsyrkx"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCgeam"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasZgeam"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasChemm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasZhemm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasCtrmm"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZtrmm"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCtrsm"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZtrsm"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCtrsmBatched"]                                          = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZtrsmBatched"]                                          = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCdgmm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasZdgmm"]                                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasCgetrfBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZgetrfBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCgetrsBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZgetrsBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasCgetriBatched"]                                         = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipblasZgetriBatched"]                                         = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipblasCgelsBatched"]                                          = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipblasZgelsBatched"]                                          = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipblasCgeqrfBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasZgeqrfBatched"]                                         = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasGemmEx"]                                                = {HIP_1082, HIP_0,    HIP_0   };
+  m["hipblasGemmBatchedEx"]                                         = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasGemmStridedBatchedEx"]                                  = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipblasAxpyEx"]                                                = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipblasDotEx"]                                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipblasDotcEx"]                                                = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipblasNrm2Ex"]                                                = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipblasRotEx"]                                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipblasScalEx"]                                                = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipblasSetMathMode"]                                           = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasGetMathMode"]                                           = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasIsamax_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasIdamax_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasIcamax_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasIzamax_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasIsamin_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasIdamin_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasIcamin_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasIzamin_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasSasum_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDasum_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasScasum_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDzasum_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasSaxpy_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDaxpy_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCaxpy_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZaxpy_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasScopy_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDcopy_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCcopy_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZcopy_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasSdot_64"]                                               = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDdot_64"]                                               = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCdotc_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCdotu_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZdotc_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZdotu_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasSnrm2_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDnrm2_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasScnrm2_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDznrm2_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasSrot_64"]                                               = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDrot_64"]                                               = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCrot_64"]                                               = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCsrot_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZrot_64"]                                               = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZdrot_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasSrotm_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDrotm_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasSscal_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDscal_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCscal_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCsscal_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZscal_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZdscal_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasSswap_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasDswap_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasCswap_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasZswap_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipblasLtCreate"]                                              = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtDestroy"]                                             = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmul"]                                              = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixTransform"]                                     = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixLayoutCreate"]                                  = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixLayoutDestroy"]                                 = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixLayoutSetAttribute"]                            = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixLayoutGetAttribute"]                            = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulDescCreate"]                                    = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulDescDestroy"]                                   = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulDescSetAttribute"]                              = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulDescGetAttribute"]                              = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixTransformDescCreate"]                           = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixTransformDescDestroy"]                          = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixTransformDescSetAttribute"]                     = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipblasLtMatrixTransformDescGetAttribute"]                     = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulPreferenceCreate"]                              = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulPreferenceDestroy"]                             = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulPreferenceSetAttribute"]                        = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulPreferenceGetAttribute"]                        = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasLtMatmulAlgoGetHeuristic"]                              = {HIP_5050, HIP_0,    HIP_0   };
+  m["hipblasSgbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDgbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCgbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZgbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSgemv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDgemv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCgemv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZgemv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSgemvBatched_64"]                                       = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDgemvBatched_64"]                                       = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCgemvBatched_64"]                                       = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZgemvBatched_64"]                                       = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSgemvStridedBatched"]                                   = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasDgemvStridedBatched"]                                   = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSgemvBatched"]                                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipblasDgemvBatched"]                                          = {HIP_3000, HIP_0,    HIP_0   };
+  m["hipblasSgemvStridedBatched_64"]                                = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDgemvStridedBatched_64"]                                = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCgemvStridedBatched_64"]                                = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZgemvStridedBatched_64"]                                = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSger_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDger_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCgeru_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCgerc_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZgeru_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZgerc_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasChbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZhbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasChemv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZhemv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCher_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZher_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCher2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZher2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasChpmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZhpmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasChpr_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZhpr_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasChpr2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZhpr2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSsbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDsbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSspmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDspmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSspr_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDspr_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSspr2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDspr2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSsymv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDsymv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCsymv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZsymv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSsyr_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDsyr_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCsyr_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZsyr_64"]                                               = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasSsyr2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDsyr2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCsyr2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZsyr2_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasStbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDtbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCtbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZtbmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasStbsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDtbsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCtbsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZtbsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasStpmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDtpmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCtpmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZtpmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasStpsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDtpsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCtpsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZtpsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasStrmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDtrmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCtrmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZtrmv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasStrsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDtrsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasCtrsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasZtrsv_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasAxpyEx_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDotEx_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasDotcEx_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasNrm2Ex_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasRotEx_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasScalEx_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipblasHgemm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSgemm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDgemm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCgemm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZgemm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasHgemmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSgemmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDgemmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCgemmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZgemmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasHgemmStridedBatched_64"]                                = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSgemmStridedBatched_64"]                                = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDgemmStridedBatched_64"]                                = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCgemmStridedBatched_64"]                                = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZgemmStridedBatched_64"]                                = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCherk_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZherk_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCherkx_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZherkx_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCher2k_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZher2k_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSsymm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDsymm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCsymm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZsymm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSsyrk_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDsyrk_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCsyrk_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZsyrk_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSsyr2k_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDsyr2k_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCsyr2k_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZsyr2k_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSsyrkx_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDsyrkx_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCsyrkx_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZsyrkx_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSgeam_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDgeam_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCgeam_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZgeam_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasChemm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZhemm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasStrmm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDtrmm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCtrmm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZtrmm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasStrsm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDtrsm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCtrsm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZtrsm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasStrsmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDtrsmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCtrsmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZtrsmBatched_64"]                                       = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSdgmm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasDdgmm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasCdgmm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasZdgmm_64"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasGemmEx_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasGemmBatchedEx_64"]                                      = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasGemmStridedBatchedEx_64"]                               = {HIP_6030, HIP_0,    HIP_0   };
 
-const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP {
-  {"hipblasStrmm",                                         {HIP_6000}},
-  {"hipblasDtrmm",                                         {HIP_6000}},
-  {"hipblasGemmEx",                                        {HIP_7000}},
-  {"hipblasGemmEx_64",                                     {HIP_7000}},
-  {"hipblasGemmBatchedEx",                                 {HIP_7000}},
-  {"hipblasGemmBatchedEx_64",                              {HIP_7000}},
-  {"hipblasGemmStridedBatchedEx",                          {HIP_7000}},
-  {"hipblasGemmStridedBatchedEx_64",                       {HIP_7000}},
-  {"hipblasIcamax",                                        {HIP_7000}},
-  {"hipblasIcamax_64",                                     {HIP_7000}},
-  {"hipblasIzamax",                                        {HIP_7000}},
-  {"hipblasIzamax_64",                                     {HIP_7000}},
-  {"hipblasIcamin",                                        {HIP_7000}},
-  {"hipblasIcamin_64",                                     {HIP_7000}},
-  {"hipblasIzamin",                                        {HIP_7000}},
-  {"hipblasIzamin_64",                                     {HIP_7000}},
-  {"hipblasScasum",                                        {HIP_7000}},
-  {"hipblasScasum_64",                                     {HIP_7000}},
-  {"hipblasDzasum",                                        {HIP_7000}},
-  {"hipblasDzasum_64",                                     {HIP_7000}},
-  {"hipblasCaxpy",                                         {HIP_7000}},
-  {"hipblasCaxpy_64",                                      {HIP_7000}},
-  {"hipblasZaxpy",                                         {HIP_7000}},
-  {"hipblasZaxpy_64",                                      {HIP_7000}},
-  {"hipblasCcopy",                                         {HIP_7000}},
-  {"hipblasCcopy_64",                                      {HIP_7000}},
-  {"hipblasZcopy",                                         {HIP_7000}},
-  {"hipblasZcopy_64",                                      {HIP_7000}},
-  {"hipblasCdotc",                                         {HIP_7000}},
-  {"hipblasCdotc_64",                                      {HIP_7000}},
-  {"hipblasCdotu",                                         {HIP_7000}},
-  {"hipblasCdotu_64",                                      {HIP_7000}},
-  {"hipblasZdotc",                                         {HIP_7000}},
-  {"hipblasZdotc_64",                                      {HIP_7000}},
-  {"hipblasZdotu",                                         {HIP_7000}},
-  {"hipblasZdotu_64",                                      {HIP_7000}},
-  {"hipblasScnrm2",                                        {HIP_7000}},
-  {"hipblasScnrm2_64",                                     {HIP_7000}},
-  {"hipblasDznrm2",                                        {HIP_7000}},
-  {"hipblasDznrm2_64",                                     {HIP_7000}},
-  {"hipblasCrot",                                          {HIP_7000}},
-  {"hipblasCrot_64",                                       {HIP_7000}},
-  {"hipblasCrotg",                                         {HIP_7000}},
-  {"hipblasCsrot",                                         {HIP_7000}},
-  {"hipblasCsrot_64",                                      {HIP_7000}},
-  {"hipblasZrot",                                          {HIP_7000}},
-  {"hipblasZrot_64",                                       {HIP_7000}},
-  {"hipblasZrotg",                                         {HIP_7000}},
-  {"hipblasZdrot",                                         {HIP_7000}},
-  {"hipblasZdrot_64",                                      {HIP_7000}},
-  {"hipblasCscal",                                         {HIP_7000}},
-  {"hipblasCscal_64",                                      {HIP_7000}},
-  {"hipblasCsscal",                                        {HIP_7000}},
-  {"hipblasCsscal_64",                                     {HIP_7000}},
-  {"hipblasZscal",                                         {HIP_7000}},
-  {"hipblasZscal_64",                                      {HIP_7000}},
-  {"hipblasZdscal",                                        {HIP_7000}},
-  {"hipblasZdscal_64",                                     {HIP_7000}},
-  {"hipblasCswap",                                         {HIP_7000}},
-  {"hipblasCswap_64",                                      {HIP_7000}},
-  {"hipblasZswap",                                         {HIP_7000}},
-  {"hipblasZswap_64",                                      {HIP_7000}},
-  {"hipblasCgbmv",                                         {HIP_7000}},
-  {"hipblasCgbmv_64",                                      {HIP_7000}},
-  {"hipblasZgbmv",                                         {HIP_7000}},
-  {"hipblasZgbmv_64",                                      {HIP_7000}},
-  {"hipblasCgemv",                                         {HIP_7000}},
-  {"hipblasCgemv_64",                                      {HIP_7000}},
-  {"hipblasZgemv",                                         {HIP_7000}},
-  {"hipblasZgemv_64",                                      {HIP_7000}},
-  {"hipblasCgemvBatched",                                  {HIP_7000}},
-  {"hipblasCgemvBatched_64",                               {HIP_7000}},
-  {"hipblasZgemvBatched",                                  {HIP_7000}},
-  {"hipblasZgemvBatched_64",                               {HIP_7000}},
-  {"hipblasCgemvStridedBatched",                           {HIP_7000}},
-  {"hipblasCgemvStridedBatched_64",                        {HIP_7000}},
-  {"hipblasZgemvStridedBatched",                           {HIP_7000}},
-  {"hipblasZgemvStridedBatched_64",                        {HIP_7000}},
-  {"hipblasCgeru",                                         {HIP_7000}},
-  {"hipblasCgeru_64",                                      {HIP_7000}},
-  {"hipblasCgerc",                                         {HIP_7000}},
-  {"hipblasCgerc_64",                                      {HIP_7000}},
-  {"hipblasZgeru",                                         {HIP_7000}},
-  {"hipblasZgeru_64",                                      {HIP_7000}},
-  {"hipblasZgerc",                                         {HIP_7000}},
-  {"hipblasZgerc_64",                                      {HIP_7000}},
-  {"hipblasChbmv",                                         {HIP_7000}},
-  {"hipblasChbmv_64",                                      {HIP_7000}},
-  {"hipblasZhbmv",                                         {HIP_7000}},
-  {"hipblasZhbmv_64",                                      {HIP_7000}},
-  {"hipblasChemv",                                         {HIP_7000}},
-  {"hipblasChemv_64",                                      {HIP_7000}},
-  {"hipblasZhemv",                                         {HIP_7000}},
-  {"hipblasZhemv_64",                                      {HIP_7000}},
-  {"hipblasCher",                                          {HIP_7000}},
-  {"hipblasCher_64",                                       {HIP_7000}},
-  {"hipblasZher",                                          {HIP_7000}},
-  {"hipblasZher_64",                                       {HIP_7000}},
-  {"hipblasCher2",                                         {HIP_7000}},
-  {"hipblasCher2_64",                                      {HIP_7000}},
-  {"hipblasZher2",                                         {HIP_7000}},
-  {"hipblasZher2_64",                                      {HIP_7000}},
-  {"hipblasChpmv",                                         {HIP_7000}},
-  {"hipblasChpmv_64",                                      {HIP_7000}},
-  {"hipblasZhpmv",                                         {HIP_7000}},
-  {"hipblasZhpmv_64",                                      {HIP_7000}},
-  {"hipblasChpr",                                          {HIP_7000}},
-  {"hipblasChpr_64",                                       {HIP_7000}},
-  {"hipblasZhpr",                                          {HIP_7000}},
-  {"hipblasZhpr_64",                                       {HIP_7000}},
-  {"hipblasChpr2",                                         {HIP_7000}},
-  {"hipblasChpr2_64",                                      {HIP_7000}},
-  {"hipblasZhpr2",                                         {HIP_7000}},
-  {"hipblasZhpr2_64",                                      {HIP_7000}},
-  {"hipblasCsymv",                                         {HIP_7000}},
-  {"hipblasCsymv_64",                                      {HIP_7000}},
-  {"hipblasZsymv",                                         {HIP_7000}},
-  {"hipblasZsymv_64",                                      {HIP_7000}},
-  {"hipblasCsyr",                                          {HIP_7000}},
-  {"hipblasCsyr_64",                                       {HIP_7000}},
-  {"hipblasZsyr",                                          {HIP_7000}},
-  {"hipblasZsyr_64",                                       {HIP_7000}},
-  {"hipblasCsyr2",                                         {HIP_7000}},
-  {"hipblasCsyr2_64",                                      {HIP_7000}},
-  {"hipblasZsyr2",                                         {HIP_7000}},
-  {"hipblasZsyr2_64",                                      {HIP_7000}},
-  {"hipblasCsyr2k",                                        {HIP_7000}},
-  {"hipblasCsyr2k_64",                                     {HIP_7000}},
-  {"hipblasZsyr2k",                                        {HIP_7000}},
-  {"hipblasZsyr2k_64",                                     {HIP_7000}},
-  {"hipblasCsyrkx",                                        {HIP_7000}},
-  {"hipblasCsyrkx_64",                                     {HIP_7000}},
-  {"hipblasZsyrkx",                                        {HIP_7000}},
-  {"hipblasZsyrkx_64",                                     {HIP_7000}},
-  {"hipblasCtbmv",                                         {HIP_7000}},
-  {"hipblasCtbmv_64",                                      {HIP_7000}},
-  {"hipblasZtbmv",                                         {HIP_7000}},
-  {"hipblasZtbmv_64",                                      {HIP_7000}},
-  {"hipblasCtbsv",                                         {HIP_7000}},
-  {"hipblasCtbsv_64",                                      {HIP_7000}},
-  {"hipblasZtbsv",                                         {HIP_7000}},
-  {"hipblasZtbsv_64",                                      {HIP_7000}},
-  {"hipblasCtpmv",                                         {HIP_7000}},
-  {"hipblasCtpmv_64",                                      {HIP_7000}},
-  {"hipblasZtpmv",                                         {HIP_7000}},
-  {"hipblasZtpmv_64",                                      {HIP_7000}},
-  {"hipblasCtpsv",                                         {HIP_7000}},
-  {"hipblasCtpsv_64",                                      {HIP_7000}},
-  {"hipblasZtpsv",                                         {HIP_7000}},
-  {"hipblasZtpsv_64",                                      {HIP_7000}},
-  {"hipblasCtrmv",                                         {HIP_7000}},
-  {"hipblasCtrmv_64",                                      {HIP_7000}},
-  {"hipblasZtrmv",                                         {HIP_7000}},
-  {"hipblasZtrmv_64",                                      {HIP_7000}},
-  {"hipblasCtrsv",                                         {HIP_7000}},
-  {"hipblasCtrsv_64",                                      {HIP_7000}},
-  {"hipblasZtrsv",                                         {HIP_7000}},
-  {"hipblasZtrsv_64",                                      {HIP_7000}},
-  {"hipblasCgemm",                                         {HIP_7000}},
-  {"hipblasCgemm_64",                                      {HIP_7000}},
-  {"hipblasZgemm",                                         {HIP_7000}},
-  {"hipblasZgemm_64",                                      {HIP_7000}},
-  {"hipblasCgemmBatched",                                  {HIP_7000}},
-  {"hipblasCgemmBatched_64",                               {HIP_7000}},
-  {"hipblasZgemmBatched",                                  {HIP_7000}},
-  {"hipblasZgemmBatched_64",                               {HIP_7000}},
-  {"hipblasCgemmStridedBatched",                           {HIP_7000}},
-  {"hipblasCgemmStridedBatched_64",                        {HIP_7000}},
-  {"hipblasZgemmStridedBatched",                           {HIP_7000}},
-  {"hipblasZgemmStridedBatched_64",                        {HIP_7000}},
-  {"hipblasCherk",                                         {HIP_7000}},
-  {"hipblasCherk_64",                                      {HIP_7000}},
-  {"hipblasZherk",                                         {HIP_7000}},
-  {"hipblasZherk_64",                                      {HIP_7000}},
-  {"hipblasCherkx",                                        {HIP_7000}},
-  {"hipblasCherkx_64",                                     {HIP_7000}},
-  {"hipblasZherkx",                                        {HIP_7000}},
-  {"hipblasZherkx_64",                                     {HIP_7000}},
-  {"hipblasCher2k",                                        {HIP_7000}},
-  {"hipblasCher2k_64",                                     {HIP_7000}},
-  {"hipblasZher2k",                                        {HIP_7000}},
-  {"hipblasZher2k_64",                                     {HIP_7000}},
-  {"hipblasCsymm",                                         {HIP_7000}},
-  {"hipblasCsymm_64",                                      {HIP_7000}},
-  {"hipblasZsymm",                                         {HIP_7000}},
-  {"hipblasZsymm_64",                                      {HIP_7000}},
-  {"hipblasCsyrk",                                         {HIP_7000}},
-  {"hipblasCsyrk_64",                                      {HIP_7000}},
-  {"hipblasZsyrk",                                         {HIP_7000}},
-  {"hipblasZsyrk_64",                                      {HIP_7000}},
-  {"hipblasCgeam",                                         {HIP_7000}},
-  {"hipblasCgeam_64",                                      {HIP_7000}},
-  {"hipblasZgeam",                                         {HIP_7000}},
-  {"hipblasZgeam_64",                                      {HIP_7000}},
-  {"hipblasChemm",                                         {HIP_7000}},
-  {"hipblasChemm_64",                                      {HIP_7000}},
-  {"hipblasZhemm",                                         {HIP_7000}},
-  {"hipblasZhemm_64",                                      {HIP_7000}},
-  {"hipblasCtrmm",                                         {HIP_7000}},
-  {"hipblasCtrmm_64",                                      {HIP_7000}},
-  {"hipblasZtrmm",                                         {HIP_7000}},
-  {"hipblasZtrmm_64",                                      {HIP_7000}},
-  {"hipblasCtrsm",                                         {HIP_7000}},
-  {"hipblasCtrsm_64",                                      {HIP_7000}},
-  {"hipblasZtrsm",                                         {HIP_7000}},
-  {"hipblasZtrsm_64",                                      {HIP_7000}},
-  {"hipblasCtrsmBatched",                                  {HIP_7000}},
-  {"hipblasCtrsmBatched_64",                               {HIP_7000}},
-  {"hipblasZtrsmBatched",                                  {HIP_7000}},
-  {"hipblasZtrsmBatched_64",                               {HIP_7000}},
-  {"hipblasCdgmm",                                         {HIP_7000}},
-  {"hipblasCdgmm_64",                                      {HIP_7000}},
-  {"hipblasZdgmm",                                         {HIP_7000}},
-  {"hipblasZdgmm_64",                                      {HIP_7000}},
-  {"hipblasCgetrfBatched",                                 {HIP_7000}},
-  {"hipblasZgetrfBatched",                                 {HIP_7000}},
-  {"hipblasCgetrsBatched",                                 {HIP_7000}},
-  {"hipblasZgetrsBatched",                                 {HIP_7000}},
-  {"hipblasCgetriBatched",                                 {HIP_7000}},
-  {"hipblasZgetriBatched",                                 {HIP_7000}},
-  {"hipblasCgelsBatched",                                  {HIP_7000}},
-  {"hipblasZgelsBatched",                                  {HIP_7000}},
-  {"hipblasCgeqrfBatched",                                 {HIP_7000}},
-  {"hipblasZgeqrfBatched",                                 {HIP_7000}},
-  {"hipblasAxpyEx",                                        {HIP_7000}},
-  {"hipblasAxpyEx_64",                                     {HIP_7000}},
-  {"hipblasDotEx",                                         {HIP_7000}},
-  {"hipblasDotEx_64",                                      {HIP_7000}},
-  {"hipblasDotcEx",                                        {HIP_7000}},
-  {"hipblasDotcEx_64",                                     {HIP_7000}},
-  {"hipblasNrm2Ex",                                        {HIP_7000}},
-  {"hipblasNrm2Ex_64",                                     {HIP_7000}},
-  {"hipblasRotEx",                                         {HIP_7000}},
-  {"hipblasRotEx_64",                                      {HIP_7000}},
-  {"hipblasScalEx",                                        {HIP_7000}},
-  {"hipblasScalEx_64",                                     {HIP_7000}},
+  m["rocblas_status_to_string"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sscal"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dscal"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_cscal"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zscal"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_csscal"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zdscal"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_scopy"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dcopy"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_ccopy"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zcopy"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_sdot"]                                                 = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_ddot"]                                                 = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_hdot"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cdotu"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zdotu"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_cdotc"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zdotc"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sswap"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dswap"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_cswap"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zswap"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_saxpy"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_daxpy"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_caxpy"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zaxpy"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_sasum"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dasum"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_scasum"]                                               = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dzasum"]                                               = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_snrm2"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dnrm2"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_scnrm2"]                                               = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dznrm2"]                                               = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_isamax"]                                               = {HIP_1064, HIP_0,    HIP_0   };
+  m["rocblas_idamax"]                                               = {HIP_1064, HIP_0,    HIP_0   };
+  m["rocblas_icamax"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_izamax"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_isamin"]                                               = {HIP_1064, HIP_0,    HIP_0   };
+  m["rocblas_idamin"]                                               = {HIP_1064, HIP_0,    HIP_0   };
+  m["rocblas_icamin"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_izamin"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_srot"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_drot"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_crot"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_csrot"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zrot"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zdrot"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_srotg"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_drotg"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_crotg"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zrotg"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_srotm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_drotm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_srotmg"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_drotmg"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sgbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dgbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cgbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zgbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sgemv"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dgemv"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_cgemv"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zgemv"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_chbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zhbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_chemv"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zhemv"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_cher"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zher"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cher2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zher2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_chpmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zhpmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_chpr"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zhpr"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_chpr2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zhpr2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_strmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dtrmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ctrmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztrmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_stpmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dtpmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ctpmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztpmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_stbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dtbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ctbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_stbsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dtbsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ctbsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztbsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_strsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dtrsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ctrsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztrsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_stpsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dtpsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ctpsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztpsv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ssymv"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dsymv"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_csymv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zsymv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sspmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dspmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ssbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dsbmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sger"]                                                 = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dger"]                                                 = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_cgeru"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zgeru"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cgerc"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zgerc"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sspr"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dspr"]                                                 = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sspr2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dspr2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ssyr"]                                                 = {HIP_1071, HIP_0,    HIP_0   };
+  m["rocblas_dsyr"]                                                 = {HIP_1071, HIP_0,    HIP_0   };
+  m["rocblas_csyr"]                                                 = {HIP_1071, HIP_0,    HIP_0   };
+  m["rocblas_zsyr"]                                                 = {HIP_1071, HIP_0,    HIP_0   };
+  m["rocblas_ssyr2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dsyr2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_csyr2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zsyr2"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_chemm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zhemm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cherk"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zherk"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cher2k"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zher2k"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cherkx"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zherkx"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ssymm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dsymm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_csymm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zsymm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ssyrk"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dsyrk"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_csyrk"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zsyrk"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ssyr2k"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dsyr2k"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_csyr2k"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zsyr2k"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ssyrkx"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dsyrkx"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_csyrkx"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zsyrkx"]                                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_strmm_outofplace"]                                     = {HIP_5000, HIP_5060, HIP_6000};
+  m["rocblas_dtrmm_outofplace"]                                     = {HIP_5000, HIP_5060, HIP_6000};
+  m["rocblas_ctrmm_outofplace"]                                     = {HIP_5000, HIP_5060, HIP_6000};
+  m["rocblas_ztrmm_outofplace"]                                     = {HIP_5000, HIP_5060, HIP_6000};
+  m["rocblas_strsm"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dtrsm"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_ctrsm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztrsm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_strsm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dtrsm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ctrsm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztrsm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sgemm"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dgemm"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_hgemm"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_cgemm"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zgemm"]                                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_sgemm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dgemm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_hgemm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cgemm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zgemm_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sgemm_strided_batched"]                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_dgemm_strided_batched"]                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_hgemm_strided_batched"]                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_cgemm_strided_batched"]                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_zgemm_strided_batched"]                                = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_sdgmm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ddgmm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cdgmm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zdgmm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sgeam"]                                                = {HIP_1064, HIP_0,    HIP_0   };
+  m["rocblas_dgeam"]                                                = {HIP_1064, HIP_0,    HIP_0   };
+  m["rocblas_cgeam"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zgeam"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_gemm_ex"]                                              = {HIP_1082, HIP_0,    HIP_0   };
+  m["rocblas_gemm_batched_ex"]                                      = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_gemm_strided_batched_ex"]                              = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocblas_axpy_ex"]                                              = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocblas_dot_ex"]                                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocblas_dotc_ex"]                                              = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocblas_nrm2_ex"]                                              = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocblas_rot_ex"]                                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocblas_scal_ex"]                                              = {HIP_4000, HIP_0,    HIP_0   };
+  m["rocblas_initialize"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_create_handle"]                                        = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_destroy_handle"]                                       = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_set_stream"]                                           = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_get_stream"]                                           = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_set_pointer_mode"]                                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["rocblas_get_pointer_mode"]                                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["rocblas_set_atomics_mode"]                                     = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocblas_get_atomics_mode"]                                     = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocblas_set_vector"]                                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["rocblas_get_vector"]                                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["rocblas_set_matrix"]                                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["rocblas_get_matrix"]                                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["rocblas_set_vector_async"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_get_vector_async"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_set_matrix_async"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_get_matrix_async"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipblasSgelsBatched"]                                          = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipblasDgelsBatched"]                                          = {HIP_5040, HIP_0,    HIP_0   };
+  m["rocblas_get_math_mode"]                                        = {HIP_5070, HIP_0,    HIP_0   };
+  m["rocblas_set_math_mode"]                                        = {HIP_5070, HIP_0,    HIP_0   };
+  m["rocblas_cgemv_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zgemv_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_cgemv_strided_batched"]                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_zgemv_strided_batched"]                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_strmm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dtrmm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ctrmm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_ztrmm"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_hshgemv_batched"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocblas_hssgemv_batched"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocblas_tstgemv_batched"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocblas_tssgemv_batched"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocblas_hshgemv_strided_batched"]                              = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocblas_hssgemv_strided_batched"]                              = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocblas_tstgemv_strided_batched"]                              = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocblas_tssgemv_strided_batched"]                              = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocblas_isamax_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_idamax_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_icamax_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_izamax_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_isamin_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_idamin_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_icamin_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_izamin_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_sasum_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dasum_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_scasum_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dzasum_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_saxpy_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_daxpy_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_caxpy_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zaxpy_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_scopy_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dcopy_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_ccopy_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zcopy_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_sdot_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_ddot_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_cdotc_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_cdotu_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zdotc_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zdotu_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_snrm2_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dnrm2_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_scnrm2_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dznrm2_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_srot_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_drot_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_crot_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_csrot_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zrot_64"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zdrot_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_srotm_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_drotm_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_sscal_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dscal_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_cscal_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_csscal_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zscal_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zdscal_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_sswap_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dswap_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_cswap_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_zswap_64"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_axpy_ex_64"]                                           = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dot_ex_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_dotc_ex_64"]                                           = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_nrm2_ex_64"]                                           = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_rot_ex_64"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_scal_ex_64"]                                           = {HIP_6010, HIP_0,    HIP_0   };
+  m["rocblas_sgbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dgbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_cgbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zgbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_sgemv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dgemv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_cgemv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zgemv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_sgemv_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dgemv_batched"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sgemv_batched_64"]                                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dgemv_batched_64"]                                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_cgemv_batched_64"]                                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zgemv_batched_64"]                                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_hshgemv_batched_64"]                                   = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_hssgemv_batched_64"]                                   = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_tstgemv_batched_64"]                                   = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_tssgemv_batched_64"]                                   = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_sgemv_strided_batched"]                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_dgemv_strided_batched"]                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_sgemv_strided_batched_64"]                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dgemv_strided_batched_64"]                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_cgemv_strided_batched_64"]                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zgemv_strided_batched_64"]                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_hshgemv_strided_batched_64"]                           = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_hssgemv_strided_batched_64"]                           = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_tstgemv_strided_batched_64"]                           = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_tssgemv_strided_batched_64"]                           = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ssbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dsbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_chbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zhbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ssymv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dsymv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_csymv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zsymv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_chemv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zhemv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ssyr_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dsyr_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_csyr_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zsyr_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_cher_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zher_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ssyr2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dsyr2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_csyr2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zsyr2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_cher2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zher2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_sspmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dspmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_chpmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zhpmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_sspr_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dspr_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_chpr_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zhpr_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_sspr2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dspr2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_chpr2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zhpr2_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_strmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dtrmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ctrmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ztrmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_stpmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dtpmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ctpmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ztpmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_stbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dtbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ctbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ztbmv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_stbsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dtbsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ctbsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ztbsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_strsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dtrsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ctrsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ztrsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_stpsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dtpsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ctpsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ztpsv_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_sger_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dger_64"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_cgeru_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zgeru_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_cgerc_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_zgerc_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_strsm_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dtrsm_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ctrsm_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ztrsm_64"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_strsm_batched_64"]                                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_dtrsm_batched_64"]                                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ctrsm_batched_64"]                                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_ztrsm_batched_64"]                                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["rocblas_hgemm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_sgemm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dgemm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_cgemm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zgemm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_hgemm_batched_64"]                                     = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_sgemm_batched_64"]                                     = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dgemm_batched_64"]                                     = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_cgemm_batched_64"]                                     = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zgemm_batched_64"]                                     = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_hgemm_strided_batched_64"]                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_sgemm_strided_batched_64"]                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dgemm_strided_batched_64"]                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_cgemm_strided_batched_64"]                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zgemm_strided_batched_64"]                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_cherk_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zherk_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_cherkx_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zherkx_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_cher2k_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zher2k_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_ssymm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dsymm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_csymm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zsymm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_ssyrk_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dsyrk_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_csyrk_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zsyrk_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_ssyr2k_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dsyr2k_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_csyr2k_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zsyr2k_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_ssyrkx_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dsyrkx_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_csyrkx_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zsyrkx_64"]                                            = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_sgeam_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dgeam_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_cgeam_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zgeam_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_chemm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zhemm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_strmm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_dtrmm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_ctrmm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_ztrmm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_sdgmm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_ddgmm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_cdgmm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_zdgmm_64"]                                             = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_gemm_ex_64"]                                           = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_gemm_batched_ex_64"]                                   = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_gemm_strided_batched_ex_64"]                           = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipblasSetWorkspace"]                                          = {HIP_7000, HIP_0,    HIP_0   };
 
-  {"rocblas_strmm",                                        {HIP_6000}},
-  {"rocblas_dtrmm",                                        {HIP_6000}},
-  {"rocblas_ctrmm",                                        {HIP_6000}},
-  {"rocblas_ztrmm",                                        {HIP_6000}},
-};
+  return m;
+}();
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_BLAS_FUNCTION_CHANGED_VER_MAP {
-  {"cublasLtMatmulDescCreate",                             {CUDA_110}},
-  {"cublasGemmEx",                                         {CUDA_110}},
-  {"cublasGemmBatchedEx",                                  {CUDA_110}},
-  {"cublasGemmStridedBatchedEx",                           {CUDA_110}},
-};
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP = [] {
+  std::map<llvm::StringRef, hipAPIChangedVersions> m;
+  m["hipblasStrmm"]                                                 = {HIP_6000};
+  m["hipblasDtrmm"]                                                 = {HIP_6000};
+  m["hipblasGemmEx"]                                                = {HIP_7000};
+  m["hipblasGemmEx_64"]                                             = {HIP_7000};
+  m["hipblasGemmBatchedEx"]                                         = {HIP_7000};
+  m["hipblasGemmBatchedEx_64"]                                      = {HIP_7000};
+  m["hipblasGemmStridedBatchedEx"]                                  = {HIP_7000};
+  m["hipblasGemmStridedBatchedEx_64"]                               = {HIP_7000};
+  m["hipblasIcamax"]                                                = {HIP_7000};
+  m["hipblasIcamax_64"]                                             = {HIP_7000};
+  m["hipblasIzamax"]                                                = {HIP_7000};
+  m["hipblasIzamax_64"]                                             = {HIP_7000};
+  m["hipblasIcamin"]                                                = {HIP_7000};
+  m["hipblasIcamin_64"]                                             = {HIP_7000};
+  m["hipblasIzamin"]                                                = {HIP_7000};
+  m["hipblasIzamin_64"]                                             = {HIP_7000};
+  m["hipblasScasum"]                                                = {HIP_7000};
+  m["hipblasScasum_64"]                                             = {HIP_7000};
+  m["hipblasDzasum"]                                                = {HIP_7000};
+  m["hipblasDzasum_64"]                                             = {HIP_7000};
+  m["hipblasCaxpy"]                                                 = {HIP_7000};
+  m["hipblasCaxpy_64"]                                              = {HIP_7000};
+  m["hipblasZaxpy"]                                                 = {HIP_7000};
+  m["hipblasZaxpy_64"]                                              = {HIP_7000};
+  m["hipblasCcopy"]                                                 = {HIP_7000};
+  m["hipblasCcopy_64"]                                              = {HIP_7000};
+  m["hipblasZcopy"]                                                 = {HIP_7000};
+  m["hipblasZcopy_64"]                                              = {HIP_7000};
+  m["hipblasCdotc"]                                                 = {HIP_7000};
+  m["hipblasCdotc_64"]                                              = {HIP_7000};
+  m["hipblasCdotu"]                                                 = {HIP_7000};
+  m["hipblasCdotu_64"]                                              = {HIP_7000};
+  m["hipblasZdotc"]                                                 = {HIP_7000};
+  m["hipblasZdotc_64"]                                              = {HIP_7000};
+  m["hipblasZdotu"]                                                 = {HIP_7000};
+  m["hipblasZdotu_64"]                                              = {HIP_7000};
+  m["hipblasScnrm2"]                                                = {HIP_7000};
+  m["hipblasScnrm2_64"]                                             = {HIP_7000};
+  m["hipblasDznrm2"]                                                = {HIP_7000};
+  m["hipblasDznrm2_64"]                                             = {HIP_7000};
+  m["hipblasCrot"]                                                  = {HIP_7000};
+  m["hipblasCrot_64"]                                               = {HIP_7000};
+  m["hipblasCrotg"]                                                 = {HIP_7000};
+  m["hipblasCsrot"]                                                 = {HIP_7000};
+  m["hipblasCsrot_64"]                                              = {HIP_7000};
+  m["hipblasZrot"]                                                  = {HIP_7000};
+  m["hipblasZrot_64"]                                               = {HIP_7000};
+  m["hipblasZrotg"]                                                 = {HIP_7000};
+  m["hipblasZdrot"]                                                 = {HIP_7000};
+  m["hipblasZdrot_64"]                                              = {HIP_7000};
+  m["hipblasCscal"]                                                 = {HIP_7000};
+  m["hipblasCscal_64"]                                              = {HIP_7000};
+  m["hipblasCsscal"]                                                = {HIP_7000};
+  m["hipblasCsscal_64"]                                             = {HIP_7000};
+  m["hipblasZscal"]                                                 = {HIP_7000};
+  m["hipblasZscal_64"]                                              = {HIP_7000};
+  m["hipblasZdscal"]                                                = {HIP_7000};
+  m["hipblasZdscal_64"]                                             = {HIP_7000};
+  m["hipblasCswap"]                                                 = {HIP_7000};
+  m["hipblasCswap_64"]                                              = {HIP_7000};
+  m["hipblasZswap"]                                                 = {HIP_7000};
+  m["hipblasZswap_64"]                                              = {HIP_7000};
+  m["hipblasCgbmv"]                                                 = {HIP_7000};
+  m["hipblasCgbmv_64"]                                              = {HIP_7000};
+  m["hipblasZgbmv"]                                                 = {HIP_7000};
+  m["hipblasZgbmv_64"]                                              = {HIP_7000};
+  m["hipblasCgemv"]                                                 = {HIP_7000};
+  m["hipblasCgemv_64"]                                              = {HIP_7000};
+  m["hipblasZgemv"]                                                 = {HIP_7000};
+  m["hipblasZgemv_64"]                                              = {HIP_7000};
+  m["hipblasCgemvBatched"]                                          = {HIP_7000};
+  m["hipblasCgemvBatched_64"]                                       = {HIP_7000};
+  m["hipblasZgemvBatched"]                                          = {HIP_7000};
+  m["hipblasZgemvBatched_64"]                                       = {HIP_7000};
+  m["hipblasCgemvStridedBatched"]                                   = {HIP_7000};
+  m["hipblasCgemvStridedBatched_64"]                                = {HIP_7000};
+  m["hipblasZgemvStridedBatched"]                                   = {HIP_7000};
+  m["hipblasZgemvStridedBatched_64"]                                = {HIP_7000};
+  m["hipblasCgeru"]                                                 = {HIP_7000};
+  m["hipblasCgeru_64"]                                              = {HIP_7000};
+  m["hipblasCgerc"]                                                 = {HIP_7000};
+  m["hipblasCgerc_64"]                                              = {HIP_7000};
+  m["hipblasZgeru"]                                                 = {HIP_7000};
+  m["hipblasZgeru_64"]                                              = {HIP_7000};
+  m["hipblasZgerc"]                                                 = {HIP_7000};
+  m["hipblasZgerc_64"]                                              = {HIP_7000};
+  m["hipblasChbmv"]                                                 = {HIP_7000};
+  m["hipblasChbmv_64"]                                              = {HIP_7000};
+  m["hipblasZhbmv"]                                                 = {HIP_7000};
+  m["hipblasZhbmv_64"]                                              = {HIP_7000};
+  m["hipblasChemv"]                                                 = {HIP_7000};
+  m["hipblasChemv_64"]                                              = {HIP_7000};
+  m["hipblasZhemv"]                                                 = {HIP_7000};
+  m["hipblasZhemv_64"]                                              = {HIP_7000};
+  m["hipblasCher"]                                                  = {HIP_7000};
+  m["hipblasCher_64"]                                               = {HIP_7000};
+  m["hipblasZher"]                                                  = {HIP_7000};
+  m["hipblasZher_64"]                                               = {HIP_7000};
+  m["hipblasCher2"]                                                 = {HIP_7000};
+  m["hipblasCher2_64"]                                              = {HIP_7000};
+  m["hipblasZher2"]                                                 = {HIP_7000};
+  m["hipblasZher2_64"]                                              = {HIP_7000};
+  m["hipblasChpmv"]                                                 = {HIP_7000};
+  m["hipblasChpmv_64"]                                              = {HIP_7000};
+  m["hipblasZhpmv"]                                                 = {HIP_7000};
+  m["hipblasZhpmv_64"]                                              = {HIP_7000};
+  m["hipblasChpr"]                                                  = {HIP_7000};
+  m["hipblasChpr_64"]                                               = {HIP_7000};
+  m["hipblasZhpr"]                                                  = {HIP_7000};
+  m["hipblasZhpr_64"]                                               = {HIP_7000};
+  m["hipblasChpr2"]                                                 = {HIP_7000};
+  m["hipblasChpr2_64"]                                              = {HIP_7000};
+  m["hipblasZhpr2"]                                                 = {HIP_7000};
+  m["hipblasZhpr2_64"]                                              = {HIP_7000};
+  m["hipblasCsymv"]                                                 = {HIP_7000};
+  m["hipblasCsymv_64"]                                              = {HIP_7000};
+  m["hipblasZsymv"]                                                 = {HIP_7000};
+  m["hipblasZsymv_64"]                                              = {HIP_7000};
+  m["hipblasCsyr"]                                                  = {HIP_7000};
+  m["hipblasCsyr_64"]                                               = {HIP_7000};
+  m["hipblasZsyr"]                                                  = {HIP_7000};
+  m["hipblasZsyr_64"]                                               = {HIP_7000};
+  m["hipblasCsyr2"]                                                 = {HIP_7000};
+  m["hipblasCsyr2_64"]                                              = {HIP_7000};
+  m["hipblasZsyr2"]                                                 = {HIP_7000};
+  m["hipblasZsyr2_64"]                                              = {HIP_7000};
+  m["hipblasCsyr2k"]                                                = {HIP_7000};
+  m["hipblasCsyr2k_64"]                                             = {HIP_7000};
+  m["hipblasZsyr2k"]                                                = {HIP_7000};
+  m["hipblasZsyr2k_64"]                                             = {HIP_7000};
+  m["hipblasCsyrkx"]                                                = {HIP_7000};
+  m["hipblasCsyrkx_64"]                                             = {HIP_7000};
+  m["hipblasZsyrkx"]                                                = {HIP_7000};
+  m["hipblasZsyrkx_64"]                                             = {HIP_7000};
+  m["hipblasCtbmv"]                                                 = {HIP_7000};
+  m["hipblasCtbmv_64"]                                              = {HIP_7000};
+  m["hipblasZtbmv"]                                                 = {HIP_7000};
+  m["hipblasZtbmv_64"]                                              = {HIP_7000};
+  m["hipblasCtbsv"]                                                 = {HIP_7000};
+  m["hipblasCtbsv_64"]                                              = {HIP_7000};
+  m["hipblasZtbsv"]                                                 = {HIP_7000};
+  m["hipblasZtbsv_64"]                                              = {HIP_7000};
+  m["hipblasCtpmv"]                                                 = {HIP_7000};
+  m["hipblasCtpmv_64"]                                              = {HIP_7000};
+  m["hipblasZtpmv"]                                                 = {HIP_7000};
+  m["hipblasZtpmv_64"]                                              = {HIP_7000};
+  m["hipblasCtpsv"]                                                 = {HIP_7000};
+  m["hipblasCtpsv_64"]                                              = {HIP_7000};
+  m["hipblasZtpsv"]                                                 = {HIP_7000};
+  m["hipblasZtpsv_64"]                                              = {HIP_7000};
+  m["hipblasCtrmv"]                                                 = {HIP_7000};
+  m["hipblasCtrmv_64"]                                              = {HIP_7000};
+  m["hipblasZtrmv"]                                                 = {HIP_7000};
+  m["hipblasZtrmv_64"]                                              = {HIP_7000};
+  m["hipblasCtrsv"]                                                 = {HIP_7000};
+  m["hipblasCtrsv_64"]                                              = {HIP_7000};
+  m["hipblasZtrsv"]                                                 = {HIP_7000};
+  m["hipblasZtrsv_64"]                                              = {HIP_7000};
+  m["hipblasCgemm"]                                                 = {HIP_7000};
+  m["hipblasCgemm_64"]                                              = {HIP_7000};
+  m["hipblasZgemm"]                                                 = {HIP_7000};
+  m["hipblasZgemm_64"]                                              = {HIP_7000};
+  m["hipblasCgemmBatched"]                                          = {HIP_7000};
+  m["hipblasCgemmBatched_64"]                                       = {HIP_7000};
+  m["hipblasZgemmBatched"]                                          = {HIP_7000};
+  m["hipblasZgemmBatched_64"]                                       = {HIP_7000};
+  m["hipblasCgemmStridedBatched"]                                   = {HIP_7000};
+  m["hipblasCgemmStridedBatched_64"]                                = {HIP_7000};
+  m["hipblasZgemmStridedBatched"]                                   = {HIP_7000};
+  m["hipblasZgemmStridedBatched_64"]                                = {HIP_7000};
+  m["hipblasCherk"]                                                 = {HIP_7000};
+  m["hipblasCherk_64"]                                              = {HIP_7000};
+  m["hipblasZherk"]                                                 = {HIP_7000};
+  m["hipblasZherk_64"]                                              = {HIP_7000};
+  m["hipblasCherkx"]                                                = {HIP_7000};
+  m["hipblasCherkx_64"]                                             = {HIP_7000};
+  m["hipblasZherkx"]                                                = {HIP_7000};
+  m["hipblasZherkx_64"]                                             = {HIP_7000};
+  m["hipblasCher2k"]                                                = {HIP_7000};
+  m["hipblasCher2k_64"]                                             = {HIP_7000};
+  m["hipblasZher2k"]                                                = {HIP_7000};
+  m["hipblasZher2k_64"]                                             = {HIP_7000};
+  m["hipblasCsymm"]                                                 = {HIP_7000};
+  m["hipblasCsymm_64"]                                              = {HIP_7000};
+  m["hipblasZsymm"]                                                 = {HIP_7000};
+  m["hipblasZsymm_64"]                                              = {HIP_7000};
+  m["hipblasCsyrk"]                                                 = {HIP_7000};
+  m["hipblasCsyrk_64"]                                              = {HIP_7000};
+  m["hipblasZsyrk"]                                                 = {HIP_7000};
+  m["hipblasZsyrk_64"]                                              = {HIP_7000};
+  m["hipblasCgeam"]                                                 = {HIP_7000};
+  m["hipblasCgeam_64"]                                              = {HIP_7000};
+  m["hipblasZgeam"]                                                 = {HIP_7000};
+  m["hipblasZgeam_64"]                                              = {HIP_7000};
+  m["hipblasChemm"]                                                 = {HIP_7000};
+  m["hipblasChemm_64"]                                              = {HIP_7000};
+  m["hipblasZhemm"]                                                 = {HIP_7000};
+  m["hipblasZhemm_64"]                                              = {HIP_7000};
+  m["hipblasCtrmm"]                                                 = {HIP_7000};
+  m["hipblasCtrmm_64"]                                              = {HIP_7000};
+  m["hipblasZtrmm"]                                                 = {HIP_7000};
+  m["hipblasZtrmm_64"]                                              = {HIP_7000};
+  m["hipblasCtrsm"]                                                 = {HIP_7000};
+  m["hipblasCtrsm_64"]                                              = {HIP_7000};
+  m["hipblasZtrsm"]                                                 = {HIP_7000};
+  m["hipblasZtrsm_64"]                                              = {HIP_7000};
+  m["hipblasCtrsmBatched"]                                          = {HIP_7000};
+  m["hipblasCtrsmBatched_64"]                                       = {HIP_7000};
+  m["hipblasZtrsmBatched"]                                          = {HIP_7000};
+  m["hipblasZtrsmBatched_64"]                                       = {HIP_7000};
+  m["hipblasCdgmm"]                                                 = {HIP_7000};
+  m["hipblasCdgmm_64"]                                              = {HIP_7000};
+  m["hipblasZdgmm"]                                                 = {HIP_7000};
+  m["hipblasZdgmm_64"]                                              = {HIP_7000};
+  m["hipblasCgetrfBatched"]                                         = {HIP_7000};
+  m["hipblasZgetrfBatched"]                                         = {HIP_7000};
+  m["hipblasCgetrsBatched"]                                         = {HIP_7000};
+  m["hipblasZgetrsBatched"]                                         = {HIP_7000};
+  m["hipblasCgetriBatched"]                                         = {HIP_7000};
+  m["hipblasZgetriBatched"]                                         = {HIP_7000};
+  m["hipblasCgelsBatched"]                                          = {HIP_7000};
+  m["hipblasZgelsBatched"]                                          = {HIP_7000};
+  m["hipblasCgeqrfBatched"]                                         = {HIP_7000};
+  m["hipblasZgeqrfBatched"]                                         = {HIP_7000};
+  m["hipblasAxpyEx"]                                                = {HIP_7000};
+  m["hipblasAxpyEx_64"]                                             = {HIP_7000};
+  m["hipblasDotEx"]                                                 = {HIP_7000};
+  m["hipblasDotEx_64"]                                              = {HIP_7000};
+  m["hipblasDotcEx"]                                                = {HIP_7000};
+  m["hipblasDotcEx_64"]                                             = {HIP_7000};
+  m["hipblasNrm2Ex"]                                                = {HIP_7000};
+  m["hipblasNrm2Ex_64"]                                             = {HIP_7000};
+  m["hipblasRotEx"]                                                 = {HIP_7000};
+  m["hipblasRotEx_64"]                                              = {HIP_7000};
+  m["hipblasScalEx"]                                                = {HIP_7000};
+  m["hipblasScalEx_64"]                                             = {HIP_7000};
 
-const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP {
-  {SEC::BLAS_DATA_TYPES, "CUBLAS Data types"},
-  {SEC::CUDA_DATA_TYPES, "CUDA Library Data types"},
-  {SEC::BLAS_LT_DATA_TYPES, "CUBLASLt Data types"},
-  {SEC::BLAS_HELPER, "CUBLAS Helper Function Reference"},
-  {SEC::BLAS_LEVEL_1, "CUBLAS Level-1 Function Reference"},
-  {SEC::BLAS_LEVEL_2, "CUBLAS Level-2 Function Reference"},
-  {SEC::BLAS_LEVEL_3, "CUBLAS Level-3 Function Reference"},
-  {SEC::BLAS_EXT, "BLAS-like Extension"},
-  {SEC::BLAS_LT, "BLASLt Function Reference"},
-};
+  m["rocblas_strmm"]                                                = {HIP_6000};
+  m["rocblas_dtrmm"]                                                = {HIP_6000};
+  m["rocblas_ctrmm"]                                                = {HIP_6000};
+  m["rocblas_ztrmm"]                                                = {HIP_6000};
+
+  return m;
+}();
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_BLAS_FUNCTION_CHANGED_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+  m["cublasLtMatmulDescCreate"]                                     = {CUDA_110};
+  m["cublasGemmEx"]                                                 = {CUDA_110};
+  m["cublasGemmBatchedEx"]                                          = {CUDA_110};
+  m["cublasGemmStridedBatchedEx"]                                   = {CUDA_110};
+
+  return m;
+}();
+
+const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP = [] {
+  std::map<unsigned int, llvm::StringRef> m;
+  m[SEC::BLAS_DATA_TYPES]                                           = "CUBLAS Data types";
+  m[SEC::CUDA_DATA_TYPES]                                           = "CUDA Library Data types";
+  m[SEC::BLAS_LT_DATA_TYPES]                                        = "CUBLASLt Data types";
+  m[SEC::BLAS_HELPER]                                               = "CUBLAS Helper Function Reference";
+  m[SEC::BLAS_LEVEL_1]                                              = "CUBLAS Level-1 Function Reference";
+  m[SEC::BLAS_LEVEL_2]                                              = "CUBLAS Level-2 Function Reference";
+  m[SEC::BLAS_LEVEL_3]                                              = "CUBLAS Level-3 Function Reference";
+  m[SEC::BLAS_EXT]                                                  = "BLAS-like Extension";
+  m[SEC::BLAS_LT]                                                   = "BLASLt Function Reference";
+
+  return m;
+}();

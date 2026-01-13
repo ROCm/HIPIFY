@@ -23,549 +23,557 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP {
+const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP = [] {
+  std::map<llvm::StringRef, hipCounter> m;
   // cuTENSOR enums
-  {"cutensorDataType_t",                               {"hiptensorDataType_t",                                      "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_R_16F",                                   {"HIPTENSOR_R_16F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_16F",                                   {"HIPTENSOR_C_16F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_16BF",                                  {"HIPTENSOR_R_16BF",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_16BF",                                  {"HIPTENSOR_C_16BF",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_32F",                                   {"HIPTENSOR_R_32F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_32F",                                   {"HIPTENSOR_C_32F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_64F",                                   {"HIPTENSOR_R_64F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_64F",                                   {"HIPTENSOR_C_64F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_4I",                                    {"HIPTENSOR_R_4I",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_4I",                                    {"HIPTENSOR_C_4I",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_4U",                                    {"HIPTENSOR_R_4U",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_4U",                                    {"HIPTENSOR_C_4U",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_8I",                                    {"HIPTENSOR_R_8I",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_8I",                                    {"HIPTENSOR_C_8I",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_8U",                                    {"HIPTENSOR_R_8U",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_8U",                                    {"HIPTENSOR_C_8U",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_16I",                                   {"HIPTENSOR_R_16I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_16I",                                   {"HIPTENSOR_C_16I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_16U",                                   {"HIPTENSOR_R_16U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_16U",                                   {"HIPTENSOR_C_16U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_32I",                                   {"HIPTENSOR_R_32I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_32I",                                   {"HIPTENSOR_C_32I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_32U",                                   {"HIPTENSOR_R_32U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_32U",                                   {"HIPTENSOR_C_32U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_64I",                                   {"HIPTENSOR_R_64I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_64I",                                   {"HIPTENSOR_C_64I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_64U",                                   {"HIPTENSOR_R_64U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_C_64U",                                   {"HIPTENSOR_C_64U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorDataType_t"]                                             = {"hiptensorDataType_t",                                      "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_R_16F"]                                                 = {"HIPTENSOR_R_16F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_16F"]                                                 = {"HIPTENSOR_C_16F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_16BF"]                                                = {"HIPTENSOR_R_16BF",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_16BF"]                                                = {"HIPTENSOR_C_16BF",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_32F"]                                                 = {"HIPTENSOR_R_32F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_32F"]                                                 = {"HIPTENSOR_C_32F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_64F"]                                                 = {"HIPTENSOR_R_64F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_64F"]                                                 = {"HIPTENSOR_C_64F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_4I"]                                                  = {"HIPTENSOR_R_4I",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_4I"]                                                  = {"HIPTENSOR_C_4I",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_4U"]                                                  = {"HIPTENSOR_R_4U",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_4U"]                                                  = {"HIPTENSOR_C_4U",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_8I"]                                                  = {"HIPTENSOR_R_8I",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_8I"]                                                  = {"HIPTENSOR_C_8I",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_8U"]                                                  = {"HIPTENSOR_R_8U",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_8U"]                                                  = {"HIPTENSOR_C_8U",                                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_16I"]                                                 = {"HIPTENSOR_R_16I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_16I"]                                                 = {"HIPTENSOR_C_16I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_16U"]                                                 = {"HIPTENSOR_R_16U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_16U"]                                                 = {"HIPTENSOR_C_16U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_32I"]                                                 = {"HIPTENSOR_R_32I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_32I"]                                                 = {"HIPTENSOR_C_32I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_32U"]                                                 = {"HIPTENSOR_R_32U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_32U"]                                                 = {"HIPTENSOR_C_32U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_64I"]                                                 = {"HIPTENSOR_R_64I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_64I"]                                                 = {"HIPTENSOR_C_64I",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_64U"]                                                 = {"HIPTENSOR_R_64U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_C_64U"]                                                 = {"HIPTENSOR_C_64U",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorComputeType_t",                            {"hiptensorComputeDescriptor_t",                             "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_16F",                             {"HIPTENSOR_COMPUTE_DESC_16F",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_16BF",                            {"HIPTENSOR_COMPUTE_DESC_16BF",                              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_TF32",                            {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_COMPUTE_3XTF32",                          {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_COMPUTE_32F",                             {"HIPTENSOR_COMPUTE_DESC_32F",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_64F",                             {"HIPTENSOR_COMPUTE_DESC_64F",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_8U",                              {"HIPTENSOR_COMPUTE_DESC_8U",                                "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_8I",                              {"HIPTENSOR_COMPUTE_DESC_8I",                                "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_32U",                             {"HIPTENSOR_COMPUTE_DESC_32U",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_32I",                             {"HIPTENSOR_COMPUTE_DESC_32I",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_R_MIN_16F",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_C_MIN_16F",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_R_MIN_32F",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_C_MIN_32F",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_R_MIN_64F",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_C_MIN_64F",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_R_MIN_8U",                                {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_R_MIN_32U",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_R_MIN_8I",                                {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_R_MIN_32I",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_R_MIN_16BF",                              {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_R_MIN_TF32",                              {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_C_MIN_TF32",                              {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorComputeType_t"]                                          = {"hiptensorComputeDescriptor_t",                             "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_16F"]                                           = {"HIPTENSOR_COMPUTE_DESC_16F",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_16BF"]                                          = {"HIPTENSOR_COMPUTE_DESC_16BF",                              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_TF32"]                                          = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_COMPUTE_3XTF32"]                                        = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_COMPUTE_32F"]                                           = {"HIPTENSOR_COMPUTE_DESC_32F",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_64F"]                                           = {"HIPTENSOR_COMPUTE_DESC_64F",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_8U"]                                            = {"HIPTENSOR_COMPUTE_DESC_8U",                                "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_8I"]                                            = {"HIPTENSOR_COMPUTE_DESC_8I",                                "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_32U"]                                           = {"HIPTENSOR_COMPUTE_DESC_32U",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_32I"]                                           = {"HIPTENSOR_COMPUTE_DESC_32I",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_R_MIN_16F"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_C_MIN_16F"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_R_MIN_32F"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_C_MIN_32F"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_R_MIN_64F"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_C_MIN_64F"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_R_MIN_8U"]                                              = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_R_MIN_32U"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_R_MIN_8I"]                                              = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_R_MIN_32I"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_R_MIN_16BF"]                                            = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_R_MIN_TF32"]                                            = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_C_MIN_TF32"]                                            = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorOperator_t",                               {"hiptensorOperator_t",                                      "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_OP_IDENTITY",                             {"HIPTENSOR_OP_IDENTITY",                                    "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_SQRT",                                 {"HIPTENSOR_OP_SQRT",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_RELU",                                 {"HIPTENSOR_OP_RELU",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_CONJ",                                 {"HIPTENSOR_OP_CONJ",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_RCP",                                  {"HIPTENSOR_OP_RCP",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_SIGMOID",                              {"HIPTENSOR_OP_SIGMOID",                                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_TANH",                                 {"HIPTENSOR_OP_TANH",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_EXP",                                  {"HIPTENSOR_OP_EXP",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_LOG",                                  {"HIPTENSOR_OP_LOG",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_ABS",                                  {"HIPTENSOR_OP_ABS",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_NEG",                                  {"HIPTENSOR_OP_NEG",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_SIN",                                  {"HIPTENSOR_OP_SIN",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_COS",                                  {"HIPTENSOR_OP_COS",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_TAN",                                  {"HIPTENSOR_OP_TAN",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_SINH",                                 {"HIPTENSOR_OP_SINH",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_COSH",                                 {"HIPTENSOR_OP_COSH",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_ASIN",                                 {"HIPTENSOR_OP_ASIN",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_ACOS",                                 {"HIPTENSOR_OP_ACOS",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_ATAN",                                 {"HIPTENSOR_OP_ATAN",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_ASINH",                                {"HIPTENSOR_OP_ASINH",                                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_ACOSH",                                {"HIPTENSOR_OP_ACOSH",                                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_ATANH",                                {"HIPTENSOR_OP_ATANH",                                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_CEIL",                                 {"HIPTENSOR_OP_CEIL",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_FLOOR",                                {"HIPTENSOR_OP_FLOOR",                                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_MISH",                                 {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_OP_SWISH",                                {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_OP_SOFT_PLUS",                            {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_OP_SOFT_SIGN",                            {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_OP_ADD",                                  {"HIPTENSOR_OP_ADD",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_MUL",                                  {"HIPTENSOR_OP_MUL",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_MAX",                                  {"HIPTENSOR_OP_MAX",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_MIN",                                  {"HIPTENSOR_OP_MIN",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OP_UNKNOWN",                              {"HIPTENSOR_OP_UNKNOWN",                                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorOperator_t"]                                             = {"hiptensorOperator_t",                                      "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_OP_IDENTITY"]                                           = {"HIPTENSOR_OP_IDENTITY",                                    "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_SQRT"]                                               = {"HIPTENSOR_OP_SQRT",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_RELU"]                                               = {"HIPTENSOR_OP_RELU",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_CONJ"]                                               = {"HIPTENSOR_OP_CONJ",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_RCP"]                                                = {"HIPTENSOR_OP_RCP",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_SIGMOID"]                                            = {"HIPTENSOR_OP_SIGMOID",                                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_TANH"]                                               = {"HIPTENSOR_OP_TANH",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_EXP"]                                                = {"HIPTENSOR_OP_EXP",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_LOG"]                                                = {"HIPTENSOR_OP_LOG",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_ABS"]                                                = {"HIPTENSOR_OP_ABS",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_NEG"]                                                = {"HIPTENSOR_OP_NEG",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_SIN"]                                                = {"HIPTENSOR_OP_SIN",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_COS"]                                                = {"HIPTENSOR_OP_COS",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_TAN"]                                                = {"HIPTENSOR_OP_TAN",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_SINH"]                                               = {"HIPTENSOR_OP_SINH",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_COSH"]                                               = {"HIPTENSOR_OP_COSH",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_ASIN"]                                               = {"HIPTENSOR_OP_ASIN",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_ACOS"]                                               = {"HIPTENSOR_OP_ACOS",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_ATAN"]                                               = {"HIPTENSOR_OP_ATAN",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_ASINH"]                                              = {"HIPTENSOR_OP_ASINH",                                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_ACOSH"]                                              = {"HIPTENSOR_OP_ACOSH",                                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_ATANH"]                                              = {"HIPTENSOR_OP_ATANH",                                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_CEIL"]                                               = {"HIPTENSOR_OP_CEIL",                                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_FLOOR"]                                              = {"HIPTENSOR_OP_FLOOR",                                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_MISH"]                                               = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_OP_SWISH"]                                              = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_OP_SOFT_PLUS"]                                          = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_OP_SOFT_SIGN"]                                          = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_OP_ADD"]                                                = {"HIPTENSOR_OP_ADD",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_MUL"]                                                = {"HIPTENSOR_OP_MUL",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_MAX"]                                                = {"HIPTENSOR_OP_MAX",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_MIN"]                                                = {"HIPTENSOR_OP_MIN",                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OP_UNKNOWN"]                                            = {"HIPTENSOR_OP_UNKNOWN",                                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorStatus_t",                                 {"hiptensorStatus_t",                                        "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_SUCCESS",                          {"HIPTENSOR_STATUS_SUCCESS",                                 "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_NOT_INITIALIZED",                  {"HIPTENSOR_STATUS_NOT_INITIALIZED",                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_ALLOC_FAILED",                     {"HIPTENSOR_STATUS_ALLOC_FAILED",                            "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_INVALID_VALUE",                    {"HIPTENSOR_STATUS_INVALID_VALUE",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_ARCH_MISMATCH",                    {"HIPTENSOR_STATUS_ARCH_MISMATCH",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_MAPPING_ERROR",                    {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_STATUS_EXECUTION_FAILED",                 {"HIPTENSOR_STATUS_EXECUTION_FAILED",                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_INTERNAL_ERROR",                   {"HIPTENSOR_STATUS_INTERNAL_ERROR",                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_NOT_SUPPORTED",                    {"HIPTENSOR_STATUS_NOT_SUPPORTED",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_LICENSE_ERROR",                    {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_STATUS_CUBLAS_ERROR",                     {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_STATUS_CUDA_ERROR",                       {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_STATUS_INSUFFICIENT_WORKSPACE",           {"HIPTENSOR_STATUS_INSUFFICIENT_WORKSPACE",                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_INSUFFICIENT_DRIVER",              {"HIPTENSOR_STATUS_INSUFFICIENT_DRIVER",                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_STATUS_IO_ERROR",                         {"HIPTENSOR_STATUS_IO_ERROR",                                "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorStatus_t"]                                               = {"hiptensorStatus_t",                                        "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_SUCCESS"]                                        = {"HIPTENSOR_STATUS_SUCCESS",                                 "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_NOT_INITIALIZED"]                                = {"HIPTENSOR_STATUS_NOT_INITIALIZED",                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_ALLOC_FAILED"]                                   = {"HIPTENSOR_STATUS_ALLOC_FAILED",                            "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_INVALID_VALUE"]                                  = {"HIPTENSOR_STATUS_INVALID_VALUE",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_ARCH_MISMATCH"]                                  = {"HIPTENSOR_STATUS_ARCH_MISMATCH",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_MAPPING_ERROR"]                                  = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_STATUS_EXECUTION_FAILED"]                               = {"HIPTENSOR_STATUS_EXECUTION_FAILED",                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_INTERNAL_ERROR"]                                 = {"HIPTENSOR_STATUS_INTERNAL_ERROR",                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_NOT_SUPPORTED"]                                  = {"HIPTENSOR_STATUS_NOT_SUPPORTED",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_LICENSE_ERROR"]                                  = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_STATUS_CUBLAS_ERROR"]                                   = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_STATUS_CUDA_ERROR"]                                     = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_STATUS_INSUFFICIENT_WORKSPACE"]                         = {"HIPTENSOR_STATUS_INSUFFICIENT_WORKSPACE",                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_INSUFFICIENT_DRIVER"]                            = {"HIPTENSOR_STATUS_INSUFFICIENT_DRIVER",                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_STATUS_IO_ERROR"]                                       = {"HIPTENSOR_STATUS_IO_ERROR",                                "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorAlgo_t",                                   {"hiptensorAlgo_t",                                          "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_ALGO_DEFAULT_PATIENT",                    {"HIPTENSOR_ALGO_DEFAULT_PATIENT",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_ALGO_GETT",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_ALGO_TGETT",                              {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_ALGO_TTGT",                               {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_ALGO_DEFAULT",                            {"HIPTENSOR_ALGO_DEFAULT",                                   "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorAlgo_t"]                                                 = {"hiptensorAlgo_t",                                          "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_ALGO_DEFAULT_PATIENT"]                                  = {"HIPTENSOR_ALGO_DEFAULT_PATIENT",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_ALGO_GETT"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_ALGO_TGETT"]                                            = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_ALGO_TTGT"]                                             = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_ALGO_DEFAULT"]                                          = {"HIPTENSOR_ALGO_DEFAULT",                                   "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorWorksizePreference_t",                     {"hiptensorWorksizePreference_t",                            "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_WORKSPACE_MIN",                           {"HIPTENSOR_WORKSPACE_MIN",                                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_WORKSPACE_DEFAULT",                       {"HIPTENSOR_WORKSPACE_DEFAULT",                              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_WORKSPACE_RECOMMENDED",                   {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED | CUDA_REMOVED}},
-  {"CUTENSOR_WORKSPACE_MAX",                           {"HIPTENSOR_WORKSPACE_MAX",                                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorWorksizePreference_t"]                                   = {"hiptensorWorksizePreference_t",                            "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_WORKSPACE_MIN"]                                         = {"HIPTENSOR_WORKSPACE_MIN",                                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_WORKSPACE_DEFAULT"]                                     = {"HIPTENSOR_WORKSPACE_DEFAULT",                              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_WORKSPACE_RECOMMENDED"]                                 = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED | CUDA_REMOVED};
+  m["CUTENSOR_WORKSPACE_MAX"]                                         = {"HIPTENSOR_WORKSPACE_MAX",                                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorOperationDescriptorAttribute_t",           {"hiptensorOperationDescriptorAttribute_t",                  "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_TAG",                {"HIPTENSOR_OPERATION_DESCRIPTOR_TAG",                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE",        {"HIPTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE",               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_FLOPS",              {"HIPTENSOR_OPERATION_DESCRIPTOR_FLOPS",                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES",        {"HIPTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES",               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT",       {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT",              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT",      {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT",             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE",      {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE",             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorOperationDescriptorAttribute_t"]                         = {"hiptensorOperationDescriptorAttribute_t",                  "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_OPERATION_DESCRIPTOR_TAG"]                              = {"HIPTENSOR_OPERATION_DESCRIPTOR_TAG",                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE"]                      = {"HIPTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE",               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OPERATION_DESCRIPTOR_FLOPS"]                            = {"HIPTENSOR_OPERATION_DESCRIPTOR_FLOPS",                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES"]                      = {"HIPTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES",               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT"]                     = {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT",              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT"]                    = {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT",             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE"]                    = {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE",             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorPlanPreferenceAttribute_t",                {"hiptensorPlanPreferenceAttribute_t",                       "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE",           {"HIPTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE",                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_PLAN_PREFERENCE_CACHE_MODE",              {"HIPTENSOR_PLAN_PREFERENCE_CACHE_MODE",                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT",       {"HIPTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT",              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_PLAN_PREFERENCE_ALGO",                    {"HIPTENSOR_PLAN_PREFERENCE_ALGO",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK",             {"HIPTENSOR_PLAN_PREFERENCE_KERNEL_RANK",                    "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_PLAN_PREFERENCE_JIT",                     {"HIPTENSOR_PLAN_PREFERENCE_JIT",                            "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorPlanPreferenceAttribute_t"]                              = {"hiptensorPlanPreferenceAttribute_t",                       "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE"]                         = {"HIPTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE",                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_PLAN_PREFERENCE_CACHE_MODE"]                            = {"HIPTENSOR_PLAN_PREFERENCE_CACHE_MODE",                     "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT"]                     = {"HIPTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT",              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_PLAN_PREFERENCE_ALGO"]                                  = {"HIPTENSOR_PLAN_PREFERENCE_ALGO",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK"]                           = {"HIPTENSOR_PLAN_PREFERENCE_KERNEL_RANK",                    "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_PLAN_PREFERENCE_JIT"]                                   = {"HIPTENSOR_PLAN_PREFERENCE_JIT",                            "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  { "cutensorAutotuneMode_t",                           {"hiptensorAutotuneMode_t",                                  "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_AUTOTUNE_MODE_NONE",                      {"HIPTENSOR_AUTOTUNE_MODE_NONE",                             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_AUTOTUNE_NONE",                           {"HIPTENSOR_AUTOTUNE_MODE_NONE",                             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, CUDA_REMOVED}},
-  {"CUTENSOR_AUTOTUNE_MODE_INCREMENTAL",               {"HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL",                      "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_AUTOTUNE_INCREMENTAL",                    {"HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL",                      "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, CUDA_REMOVED}},
+  m[ "cutensorAutotuneMode_t"]                                        = {"hiptensorAutotuneMode_t",                                  "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_AUTOTUNE_MODE_NONE"]                                    = {"HIPTENSOR_AUTOTUNE_MODE_NONE",                             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_AUTOTUNE_NONE"]                                         = {"HIPTENSOR_AUTOTUNE_MODE_NONE",                             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, CUDA_REMOVED};
+  m["CUTENSOR_AUTOTUNE_MODE_INCREMENTAL"]                             = {"HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL",                      "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_AUTOTUNE_INCREMENTAL"]                                  = {"HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL",                      "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, CUDA_REMOVED};
 
-  {"cutensorJitMode_t",                                {"hiptensorJitMode_t",                                       "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_JIT_MODE_NONE",                           {"HIPTENSOR_JIT_MODE_NONE",                                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_JIT_MODE_DEFAULT",                        {"HIPTENSOR_JIT_MODE_DEFAULT",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorJitMode_t"]                                              = {"hiptensorJitMode_t",                                       "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_JIT_MODE_NONE"]                                         = {"HIPTENSOR_JIT_MODE_NONE",                                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_JIT_MODE_DEFAULT"]                                      = {"HIPTENSOR_JIT_MODE_DEFAULT",                               "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorCacheMode_t",                              {"hiptensorCacheMode_t",                                     "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_CACHE_MODE_NONE",                         {"HIPTENSOR_CACHE_MODE_NONE",                                "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
-  {"CUTENSOR_CACHE_MODE_PEDANTIC",                     {"HIPTENSOR_CACHE_MODE_PEDANTIC",                            "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorCacheMode_t"]                                            = {"hiptensorCacheMode_t",                                     "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_CACHE_MODE_NONE"]                                       = {"HIPTENSOR_CACHE_MODE_NONE",                                "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_CACHE_MODE_PEDANTIC"]                                   = {"HIPTENSOR_CACHE_MODE_PEDANTIC",                            "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorPlanAttribute_t",                          {"hiptensorPlanAttribute_t",                                 "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_PLAN_REQUIRED_WORKSPACE",                 {"HIPTENSOR_PLAN_REQUIRED_WORKSPACE",                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1}},
+  m["cutensorPlanAttribute_t"]                                        = {"hiptensorPlanAttribute_t",                                 "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_PLAN_REQUIRED_WORKSPACE"]                               = {"HIPTENSOR_PLAN_REQUIRED_WORKSPACE",                        "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
 
-  {"cutensorMgHostDevice_t",                           {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_MG_DEVICE_HOST",                          {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_MG_DEVICE_HOST_PINNED",                   {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgHostDevice_t"]                                         = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_MG_DEVICE_HOST"]                                        = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_MG_DEVICE_HOST_PINNED"]                                 = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorMgAlgo_t",                                 {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSORMG_ALGO_DEFAULT",                          {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgAlgo_t"]                                               = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSORMG_ALGO_DEFAULT"]                                        = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorMgContractionFindAttribute_t",             {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSORMG_CONTRACTION_FIND_ATTRIBUTE_MAX",        {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgContractionFindAttribute_t"]                           = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSORMG_CONTRACTION_FIND_ATTRIBUTE_MAX"]                      = {"",                                                         "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorHandle_t",                                 {"hiptensorHandle_t",                                        "", CONV_TYPE, API_TENSOR, 1}},
-  {"cutensorHandle",                                   {"hiptensorHandle",                                          "", CONV_TYPE, API_TENSOR, 1}},
+  m["cutensorHandle_t"]                                               = {"hiptensorHandle_t",                                        "", CONV_TYPE, API_TENSOR, 1};
+  m["cutensorHandle"]                                                 = {"hiptensorHandle",                                          "", CONV_TYPE, API_TENSOR, 1};
 
-  {"cutensorTensorDescriptor_t",                       {"hiptensorTensorDescriptor_t",                              "", CONV_TYPE, API_TENSOR, 1}},
-  {"cutensorTensorDescriptor",                         {"hiptensorTensorDescriptor",                                "", CONV_TYPE, API_TENSOR, 1}},
+  m["cutensorTensorDescriptor_t"]                                     = {"hiptensorTensorDescriptor_t",                              "", CONV_TYPE, API_TENSOR, 1};
+  m["cutensorTensorDescriptor"]                                       = {"hiptensorTensorDescriptor",                                "", CONV_TYPE, API_TENSOR, 1};
 
-  {"cutensorOperationDescriptor_t",                    {"hiptensorOperationDescriptor_t",                           "", CONV_TYPE, API_TENSOR, 1}},
-  {"cutensorOperationDescriptor",                      {"hiptensorOperationDescriptor",                             "", CONV_TYPE, API_TENSOR, 1}},
+  m["cutensorOperationDescriptor_t"]                                  = {"hiptensorOperationDescriptor_t",                           "", CONV_TYPE, API_TENSOR, 1};
+  m["cutensorOperationDescriptor"]                                    = {"hiptensorOperationDescriptor",                             "", CONV_TYPE, API_TENSOR, 1};
 
-  {"cutensorContractionPlan_t",                        {"hiptensorContractionPlan_t",                               "", CONV_TYPE, API_TENSOR, 1}},
+  m["cutensorContractionPlan_t"]                                      = {"hiptensorContractionPlan_t",                               "", CONV_TYPE, API_TENSOR, 1};
 
-  {"cutensorPlan_t",                                   {"hiptensorPlan_t",                                          "", CONV_TYPE, API_TENSOR, 1}},
-  {"cutensorPlan",                                     {"hiptensorPlan",                                            "", CONV_TYPE, API_TENSOR, 1}},
+  m["cutensorPlan_t"]                                                 = {"hiptensorPlan_t",                                          "", CONV_TYPE, API_TENSOR, 1};
+  m["cutensorPlan"]                                                   = {"hiptensorPlan",                                            "", CONV_TYPE, API_TENSOR, 1};
 
-  {"cutensorLoggerCallback_t",                         {"hiptensorLoggerCallback_t",                                "", CONV_TYPE, API_TENSOR, 1}},
+  m["cutensorLoggerCallback_t"]                                       = {"hiptensorLoggerCallback_t",                                "", CONV_TYPE, API_TENSOR, 1};
 
-  {"cutensorMgHandle_t",                               {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"cutensorMgHandle_s",                               {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgHandle_t"]                                             = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["cutensorMgHandle_s"]                                             = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorMgTensorDescriptor_t",                     {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"cutensorMgTensorDescriptor_s",                     {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgTensorDescriptor_t"]                                   = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["cutensorMgTensorDescriptor_s"]                                   = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorMgCopyDescriptor_t",                       {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"cutensorMgCopyDescriptor_s",                       {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgCopyDescriptor_t"]                                     = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["cutensorMgCopyDescriptor_s"]                                     = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorMgCopyPlan_t",                             {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"cutensorMgCopyPlan_s",                             {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgCopyPlan_t"]                                           = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["cutensorMgCopyPlan_s"]                                           = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorMgContractionDescriptor_t",                {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"cutensorMgContractionDescriptor_s",                {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgContractionDescriptor_t"]                              = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["cutensorMgContractionDescriptor_s"]                              = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorMgContractionFind_t",                      {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"cutensorMgContractionFind_s",                      {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgContractionFind_t"]                                    = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["cutensorMgContractionFind_s"]                                    = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorMgContractionPlan_t",                      {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"cutensorMgContractionPlan_s",                      {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorMgContractionPlan_t"]                                    = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["cutensorMgContractionPlan_s"]                                    = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorPlanPreference_t",                         {"hiptensorPlanPreference_t",                                "", CONV_TYPE, API_TENSOR, 1}},
-  {"cutensorPlanPreference",                           {"hiptensorPlanPreference",                                  "", CONV_TYPE, API_TENSOR, 1}},
+  m["cutensorPlanPreference_t"]                                       = {"hiptensorPlanPreference_t",                                "", CONV_TYPE, API_TENSOR, 1};
+  m["cutensorPlanPreference"]                                         = {"hiptensorPlanPreference",                                  "", CONV_TYPE, API_TENSOR, 1};
 
-  {"cutensorBlockSparseTensorDescriptor_t",            {"hiptensorBlockSparseTensorDescriptor_t",                   "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"cutensorBlockSparseTensorDescriptor",              {"hiptensorBlockSparseTensorDescriptor",                     "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorBlockSparseTensorDescriptor_t"]                          = {"hiptensorBlockSparseTensorDescriptor_t",                   "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["cutensorBlockSparseTensorDescriptor"]                            = {"hiptensorBlockSparseTensorDescriptor",                     "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
 
-  {"cutensorComputeDescriptor",                        {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  m["cutensorComputeDescriptor"]                                      = {"",                                                         "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
   // NOTE: cutensorComputeDescriptor_t is a pointer to struct cutensorComputeDescriptor, whereas hiptensorComputeDescriptor_t is enum
   // NOTE: Hipification of cutensorCreateContraction -> hiptensorCreateContraction, cutensorCreatePermutation -> hiptensorCreatePermutation,
   //       cutensorCreateElementwiseBinary -> hiptensorCreateElementwiseBinary are incorrect
   // TODO: File a corresponding ticket to the Tensor team
-  {"cutensorComputeDescriptor_t",                      {"hiptensorComputeDescriptor_t",                             "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_DESC_16F",                        {"HIPTENSOR_COMPUTE_DESC_16F",                               "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_DESC_16BF",                       {"HIPTENSOR_COMPUTE_DESC_16BF",                              "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_DESC_TF32",                       {"HIPTENSOR_COMPUTE_DESC_TF32",                              "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_COMPUTE_DESC_3XTF32",                     {"HIPTENSOR_COMPUTE_DESC_3XTF32",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_COMPUTE_DESC_32F",                        {"HIPTENSOR_COMPUTE_DESC_32F",                               "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_DESC_64F",                        {"HIPTENSOR_COMPUTE_DESC_64F",                               "", CONV_TYPE, API_TENSOR, 1}},
-  {"CUTENSOR_COMPUTE_DESC_9X16BF",                     {"HIPTENSOR_COMPUTE_DESC_9X16BF",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-  {"CUTENSOR_COMPUTE_DESC_8XINT8",                     {"HIPTENSOR_COMPUTE_DESC_8XINT8",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
-};
+  m["cutensorComputeDescriptor_t"]                                    = {"hiptensorComputeDescriptor_t",                             "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_DESC_16F"]                                      = {"HIPTENSOR_COMPUTE_DESC_16F",                               "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_DESC_16BF"]                                     = {"HIPTENSOR_COMPUTE_DESC_16BF",                              "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_DESC_TF32"]                                     = {"HIPTENSOR_COMPUTE_DESC_TF32",                              "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_COMPUTE_DESC_3XTF32"]                                   = {"HIPTENSOR_COMPUTE_DESC_3XTF32",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_COMPUTE_DESC_32F"]                                      = {"HIPTENSOR_COMPUTE_DESC_32F",                               "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_DESC_64F"]                                      = {"HIPTENSOR_COMPUTE_DESC_64F",                               "", CONV_TYPE, API_TENSOR, 1};
+  m["CUTENSOR_COMPUTE_DESC_9X16BF"]                                   = {"HIPTENSOR_COMPUTE_DESC_9X16BF",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_COMPUTE_DESC_8XINT8"]                                   = {"HIPTENSOR_COMPUTE_DESC_8XINT8",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  return m;
+}();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP {
-  {"cutensorDataType_t",                               {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_16F",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_16F",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_16BF",                                  {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_16BF",                                  {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_32F",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_32F",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_64F",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_64F",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_4I",                                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_4I",                                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_4U",                                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_4U",                                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_8I",                                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_8I",                                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_8U",                                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_8U",                                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_16I",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_16I",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_16U",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_16U",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_32I",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_32I",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_32U",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_32U",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_64I",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_64I",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_64U",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_C_64U",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_16F",                             {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_16BF",                            {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_TF32",                            {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_32F",                             {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_64F",                             {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_8U",                              {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_8I",                              {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_32U",                             {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_32I",                             {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_COMPUTE_3XTF32",                          {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_R_MIN_16F",                               {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_C_MIN_16F",                               {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_R_MIN_32F",                               {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_C_MIN_32F",                               {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_R_MIN_64F",                               {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_C_MIN_64F",                               {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_R_MIN_8U",                                {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_R_MIN_32U",                               {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_R_MIN_8I",                                {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_R_MIN_32I",                               {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_R_MIN_16BF",                              {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_R_MIN_TF32",                              {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"CUTENSOR_C_MIN_TF32",                              {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 }},
-  {"cutensorOperator_t",                               {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_IDENTITY",                             {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_SQRT",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_RELU",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_CONJ",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_RCP",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_SIGMOID",                              {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_TANH",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_EXP",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_LOG",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_ABS",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_NEG",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_SIN",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_COS",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_TAN",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_SINH",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_COSH",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_ASIN",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_ACOS",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_ATAN",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_ASINH",                                {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_ACOSH",                                {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_ATANH",                                {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_CEIL",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_FLOOR",                                {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_MISH",                                 {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_SWISH",                                {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_SOFT_PLUS",                            {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_SOFT_SIGN",                            {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_ADD",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_MUL",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_MAX",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_MIN",                                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OP_UNKNOWN",                              {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"cutensorStatus_t",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_SUCCESS",                          {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_NOT_INITIALIZED",                  {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_ALLOC_FAILED",                     {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_INVALID_VALUE",                    {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_ARCH_MISMATCH",                    {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_MAPPING_ERROR",                    {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_EXECUTION_FAILED",                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_INTERNAL_ERROR",                   {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_NOT_SUPPORTED",                    {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_LICENSE_ERROR",                    {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_CUBLAS_ERROR",                     {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_CUDA_ERROR",                       {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_INSUFFICIENT_WORKSPACE",           {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_INSUFFICIENT_DRIVER",              {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_STATUS_IO_ERROR",                         {CUTENSOR_1200, CUDA_0,        CUDA_0        }},
-  {"cutensorAlgo_t",                                   {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_ALGO_DEFAULT_PATIENT",                    {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_ALGO_GETT",                               {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_ALGO_TGETT",                              {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_ALGO_TTGT",                               {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_ALGO_DEFAULT",                            {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"cutensorWorksizePreference_t",                     {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_WORKSPACE_MIN",                           {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_WORKSPACE_DEFAULT",                       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_WORKSPACE_RECOMMENDED",                   {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_WORKSPACE_MAX",                           {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"cutensorOperationDescriptorAttribute_t",           {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_TAG",                {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE",        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_FLOPS",              {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES",        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT",       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT",      {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE",      {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorPlanPreferenceAttribute_t",                {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE",           {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_PLAN_PREFERENCE_CACHE_MODE",              {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT",       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_PLAN_PREFERENCE_ALGO",                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK",             {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_PLAN_PREFERENCE_JIT",                     {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorAutotuneMode_t",                           {CUTENSOR_1200, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_AUTOTUNE_MODE_NONE",                      {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_AUTOTUNE_MODE_INCREMENTAL",               {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_AUTOTUNE_NONE",                           {CUTENSOR_1200, CUDA_0,        CUTENSOR_2000 }},
-  {"CUTENSOR_AUTOTUNE_INCREMENTAL",                    {CUTENSOR_1200, CUDA_0,        CUTENSOR_2000 }},
-  {"cutensorJitMode_t",                                {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_JIT_MODE_NONE",                           {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_JIT_MODE_DEFAULT",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorCacheMode_t",                              {CUTENSOR_1200, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_CACHE_MODE_NONE",                         {CUTENSOR_1200, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_CACHE_MODE_PEDANTIC",                     {CUTENSOR_1200, CUDA_0,        CUDA_0        }},
-  {"cutensorPlanAttribute_t",                          {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_PLAN_REQUIRED_WORKSPACE",                 {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorHandle_t",                                 {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"cutensorHandle",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorTensorDescriptor_t",                       {CUTENSOR_1010, CUDA_0,        CUDA_0        }},
-  {"cutensorTensorDescriptor",                         {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorContractionPlan_t",                        {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 }},
-  {"cutensorPlan_t",                                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorPlan",                                     {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorLoggerCallback_t",                         {CUTENSOR_1320, CUDA_0,        CUDA_0        }},
-  {"cutensorMgHostDevice_t",                           {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_MG_DEVICE_HOST",                          {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_MG_DEVICE_HOST_PINNED",                   {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgHandle_s",                               {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgHandle_t",                               {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgTensorDescriptor_s",                     {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgTensorDescriptor_t",                     {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgCopyDescriptor_s",                       {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgCopyDescriptor_t",                       {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgCopyPlan_s",                             {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgCopyPlan_t",                             {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgContractionDescriptor_s",                {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgContractionDescriptor_t",                {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgContractionFind_s",                      {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgContractionFind_t",                      {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgContractionPlan_s",                      {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgContractionPlan_t",                      {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgAlgo_t",                                 {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"CUTENSORMG_ALGO_DEFAULT",                          {CUTENSOR_1400, CUDA_0,        CUDA_0        }},
-  {"cutensorMgContractionFindAttribute_t",             {CUTENSOR_1500, CUDA_0,        CUDA_0        }},
-  {"CUTENSORMG_CONTRACTION_FIND_ATTRIBUTE_MAX",        {CUTENSOR_1500, CUDA_0,        CUDA_0        }},
-  {"cutensorPlanPreference",                           {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorPlanPreference_t",                         {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorOperationDescriptor_t",                    {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorOperationDescriptor",                      {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorComputeDescriptor_t",                      {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"cutensorComputeDescriptor",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_16F",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_16BF",                       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_TF32",                       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_3XTF32",                     {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_32F",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_64F",                        {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_9X16BF",                     {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
-  {"cutensorBlockSparseTensorDescriptor_t",            {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
-  {"cutensorBlockSparseTensorDescriptor",              {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
-  {"CUTENSOR_COMPUTE_DESC_8XINT8",                     {CUTENSOR_2400, CUDA_0,        CUDA_0        }},
-};
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIversions> m;
+  m["cutensorDataType_t"]                                             = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_16F"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_16F"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_16BF"]                                                = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_16BF"]                                                = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_32F"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_32F"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_64F"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_64F"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_4I"]                                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_4I"]                                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_4U"]                                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_4U"]                                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_8I"]                                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_8I"]                                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_8U"]                                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_8U"]                                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_16I"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_16I"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_16U"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_16U"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_32I"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_32I"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_32U"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_32U"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_64I"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_64I"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_64U"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_C_64U"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_16F"]                                           = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_16BF"]                                          = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_TF32"]                                          = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_32F"]                                           = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_64F"]                                           = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_8U"]                                            = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_8I"]                                            = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_32U"]                                           = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_32I"]                                           = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_COMPUTE_3XTF32"]                                        = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_R_MIN_16F"]                                             = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_C_MIN_16F"]                                             = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_R_MIN_32F"]                                             = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_C_MIN_32F"]                                             = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_R_MIN_64F"]                                             = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_C_MIN_64F"]                                             = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_R_MIN_8U"]                                              = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_R_MIN_32U"]                                             = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_R_MIN_8I"]                                              = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_R_MIN_32I"]                                             = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_R_MIN_16BF"]                                            = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_R_MIN_TF32"]                                            = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["CUTENSOR_C_MIN_TF32"]                                            = {CUTENSOR_1010, CUTENSOR_1200, CUTENSOR_2000 };
+  m["cutensorOperator_t"]                                             = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_IDENTITY"]                                           = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_SQRT"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_RELU"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_CONJ"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_RCP"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_SIGMOID"]                                            = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_TANH"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_EXP"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_LOG"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_ABS"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_NEG"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_SIN"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_COS"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_TAN"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_SINH"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_COSH"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_ASIN"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_ACOS"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_ATAN"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_ASINH"]                                              = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_ACOSH"]                                              = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_ATANH"]                                              = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_CEIL"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_FLOOR"]                                              = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_MISH"]                                               = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_SWISH"]                                              = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_SOFT_PLUS"]                                          = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_SOFT_SIGN"]                                          = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_ADD"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_MUL"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_MAX"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_MIN"]                                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OP_UNKNOWN"]                                            = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["cutensorStatus_t"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_SUCCESS"]                                        = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_NOT_INITIALIZED"]                                = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_ALLOC_FAILED"]                                   = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_INVALID_VALUE"]                                  = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_ARCH_MISMATCH"]                                  = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_MAPPING_ERROR"]                                  = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_EXECUTION_FAILED"]                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_INTERNAL_ERROR"]                                 = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_NOT_SUPPORTED"]                                  = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_LICENSE_ERROR"]                                  = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_CUBLAS_ERROR"]                                   = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_CUDA_ERROR"]                                     = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_INSUFFICIENT_WORKSPACE"]                         = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_INSUFFICIENT_DRIVER"]                            = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_STATUS_IO_ERROR"]                                       = {CUTENSOR_1200, CUDA_0,        CUDA_0        };
+  m["cutensorAlgo_t"]                                                 = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_ALGO_DEFAULT_PATIENT"]                                  = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_ALGO_GETT"]                                             = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_ALGO_TGETT"]                                            = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_ALGO_TTGT"]                                             = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_ALGO_DEFAULT"]                                          = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["cutensorWorksizePreference_t"]                                   = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_WORKSPACE_MIN"]                                         = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_WORKSPACE_DEFAULT"]                                     = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_WORKSPACE_RECOMMENDED"]                                 = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_WORKSPACE_MAX"]                                         = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["cutensorOperationDescriptorAttribute_t"]                         = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OPERATION_DESCRIPTOR_TAG"]                              = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE"]                      = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OPERATION_DESCRIPTOR_FLOPS"]                            = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES"]                      = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT"]                     = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT"]                    = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE"]                    = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorPlanPreferenceAttribute_t"]                              = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE"]                         = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_PLAN_PREFERENCE_CACHE_MODE"]                            = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT"]                     = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_PLAN_PREFERENCE_ALGO"]                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK"]                           = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_PLAN_PREFERENCE_JIT"]                                   = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorAutotuneMode_t"]                                         = {CUTENSOR_1200, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_AUTOTUNE_MODE_NONE"]                                    = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_AUTOTUNE_MODE_INCREMENTAL"]                             = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_AUTOTUNE_NONE"]                                         = {CUTENSOR_1200, CUDA_0,        CUTENSOR_2000 };
+  m["CUTENSOR_AUTOTUNE_INCREMENTAL"]                                  = {CUTENSOR_1200, CUDA_0,        CUTENSOR_2000 };
+  m["cutensorJitMode_t"]                                              = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_JIT_MODE_NONE"]                                         = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_JIT_MODE_DEFAULT"]                                      = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorCacheMode_t"]                                            = {CUTENSOR_1200, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_CACHE_MODE_NONE"]                                       = {CUTENSOR_1200, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_CACHE_MODE_PEDANTIC"]                                   = {CUTENSOR_1200, CUDA_0,        CUDA_0        };
+  m["cutensorPlanAttribute_t"]                                        = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_PLAN_REQUIRED_WORKSPACE"]                               = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorHandle_t"]                                               = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["cutensorHandle"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorTensorDescriptor_t"]                                     = {CUTENSOR_1010, CUDA_0,        CUDA_0        };
+  m["cutensorTensorDescriptor"]                                       = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorContractionPlan_t"]                                      = {CUTENSOR_1010, CUDA_0,        CUTENSOR_2000 };
+  m["cutensorPlan_t"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorPlan"]                                                   = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorLoggerCallback_t"]                                       = {CUTENSOR_1320, CUDA_0,        CUDA_0        };
+  m["cutensorMgHostDevice_t"]                                         = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_MG_DEVICE_HOST"]                                        = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_MG_DEVICE_HOST_PINNED"]                                 = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgHandle_s"]                                             = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgHandle_t"]                                             = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgTensorDescriptor_s"]                                   = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgTensorDescriptor_t"]                                   = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgCopyDescriptor_s"]                                     = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgCopyDescriptor_t"]                                     = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgCopyPlan_s"]                                           = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgCopyPlan_t"]                                           = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgContractionDescriptor_s"]                              = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgContractionDescriptor_t"]                              = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgContractionFind_s"]                                    = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgContractionFind_t"]                                    = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgContractionPlan_s"]                                    = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgContractionPlan_t"]                                    = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgAlgo_t"]                                               = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["CUTENSORMG_ALGO_DEFAULT"]                                        = {CUTENSOR_1400, CUDA_0,        CUDA_0        };
+  m["cutensorMgContractionFindAttribute_t"]                           = {CUTENSOR_1500, CUDA_0,        CUDA_0        };
+  m["CUTENSORMG_CONTRACTION_FIND_ATTRIBUTE_MAX"]                      = {CUTENSOR_1500, CUDA_0,        CUDA_0        };
+  m["cutensorPlanPreference"]                                         = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorPlanPreference_t"]                                       = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorOperationDescriptor_t"]                                  = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorOperationDescriptor"]                                    = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorComputeDescriptor_t"]                                    = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["cutensorComputeDescriptor"]                                      = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_16F"]                                      = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_16BF"]                                     = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_TF32"]                                     = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_3XTF32"]                                   = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_32F"]                                      = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_64F"]                                      = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_9X16BF"]                                   = {CUTENSOR_2300, CUDA_0,        CUDA_0        };
+  m["cutensorBlockSparseTensorDescriptor_t"]                          = {CUTENSOR_2300, CUDA_0,        CUDA_0        };
+  m["cutensorBlockSparseTensorDescriptor"]                            = {CUTENSOR_2300, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_8XINT8"]                                   = {CUTENSOR_2400, CUDA_0,        CUDA_0        };
+  return m;
+}();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_TYPE_NAME_VER_MAP {
-  {"hiptensorComputeDescriptor_t",                     {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_COMPUTE_DESC_16F",                       {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_COMPUTE_DESC_16BF",                      {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_COMPUTE_DESC_32F",                       {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_COMPUTE_DESC_64F",                       {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_COMPUTE_DESC_8I",                        {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_COMPUTE_DESC_8U",                        {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_COMPUTE_DESC_32I",                       {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_COMPUTE_DESC_32U",                       {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorOperator_t",                              {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_IDENTITY",                            {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_SQRT",                                {HIP_6020,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_ADD",                                 {HIP_6030,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_MUL",                                 {HIP_6030,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_MAX",                                 {HIP_6030,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_MIN",                                 {HIP_6030,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_UNKNOWN",                             {HIP_5070,      HIP_0,         HIP_0         }},
-  {"hiptensorStatus_t",                                {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_SUCCESS",                         {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_NOT_INITIALIZED",                 {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_ALLOC_FAILED",                    {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_INVALID_VALUE",                   {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_ARCH_MISMATCH",                   {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_EXECUTION_FAILED",                {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_INTERNAL_ERROR",                  {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_NOT_SUPPORTED",                   {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_INSUFFICIENT_WORKSPACE",          {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_INSUFFICIENT_DRIVER",             {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_STATUS_IO_ERROR",                        {HIP_5070,      HIP_0,         HIP_0         }},
-  {"hiptensorAlgo_t",                                  {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_ALGO_DEFAULT",                           {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_ALGO_DEFAULT_PATIENT",                   {HIP_5070,      HIP_0,         HIP_0         }},
-  {"hiptensorWorksizePreference_t",                    {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_WORKSPACE_MIN",                          {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_WORKSPACE_RECOMMENDED",                  {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_WORKSPACE_MAX",                          {HIP_5070,      HIP_0,         HIP_0         }},
-  {"hiptensorHandle_t",                                {HIP_5070,      HIP_0,         HIP_0         }},
-  {"hiptensorTensorDescriptor_t",                      {HIP_5070,      HIP_0,         HIP_0         }},
-  {"hiptensorContractionPlan_t",                       {HIP_5070,      HIP_0,         HIP_0         }},
-  {"hiptensorLoggerCallback_t",                        {HIP_5070,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_RELU",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_CONJ",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_RCP",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_SIGMOID",                             {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_TANH",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_EXP",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_LOG",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_ABS",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_NEG",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_SIN",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_COS",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_TAN",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_SINH",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_COSH",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_ASIN",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_ACOS",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_ATAN",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_ASINH",                               {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_ACOSH",                               {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_ATANH",                               {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_CEIL",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OP_FLOOR",                               {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_WORKSPACE_DEFAULT",                      {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorDataType_t",                              {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_16F",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_16F",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_16BF",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_16BF",                                 {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_32F",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_32F",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_64F",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_64F",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_4I",                                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_4I",                                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_4U",                                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_4U",                                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_8I",                                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_8I",                                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_8U",                                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_8U",                                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_16I",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_16I",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_16U",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_16U",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_32I",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_32I",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_32U",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_32U",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_64I",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_64I",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_R_64U",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_C_64U",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorOperationDescriptorAttribute_t",          {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OPERATION_DESCRIPTOR_TAG",               {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE",       {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OPERATION_DESCRIPTOR_FLOPS",             {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES",       {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT",      {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT",     {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE",     {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorPlanPreferenceAttribute_t",               {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE",          {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_PLAN_PREFERENCE_CACHE_MODE",             {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT",      {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_PLAN_PREFERENCE_ALGO",                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_PLAN_PREFERENCE_KERNEL_RANK",            {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_PLAN_PREFERENCE_JIT",                    {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorPlanAttribute_t",                         {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_PLAN_REQUIRED_WORKSPACE",                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorAutotuneMode_t",                          {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_AUTOTUNE_MODE_NONE",                     {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL",              {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorCacheMode_t",                             {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_CACHE_MODE_NONE",                        {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_CACHE_MODE_PEDANTIC",                    {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorJitMode_t",                               {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_JIT_MODE_NONE",                          {HIP_7000,      HIP_0,         HIP_0         }},
-  {"HIPTENSOR_JIT_MODE_DEFAULT",                       {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorPlan_t",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorPlan",                                    {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorPlanPreference_t",                        {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorPlanPreference",                          {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorHandle",                                  {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorOperationDescriptor_t",                   {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorOperationDescriptor",                     {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorTensorDescriptor",                        {HIP_7000,      HIP_0,         HIP_0         }},
-};
+const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_TYPE_NAME_VER_MAP = [] {
+  std::map<llvm::StringRef, hipAPIversions> m;
+  m["hiptensorComputeDescriptor_t"]                                   = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_COMPUTE_DESC_16F"]                                     = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_COMPUTE_DESC_16BF"]                                    = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_COMPUTE_DESC_32F"]                                     = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_COMPUTE_DESC_64F"]                                     = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_COMPUTE_DESC_8I"]                                      = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_COMPUTE_DESC_8U"]                                      = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_COMPUTE_DESC_32I"]                                     = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_COMPUTE_DESC_32U"]                                     = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorOperator_t"]                                            = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_IDENTITY"]                                          = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_SQRT"]                                              = {HIP_6020,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_ADD"]                                               = {HIP_6030,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_MUL"]                                               = {HIP_6030,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_MAX"]                                               = {HIP_6030,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_MIN"]                                               = {HIP_6030,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_UNKNOWN"]                                           = {HIP_5070,      HIP_0,         HIP_0         };
+  m["hiptensorStatus_t"]                                              = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_SUCCESS"]                                       = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_NOT_INITIALIZED"]                               = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_ALLOC_FAILED"]                                  = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_INVALID_VALUE"]                                 = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_ARCH_MISMATCH"]                                 = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_EXECUTION_FAILED"]                              = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_INTERNAL_ERROR"]                                = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_NOT_SUPPORTED"]                                 = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_INSUFFICIENT_WORKSPACE"]                        = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_INSUFFICIENT_DRIVER"]                           = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_STATUS_IO_ERROR"]                                      = {HIP_5070,      HIP_0,         HIP_0         };
+  m["hiptensorAlgo_t"]                                                = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_ALGO_DEFAULT"]                                         = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_ALGO_DEFAULT_PATIENT"]                                 = {HIP_5070,      HIP_0,         HIP_0         };
+  m["hiptensorWorksizePreference_t"]                                  = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_WORKSPACE_MIN"]                                        = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_WORKSPACE_RECOMMENDED"]                                = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_WORKSPACE_MAX"]                                        = {HIP_5070,      HIP_0,         HIP_0         };
+  m["hiptensorHandle_t"]                                              = {HIP_5070,      HIP_0,         HIP_0         };
+  m["hiptensorTensorDescriptor_t"]                                    = {HIP_5070,      HIP_0,         HIP_0         };
+  m["hiptensorContractionPlan_t"]                                     = {HIP_5070,      HIP_0,         HIP_0         };
+  m["hiptensorLoggerCallback_t"]                                      = {HIP_5070,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_RELU"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_CONJ"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_RCP"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_SIGMOID"]                                           = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_TANH"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_EXP"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_LOG"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_ABS"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_NEG"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_SIN"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_COS"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_TAN"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_SINH"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_COSH"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_ASIN"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_ACOS"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_ATAN"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_ASINH"]                                             = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_ACOSH"]                                             = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_ATANH"]                                             = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_CEIL"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OP_FLOOR"]                                             = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_WORKSPACE_DEFAULT"]                                    = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorDataType_t"]                                            = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_16F"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_16F"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_16BF"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_16BF"]                                               = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_32F"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_32F"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_64F"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_64F"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_4I"]                                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_4I"]                                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_4U"]                                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_4U"]                                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_8I"]                                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_8I"]                                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_8U"]                                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_8U"]                                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_16I"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_16I"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_16U"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_16U"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_32I"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_32I"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_32U"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_32U"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_64I"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_64I"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_R_64U"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_C_64U"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorOperationDescriptorAttribute_t"]                        = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OPERATION_DESCRIPTOR_TAG"]                             = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OPERATION_DESCRIPTOR_SCALAR_TYPE"]                     = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OPERATION_DESCRIPTOR_FLOPS"]                           = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OPERATION_DESCRIPTOR_MOVED_BYTES"]                     = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT"]                    = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT"]                   = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE"]                   = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorPlanPreferenceAttribute_t"]                             = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE"]                        = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_PLAN_PREFERENCE_CACHE_MODE"]                           = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_PLAN_PREFERENCE_INCREMENTAL_COUNT"]                    = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_PLAN_PREFERENCE_ALGO"]                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_PLAN_PREFERENCE_KERNEL_RANK"]                          = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_PLAN_PREFERENCE_JIT"]                                  = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorPlanAttribute_t"]                                       = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_PLAN_REQUIRED_WORKSPACE"]                              = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorAutotuneMode_t"]                                        = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_AUTOTUNE_MODE_NONE"]                                   = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_AUTOTUNE_MODE_INCREMENTAL"]                            = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorCacheMode_t"]                                           = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_CACHE_MODE_NONE"]                                      = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_CACHE_MODE_PEDANTIC"]                                  = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorJitMode_t"]                                             = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_JIT_MODE_NONE"]                                        = {HIP_7000,      HIP_0,         HIP_0         };
+  m["HIPTENSOR_JIT_MODE_DEFAULT"]                                     = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorPlan_t"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorPlan"]                                                  = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorPlanPreference_t"]                                      = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorPlanPreference"]                                        = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorHandle"]                                                = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorOperationDescriptor_t"]                                 = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorOperationDescriptor"]                                   = {HIP_7000,      HIP_0,         HIP_0         };
+  m["hiptensorTensorDescriptor"]                                      = {HIP_7000,      HIP_0,         HIP_0         };
+  return m;
+}();
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_TYPE_CHANGED_VER_MAP {
-  {"cutensorAutotuneMode_t",                           {CUTENSOR_2000}},
-};
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_TYPE_CHANGED_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+  m["cutensorAutotuneMode_t"]                                         = {CUTENSOR_2000};
+  return m;
+}();
