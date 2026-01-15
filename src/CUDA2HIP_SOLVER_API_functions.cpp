@@ -23,1537 +23,1552 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP {
-  {"cusolverDnCreate",                                   {"hipsolverDnCreate",                                     "rocblas_create_handle",                                          CONV_LIB_FUNC, API_SOLVER, 2}},
-  {"cusolverDnDestroy",                                  {"hipsolverDnDestroy",                                    "rocblas_destroy_handle",                                         CONV_LIB_FUNC, API_SOLVER, 2}},
+const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP = [] {
+  std::map<llvm::StringRef, hipCounter> m;
+
+  m["cusolverDnCreate"]                                               = {"hipsolverDnCreate",                                     "rocblas_create_handle",                                          CONV_LIB_FUNC, API_SOLVER, 2};
+  m["cusolverDnDestroy"]                                              = {"hipsolverDnDestroy",                                    "rocblas_destroy_handle",                                         CONV_LIB_FUNC, API_SOLVER, 2};
   // NOTE: cusolverDn(S|D|C|Z)getrf -> rocsolver_(s|d|c|z)getrf + harness of other API calls
-  {"cusolverDnSgetrf",                                   {"hipsolverDnSgetrf",                                     "rocsolver_sgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgetrf",                                   {"hipsolverDnDgetrf",                                     "rocsolver_dgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgetrf",                                   {"hipsolverDnCgetrf",                                     "rocsolver_cgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgetrf",                                   {"hipsolverDnZgetrf",                                     "rocsolver_zgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgetrf"]                                               = {"hipsolverDnSgetrf",                                     "rocsolver_sgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgetrf"]                                               = {"hipsolverDnDgetrf",                                     "rocsolver_dgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgetrf"]                                               = {"hipsolverDnCgetrf",                                     "rocsolver_cgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgetrf"]                                               = {"hipsolverDnZgetrf",                                     "rocsolver_zgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: cusolverDn(S|D|C|Z)getrf_bufferSize -> rocsolver_(s|d|c|z)getrf + harness of other API calls
-  {"cusolverDnSgetrf_bufferSize",                        {"hipsolverDnSgetrf_bufferSize",                          "rocsolver_sgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgetrf_bufferSize",                        {"hipsolverDnDgetrf_bufferSize",                          "rocsolver_dgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgetrf_bufferSize",                        {"hipsolverDnCgetrf_bufferSize",                          "rocsolver_cgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgetrf_bufferSize",                        {"hipsolverDnZgetrf_bufferSize",                          "rocsolver_zgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgetrf_bufferSize"]                                    = {"hipsolverDnSgetrf_bufferSize",                          "rocsolver_sgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgetrf_bufferSize"]                                    = {"hipsolverDnDgetrf_bufferSize",                          "rocsolver_dgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgetrf_bufferSize"]                                    = {"hipsolverDnCgetrf_bufferSize",                          "rocsolver_cgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgetrf_bufferSize"]                                    = {"hipsolverDnZgetrf_bufferSize",                          "rocsolver_zgetrf",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: cusolverDn(S|D|C|Z)getrs -> rocsolver_(s|d|c|z)getrs + harness of other API calls
-  {"cusolverDnSgetrs",                                   {"hipsolverDnSgetrs",                                     "rocsolver_sgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgetrs",                                   {"hipsolverDnDgetrs",                                     "rocsolver_dgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgetrs",                                   {"hipsolverDnCgetrs",                                     "rocsolver_cgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgetrs",                                   {"hipsolverDnZgetrs",                                     "rocsolver_zgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgetrf",                                   {"hipsolverDnXgetrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgetrf_bufferSize",                        {"hipsolverDnXgetrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgetrs",                                   {"hipsolverDnXgetrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCreateParams",                             {"hipsolverDnCreateParams",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDestroyParams",                            {"hipsolverDnDestroyParams",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnSetAdvOptions",                            {"hipsolverDnSetAdvOptions",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnSetStream",                                {"hipsolverSetStream",                                    "rocblas_set_stream",                                             CONV_LIB_FUNC, API_SOLVER, 2}},
-  {"cusolverDnGetStream",                                {"hipsolverGetStream",                                    "rocblas_get_stream",                                             CONV_LIB_FUNC, API_SOLVER, 2}},
-  {"cusolverDnSetDeterministicMode",                     {"hipsolverDnSetDeterministicMode",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnGetDeterministicMode",                     {"hipsolverDnGetDeterministicMode",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnIRSParamsCreate",                          {"hipsolverDnIRSParamsCreate",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsDestroy",                         {"hipsolverDnIRSParamsDestroy",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsSetRefinementSolver",             {"hipsolverDnIRSParamsSetRefinementSolver",               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsSetSolverMainPrecision",          {"hipsolverDnIRSParamsSetSolverMainPrecision",            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsSetSolverLowestPrecision",        {"hipsolverDnIRSParamsSetSolverLowestPrecision",          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsSetSolverPrecisions",             {"hipsolverDnIRSParamsSetSolverPrecisions",               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsSetTol",                          {"hipsolverDnIRSParamsSetTol",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsSetTolInner",                     {"hipsolverDnIRSParamsSetTolInner",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsSetMaxIters",                     {"hipsolverDnIRSParamsSetMaxIters",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsSetMaxItersInner",                {"hipsolverDnIRSParamsSetMaxItersInner",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsGetMaxIters",                     {"hipsolverDnIRSParamsGetMaxIters",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsEnableFallback",                  {"hipsolverDnIRSParamsEnableFallback",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSParamsDisableFallback",                 {"hipsolverDnIRSParamsDisableFallback",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSInfosCreate",                           {"hipsolverDnIRSInfosCreate",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSInfosDestroy",                          {"hipsolverDnIRSInfosDestroy",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSInfosGetNiters",                        {"hipsolverDnIRSInfosGetNiters",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSInfosGetOuterNiters",                   {"hipsolverDnIRSInfosGetOuterNiters",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSInfosRequestResidual",                  {"hipsolverDnIRSInfosRequestResidual",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSInfosGetResidualHistory",               {"hipsolverDnIRSInfosGetResidualHistory",                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSInfosGetMaxIters",                      {"hipsolverDnIRSInfosGetMaxIters",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnSgetrs"]                                               = {"hipsolverDnSgetrs",                                     "rocsolver_sgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgetrs"]                                               = {"hipsolverDnDgetrs",                                     "rocsolver_dgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgetrs"]                                               = {"hipsolverDnCgetrs",                                     "rocsolver_cgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgetrs"]                                               = {"hipsolverDnZgetrs",                                     "rocsolver_zgetrs",                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgetrf"]                                               = {"hipsolverDnXgetrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgetrf_bufferSize"]                                    = {"hipsolverDnXgetrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgetrs"]                                               = {"hipsolverDnXgetrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCreateParams"]                                         = {"hipsolverDnCreateParams",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDestroyParams"]                                        = {"hipsolverDnDestroyParams",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnSetAdvOptions"]                                        = {"hipsolverDnSetAdvOptions",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnSetStream"]                                            = {"hipsolverSetStream",                                    "rocblas_set_stream",                                             CONV_LIB_FUNC, API_SOLVER, 2};
+  m["cusolverDnGetStream"]                                            = {"hipsolverGetStream",                                    "rocblas_get_stream",                                             CONV_LIB_FUNC, API_SOLVER, 2};
+  m["cusolverDnSetDeterministicMode"]                                 = {"hipsolverDnSetDeterministicMode",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnGetDeterministicMode"]                                 = {"hipsolverDnGetDeterministicMode",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnIRSParamsCreate"]                                      = {"hipsolverDnIRSParamsCreate",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsDestroy"]                                     = {"hipsolverDnIRSParamsDestroy",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsSetRefinementSolver"]                         = {"hipsolverDnIRSParamsSetRefinementSolver",               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsSetSolverMainPrecision"]                      = {"hipsolverDnIRSParamsSetSolverMainPrecision",            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsSetSolverLowestPrecision"]                    = {"hipsolverDnIRSParamsSetSolverLowestPrecision",          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsSetSolverPrecisions"]                         = {"hipsolverDnIRSParamsSetSolverPrecisions",               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsSetTol"]                                      = {"hipsolverDnIRSParamsSetTol",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsSetTolInner"]                                 = {"hipsolverDnIRSParamsSetTolInner",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsSetMaxIters"]                                 = {"hipsolverDnIRSParamsSetMaxIters",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsSetMaxItersInner"]                            = {"hipsolverDnIRSParamsSetMaxItersInner",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsGetMaxIters"]                                 = {"hipsolverDnIRSParamsGetMaxIters",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsEnableFallback"]                              = {"hipsolverDnIRSParamsEnableFallback",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSParamsDisableFallback"]                             = {"hipsolverDnIRSParamsDisableFallback",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSInfosCreate"]                                       = {"hipsolverDnIRSInfosCreate",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSInfosDestroy"]                                      = {"hipsolverDnIRSInfosDestroy",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSInfosGetNiters"]                                    = {"hipsolverDnIRSInfosGetNiters",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSInfosGetOuterNiters"]                               = {"hipsolverDnIRSInfosGetOuterNiters",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSInfosRequestResidual"]                              = {"hipsolverDnIRSInfosRequestResidual",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSInfosGetResidualHistory"]                           = {"hipsolverDnIRSInfosGetResidualHistory",                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSInfosGetMaxIters"]                                  = {"hipsolverDnIRSInfosGetMaxIters",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_zgesv has a harness of rocblas_set_workspace, hipsolverZZgesv_bufferSize, and rocsolver_zgesv_outofplace
-  {"cusolverDnZZgesv",                                   {"hipsolverDnZZgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZCgesv",                                   {"hipsolverDnZCgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZKgesv",                                   {"hipsolverDnZKgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZEgesv",                                   {"hipsolverDnZEgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZYgesv",                                   {"hipsolverDnZYgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnZZgesv"]                                               = {"hipsolverDnZZgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZCgesv"]                                               = {"hipsolverDnZCgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZKgesv"]                                               = {"hipsolverDnZKgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZEgesv"]                                               = {"hipsolverDnZEgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZYgesv"]                                               = {"hipsolverDnZYgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_cgesv has a harness of rocblas_set_workspace, hipsolverCCgesv_bufferSize, and rocsolver_cgesv_outofplace
-  {"cusolverDnCCgesv",                                   {"hipsolverDnCCgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCEgesv",                                   {"hipsolverDnCEgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCKgesv",                                   {"hipsolverDnCKgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCYgesv",                                   {"hipsolverDnCYgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnCCgesv"]                                               = {"hipsolverDnCCgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCEgesv"]                                               = {"hipsolverDnCEgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCKgesv"]                                               = {"hipsolverDnCKgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCYgesv"]                                               = {"hipsolverDnCYgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_dgesv has a harness of rocblas_set_workspace, hipsolverDDgesv_bufferSize, and rocsolver_dgesv_outofplace
-  {"cusolverDnDDgesv",                                   {"hipsolverDnDDgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDSgesv",                                   {"hipsolverDnDSgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDHgesv",                                   {"hipsolverDnDHgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDBgesv",                                   {"hipsolverDnDBgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDXgesv",                                   {"hipsolverDnDXgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnDDgesv"]                                               = {"hipsolverDnDDgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDSgesv"]                                               = {"hipsolverDnDSgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDHgesv"]                                               = {"hipsolverDnDHgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDBgesv"]                                               = {"hipsolverDnDBgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDXgesv"]                                               = {"hipsolverDnDXgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_sgesv has a harness of rocblas_set_workspace, hipsolverSSgesv_bufferSize, and rocsolver_sgesv_outofplace
-  {"cusolverDnSSgesv",                                   {"hipsolverDnSSgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnSHgesv",                                   {"hipsolverDnSHgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSBgesv",                                   {"hipsolverDnSBgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSXgesv",                                   {"hipsolverDnSXgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnSSgesv"]                                               = {"hipsolverDnSSgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnSHgesv"]                                               = {"hipsolverDnSHgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSBgesv"]                                               = {"hipsolverDnSBgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSXgesv"]                                               = {"hipsolverDnSXgesv",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_zgesv has a harness of rocblas_start_device_memory_size_query, rocsolver_zgesv_outofplace, and rocblas_stop_device_memory_size_query
-  {"cusolverDnZZgesv_bufferSize",                        {"hipsolverDnZZgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZCgesv_bufferSize",                        {"hipsolverDnZCgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZKgesv_bufferSize",                        {"hipsolverDnZKgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZEgesv_bufferSize",                        {"hipsolverDnZEgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZYgesv_bufferSize",                        {"hipsolverDnZYgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnZZgesv_bufferSize"]                                    = {"hipsolverDnZZgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZCgesv_bufferSize"]                                    = {"hipsolverDnZCgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZKgesv_bufferSize"]                                    = {"hipsolverDnZKgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZEgesv_bufferSize"]                                    = {"hipsolverDnZEgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZYgesv_bufferSize"]                                    = {"hipsolverDnZYgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_cgesv has a harness of rocblas_start_device_memory_size_query, rocsolver_cgesv_outofplace, and rocblas_stop_device_memory_size_query
-  {"cusolverDnCCgesv_bufferSize",                        {"hipsolverDnCCgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCKgesv_bufferSize",                        {"hipsolverDnCKgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCEgesv_bufferSize",                        {"hipsolverDnCEgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCYgesv_bufferSize",                        {"hipsolverDnCYgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnCCgesv_bufferSize"]                                    = {"hipsolverDnCCgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCKgesv_bufferSize"]                                    = {"hipsolverDnCKgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCEgesv_bufferSize"]                                    = {"hipsolverDnCEgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCYgesv_bufferSize"]                                    = {"hipsolverDnCYgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_dgesv has a harness of rocblas_start_device_memory_size_query, rocsolver_dgesv_outofplace, and rocblas_stop_device_memory_size_query
-  {"cusolverDnDDgesv_bufferSize",                        {"hipsolverDnDDgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDSgesv_bufferSize",                        {"hipsolverDnDSgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDHgesv_bufferSize",                        {"hipsolverDnDHgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDBgesv_bufferSize",                        {"hipsolverDnDBgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDXgesv_bufferSize",                        {"hipsolverDnDXgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnDDgesv_bufferSize"]                                    = {"hipsolverDnDDgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDSgesv_bufferSize"]                                    = {"hipsolverDnDSgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDHgesv_bufferSize"]                                    = {"hipsolverDnDHgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDBgesv_bufferSize"]                                    = {"hipsolverDnDBgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDXgesv_bufferSize"]                                    = {"hipsolverDnDXgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_sgesv has a harness of rocblas_start_device_memory_size_query, rocsolver_sgesv_outofplace, and rocblas_stop_device_memory_size_query
-  {"cusolverDnSSgesv_bufferSize",                        {"hipsolverDnSSgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnSHgesv_bufferSize",                        {"hipsolverDnSHgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSBgesv_bufferSize",                        {"hipsolverDnSBgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSXgesv_bufferSize",                        {"hipsolverDnSXgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnSSgesv_bufferSize"]                                    = {"hipsolverDnSSgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnSHgesv_bufferSize"]                                    = {"hipsolverDnSHgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSBgesv_bufferSize"]                                    = {"hipsolverDnSBgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSXgesv_bufferSize"]                                    = {"hipsolverDnSXgesv_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_zgels has a harness of rocblas_set_workspace, hipsolverZZgels_bufferSize, hipsolverManageWorkspace, and rocsolver_zgels_outofplace
-  {"cusolverDnZZgels",                                   {"hipsolverDnZZgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZCgels",                                   {"hipsolverDnZCgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZKgels",                                   {"hipsolverDnZKgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZEgels",                                   {"hipsolverDnZEgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZYgels",                                   {"hipsolverDnZYgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnZZgels"]                                               = {"hipsolverDnZZgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZCgels"]                                               = {"hipsolverDnZCgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZKgels"]                                               = {"hipsolverDnZKgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZEgels"]                                               = {"hipsolverDnZEgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZYgels"]                                               = {"hipsolverDnZYgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_cgels has a harness of rocblas_set_workspace, hipsolverCCgels_bufferSize, hipsolverManageWorkspace, and rocsolver_cgels_outofplace
-  {"cusolverDnCCgels",                                   {"hipsolverDnCCgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCKgels",                                   {"hipsolverDnCKgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCEgels",                                   {"hipsolverDnCEgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCYgels",                                   {"hipsolverDnCYgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnCCgels"]                                               = {"hipsolverDnCCgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCKgels"]                                               = {"hipsolverDnCKgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCEgels"]                                               = {"hipsolverDnCEgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCYgels"]                                               = {"hipsolverDnCYgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_dgels has a harness of rocblas_set_workspace, hipsolverDDgels_bufferSize, hipsolverManageWorkspace, and rocsolver_dgels_outofplace
-  {"cusolverDnDDgels",                                   {"hipsolverDnDDgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDSgels",                                   {"hipsolverDnDSgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDHgels",                                   {"hipsolverDnDHgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDBgels",                                   {"hipsolverDnDBgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDXgels",                                   {"hipsolverDnDXgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnDDgels"]                                               = {"hipsolverDnDDgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDSgels"]                                               = {"hipsolverDnDSgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDHgels"]                                               = {"hipsolverDnDHgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDBgels"]                                               = {"hipsolverDnDBgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDXgels"]                                               = {"hipsolverDnDXgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_sgels has a harness of rocblas_set_workspace, hipsolverSSgels_bufferSize, hipsolverManageWorkspace, and rocsolver_sgels_outofplace
-  {"cusolverDnSSgels",                                   {"hipsolverDnSSgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnSHgels",                                   {"hipsolverDnSHgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSBgels",                                   {"hipsolverDnSBgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSXgels",                                   {"hipsolverDnSXgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnSSgels"]                                               = {"hipsolverDnSSgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnSHgels"]                                               = {"hipsolverDnSHgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSBgels"]                                               = {"hipsolverDnSBgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSXgels"]                                               = {"hipsolverDnSXgels",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_zgels has a harness of rocblas_start_device_memory_size_query, rocsolver_zgels_outofplace, and rocblas_stop_device_memory_size_query
-  {"cusolverDnZZgels_bufferSize",                        {"hipsolverDnZZgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZCgels_bufferSize",                        {"hipsolverDnZCgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZKgels_bufferSize",                        {"hipsolverDnZKgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZEgels_bufferSize",                        {"hipsolverDnZEgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZYgels_bufferSize",                        {"hipsolverDnZYgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnZZgels_bufferSize"]                                    = {"hipsolverDnZZgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZCgels_bufferSize"]                                    = {"hipsolverDnZCgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZKgels_bufferSize"]                                    = {"hipsolverDnZKgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZEgels_bufferSize"]                                    = {"hipsolverDnZEgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZYgels_bufferSize"]                                    = {"hipsolverDnZYgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_cgels has a harness of rocblas_start_device_memory_size_query, rocsolver_cgels_outofplace, and rocblas_stop_device_memory_size_query
-  {"cusolverDnCCgels_bufferSize",                        {"hipsolverDnCCgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCKgels_bufferSize",                        {"hipsolverDnCKgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCEgels_bufferSize",                        {"hipsolverDnCEgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCYgels_bufferSize",                        {"hipsolverDnCYgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnCCgels_bufferSize"]                                    = {"hipsolverDnCCgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCKgels_bufferSize"]                                    = {"hipsolverDnCKgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCEgels_bufferSize"]                                    = {"hipsolverDnCEgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCYgels_bufferSize"]                                    = {"hipsolverDnCYgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_dgels has a harness of rocblas_start_device_memory_size_query, rocsolver_dgels_outofplace, and rocblas_stop_device_memory_size_query
-  {"cusolverDnDDgels_bufferSize",                        {"hipsolverDnDDgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDSgels_bufferSize",                        {"hipsolverDnDSgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDHgels_bufferSize",                        {"hipsolverDnDHgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDBgels_bufferSize",                        {"hipsolverDnDBgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDXgels_bufferSize",                        {"hipsolverDnDXgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnDDgels_bufferSize"]                                    = {"hipsolverDnDDgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDSgels_bufferSize"]                                    = {"hipsolverDnDSgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDHgels_bufferSize"]                                    = {"hipsolverDnDHgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDBgels_bufferSize"]                                    = {"hipsolverDnDBgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDXgels_bufferSize"]                                    = {"hipsolverDnDXgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_sgels has a harness of rocblas_start_device_memory_size_query, rocsolver_sgels_outofplace, and rocblas_stop_device_memory_size_query
-  {"cusolverDnSSgels_bufferSize",                        {"hipsolverDnSSgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnSHgels_bufferSize",                        {"hipsolverDnSHgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSBgels_bufferSize",                        {"hipsolverDnSBgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSXgels_bufferSize",                        {"hipsolverDnSXgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSXgesv",                                 {"hipsolverDnIRSXgesv",                                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSXgesv_bufferSize",                      {"hipsolverDnIRSXgesv_bufferSize",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSXgels",                                 {"hipsolverDnIRSXgels",                                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnIRSXgels_bufferSize",                      {"hipsolverDnIRSXgels_bufferSize",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnSSgels_bufferSize"]                                    = {"hipsolverDnSSgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnSHgels_bufferSize"]                                    = {"hipsolverDnSHgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSBgels_bufferSize"]                                    = {"hipsolverDnSBgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSXgels_bufferSize"]                                    = {"hipsolverDnSXgels_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSXgesv"]                                             = {"hipsolverDnIRSXgesv",                                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSXgesv_bufferSize"]                                  = {"hipsolverDnIRSXgesv_bufferSize",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSXgels"]                                             = {"hipsolverDnIRSXgels",                                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnIRSXgels_bufferSize"]                                  = {"hipsolverDnIRSXgels_bufferSize",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)potrf has a harness of rocblas_start_device_memory_size_query and rocblas_stop_device_memory_size_query
-  {"cusolverDnSpotrf_bufferSize",                        {"hipsolverDnSpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDpotrf_bufferSize",                        {"hipsolverDnDpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCpotrf_bufferSize",                        {"hipsolverDnCpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZpotrf_bufferSize",                        {"hipsolverDnZpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSpotrf_bufferSize"]                                    = {"hipsolverDnSpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDpotrf_bufferSize"]                                    = {"hipsolverDnDpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCpotrf_bufferSize"]                                    = {"hipsolverDnCpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZpotrf_bufferSize"]                                    = {"hipsolverDnZpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // TODO: rocsolver_(s|d|c|z)potrf needs second call to calculate workspaces
-  {"cusolverDnSpotrf",                                   {"hipsolverDnSpotrf",                                     "rocsolver_spotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2}},
-  {"cusolverDnDpotrf",                                   {"hipsolverDnDpotrf",                                     "rocsolver_dpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2}},
-  {"cusolverDnCpotrf",                                   {"hipsolverDnCpotrf",                                     "rocsolver_cpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2}},
-  {"cusolverDnZpotrf",                                   {"hipsolverDnZpotrf",                                     "rocsolver_zpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2}},
+  m["cusolverDnSpotrf"]                                               = {"hipsolverDnSpotrf",                                     "rocsolver_spotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2};
+  m["cusolverDnDpotrf"]                                               = {"hipsolverDnDpotrf",                                     "rocsolver_dpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2};
+  m["cusolverDnCpotrf"]                                               = {"hipsolverDnCpotrf",                                     "rocsolver_cpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2};
+  m["cusolverDnZpotrf"]                                               = {"hipsolverDnZpotrf",                                     "rocsolver_zpotrf",                                               CONV_LIB_FUNC, API_SOLVER, 2};
   // NOTE: rocsolver_(s|d|c|z)potrs has a harness of rocblas_set_workspace, hipsolver(S|D|C|Z)potrs_bufferSize, hipsolverManageWorkspace, and hipsolverZeroInfo
-  {"cusolverDnSpotrs",                                   {"hipsolverDnSpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDpotrs",                                   {"hipsolverDnDpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCpotrs",                                   {"hipsolverDnCpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZpotrs",                                   {"hipsolverDnZpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSpotrs"]                                               = {"hipsolverDnSpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDpotrs"]                                               = {"hipsolverDnDpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCpotrs"]                                               = {"hipsolverDnCpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZpotrs"]                                               = {"hipsolverDnZpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)potrf_batched has a harness of rocblas_set_workspace, hipsolver(S|D|C|Z)potrfBatched_bufferSize, and hipsolverManageWorkspace
-  {"cusolverDnSpotrfBatched",                            {"hipsolverDnSpotrfBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDpotrfBatched",                            {"hipsolverDnDpotrfBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCpotrfBatched",                            {"hipsolverDnCpotrfBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZpotrfBatched",                            {"hipsolverDnZpotrfBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSpotrfBatched"]                                        = {"hipsolverDnSpotrfBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDpotrfBatched"]                                        = {"hipsolverDnDpotrfBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCpotrfBatched"]                                        = {"hipsolverDnCpotrfBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZpotrfBatched"]                                        = {"hipsolverDnZpotrfBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)potrs_batched has a harness of rocblas_set_workspace, hipsolver(S|D|C|Z)potrsBatched_bufferSize, and hipsolverManageWorkspace
-  {"cusolverDnSpotrsBatched",                            {"hipsolverDnSpotrsBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDpotrsBatched",                            {"hipsolverDnDpotrsBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCpotrsBatched",                            {"hipsolverDnCpotrsBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZpotrsBatched",                            {"hipsolverDnZpotrsBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSpotrsBatched"]                                        = {"hipsolverDnSpotrsBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDpotrsBatched"]                                        = {"hipsolverDnDpotrsBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCpotrsBatched"]                                        = {"hipsolverDnCpotrsBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZpotrsBatched"]                                        = {"hipsolverDnZpotrsBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)potri has a harness of rocblas_start_device_memory_size_query and rocblas_stop_device_memory_size_query
-  {"cusolverDnSpotri_bufferSize",                        {"hipsolverDnSpotri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDpotri_bufferSize",                        {"hipsolverDnDpotri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCpotri_bufferSize",                        {"hipsolverDnCpotri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZpotri_bufferSize",                        {"hipsolverDnZpotri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSpotri_bufferSize"]                                    = {"hipsolverDnSpotri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDpotri_bufferSize"]                                    = {"hipsolverDnDpotri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCpotri_bufferSize"]                                    = {"hipsolverDnCpotri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZpotri_bufferSize"]                                    = {"hipsolverDnZpotri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)potri has a harness of rocblas_set_workspace, hipsolver(S|D|C|Z)potri_bufferSize and hipsolverManageWorkspace
-  {"cusolverDnSpotri",                                   {"hipsolverDnSpotri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDpotri",                                   {"hipsolverDnDpotri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCpotri",                                   {"hipsolverDnCpotri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZpotri",                                   {"hipsolverDnZpotri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXtrtri_bufferSize",                        {"hipsolverDnXtrtri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXtrtri",                                   {"hipsolverDnXtrtri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSlauum_bufferSize",                        {"hipsolverDnSlauum_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDlauum_bufferSize",                        {"hipsolverDnDlauum_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnClauum_bufferSize",                        {"hipsolverDnClauum_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZlauum_bufferSize",                        {"hipsolverDnZlauum_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSlauum",                                   {"hipsolverDnSlauum",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDlauum",                                   {"hipsolverDnDlauum",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnClauum",                                   {"hipsolverDnClauum",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZlauum",                                   {"hipsolverDnZlauum",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSlaswp",                                   {"hipsolverDnSlaswp",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDlaswp",                                   {"hipsolverDnDlaswp",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnClaswp",                                   {"hipsolverDnClaswp",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZlaswp",                                   {"hipsolverDnZlaswp",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnSpotri"]                                               = {"hipsolverDnSpotri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDpotri"]                                               = {"hipsolverDnDpotri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCpotri"]                                               = {"hipsolverDnCpotri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZpotri"]                                               = {"hipsolverDnZpotri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXtrtri_bufferSize"]                                    = {"hipsolverDnXtrtri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXtrtri"]                                               = {"hipsolverDnXtrtri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSlauum_bufferSize"]                                    = {"hipsolverDnSlauum_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDlauum_bufferSize"]                                    = {"hipsolverDnDlauum_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnClauum_bufferSize"]                                    = {"hipsolverDnClauum_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZlauum_bufferSize"]                                    = {"hipsolverDnZlauum_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSlauum"]                                               = {"hipsolverDnSlauum",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDlauum"]                                               = {"hipsolverDnDlauum",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnClauum"]                                               = {"hipsolverDnClauum",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZlauum"]                                               = {"hipsolverDnZlauum",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSlaswp"]                                               = {"hipsolverDnSlaswp",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDlaswp"]                                               = {"hipsolverDnDlaswp",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnClaswp"]                                               = {"hipsolverDnClaswp",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZlaswp"]                                               = {"hipsolverDnZlaswp",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)geqrf have a harness of other HIP and ROC API calls
-  {"cusolverDnSgeqrf_bufferSize",                        {"hipsolverDnSgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgeqrf_bufferSize",                        {"hipsolverDnDgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgeqrf_bufferSize",                        {"hipsolverDnCgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgeqrf_bufferSize",                        {"hipsolverDnZgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgeqrf_bufferSize"]                                    = {"hipsolverDnSgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgeqrf_bufferSize"]                                    = {"hipsolverDnDgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgeqrf_bufferSize"]                                    = {"hipsolverDnCgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgeqrf_bufferSize"]                                    = {"hipsolverDnZgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)geqrf have a harness of other HIP and ROC API calls
-  {"cusolverDnSgeqrf",                                   {"hipsolverDnSgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgeqrf",                                   {"hipsolverDnDgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgeqrf",                                   {"hipsolverDnCgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgeqrf",                                   {"hipsolverDnZgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgeqrf"]                                               = {"hipsolverDnSgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgeqrf"]                                               = {"hipsolverDnDgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgeqrf"]                                               = {"hipsolverDnCgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgeqrf"]                                               = {"hipsolverDnZgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)orgqr and rocsolver_(c|z)ungqr have a harness of other HIP and ROC API calls
-  {"cusolverDnSorgqr_bufferSize",                        {"hipsolverDnSorgqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDorgqr_bufferSize",                        {"hipsolverDnDorgqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCungqr_bufferSize",                        {"hipsolverDnCungqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZungqr_bufferSize",                        {"hipsolverDnZungqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSorgqr_bufferSize"]                                    = {"hipsolverDnSorgqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDorgqr_bufferSize"]                                    = {"hipsolverDnDorgqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCungqr_bufferSize"]                                    = {"hipsolverDnCungqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZungqr_bufferSize"]                                    = {"hipsolverDnZungqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)orgqr and rocsolver_(c|z)ungqr have a harness of other HIP and ROC API calls
-  {"cusolverDnSorgqr",                                   {"hipsolverDnSorgqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDorgqr",                                   {"hipsolverDnDorgqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCungqr",                                   {"hipsolverDnCungqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZungqr",                                   {"hipsolverDnZungqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSorgqr"]                                               = {"hipsolverDnSorgqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDorgqr"]                                               = {"hipsolverDnDorgqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCungqr"]                                               = {"hipsolverDnCungqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZungqr"]                                               = {"hipsolverDnZungqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)ormqr and rocsolver_(c|z)unmqr have a harness of other HIP and ROC API calls
-  {"cusolverDnSormqr_bufferSize",                        {"hipsolverDnSormqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDormqr_bufferSize",                        {"hipsolverDnDormqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCunmqr_bufferSize",                        {"hipsolverDnCunmqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZunmqr_bufferSize",                        {"hipsolverDnZunmqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSormqr_bufferSize"]                                    = {"hipsolverDnSormqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDormqr_bufferSize"]                                    = {"hipsolverDnDormqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCunmqr_bufferSize"]                                    = {"hipsolverDnCunmqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZunmqr_bufferSize"]                                    = {"hipsolverDnZunmqr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)ormqr and rocsolver_(c|z)unmqr have a harness of other HIP and ROC API calls
-  {"cusolverDnSormqr",                                   {"hipsolverDnSormqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDormqr",                                   {"hipsolverDnDormqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCunmqr",                                   {"hipsolverDnCunmqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZunmqr",                                   {"hipsolverDnZunmqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSormqr"]                                               = {"hipsolverDnSormqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDormqr"]                                               = {"hipsolverDnDormqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCunmqr"]                                               = {"hipsolverDnCunmqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZunmqr"]                                               = {"hipsolverDnZunmqr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)sytrf have a harness of other HIP and ROC API calls
-  {"cusolverDnSsytrf_bufferSize",                        {"hipsolverDnSsytrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsytrf_bufferSize",                        {"hipsolverDnDsytrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCsytrf_bufferSize",                        {"hipsolverDnCsytrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZsytrf_bufferSize",                        {"hipsolverDnZsytrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsytrf_bufferSize"]                                    = {"hipsolverDnSsytrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsytrf_bufferSize"]                                    = {"hipsolverDnDsytrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCsytrf_bufferSize"]                                    = {"hipsolverDnCsytrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZsytrf_bufferSize"]                                    = {"hipsolverDnZsytrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)sytrf have a harness of other HIP and ROC API calls
-  {"cusolverDnSsytrf",                                   {"hipsolverDnSsytrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsytrf",                                   {"hipsolverDnDsytrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCsytrf",                                   {"hipsolverDnCsytrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZsytrf",                                   {"hipsolverDnZsytrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXsytrs_bufferSize",                        {"hipsolverDnXsytrs_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXsytrs",                                   {"hipsolverDnXsytrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSsytri_bufferSize",                        {"hipsolverDnSsytri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDsytri_bufferSize",                        {"hipsolverDnDsytri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCsytri_bufferSize",                        {"hipsolverDnCsytri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZsytri_bufferSize",                        {"hipsolverDnZsytri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSsytri",                                   {"hipsolverDnSsytri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnDsytri",                                   {"hipsolverDnDsytri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnCsytri",                                   {"hipsolverDnCsytri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnZsytri",                                   {"hipsolverDnZsytri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
+  m["cusolverDnSsytrf"]                                               = {"hipsolverDnSsytrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsytrf"]                                               = {"hipsolverDnDsytrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCsytrf"]                                               = {"hipsolverDnCsytrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZsytrf"]                                               = {"hipsolverDnZsytrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXsytrs_bufferSize"]                                    = {"hipsolverDnXsytrs_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXsytrs"]                                               = {"hipsolverDnXsytrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSsytri_bufferSize"]                                    = {"hipsolverDnSsytri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDsytri_bufferSize"]                                    = {"hipsolverDnDsytri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCsytri_bufferSize"]                                    = {"hipsolverDnCsytri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZsytri_bufferSize"]                                    = {"hipsolverDnZsytri_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSsytri"]                                               = {"hipsolverDnSsytri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnDsytri"]                                               = {"hipsolverDnDsytri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnCsytri"]                                               = {"hipsolverDnCsytri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnZsytri"]                                               = {"hipsolverDnZsytri",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gebrd have a harness of other HIP and ROC API calls
-  {"cusolverDnSgebrd_bufferSize",                        {"hipsolverDnSgebrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgebrd_bufferSize",                        {"hipsolverDnDgebrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgebrd_bufferSize",                        {"hipsolverDnCgebrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgebrd_bufferSize",                        {"hipsolverDnZgebrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgebrd_bufferSize"]                                    = {"hipsolverDnSgebrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgebrd_bufferSize"]                                    = {"hipsolverDnDgebrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgebrd_bufferSize"]                                    = {"hipsolverDnCgebrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgebrd_bufferSize"]                                    = {"hipsolverDnZgebrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gebrd have a harness of other HIP and ROC API calls
-  {"cusolverDnSgebrd",                                   {"hipsolverDnSgebrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgebrd",                                   {"hipsolverDnDgebrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgebrd",                                   {"hipsolverDnCgebrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgebrd",                                   {"hipsolverDnZgebrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgebrd"]                                               = {"hipsolverDnSgebrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgebrd"]                                               = {"hipsolverDnDgebrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgebrd"]                                               = {"hipsolverDnCgebrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgebrd"]                                               = {"hipsolverDnZgebrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)orgbr and rocsolver_(c|z)ungbr have a harness of other HIP and ROC API calls
-  {"cusolverDnSorgbr_bufferSize",                        {"hipsolverDnSorgbr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDorgbr_bufferSize",                        {"hipsolverDnDorgbr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCungbr_bufferSize",                        {"hipsolverDnCungbr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZungbr_bufferSize",                        {"hipsolverDnZungbr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSorgbr_bufferSize"]                                    = {"hipsolverDnSorgbr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDorgbr_bufferSize"]                                    = {"hipsolverDnDorgbr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCungbr_bufferSize"]                                    = {"hipsolverDnCungbr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZungbr_bufferSize"]                                    = {"hipsolverDnZungbr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)orgbr and rocsolver_(c|z)ungbr have a harness of other HIP and ROC API calls
-  {"cusolverDnSorgbr",                                   {"hipsolverDnSorgbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDorgbr",                                   {"hipsolverDnDorgbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCungbr",                                   {"hipsolverDnCungbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZungbr",                                   {"hipsolverDnZungbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSorgbr"]                                               = {"hipsolverDnSorgbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDorgbr"]                                               = {"hipsolverDnDorgbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCungbr"]                                               = {"hipsolverDnCungbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZungbr"]                                               = {"hipsolverDnZungbr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sytrd and rocsolver_(c|z)hetrd have a harness of other HIP and ROC API calls
-  {"cusolverDnSsytrd_bufferSize",                        {"hipsolverDnSsytrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsytrd_bufferSize",                        {"hipsolverDnDsytrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnChetrd_bufferSize",                        {"hipsolverDnChetrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZhetrd_bufferSize",                        {"hipsolverDnZhetrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsytrd_bufferSize"]                                    = {"hipsolverDnSsytrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsytrd_bufferSize"]                                    = {"hipsolverDnDsytrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnChetrd_bufferSize"]                                    = {"hipsolverDnChetrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZhetrd_bufferSize"]                                    = {"hipsolverDnZhetrd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sytrd and rocsolver_(c|z)hetrd have a harness of other HIP and ROC API calls
-  {"cusolverDnSsytrd",                                   {"hipsolverDnSsytrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsytrd",                                   {"hipsolverDnDsytrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnChetrd",                                   {"hipsolverDnChetrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZhetrd",                                   {"hipsolverDnZhetrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsytrd"]                                               = {"hipsolverDnSsytrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsytrd"]                                               = {"hipsolverDnDsytrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnChetrd"]                                               = {"hipsolverDnChetrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZhetrd"]                                               = {"hipsolverDnZhetrd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)orgtr and rocsolver_(c|z)ungtr have a harness of other HIP and ROC API calls
-  {"cusolverDnSorgtr_bufferSize",                        {"hipsolverDnSorgtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDorgtr_bufferSize",                        {"hipsolverDnDorgtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCungtr_bufferSize",                        {"hipsolverDnCungtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZungtr_bufferSize",                        {"hipsolverDnZungtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSorgtr_bufferSize"]                                    = {"hipsolverDnSorgtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDorgtr_bufferSize"]                                    = {"hipsolverDnDorgtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCungtr_bufferSize"]                                    = {"hipsolverDnCungtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZungtr_bufferSize"]                                    = {"hipsolverDnZungtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)orgtr and rocsolver_(c|z)ungtr have a harness of other HIP and ROC API calls
-  {"cusolverDnSorgtr",                                   {"hipsolverDnSorgtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDorgtr",                                   {"hipsolverDnDorgtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCungtr",                                   {"hipsolverDnCungtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZungtr",                                   {"hipsolverDnZungtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSorgtr"]                                               = {"hipsolverDnSorgtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDorgtr"]                                               = {"hipsolverDnDorgtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCungtr"]                                               = {"hipsolverDnCungtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZungtr"]                                               = {"hipsolverDnZungtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)ormtr and rocsolver_(c|z)unmtr have a harness of other HIP and ROC API calls
-  {"cusolverDnSormtr_bufferSize",                        {"hipsolverDnSormtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDormtr_bufferSize",                        {"hipsolverDnDormtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCunmtr_bufferSize",                        {"hipsolverDnCunmtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZunmtr_bufferSize",                        {"hipsolverDnZunmtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSormtr_bufferSize"]                                    = {"hipsolverDnSormtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDormtr_bufferSize"]                                    = {"hipsolverDnDormtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCunmtr_bufferSize"]                                    = {"hipsolverDnCunmtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZunmtr_bufferSize"]                                    = {"hipsolverDnZunmtr_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)ormtr and rocsolver_(c|z)unmtr have a harness of other HIP and ROC API calls
-  {"cusolverDnSormtr",                                   {"hipsolverDnSormtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDormtr",                                   {"hipsolverDnDormtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCunmtr",                                   {"hipsolverDnCunmtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZunmtr",                                   {"hipsolverDnZunmtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSormtr"]                                               = {"hipsolverDnSormtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDormtr"]                                               = {"hipsolverDnDormtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCunmtr"]                                               = {"hipsolverDnCunmtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZunmtr"]                                               = {"hipsolverDnZunmtr",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gesvd have a harness of other HIP and ROC API calls
-  {"cusolverDnSgesvd_bufferSize",                        {"hipsolverDnSgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgesvd_bufferSize",                        {"hipsolverDnDgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgesvd_bufferSize",                        {"hipsolverDnCgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgesvd_bufferSize",                        {"hipsolverDnZgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgesvd_bufferSize"]                                    = {"hipsolverDnSgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgesvd_bufferSize"]                                    = {"hipsolverDnDgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgesvd_bufferSize"]                                    = {"hipsolverDnCgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgesvd_bufferSize"]                                    = {"hipsolverDnZgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gesvd have a harness of other HIP and ROC API calls
-  {"cusolverDnSgesvd",                                   {"hipsolverDnSgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgesvd",                                   {"hipsolverDnDgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgesvd",                                   {"hipsolverDnCgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgesvd",                                   {"hipsolverDnZgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgesvd"]                                               = {"hipsolverDnSgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgesvd"]                                               = {"hipsolverDnDgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgesvd"]                                               = {"hipsolverDnCgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgesvd"]                                               = {"hipsolverDnZgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)syevd and rocsolver_(c|z)heevd have a harness of other HIP and ROC API calls
-  {"cusolverDnSsyevd_bufferSize",                        {"hipsolverDnSsyevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsyevd_bufferSize",                        {"hipsolverDnDsyevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCheevd_bufferSize",                        {"hipsolverDnCheevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZheevd_bufferSize",                        {"hipsolverDnZheevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsyevd_bufferSize"]                                    = {"hipsolverDnSsyevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsyevd_bufferSize"]                                    = {"hipsolverDnDsyevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCheevd_bufferSize"]                                    = {"hipsolverDnCheevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZheevd_bufferSize"]                                    = {"hipsolverDnZheevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)syevd and rocsolver_(c|z)heevd have a harness of other HIP and ROC API calls
-  {"cusolverDnSsyevd",                                   {"hipsolverDnSsyevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsyevd",                                   {"hipsolverDnDsyevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCheevd",                                   {"hipsolverDnCheevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZheevd",                                   {"hipsolverDnZheevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsyevd"]                                               = {"hipsolverDnSsyevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsyevd"]                                               = {"hipsolverDnDsyevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCheevd"]                                               = {"hipsolverDnCheevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZheevd"]                                               = {"hipsolverDnZheevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)syevdx_inplace and rocsolver_(c|z)heevdx_inplace have a harness of other ROC API calls
-  {"cusolverDnSsyevdx_bufferSize",                       {"hipsolverDnSsyevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsyevdx_bufferSize",                       {"hipsolverDnDsyevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCheevdx_bufferSize",                       {"hipsolverDnCheevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZheevdx_bufferSize",                       {"hipsolverDnZheevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsyevdx_bufferSize"]                                   = {"hipsolverDnSsyevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsyevdx_bufferSize"]                                   = {"hipsolverDnDsyevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCheevdx_bufferSize"]                                   = {"hipsolverDnCheevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZheevdx_bufferSize"]                                   = {"hipsolverDnZheevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)syevdx_inplace and rocsolver_(c|z)heevdx_inplace have a harness of other ROC and HIP API calls
-  {"cusolverDnSsyevdx",                                  {"hipsolverDnSsyevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsyevdx",                                  {"hipsolverDnDsyevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCheevdx",                                  {"hipsolverDnCheevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZheevdx",                                  {"hipsolverDnZheevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsyevdx"]                                              = {"hipsolverDnSsyevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsyevdx"]                                              = {"hipsolverDnDsyevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCheevdx"]                                              = {"hipsolverDnCheevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZheevdx"]                                              = {"hipsolverDnZheevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sygvdx_inplace and rocsolver_(c|z)hegvdx_inplace have a harness of other ROC and HIP API calls
-  {"cusolverDnSsygvdx_bufferSize",                       {"hipsolverDnSsygvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsygvdx_bufferSize",                       {"hipsolverDnDsygvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnChegvdx_bufferSize",                       {"hipsolverDnChegvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZhegvdx_bufferSize",                       {"hipsolverDnZhegvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsygvdx_bufferSize"]                                   = {"hipsolverDnSsygvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsygvdx_bufferSize"]                                   = {"hipsolverDnDsygvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnChegvdx_bufferSize"]                                   = {"hipsolverDnChegvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZhegvdx_bufferSize"]                                   = {"hipsolverDnZhegvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sygvdx_inplace and rocsolver_(c|z)hegvdx_inplace have a harness of other ROC and HIP API calls
-  {"cusolverDnSsygvdx",                                  {"hipsolverDnSsygvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsygvdx",                                  {"hipsolverDnDsygvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnChegvdx",                                  {"hipsolverDnChegvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZhegvdx",                                  {"hipsolverDnZhegvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsygvdx"]                                              = {"hipsolverDnSsygvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsygvdx"]                                              = {"hipsolverDnDsygvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnChegvdx"]                                              = {"hipsolverDnChegvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZhegvdx"]                                              = {"hipsolverDnZhegvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sygvd and rocsolver_(c|z)hegvd have a harness of other ROC and HIP API calls
-  {"cusolverDnSsygvd_bufferSize",                        {"hipsolverDnSsygvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsygvd_bufferSize",                        {"hipsolverDnDsygvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnChegvd_bufferSize",                        {"hipsolverDnChegvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZhegvd_bufferSize",                        {"hipsolverDnZhegvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsygvd_bufferSize"]                                    = {"hipsolverDnSsygvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsygvd_bufferSize"]                                    = {"hipsolverDnDsygvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnChegvd_bufferSize"]                                    = {"hipsolverDnChegvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZhegvd_bufferSize"]                                    = {"hipsolverDnZhegvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sygvd and rocsolver_(c|z)hegvd have a harness of other ROC and HIP API calls
-  {"cusolverDnSsygvd",                                   {"hipsolverDnSsygvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsygvd",                                   {"hipsolverDnDsygvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnChegvd",                                   {"hipsolverDnChegvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZhegvd",                                   {"hipsolverDnZhegvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsygvd"]                                               = {"hipsolverDnSsygvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsygvd"]                                               = {"hipsolverDnDsygvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnChegvd"]                                               = {"hipsolverDnChegvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZhegvd"]                                               = {"hipsolverDnZhegvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverDnCreateSyevjInfo",                          {"hipsolverDnCreateSyevjInfo",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDestroySyevjInfo",                         {"hipsolverDnDestroySyevjInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXsyevjSetTolerance",                       {"hipsolverDnXsyevjSetTolerance",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXsyevjSetMaxSweeps",                       {"hipsolverDnXsyevjSetMaxSweeps",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXsyevjSetSortEig",                         {"hipsolverDnXsyevjSetSortEig",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXsyevjGetResidual",                        {"hipsolverDnXsyevjGetResidual",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXsyevjGetSweeps",                          {"hipsolverDnXsyevjGetSweeps",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnCreateSyevjInfo"]                                      = {"hipsolverDnCreateSyevjInfo",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDestroySyevjInfo"]                                     = {"hipsolverDnDestroySyevjInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXsyevjSetTolerance"]                                   = {"hipsolverDnXsyevjSetTolerance",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXsyevjSetMaxSweeps"]                                   = {"hipsolverDnXsyevjSetMaxSweeps",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXsyevjSetSortEig"]                                     = {"hipsolverDnXsyevjSetSortEig",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXsyevjGetResidual"]                                    = {"hipsolverDnXsyevjGetResidual",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXsyevjGetSweeps"]                                      = {"hipsolverDnXsyevjGetSweeps",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)syevj_strided_batched and rocsolver_(c|z)heevj_strided_batched have a harness of other ROC and HIP API calls
-  {"cusolverDnSsyevjBatched_bufferSize",                 {"hipsolverDnSsyevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsyevjBatched_bufferSize",                 {"hipsolverDnDsyevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCheevjBatched_bufferSize",                 {"hipsolverDnCheevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZheevjBatched_bufferSize",                 {"hipsolverDnZheevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsyevjBatched_bufferSize"]                             = {"hipsolverDnSsyevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsyevjBatched_bufferSize"]                             = {"hipsolverDnDsyevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCheevjBatched_bufferSize"]                             = {"hipsolverDnCheevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZheevjBatched_bufferSize"]                             = {"hipsolverDnZheevjBatched_bufferSize",                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)syevj_strided_batched and rocsolver_(c|z)heevj_strided_batched have a harness of other ROC and HIP API calls
-  {"cusolverDnSsyevjBatched",                            {"hipsolverDnSsyevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsyevjBatched",                            {"hipsolverDnDsyevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCheevjBatched",                            {"hipsolverDnCheevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZheevjBatched",                            {"hipsolverDnZheevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsyevjBatched"]                                        = {"hipsolverDnSsyevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsyevjBatched"]                                        = {"hipsolverDnDsyevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCheevjBatched"]                                        = {"hipsolverDnCheevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZheevjBatched"]                                        = {"hipsolverDnZheevjBatched",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)syevj and rocsolver_(c|z)heevj have a harness of other ROC and HIP API calls
-  {"cusolverDnSsyevj_bufferSize",                        {"hipsolverDnSsyevj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsyevj_bufferSize",                        {"hipsolverDnDsyevj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCheevj_bufferSize",                        {"hipsolverDnCheevj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZheevj_bufferSize",                        {"hipsolverDnZheevj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsyevj_bufferSize"]                                    = {"hipsolverDnSsyevj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsyevj_bufferSize"]                                    = {"hipsolverDnDsyevj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCheevj_bufferSize"]                                    = {"hipsolverDnCheevj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZheevj_bufferSize"]                                    = {"hipsolverDnZheevj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)syevj and rocsolver_(c|z)heevj have a harness of other ROC and HIP API calls
-  {"cusolverDnSsyevj",                                   {"hipsolverDnSsyevj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsyevj",                                   {"hipsolverDnDsyevj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCheevj",                                   {"hipsolverDnCheevj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZheevj",                                   {"hipsolverDnZheevj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsyevj"]                                               = {"hipsolverDnSsyevj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsyevj"]                                               = {"hipsolverDnDsyevj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCheevj"]                                               = {"hipsolverDnCheevj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZheevj"]                                               = {"hipsolverDnZheevj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sygvj and rocsolver_(c|z)hegvj have a harness of other ROC and HIP API calls
-  {"cusolverDnSsygvj_bufferSize",                        {"hipsolverDnSsygvj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsygvj_bufferSize",                        {"hipsolverDnDsygvj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnChegvj_bufferSize",                        {"hipsolverDnChegvj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZhegvj_bufferSize",                        {"hipsolverDnZhegvj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsygvj_bufferSize"]                                    = {"hipsolverDnSsygvj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsygvj_bufferSize"]                                    = {"hipsolverDnDsygvj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnChegvj_bufferSize"]                                    = {"hipsolverDnChegvj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZhegvj_bufferSize"]                                    = {"hipsolverDnZhegvj_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sygvj and rocsolver_(c|z)hegvj have a harness of other ROC and HIP API calls
-  {"cusolverDnSsygvj",                                   {"hipsolverDnSsygvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDsygvj",                                   {"hipsolverDnDsygvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnChegvj",                                   {"hipsolverDnChegvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZhegvj",                                   {"hipsolverDnZhegvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSsygvj"]                                               = {"hipsolverDnSsygvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDsygvj"]                                               = {"hipsolverDnDsygvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnChegvj"]                                               = {"hipsolverDnChegvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZhegvj"]                                               = {"hipsolverDnZhegvj",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverDnCreateGesvdjInfo",                         {"hipsolverDnCreateGesvdjInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDestroyGesvdjInfo",                        {"hipsolverDnDestroyGesvdjInfo",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgesvdjSetTolerance",                      {"hipsolverDnXgesvdjSetTolerance",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgesvdjSetMaxSweeps",                      {"hipsolverDnXgesvdjSetMaxSweeps",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgesvdjSetSortEig",                        {"hipsolverDnXgesvdjSetSortEig",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgesvdjGetResidual",                       {"hipsolverDnXgesvdjGetResidual",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgesvdjGetSweeps",                         {"hipsolverDnXgesvdjGetSweeps",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnCreateGesvdjInfo"]                                     = {"hipsolverDnCreateGesvdjInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDestroyGesvdjInfo"]                                    = {"hipsolverDnDestroyGesvdjInfo",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgesvdjSetTolerance"]                                  = {"hipsolverDnXgesvdjSetTolerance",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgesvdjSetMaxSweeps"]                                  = {"hipsolverDnXgesvdjSetMaxSweeps",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgesvdjSetSortEig"]                                    = {"hipsolverDnXgesvdjSetSortEig",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgesvdjGetResidual"]                                   = {"hipsolverDnXgesvdjGetResidual",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgesvdjGetSweeps"]                                     = {"hipsolverDnXgesvdjGetSweeps",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gesvdj_notransv_strided_batched have a harness of other ROC and HIP API calls
-  {"cusolverDnSgesvdjBatched_bufferSize",                {"hipsolverDnSgesvdjBatched_bufferSize",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgesvdjBatched_bufferSize",                {"hipsolverDnDgesvdjBatched_bufferSize",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgesvdjBatched_bufferSize",                {"hipsolverDnCgesvdjBatched_bufferSize",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgesvdjBatched_bufferSize",                {"hipsolverDnZgesvdjBatched_bufferSize",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgesvdjBatched_bufferSize"]                            = {"hipsolverDnSgesvdjBatched_bufferSize",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgesvdjBatched_bufferSize"]                            = {"hipsolverDnDgesvdjBatched_bufferSize",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgesvdjBatched_bufferSize"]                            = {"hipsolverDnCgesvdjBatched_bufferSize",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgesvdjBatched_bufferSize"]                            = {"hipsolverDnZgesvdjBatched_bufferSize",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gesvdj_notransv_strided_batched have a harness of other ROC and HIP API calls
-  {"cusolverDnSgesvdjBatched",                           {"hipsolverDnSgesvdjBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgesvdjBatched",                           {"hipsolverDnDgesvdjBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgesvdjBatched",                           {"hipsolverDnCgesvdjBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgesvdjBatched",                           {"hipsolverDnZgesvdjBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgesvdjBatched"]                                       = {"hipsolverDnSgesvdjBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgesvdjBatched"]                                       = {"hipsolverDnDgesvdjBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgesvdjBatched"]                                       = {"hipsolverDnCgesvdjBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgesvdjBatched"]                                       = {"hipsolverDnZgesvdjBatched",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gesvdj_notransv have a harness of other ROC and HIP API calls
-  {"cusolverDnSgesvdj_bufferSize",                       {"hipsolverDnSgesvdj_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgesvdj_bufferSize",                       {"hipsolverDnDgesvdj_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgesvdj_bufferSize",                       {"hipsolverDnCgesvdj_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgesvdj_bufferSize",                       {"hipsolverDnZgesvdj_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgesvdj_bufferSize"]                                   = {"hipsolverDnSgesvdj_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgesvdj_bufferSize"]                                   = {"hipsolverDnDgesvdj_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgesvdj_bufferSize"]                                   = {"hipsolverDnCgesvdj_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgesvdj_bufferSize"]                                   = {"hipsolverDnZgesvdj_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gesvdj_notransv have a harness of other ROC and HIP API calls
-  {"cusolverDnSgesvdj",                                  {"hipsolverDnSgesvdj",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgesvdj",                                  {"hipsolverDnDgesvdj",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgesvdj",                                  {"hipsolverDnCgesvdj",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgesvdj",                                  {"hipsolverDnZgesvdj",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgesvdj"]                                              = {"hipsolverDnSgesvdj",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgesvdj"]                                              = {"hipsolverDnDgesvdj",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgesvdj"]                                              = {"hipsolverDnCgesvdj",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgesvdj"]                                              = {"hipsolverDnZgesvdj",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gesvdx_strided_batched have a harness of other ROC and HIP API calls
-  {"cusolverDnSgesvdaStridedBatched_bufferSize",         {"hipsolverDnSgesvdaStridedBatched_bufferSize",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgesvdaStridedBatched_bufferSize",         {"hipsolverDnDgesvdaStridedBatched_bufferSize",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgesvdaStridedBatched_bufferSize",         {"hipsolverDnCgesvdaStridedBatched_bufferSize",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgesvdaStridedBatched_bufferSize",         {"hipsolverDnZgesvdaStridedBatched_bufferSize",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
+  m["cusolverDnSgesvdaStridedBatched_bufferSize"]                     = {"hipsolverDnSgesvdaStridedBatched_bufferSize",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgesvdaStridedBatched_bufferSize"]                     = {"hipsolverDnDgesvdaStridedBatched_bufferSize",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgesvdaStridedBatched_bufferSize"]                     = {"hipsolverDnCgesvdaStridedBatched_bufferSize",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgesvdaStridedBatched_bufferSize"]                     = {"hipsolverDnZgesvdaStridedBatched_bufferSize",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   // NOTE: rocsolver_(s|d|c|z)gesvdx_strided_batched have a harness of other ROC and HIP API calls
-  {"cusolverDnSgesvdaStridedBatched",                    {"hipsolverDnSgesvdaStridedBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnDgesvdaStridedBatched",                    {"hipsolverDnDgesvdaStridedBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnCgesvdaStridedBatched",                    {"hipsolverDnCgesvdaStridedBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnZgesvdaStridedBatched",                    {"hipsolverDnZgesvdaStridedBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnPotrf_bufferSize",                         {"hipsolverDnPotrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnPotrf",                                    {"hipsolverDnPotrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnPotrs",                                    {"hipsolverDnPotrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnGeqrf_bufferSize",                         {"hipsolverDnGeqrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnGeqrf",                                    {"hipsolverDnGeqrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnGetrf_bufferSize",                         {"hipsolverDnGetrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnGetrf",                                    {"hipsolverDnGetrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnGetrs",                                    {"hipsolverDnGetrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnSyevd_bufferSize",                         {"hipsolverDnSyevd_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnSyevd",                                    {"hipsolverDnSyevd",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnSyevdx_bufferSize",                        {"hipsolverDnSyevdx_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnSyevdx",                                   {"hipsolverDnSyevdx",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnGesvd_bufferSize",                         {"hipsolverDnGesvd_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnGesvd",                                    {"hipsolverDnGesvd",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED}},
-  {"cusolverDnXpotrf_bufferSize",                        {"hipsolverDnXpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXpotrf",                                   {"hipsolverDnXpotrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXpotrs",                                   {"hipsolverDnXpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgeqrf_bufferSize",                        {"hipsolverDnXgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXgeqrf",                                   {"hipsolverDnXgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED}},
-  {"cusolverDnXsyevBatched",                             {"hipsolverDnXsyevBatched",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXsyevBatched_bufferSize",                  {"hipsolverDnXsyevBatched_bufferSize",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXsyevd_bufferSize",                        {"hipsolverDnXsyevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXsyevd",                                   {"hipsolverDnXsyevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXsyevdx_bufferSize",                       {"hipsolverDnXsyevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXsyevdx",                                  {"hipsolverDnXsyevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXgesvd_bufferSize",                        {"hipsolverDnXgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXgeev",                                    {"hipsolverDnXgeev",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXgeev_bufferSize",                         {"hipsolverDnXgeev_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXgesvd",                                   {"hipsolverDnXgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXgesvdp_bufferSize",                       {"hipsolverDnXgesvdp_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXgesvdp",                                  {"hipsolverDnXgesvdp",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXgesvdr_bufferSize",                       {"hipsolverDnXgesvdr_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXgesvdr",                                  {"hipsolverDnXgesvdr",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXlarft_bufferSize",                        {"hipsolverDnXlarft_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnXlarft",                                   {"hipsolverDnXlarft",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnLoggerSetCallback",                        {"hipsolverDnLoggerSetCallback",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnLoggerSetFile",                            {"hipsolverDnLoggerSetFile",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnLoggerOpenFile",                           {"hipsolverDnLoggerOpenFile",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnLoggerSetLevel",                           {"hipsolverDnLoggerSetLevel",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnLoggerSetMask",                            {"hipsolverDnLoggerSetMask",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnLoggerForceDisable",                       {"hipsolverDnLoggerForceDisable",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverMgCreate",                                   {"hipsolverMgCreate",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgDestroy",                                  {"hipsolverMgDestroy",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgDeviceSelect",                             {"hipsolverMgDeviceSelect",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgCreateDeviceGrid",                         {"hipsolverMgCreateDeviceGrid",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgDestroyGrid",                              {"hipsolverMgDestroyGrid",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgCreateMatrixDesc",                         {"hipsolverMgCreateMatrixDesc",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgDestroyMatrixDesc",                        {"hipsolverMgDestroyMatrixDesc",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgSyevd_bufferSize",                         {"hipsolverMgSyevd_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgSyevd",                                    {"hipsolverMgSyevd",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgGetrf_bufferSize",                         {"hipsolverMgGetrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgGetrf",                                    {"hipsolverMgGetrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgGetrs_bufferSize",                         {"hipsolverMgGetrs_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgGetrs",                                    {"hipsolverMgGetrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgPotrf_bufferSize",                         {"hipsolverMgPotrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgPotrf",                                    {"hipsolverMgPotrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgPotrs_bufferSize",                         {"hipsolverMgPotrs_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgPotrs",                                    {"hipsolverMgPotrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgPotri_bufferSize",                         {"hipsolverMgPotri_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverMgPotri",                                    {"hipsolverMgPotri",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
+  m["cusolverDnSgesvdaStridedBatched"]                                = {"hipsolverDnSgesvdaStridedBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnDgesvdaStridedBatched"]                                = {"hipsolverDnDgesvdaStridedBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnCgesvdaStridedBatched"]                                = {"hipsolverDnCgesvdaStridedBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnZgesvdaStridedBatched"]                                = {"hipsolverDnZgesvdaStridedBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnPotrf_bufferSize"]                                     = {"hipsolverDnPotrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnPotrf"]                                                = {"hipsolverDnPotrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnPotrs"]                                                = {"hipsolverDnPotrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnGeqrf_bufferSize"]                                     = {"hipsolverDnGeqrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnGeqrf"]                                                = {"hipsolverDnGeqrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnGetrf_bufferSize"]                                     = {"hipsolverDnGetrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnGetrf"]                                                = {"hipsolverDnGetrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnGetrs"]                                                = {"hipsolverDnGetrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnSyevd_bufferSize"]                                     = {"hipsolverDnSyevd_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnSyevd"]                                                = {"hipsolverDnSyevd",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnSyevdx_bufferSize"]                                    = {"hipsolverDnSyevdx_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnSyevdx"]                                               = {"hipsolverDnSyevdx",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnGesvd_bufferSize"]                                     = {"hipsolverDnGesvd_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnGesvd"]                                                = {"hipsolverDnGesvd",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | CUDA_REMOVED | UNSUPPORTED};
+  m["cusolverDnXpotrf_bufferSize"]                                    = {"hipsolverDnXpotrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXpotrf"]                                               = {"hipsolverDnXpotrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXpotrs"]                                               = {"hipsolverDnXpotrs",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgeqrf_bufferSize"]                                    = {"hipsolverDnXgeqrf_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXgeqrf"]                                               = {"hipsolverDnXgeqrf",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  m["cusolverDnXsyevBatched"]                                         = {"hipsolverDnXsyevBatched",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXsyevBatched_bufferSize"]                              = {"hipsolverDnXsyevBatched_bufferSize",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXsyevd_bufferSize"]                                    = {"hipsolverDnXsyevd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXsyevd"]                                               = {"hipsolverDnXsyevd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXsyevdx_bufferSize"]                                   = {"hipsolverDnXsyevdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXsyevdx"]                                              = {"hipsolverDnXsyevdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXgesvd_bufferSize"]                                    = {"hipsolverDnXgesvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXgeev"]                                                = {"hipsolverDnXgeev",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXgeev_bufferSize"]                                     = {"hipsolverDnXgeev_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXgesvd"]                                               = {"hipsolverDnXgesvd",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXgesvdp_bufferSize"]                                   = {"hipsolverDnXgesvdp_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXgesvdp"]                                              = {"hipsolverDnXgesvdp",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXgesvdr_bufferSize"]                                   = {"hipsolverDnXgesvdr_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXgesvdr"]                                              = {"hipsolverDnXgesvdr",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXlarft_bufferSize"]                                    = {"hipsolverDnXlarft_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXlarft"]                                               = {"hipsolverDnXlarft",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnLoggerSetCallback"]                                    = {"hipsolverDnLoggerSetCallback",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnLoggerSetFile"]                                        = {"hipsolverDnLoggerSetFile",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnLoggerOpenFile"]                                       = {"hipsolverDnLoggerOpenFile",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnLoggerSetLevel"]                                       = {"hipsolverDnLoggerSetLevel",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnLoggerSetMask"]                                        = {"hipsolverDnLoggerSetMask",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnLoggerForceDisable"]                                   = {"hipsolverDnLoggerForceDisable",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverMgCreate"]                                               = {"hipsolverMgCreate",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgDestroy"]                                              = {"hipsolverMgDestroy",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgDeviceSelect"]                                         = {"hipsolverMgDeviceSelect",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgCreateDeviceGrid"]                                     = {"hipsolverMgCreateDeviceGrid",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgDestroyGrid"]                                          = {"hipsolverMgDestroyGrid",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgCreateMatrixDesc"]                                     = {"hipsolverMgCreateMatrixDesc",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgDestroyMatrixDesc"]                                    = {"hipsolverMgDestroyMatrixDesc",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgSyevd_bufferSize"]                                     = {"hipsolverMgSyevd_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgSyevd"]                                                = {"hipsolverMgSyevd",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgGetrf_bufferSize"]                                     = {"hipsolverMgGetrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgGetrf"]                                                = {"hipsolverMgGetrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgGetrs_bufferSize"]                                     = {"hipsolverMgGetrs_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgGetrs"]                                                = {"hipsolverMgGetrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgPotrf_bufferSize"]                                     = {"hipsolverMgPotrf_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgPotrf"]                                                = {"hipsolverMgPotrf",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgPotrs_bufferSize"]                                     = {"hipsolverMgPotrs_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgPotrs"]                                                = {"hipsolverMgPotrs",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgPotri_bufferSize"]                                     = {"hipsolverMgPotri_bufferSize",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverMgPotri"]                                                = {"hipsolverMgPotri",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
   // NOTE: rocsolver_create_rfinfo have a harness of other ROC and HIP API calls
-  {"cusolverRfCreate",                                   {"hipsolverRfCreate",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfCreate"]                                               = {"hipsolverRfCreate",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // NOTE: rocsolver_destroy_rfinfo have a harness of other ROC and HIP API calls
-  {"cusolverRfDestroy",                                  {"hipsolverRfDestroy",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfDestroy"]                                              = {"hipsolverRfDestroy",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfGetMatrixFormat",                          {"hipsolverRfGetMatrixFormat",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverRfSetMatrixFormat",                          {"hipsolverRfSetMatrixFormat",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverRfSetNumericProperties",                     {"hipsolverRfSetNumericProperties",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverRfGetNumericProperties",                     {"hipsolverRfGetNumericProperties",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverRfGetNumericBoostReport",                    {"hipsolverRfGetNumericBoostReport",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverRfSetAlgs",                                  {"hipsolverRfSetAlgs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverRfGetAlgs",                                  {"hipsolverRfGetAlgs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverRfGetResetValuesFastMode",                   {"hipsolverRfGetResetValuesFastMode",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverRfSetResetValuesFastMode",                   {"hipsolverRfSetResetValuesFastMode",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfGetMatrixFormat"]                                      = {"hipsolverRfGetMatrixFormat",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverRfSetMatrixFormat"]                                      = {"hipsolverRfSetMatrixFormat",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverRfSetNumericProperties"]                                 = {"hipsolverRfSetNumericProperties",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverRfGetNumericProperties"]                                 = {"hipsolverRfGetNumericProperties",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverRfGetNumericBoostReport"]                                = {"hipsolverRfGetNumericBoostReport",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverRfSetAlgs"]                                              = {"hipsolverRfSetAlgs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverRfGetAlgs"]                                              = {"hipsolverRfGetAlgs",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverRfGetResetValuesFastMode"]                               = {"hipsolverRfGetResetValuesFastMode",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverRfSetResetValuesFastMode"]                               = {"hipsolverRfSetResetValuesFastMode",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // NOTE: rocsolver_dcsrrf_sumlu have a harness of other ROC and HIP API calls
-  {"cusolverRfSetupHost",                                {"hipsolverRfSetupHost",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfSetupHost"]                                            = {"hipsolverRfSetupHost",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // NOTE: rocsolver_dcsrrf_sumlu have a harness of other ROC and HIP API calls
-  {"cusolverRfSetupDevice",                              {"hipsolverRfSetupDevice",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfSetupDevice"]                                          = {"hipsolverRfSetupDevice",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfResetValues",                              {"hipsolverRfResetValues",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfResetValues"]                                          = {"hipsolverRfResetValues",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // NOTE: can't call rocsolver_dcsrrf_analysis w/o using hipSOLVER's hipsolverRfHandle
-  {"cusolverRfAnalyze",                                  {"hipsolverRfAnalyze",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfAnalyze"]                                              = {"hipsolverRfAnalyze",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // NOTE: can't call rocsolver_dcsrrf_refactlu w/o using hipSOLVER's hipsolverRfHandle
-  {"cusolverRfRefactor",                                 {"hipsolverRfRefactor",                                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfRefactor"]                                             = {"hipsolverRfRefactor",                                   "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfAccessBundledFactorsDevice",               {"hipsolverRfAccessBundledFactorsDevice",                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfAccessBundledFactorsDevice"]                           = {"hipsolverRfAccessBundledFactorsDevice",                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfExtractBundledFactorsHost",                {"hipsolverRfExtractBundledFactorsHost",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfExtractBundledFactorsHost"]                            = {"hipsolverRfExtractBundledFactorsHost",                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfExtractSplitFactorsHost",                  {"hipsolverRfExtractSplitFactorsHost",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfExtractSplitFactorsHost"]                              = {"hipsolverRfExtractSplitFactorsHost",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // NOTE: can't call rocsolver_dcsrrf_solve w/o using hipSOLVER's hipsolverRfHandle
-  {"cusolverRfSolve",                                    {"hipsolverRfSolve",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfSolve"]                                                = {"hipsolverRfSolve",                                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfBatchSetupHost",                           {"hipsolverRfBatchSetupHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfBatchSetupHost"]                                       = {"hipsolverRfBatchSetupHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfBatchResetValues",                         {"hipsolverRfBatchResetValues",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfBatchResetValues"]                                     = {"hipsolverRfBatchResetValues",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfBatchAnalyze",                             {"hipsolverRfBatchAnalyze",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfBatchAnalyze"]                                         = {"hipsolverRfBatchAnalyze",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfBatchRefactor",                            {"hipsolverRfBatchRefactor",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfBatchRefactor"]                                        = {"hipsolverRfBatchRefactor",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfBatchSolve",                               {"hipsolverRfBatchSolve",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfBatchSolve"]                                           = {"hipsolverRfBatchSolve",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
   // no ROC analogues
-  {"cusolverRfBatchZeroPivot",                           {"hipsolverRfBatchZeroPivot",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
+  m["cusolverRfBatchZeroPivot"]                                       = {"hipsolverRfBatchZeroPivot",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpCreate"]                                               = {"hipsolverSpCreate",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpDestroy"]                                              = {"hipsolverSpDestroy",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpSetStream"]                                            = {"hipsolverSpSetStream",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpGetStream"]                                            = {"hipsolverSpGetStream",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrissymHost"]                                        = {"hipsolverSpXcsrissymHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrlsvluHost"]                                        = {"hipsolverSpScsrlsvluHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrlsvluHost"]                                        = {"hipsolverSpDcsrlsvluHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrlsvluHost"]                                        = {"hipsolverSpCcsrlsvluHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrlsvluHost"]                                        = {"hipsolverSpZcsrlsvluHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrlsvqr"]                                            = {"hipsolverSpScsrlsvqr",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpDcsrlsvqr"]                                            = {"hipsolverSpDcsrlsvqr",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpCcsrlsvqr"]                                            = {"hipsolverSpCcsrlsvqr",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpZcsrlsvqr"]                                            = {"hipsolverSpZcsrlsvqr",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpScsrlsvqrHost"]                                        = {"hipsolverSpScsrlsvqrHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrlsvqrHost"]                                        = {"hipsolverSpDcsrlsvqrHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrlsvqrHost"]                                        = {"hipsolverSpCcsrlsvqrHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrlsvqrHost"]                                        = {"hipsolverSpZcsrlsvqrHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrlsvcholHost"]                                      = {"hipsolverSpScsrlsvcholHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpDcsrlsvcholHost"]                                      = {"hipsolverSpDcsrlsvcholHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpCcsrlsvcholHost"]                                      = {"hipsolverSpCcsrlsvcholHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrlsvcholHost"]                                      = {"hipsolverSpZcsrlsvcholHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrlsvchol"]                                          = {"hipsolverSpScsrlsvchol",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpDcsrlsvchol"]                                          = {"hipsolverSpDcsrlsvchol",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED};
+  m["cusolverSpCcsrlsvchol"]                                          = {"hipsolverSpCcsrlsvchol",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrlsvchol"]                                          = {"hipsolverSpZcsrlsvchol",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrlsqvqrHost"]                                       = {"hipsolverSpScsrlsqvqrHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrlsqvqrHost"]                                       = {"hipsolverSpDcsrlsqvqrHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrlsqvqrHost"]                                       = {"hipsolverSpCcsrlsqvqrHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrlsqvqrHost"]                                       = {"hipsolverSpZcsrlsqvqrHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsreigvsiHost"]                                       = {"hipsolverSpScsreigvsiHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsreigvsiHost"]                                       = {"hipsolverSpDcsreigvsiHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsreigvsiHost"]                                       = {"hipsolverSpCcsreigvsiHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsreigvsiHost"]                                       = {"hipsolverSpZcsreigvsiHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsreigvsi"]                                           = {"hipsolverSpScsreigvsi",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsreigvsi"]                                           = {"hipsolverSpDcsreigvsi",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsreigvsi"]                                           = {"hipsolverSpCcsreigvsi",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsreigvsi"]                                           = {"hipsolverSpZcsreigvsi",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsreigsHost"]                                         = {"hipsolverSpScsreigsHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsreigsHost"]                                         = {"hipsolverSpDcsreigsHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsreigsHost"]                                         = {"hipsolverSpCcsreigsHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsreigsHost"]                                         = {"hipsolverSpZcsreigsHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrsymrcmHost"]                                       = {"hipsolverSpXcsrsymrcmHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrsymmdqHost"]                                       = {"hipsolverSpXcsrsymmdqHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrsymamdHost"]                                       = {"hipsolverSpXcsrsymamdHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrmetisndHost"]                                      = {"hipsolverSpXcsrmetisndHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrzfdHost"]                                          = {"hipsolverSpScsrzfdHost",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrzfdHost"]                                          = {"hipsolverSpDcsrzfdHost",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrzfdHost"]                                          = {"hipsolverSpCcsrzfdHost",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrzfdHost"]                                          = {"hipsolverSpZcsrzfdHost",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrperm_bufferSizeHost"]                              = {"hipsolverSpXcsrperm_bufferSizeHost",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrpermHost"]                                         = {"hipsolverSpXcsrpermHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCreateCsrqrInfo"]                                      = {"hipsolverSpCreateCsrqrInfo",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDestroyCsrqrInfo"]                                     = {"hipsolverSpDestroyCsrqrInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrqrAnalysisBatched"]                                = {"hipsolverSpXcsrqrAnalysisBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrqrBufferInfoBatched"]                              = {"hipsolverSpScsrqrBufferInfoBatched",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrqrBufferInfoBatched"]                              = {"hipsolverSpDcsrqrBufferInfoBatched",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrqrBufferInfoBatched"]                              = {"hipsolverSpCcsrqrBufferInfoBatched",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrqrBufferInfoBatched"]                              = {"hipsolverSpZcsrqrBufferInfoBatched",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrqrsvBatched"]                                      = {"hipsolverSpScsrqrsvBatched",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrqrsvBatched"]                                      = {"hipsolverSpDcsrqrsvBatched",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrqrsvBatched"]                                      = {"hipsolverSpCcsrqrsvBatched",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrqrsvBatched"]                                      = {"hipsolverSpZcsrqrsvBatched",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCreateCsrluInfoHost"]                                  = {"hipsolverSpCreateCsrluInfoHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDestroyCsrluInfoHost"]                                 = {"hipsolverSpDestroyCsrluInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpXcsrluAnalysisHost"]                                   = {"hipsolverSpXcsrluAnalysisHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrluBufferInfoHost"]                                 = {"hipsolverSpScsrluBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrluBufferInfoHost"]                                 = {"hipsolverSpDcsrluBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrluBufferInfoHost"]                                 = {"hipsolverSpCcsrluBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrluBufferInfoHost"]                                 = {"hipsolverSpZcsrluBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrluFactorHost"]                                     = {"hipsolverSpScsrluFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrluFactorHost"]                                     = {"hipsolverSpDcsrluFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrluFactorHost"]                                     = {"hipsolverSpCcsrluFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrluFactorHost"]                                     = {"hipsolverSpZcsrluFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrluZeroPivotHost"]                                  = {"hipsolverSpScsrluZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrluZeroPivotHost"]                                  = {"hipsolverSpDcsrluZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrluZeroPivotHost"]                                  = {"hipsolverSpCcsrluZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrluZeroPivotHost"]                                  = {"hipsolverSpZcsrluZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrluSolveHost"]                                      = {"hipsolverSpScsrluSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrluSolveHost"]                                      = {"hipsolverSpDcsrluSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrluSolveHost"]                                      = {"hipsolverSpCcsrluSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrluSolveHost"]                                      = {"hipsolverSpZcsrluSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrluNnzHost"]                                        = {"hipsolverSpXcsrluNnzHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrluExtractHost"]                                    = {"hipsolverSpScsrluExtractHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrluExtractHost"]                                    = {"hipsolverSpDcsrluExtractHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrluExtractHost"]                                    = {"hipsolverSpCcsrluExtractHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrluExtractHost"]                                    = {"hipsolverSpZcsrluExtractHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCreateCsrqrInfoHost"]                                  = {"hipsolverSpCreateCsrqrInfoHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDestroyCsrqrInfoHost"]                                 = {"hipsolverSpDestroyCsrqrInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpXcsrqrAnalysisHost"]                                   = {"hipsolverSpXcsrqrAnalysisHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrBufferInfoHost"]                                 = {"hipsolverSpScsrqrBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrBufferInfoHost"]                                 = {"hipsolverSpDcsrqrBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrBufferInfoHost"]                                 = {"hipsolverSpCcsrqrBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrBufferInfoHost"]                                 = {"hipsolverSpZcsrqrBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrSetupHost"]                                      = {"hipsolverSpScsrqrSetupHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrSetupHost"]                                      = {"hipsolverSpDcsrqrSetupHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrSetupHost"]                                      = {"hipsolverSpCcsrqrSetupHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrSetupHost"]                                      = {"hipsolverSpZcsrqrSetupHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrFactorHost"]                                     = {"hipsolverSpScsrqrFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrFactorHost"]                                     = {"hipsolverSpDcsrqrFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrFactorHost"]                                     = {"hipsolverSpCcsrqrFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrFactorHost"]                                     = {"hipsolverSpZcsrqrFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrZeroPivotHost"]                                  = {"hipsolverSpScsrqrZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrZeroPivotHost"]                                  = {"hipsolverSpDcsrqrZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrZeroPivotHost"]                                  = {"hipsolverSpCcsrqrZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrZeroPivotHost"]                                  = {"hipsolverSpZcsrqrZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrSolveHost"]                                      = {"hipsolverSpScsrqrSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrSolveHost"]                                      = {"hipsolverSpDcsrqrSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrSolveHost"]                                      = {"hipsolverSpCcsrqrSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrSolveHost"]                                      = {"hipsolverSpZcsrqrSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpXcsrqrAnalysis"]                                       = {"hipsolverSpXcsrqrAnalysis",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrBufferInfo"]                                     = {"hipsolverSpScsrqrBufferInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrBufferInfo"]                                     = {"hipsolverSpDcsrqrBufferInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrBufferInfo"]                                     = {"hipsolverSpCcsrqrBufferInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrBufferInfo"]                                     = {"hipsolverSpZcsrqrBufferInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrSetup"]                                          = {"hipsolverSpScsrqrSetup",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrSetup"]                                          = {"hipsolverSpDcsrqrSetup",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrSetup"]                                          = {"hipsolverSpCcsrqrSetup",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrSetup"]                                          = {"hipsolverSpZcsrqrSetup",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrFactor"]                                         = {"hipsolverSpScsrqrFactor",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrFactor"]                                         = {"hipsolverSpDcsrqrFactor",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrFactor"]                                         = {"hipsolverSpCcsrqrFactor",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrFactor"]                                         = {"hipsolverSpZcsrqrFactor",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrZeroPivot"]                                      = {"hipsolverSpScsrqrZeroPivot",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrZeroPivot"]                                      = {"hipsolverSpDcsrqrZeroPivot",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrZeroPivot"]                                      = {"hipsolverSpCcsrqrZeroPivot",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrZeroPivot"]                                      = {"hipsolverSpZcsrqrZeroPivot",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpScsrqrSolve"]                                          = {"hipsolverSpScsrqrSolve",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDcsrqrSolve"]                                          = {"hipsolverSpDcsrqrSolve",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCcsrqrSolve"]                                          = {"hipsolverSpCcsrqrSolve",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpZcsrqrSolve"]                                          = {"hipsolverSpZcsrqrSolve",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpCreateCsrcholInfoHost"]                                = {"hipsolverSpCreateCsrcholInfoHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpDestroyCsrcholInfoHost"]                               = {"hipsolverSpDestroyCsrcholInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverSpXcsrcholAnalysisHost"]                                 = {"hipsolverSpXcsrcholAnalysisHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholBufferInfoHost"]                               = {"hipsolverSpScsrcholBufferInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholBufferInfoHost"]                               = {"hipsolverSpDcsrcholBufferInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholBufferInfoHost"]                               = {"hipsolverSpCcsrcholBufferInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholBufferInfoHost"]                               = {"hipsolverSpZcsrcholBufferInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholFactorHost"]                                   = {"hipsolverSpScsrcholFactorHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholFactorHost"]                                   = {"hipsolverSpDcsrcholFactorHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholFactorHost"]                                   = {"hipsolverSpCcsrcholFactorHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholFactorHost"]                                   = {"hipsolverSpZcsrcholFactorHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholZeroPivotHost"]                                = {"hipsolverSpScsrcholZeroPivotHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholZeroPivotHost"]                                = {"hipsolverSpDcsrcholZeroPivotHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholZeroPivotHost"]                                = {"hipsolverSpCcsrcholZeroPivotHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholZeroPivotHost"]                                = {"hipsolverSpZcsrcholZeroPivotHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholSolveHost"]                                    = {"hipsolverSpScsrcholSolveHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholSolveHost"]                                    = {"hipsolverSpDcsrcholSolveHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholSolveHost"]                                    = {"hipsolverSpCcsrcholSolveHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholSolveHost"]                                    = {"hipsolverSpZcsrcholSolveHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCreateCsrcholInfo"]                                    = {"hipsolverSpCreateCsrcholInfo",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDestroyCsrcholInfo"]                                   = {"hipsolverSpDestroyCsrcholInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpXcsrcholAnalysis"]                                     = {"hipsolverSpXcsrcholAnalysis",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholBufferInfo"]                                   = {"hipsolverSpScsrcholBufferInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholBufferInfo"]                                   = {"hipsolverSpDcsrcholBufferInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholBufferInfo"]                                   = {"hipsolverSpCcsrcholBufferInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholBufferInfo"]                                   = {"hipsolverSpZcsrcholBufferInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholFactor"]                                       = {"hipsolverSpScsrcholFactor",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholFactor"]                                       = {"hipsolverSpDcsrcholFactor",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholFactor"]                                       = {"hipsolverSpCcsrcholFactor",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholFactor"]                                       = {"hipsolverSpZcsrcholFactor",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholZeroPivot"]                                    = {"hipsolverSpScsrcholZeroPivot",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholZeroPivot"]                                    = {"hipsolverSpDcsrcholZeroPivot",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholZeroPivot"]                                    = {"hipsolverSpCcsrcholZeroPivot",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholZeroPivot"]                                    = {"hipsolverSpZcsrcholZeroPivot",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholSolve"]                                        = {"hipsolverSpScsrcholSolve",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholSolve"]                                        = {"hipsolverSpDcsrcholSolve",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholSolve"]                                        = {"hipsolverSpCcsrcholSolve",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholSolve"]                                        = {"hipsolverSpZcsrcholSolve",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpScsrcholDiag"]                                         = {"hipsolverSpScsrcholDiag",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpDcsrcholDiag"]                                         = {"hipsolverSpDcsrcholDiag",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpCcsrcholDiag"]                                         = {"hipsolverSpCcsrcholDiag",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverSpZcsrcholDiag"]                                         = {"hipsolverSpZcsrcholDiag",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusolverDnSetMathMode"]                                          = {"hipsolverDnSetMathMode",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnGetMathMode"]                                          = {"hipsolverDnGetMathMode",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSetEmulationStrategy"]                                 = {"hipsolverDnSetEmulationStrategy",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnGetEmulationStrategy"]                                 = {"hipsolverDnGetEmulationStrategy",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
 
-  {"cusolverSpCreate",                                   {"hipsolverSpCreate",                                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpDestroy",                                  {"hipsolverSpDestroy",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpSetStream",                                {"hipsolverSpSetStream",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpGetStream",                                {"hipsolverSpGetStream",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrissymHost",                            {"hipsolverSpXcsrissymHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrlsvluHost",                            {"hipsolverSpScsrlsvluHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrlsvluHost",                            {"hipsolverSpDcsrlsvluHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrlsvluHost",                            {"hipsolverSpCcsrlsvluHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrlsvluHost",                            {"hipsolverSpZcsrlsvluHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrlsvqr",                                {"hipsolverSpScsrlsvqr",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpDcsrlsvqr",                                {"hipsolverSpDcsrlsvqr",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpCcsrlsvqr",                                {"hipsolverSpCcsrlsvqr",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpZcsrlsvqr",                                {"hipsolverSpZcsrlsvqr",                                  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpScsrlsvqrHost",                            {"hipsolverSpScsrlsvqrHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrlsvqrHost",                            {"hipsolverSpDcsrlsvqrHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrlsvqrHost",                            {"hipsolverSpCcsrlsvqrHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrlsvqrHost",                            {"hipsolverSpZcsrlsvqrHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrlsvcholHost",                          {"hipsolverSpScsrlsvcholHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpDcsrlsvcholHost",                          {"hipsolverSpDcsrlsvcholHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpCcsrlsvcholHost",                          {"hipsolverSpCcsrlsvcholHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrlsvcholHost",                          {"hipsolverSpZcsrlsvcholHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrlsvchol",                              {"hipsolverSpScsrlsvchol",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpDcsrlsvchol",                              {"hipsolverSpDcsrlsvchol",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | ROC_UNSUPPORTED}},
-  {"cusolverSpCcsrlsvchol",                              {"hipsolverSpCcsrlsvchol",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrlsvchol",                              {"hipsolverSpZcsrlsvchol",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrlsqvqrHost",                           {"hipsolverSpScsrlsqvqrHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrlsqvqrHost",                           {"hipsolverSpDcsrlsqvqrHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrlsqvqrHost",                           {"hipsolverSpCcsrlsqvqrHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrlsqvqrHost",                           {"hipsolverSpZcsrlsqvqrHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsreigvsiHost",                           {"hipsolverSpScsreigvsiHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsreigvsiHost",                           {"hipsolverSpDcsreigvsiHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsreigvsiHost",                           {"hipsolverSpCcsreigvsiHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsreigvsiHost",                           {"hipsolverSpZcsreigvsiHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsreigvsi",                               {"hipsolverSpScsreigvsi",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsreigvsi",                               {"hipsolverSpDcsreigvsi",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsreigvsi",                               {"hipsolverSpCcsreigvsi",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsreigvsi",                               {"hipsolverSpZcsreigvsi",                                 "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsreigsHost",                             {"hipsolverSpScsreigsHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsreigsHost",                             {"hipsolverSpDcsreigsHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsreigsHost",                             {"hipsolverSpCcsreigsHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsreigsHost",                             {"hipsolverSpZcsreigsHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrsymrcmHost",                           {"hipsolverSpXcsrsymrcmHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrsymmdqHost",                           {"hipsolverSpXcsrsymmdqHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrsymamdHost",                           {"hipsolverSpXcsrsymamdHost",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrmetisndHost",                          {"hipsolverSpXcsrmetisndHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrzfdHost",                              {"hipsolverSpScsrzfdHost",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrzfdHost",                              {"hipsolverSpDcsrzfdHost",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrzfdHost",                              {"hipsolverSpCcsrzfdHost",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrzfdHost",                              {"hipsolverSpZcsrzfdHost",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrperm_bufferSizeHost",                  {"hipsolverSpXcsrperm_bufferSizeHost",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrpermHost",                             {"hipsolverSpXcsrpermHost",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCreateCsrqrInfo",                          {"hipsolverSpCreateCsrqrInfo",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDestroyCsrqrInfo",                         {"hipsolverSpDestroyCsrqrInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrqrAnalysisBatched",                    {"hipsolverSpXcsrqrAnalysisBatched",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrqrBufferInfoBatched",                  {"hipsolverSpScsrqrBufferInfoBatched",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrqrBufferInfoBatched",                  {"hipsolverSpDcsrqrBufferInfoBatched",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrqrBufferInfoBatched",                  {"hipsolverSpCcsrqrBufferInfoBatched",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrqrBufferInfoBatched",                  {"hipsolverSpZcsrqrBufferInfoBatched",                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrqrsvBatched",                          {"hipsolverSpScsrqrsvBatched",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrqrsvBatched",                          {"hipsolverSpDcsrqrsvBatched",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrqrsvBatched",                          {"hipsolverSpCcsrqrsvBatched",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrqrsvBatched",                          {"hipsolverSpZcsrqrsvBatched",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCreateCsrluInfoHost",                      {"hipsolverSpCreateCsrluInfoHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDestroyCsrluInfoHost",                     {"hipsolverSpDestroyCsrluInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpXcsrluAnalysisHost",                       {"hipsolverSpXcsrluAnalysisHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrluBufferInfoHost",                     {"hipsolverSpScsrluBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrluBufferInfoHost",                     {"hipsolverSpDcsrluBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrluBufferInfoHost",                     {"hipsolverSpCcsrluBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrluBufferInfoHost",                     {"hipsolverSpZcsrluBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrluFactorHost",                         {"hipsolverSpScsrluFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrluFactorHost",                         {"hipsolverSpDcsrluFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrluFactorHost",                         {"hipsolverSpCcsrluFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrluFactorHost",                         {"hipsolverSpZcsrluFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrluZeroPivotHost",                      {"hipsolverSpScsrluZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrluZeroPivotHost",                      {"hipsolverSpDcsrluZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrluZeroPivotHost",                      {"hipsolverSpCcsrluZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrluZeroPivotHost",                      {"hipsolverSpZcsrluZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrluSolveHost",                          {"hipsolverSpScsrluSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrluSolveHost",                          {"hipsolverSpDcsrluSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrluSolveHost",                          {"hipsolverSpCcsrluSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrluSolveHost",                          {"hipsolverSpZcsrluSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrluNnzHost",                            {"hipsolverSpXcsrluNnzHost",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrluExtractHost",                        {"hipsolverSpScsrluExtractHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrluExtractHost",                        {"hipsolverSpDcsrluExtractHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrluExtractHost",                        {"hipsolverSpCcsrluExtractHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrluExtractHost",                        {"hipsolverSpZcsrluExtractHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCreateCsrqrInfoHost",                      {"hipsolverSpCreateCsrqrInfoHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDestroyCsrqrInfoHost",                     {"hipsolverSpDestroyCsrqrInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpXcsrqrAnalysisHost",                       {"hipsolverSpXcsrqrAnalysisHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrBufferInfoHost",                     {"hipsolverSpScsrqrBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrBufferInfoHost",                     {"hipsolverSpDcsrqrBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrBufferInfoHost",                     {"hipsolverSpCcsrqrBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrBufferInfoHost",                     {"hipsolverSpZcsrqrBufferInfoHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrSetupHost",                          {"hipsolverSpScsrqrSetupHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrSetupHost",                          {"hipsolverSpDcsrqrSetupHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrSetupHost",                          {"hipsolverSpCcsrqrSetupHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrSetupHost",                          {"hipsolverSpZcsrqrSetupHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrFactorHost",                         {"hipsolverSpScsrqrFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrFactorHost",                         {"hipsolverSpDcsrqrFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrFactorHost",                         {"hipsolverSpCcsrqrFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrFactorHost",                         {"hipsolverSpZcsrqrFactorHost",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrZeroPivotHost",                      {"hipsolverSpScsrqrZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrZeroPivotHost",                      {"hipsolverSpDcsrqrZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrZeroPivotHost",                      {"hipsolverSpCcsrqrZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrZeroPivotHost",                      {"hipsolverSpZcsrqrZeroPivotHost",                        "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrSolveHost",                          {"hipsolverSpScsrqrSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrSolveHost",                          {"hipsolverSpDcsrqrSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrSolveHost",                          {"hipsolverSpCcsrqrSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrSolveHost",                          {"hipsolverSpZcsrqrSolveHost",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpXcsrqrAnalysis",                           {"hipsolverSpXcsrqrAnalysis",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrBufferInfo",                         {"hipsolverSpScsrqrBufferInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrBufferInfo",                         {"hipsolverSpDcsrqrBufferInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrBufferInfo",                         {"hipsolverSpCcsrqrBufferInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrBufferInfo",                         {"hipsolverSpZcsrqrBufferInfo",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrSetup",                              {"hipsolverSpScsrqrSetup",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrSetup",                              {"hipsolverSpDcsrqrSetup",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrSetup",                              {"hipsolverSpCcsrqrSetup",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrSetup",                              {"hipsolverSpZcsrqrSetup",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrFactor",                             {"hipsolverSpScsrqrFactor",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrFactor",                             {"hipsolverSpDcsrqrFactor",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrFactor",                             {"hipsolverSpCcsrqrFactor",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrFactor",                             {"hipsolverSpZcsrqrFactor",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrZeroPivot",                          {"hipsolverSpScsrqrZeroPivot",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrZeroPivot",                          {"hipsolverSpDcsrqrZeroPivot",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrZeroPivot",                          {"hipsolverSpCcsrqrZeroPivot",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrZeroPivot",                          {"hipsolverSpZcsrqrZeroPivot",                            "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpScsrqrSolve",                              {"hipsolverSpScsrqrSolve",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDcsrqrSolve",                              {"hipsolverSpDcsrqrSolve",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCcsrqrSolve",                              {"hipsolverSpCcsrqrSolve",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpZcsrqrSolve",                              {"hipsolverSpZcsrqrSolve",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpCreateCsrcholInfoHost",                    {"hipsolverSpCreateCsrcholInfoHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpDestroyCsrcholInfoHost",                   {"hipsolverSpDestroyCsrcholInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverSpXcsrcholAnalysisHost",                     {"hipsolverSpXcsrcholAnalysisHost",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholBufferInfoHost",                   {"hipsolverSpScsrcholBufferInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholBufferInfoHost",                   {"hipsolverSpDcsrcholBufferInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholBufferInfoHost",                   {"hipsolverSpCcsrcholBufferInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholBufferInfoHost",                   {"hipsolverSpZcsrcholBufferInfoHost",                     "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholFactorHost",                       {"hipsolverSpScsrcholFactorHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholFactorHost",                       {"hipsolverSpDcsrcholFactorHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholFactorHost",                       {"hipsolverSpCcsrcholFactorHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholFactorHost",                       {"hipsolverSpZcsrcholFactorHost",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholZeroPivotHost",                    {"hipsolverSpScsrcholZeroPivotHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholZeroPivotHost",                    {"hipsolverSpDcsrcholZeroPivotHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholZeroPivotHost",                    {"hipsolverSpCcsrcholZeroPivotHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholZeroPivotHost",                    {"hipsolverSpZcsrcholZeroPivotHost",                      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholSolveHost",                        {"hipsolverSpScsrcholSolveHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholSolveHost",                        {"hipsolverSpDcsrcholSolveHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholSolveHost",                        {"hipsolverSpCcsrcholSolveHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholSolveHost",                        {"hipsolverSpZcsrcholSolveHost",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCreateCsrcholInfo",                        {"hipsolverSpCreateCsrcholInfo",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDestroyCsrcholInfo",                       {"hipsolverSpDestroyCsrcholInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpXcsrcholAnalysis",                         {"hipsolverSpXcsrcholAnalysis",                           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholBufferInfo",                       {"hipsolverSpScsrcholBufferInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholBufferInfo",                       {"hipsolverSpDcsrcholBufferInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholBufferInfo",                       {"hipsolverSpCcsrcholBufferInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholBufferInfo",                       {"hipsolverSpZcsrcholBufferInfo",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholFactor",                           {"hipsolverSpScsrcholFactor",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholFactor",                           {"hipsolverSpDcsrcholFactor",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholFactor",                           {"hipsolverSpCcsrcholFactor",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholFactor",                           {"hipsolverSpZcsrcholFactor",                             "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholZeroPivot",                        {"hipsolverSpScsrcholZeroPivot",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholZeroPivot",                        {"hipsolverSpDcsrcholZeroPivot",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholZeroPivot",                        {"hipsolverSpCcsrcholZeroPivot",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholZeroPivot",                        {"hipsolverSpZcsrcholZeroPivot",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholSolve",                            {"hipsolverSpScsrcholSolve",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholSolve",                            {"hipsolverSpDcsrcholSolve",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholSolve",                            {"hipsolverSpCcsrcholSolve",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholSolve",                            {"hipsolverSpZcsrcholSolve",                              "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpScsrcholDiag",                             {"hipsolverSpScsrcholDiag",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpDcsrcholDiag",                             {"hipsolverSpDcsrcholDiag",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpCcsrcholDiag",                             {"hipsolverSpCcsrcholDiag",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverSpZcsrcholDiag",                             {"hipsolverSpZcsrcholDiag",                               "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusolverDnSetMathMode",                              {"hipsolverDnSetMathMode",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnGetMathMode",                              {"hipsolverDnGetMathMode",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnSetEmulationStrategy",                     {"hipsolverDnSetEmulationStrategy",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-  {"cusolverDnGetEmulationStrategy",                     {"hipsolverDnGetEmulationStrategy",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED}},
-};
+  return m;
+}();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP {
-  {"cusolverDnCreateParams",                             {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDestroyParams",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSetAdvOptions",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgetrf",                                   {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgetrf_bufferSize",                        {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgetrs",                                   {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSetDeterministicMode",                     {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"cusolverDnGetDeterministicMode",                     {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsCreate",                          {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsDestroy",                         {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsSetRefinementSolver",             {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsSetSolverMainPrecision",          {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsSetSolverLowestPrecision",        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsSetSolverPrecisions",             {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsSetTol",                          {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsSetTolInner",                     {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsSetMaxIters",                     {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsSetMaxItersInner",                {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsGetMaxIters",                     {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsEnableFallback",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParamsDisableFallback",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfosCreate",                           {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfosDestroy",                          {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfosGetNiters",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfosGetOuterNiters",                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfosRequestResidual",                  {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfosGetResidualHistory",               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfosGetMaxIters",                      {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZZgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZCgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZKgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZEgesv",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZYgesv",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCCgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCEgesv",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCKgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCYgesv",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDDgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDSgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDHgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDBgesv",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDXgesv",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSSgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSHgesv",                                   {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSBgesv",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSXgesv",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZZgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZCgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZKgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZEgesv_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZYgesv_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCCgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCKgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCEgesv_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCYgesv_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDDgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDSgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDHgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDBgesv_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDXgesv_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSSgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSHgesv_bufferSize",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSBgesv_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSXgesv_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZZgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZCgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZKgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZEgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZYgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCCgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCKgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCEgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCYgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDDgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDSgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDHgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDBgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDXgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSSgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSHgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSBgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSXgels",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZZgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZCgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZKgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZEgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZYgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCCgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCKgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCEgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCYgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDDgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDSgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDHgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDBgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDXgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSSgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSHgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSBgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSXgels_bufferSize",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSXgesv",                                 {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSXgesv_bufferSize",                      {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSXgels",                                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSXgels_bufferSize",                      {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSpotrfBatched",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDpotrfBatched",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCpotrfBatched",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZpotrfBatched",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSpotrsBatched",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDpotrsBatched",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCpotrsBatched",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZpotrsBatched",                            {CUDA_91,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSpotri_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDpotri_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCpotri_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZpotri_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSpotri",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDpotri",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCpotri",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZpotri",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXtrtri_bufferSize",                        {CUDA_114, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXtrtri",                                   {CUDA_114, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSlauum_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDlauum_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnClauum_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZlauum_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSlauum",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDlauum",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnClauum",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZlauum",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSorgqr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDorgqr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCungqr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZungqr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSorgqr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDorgqr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCungqr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZungqr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSormqr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDormqr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCunmqr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZunmqr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsytrs_bufferSize",                        {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsytrs",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsytri_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsytri_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCsytri_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZsytri_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsytri",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsytri",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCsytri",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZsytri",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSorgbr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDorgbr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCungbr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZungbr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSorgbr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDorgbr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCungbr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZungbr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsytrd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsytrd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnChetrd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZhetrd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnChetrd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZhetrd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSorgtr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDorgtr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCungtr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZungtr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSorgtr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDorgtr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCungtr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZungtr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSormtr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDormtr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCunmtr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZunmtr_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSormtr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDormtr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCunmtr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZunmtr",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsyevd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsyevd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCheevd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZheevd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsyevd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsyevd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCheevd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZheevd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsyevdx_bufferSize",                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsyevdx_bufferSize",                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCheevdx_bufferSize",                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZheevdx_bufferSize",                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsyevdx",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsyevdx",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCheevdx",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZheevdx",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsygvdx_bufferSize",                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsygvdx_bufferSize",                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnChegvdx_bufferSize",                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZhegvdx_bufferSize",                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsygvdx",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsygvdx",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnChegvdx",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZhegvdx",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsygvd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsygvd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnChegvd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZhegvd_bufferSize",                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsygvd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsygvd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnChegvd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZhegvd",                                   {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCreateSyevjInfo",                          {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDestroySyevjInfo",                         {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevjSetTolerance",                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevjSetMaxSweeps",                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevjSetSortEig",                         {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevjGetResidual",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevjGetSweeps",                          {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsyevjBatched_bufferSize",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsyevjBatched_bufferSize",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCheevjBatched_bufferSize",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZheevjBatched_bufferSize",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsyevjBatched",                            {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsyevjBatched",                            {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCheevjBatched",                            {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZheevjBatched",                            {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsyevj_bufferSize",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsyevj_bufferSize",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCheevj_bufferSize",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZheevj_bufferSize",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsyevj",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsyevj",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCheevj",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZheevj",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsygvj_bufferSize",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsygvj_bufferSize",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnChegvj_bufferSize",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZhegvj_bufferSize",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSsygvj",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDsygvj",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnChegvj",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZhegvj",                                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCreateGesvdjInfo",                         {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDestroyGesvdjInfo",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdjSetTolerance",                      {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdjSetMaxSweeps",                      {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdjSetSortEig",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdjGetResidual",                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdjGetSweeps",                         {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSgesvdjBatched_bufferSize",                {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDgesvdjBatched_bufferSize",                {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCgesvdjBatched_bufferSize",                {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZgesvdjBatched_bufferSize",                {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSgesvdjBatched",                           {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDgesvdjBatched",                           {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCgesvdjBatched",                           {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZgesvdjBatched",                           {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSgesvdj_bufferSize",                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDgesvdj_bufferSize",                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCgesvdj_bufferSize",                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZgesvdj_bufferSize",                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSgesvdj",                                  {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnDgesvdj",                                  {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnCgesvdj",                                  {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnZgesvdj",                                  {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnSgesvdaStridedBatched_bufferSize",         {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDgesvdaStridedBatched_bufferSize",         {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCgesvdaStridedBatched_bufferSize",         {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZgesvdaStridedBatched_bufferSize",         {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSgesvdaStridedBatched",                    {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnDgesvdaStridedBatched",                    {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnCgesvdaStridedBatched",                    {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnZgesvdaStridedBatched",                    {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverDnPotrf_bufferSize",                         {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnPotrf",                                    {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnPotrs",                                    {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnGeqrf_bufferSize",                         {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnGeqrf",                                    {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnGetrf_bufferSize",                         {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnGetrf",                                    {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnGetrs",                                    {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnSyevd_bufferSize",                         {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnSyevd",                                    {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnSyevdx_bufferSize",                        {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnSyevdx",                                   {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnGesvd_bufferSize",                         {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnGesvd",                                    {CUDA_110, CUDA_111, CUDA_130}},
-  {"cusolverDnXpotrf_bufferSize",                        {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXpotrf",                                   {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXpotrs",                                   {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgeqrf_bufferSize",                        {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgeqrf",                                   {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevd_bufferSize",                        {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevd",                                   {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevdx_bufferSize",                       {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXsyevdx",                                  {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvd_bufferSize",                        {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvd",                                   {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdp_bufferSize",                       {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdp",                                  {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdr_bufferSize",                       {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgesvdr",                                  {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cusolverDnLoggerSetCallback",                        {CUDA_117, CUDA_0,   CUDA_0  }},
-  {"cusolverDnLoggerSetFile",                            {CUDA_117, CUDA_0,   CUDA_0  }},
-  {"cusolverDnLoggerOpenFile",                           {CUDA_117, CUDA_0,   CUDA_0  }},
-  {"cusolverDnLoggerSetLevel",                           {CUDA_117, CUDA_0,   CUDA_0  }},
-  {"cusolverDnLoggerSetMask",                            {CUDA_117, CUDA_0,   CUDA_0  }},
-  {"cusolverDnLoggerForceDisable",                       {CUDA_117, CUDA_0,   CUDA_0  }},
-  {"cusolverMgCreate",                                   {CUDA_101, CUDA_130, CUDA_0  }},
-  {"cusolverMgDestroy",                                  {CUDA_101, CUDA_130, CUDA_0  }},
-  {"cusolverMgDeviceSelect",                             {CUDA_101, CUDA_130, CUDA_0  }},
-  {"cusolverMgCreateDeviceGrid",                         {CUDA_101, CUDA_130, CUDA_0  }},
-  {"cusolverMgDestroyGrid",                              {CUDA_101, CUDA_130, CUDA_0  }},
-  {"cusolverMgCreateMatrixDesc",                         {CUDA_101, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10200
-  {"cusolverMgDestroyMatrixDesc",                        {CUDA_101, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10200
-  {"cusolverMgSyevd_bufferSize",                         {CUDA_101, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10200
-  {"cusolverMgSyevd",                                    {CUDA_101, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10200
-  {"cusolverMgGetrf_bufferSize",                         {CUDA_102, CUDA_130, CUDA_0  }},
-  {"cusolverMgGetrf",                                    {CUDA_102, CUDA_130, CUDA_0  }},
-  {"cusolverMgGetrs_bufferSize",                         {CUDA_102, CUDA_130, CUDA_0  }},
-  {"cusolverMgGetrs",                                    {CUDA_102, CUDA_130, CUDA_0  }},
-  {"cusolverMgPotrf_bufferSize",                         {CUDA_110, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10500
-  {"cusolverMgPotrf",                                    {CUDA_110, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10500
-  {"cusolverMgPotrs_bufferSize",                         {CUDA_110, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10500
-  {"cusolverMgPotrs",                                    {CUDA_110, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10500
-  {"cusolverMgPotri_bufferSize",                         {CUDA_110, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10500
-  {"cusolverMgPotri",                                    {CUDA_110, CUDA_130, CUDA_0  }},  // A: CUSOLVER_VERSION 10500
-  {"cusolverSpXcsrsymmdqHost",                           {CUDA_75,  CUDA_130, CUDA_0  }},
-  {"cusolverSpXcsrsymamdHost",                           {CUDA_75,  CUDA_130, CUDA_0  }},
-  {"cusolverSpXcsrmetisndHost",                          {CUDA_92,  CUDA_130, CUDA_0  }},
-  {"cusolverSpScsrzfdHost",                              {CUDA_92,  CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsrzfdHost",                              {CUDA_92,  CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsrzfdHost",                              {CUDA_92,  CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsrzfdHost",                              {CUDA_92,  CUDA_130, CUDA_0  }},
-  {"cusolverSpCreateCsrluInfoHost",                      {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDestroyCsrluInfoHost",                     {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpXcsrluAnalysisHost",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrluBufferInfoHost",                     {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrluBufferInfoHost",                     {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrluBufferInfoHost",                     {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrluBufferInfoHost",                     {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrluFactorHost",                         {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrluFactorHost",                         {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrluFactorHost",                         {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrluFactorHost",                         {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrluZeroPivotHost",                      {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrluZeroPivotHost",                      {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrluZeroPivotHost",                      {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrluZeroPivotHost",                      {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrluSolveHost",                          {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrluSolveHost",                          {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrluSolveHost",                          {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrluSolveHost",                          {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpXcsrluNnzHost",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrluExtractHost",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrluExtractHost",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrluExtractHost",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrluExtractHost",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCreateCsrqrInfoHost",                      {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDestroyCsrqrInfoHost",                     {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpXcsrqrAnalysisHost",                       {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrBufferInfoHost",                     {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrBufferInfoHost",                     {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrBufferInfoHost",                     {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrBufferInfoHost",                     {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrSetupHost",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrSetupHost",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrSetupHost",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrSetupHost",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrFactorHost",                         {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrFactorHost",                         {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrFactorHost",                         {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrFactorHost",                         {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrZeroPivotHost",                      {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrZeroPivotHost",                      {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrZeroPivotHost",                      {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrZeroPivotHost",                      {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrSolveHost",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrSolveHost",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrSolveHost",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrSolveHost",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpXcsrqrAnalysis",                           {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrBufferInfo",                         {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrBufferInfo",                         {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrBufferInfo",                         {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrBufferInfo",                         {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrSetup",                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrSetup",                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrSetup",                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrSetup",                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrFactor",                             {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrFactor",                             {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrFactor",                             {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrFactor",                             {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrZeroPivot",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrZeroPivot",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrZeroPivot",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrZeroPivot",                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpScsrqrSolve",                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDcsrqrSolve",                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCcsrqrSolve",                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpZcsrqrSolve",                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpCreateCsrcholInfoHost",                    {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpDestroyCsrcholInfoHost",                   {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverSpXcsrcholAnalysisHost",                     {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholBufferInfoHost",                   {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrcholBufferInfoHost",                   {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrcholBufferInfoHost",                   {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrcholBufferInfoHost",                   {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholFactorHost",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrcholFactorHost",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrcholFactorHost",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrcholFactorHost",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholZeroPivotHost",                    {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrcholZeroPivotHost",                    {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrcholZeroPivotHost",                    {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrcholZeroPivotHost",                    {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholSolveHost",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrcholSolveHost",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrcholSolveHost",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrcholSolveHost",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCreateCsrcholInfo",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDestroyCsrcholInfo",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpXcsrcholAnalysis",                         {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholBufferInfo",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrcholBufferInfo",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrcholBufferInfo",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrcholBufferInfo",                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholFactor",                           {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrcholFactor",                           {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrcholFactor",                           {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrcholFactor",                           {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholZeroPivot",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrcholZeroPivot",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrcholZeroPivot",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrcholZeroPivot",                        {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholSolve",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpDcsrcholSolve",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpCcsrcholSolve",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpZcsrcholSolve",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusolverSpScsrcholDiag",                             {CUDA_101, CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 10200
-  {"cusolverSpDcsrcholDiag",                             {CUDA_101, CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 10200
-  {"cusolverSpCcsrcholDiag",                             {CUDA_101, CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 10200
-  {"cusolverSpZcsrcholDiag",                             {CUDA_101, CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 10200
-  {"cusolverDnXlarft",                                   {CUDA_124, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXlarft_bufferSize",                        {CUDA_124, CUDA_0,   CUDA_0  }},
-  {"cusolverDnXgeev",                                    {CUDA_126, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 11701
-  {"cusolverDnXgeev_bufferSize",                         {CUDA_126, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 11701
-  {"cusolverDnXsyevBatched",                             {CUDA_126, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 11701
-  {"cusolverDnXsyevBatched_bufferSize",                  {CUDA_126, CUDA_0,   CUDA_0  }}, // CUSOLVER_VERSION 11701
-  {"cusolverRfSetupHost",                                {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverRfSetupDevice",                              {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverRfResetValues",                              {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverRfAnalyze",                                  {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverRfRefactor",                                 {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverRfAccessBundledFactorsDevice",               {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverRfExtractBundledFactorsHost",                {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverRfExtractSplitFactorsHost",                  {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverRfSolve",                                    {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpScsrlsvluHost",                            {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpDcsrlsvluHost",                            {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpCcsrlsvluHost",                            {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpZcsrlsvluHost",                            {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpScsrlsvcholHost",                          {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpDcsrlsvcholHost",                          {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpCcsrlsvcholHost",                          {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpZcsrlsvcholHost",                          {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpScsrlsvchol",                              {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpDcsrlsvchol",                              {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpCcsrlsvchol",                              {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverSpZcsrlsvchol",                              {CUDA_0,   CUDA_128, CUDA_0  }}, // CUSOLVER_VERSION 11702
-  {"cusolverDnSetMathMode",                              {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"cusolverDnGetMathMode",                              {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"cusolverDnSetEmulationStrategy",                     {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"cusolverDnGetEmulationStrategy",                     {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"cusolverRfCreate",                                   {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfDestroy",                                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfGetMatrixFormat",                          {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfSetMatrixFormat",                          {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfSetNumericProperties",                     {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfGetNumericProperties",                     {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfGetNumericBoostReport",                    {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfSetAlgs",                                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfGetAlgs",                                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfGetResetValuesFastMode",                   {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfSetResetValuesFastMode",                   {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfBatchSetupHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfBatchResetValues",                         {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfBatchAnalyze",                             {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfBatchRefactor",                            {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfBatchSolve",                               {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverRfBatchZeroPivot",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCreate",                                   {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDestroy",                                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpSetStream",                                {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpGetStream",                                {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpXcsrissymHost",                            {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpScsrlsvqr",                                {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsrlsvqr",                                {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsrlsvqr",                                {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsrlsvqr",                                {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpScsrlsvqrHost",                            {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsrlsvqrHost",                            {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsrlsvqrHost",                            {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsrlsvqrHost",                            {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpScsrlsqvqrHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsrlsqvqrHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsrlsqvqrHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsrlsqvqrHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpScsreigvsiHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsreigvsiHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsreigvsiHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsreigvsiHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpScsreigvsi",                               {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsreigvsi",                               {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsreigvsi",                               {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsreigvsi",                               {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpScsreigsHost",                             {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsreigsHost",                             {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsreigsHost",                             {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsreigsHost",                             {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpXcsrsymrcmHost",                           {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpXcsrperm_bufferSizeHost",                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpXcsrpermHost",                             {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCreateCsrqrInfo",                          {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDestroyCsrqrInfo",                         {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpXcsrqrAnalysisBatched",                    {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpScsrqrBufferInfoBatched",                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsrqrBufferInfoBatched",                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsrqrBufferInfoBatched",                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsrqrBufferInfoBatched",                  {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpScsrqrsvBatched",                          {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpDcsrqrsvBatched",                          {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpCcsrqrsvBatched",                          {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"cusolverSpZcsrqrsvBatched",                          {CUDA_0,   CUDA_130, CUDA_0  }},
-};
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIversions> m;
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP {
-  {"hipsolverDnCreate",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDestroy",                                 {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgetrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgetrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgetrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgetrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgetrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgetrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgetrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgetrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgetrs",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgetrs",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgetrs",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgetrs",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverSetStream",                                 {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsolverGetStream",                                 {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsolverDnZZgesv",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCCgesv",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDDgesv",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSSgesv",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZZgesv_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCCgesv_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDDgesv_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSSgesv_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZZgels",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCCgels",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDDgels",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSSgels",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZZgels_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCCgels_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDDgels_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSSgels_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSpotrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDpotrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCpotrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZpotrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSpotrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDpotrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCpotrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZpotrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSpotrs",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDpotrs",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCpotrs",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZpotrs",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSpotrfBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDpotrfBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCpotrfBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZpotrfBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSpotrsBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDpotrsBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCpotrsBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZpotrsBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSpotri_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDpotri_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCpotri_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZpotri_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSpotri",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDpotri",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCpotri",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZpotri",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgeqrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgeqrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgeqrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgeqrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgeqrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgeqrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgeqrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgeqrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSorgqr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDorgqr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCungqr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZungqr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSorgqr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDorgqr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCungqr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZungqr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSormqr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDormqr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCunmqr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZunmqr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSormqr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDormqr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCunmqr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZunmqr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsytrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsytrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCsytrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZsytrf_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsytrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsytrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCsytrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZsytrf",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgebrd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgebrd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgebrd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgebrd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgebrd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgebrd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgebrd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgebrd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSorgbr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDorgbr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCungbr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZungbr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSorgbr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDorgbr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCungbr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZungbr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsytrd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsytrd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnChetrd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZhetrd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsytrd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsytrd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnChetrd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZhetrd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSorgtr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDorgtr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCungtr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZungtr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSorgtr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDorgtr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCungtr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZungtr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSormtr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDormtr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCunmtr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZunmtr_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSormtr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDormtr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCunmtr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZunmtr",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgesvd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgesvd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgesvd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgesvd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgesvd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgesvd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgesvd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgesvd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsyevd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsyevd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCheevd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZheevd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsyevd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsyevd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCheevd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZheevd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsyevdx_bufferSize",                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsyevdx_bufferSize",                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnCheevdx_bufferSize",                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnZheevdx_bufferSize",                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsyevdx",                                 {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsyevdx",                                 {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnCheevdx",                                 {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnZheevdx",                                 {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsygvdx_bufferSize",                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsygvdx_bufferSize",                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnChegvdx_bufferSize",                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnZhegvdx_bufferSize",                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsygvdx",                                 {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsygvdx",                                 {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnChegvdx",                                 {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnZhegvdx",                                 {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsygvd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsygvd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnChegvd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZhegvd_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsygvd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsygvd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnChegvd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZhegvd",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCreateSyevjInfo",                         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDestroySyevjInfo",                        {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXsyevjSetTolerance",                      {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXsyevjSetMaxSweeps",                      {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXsyevjSetSortEig",                        {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXsyevjGetResidual",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXsyevjGetSweeps",                         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsyevjBatched_bufferSize",                {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsyevjBatched_bufferSize",                {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCheevjBatched_bufferSize",                {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZheevjBatched_bufferSize",                {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsyevjBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsyevjBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCheevjBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZheevjBatched",                           {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsyevj_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsyevj_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCheevj_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZheevj_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsyevj",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsyevj",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCheevj",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZheevj",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsygvj_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsygvj_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnChegvj_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZhegvj_bufferSize",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSsygvj",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDsygvj",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnChegvj",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZhegvj",                                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCreateGesvdjInfo",                        {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDestroyGesvdjInfo",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgesvdjSetTolerance",                     {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgesvdjSetMaxSweeps",                     {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgesvdjSetSortEig",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgesvdjGetResidual",                      {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgesvdjGetSweeps",                        {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgesvdjBatched_bufferSize",               {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgesvdjBatched_bufferSize",               {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgesvdjBatched_bufferSize",               {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgesvdjBatched_bufferSize",               {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgesvdjBatched",                          {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgesvdjBatched",                          {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgesvdjBatched",                          {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgesvdjBatched",                          {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgesvdj_bufferSize",                      {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgesvdj_bufferSize",                      {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgesvdj_bufferSize",                      {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgesvdj_bufferSize",                      {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgesvdj",                                 {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgesvdj",                                 {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgesvdj",                                 {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgesvdj",                                 {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgesvdaStridedBatched_bufferSize",        {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgesvdaStridedBatched_bufferSize",        {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgesvdaStridedBatched_bufferSize",        {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgesvdaStridedBatched_bufferSize",        {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsolverDnSgesvdaStridedBatched",                   {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsolverDnDgesvdaStridedBatched",                   {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsolverDnCgesvdaStridedBatched",                   {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsolverDnZgesvdaStridedBatched",                   {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsolverRfCreate",                                  {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfDestroy",                                 {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfGetMatrixFormat",                         {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfSetMatrixFormat",                         {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfSetNumericProperties",                    {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfGetNumericProperties",                    {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfGetNumericBoostReport",                   {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfSetAlgs",                                 {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfGetResetValuesFastMode",                  {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfSetResetValuesFastMode",                  {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfSetupHost",                               {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfSetupDevice",                             {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfResetValues",                             {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfAnalyze",                                 {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfRefactor",                                {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfAccessBundledFactorsDevice",              {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfExtractBundledFactorsHost",               {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfExtractSplitFactorsHost",                 {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfSolve",                                   {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfBatchSetupHost",                          {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfBatchResetValues",                        {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfBatchAnalyze",                            {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfBatchRefactor",                           {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfBatchSolve",                              {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfBatchZeroPivot",                          {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverSpCreate",                                  {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverSpDestroy",                                 {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverSpSetStream",                               {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverSpScsrlsvchol",                             {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverSpDcsrlsvchol",                             {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverSpScsrlsvcholHost",                         {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverSpDcsrlsvcholHost",                         {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverDnCreateParams",                            {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverDnDestroyParams",                           {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverDnSetAdvOptions",                           {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgetrf",                                  {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgetrf_bufferSize",                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgetrs",                                  {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverDnSetDeterministicMode",                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipsolverDnGetDeterministicMode",                    {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgeqrf_bufferSize",                       {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipsolverDnXgeqrf",                                  {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipsolverDnXpotrf_bufferSize",                       {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipsolverDnXpotrf",                                  {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipsolverDnXpotrs",                                  {HIP_6030, HIP_0,    HIP_0   }},
-  {"hipsolverSpScsrlsvqr",                               {HIP_6040, HIP_0,    HIP_0   }},
-  {"hipsolverSpDcsrlsvqr",                               {HIP_6040, HIP_0,    HIP_0   }},
-  {"hipsolverSpCcsrlsvqr",                               {HIP_7000, HIP_0,    HIP_0   }},
-  {"hipsolverSpZcsrlsvqr",                               {HIP_7000, HIP_0,    HIP_0   }},
+  m["cusolverDnCreateParams"]                                         = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDestroyParams"]                                        = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSetAdvOptions"]                                        = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgetrf"]                                               = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgetrf_bufferSize"]                                    = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgetrs"]                                               = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnSetDeterministicMode"]                                 = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["cusolverDnGetDeterministicMode"]                                 = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsCreate"]                                      = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsDestroy"]                                     = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsSetRefinementSolver"]                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsSetSolverMainPrecision"]                      = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsSetSolverLowestPrecision"]                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsSetSolverPrecisions"]                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsSetTol"]                                      = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsSetTolInner"]                                 = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsSetMaxIters"]                                 = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsSetMaxItersInner"]                            = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsGetMaxIters"]                                 = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsEnableFallback"]                              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParamsDisableFallback"]                             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfosCreate"]                                       = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfosDestroy"]                                      = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfosGetNiters"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfosGetOuterNiters"]                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfosRequestResidual"]                              = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfosGetResidualHistory"]                           = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfosGetMaxIters"]                                  = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnZZgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnZCgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnZKgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnZEgesv"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZYgesv"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCCgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnCEgesv"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCKgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnCYgesv"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDDgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnDSgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnDHgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnDBgesv"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDXgesv"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSSgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnSHgesv"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnSBgesv"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSXgesv"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZZgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnZCgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnZKgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnZEgesv_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZYgesv_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCCgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnCKgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnCEgesv_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCYgesv_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDDgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnDSgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnDHgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnDBgesv_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDXgesv_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSSgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnSHgesv_bufferSize"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnSBgesv_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSXgesv_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZZgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZCgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZKgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZEgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZYgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCCgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCKgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCEgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCYgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDDgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDSgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDHgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDBgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDXgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSSgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSHgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSBgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSXgels"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZZgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZCgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZKgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZEgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnZYgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCCgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCKgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCEgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnCYgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDDgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDSgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDHgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDBgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnDXgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSSgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSHgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSBgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSXgels_bufferSize"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSXgesv"]                                             = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSXgesv_bufferSize"]                                  = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSXgels"]                                             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSXgels_bufferSize"]                                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnSpotrfBatched"]                                        = {CUDA_91,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDpotrfBatched"]                                        = {CUDA_91,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCpotrfBatched"]                                        = {CUDA_91,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZpotrfBatched"]                                        = {CUDA_91,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSpotrsBatched"]                                        = {CUDA_91,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDpotrsBatched"]                                        = {CUDA_91,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCpotrsBatched"]                                        = {CUDA_91,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZpotrsBatched"]                                        = {CUDA_91,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSpotri_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDpotri_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnCpotri_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZpotri_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSpotri"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDpotri"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnCpotri"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZpotri"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnXtrtri_bufferSize"]                                    = {CUDA_114, CUDA_0,   CUDA_0  };
+  m["cusolverDnXtrtri"]                                               = {CUDA_114, CUDA_0,   CUDA_0  };
+  m["cusolverDnSlauum_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDlauum_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnClauum_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZlauum_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSlauum"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDlauum"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnClauum"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZlauum"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSorgqr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDorgqr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCungqr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZungqr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSorgqr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDorgqr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCungqr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZungqr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSormqr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDormqr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCunmqr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZunmqr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXsytrs_bufferSize"]                                    = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsytrs"]                                               = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusolverDnSsytri_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDsytri_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnCsytri_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZsytri_bufferSize"]                                    = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSsytri"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDsytri"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnCsytri"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZsytri"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSorgbr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDorgbr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCungbr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZungbr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSorgbr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDorgbr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCungbr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZungbr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsytrd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsytrd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnChetrd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZhetrd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnChetrd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZhetrd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSorgtr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDorgtr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCungtr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZungtr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSorgtr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDorgtr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCungtr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZungtr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSormtr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDormtr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCunmtr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZunmtr_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSormtr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDormtr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCunmtr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZunmtr"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsyevd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsyevd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCheevd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZheevd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsyevd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsyevd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCheevd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZheevd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsyevdx_bufferSize"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDsyevdx_bufferSize"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnCheevdx_bufferSize"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZheevdx_bufferSize"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSsyevdx"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDsyevdx"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnCheevdx"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZheevdx"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSsygvdx_bufferSize"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDsygvdx_bufferSize"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnChegvdx_bufferSize"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZhegvdx_bufferSize"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSsygvdx"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDsygvdx"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnChegvdx"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZhegvdx"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSsygvd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsygvd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnChegvd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZhegvd_bufferSize"]                                    = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsygvd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsygvd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnChegvd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZhegvd"]                                               = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCreateSyevjInfo"]                                      = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDestroySyevjInfo"]                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevjSetTolerance"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevjSetMaxSweeps"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevjSetSortEig"]                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevjGetResidual"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevjGetSweeps"]                                      = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsyevjBatched_bufferSize"]                             = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsyevjBatched_bufferSize"]                             = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCheevjBatched_bufferSize"]                             = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZheevjBatched_bufferSize"]                             = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsyevjBatched"]                                        = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsyevjBatched"]                                        = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCheevjBatched"]                                        = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZheevjBatched"]                                        = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsyevj_bufferSize"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsyevj_bufferSize"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCheevj_bufferSize"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZheevj_bufferSize"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsyevj"]                                               = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsyevj"]                                               = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCheevj"]                                               = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZheevj"]                                               = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsygvj_bufferSize"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsygvj_bufferSize"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnChegvj_bufferSize"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZhegvj_bufferSize"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSsygvj"]                                               = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDsygvj"]                                               = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnChegvj"]                                               = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZhegvj"]                                               = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCreateGesvdjInfo"]                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDestroyGesvdjInfo"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdjSetTolerance"]                                  = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdjSetMaxSweeps"]                                  = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdjSetSortEig"]                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdjGetResidual"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdjGetSweeps"]                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSgesvdjBatched_bufferSize"]                            = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDgesvdjBatched_bufferSize"]                            = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCgesvdjBatched_bufferSize"]                            = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZgesvdjBatched_bufferSize"]                            = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSgesvdjBatched"]                                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDgesvdjBatched"]                                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCgesvdjBatched"]                                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZgesvdjBatched"]                                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSgesvdj_bufferSize"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDgesvdj_bufferSize"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCgesvdj_bufferSize"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZgesvdj_bufferSize"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSgesvdj"]                                              = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnDgesvdj"]                                              = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnCgesvdj"]                                              = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnZgesvdj"]                                              = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnSgesvdaStridedBatched_bufferSize"]                     = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDgesvdaStridedBatched_bufferSize"]                     = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnCgesvdaStridedBatched_bufferSize"]                     = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZgesvdaStridedBatched_bufferSize"]                     = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnSgesvdaStridedBatched"]                                = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnDgesvdaStridedBatched"]                                = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnCgesvdaStridedBatched"]                                = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnZgesvdaStridedBatched"]                                = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverDnPotrf_bufferSize"]                                     = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnPotrf"]                                                = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnPotrs"]                                                = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnGeqrf_bufferSize"]                                     = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnGeqrf"]                                                = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnGetrf_bufferSize"]                                     = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnGetrf"]                                                = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnGetrs"]                                                = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnSyevd_bufferSize"]                                     = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnSyevd"]                                                = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnSyevdx_bufferSize"]                                    = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnSyevdx"]                                               = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnGesvd_bufferSize"]                                     = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnGesvd"]                                                = {CUDA_110, CUDA_111, CUDA_130};
+  m["cusolverDnXpotrf_bufferSize"]                                    = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXpotrf"]                                               = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXpotrs"]                                               = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgeqrf_bufferSize"]                                    = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgeqrf"]                                               = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevd_bufferSize"]                                    = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevd"]                                               = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevdx_bufferSize"]                                   = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsyevdx"]                                              = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvd_bufferSize"]                                    = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvd"]                                               = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdp_bufferSize"]                                   = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdp"]                                              = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdr_bufferSize"]                                   = {CUDA_112, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgesvdr"]                                              = {CUDA_112, CUDA_0,   CUDA_0  };
+  m["cusolverDnLoggerSetCallback"]                                    = {CUDA_117, CUDA_0,   CUDA_0  };
+  m["cusolverDnLoggerSetFile"]                                        = {CUDA_117, CUDA_0,   CUDA_0  };
+  m["cusolverDnLoggerOpenFile"]                                       = {CUDA_117, CUDA_0,   CUDA_0  };
+  m["cusolverDnLoggerSetLevel"]                                       = {CUDA_117, CUDA_0,   CUDA_0  };
+  m["cusolverDnLoggerSetMask"]                                        = {CUDA_117, CUDA_0,   CUDA_0  };
+  m["cusolverDnLoggerForceDisable"]                                   = {CUDA_117, CUDA_0,   CUDA_0  };
+  m["cusolverMgCreate"]                                               = {CUDA_101, CUDA_130, CUDA_0  };
+  m["cusolverMgDestroy"]                                              = {CUDA_101, CUDA_130, CUDA_0  };
+  m["cusolverMgDeviceSelect"]                                         = {CUDA_101, CUDA_130, CUDA_0  };
+  m["cusolverMgCreateDeviceGrid"]                                     = {CUDA_101, CUDA_130, CUDA_0  };
+  m["cusolverMgDestroyGrid"]                                          = {CUDA_101, CUDA_130, CUDA_0  };
+  m["cusolverMgCreateMatrixDesc"]                                     = {CUDA_101, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10200
+  m["cusolverMgDestroyMatrixDesc"]                                    = {CUDA_101, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10200
+  m["cusolverMgSyevd_bufferSize"]                                     = {CUDA_101, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10200
+  m["cusolverMgSyevd"]                                                = {CUDA_101, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10200
+  m["cusolverMgGetrf_bufferSize"]                                     = {CUDA_102, CUDA_130, CUDA_0  };
+  m["cusolverMgGetrf"]                                                = {CUDA_102, CUDA_130, CUDA_0  };
+  m["cusolverMgGetrs_bufferSize"]                                     = {CUDA_102, CUDA_130, CUDA_0  };
+  m["cusolverMgGetrs"]                                                = {CUDA_102, CUDA_130, CUDA_0  };
+  m["cusolverMgPotrf_bufferSize"]                                     = {CUDA_110, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10500
+  m["cusolverMgPotrf"]                                                = {CUDA_110, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10500
+  m["cusolverMgPotrs_bufferSize"]                                     = {CUDA_110, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10500
+  m["cusolverMgPotrs"]                                                = {CUDA_110, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10500
+  m["cusolverMgPotri_bufferSize"]                                     = {CUDA_110, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10500
+  m["cusolverMgPotri"]                                                = {CUDA_110, CUDA_130, CUDA_0  };  // A: CUSOLVER_VERSION 10500
+  m["cusolverSpXcsrsymmdqHost"]                                       = {CUDA_75,  CUDA_130, CUDA_0  };
+  m["cusolverSpXcsrsymamdHost"]                                       = {CUDA_75,  CUDA_130, CUDA_0  };
+  m["cusolverSpXcsrmetisndHost"]                                      = {CUDA_92,  CUDA_130, CUDA_0  };
+  m["cusolverSpScsrzfdHost"]                                          = {CUDA_92,  CUDA_130, CUDA_0  };
+  m["cusolverSpDcsrzfdHost"]                                          = {CUDA_92,  CUDA_130, CUDA_0  };
+  m["cusolverSpCcsrzfdHost"]                                          = {CUDA_92,  CUDA_130, CUDA_0  };
+  m["cusolverSpZcsrzfdHost"]                                          = {CUDA_92,  CUDA_130, CUDA_0  };
+  m["cusolverSpCreateCsrluInfoHost"]                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDestroyCsrluInfoHost"]                                 = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpXcsrluAnalysisHost"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrluBufferInfoHost"]                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrluBufferInfoHost"]                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrluBufferInfoHost"]                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrluBufferInfoHost"]                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrluFactorHost"]                                     = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrluFactorHost"]                                     = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrluFactorHost"]                                     = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrluFactorHost"]                                     = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrluZeroPivotHost"]                                  = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrluZeroPivotHost"]                                  = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrluZeroPivotHost"]                                  = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrluZeroPivotHost"]                                  = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrluSolveHost"]                                      = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrluSolveHost"]                                      = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrluSolveHost"]                                      = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrluSolveHost"]                                      = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpXcsrluNnzHost"]                                        = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrluExtractHost"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrluExtractHost"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrluExtractHost"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrluExtractHost"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCreateCsrqrInfoHost"]                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDestroyCsrqrInfoHost"]                                 = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpXcsrqrAnalysisHost"]                                   = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrBufferInfoHost"]                                 = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrBufferInfoHost"]                                 = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrBufferInfoHost"]                                 = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrBufferInfoHost"]                                 = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrSetupHost"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrSetupHost"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrSetupHost"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrSetupHost"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrFactorHost"]                                     = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrFactorHost"]                                     = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrFactorHost"]                                     = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrFactorHost"]                                     = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrZeroPivotHost"]                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrZeroPivotHost"]                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrZeroPivotHost"]                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrZeroPivotHost"]                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrSolveHost"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrSolveHost"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrSolveHost"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrSolveHost"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpXcsrqrAnalysis"]                                       = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrBufferInfo"]                                     = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrBufferInfo"]                                     = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrBufferInfo"]                                     = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrBufferInfo"]                                     = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrSetup"]                                          = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrSetup"]                                          = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrSetup"]                                          = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrSetup"]                                          = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrFactor"]                                         = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrFactor"]                                         = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrFactor"]                                         = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrFactor"]                                         = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrZeroPivot"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrZeroPivot"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrZeroPivot"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrZeroPivot"]                                      = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpScsrqrSolve"]                                          = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDcsrqrSolve"]                                          = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCcsrqrSolve"]                                          = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpZcsrqrSolve"]                                          = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpCreateCsrcholInfoHost"]                                = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpDestroyCsrcholInfoHost"]                               = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverSpXcsrcholAnalysisHost"]                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholBufferInfoHost"]                               = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrcholBufferInfoHost"]                               = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrcholBufferInfoHost"]                               = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrcholBufferInfoHost"]                               = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholFactorHost"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrcholFactorHost"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrcholFactorHost"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrcholFactorHost"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholZeroPivotHost"]                                = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrcholZeroPivotHost"]                                = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrcholZeroPivotHost"]                                = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrcholZeroPivotHost"]                                = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholSolveHost"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrcholSolveHost"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrcholSolveHost"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrcholSolveHost"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCreateCsrcholInfo"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDestroyCsrcholInfo"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpXcsrcholAnalysis"]                                     = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholBufferInfo"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrcholBufferInfo"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrcholBufferInfo"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrcholBufferInfo"]                                   = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholFactor"]                                       = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrcholFactor"]                                       = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrcholFactor"]                                       = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrcholFactor"]                                       = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholZeroPivot"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrcholZeroPivot"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrcholZeroPivot"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrcholZeroPivot"]                                    = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholSolve"]                                        = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpDcsrcholSolve"]                                        = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpCcsrcholSolve"]                                        = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpZcsrcholSolve"]                                        = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusolverSpScsrcholDiag"]                                         = {CUDA_101, CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 10200
+  m["cusolverSpDcsrcholDiag"]                                         = {CUDA_101, CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 10200
+  m["cusolverSpCcsrcholDiag"]                                         = {CUDA_101, CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 10200
+  m["cusolverSpZcsrcholDiag"]                                         = {CUDA_101, CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 10200
+  m["cusolverDnXlarft"]                                               = {CUDA_124, CUDA_0,   CUDA_0  };
+  m["cusolverDnXlarft_bufferSize"]                                    = {CUDA_124, CUDA_0,   CUDA_0  };
+  m["cusolverDnXgeev"]                                                = {CUDA_126, CUDA_0,   CUDA_0  }; // CUSOLVER_VERSION 11701
+  m["cusolverDnXgeev_bufferSize"]                                     = {CUDA_126, CUDA_0,   CUDA_0  }; // CUSOLVER_VERSION 11701
+  m["cusolverDnXsyevBatched"]                                         = {CUDA_126, CUDA_0,   CUDA_0  }; // CUSOLVER_VERSION 11701
+  m["cusolverDnXsyevBatched_bufferSize"]                              = {CUDA_126, CUDA_0,   CUDA_0  }; // CUSOLVER_VERSION 11701
+  m["cusolverRfSetupHost"]                                            = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverRfSetupDevice"]                                          = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverRfResetValues"]                                          = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverRfAnalyze"]                                              = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverRfRefactor"]                                             = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverRfAccessBundledFactorsDevice"]                           = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverRfExtractBundledFactorsHost"]                            = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverRfExtractSplitFactorsHost"]                              = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverRfSolve"]                                                = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpScsrlsvluHost"]                                        = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpDcsrlsvluHost"]                                        = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpCcsrlsvluHost"]                                        = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpZcsrlsvluHost"]                                        = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpScsrlsvcholHost"]                                      = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpDcsrlsvcholHost"]                                      = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpCcsrlsvcholHost"]                                      = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpZcsrlsvcholHost"]                                      = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpScsrlsvchol"]                                          = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpDcsrlsvchol"]                                          = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpCcsrlsvchol"]                                          = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverSpZcsrlsvchol"]                                          = {CUDA_0,   CUDA_128, CUDA_0  }; // CUSOLVER_VERSION 11702
+  m["cusolverDnSetMathMode"]                                          = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["cusolverDnGetMathMode"]                                          = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["cusolverDnSetEmulationStrategy"]                                 = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["cusolverDnGetEmulationStrategy"]                                 = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["cusolverRfCreate"]                                               = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfDestroy"]                                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfGetMatrixFormat"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfSetMatrixFormat"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfSetNumericProperties"]                                 = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfGetNumericProperties"]                                 = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfGetNumericBoostReport"]                                = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfSetAlgs"]                                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfGetAlgs"]                                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfGetResetValuesFastMode"]                               = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfSetResetValuesFastMode"]                               = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfBatchSetupHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfBatchResetValues"]                                     = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfBatchAnalyze"]                                         = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfBatchRefactor"]                                        = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfBatchSolve"]                                           = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverRfBatchZeroPivot"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCreate"]                                               = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDestroy"]                                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpSetStream"]                                            = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpGetStream"]                                            = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpXcsrissymHost"]                                        = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpScsrlsvqr"]                                            = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDcsrlsvqr"]                                            = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCcsrlsvqr"]                                            = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpZcsrlsvqr"]                                            = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpScsrlsvqrHost"]                                        = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDcsrlsvqrHost"]                                        = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCcsrlsvqrHost"]                                        = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpZcsrlsvqrHost"]                                        = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpScsrlsqvqrHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDcsrlsqvqrHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCcsrlsqvqrHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpZcsrlsqvqrHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpScsreigvsiHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDcsreigvsiHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCcsreigvsiHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpZcsreigvsiHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpScsreigvsi"]                                           = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDcsreigvsi"]                                           = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCcsreigvsi"]                                           = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpZcsreigvsi"]                                           = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpScsreigsHost"]                                         = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDcsreigsHost"]                                         = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCcsreigsHost"]                                         = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpZcsreigsHost"]                                         = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpXcsrsymrcmHost"]                                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpXcsrperm_bufferSizeHost"]                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpXcsrpermHost"]                                         = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCreateCsrqrInfo"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDestroyCsrqrInfo"]                                     = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpXcsrqrAnalysisBatched"]                                = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpScsrqrBufferInfoBatched"]                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDcsrqrBufferInfoBatched"]                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCcsrqrBufferInfoBatched"]                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpZcsrqrBufferInfoBatched"]                              = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpScsrqrsvBatched"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpDcsrqrsvBatched"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpCcsrqrsvBatched"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverSpZcsrqrsvBatched"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
 
-  {"rocsolver_spotrf",                                   {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsolver_dpotrf",                                   {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsolver_cpotrf",                                   {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsolver_zpotrf",                                   {HIP_3060, HIP_0,    HIP_0   }},
-};
+  return m;
+}();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP {
-  {1, "CUSOLVER Data types"},
-  {2, "CUSOLVER Function Reference"},
-};
+const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_FUNCTION_VER_MAP = [] {
+  std::map<llvm::StringRef, hipAPIversions> m;
+
+  m["hipsolverDnCreate"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDestroy"]                                             = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgetrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgetrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgetrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgetrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgetrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgetrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgetrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgetrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgetrs"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgetrs"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgetrs"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgetrs"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverSetStream"]                                             = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsolverGetStream"]                                             = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsolverDnZZgesv"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCCgesv"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDDgesv"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSSgesv"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZZgesv_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCCgesv_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDDgesv_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSSgesv_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZZgels"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCCgels"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDDgels"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSSgels"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZZgels_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCCgels_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDDgels_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSSgels_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSpotrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDpotrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCpotrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZpotrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSpotrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDpotrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCpotrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZpotrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSpotrs"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDpotrs"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCpotrs"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZpotrs"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSpotrfBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDpotrfBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCpotrfBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZpotrfBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSpotrsBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDpotrsBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCpotrsBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZpotrsBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSpotri_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDpotri_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCpotri_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZpotri_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSpotri"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDpotri"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCpotri"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZpotri"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgeqrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgeqrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgeqrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgeqrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgeqrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgeqrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgeqrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgeqrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSorgqr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDorgqr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCungqr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZungqr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSorgqr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDorgqr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCungqr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZungqr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSormqr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDormqr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCunmqr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZunmqr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSormqr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDormqr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCunmqr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZunmqr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsytrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsytrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCsytrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZsytrf_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsytrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsytrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCsytrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZsytrf"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgebrd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgebrd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgebrd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgebrd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgebrd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgebrd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgebrd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgebrd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSorgbr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDorgbr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCungbr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZungbr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSorgbr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDorgbr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCungbr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZungbr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsytrd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsytrd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnChetrd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZhetrd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsytrd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsytrd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnChetrd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZhetrd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSorgtr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDorgtr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCungtr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZungtr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSorgtr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDorgtr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCungtr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZungtr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSormtr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDormtr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCunmtr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZunmtr_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSormtr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDormtr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCunmtr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZunmtr"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgesvd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgesvd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgesvd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgesvd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgesvd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgesvd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgesvd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgesvd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsyevd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsyevd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCheevd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZheevd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsyevd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsyevd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCheevd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZheevd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsyevdx_bufferSize"]                                  = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnDsyevdx_bufferSize"]                                  = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnCheevdx_bufferSize"]                                  = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnZheevdx_bufferSize"]                                  = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnSsyevdx"]                                             = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnDsyevdx"]                                             = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnCheevdx"]                                             = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnZheevdx"]                                             = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnSsygvdx_bufferSize"]                                  = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnDsygvdx_bufferSize"]                                  = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnChegvdx_bufferSize"]                                  = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnZhegvdx_bufferSize"]                                  = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnSsygvdx"]                                             = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnDsygvdx"]                                             = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnChegvdx"]                                             = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnZhegvdx"]                                             = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverDnSsygvd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsygvd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnChegvd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZhegvd_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsygvd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsygvd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnChegvd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZhegvd"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCreateSyevjInfo"]                                     = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDestroySyevjInfo"]                                    = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXsyevjSetTolerance"]                                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXsyevjSetMaxSweeps"]                                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXsyevjSetSortEig"]                                    = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXsyevjGetResidual"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXsyevjGetSweeps"]                                     = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsyevjBatched_bufferSize"]                            = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsyevjBatched_bufferSize"]                            = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCheevjBatched_bufferSize"]                            = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZheevjBatched_bufferSize"]                            = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsyevjBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsyevjBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCheevjBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZheevjBatched"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsyevj_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsyevj_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCheevj_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZheevj_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsyevj"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsyevj"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCheevj"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZheevj"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsygvj_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsygvj_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnChegvj_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZhegvj_bufferSize"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSsygvj"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDsygvj"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnChegvj"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZhegvj"]                                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCreateGesvdjInfo"]                                    = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDestroyGesvdjInfo"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXgesvdjSetTolerance"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXgesvdjSetMaxSweeps"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXgesvdjSetSortEig"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXgesvdjGetResidual"]                                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnXgesvdjGetSweeps"]                                    = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgesvdjBatched_bufferSize"]                           = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgesvdjBatched_bufferSize"]                           = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgesvdjBatched_bufferSize"]                           = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgesvdjBatched_bufferSize"]                           = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgesvdjBatched"]                                      = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgesvdjBatched"]                                      = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgesvdjBatched"]                                      = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgesvdjBatched"]                                      = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgesvdj_bufferSize"]                                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgesvdj_bufferSize"]                                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgesvdj_bufferSize"]                                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgesvdj_bufferSize"]                                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgesvdj"]                                             = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnDgesvdj"]                                             = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnCgesvdj"]                                             = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnZgesvdj"]                                             = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverDnSgesvdaStridedBatched_bufferSize"]                    = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsolverDnDgesvdaStridedBatched_bufferSize"]                    = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsolverDnCgesvdaStridedBatched_bufferSize"]                    = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsolverDnZgesvdaStridedBatched_bufferSize"]                    = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsolverDnSgesvdaStridedBatched"]                               = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsolverDnDgesvdaStridedBatched"]                               = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsolverDnCgesvdaStridedBatched"]                               = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsolverDnZgesvdaStridedBatched"]                               = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsolverRfCreate"]                                              = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfDestroy"]                                             = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfGetMatrixFormat"]                                     = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfSetMatrixFormat"]                                     = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfSetNumericProperties"]                                = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfGetNumericProperties"]                                = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfGetNumericBoostReport"]                               = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfSetAlgs"]                                             = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfGetResetValuesFastMode"]                              = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfSetResetValuesFastMode"]                              = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfSetupHost"]                                           = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfSetupDevice"]                                         = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfResetValues"]                                         = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfAnalyze"]                                             = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfRefactor"]                                            = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfAccessBundledFactorsDevice"]                          = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfExtractBundledFactorsHost"]                           = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfExtractSplitFactorsHost"]                             = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfSolve"]                                               = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfBatchSetupHost"]                                      = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfBatchResetValues"]                                    = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfBatchAnalyze"]                                        = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfBatchRefactor"]                                       = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfBatchSolve"]                                          = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfBatchZeroPivot"]                                      = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverSpCreate"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverSpDestroy"]                                             = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverSpSetStream"]                                           = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverSpScsrlsvchol"]                                         = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverSpDcsrlsvchol"]                                         = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverSpScsrlsvcholHost"]                                     = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverSpDcsrlsvcholHost"]                                     = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverDnCreateParams"]                                        = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverDnDestroyParams"]                                       = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverDnSetAdvOptions"]                                       = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverDnXgetrf"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverDnXgetrf_bufferSize"]                                   = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverDnXgetrs"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverDnSetDeterministicMode"]                                = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipsolverDnGetDeterministicMode"]                                = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipsolverDnXgeqrf_bufferSize"]                                   = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipsolverDnXgeqrf"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipsolverDnXpotrf_bufferSize"]                                   = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipsolverDnXpotrf"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipsolverDnXpotrs"]                                              = {HIP_6030, HIP_0,    HIP_0   };
+  m["hipsolverSpScsrlsvqr"]                                           = {HIP_6040, HIP_0,    HIP_0   };
+  m["hipsolverSpDcsrlsvqr"]                                           = {HIP_6040, HIP_0,    HIP_0   };
+  m["hipsolverSpCcsrlsvqr"]                                           = {HIP_7000, HIP_0,    HIP_0   };
+  m["hipsolverSpZcsrlsvqr"]                                           = {HIP_7000, HIP_0,    HIP_0   };
+
+  m["rocsolver_spotrf"]                                               = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsolver_dpotrf"]                                               = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsolver_cpotrf"]                                               = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsolver_zpotrf"]                                               = {HIP_3060, HIP_0,    HIP_0   };
+
+  return m;
+}();
+
+const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP = [] {
+  std::map<unsigned int, llvm::StringRef> m;
+
+  m[1]                                                                = "CUSOLVER Data types";
+  m[2]                                                                = "CUSOLVER Function Reference";
+
+  return m;
+}();
