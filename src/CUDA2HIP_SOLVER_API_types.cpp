@@ -23,343 +23,354 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP {
-  {"cusolverStatus_t",                                         {"hipsolverStatus_t",                                         "rocblas_status",                                                   CONV_TYPE, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_SUCCESS",                                  {"HIPSOLVER_STATUS_SUCCESS",                                  "rocblas_status_success",                                           CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_NOT_INITIALIZED",                          {"HIPSOLVER_STATUS_NOT_INITIALIZED",                          "rocblas_status_invalid_handle",                                    CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_ALLOC_FAILED",                             {"HIPSOLVER_STATUS_ALLOC_FAILED",                             "rocblas_status_memory_error",                                      CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_INVALID_VALUE",                            {"HIPSOLVER_STATUS_INVALID_VALUE",                            "rocblas_status_invalid_value",                                     CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_ARCH_MISMATCH",                            {"HIPSOLVER_STATUS_ARCH_MISMATCH",                            "rocblas_status_arch_mismatch",                                     CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_MAPPING_ERROR",                            {"HIPSOLVER_STATUS_MAPPING_ERROR",                            "rocblas_status_not_implemented",                                   CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_EXECUTION_FAILED",                         {"HIPSOLVER_STATUS_EXECUTION_FAILED",                         "rocblas_status_not_implemented",                                   CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_INTERNAL_ERROR",                           {"HIPSOLVER_STATUS_INTERNAL_ERROR",                           "rocblas_status_internal_error",                                    CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED",                {"HIPSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED",                "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_STATUS_NOT_SUPPORTED",                            {"HIPSOLVER_STATUS_NOT_SUPPORTED",                            "rocblas_status_not_implemented",                                   CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_ZERO_PIVOT",                               {"HIPSOLVER_STATUS_ZERO_PIVOT",                               "rocblas_status_not_implemented",                                   CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_STATUS_INVALID_LICENSE",                          {"HIPSOLVER_STATUS_INVALID_LICENSE",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED",               {"HIPSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED",               "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_PARAMS_INVALID",                       {"HIPSOLVER_STATUS_INVALID_VALUE",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_PARAMS_INVALID_PREC",                  {"HIPSOLVER_STATUS_IRS_PARAMS_INVALID_PREC",                  "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE",                {"HIPSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE",                "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_PARAMS_INVALID_MAXITER",               {"HIPSOLVER_STATUS_IRS_PARAMS_INVALID_MAXITER",               "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_INTERNAL_ERROR",                       {"HIPSOLVER_STATUS_INTERNAL_ERROR",                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_NOT_SUPPORTED",                        {"HIPSOLVER_STATUS_NOT_SUPPORTED",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_OUT_OF_RANGE",                         {"HIPSOLVER_STATUS_IRS_OUT_OF_RANGE",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES",  {"HIPSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES",  "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED",                {"HIPSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED",                "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_INFOS_NOT_DESTROYED",                  {"HIPSOLVER_STATUS_IRS_INFOS_NOT_DESTROYED",                  "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_IRS_MATRIX_SINGULAR",                      {"HIPSOLVER_STATUS_IRS_MATRIX_SINGULAR",                      "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_STATUS_INVALID_WORKSPACE",                        {"HIPSOLVER_STATUS_INVALID_WORKSPACE",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDnContext",                                        {"hipsolverDnContext",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDnHandle_t",                                       {"hipsolverHandle_t",                                         "rocblas_handle",                                                   CONV_TYPE, API_SOLVER, 1}},
-  {"cusolverEigType_t",                                        {"hipsolverEigType_t",                                        "rocblas_eform",                                                    CONV_TYPE, API_SOLVER, 1}},
-  {"CUSOLVER_EIG_TYPE_1",                                      {"HIPSOLVER_EIG_TYPE_1",                                      "rocblas_eform_ax",                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_EIG_TYPE_2",                                      {"HIPSOLVER_EIG_TYPE_2",                                      "rocblas_eform_abx",                                                CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_EIG_TYPE_3",                                      {"HIPSOLVER_EIG_TYPE_3",                                      "rocblas_eform_bax",                                                CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"cusolverEigMode_t",                                        {"hipsolverEigMode_t",                                        "rocblas_evect",                                                    CONV_TYPE, API_SOLVER, 1}},
-  {"CUSOLVER_EIG_MODE_NOVECTOR",                               {"HIPSOLVER_EIG_MODE_NOVECTOR",                               "rocblas_evect_none",                                               CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_EIG_MODE_VECTOR",                                 {"HIPSOLVER_EIG_MODE_VECTOR",                                 "rocblas_evect_original",                                           CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"cusolverEigRange_t",                                       {"hipsolverEigRange_t",                                       "rocblas_erange",                                                   CONV_TYPE, API_SOLVER, 1}},
-  {"CUSOLVER_EIG_RANGE_ALL",                                   {"HIPSOLVER_EIG_RANGE_ALL",                                   "rocblas_erange_all",                                               CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_EIG_RANGE_I",                                     {"HIPSOLVER_EIG_RANGE_I",                                     "rocblas_erange_index",                                             CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"CUSOLVER_EIG_RANGE_V",                                     {"HIPSOLVER_EIG_RANGE_V",                                     "rocblas_erange_value",                                             CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"cusolverNorm_t",                                           {"hipsolverNorm_t",                                           "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_INF_NORM",                                        {"HIPSOLVER_INF_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_MAX_NORM",                                        {"HIPSOLVER_MAX_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_ONE_NORM",                                        {"HIPSOLVER_ONE_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_FRO_NORM",                                        {"HIPSOLVER_FRO_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverIRSRefinement_t",                                  {"hipsolverIRSRefinement_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_IRS_REFINE_NOT_SET",                              {"HIPSOLVER_IRS_REFINE_NOT_SET",                              "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_IRS_REFINE_NONE",                                 {"HIPSOLVER_IRS_REFINE_NONE",                                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_IRS_REFINE_CLASSICAL",                            {"HIPSOLVER_IRS_REFINE_CLASSICAL",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_IRS_REFINE_CLASSICAL_GMRES",                      {"HIPSOLVER_IRS_REFINE_CLASSICAL_GMRES",                      "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_IRS_REFINE_GMRES",                                {"HIPSOLVER_IRS_REFINE_GMRES",                                "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_IRS_REFINE_GMRES_GMRES",                          {"HIPSOLVER_IRS_REFINE_GMRES_GMRES",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_IRS_REFINE_GMRES_NOPCOND",                        {"HIPSOLVER_IRS_REFINE_GMRES_NOPCOND",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_PREC_DD",                                         {"HIPSOLVER_PREC_DD",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_PREC_SS",                                         {"HIPSOLVER_PREC_SS",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_PREC_SHT",                                        {"HIPSOLVER_PREC_SHT",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDirectMode_t",                                     {"hipsolverDirectMode_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUBLAS_DIRECT_FORWARD",                                    {"HIPBLAS_DIRECT_FORWARD",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUBLAS_DIRECT_BACKWARD",                                   {"HIPBLAS_DIRECT_BACKWARD",                                   "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverStorevMode_t",                                     {"hipsolverStorevMode_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUBLAS_STOREV_COLUMNWISE",                                 {"HIPBLAS_STOREV_COLUMNWISE",                                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUBLAS_STOREV_ROWWISE",                                    {"HIPBLAS_STOREV_ROWWISE",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverAlgMode_t",                                        {"hipsolverAlgMode_t",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_ALG_0",                                           {"HIPSOLVER_ALG_0",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_ALG_1",                                           {"HIPSOLVER_ALG_1",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_ALG_2",                                           {"HIPSOLVER_ALG_2",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverPrecType_t",                                       {"hipsolverPrecType_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_R_8I",                                            {"HIPSOLVER_R_8I",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_R_8U",                                            {"HIPSOLVER_R_8U",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_R_64F",                                           {"HIPSOLVER_R_64F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_R_32F",                                           {"HIPSOLVER_R_32F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_R_16F",                                           {"HIPSOLVER_R_16F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_R_16BF",                                          {"HIPSOLVER_R_16BF",                                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_R_TF32",                                          {"HIPSOLVER_R_TF32",                                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_R_AP",                                            {"HIPSOLVER_R_AP",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_C_8I",                                            {"HIPSOLVER_C_8I",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_C_8U",                                            {"HIPSOLVER_C_8U",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_C_64F",                                           {"HIPSOLVER_C_64F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_C_32F",                                           {"HIPSOLVER_C_32F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_C_16F",                                           {"HIPSOLVER_C_16F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_C_16BF",                                          {"HIPSOLVER_C_16BF",                                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_C_TF32",                                          {"HIPSOLVER_C_TF32",                                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_C_AP",                                            {"HIPSOLVER_C_AP",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"syevjInfo",                                                {"hipsyevjInfo",                                              "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"syevjInfo_t",                                              {"hipsolverSyevjInfo_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"gesvdjInfo",                                               {"hipgesvdjInfo",                                             "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"gesvdjInfo_t",                                             {"hipsolverGesvdjInfo_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverDnIRSParams",                                      {"hipsolverDnIRSParams",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDnIRSParams_t",                                    {"hipsolverDnIRSParams_t",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDnIRSInfos",                                       {"hipsolverDnIRSInfos",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDnIRSInfos_t",                                     {"hipsolverDnIRSInfos_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDnParams",                                         {"hipsolverDnParams",                                         "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDnParams_t",                                       {"hipsolverDnParams_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverDnFunction_t",                                     {"hipsolverDnFunction_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERDN_GETRF",                                         {"HIPSOLVERDN_GETRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERDN_POTRF",                                         {"HIPSOLVERDN_POTRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVERDN_SYEVBATCHED",                                   {"HIPSOLVERDN_SYEVBATCHED",                                   "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverDeterministicMode_t",                              {"hipsolverDeterministicMode_t",                              "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_DETERMINISTIC_RESULTS",                           {"HIPSOLVER_DETERMINISTIC_RESULTS",                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 {"HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolver_int_t",                                           {"int",                                                       "rocblas_int",                                                      CONV_NUMERIC_LITERAL, API_SOLVER, 1}},
-  {"cusolverDnLoggerCallback_t",                               {"hipsolverDnLoggerCallback_t",                               "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverMgContext",                                        {"hipsolverMgContext",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverMgHandle_t",                                       {"hipsolverMgHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverMgGridMapping_t",                                  {"hipsolverMgGridMapping_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUDALIBMG_GRID_MAPPING_ROW_MAJOR",                         {"HIP_LIBMG_GRID_MAPPING_ROW_MAJOR",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUDALIBMG_GRID_MAPPING_COL_MAJOR",                         {"HIP_LIBMG_GRID_MAPPING_COL_MAJOR",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"cudaLibMgGrid_t",                                          {"hipLibMgGrid_t",                                            "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cudaLibMgMatrixDesc_t",                                    {"hipLibMgMatrixDesc_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverRfResetValuesFastMode_t",                          {"hipsolverRfResetValuesFastMode_t",                          "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_RESET_VALUES_FAST_MODE_OFF",                    {"HIPSOLVERRF_RESET_VALUES_FAST_MODE_OFF",                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_RESET_VALUES_FAST_MODE_ON",                     {"HIPSOLVERRF_RESET_VALUES_FAST_MODE_ON",                     "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverRfMatrixFormat_t",                                 {"hipsolverRfMatrixFormat_t",                                 "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_MATRIX_FORMAT_CSR",                             {"HIPSOLVERRF_MATRIX_FORMAT_CSR",                             "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_MATRIX_FORMAT_CSC",                             {"HIPSOLVERRF_MATRIX_FORMAT_CSC",                             "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverRfUnitDiagonal_t",                                 {"hipsolverRfUnitDiagonal_t",                                 "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_UNIT_DIAGONAL_STORED_L",                        {"HIPSOLVERRF_UNIT_DIAGONAL_STORED_L",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_UNIT_DIAGONAL_STORED_U",                        {"HIPSOLVERRF_UNIT_DIAGONAL_STORED_U",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L",                       {"HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_L",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_U",                       {"HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_U",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverRfFactorization_t",                                {"hipsolverRfFactorization_t",                                "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_FACTORIZATION_ALG0",                            {"HIPSOLVERRF_FACTORIZATION_ALG0",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_FACTORIZATION_ALG1",                            {"HIPSOLVERRF_FACTORIZATION_ALG1",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_FACTORIZATION_ALG2",                            {"HIPSOLVERRF_FACTORIZATION_ALG2",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverRfTriangularSolve_t",                              {"hipsolverRfTriangularSolve_t",                              "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_TRIANGULAR_SOLVE_ALG1",                         {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG1",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_TRIANGULAR_SOLVE_ALG2",                         {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG2",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_TRIANGULAR_SOLVE_ALG3",                         {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG3",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverRfNumericBoostReport_t",                           {"hipsolverRfNumericBoostReport_t",                           "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_NUMERIC_BOOST_NOT_USED",                        {"HIPSOLVERRF_NUMERIC_BOOST_NOT_USED",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"CUSOLVERRF_NUMERIC_BOOST_USED",                            {"HIPSOLVERRF_NUMERIC_BOOST_USED",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverRfCommon",                                         {"hipsolverRfCommon",                                         "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverRfHandle_t",                                       {"hipsolverRfHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"cusolverSpContext",                                        {"hipsolverSpContext",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverSpHandle_t",                                       {"hipsolverSpHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED}},
-  {"csrqrInfo",                                                {"hipsolvercsrqrInfo",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrqrInfo_t",                                              {"hipsolvercsrqrInfo_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrluInfoHost",                                            {"hipsolvercsrluInfoHost",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrluInfoHost_t",                                          {"hipsolvercsrluInfoHost_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrqrInfoHost",                                            {"hipsolvercsrqrInfoHost",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrqrInfoHost_t",                                          {"hipsolvercsrqrInfoHost_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrcholInfoHost",                                          {"hipsolvercsrcholInfoHost",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrcholInfoHost_t",                                        {"hipsolvercsrcholInfoHost_t",                                "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrcholInfo",                                              {"hipsolvercsrcholInfo",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"csrcholInfo_t",                                            {"hipsolvercsrcholInfo_t",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"cusolverMathMode_t",                                       {"hipsolverMathMode_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_DEFAULT_MATH",                                    {"HIPSOLVER_DEFAULT_MATH",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-  {"CUSOLVER_FP32_EMULATED_BF16X9_MATH",                       {"HIPSOLVER_FP32_EMULATED_BF16X9_MATH",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED}},
-};
+const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP = [] {
+  std::map<llvm::StringRef, hipCounter> m;
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP {
-  {"cusolver_int_t",                                           {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED",               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_PARAMS_INVALID",                       {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_PARAMS_INVALID_PREC",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_PARAMS_INVALID_MAXITER",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_INTERNAL_ERROR",                       {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_NOT_SUPPORTED",                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_OUT_OF_RANGE",                         {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES",  {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED",                {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_INFOS_NOT_DESTROYED",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_IRS_MATRIX_SINGULAR",                      {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_STATUS_INVALID_WORKSPACE",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverEigType_t",                                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_EIG_TYPE_1",                                      {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_EIG_TYPE_2",                                      {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_EIG_TYPE_3",                                      {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverEigMode_t",                                        {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_EIG_MODE_NOVECTOR",                               {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_EIG_MODE_VECTOR",                                 {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusolverEigRange_t",                                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_EIG_RANGE_ALL",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_EIG_RANGE_I",                                     {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_EIG_RANGE_V",                                     {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverNorm_t",                                           {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_INF_NORM",                                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_MAX_NORM",                                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_ONE_NORM",                                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_FRO_NORM",                                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverIRSRefinement_t",                                  {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_IRS_REFINE_NOT_SET",                              {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_IRS_REFINE_NONE",                                 {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_IRS_REFINE_CLASSICAL",                            {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_IRS_REFINE_CLASSICAL_GMRES",                      {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_IRS_REFINE_GMRES",                                {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_IRS_REFINE_GMRES_GMRES",                          {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_IRS_REFINE_GMRES_NOPCOND",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_PREC_DD",                                         {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_PREC_SS",                                         {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_PREC_SHT",                                        {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDirectMode_t",                                     {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUBLAS_DIRECT_FORWARD",                                    {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUBLAS_DIRECT_BACKWARD",                                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverStorevMode_t",                                     {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUBLAS_STOREV_COLUMNWISE",                                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUBLAS_STOREV_ROWWISE",                                    {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverAlgMode_t",                                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_ALG_0",                                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_ALG_1",                                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_ALG_2",                                           {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusolverPrecType_t",                                       {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_R_8I",                                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_R_8U",                                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_R_64F",                                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_R_32F",                                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_R_16F",                                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_R_16BF",                                          {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_R_TF32",                                          {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_R_AP",                                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_C_8I",                                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_C_8U",                                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_C_64F",                                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_C_32F",                                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_C_16F",                                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_C_16BF",                                          {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_C_TF32",                                          {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_C_AP",                                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"syevjInfo",                                                {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"syevjInfo_t",                                              {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"gesvdjInfo",                                               {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"gesvdjInfo_t",                                             {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParams",                                      {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSParams_t",                                    {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfos",                                       {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnIRSInfos_t",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusolverDnParams",                                         {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnParams_t",                                       {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusolverDnFunction_t",                                     {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVERDN_GETRF",                                         {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"CUSOLVERDN_POTRF",                                         {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusolverDeterministicMode_t",                              {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_DETERMINISTIC_RESULTS",                           {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"cusolverDnLoggerCallback_t",                               {CUDA_117, CUDA_0,   CUDA_0  }},
-  {"cusolverMgContext",                                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverMgHandle_t",                                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusolverMgGridMapping_t",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"CUDALIBMG_GRID_MAPPING_ROW_MAJOR",                         {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"CUDALIBMG_GRID_MAPPING_COL_MAJOR",                         {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cudaLibMgGrid_t",                                          {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cudaLibMgMatrixDesc_t",                                    {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"csrluInfoHost",                                            {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"csrluInfoHost_t",                                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"csrqrInfoHost",                                            {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"csrqrInfoHost_t",                                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"csrcholInfoHost",                                          {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"csrcholInfoHost_t",                                        {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"csrcholInfo",                                              {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"csrcholInfo_t",                                            {CUDA_75,  CUDA_0,   CUDA_0  }},
-  {"cusolverMathMode_t",                                       {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_DEFAULT_MATH",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"CUSOLVER_FP32_EMULATED_BF16X9_MATH",                       {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"CUSOLVERDN_SYEVBATCHED",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
-};
+  m["cusolverStatus_t"]                                               = {"hipsolverStatus_t",                                         "rocblas_status",                                                   CONV_TYPE, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_SUCCESS"]                                        = {"HIPSOLVER_STATUS_SUCCESS",                                  "rocblas_status_success",                                           CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_NOT_INITIALIZED"]                                = {"HIPSOLVER_STATUS_NOT_INITIALIZED",                          "rocblas_status_invalid_handle",                                    CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_ALLOC_FAILED"]                                   = {"HIPSOLVER_STATUS_ALLOC_FAILED",                             "rocblas_status_memory_error",                                      CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_INVALID_VALUE"]                                  = {"HIPSOLVER_STATUS_INVALID_VALUE",                            "rocblas_status_invalid_value",                                     CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_ARCH_MISMATCH"]                                  = {"HIPSOLVER_STATUS_ARCH_MISMATCH",                            "rocblas_status_arch_mismatch",                                     CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_MAPPING_ERROR"]                                  = {"HIPSOLVER_STATUS_MAPPING_ERROR",                            "rocblas_status_not_implemented",                                   CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_EXECUTION_FAILED"]                               = {"HIPSOLVER_STATUS_EXECUTION_FAILED",                         "rocblas_status_not_implemented",                                   CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_INTERNAL_ERROR"]                                 = {"HIPSOLVER_STATUS_INTERNAL_ERROR",                           "rocblas_status_internal_error",                                    CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED"]                      = {"HIPSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED",                "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_STATUS_NOT_SUPPORTED"]                                  = {"HIPSOLVER_STATUS_NOT_SUPPORTED",                            "rocblas_status_not_implemented",                                   CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_ZERO_PIVOT"]                                     = {"HIPSOLVER_STATUS_ZERO_PIVOT",                               "rocblas_status_not_implemented",                                   CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_STATUS_INVALID_LICENSE"]                                = {"HIPSOLVER_STATUS_INVALID_LICENSE",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED"]                     = {"HIPSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED",               "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_PARAMS_INVALID"]                             = {"HIPSOLVER_STATUS_INVALID_VALUE",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_PARAMS_INVALID_PREC"]                        = {"HIPSOLVER_STATUS_IRS_PARAMS_INVALID_PREC",                  "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE"]                      = {"HIPSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE",                "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_PARAMS_INVALID_MAXITER"]                     = {"HIPSOLVER_STATUS_IRS_PARAMS_INVALID_MAXITER",               "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_INTERNAL_ERROR"]                             = {"HIPSOLVER_STATUS_INTERNAL_ERROR",                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_NOT_SUPPORTED"]                              = {"HIPSOLVER_STATUS_NOT_SUPPORTED",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_OUT_OF_RANGE"]                               = {"HIPSOLVER_STATUS_IRS_OUT_OF_RANGE",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES"]        = {"HIPSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES",  "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED"]                      = {"HIPSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED",                "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_INFOS_NOT_DESTROYED"]                        = {"HIPSOLVER_STATUS_IRS_INFOS_NOT_DESTROYED",                  "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_IRS_MATRIX_SINGULAR"]                            = {"HIPSOLVER_STATUS_IRS_MATRIX_SINGULAR",                      "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_STATUS_INVALID_WORKSPACE"]                              = {"HIPSOLVER_STATUS_INVALID_WORKSPACE",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDnContext"]                                              = {"hipsolverDnContext",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDnHandle_t"]                                             = {"hipsolverHandle_t",                                         "rocblas_handle",                                                   CONV_TYPE, API_SOLVER, 1};
+  m["cusolverEigType_t"]                                              = {"hipsolverEigType_t",                                        "rocblas_eform",                                                    CONV_TYPE, API_SOLVER, 1};
+  m["CUSOLVER_EIG_TYPE_1"]                                            = {"HIPSOLVER_EIG_TYPE_1",                                      "rocblas_eform_ax",                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_EIG_TYPE_2"]                                            = {"HIPSOLVER_EIG_TYPE_2",                                      "rocblas_eform_abx",                                                CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_EIG_TYPE_3"]                                            = {"HIPSOLVER_EIG_TYPE_3",                                      "rocblas_eform_bax",                                                CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["cusolverEigMode_t"]                                              = {"hipsolverEigMode_t",                                        "rocblas_evect",                                                    CONV_TYPE, API_SOLVER, 1};
+  m["CUSOLVER_EIG_MODE_NOVECTOR"]                                     = {"HIPSOLVER_EIG_MODE_NOVECTOR",                               "rocblas_evect_none",                                               CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_EIG_MODE_VECTOR"]                                       = {"HIPSOLVER_EIG_MODE_VECTOR",                                 "rocblas_evect_original",                                           CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["cusolverEigRange_t"]                                             = {"hipsolverEigRange_t",                                       "rocblas_erange",                                                   CONV_TYPE, API_SOLVER, 1};
+  m["CUSOLVER_EIG_RANGE_ALL"]                                         = {"HIPSOLVER_EIG_RANGE_ALL",                                   "rocblas_erange_all",                                               CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_EIG_RANGE_I"]                                           = {"HIPSOLVER_EIG_RANGE_I",                                     "rocblas_erange_index",                                             CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["CUSOLVER_EIG_RANGE_V"]                                           = {"HIPSOLVER_EIG_RANGE_V",                                     "rocblas_erange_value",                                             CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["cusolverNorm_t"]                                                 = {"hipsolverNorm_t",                                           "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_INF_NORM"]                                              = {"HIPSOLVER_INF_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_MAX_NORM"]                                              = {"HIPSOLVER_MAX_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_ONE_NORM"]                                              = {"HIPSOLVER_ONE_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_FRO_NORM"]                                              = {"HIPSOLVER_FRO_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverIRSRefinement_t"]                                        = {"hipsolverIRSRefinement_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_IRS_REFINE_NOT_SET"]                                    = {"HIPSOLVER_IRS_REFINE_NOT_SET",                              "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_IRS_REFINE_NONE"]                                       = {"HIPSOLVER_IRS_REFINE_NONE",                                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_IRS_REFINE_CLASSICAL"]                                  = {"HIPSOLVER_IRS_REFINE_CLASSICAL",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_IRS_REFINE_CLASSICAL_GMRES"]                            = {"HIPSOLVER_IRS_REFINE_CLASSICAL_GMRES",                      "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_IRS_REFINE_GMRES"]                                      = {"HIPSOLVER_IRS_REFINE_GMRES",                                "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_IRS_REFINE_GMRES_GMRES"]                                = {"HIPSOLVER_IRS_REFINE_GMRES_GMRES",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_IRS_REFINE_GMRES_NOPCOND"]                              = {"HIPSOLVER_IRS_REFINE_GMRES_NOPCOND",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_PREC_DD"]                                               = {"HIPSOLVER_PREC_DD",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_PREC_SS"]                                               = {"HIPSOLVER_PREC_SS",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_PREC_SHT"]                                              = {"HIPSOLVER_PREC_SHT",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDirectMode_t"]                                           = {"hipsolverDirectMode_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["CUBLAS_DIRECT_FORWARD"]                                          = {"HIPBLAS_DIRECT_FORWARD",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUBLAS_DIRECT_BACKWARD"]                                         = {"HIPBLAS_DIRECT_BACKWARD",                                   "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverStorevMode_t"]                                           = {"hipsolverStorevMode_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["CUBLAS_STOREV_COLUMNWISE"]                                       = {"HIPBLAS_STOREV_COLUMNWISE",                                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUBLAS_STOREV_ROWWISE"]                                          = {"HIPBLAS_STOREV_ROWWISE",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverAlgMode_t"]                                              = {"hipsolverAlgMode_t",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_ALG_0"]                                                 = {"HIPSOLVER_ALG_0",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_ALG_1"]                                                 = {"HIPSOLVER_ALG_1",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_ALG_2"]                                                 = {"HIPSOLVER_ALG_2",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverPrecType_t"]                                             = {"hipsolverPrecType_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_R_8I"]                                                  = {"HIPSOLVER_R_8I",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_R_8U"]                                                  = {"HIPSOLVER_R_8U",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_R_64F"]                                                 = {"HIPSOLVER_R_64F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_R_32F"]                                                 = {"HIPSOLVER_R_32F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_R_16F"]                                                 = {"HIPSOLVER_R_16F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_R_16BF"]                                                = {"HIPSOLVER_R_16BF",                                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_R_TF32"]                                                = {"HIPSOLVER_R_TF32",                                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_R_AP"]                                                  = {"HIPSOLVER_R_AP",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_C_8I"]                                                  = {"HIPSOLVER_C_8I",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_C_8U"]                                                  = {"HIPSOLVER_C_8U",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_C_64F"]                                                 = {"HIPSOLVER_C_64F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_C_32F"]                                                 = {"HIPSOLVER_C_32F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_C_16F"]                                                 = {"HIPSOLVER_C_16F",                                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_C_16BF"]                                                = {"HIPSOLVER_C_16BF",                                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_C_TF32"]                                                = {"HIPSOLVER_C_TF32",                                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_C_AP"]                                                  = {"HIPSOLVER_C_AP",                                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["syevjInfo"]                                                      = {"hipsyevjInfo",                                              "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["syevjInfo_t"]                                                    = {"hipsolverSyevjInfo_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["gesvdjInfo"]                                                     = {"hipgesvdjInfo",                                             "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["gesvdjInfo_t"]                                                   = {"hipsolverGesvdjInfo_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverDnIRSParams"]                                            = {"hipsolverDnIRSParams",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDnIRSParams_t"]                                          = {"hipsolverDnIRSParams_t",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDnIRSInfos"]                                             = {"hipsolverDnIRSInfos",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDnIRSInfos_t"]                                           = {"hipsolverDnIRSInfos_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDnParams"]                                               = {"hipsolverDnParams",                                         "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDnParams_t"]                                             = {"hipsolverDnParams_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverDnFunction_t"]                                           = {"hipsolverDnFunction_t",                                     "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERDN_GETRF"]                                               = {"HIPSOLVERDN_GETRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERDN_POTRF"]                                               = {"HIPSOLVERDN_POTRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVERDN_SYEVBATCHED"]                                         = {"HIPSOLVERDN_SYEVBATCHED",                                   "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverDeterministicMode_t"]                                    = {"hipsolverDeterministicMode_t",                              "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_DETERMINISTIC_RESULTS"]                                 = {"HIPSOLVER_DETERMINISTIC_RESULTS",                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS"]                       = {"HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolver_int_t"]                                                 = {"int",                                                       "rocblas_int",                                                      CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["cusolverDnLoggerCallback_t"]                                     = {"hipsolverDnLoggerCallback_t",                               "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverMgContext"]                                              = {"hipsolverMgContext",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverMgHandle_t"]                                             = {"hipsolverMgHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverMgGridMapping_t"]                                        = {"hipsolverMgGridMapping_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["CUDALIBMG_GRID_MAPPING_ROW_MAJOR"]                               = {"HIP_LIBMG_GRID_MAPPING_ROW_MAJOR",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUDALIBMG_GRID_MAPPING_COL_MAJOR"]                               = {"HIP_LIBMG_GRID_MAPPING_COL_MAJOR",                          "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["cudaLibMgGrid_t"]                                                = {"hipLibMgGrid_t",                                            "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cudaLibMgMatrixDesc_t"]                                          = {"hipLibMgMatrixDesc_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverRfResetValuesFastMode_t"]                                = {"hipsolverRfResetValuesFastMode_t",                          "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_RESET_VALUES_FAST_MODE_OFF"]                          = {"HIPSOLVERRF_RESET_VALUES_FAST_MODE_OFF",                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_RESET_VALUES_FAST_MODE_ON"]                           = {"HIPSOLVERRF_RESET_VALUES_FAST_MODE_ON",                     "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverRfMatrixFormat_t"]                                       = {"hipsolverRfMatrixFormat_t",                                 "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_MATRIX_FORMAT_CSR"]                                   = {"HIPSOLVERRF_MATRIX_FORMAT_CSR",                             "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_MATRIX_FORMAT_CSC"]                                   = {"HIPSOLVERRF_MATRIX_FORMAT_CSC",                             "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverRfUnitDiagonal_t"]                                       = {"hipsolverRfUnitDiagonal_t",                                 "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_UNIT_DIAGONAL_STORED_L"]                              = {"HIPSOLVERRF_UNIT_DIAGONAL_STORED_L",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_UNIT_DIAGONAL_STORED_U"]                              = {"HIPSOLVERRF_UNIT_DIAGONAL_STORED_U",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_L"]                             = {"HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_L",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_UNIT_DIAGONAL_ASSUMED_U"]                             = {"HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_U",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverRfFactorization_t"]                                      = {"hipsolverRfFactorization_t",                                "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_FACTORIZATION_ALG0"]                                  = {"HIPSOLVERRF_FACTORIZATION_ALG0",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_FACTORIZATION_ALG1"]                                  = {"HIPSOLVERRF_FACTORIZATION_ALG1",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_FACTORIZATION_ALG2"]                                  = {"HIPSOLVERRF_FACTORIZATION_ALG2",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverRfTriangularSolve_t"]                                    = {"hipsolverRfTriangularSolve_t",                              "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_TRIANGULAR_SOLVE_ALG1"]                               = {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG1",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_TRIANGULAR_SOLVE_ALG2"]                               = {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG2",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_TRIANGULAR_SOLVE_ALG3"]                               = {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG3",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverRfNumericBoostReport_t"]                                 = {"hipsolverRfNumericBoostReport_t",                           "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_NUMERIC_BOOST_NOT_USED"]                              = {"HIPSOLVERRF_NUMERIC_BOOST_NOT_USED",                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["CUSOLVERRF_NUMERIC_BOOST_USED"]                                  = {"HIPSOLVERRF_NUMERIC_BOOST_USED",                            "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverRfCommon"]                                               = {"hipsolverRfCommon",                                         "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverRfHandle_t"]                                             = {"hipsolverRfHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["cusolverSpContext"]                                              = {"hipsolverSpContext",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverSpHandle_t"]                                             = {"hipsolverSpHandle_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
+  m["csrqrInfo"]                                                      = {"hipsolvercsrqrInfo",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrqrInfo_t"]                                                    = {"hipsolvercsrqrInfo_t",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrluInfoHost"]                                                  = {"hipsolvercsrluInfoHost",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrluInfoHost_t"]                                                = {"hipsolvercsrluInfoHost_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrqrInfoHost"]                                                  = {"hipsolvercsrqrInfoHost",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrqrInfoHost_t"]                                                = {"hipsolvercsrqrInfoHost_t",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrcholInfoHost"]                                                = {"hipsolvercsrcholInfoHost",                                  "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrcholInfoHost_t"]                                              = {"hipsolvercsrcholInfoHost_t",                                "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrcholInfo"]                                                    = {"hipsolvercsrcholInfo",                                      "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["csrcholInfo_t"]                                                  = {"hipsolvercsrcholInfo_t",                                    "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["cusolverMathMode_t"]                                             = {"hipsolverMathMode_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_DEFAULT_MATH"]                                          = {"HIPSOLVER_DEFAULT_MATH",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_FP32_EMULATED_BF16X9_MATH"]                             = {"HIPSOLVER_FP32_EMULATED_BF16X9_MATH",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP {
-  {"hipsolverStatus_t",                                        {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_SUCCESS",                                 {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_NOT_INITIALIZED",                         {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_ALLOC_FAILED",                            {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_INVALID_VALUE",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_ARCH_MISMATCH",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_MAPPING_ERROR",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_EXECUTION_FAILED",                        {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_INTERNAL_ERROR",                          {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_NOT_SUPPORTED",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_ZERO_PIVOT",                              {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverHandle_t",                                        {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsolverEigType_t",                                       {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_EIG_TYPE_1",                                     {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_EIG_TYPE_2",                                     {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_EIG_TYPE_3",                                     {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsolverEigMode_t",                                       {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_EIG_MODE_NOVECTOR",                              {HIP_4050, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_EIG_MODE_VECTOR",                                {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsolverEigRange_t",                                      {HIP_5030, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_EIG_RANGE_ALL",                                  {HIP_5030, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_EIG_RANGE_I",                                    {HIP_5030, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_EIG_RANGE_V",                                    {HIP_5030, HIP_0,    HIP_0   }},
-  {"hipsolverSyevjInfo_t",                                     {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverGesvdjInfo_t",                                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsolverRfResetValuesFastMode_t",                         {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_RESET_VALUES_FAST_MODE_OFF",                   {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_RESET_VALUES_FAST_MODE_ON",                    {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfMatrixFormat_t",                                {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_MATRIX_FORMAT_CSR",                            {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_MATRIX_FORMAT_CSC",                            {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfUnitDiagonal_t",                                {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_UNIT_DIAGONAL_STORED_L",                       {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_UNIT_DIAGONAL_STORED_U",                       {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_L",                      {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_U",                      {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfFactorization_t",                               {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_FACTORIZATION_ALG0",                           {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_FACTORIZATION_ALG1",                           {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_FACTORIZATION_ALG2",                           {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfTriangularSolve_t",                             {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG1",                        {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG2",                        {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_TRIANGULAR_SOLVE_ALG3",                        {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfNumericBoostReport_t",                          {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_NUMERIC_BOOST_NOT_USED",                       {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVERRF_NUMERIC_BOOST_USED",                           {HIP_5060, HIP_0,    HIP_0   }},
-  {"hipsolverRfHandle_t",                                      {HIP_5060, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED",               {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverSpHandle_t",                                      {HIP_6010, HIP_0,    HIP_0   }},
-  {"hipsolverDnParams_t",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverAlgMode_t",                                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_ALG_0",                                          {HIP_6020, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_ALG_1",                                          {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverDnFunction_t",                                    {HIP_6020, HIP_0,    HIP_0   }},
-  {"HIPSOLVERDN_GETRF",                                        {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsolverDeterministicMode_t",                             {HIP_6030, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_DETERMINISTIC_RESULTS",                          {HIP_6030, HIP_0,    HIP_0   }},
-  {"HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                {HIP_6030, HIP_0,    HIP_0   }},
+  return m;
+}();
 
-  {"rocblas_int",                                              {HIP_3000, HIP_0,    HIP_0   }},
-  {"rocblas_status",                                           {HIP_3000, HIP_0,    HIP_0   }},
-  {"rocblas_status_success",                                   {HIP_3000, HIP_0,    HIP_0   }},
-  {"rocblas_status_invalid_handle",                            {HIP_5060, HIP_0,    HIP_0   }},
-  {"rocblas_status_memory_error",                              {HIP_5060, HIP_0,    HIP_0   }},
-  {"rocblas_status_invalid_value",                             {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocblas_status_not_implemented",                           {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_status_internal_error",                            {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_status_arch_mismatch",                             {HIP_5070, HIP_0,    HIP_0   }},
-  {"rocblas_handle",                                           {HIP_1050, HIP_0,    HIP_0   }},
-  {"rocblas_eform",                                            {HIP_4020, HIP_0,    HIP_0   }},
-  {"rocblas_eform_ax",                                         {HIP_4020, HIP_0,    HIP_0   }},
-  {"rocblas_eform_abx",                                        {HIP_4020, HIP_0,    HIP_0   }},
-  {"rocblas_eform_bax",                                        {HIP_4020, HIP_0,    HIP_0   }},
-  {"rocblas_evect",                                            {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocblas_evect_none",                                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocblas_evect_original",                                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocblas_erange",                                           {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocblas_erange_all",                                       {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocblas_erange_index",                                     {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocblas_erange_value",                                     {HIP_5020, HIP_0,    HIP_0   }},
-};
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIversions> m;
+
+  m["cusolver_int_t"]                                                 = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_PARAMS_NOT_INITIALIZED"]                     = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_PARAMS_INVALID"]                             = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_PARAMS_INVALID_PREC"]                        = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_PARAMS_INVALID_REFINE"]                      = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_PARAMS_INVALID_MAXITER"]                     = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_INTERNAL_ERROR"]                             = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_NOT_SUPPORTED"]                              = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_OUT_OF_RANGE"]                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_NRHS_NOT_SUPPORTED_FOR_REFINE_GMRES"]        = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_INFOS_NOT_INITIALIZED"]                      = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_INFOS_NOT_DESTROYED"]                        = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_IRS_MATRIX_SINGULAR"]                            = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_STATUS_INVALID_WORKSPACE"]                              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverEigType_t"]                                              = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["CUSOLVER_EIG_TYPE_1"]                                            = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["CUSOLVER_EIG_TYPE_2"]                                            = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["CUSOLVER_EIG_TYPE_3"]                                            = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverEigMode_t"]                                              = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["CUSOLVER_EIG_MODE_NOVECTOR"]                                     = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["CUSOLVER_EIG_MODE_VECTOR"]                                       = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusolverEigRange_t"]                                             = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_EIG_RANGE_ALL"]                                         = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_EIG_RANGE_I"]                                           = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_EIG_RANGE_V"]                                           = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverNorm_t"]                                                 = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_INF_NORM"]                                              = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_MAX_NORM"]                                              = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_ONE_NORM"]                                              = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_FRO_NORM"]                                              = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverIRSRefinement_t"]                                        = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_IRS_REFINE_NOT_SET"]                                    = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_IRS_REFINE_NONE"]                                       = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_IRS_REFINE_CLASSICAL"]                                  = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_IRS_REFINE_CLASSICAL_GMRES"]                            = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_IRS_REFINE_GMRES"]                                      = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_IRS_REFINE_GMRES_GMRES"]                                = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_IRS_REFINE_GMRES_NOPCOND"]                              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_PREC_DD"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_PREC_SS"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_PREC_SHT"]                                              = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDirectMode_t"]                                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUBLAS_DIRECT_FORWARD"]                                          = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUBLAS_DIRECT_BACKWARD"]                                         = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverStorevMode_t"]                                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUBLAS_STOREV_COLUMNWISE"]                                       = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUBLAS_STOREV_ROWWISE"]                                          = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverAlgMode_t"]                                              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_ALG_0"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_ALG_1"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_ALG_2"]                                                 = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusolverPrecType_t"]                                             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_R_8I"]                                                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_R_8U"]                                                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_R_64F"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_R_32F"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_R_16F"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_R_16BF"]                                                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_R_TF32"]                                                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_R_AP"]                                                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_C_8I"]                                                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_C_8U"]                                                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_C_64F"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_C_32F"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_C_16F"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_C_16BF"]                                                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_C_TF32"]                                                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_C_AP"]                                                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["syevjInfo"]                                                      = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["syevjInfo_t"]                                                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["gesvdjInfo"]                                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["gesvdjInfo_t"]                                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParams"]                                            = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSParams_t"]                                          = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfos"]                                             = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnIRSInfos_t"]                                           = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusolverDnParams"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnParams_t"]                                             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusolverDnFunction_t"]                                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVERDN_GETRF"]                                               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["CUSOLVERDN_POTRF"]                                               = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusolverDeterministicMode_t"]                                    = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_DETERMINISTIC_RESULTS"]                                 = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS"]                       = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["cusolverDnLoggerCallback_t"]                                     = {CUDA_117, CUDA_0,   CUDA_0  };
+  m["cusolverMgContext"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverMgHandle_t"]                                             = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusolverMgGridMapping_t"]                                        = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["CUDALIBMG_GRID_MAPPING_ROW_MAJOR"]                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["CUDALIBMG_GRID_MAPPING_COL_MAJOR"]                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cudaLibMgGrid_t"]                                                = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cudaLibMgMatrixDesc_t"]                                          = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["csrluInfoHost"]                                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["csrluInfoHost_t"]                                                = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["csrqrInfoHost"]                                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["csrqrInfoHost_t"]                                                = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["csrcholInfoHost"]                                                = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["csrcholInfoHost_t"]                                              = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["csrcholInfo"]                                                    = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["csrcholInfo_t"]                                                  = {CUDA_75,  CUDA_0,   CUDA_0  };
+  m["cusolverMathMode_t"]                                             = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_DEFAULT_MATH"]                                          = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_FP32_EMULATED_BF16X9_MATH"]                             = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["CUSOLVERDN_SYEVBATCHED"]                                         = {CUDA_130, CUDA_0,   CUDA_0  };
+
+  return m;
+}();
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_SOLVER_TYPE_NAME_VER_MAP = [] {
+  std::map<llvm::StringRef, hipAPIversions> m;
+
+  m["hipsolverStatus_t"]                                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_SUCCESS"]                                       = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_NOT_INITIALIZED"]                               = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_ALLOC_FAILED"]                                  = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_INVALID_VALUE"]                                 = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_ARCH_MISMATCH"]                                 = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_MAPPING_ERROR"]                                 = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_EXECUTION_FAILED"]                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_INTERNAL_ERROR"]                                = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_NOT_SUPPORTED"]                                 = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_ZERO_PIVOT"]                                    = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverHandle_t"]                                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsolverEigType_t"]                                             = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_EIG_TYPE_1"]                                           = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_EIG_TYPE_2"]                                           = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_EIG_TYPE_3"]                                           = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsolverEigMode_t"]                                             = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_EIG_MODE_NOVECTOR"]                                    = {HIP_4050, HIP_0,    HIP_0   };
+  m["HIPSOLVER_EIG_MODE_VECTOR"]                                      = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsolverEigRange_t"]                                            = {HIP_5030, HIP_0,    HIP_0   };
+  m["HIPSOLVER_EIG_RANGE_ALL"]                                        = {HIP_5030, HIP_0,    HIP_0   };
+  m["HIPSOLVER_EIG_RANGE_I"]                                          = {HIP_5030, HIP_0,    HIP_0   };
+  m["HIPSOLVER_EIG_RANGE_V"]                                          = {HIP_5030, HIP_0,    HIP_0   };
+  m["hipsolverSyevjInfo_t"]                                           = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverGesvdjInfo_t"]                                          = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsolverRfResetValuesFastMode_t"]                               = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_RESET_VALUES_FAST_MODE_OFF"]                         = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_RESET_VALUES_FAST_MODE_ON"]                          = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfMatrixFormat_t"]                                      = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_MATRIX_FORMAT_CSR"]                                  = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_MATRIX_FORMAT_CSC"]                                  = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfUnitDiagonal_t"]                                      = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_UNIT_DIAGONAL_STORED_L"]                             = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_UNIT_DIAGONAL_STORED_U"]                             = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_L"]                            = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_UNIT_DIAGONAL_ASSUMED_U"]                            = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfFactorization_t"]                                     = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_FACTORIZATION_ALG0"]                                 = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_FACTORIZATION_ALG1"]                                 = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_FACTORIZATION_ALG2"]                                 = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfTriangularSolve_t"]                                   = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_TRIANGULAR_SOLVE_ALG1"]                              = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_TRIANGULAR_SOLVE_ALG2"]                              = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_TRIANGULAR_SOLVE_ALG3"]                              = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfNumericBoostReport_t"]                                = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_NUMERIC_BOOST_NOT_USED"]                             = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVERRF_NUMERIC_BOOST_USED"]                                 = {HIP_5060, HIP_0,    HIP_0   };
+  m["hipsolverRfHandle_t"]                                            = {HIP_5060, HIP_0,    HIP_0   };
+  m["HIPSOLVER_STATUS_MATRIX_TYPE_NOT_SUPPORTED"]                     = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverSpHandle_t"]                                            = {HIP_6010, HIP_0,    HIP_0   };
+  m["hipsolverDnParams_t"]                                            = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverAlgMode_t"]                                             = {HIP_6020, HIP_0,    HIP_0   };
+  m["HIPSOLVER_ALG_0"]                                                = {HIP_6020, HIP_0,    HIP_0   };
+  m["HIPSOLVER_ALG_1"]                                                = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverDnFunction_t"]                                          = {HIP_6020, HIP_0,    HIP_0   };
+  m["HIPSOLVERDN_GETRF"]                                              = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsolverDeterministicMode_t"]                                   = {HIP_6030, HIP_0,    HIP_0   };
+  m["HIPSOLVER_DETERMINISTIC_RESULTS"]                                = {HIP_6030, HIP_0,    HIP_0   };
+  m["HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS"]                      = {HIP_6030, HIP_0,    HIP_0   };
+  m["rocblas_int"]                                                    = {HIP_3000, HIP_0,    HIP_0   };
+  m["rocblas_status"]                                                 = {HIP_3000, HIP_0,    HIP_0   };
+  m["rocblas_status_success"]                                         = {HIP_3000, HIP_0,    HIP_0   };
+  m["rocblas_status_invalid_handle"]                                  = {HIP_5060, HIP_0,    HIP_0   };
+  m["rocblas_status_memory_error"]                                    = {HIP_5060, HIP_0,    HIP_0   };
+  m["rocblas_status_invalid_value"]                                   = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocblas_status_not_implemented"]                                 = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_status_internal_error"]                                  = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_status_arch_mismatch"]                                   = {HIP_5070, HIP_0,    HIP_0   };
+  m["rocblas_handle"]                                                 = {HIP_1050, HIP_0,    HIP_0   };
+  m["rocblas_eform"]                                                  = {HIP_4020, HIP_0,    HIP_0   };
+  m["rocblas_eform_ax"]                                               = {HIP_4020, HIP_0,    HIP_0   };
+  m["rocblas_eform_abx"]                                              = {HIP_4020, HIP_0,    HIP_0   };
+  m["rocblas_eform_bax"]                                              = {HIP_4020, HIP_0,    HIP_0   };
+  m["rocblas_evect"]                                                  = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocblas_evect_none"]                                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocblas_evect_original"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocblas_erange"]                                                 = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocblas_erange_all"]                                             = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocblas_erange_index"]                                           = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocblas_erange_value"]                                           = {HIP_5020, HIP_0,    HIP_0   };
+
+  return m;
+}();

@@ -23,2581 +23,2603 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA SPARSE API functions to the corresponding HIP functions
-const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP {
+const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP = [] {
+  std::map<llvm::StringRef, hipCounter> m;
+
   // 5. cuSPARSE Management Function Reference
-  {"cusparseCreate",                                       {"hipsparseCreate",                                    "rocsparse_create_handle",                                          CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseDestroy",                                      {"hipsparseDestroy",                                   "rocsparse_destroy_handle",                                         CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseGetPointerMode",                               {"hipsparseGetPointerMode",                            "rocsparse_get_pointer_mode",                                       CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseGetVersion",                                   {"hipsparseGetVersion",                                "rocsparse_get_version",                                            CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseSetPointerMode",                               {"hipsparseSetPointerMode",                            "rocsparse_set_pointer_mode",                                       CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseSetStream",                                    {"hipsparseSetStream",                                 "rocsparse_set_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseGetStream",                                    {"hipsparseGetStream",                                 "rocsparse_get_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseGetErrorName",                                 {"hipsparseGetErrorName",                              "rocsparse_get_status_name",                                        CONV_LIB_FUNC, API_SPARSE, 5}},
-  {"cusparseGetErrorString",                               {"hipsparseGetErrorString",                            "rocsparse_get_status_description",                                 CONV_LIB_FUNC, API_SPARSE, 5}},
+  m["cusparseCreate"]                                                 = {"hipsparseCreate",                                    "rocsparse_create_handle",                                          CONV_LIB_FUNC, API_SPARSE, 5};
+  m["cusparseDestroy"]                                                = {"hipsparseDestroy",                                   "rocsparse_destroy_handle",                                         CONV_LIB_FUNC, API_SPARSE, 5};
+  m["cusparseGetPointerMode"]                                         = {"hipsparseGetPointerMode",                            "rocsparse_get_pointer_mode",                                       CONV_LIB_FUNC, API_SPARSE, 5};
+  m["cusparseGetVersion"]                                             = {"hipsparseGetVersion",                                "rocsparse_get_version",                                            CONV_LIB_FUNC, API_SPARSE, 5};
+  m["cusparseSetPointerMode"]                                         = {"hipsparseSetPointerMode",                            "rocsparse_set_pointer_mode",                                       CONV_LIB_FUNC, API_SPARSE, 5};
+  m["cusparseSetStream"]                                              = {"hipsparseSetStream",                                 "rocsparse_set_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5};
+  m["cusparseGetStream"]                                              = {"hipsparseGetStream",                                 "rocsparse_get_stream",                                             CONV_LIB_FUNC, API_SPARSE, 5};
+  m["cusparseGetErrorName"]                                           = {"hipsparseGetErrorName",                              "rocsparse_get_status_name",                                        CONV_LIB_FUNC, API_SPARSE, 5};
+  m["cusparseGetErrorString"]                                         = {"hipsparseGetErrorString",                            "rocsparse_get_status_description",                                 CONV_LIB_FUNC, API_SPARSE, 5};
 
   // 6. cuSPARSE Logging
-  {"cusparseLoggerSetCallback",                            {"hipsparseLoggerSetCallback",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
-  {"cusparseLoggerSetFile",                                {"hipsparseLoggerSetFile",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
-  {"cusparseLoggerOpenFile",                               {"hipsparseLoggerOpenFile",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
-  {"cusparseLoggerSetLevel",                               {"hipsparseLoggerSetLevel",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
-  {"cusparseLoggerSetMask",                                {"hipsparseLoggerSetMask",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
-  {"cusparseLoggerForceDisable",                           {"hipsparseLoggerForceDisable",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED}},
+  m["cusparseLoggerSetCallback"]                                      = {"hipsparseLoggerSetCallback",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED};
+  m["cusparseLoggerSetFile"]                                          = {"hipsparseLoggerSetFile",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED};
+  m["cusparseLoggerOpenFile"]                                         = {"hipsparseLoggerOpenFile",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED};
+  m["cusparseLoggerSetLevel"]                                         = {"hipsparseLoggerSetLevel",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED};
+  m["cusparseLoggerSetMask"]                                          = {"hipsparseLoggerSetMask",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED};
+  m["cusparseLoggerForceDisable"]                                     = {"hipsparseLoggerForceDisable",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 6, UNSUPPORTED};
 
   // 7. cuSPARSE Helper Function Reference
-  {"cusparseCreateSolveAnalysisInfo",                      {"hipsparseCreateSolveAnalysisInfo",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCreateHybMat",                                 {"hipsparseCreateHybMat",                              "rocsparse_create_hyb_mat",                                         CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCreateMatDescr",                               {"hipsparseCreateMatDescr",                            "rocsparse_create_mat_descr",                                       CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseDestroySolveAnalysisInfo",                     {"hipsparseDestroySolveAnalysisInfo",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDestroyHybMat",                                {"hipsparseDestroyHybMat",                             "rocsparse_destroy_hyb_mat",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDestroyMatDescr",                              {"hipsparseDestroyMatDescr",                           "rocsparse_destroy_mat_descr",                                      CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseCopyMatDescr",                                 {"hipsparseCopyMatDescr",                              "rocsparse_copy_mat_descr",                                         CONV_LIB_FUNC, API_SPARSE, 7, CUDA_REMOVED}},
-  {"cusparseGetLevelInfo",                                 {"hipsparseGetLevelInfo",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_REMOVED}},
-  {"cusparseGetMatDiagType",                               {"hipsparseGetMatDiagType",                            "rocsparse_get_mat_diag_type",                                      CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseGetMatFillMode",                               {"hipsparseGetMatFillMode",                            "rocsparse_get_mat_fill_mode",                                      CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseGetMatIndexBase",                              {"hipsparseGetMatIndexBase",                           "rocsparse_get_mat_index_base",                                     CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseGetMatType",                                   {"hipsparseGetMatType",                                "rocsparse_get_mat_type",                                           CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseSetMatDiagType",                               {"hipsparseSetMatDiagType",                            "rocsparse_set_mat_diag_type",                                      CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseSetMatFillMode",                               {"hipsparseSetMatFillMode",                            "rocsparse_set_mat_fill_mode",                                      CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseSetMatIndexBase",                              {"hipsparseSetMatIndexBase",                           "rocsparse_set_mat_index_base",                                     CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseSetMatType",                                   {"hipsparseSetMatType",                                "rocsparse_set_mat_type",                                           CONV_LIB_FUNC, API_SPARSE, 7}},
-  {"cusparseCreateCsrsv2Info",                             {"hipsparseCreateCsrsv2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDestroyCsrsv2Info",                            {"hipsparseDestroyCsrsv2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCreateCsrsm2Info",                             {"hipsparseCreateCsrsm2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDestroyCsrsm2Info",                            {"hipsparseDestroyCsrsm2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCreateCsric02Info",                            {"hipsparseCreateCsric02Info",                         "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDestroyCsric02Info",                           {"hipsparseDestroyCsric02Info",                        "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCreateCsrilu02Info",                           {"hipsparseCreateCsrilu02Info",                        "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDestroyCsrilu02Info",                          {"hipsparseDestroyCsrilu02Info",                       "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCreateBsrsv2Info",                             {"hipsparseCreateBsrsv2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDestroyBsrsv2Info",                            {"hipsparseDestroyBsrsv2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCreateBsrsm2Info",                             {"hipsparseCreateBsrsm2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDestroyBsrsm2Info",                            {"hipsparseDestroyBsrsm2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCreateBsric02Info",                            {"hipsparseCreateBsric02Info",                         "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDestroyBsric02Info",                           {"hipsparseDestroyBsric02Info",                        "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCreateBsrilu02Info",                           {"hipsparseCreateBsrilu02Info",                        "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDestroyBsrilu02Info",                          {"hipsparseDestroyBsrilu02Info",                       "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCreateCsrgemm2Info",                           {"hipsparseCreateCsrgemm2Info",                        "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDestroyCsrgemm2Info",                          {"hipsparseDestroyCsrgemm2Info",                       "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCreatePruneInfo",                              {"hipsparseCreatePruneInfo",                           "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDestroyPruneInfo",                             {"hipsparseDestroyPruneInfo",                          "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCreateColorInfo",                              {"hipsparseCreateColorInfo",                           "rocsparse_create_color_info",                                      CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDestroyColorInfo",                             {"hipsparseDestroyColorInfo",                          "rocsparse_destroy_color_info",                                     CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseCreateSolveAnalysisInfo"]                                = {"hipsparseCreateSolveAnalysisInfo",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCreateHybMat"]                                           = {"hipsparseCreateHybMat",                              "rocsparse_create_hyb_mat",                                         CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCreateMatDescr"]                                         = {"hipsparseCreateMatDescr",                            "rocsparse_create_mat_descr",                                       CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseDestroySolveAnalysisInfo"]                               = {"hipsparseDestroySolveAnalysisInfo",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDestroyHybMat"]                                          = {"hipsparseDestroyHybMat",                             "rocsparse_destroy_hyb_mat",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDestroyMatDescr"]                                        = {"hipsparseDestroyMatDescr",                           "rocsparse_destroy_mat_descr",                                      CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseCopyMatDescr"]                                           = {"hipsparseCopyMatDescr",                              "rocsparse_copy_mat_descr",                                         CONV_LIB_FUNC, API_SPARSE, 7, CUDA_REMOVED};
+  m["cusparseGetLevelInfo"]                                           = {"hipsparseGetLevelInfo",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 7, UNSUPPORTED | CUDA_REMOVED};
+  m["cusparseGetMatDiagType"]                                         = {"hipsparseGetMatDiagType",                            "rocsparse_get_mat_diag_type",                                      CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseGetMatFillMode"]                                         = {"hipsparseGetMatFillMode",                            "rocsparse_get_mat_fill_mode",                                      CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseGetMatIndexBase"]                                        = {"hipsparseGetMatIndexBase",                           "rocsparse_get_mat_index_base",                                     CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseGetMatType"]                                             = {"hipsparseGetMatType",                                "rocsparse_get_mat_type",                                           CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseSetMatDiagType"]                                         = {"hipsparseSetMatDiagType",                            "rocsparse_set_mat_diag_type",                                      CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseSetMatFillMode"]                                         = {"hipsparseSetMatFillMode",                            "rocsparse_set_mat_fill_mode",                                      CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseSetMatIndexBase"]                                        = {"hipsparseSetMatIndexBase",                           "rocsparse_set_mat_index_base",                                     CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseSetMatType"]                                             = {"hipsparseSetMatType",                                "rocsparse_set_mat_type",                                           CONV_LIB_FUNC, API_SPARSE, 7};
+  m["cusparseCreateCsrsv2Info"]                                       = {"hipsparseCreateCsrsv2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDestroyCsrsv2Info"]                                      = {"hipsparseDestroyCsrsv2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCreateCsrsm2Info"]                                       = {"hipsparseCreateCsrsm2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDestroyCsrsm2Info"]                                      = {"hipsparseDestroyCsrsm2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCreateCsric02Info"]                                      = {"hipsparseCreateCsric02Info",                         "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDestroyCsric02Info"]                                     = {"hipsparseDestroyCsric02Info",                        "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCreateCsrilu02Info"]                                     = {"hipsparseCreateCsrilu02Info",                        "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDestroyCsrilu02Info"]                                    = {"hipsparseDestroyCsrilu02Info",                       "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCreateBsrsv2Info"]                                       = {"hipsparseCreateBsrsv2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDestroyBsrsv2Info"]                                      = {"hipsparseDestroyBsrsv2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCreateBsrsm2Info"]                                       = {"hipsparseCreateBsrsm2Info",                          "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDestroyBsrsm2Info"]                                      = {"hipsparseDestroyBsrsm2Info",                         "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCreateBsric02Info"]                                      = {"hipsparseCreateBsric02Info",                         "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDestroyBsric02Info"]                                     = {"hipsparseDestroyBsric02Info",                        "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCreateBsrilu02Info"]                                     = {"hipsparseCreateBsrilu02Info",                        "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDestroyBsrilu02Info"]                                    = {"hipsparseDestroyBsrilu02Info",                       "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCreateCsrgemm2Info"]                                     = {"hipsparseCreateCsrgemm2Info",                        "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDestroyCsrgemm2Info"]                                    = {"hipsparseDestroyCsrgemm2Info",                       "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCreatePruneInfo"]                                        = {"hipsparseCreatePruneInfo",                           "rocsparse_create_mat_info",                                        CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDestroyPruneInfo"]                                       = {"hipsparseDestroyPruneInfo",                          "rocsparse_destroy_mat_info",                                       CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCreateColorInfo"]                                        = {"hipsparseCreateColorInfo",                           "rocsparse_create_color_info",                                      CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDestroyColorInfo"]                                       = {"hipsparseDestroyColorInfo",                          "rocsparse_destroy_color_info",                                     CONV_LIB_FUNC, API_SPARSE, 7, CUDA_DEPRECATED | HIP_DEPRECATED};
 
   // 8. cuSPARSE Level 1 Function Reference
-  {"cusparseSaxpyi",                                       {"hipsparseSaxpyi",                                    "rocsparse_saxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDaxpyi",                                       {"hipsparseDaxpyi",                                    "rocsparse_daxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCaxpyi",                                       {"hipsparseCaxpyi",                                    "rocsparse_caxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZaxpyi",                                       {"hipsparseZaxpyi",                                    "rocsparse_zaxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseSaxpyi"]                                                 = {"hipsparseSaxpyi",                                    "rocsparse_saxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDaxpyi"]                                                 = {"hipsparseDaxpyi",                                    "rocsparse_daxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCaxpyi"]                                                 = {"hipsparseCaxpyi",                                    "rocsparse_caxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZaxpyi"]                                                 = {"hipsparseZaxpyi",                                    "rocsparse_zaxpyi",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
   // TODO: rocsparse_get_stream and hipStreamSynchronize need to be added correspondingly before and after rocsparse_(s|d|c|z)doti call, because cusparse(S|D|C|Z)doti is blocking, and rocsparse_(s|d|c|z)doti is not
-  {"cusparseSdoti",                                        {"hipsparseSdoti",                                     "rocsparse_sdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDdoti",                                        {"hipsparseDdoti",                                     "rocsparse_ddoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCdoti",                                        {"hipsparseCdoti",                                     "rocsparse_cdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZdoti",                                        {"hipsparseZdoti",                                     "rocsparse_zdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseSdoti"]                                                  = {"hipsparseSdoti",                                     "rocsparse_sdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDdoti"]                                                  = {"hipsparseDdoti",                                     "rocsparse_ddoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCdoti"]                                                  = {"hipsparseCdoti",                                     "rocsparse_cdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZdoti"]                                                  = {"hipsparseZdoti",                                     "rocsparse_zdoti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
   // TODO: rocsparse_get_stream and hipStreamSynchronize need to be added correspondingly before and after rocsparse_(c|z)dotci call, because cusparse(C|Z)dotci is blocking, and rocsparse_(c|z)dotci is not
-  {"cusparseCdotci",                                       {"hipsparseCdotci",                                    "rocsparse_cdotci",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZdotci",                                       {"hipsparseZdotci",                                    "rocsparse_zdotci",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseCdotci"]                                                 = {"hipsparseCdotci",                                    "rocsparse_cdotci",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZdotci"]                                                 = {"hipsparseZdotci",                                    "rocsparse_zdotci",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseSgthr",                                        {"hipsparseSgthr",                                     "rocsparse_sgthr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDgthr",                                        {"hipsparseDgthr",                                     "rocsparse_dgthr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCgthr",                                        {"hipsparseCgthr",                                     "rocsparse_cgthr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZgthr",                                        {"hipsparseZgthr",                                     "rocsparse_zgthr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseSgthr"]                                                  = {"hipsparseSgthr",                                     "rocsparse_sgthr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDgthr"]                                                  = {"hipsparseDgthr",                                     "rocsparse_dgthr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCgthr"]                                                  = {"hipsparseCgthr",                                     "rocsparse_cgthr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZgthr"]                                                  = {"hipsparseZgthr",                                     "rocsparse_zgthr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseSgthrz",                                       {"hipsparseSgthrz",                                    "rocsparse_sgthrz",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDgthrz",                                       {"hipsparseDgthrz",                                    "rocsparse_dgthrz",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCgthrz",                                       {"hipsparseCgthrz",                                    "rocsparse_cgthrz",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZgthrz",                                       {"hipsparseZgthrz",                                    "rocsparse_zgthrz",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseSgthrz"]                                                 = {"hipsparseSgthrz",                                    "rocsparse_sgthrz",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDgthrz"]                                                 = {"hipsparseDgthrz",                                    "rocsparse_dgthrz",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCgthrz"]                                                 = {"hipsparseCgthrz",                                    "rocsparse_cgthrz",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZgthrz"]                                                 = {"hipsparseZgthrz",                                    "rocsparse_zgthrz",                                                 CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseSroti",                                        {"hipsparseSroti",                                     "rocsparse_sroti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDroti",                                        {"hipsparseDroti",                                     "rocsparse_droti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseSroti"]                                                  = {"hipsparseSroti",                                     "rocsparse_sroti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDroti"]                                                  = {"hipsparseDroti",                                     "rocsparse_droti",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseSsctr",                                        {"hipsparseSsctr",                                     "rocsparse_ssctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDsctr",                                        {"hipsparseDsctr",                                     "rocsparse_dsctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCsctr",                                        {"hipsparseCsctr",                                     "rocsparse_csctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZsctr",                                        {"hipsparseZsctr",                                     "rocsparse_zsctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseSsctr"]                                                  = {"hipsparseSsctr",                                     "rocsparse_ssctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDsctr"]                                                  = {"hipsparseDsctr",                                     "rocsparse_dsctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCsctr"]                                                  = {"hipsparseCsctr",                                     "rocsparse_csctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZsctr"]                                                  = {"hipsparseZsctr",                                     "rocsparse_zsctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
   // 9. cuSPARSE Level 2 Function Reference
-  {"cusparseSbsrmv",                                       {"hipsparseSbsrmv",                                    "rocsparse_sbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED}},
-  {"cusparseDbsrmv",                                       {"hipsparseDbsrmv",                                    "rocsparse_dbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED}},
-  {"cusparseCbsrmv",                                       {"hipsparseCbsrmv",                                    "rocsparse_cbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED}},
-  {"cusparseZbsrmv",                                       {"hipsparseZbsrmv",                                    "rocsparse_zbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED}},
+  m["cusparseSbsrmv"]                                                 = {"hipsparseSbsrmv",                                    "rocsparse_sbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED};
+  m["cusparseDbsrmv"]                                                 = {"hipsparseDbsrmv",                                    "rocsparse_dbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED};
+  m["cusparseCbsrmv"]                                                 = {"hipsparseCbsrmv",                                    "rocsparse_cbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED};
+  m["cusparseZbsrmv"]                                                 = {"hipsparseZbsrmv",                                    "rocsparse_zbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED};
 
-  {"cusparseSbsrxmv",                                      {"hipsparseSbsrxmv",                                   "rocsparse_sbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrxmv",                                      {"hipsparseDbsrxmv",                                   "rocsparse_dbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrxmv",                                      {"hipsparseCbsrxmv",                                   "rocsparse_cbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrxmv",                                      {"hipsparseZbsrxmv",                                   "rocsparse_zbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsrxmv"]                                                = {"hipsparseSbsrxmv",                                   "rocsparse_sbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrxmv"]                                                = {"hipsparseDbsrxmv",                                   "rocsparse_dbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrxmv"]                                                = {"hipsparseCbsrxmv",                                   "rocsparse_cbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrxmv"]                                                = {"hipsparseZbsrxmv",                                   "rocsparse_zbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseScsrmv",                                       {"hipsparseScsrmv",                                    "rocsparse_scsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrmv",                                       {"hipsparseDcsrmv",                                    "rocsparse_dcsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrmv",                                       {"hipsparseCcsrmv",                                    "rocsparse_ccsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrmv",                                       {"hipsparseZcsrmv",                                    "rocsparse_zcsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrmv"]                                                 = {"hipsparseScsrmv",                                    "rocsparse_scsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrmv"]                                                 = {"hipsparseDcsrmv",                                    "rocsparse_dcsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrmv"]                                                 = {"hipsparseCcsrmv",                                    "rocsparse_ccsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrmv"]                                                 = {"hipsparseZcsrmv",                                    "rocsparse_zcsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseCsrmvEx",                                      {"hipsparseCsrmvEx",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCsrmvEx_bufferSize",                           {"hipsparseCsrmvEx_bufferSize",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseCsrmvEx"]                                                = {"hipsparseCsrmvEx",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCsrmvEx_bufferSize"]                                     = {"hipsparseCsrmvEx_bufferSize",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseScsrmv_mp",                                    {"hipsparseScsrmv_mp",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrmv_mp",                                    {"hipsparseDcsrmv_mp",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrmv_mp",                                    {"hipsparseCcsrmv_mp",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrmv_mp",                                    {"hipsparseZcsrmv_mp",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsrmv_mp"]                                              = {"hipsparseScsrmv_mp",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsrmv_mp"]                                              = {"hipsparseDcsrmv_mp",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsrmv_mp"]                                              = {"hipsparseCcsrmv_mp",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsrmv_mp"]                                              = {"hipsparseZcsrmv_mp",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseSgemvi",                                       {"hipsparseSgemvi",                                    "rocsparse_sgemvi",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseDgemvi",                                       {"hipsparseDgemvi",                                    "rocsparse_dgemvi",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseCgemvi",                                       {"hipsparseCgemvi",                                    "rocsparse_cgemvi",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseZgemvi",                                       {"hipsparseZgemvi",                                    "rocsparse_zgemvi",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
+  m["cusparseSgemvi"]                                                 = {"hipsparseSgemvi",                                    "rocsparse_sgemvi",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseDgemvi"]                                                 = {"hipsparseDgemvi",                                    "rocsparse_dgemvi",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseCgemvi"]                                                 = {"hipsparseCgemvi",                                    "rocsparse_cgemvi",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseZgemvi"]                                                 = {"hipsparseZgemvi",                                    "rocsparse_zgemvi",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
 
-  {"cusparseSgemvi_bufferSize",                            {"hipsparseSgemvi_bufferSize",                         "rocsparse_sgemvi_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseDgemvi_bufferSize",                            {"hipsparseDgemvi_bufferSize",                         "rocsparse_dgemvi_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseCgemvi_bufferSize",                            {"hipsparseCgemvi_bufferSize",                         "rocsparse_cgemvi_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseZgemvi_bufferSize",                            {"hipsparseZgemvi_bufferSize",                         "rocsparse_zgemvi_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
+  m["cusparseSgemvi_bufferSize"]                                      = {"hipsparseSgemvi_bufferSize",                         "rocsparse_sgemvi_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseDgemvi_bufferSize"]                                      = {"hipsparseDgemvi_bufferSize",                         "rocsparse_dgemvi_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseCgemvi_bufferSize"]                                      = {"hipsparseCgemvi_bufferSize",                         "rocsparse_cgemvi_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseZgemvi_bufferSize"]                                      = {"hipsparseZgemvi_bufferSize",                         "rocsparse_zgemvi_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
 
-  {"cusparseSbsrsv2_bufferSize",                           {"hipsparseSbsrsv2_bufferSize",                        "rocsparse_sbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseSbsrsv2_bufferSizeExt",                        {"hipsparseSbsrsv2_bufferSizeExt",                     "rocsparse_sbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseDbsrsv2_bufferSize",                           {"hipsparseDbsrsv2_bufferSize",                        "rocsparse_dbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrsv2_bufferSizeExt",                        {"hipsparseDbsrsv2_bufferSizeExt",                     "rocsparse_dbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseCbsrsv2_bufferSize",                           {"hipsparseCbsrsv2_bufferSize",                        "rocsparse_cbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrsv2_bufferSizeExt",                        {"hipsparseCbsrsv2_bufferSizeExt",                     "rocsparse_cbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
-  {"cusparseZbsrsv2_bufferSize",                           {"hipsparseZbsrsv2_bufferSize",                        "rocsparse_zbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrsv2_bufferSizeExt",                        {"hipsparseZbsrsv2_bufferSizeExt",                     "rocsparse_zbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED}},
+  m["cusparseSbsrsv2_bufferSize"]                                     = {"hipsparseSbsrsv2_bufferSize",                        "rocsparse_sbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseSbsrsv2_bufferSizeExt"]                                  = {"hipsparseSbsrsv2_bufferSizeExt",                     "rocsparse_sbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseDbsrsv2_bufferSize"]                                     = {"hipsparseDbsrsv2_bufferSize",                        "rocsparse_dbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrsv2_bufferSizeExt"]                                  = {"hipsparseDbsrsv2_bufferSizeExt",                     "rocsparse_dbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseCbsrsv2_bufferSize"]                                     = {"hipsparseCbsrsv2_bufferSize",                        "rocsparse_cbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrsv2_bufferSizeExt"]                                  = {"hipsparseCbsrsv2_bufferSizeExt",                     "rocsparse_cbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
+  m["cusparseZbsrsv2_bufferSize"]                                     = {"hipsparseZbsrsv2_bufferSize",                        "rocsparse_zbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrsv2_bufferSizeExt"]                                  = {"hipsparseZbsrsv2_bufferSizeExt",                     "rocsparse_zbsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED};
 
-  {"cusparseSbsrsv2_analysis",                             {"hipsparseSbsrsv2_analysis",                          "rocsparse_sbsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrsv2_analysis",                             {"hipsparseDbsrsv2_analysis",                          "rocsparse_dbsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrsv2_analysis",                             {"hipsparseCbsrsv2_analysis",                          "rocsparse_cbsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrsv2_analysis",                             {"hipsparseZbsrsv2_analysis",                          "rocsparse_zbsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsrsv2_analysis"]                                       = {"hipsparseSbsrsv2_analysis",                          "rocsparse_sbsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrsv2_analysis"]                                       = {"hipsparseDbsrsv2_analysis",                          "rocsparse_dbsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrsv2_analysis"]                                       = {"hipsparseCbsrsv2_analysis",                          "rocsparse_cbsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrsv2_analysis"]                                       = {"hipsparseZbsrsv2_analysis",                          "rocsparse_zbsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseScsrsv_solve",                                 {"hipsparseScsrsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrsv_solve",                                 {"hipsparseDcsrsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrsv_solve",                                 {"hipsparseCcsrsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrsv_solve",                                 {"hipsparseZcsrsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsrsv_solve"]                                           = {"hipsparseScsrsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsrsv_solve"]                                           = {"hipsparseDcsrsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsrsv_solve"]                                           = {"hipsparseCcsrsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsrsv_solve"]                                           = {"hipsparseZcsrsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseSbsrsv2_solve",                                {"hipsparseSbsrsv2_solve",                             "rocsparse_sbsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrsv2_solve",                                {"hipsparseDbsrsv2_solve",                             "rocsparse_dbsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrsv2_solve",                                {"hipsparseCbsrsv2_solve",                             "rocsparse_cbsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrsv2_solve",                                {"hipsparseZbsrsv2_solve",                             "rocsparse_zbsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseXbsrsv2_zeroPivot",                            {"hipsparseXbsrsv2_zeroPivot",                         "rocsparse_bsrsv_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsrsv2_solve"]                                          = {"hipsparseSbsrsv2_solve",                             "rocsparse_sbsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrsv2_solve"]                                          = {"hipsparseDbsrsv2_solve",                             "rocsparse_dbsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrsv2_solve"]                                          = {"hipsparseCbsrsv2_solve",                             "rocsparse_cbsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrsv2_solve"]                                          = {"hipsparseZbsrsv2_solve",                             "rocsparse_zbsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseXbsrsv2_zeroPivot"]                                      = {"hipsparseXbsrsv2_zeroPivot",                         "rocsparse_bsrsv_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseScsrsv_analysis",                              {"hipsparseScsrsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrsv_analysis",                              {"hipsparseDcsrsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrsv_analysis",                              {"hipsparseCcsrsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrsv_analysis",                              {"hipsparseZcsrsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsrsv_analysis"]                                        = {"hipsparseScsrsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsrsv_analysis"]                                        = {"hipsparseDcsrsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsrsv_analysis"]                                        = {"hipsparseCcsrsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsrsv_analysis"]                                        = {"hipsparseZcsrsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseCsrsv_analysisEx",                             {"hipsparseCsrsv_analysisEx",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCsrsv_solveEx",                                {"hipsparseCsrsv_solveEx",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseCsrsv_analysisEx"]                                       = {"hipsparseCsrsv_analysisEx",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCsrsv_solveEx"]                                          = {"hipsparseCsrsv_solveEx",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseScsrsv2_bufferSize",                           {"hipsparseScsrsv2_bufferSize",                        "rocsparse_scsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseScsrsv2_bufferSizeExt",                        {"hipsparseScsrsv2_bufferSizeExt",                     "rocsparse_scsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrsv2_bufferSize",                           {"hipsparseDcsrsv2_bufferSize",                        "rocsparse_dcsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrsv2_bufferSizeExt",                        {"hipsparseDcsrsv2_bufferSizeExt",                     "rocsparse_dcsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrsv2_bufferSize",                           {"hipsparseCcsrsv2_bufferSize",                        "rocsparse_ccsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrsv2_bufferSizeExt",                        {"hipsparseCcsrsv2_bufferSizeExt",                     "rocsparse_ccsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrsv2_bufferSize",                           {"hipsparseZcsrsv2_bufferSize",                        "rocsparse_zcsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrsv2_bufferSizeExt",                        {"hipsparseZcsrsv2_bufferSizeExt",                     "rocsparse_zcsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsrsv2_bufferSize"]                                     = {"hipsparseScsrsv2_bufferSize",                        "rocsparse_scsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseScsrsv2_bufferSizeExt"]                                  = {"hipsparseScsrsv2_bufferSizeExt",                     "rocsparse_scsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsrsv2_bufferSize"]                                     = {"hipsparseDcsrsv2_bufferSize",                        "rocsparse_dcsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrsv2_bufferSizeExt"]                                  = {"hipsparseDcsrsv2_bufferSizeExt",                     "rocsparse_dcsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsrsv2_bufferSize"]                                     = {"hipsparseCcsrsv2_bufferSize",                        "rocsparse_ccsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrsv2_bufferSizeExt"]                                  = {"hipsparseCcsrsv2_bufferSizeExt",                     "rocsparse_ccsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsrsv2_bufferSize"]                                     = {"hipsparseZcsrsv2_bufferSize",                        "rocsparse_zcsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrsv2_bufferSizeExt"]                                  = {"hipsparseZcsrsv2_bufferSizeExt",                     "rocsparse_zcsrsv_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseScsrsv2_analysis",                             {"hipsparseScsrsv2_analysis",                          "rocsparse_scsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrsv2_analysis",                             {"hipsparseDcsrsv2_analysis",                          "rocsparse_dcsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrsv2_analysis",                             {"hipsparseCcsrsv2_analysis",                          "rocsparse_ccsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrsv2_analysis",                             {"hipsparseZcsrsv2_analysis",                          "rocsparse_zcsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrsv2_analysis"]                                       = {"hipsparseScsrsv2_analysis",                          "rocsparse_scsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrsv2_analysis"]                                       = {"hipsparseDcsrsv2_analysis",                          "rocsparse_dcsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrsv2_analysis"]                                       = {"hipsparseCcsrsv2_analysis",                          "rocsparse_ccsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrsv2_analysis"]                                       = {"hipsparseZcsrsv2_analysis",                          "rocsparse_zcsrsv_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsrsv2_solve",                                {"hipsparseScsrsv2_solve",                             "rocsparse_scsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrsv2_solve",                                {"hipsparseDcsrsv2_solve",                             "rocsparse_dcsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrsv2_solve",                                {"hipsparseCcsrsv2_solve",                             "rocsparse_ccsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrsv2_solve",                                {"hipsparseZcsrsv2_solve",                             "rocsparse_zcsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrsv2_solve"]                                          = {"hipsparseScsrsv2_solve",                             "rocsparse_scsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrsv2_solve"]                                          = {"hipsparseDcsrsv2_solve",                             "rocsparse_dcsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrsv2_solve"]                                          = {"hipsparseCcsrsv2_solve",                             "rocsparse_ccsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrsv2_solve"]                                          = {"hipsparseZcsrsv2_solve",                             "rocsparse_zcsrsv_solve",                                           CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+
   // TODO: rocsparse_get_stream and hipStreamSynchronize need to be added correspondingly before and after rocsparse_csrsv_zero_pivot call, because cusparseXcsrsv2_zeroPivot is blocking, and rocsparse_csrsv_zero_pivot is not
-  {"cusparseXcsrsv2_zeroPivot",                            {"hipsparseXcsrsv2_zeroPivot",                         "rocsparse_csrsv_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseXcsrsv2_zeroPivot"]                                      = {"hipsparseXcsrsv2_zeroPivot",                         "rocsparse_csrsv_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseShybmv",                                       {"hipsparseShybmv",                                    "rocsparse_shybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDhybmv",                                       {"hipsparseDhybmv",                                    "rocsparse_dhybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseChybmv",                                       {"hipsparseChybmv",                                    "rocsparse_chybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZhybmv",                                       {"hipsparseZhybmv",                                    "rocsparse_zhybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseShybmv"]                                                 = {"hipsparseShybmv",                                    "rocsparse_shybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDhybmv"]                                                 = {"hipsparseDhybmv",                                    "rocsparse_dhybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseChybmv"]                                                 = {"hipsparseChybmv",                                    "rocsparse_chybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZhybmv"]                                                 = {"hipsparseZhybmv",                                    "rocsparse_zhybmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseShybsv_analysis",                              {"hipsparseShybsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDhybsv_analysis",                              {"hipsparseDhybsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseChybsv_analysis",                              {"hipsparseChybsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZhybsv_analysis",                              {"hipsparseZhybsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseShybsv_analysis"]                                        = {"hipsparseShybsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDhybsv_analysis"]                                        = {"hipsparseDhybsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseChybsv_analysis"]                                        = {"hipsparseChybsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZhybsv_analysis"]                                        = {"hipsparseZhybsv_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseShybsv_solve",                                 {"hipsparseShybsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDhybsv_solve",                                 {"hipsparseDhybsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseChybsv_solve",                                 {"hipsparseChybsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZhybsv_solve",                                 {"hipsparseZhybsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseShybsv_solve"]                                           = {"hipsparseShybsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDhybsv_solve"]                                           = {"hipsparseDhybsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseChybsv_solve"]                                           = {"hipsparseChybsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZhybsv_solve"]                                           = {"hipsparseZhybsv_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 9, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
   // 10. cuSPARSE Level 3 Function Reference
-  {"cusparseScsrmm",                                       {"hipsparseScsrmm",                                    "rocsparse_scsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrmm",                                       {"hipsparseDcsrmm",                                    "rocsparse_dcsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrmm",                                       {"hipsparseCcsrmm",                                    "rocsparse_ccsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrmm",                                       {"hipsparseZcsrmm",                                    "rocsparse_zcsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrmm"]                                                 = {"hipsparseScsrmm",                                    "rocsparse_scsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrmm"]                                                 = {"hipsparseDcsrmm",                                    "rocsparse_dcsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrmm"]                                                 = {"hipsparseCcsrmm",                                    "rocsparse_ccsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrmm"]                                                 = {"hipsparseZcsrmm",                                    "rocsparse_zcsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsrmm2",                                      {"hipsparseScsrmm2",                                   "rocsparse_scsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrmm2",                                      {"hipsparseDcsrmm2",                                   "rocsparse_dcsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrmm2",                                      {"hipsparseCcsrmm2",                                   "rocsparse_ccsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrmm2",                                      {"hipsparseZcsrmm2",                                   "rocsparse_zcsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrmm2"]                                                = {"hipsparseScsrmm2",                                   "rocsparse_scsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrmm2"]                                                = {"hipsparseDcsrmm2",                                   "rocsparse_dcsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrmm2"]                                                = {"hipsparseCcsrmm2",                                   "rocsparse_ccsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrmm2"]                                                = {"hipsparseZcsrmm2",                                   "rocsparse_zcsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsrsm_analysis",                              {"hipsparseScsrsm_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrsm_analysis",                              {"hipsparseDcsrsm_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrsm_analysis",                              {"hipsparseCcsrsm_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrsm_analysis",                              {"hipsparseZcsrsm_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsrsm_analysis"]                                        = {"hipsparseScsrsm_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsrsm_analysis"]                                        = {"hipsparseDcsrsm_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsrsm_analysis"]                                        = {"hipsparseCcsrsm_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsrsm_analysis"]                                        = {"hipsparseZcsrsm_analysis",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseScsrsm_solve",                                 {"hipsparseScsrsm_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrsm_solve",                                 {"hipsparseDcsrsm_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrsm_solve",                                 {"hipsparseCcsrsm_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrsm_solve",                                 {"hipsparseZcsrsm_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsrsm_solve"]                                           = {"hipsparseScsrsm_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsrsm_solve"]                                           = {"hipsparseDcsrsm_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsrsm_solve"]                                           = {"hipsparseCcsrsm_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsrsm_solve"]                                           = {"hipsparseZcsrsm_solve",                              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseScsrsm2_bufferSizeExt",                        {"hipsparseScsrsm2_bufferSizeExt",                     "rocsparse_scsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrsm2_bufferSizeExt",                        {"hipsparseDcsrsm2_bufferSizeExt",                     "rocsparse_dcsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrsm2_bufferSizeExt",                        {"hipsparseCcsrsm2_bufferSizeExt",                     "rocsparse_ccsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrsm2_bufferSizeExt",                        {"hipsparseZcsrsm2_bufferSizeExt",                     "rocsparse_zcsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrsm2_bufferSizeExt"]                                  = {"hipsparseScsrsm2_bufferSizeExt",                     "rocsparse_scsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrsm2_bufferSizeExt"]                                  = {"hipsparseDcsrsm2_bufferSizeExt",                     "rocsparse_dcsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrsm2_bufferSizeExt"]                                  = {"hipsparseCcsrsm2_bufferSizeExt",                     "rocsparse_ccsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrsm2_bufferSizeExt"]                                  = {"hipsparseZcsrsm2_bufferSizeExt",                     "rocsparse_zcsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsrsm2_analysis",                             {"hipsparseScsrsm2_analysis",                          "rocsparse_scsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrsm2_analysis",                             {"hipsparseDcsrsm2_analysis",                          "rocsparse_dcsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrsm2_analysis",                             {"hipsparseCcsrsm2_analysis",                          "rocsparse_ccsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrsm2_analysis",                             {"hipsparseZcsrsm2_analysis",                          "rocsparse_zcsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrsm2_analysis"]                                       = {"hipsparseScsrsm2_analysis",                          "rocsparse_scsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrsm2_analysis"]                                       = {"hipsparseDcsrsm2_analysis",                          "rocsparse_dcsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrsm2_analysis"]                                       = {"hipsparseCcsrsm2_analysis",                          "rocsparse_ccsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrsm2_analysis"]                                       = {"hipsparseZcsrsm2_analysis",                          "rocsparse_zcsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsrsm2_solve",                                {"hipsparseScsrsm2_solve",                             "rocsparse_scsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrsm2_solve",                                {"hipsparseDcsrsm2_solve",                             "rocsparse_dcsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrsm2_solve",                                {"hipsparseCcsrsm2_solve",                             "rocsparse_ccsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrsm2_solve",                                {"hipsparseZcsrsm2_solve",                             "rocsparse_zcsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseXcsrsm2_zeroPivot",                            {"hipsparseXcsrsm2_zeroPivot",                         "rocsparse_csrsm_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrsm2_solve"]                                          = {"hipsparseScsrsm2_solve",                             "rocsparse_scsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrsm2_solve"]                                          = {"hipsparseDcsrsm2_solve",                             "rocsparse_dcsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrsm2_solve"]                                          = {"hipsparseCcsrsm2_solve",                             "rocsparse_ccsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrsm2_solve"]                                          = {"hipsparseZcsrsm2_solve",                             "rocsparse_zcsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseXcsrsm2_zeroPivot"]                                      = {"hipsparseXcsrsm2_zeroPivot",                         "rocsparse_csrsm_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseSbsrmm",                                       {"hipsparseSbsrmm",                                    "rocsparse_sbsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
-  {"cusparseDbsrmm",                                       {"hipsparseDbsrmm",                                    "rocsparse_dbsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
-  {"cusparseCbsrmm",                                       {"hipsparseCbsrmm",                                    "rocsparse_cbsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
-  {"cusparseZbsrmm",                                       {"hipsparseZbsrmm",                                    "rocsparse_zbsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED}},
+  m["cusparseSbsrmm"]                                                 = {"hipsparseSbsrmm",                                    "rocsparse_sbsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED};
+  m["cusparseDbsrmm"]                                                 = {"hipsparseDbsrmm",                                    "rocsparse_dbsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED};
+  m["cusparseCbsrmm"]                                                 = {"hipsparseCbsrmm",                                    "rocsparse_cbsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED};
+  m["cusparseZbsrmm"]                                                 = {"hipsparseZbsrmm",                                    "rocsparse_zbsrmm",                                                 CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED};
 
-  {"cusparseSbsrsm2_bufferSize",                           {"hipsparseSbsrsm2_bufferSize",                        "rocsparse_sbsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseSbsrsm2_bufferSizeExt",                        {"hipsparseSbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDbsrsm2_bufferSize",                           {"hipsparseDbsrsm2_bufferSize",                        "rocsparse_dbsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrsm2_bufferSizeExt",                        {"hipsparseDbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseCbsrsm2_bufferSize",                           {"hipsparseCbsrsm2_bufferSize",                        "rocsparse_cbsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrsm2_bufferSizeExt",                        {"hipsparseCbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseZbsrsm2_bufferSize",                           {"hipsparseZbsrsm2_bufferSize",                        "rocsparse_zbsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrsm2_bufferSizeExt",                        {"hipsparseZbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cusparseSbsrsm2_bufferSize"]                                     = {"hipsparseSbsrsm2_bufferSize",                        "rocsparse_sbsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseSbsrsm2_bufferSizeExt"]                                  = {"hipsparseSbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseDbsrsm2_bufferSize"]                                     = {"hipsparseDbsrsm2_bufferSize",                        "rocsparse_dbsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrsm2_bufferSizeExt"]                                  = {"hipsparseDbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseCbsrsm2_bufferSize"]                                     = {"hipsparseCbsrsm2_bufferSize",                        "rocsparse_cbsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrsm2_bufferSizeExt"]                                  = {"hipsparseCbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseZbsrsm2_bufferSize"]                                     = {"hipsparseZbsrsm2_bufferSize",                        "rocsparse_zbsrsm_buffer_size",                                     CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrsm2_bufferSizeExt"]                                  = {"hipsparseZbsrsm2_bufferSizeExt",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, UNSUPPORTED | CUDA_DEPRECATED};
 
-  {"cusparseSbsrsm2_analysis",                             {"hipsparseSbsrsm2_analysis",                          "rocsparse_sbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrsm2_analysis",                             {"hipsparseDbsrsm2_analysis",                          "rocsparse_dbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrsm2_analysis",                             {"hipsparseCbsrsm2_analysis",                          "rocsparse_cbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrsm2_analysis",                             {"hipsparseZbsrsm2_analysis",                          "rocsparse_zbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsrsm2_analysis"]                                       = {"hipsparseSbsrsm2_analysis",                          "rocsparse_sbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrsm2_analysis"]                                       = {"hipsparseDbsrsm2_analysis",                          "rocsparse_dbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrsm2_analysis"]                                       = {"hipsparseCbsrsm2_analysis",                          "rocsparse_cbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrsm2_analysis"]                                       = {"hipsparseZbsrsm2_analysis",                          "rocsparse_zbsrsm_analysis",                                        CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseSbsrsm2_solve",                                {"hipsparseSbsrsm2_solve",                             "rocsparse_sbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrsm2_solve",                                {"hipsparseDbsrsm2_solve",                             "rocsparse_dbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrsm2_solve",                                {"hipsparseCbsrsm2_solve",                             "rocsparse_cbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrsm2_solve",                                {"hipsparseZbsrsm2_solve",                             "rocsparse_zbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseXbsrsm2_zeroPivot",                            {"hipsparseXbsrsm2_zeroPivot",                         "rocsparse_bsrsm_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsrsm2_solve"]                                          = {"hipsparseSbsrsm2_solve",                             "rocsparse_sbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrsm2_solve"]                                          = {"hipsparseDbsrsm2_solve",                             "rocsparse_dbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrsm2_solve"]                                          = {"hipsparseCbsrsm2_solve",                             "rocsparse_cbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrsm2_solve"]                                          = {"hipsparseZbsrsm2_solve",                             "rocsparse_zbsrsm_solve",                                           CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseXbsrsm2_zeroPivot"]                                      = {"hipsparseXbsrsm2_zeroPivot",                         "rocsparse_bsrsm_zero_pivot",                                       CONV_LIB_FUNC, API_SPARSE, 10, CUDA_DEPRECATED | HIP_DEPRECATED};
 
   // NOTE: rocsparse_(s|d|c|z)gemmi have additional argument: rocsparse_mat_descr
   // TODO: Add rocsparse_create_mat_descr() call before rocsparse_(s|d|c|z)gemmi call and rocsparse_destroy_mat_descr() after
-  {"cusparseSgemmi",                                       {"hipsparseSgemmi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDgemmi",                                       {"hipsparseDgemmi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCgemmi",                                       {"hipsparseCgemmi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZgemmi",                                       {"hipsparseZgemmi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseSgemmi"]                                                 = {"hipsparseSgemmi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDgemmi"]                                                 = {"hipsparseDgemmi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCgemmi"]                                                 = {"hipsparseCgemmi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZgemmi"]                                                 = {"hipsparseZgemmi",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 10, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
   // 11. cuSPARSE Extra Function Reference
-  {"cusparseScsrgeam",                                     {"hipsparseScsrgeam",                                  "rocsparse_scsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrgeam",                                     {"hipsparseDcsrgeam",                                  "rocsparse_dcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrgeam",                                     {"hipsparseCcsrgeam",                                  "rocsparse_ccsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrgeam",                                     {"hipsparseZcsrgeam",                                  "rocsparse_zcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseXcsrgeamNnz",                                  {"hipsparseXcsrgeamNnz",                               "rocsparse_csrgeam_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrgeam"]                                               = {"hipsparseScsrgeam",                                  "rocsparse_scsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrgeam"]                                               = {"hipsparseDcsrgeam",                                  "rocsparse_dcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrgeam"]                                               = {"hipsparseCcsrgeam",                                  "rocsparse_ccsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrgeam"]                                               = {"hipsparseZcsrgeam",                                  "rocsparse_zcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseXcsrgeamNnz"]                                            = {"hipsparseXcsrgeamNnz",                               "rocsparse_csrgeam_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsrgeam2",                                    {"hipsparseScsrgeam2",                                 "rocsparse_scsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11}},
-  {"cusparseDcsrgeam2",                                    {"hipsparseDcsrgeam2",                                 "rocsparse_dcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11}},
-  {"cusparseCcsrgeam2",                                    {"hipsparseCcsrgeam2",                                 "rocsparse_ccsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11}},
-  {"cusparseZcsrgeam2",                                    {"hipsparseZcsrgeam2",                                 "rocsparse_zcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11}},
-  {"cusparseXcsrgeam2Nnz",                                 {"hipsparseXcsrgeam2Nnz",                              "rocsparse_csrgeam_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 11}},
+  m["cusparseScsrgeam2"]                                              = {"hipsparseScsrgeam2",                                 "rocsparse_scsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11};
+  m["cusparseDcsrgeam2"]                                              = {"hipsparseDcsrgeam2",                                 "rocsparse_dcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11};
+  m["cusparseCcsrgeam2"]                                              = {"hipsparseCcsrgeam2",                                 "rocsparse_ccsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11};
+  m["cusparseZcsrgeam2"]                                              = {"hipsparseZcsrgeam2",                                 "rocsparse_zcsrgeam",                                               CONV_LIB_FUNC, API_SPARSE, 11};
+  m["cusparseXcsrgeam2Nnz"]                                           = {"hipsparseXcsrgeam2Nnz",                              "rocsparse_csrgeam_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 11};
 
-  {"cusparseScsrgeam2_bufferSizeExt",                      {"hipsparseScsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
-  {"cusparseDcsrgeam2_bufferSizeExt",                      {"hipsparseDcsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
-  {"cusparseCcsrgeam2_bufferSizeExt",                      {"hipsparseCcsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
-  {"cusparseZcsrgeam2_bufferSizeExt",                      {"hipsparseZcsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED}},
+  m["cusparseScsrgeam2_bufferSizeExt"]                                = {"hipsparseScsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED};
+  m["cusparseDcsrgeam2_bufferSizeExt"]                                = {"hipsparseDcsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED};
+  m["cusparseCcsrgeam2_bufferSizeExt"]                                = {"hipsparseCcsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED};
+  m["cusparseZcsrgeam2_bufferSizeExt"]                                = {"hipsparseZcsrgeam2_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED};
 
   // NOTE: rocsparse_(s|d|c|z)csrgemm have different signatures, thus they are unsupported yet
-  {"cusparseScsrgemm",                                     {"hipsparseScsrgemm",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrgemm",                                     {"hipsparseDcsrgemm",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrgemm",                                     {"hipsparseCcsrgemm",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrgemm",                                     {"hipsparseZcsrgemm",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrgemm"]                                               = {"hipsparseScsrgemm",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrgemm"]                                               = {"hipsparseDcsrgemm",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrgemm"]                                               = {"hipsparseCcsrgemm",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrgemm"]                                               = {"hipsparseZcsrgemm",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+
   // NOTE: rocsparse_csrgemm_nnz has different signature, thus it is unsupported yet
-  {"cusparseXcsrgemmNnz",                                  {"hipsparseXcsrgemmNnz",                               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseXcsrgemmNnz"]                                            = {"hipsparseXcsrgemmNnz",                               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 11, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseScsrgemm2"]                                              = {"hipsparseScsrgemm2",                                 "rocsparse_scsrgemm",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrgemm2"]                                              = {"hipsparseDcsrgemm2",                                 "rocsparse_dcsrgemm",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrgemm2"]                                              = {"hipsparseCcsrgemm2",                                 "rocsparse_ccsrgemm",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrgemm2"]                                              = {"hipsparseZcsrgemm2",                                 "rocsparse_zcsrgemm",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseXcsrgemm2Nnz"]                                           = {"hipsparseXcsrgemm2Nnz",                              "rocsparse_csrgemm_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsrgemm2",                                    {"hipsparseScsrgemm2",                                 "rocsparse_scsrgemm",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrgemm2",                                    {"hipsparseDcsrgemm2",                                 "rocsparse_dcsrgemm",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrgemm2",                                    {"hipsparseCcsrgemm2",                                 "rocsparse_ccsrgemm",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrgemm2",                                    {"hipsparseZcsrgemm2",                                 "rocsparse_zcsrgemm",                                               CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseXcsrgemm2Nnz",                                 {"hipsparseXcsrgemm2Nnz",                              "rocsparse_csrgemm_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-
-  {"cusparseScsrgemm2_bufferSizeExt",                      {"hipsparseScsrgemm2_bufferSizeExt",                   "rocsparse_scsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsrgemm2_bufferSizeExt",                      {"hipsparseDcsrgemm2_bufferSizeExt",                   "rocsparse_dcsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsrgemm2_bufferSizeExt",                      {"hipsparseCcsrgemm2_bufferSizeExt",                   "rocsparse_ccsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsrgemm2_bufferSizeExt",                      {"hipsparseZcsrgemm2_bufferSizeExt",                   "rocsparse_zcsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsrgemm2_bufferSizeExt"]                                = {"hipsparseScsrgemm2_bufferSizeExt",                   "rocsparse_scsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsrgemm2_bufferSizeExt"]                                = {"hipsparseDcsrgemm2_bufferSizeExt",                   "rocsparse_dcsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsrgemm2_bufferSizeExt"]                                = {"hipsparseCcsrgemm2_bufferSizeExt",                   "rocsparse_ccsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsrgemm2_bufferSizeExt"]                                = {"hipsparseZcsrgemm2_bufferSizeExt",                   "rocsparse_zcsrgemm_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 11, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
   // 12. cuSPARSE Preconditioners Reference
   // 12.1. Incomplete Cholesky Factorization : level 0
-  {"cusparseScsric0",                                      {"hipsparseScsric0",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsric0",                                      {"hipsparseDcsric0",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsric0",                                      {"hipsparseCcsric0",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsric0",                                      {"hipsparseZcsric0",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsric0"]                                                = {"hipsparseScsric0",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsric0"]                                                = {"hipsparseDcsric0",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsric0"]                                                = {"hipsparseCcsric0",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsric0"]                                                = {"hipsparseZcsric0",                                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseScsric02_bufferSize",                          {"hipsparseScsric02_bufferSize",                       "rocsparse_scsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseScsric02_bufferSizeExt",                       {"hipsparseScsric02_bufferSizeExt",                    "rocsparse_scsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
-  {"cusparseDcsric02_bufferSize",                          {"hipsparseDcsric02_bufferSize",                       "rocsparse_dcsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsric02_bufferSizeExt",                       {"hipsparseDcsric02_bufferSizeExt",                    "rocsparse_dcsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
-  {"cusparseCcsric02_bufferSize",                          {"hipsparseCcsric02_bufferSize",                       "rocsparse_ccsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsric02_bufferSizeExt",                       {"hipsparseCcsric02_bufferSizeExt",                    "rocsparse_ccsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
-  {"cusparseZcsric02_bufferSize",                          {"hipsparseZcsric02_bufferSize",                       "rocsparse_zcsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsric02_bufferSizeExt",                       {"hipsparseZcsric02_bufferSizeExt",                    "rocsparse_zcsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  m["cusparseScsric02_bufferSize"]                                    = {"hipsparseScsric02_bufferSize",                       "rocsparse_scsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseScsric02_bufferSizeExt"]                                 = {"hipsparseScsric02_bufferSizeExt",                    "rocsparse_scsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED};
+  m["cusparseDcsric02_bufferSize"]                                    = {"hipsparseDcsric02_bufferSize",                       "rocsparse_dcsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsric02_bufferSizeExt"]                                 = {"hipsparseDcsric02_bufferSizeExt",                    "rocsparse_dcsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED};
+  m["cusparseCcsric02_bufferSize"]                                    = {"hipsparseCcsric02_bufferSize",                       "rocsparse_ccsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsric02_bufferSizeExt"]                                 = {"hipsparseCcsric02_bufferSizeExt",                    "rocsparse_ccsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED};
+  m["cusparseZcsric02_bufferSize"]                                    = {"hipsparseZcsric02_bufferSize",                       "rocsparse_zcsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsric02_bufferSizeExt"]                                 = {"hipsparseZcsric02_bufferSizeExt",                    "rocsparse_zcsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED};
 
-  {"cusparseScsric02_analysis",                            {"hipsparseScsric02_analysis",                         "rocsparse_scsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsric02_analysis",                            {"hipsparseDcsric02_analysis",                         "rocsparse_dcsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsric02_analysis",                            {"hipsparseCcsric02_analysis",                         "rocsparse_ccsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsric02_analysis",                            {"hipsparseZcsric02_analysis",                         "rocsparse_zcsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsric02_analysis"]                                      = {"hipsparseScsric02_analysis",                         "rocsparse_scsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsric02_analysis"]                                      = {"hipsparseDcsric02_analysis",                         "rocsparse_dcsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsric02_analysis"]                                      = {"hipsparseCcsric02_analysis",                         "rocsparse_ccsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsric02_analysis"]                                      = {"hipsparseZcsric02_analysis",                         "rocsparse_zcsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseScsric02",                                     {"hipsparseScsric02",                                  "rocsparse_scsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsric02",                                     {"hipsparseDcsric02",                                  "rocsparse_dcsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsric02",                                     {"hipsparseCcsric02",                                  "rocsparse_ccsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsric02",                                     {"hipsparseZcsric02",                                  "rocsparse_zcsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsric02"]                                               = {"hipsparseScsric02",                                  "rocsparse_scsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsric02"]                                               = {"hipsparseDcsric02",                                  "rocsparse_dcsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsric02"]                                               = {"hipsparseCcsric02",                                  "rocsparse_ccsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsric02"]                                               = {"hipsparseZcsric02",                                  "rocsparse_zcsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseXcsric02_zeroPivot",                           {"hipsparseXcsric02_zeroPivot",                        "rocsparse_csric0_zero_pivot",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseSbsric02_bufferSize",                          {"hipsparseSbsric02_bufferSize",                       "rocsparse_sbsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseSbsric02_bufferSizeExt",                       {"hipsparseSbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDbsric02_bufferSize",                          {"hipsparseDbsric02_bufferSize",                       "rocsparse_dbsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsric02_bufferSizeExt",                       {"hipsparseDbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseCbsric02_bufferSize",                          {"hipsparseCbsric02_bufferSize",                       "rocsparse_cbsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsric02_bufferSizeExt",                       {"hipsparseCbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseZbsric02_bufferSize",                          {"hipsparseZbsric02_bufferSize",                       "rocsparse_zbsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsric02_bufferSizeExt",                       {"hipsparseZbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cusparseXcsric02_zeroPivot"]                                     = {"hipsparseXcsric02_zeroPivot",                        "rocsparse_csric0_zero_pivot",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseSbsric02_bufferSize"]                                    = {"hipsparseSbsric02_bufferSize",                       "rocsparse_sbsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseSbsric02_bufferSizeExt"]                                 = {"hipsparseSbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseDbsric02_bufferSize"]                                    = {"hipsparseDbsric02_bufferSize",                       "rocsparse_dbsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsric02_bufferSizeExt"]                                 = {"hipsparseDbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseCbsric02_bufferSize"]                                    = {"hipsparseCbsric02_bufferSize",                       "rocsparse_cbsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsric02_bufferSizeExt"]                                 = {"hipsparseCbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseZbsric02_bufferSize"]                                    = {"hipsparseZbsric02_bufferSize",                       "rocsparse_zbsric0_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsric02_bufferSizeExt"]                                 = {"hipsparseZbsric02_bufferSizeExt",                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED};
 
-  {"cusparseSbsric02_analysis",                            {"hipsparseSbsric02_analysis",                         "rocsparse_sbsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsric02_analysis",                            {"hipsparseDbsric02_analysis",                         "rocsparse_dbsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsric02_analysis",                            {"hipsparseCbsric02_analysis",                         "rocsparse_cbsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsric02_analysis",                            {"hipsparseZbsric02_analysis",                         "rocsparse_zbsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsric02_analysis"]                                      = {"hipsparseSbsric02_analysis",                         "rocsparse_sbsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsric02_analysis"]                                      = {"hipsparseDbsric02_analysis",                         "rocsparse_dbsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsric02_analysis"]                                      = {"hipsparseCbsric02_analysis",                         "rocsparse_cbsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsric02_analysis"]                                      = {"hipsparseZbsric02_analysis",                         "rocsparse_zbsric0_analysis",                                       CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseSbsric02",                                     {"hipsparseSbsric02",                                  "rocsparse_sbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsric02",                                     {"hipsparseDbsric02",                                  "rocsparse_dbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsric02",                                     {"hipsparseCbsric02",                                  "rocsparse_cbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsric02",                                     {"hipsparseZbsric02",                                  "rocsparse_zbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsric02"]                                               = {"hipsparseSbsric02",                                  "rocsparse_sbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsric02"]                                               = {"hipsparseDbsric02",                                  "rocsparse_dbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsric02"]                                               = {"hipsparseCbsric02",                                  "rocsparse_cbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsric02"]                                               = {"hipsparseZbsric02",                                  "rocsparse_zbsric0",                                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
   // TODO: rocsparse_get_stream and hipStreamSynchronize need to be added correspondingly before and after rocsparse_bsric0_zero_pivot call, because cusparseXbsric02_zeroPivot is blocking, and rocsparse_bsric0_zero_pivot is not
-  {"cusparseXbsric02_zeroPivot",                           {"hipsparseXbsric02_zeroPivot",                        "rocsparse_bsric0_zero_pivot",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseXbsric02_zeroPivot"]                                     = {"hipsparseXbsric02_zeroPivot",                        "rocsparse_bsric0_zero_pivot",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
   // 12.2. Incomplete LU Factorization: level 0
   // NOTE: rocsparse_(s|d|c|z)csrilu0 have different signatures, thus they are also unsupported yet
-  {"cusparseScsrilu0",                                     {"hipsparseScsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsrilu0",                                     {"hipsparseDcsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsrilu0",                                     {"hipsparseCcsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsrilu0",                                     {"hipsparseZcsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCsrilu0Ex",                                    {"hipsparseCsrilu0Ex",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsrilu0"]                                               = {"hipsparseScsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsrilu0"]                                               = {"hipsparseDcsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsrilu0"]                                               = {"hipsparseCcsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsrilu0"]                                               = {"hipsparseZcsrilu0",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCsrilu0Ex"]                                              = {"hipsparseCsrilu0Ex",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseScsrilu02_numericBoost",                       {"hipsparseScsrilu02_numericBoost",                    "rocsparse_dscsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsrilu02_numericBoost",                       {"hipsparseDcsrilu02_numericBoost",                    "rocsparse_dcsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsrilu02_numericBoost",                       {"hipsparseCcsrilu02_numericBoost",                    "rocsparse_dccsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsrilu02_numericBoost",                       {"hipsparseZcsrilu02_numericBoost",                    "rocsparse_zcsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsrilu02_numericBoost"]                                 = {"hipsparseScsrilu02_numericBoost",                    "rocsparse_dscsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsrilu02_numericBoost"]                                 = {"hipsparseDcsrilu02_numericBoost",                    "rocsparse_dcsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsrilu02_numericBoost"]                                 = {"hipsparseCcsrilu02_numericBoost",                    "rocsparse_dccsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsrilu02_numericBoost"]                                 = {"hipsparseZcsrilu02_numericBoost",                    "rocsparse_zcsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseScsrilu02_bufferSize",                         {"hipsparseScsrilu02_bufferSize",                      "rocsparse_scsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseScsrilu02_bufferSizeExt",                      {"hipsparseScsrilu02_bufferSizeExt",                   "rocsparse_scsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
-  {"cusparseDcsrilu02_bufferSize",                         {"hipsparseDcsrilu02_bufferSize",                      "rocsparse_dcsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsrilu02_bufferSizeExt",                      {"hipsparseDcsrilu02_bufferSizeExt",                   "rocsparse_dcsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
-  {"cusparseCcsrilu02_bufferSize",                         {"hipsparseCcsrilu02_bufferSize",                      "rocsparse_ccsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsrilu02_bufferSizeExt",                      {"hipsparseCcsrilu02_bufferSizeExt",                   "rocsparse_ccsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
-  {"cusparseZcsrilu02_bufferSize",                         {"hipsparseZcsrilu02_bufferSize",                      "rocsparse_zcsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsrilu02_bufferSizeExt",                      {"hipsparseZcsrilu02_bufferSizeExt",                   "rocsparse_zcsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED}},
+  m["cusparseScsrilu02_bufferSize"]                                   = {"hipsparseScsrilu02_bufferSize",                      "rocsparse_scsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseScsrilu02_bufferSizeExt"]                                = {"hipsparseScsrilu02_bufferSizeExt",                   "rocsparse_scsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED};
+  m["cusparseDcsrilu02_bufferSize"]                                   = {"hipsparseDcsrilu02_bufferSize",                      "rocsparse_dcsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsrilu02_bufferSizeExt"]                                = {"hipsparseDcsrilu02_bufferSizeExt",                   "rocsparse_dcsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED};
+  m["cusparseCcsrilu02_bufferSize"]                                   = {"hipsparseCcsrilu02_bufferSize",                      "rocsparse_ccsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsrilu02_bufferSizeExt"]                                = {"hipsparseCcsrilu02_bufferSizeExt",                   "rocsparse_ccsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED};
+  m["cusparseZcsrilu02_bufferSize"]                                   = {"hipsparseZcsrilu02_bufferSize",                      "rocsparse_zcsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsrilu02_bufferSizeExt"]                                = {"hipsparseZcsrilu02_bufferSizeExt",                   "rocsparse_zcsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED};
 
-  {"cusparseScsrilu02_analysis",                           {"hipsparseScsrilu02_analysis",                        "rocsparse_scsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsrilu02_analysis",                           {"hipsparseDcsrilu02_analysis",                        "rocsparse_dcsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsrilu02_analysis",                           {"hipsparseCcsrilu02_analysis",                        "rocsparse_ccsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsrilu02_analysis",                           {"hipsparseZcsrilu02_analysis",                        "rocsparse_zcsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsrilu02_analysis"]                                     = {"hipsparseScsrilu02_analysis",                        "rocsparse_scsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsrilu02_analysis"]                                     = {"hipsparseDcsrilu02_analysis",                        "rocsparse_dcsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsrilu02_analysis"]                                     = {"hipsparseCcsrilu02_analysis",                        "rocsparse_ccsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsrilu02_analysis"]                                     = {"hipsparseZcsrilu02_analysis",                        "rocsparse_zcsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseScsrilu02",                                    {"hipsparseScsrilu02",                                 "rocsparse_scsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsrilu02",                                    {"hipsparseDcsrilu02",                                 "rocsparse_dcsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsrilu02",                                    {"hipsparseCcsrilu02",                                 "rocsparse_ccsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsrilu02",                                    {"hipsparseZcsrilu02",                                 "rocsparse_zcsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseXcsrilu02_zeroPivot",                          {"hipsparseXcsrilu02_zeroPivot",                       "rocsparse_csrilu0_zero_pivot",                                     CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsrilu02"]                                              = {"hipsparseScsrilu02",                                 "rocsparse_scsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsrilu02"]                                              = {"hipsparseDcsrilu02",                                 "rocsparse_dcsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsrilu02"]                                              = {"hipsparseCcsrilu02",                                 "rocsparse_ccsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsrilu02"]                                              = {"hipsparseZcsrilu02",                                 "rocsparse_zcsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseXcsrilu02_zeroPivot"]                                    = {"hipsparseXcsrilu02_zeroPivot",                       "rocsparse_csrilu0_zero_pivot",                                     CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseSbsrilu02_numericBoost",                       {"hipsparseSbsrilu02_numericBoost",                    "rocsparse_dsbsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrilu02_numericBoost",                       {"hipsparseDbsrilu02_numericBoost",                    "rocsparse_dbsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrilu02_numericBoost",                       {"hipsparseCbsrilu02_numericBoost",                    "rocsparse_dcbsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrilu02_numericBoost",                       {"hipsparseZbsrilu02_numericBoost",                    "rocsparse_zbsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsrilu02_numericBoost"]                                 = {"hipsparseSbsrilu02_numericBoost",                    "rocsparse_dsbsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrilu02_numericBoost"]                                 = {"hipsparseDbsrilu02_numericBoost",                    "rocsparse_dbsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrilu02_numericBoost"]                                 = {"hipsparseCbsrilu02_numericBoost",                    "rocsparse_dcbsrilu0_numeric_boost",                                CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrilu02_numericBoost"]                                 = {"hipsparseZbsrilu02_numericBoost",                    "rocsparse_zbsrilu0_numeric_boost",                                 CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseSbsrilu02_bufferSize",                         {"hipsparseSbsrilu02_bufferSize",                      "rocsparse_sbsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseSbsrilu02_bufferSizeExt",                      {"hipsparseSbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDbsrilu02_bufferSize",                         {"hipsparseDbsrilu02_bufferSize",                      "rocsparse_dbsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrilu02_bufferSizeExt",                      {"hipsparseDbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseCbsrilu02_bufferSize",                         {"hipsparseCbsrilu02_bufferSize",                      "rocsparse_cbsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrilu02_bufferSizeExt",                      {"hipsparseCbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseZbsrilu02_bufferSize",                         {"hipsparseZbsrilu02_bufferSize",                      "rocsparse_zbsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrilu02_bufferSizeExt",                      {"hipsparseZbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cusparseSbsrilu02_bufferSize"]                                   = {"hipsparseSbsrilu02_bufferSize",                      "rocsparse_sbsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseSbsrilu02_bufferSizeExt"]                                = {"hipsparseSbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseDbsrilu02_bufferSize"]                                   = {"hipsparseDbsrilu02_bufferSize",                      "rocsparse_dbsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrilu02_bufferSizeExt"]                                = {"hipsparseDbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseCbsrilu02_bufferSize"]                                   = {"hipsparseCbsrilu02_bufferSize",                      "rocsparse_cbsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrilu02_bufferSizeExt"]                                = {"hipsparseCbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseZbsrilu02_bufferSize"]                                   = {"hipsparseZbsrilu02_bufferSize",                      "rocsparse_zbsrilu0_buffer_size",                                   CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrilu02_bufferSizeExt"]                                = {"hipsparseZbsrilu02_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED};
 
-  {"cusparseSbsrilu02_analysis",                           {"hipsparseSbsrilu02_analysis",                        "rocsparse_sbsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrilu02_analysis",                           {"hipsparseDbsrilu02_analysis",                        "rocsparse_dbsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrilu02_analysis",                           {"hipsparseCbsrilu02_analysis",                        "rocsparse_cbsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrilu02_analysis",                           {"hipsparseZbsrilu02_analysis",                        "rocsparse_zbsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsrilu02_analysis"]                                     = {"hipsparseSbsrilu02_analysis",                        "rocsparse_sbsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrilu02_analysis"]                                     = {"hipsparseDbsrilu02_analysis",                        "rocsparse_dbsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrilu02_analysis"]                                     = {"hipsparseCbsrilu02_analysis",                        "rocsparse_cbsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrilu02_analysis"]                                     = {"hipsparseZbsrilu02_analysis",                        "rocsparse_zbsrilu0_analysis",                                      CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseSbsrilu02",                                    {"hipsparseSbsrilu02",                                 "rocsparse_sbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDbsrilu02",                                    {"hipsparseDbsrilu02",                                 "rocsparse_dbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCbsrilu02",                                    {"hipsparseCbsrilu02",                                 "rocsparse_cbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZbsrilu02",                                    {"hipsparseZbsrilu02",                                 "rocsparse_zbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseXbsrilu02_zeroPivot",                          {"hipsparseXbsrilu02_zeroPivot",                       "rocsparse_bsrilu0_zero_pivot",                                     CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSbsrilu02"]                                              = {"hipsparseSbsrilu02",                                 "rocsparse_sbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDbsrilu02"]                                              = {"hipsparseDbsrilu02",                                 "rocsparse_dbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCbsrilu02"]                                              = {"hipsparseCbsrilu02",                                 "rocsparse_cbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZbsrilu02"]                                              = {"hipsparseZbsrilu02",                                 "rocsparse_zbsrilu0",                                               CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseXbsrilu02_zeroPivot"]                                    = {"hipsparseXbsrilu02_zeroPivot",                       "rocsparse_bsrilu0_zero_pivot",                                     CONV_LIB_FUNC, API_SPARSE, 12, CUDA_DEPRECATED | HIP_DEPRECATED};
 
   // 12.3. Tridiagonal Solve
   // NOTE: rocsparse_(s|d|c|z)gtsv have an additional parameter void* temp_buffer
-  {"cusparseSgtsv",                                        {"hipsparseSgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDgtsv",                                        {"hipsparseDgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCgtsv",                                        {"hipsparseCgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZgtsv",                                        {"hipsparseZgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseSgtsv"]                                                  = {"hipsparseSgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDgtsv"]                                                  = {"hipsparseDgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCgtsv"]                                                  = {"hipsparseCgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZgtsv"]                                                  = {"hipsparseZgtsv",                                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
   // NOTE: rocsparse_(s|d|c|z)gtsv_no_pivot have an additional parameter void* temp_buffer
-  {"cusparseSgtsv_nopivot",                                {"hipsparseSgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDgtsv_nopivot",                                {"hipsparseDgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCgtsv_nopivot",                                {"hipsparseCgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZgtsv_nopivot",                                {"hipsparseZgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseSgtsv_nopivot"]                                          = {"hipsparseSgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDgtsv_nopivot"]                                          = {"hipsparseDgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCgtsv_nopivot"]                                          = {"hipsparseCgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZgtsv_nopivot"]                                          = {"hipsparseZgtsv_nopivot",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseSgtsv2_bufferSizeExt",                         {"hipsparseSgtsv2_bufferSizeExt",                      "rocsparse_sgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgtsv2_bufferSizeExt",                         {"hipsparseDgtsv2_bufferSizeExt",                      "rocsparse_dgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgtsv2_bufferSizeExt",                         {"hipsparseCgtsv2_bufferSizeExt",                      "rocsparse_cgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgtsv2_bufferSizeExt",                         {"hipsparseZgtsv2_bufferSizeExt",                      "rocsparse_zgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgtsv2_bufferSizeExt"]                                   = {"hipsparseSgtsv2_bufferSizeExt",                      "rocsparse_sgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgtsv2_bufferSizeExt"]                                   = {"hipsparseDgtsv2_bufferSizeExt",                      "rocsparse_dgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgtsv2_bufferSizeExt"]                                   = {"hipsparseCgtsv2_bufferSizeExt",                      "rocsparse_cgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgtsv2_bufferSizeExt"]                                   = {"hipsparseZgtsv2_bufferSizeExt",                      "rocsparse_zgtsv_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 12};
 
-  {"cusparseSgtsv2",                                       {"hipsparseSgtsv2",                                    "rocsparse_sgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgtsv2",                                       {"hipsparseDgtsv2",                                    "rocsparse_dgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgtsv2",                                       {"hipsparseCgtsv2",                                    "rocsparse_cgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgtsv2",                                       {"hipsparseZgtsv2",                                    "rocsparse_zgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgtsv2"]                                                 = {"hipsparseSgtsv2",                                    "rocsparse_sgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgtsv2"]                                                 = {"hipsparseDgtsv2",                                    "rocsparse_dgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgtsv2"]                                                 = {"hipsparseCgtsv2",                                    "rocsparse_cgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgtsv2"]                                                 = {"hipsparseZgtsv2",                                    "rocsparse_zgtsv",                                                  CONV_LIB_FUNC, API_SPARSE, 12};
 
-  {"cusparseSgtsv2_nopivot_bufferSizeExt",                 {"hipsparseSgtsv2_nopivot_bufferSizeExt",              "rocsparse_sgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgtsv2_nopivot_bufferSizeExt",                 {"hipsparseDgtsv2_nopivot_bufferSizeExt",              "rocsparse_dgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgtsv2_nopivot_bufferSizeExt",                 {"hipsparseCgtsv2_nopivot_bufferSizeExt",              "rocsparse_cgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgtsv2_nopivot_bufferSizeExt",                 {"hipsparseZgtsv2_nopivot_bufferSizeExt",              "rocsparse_zgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgtsv2_nopivot_bufferSizeExt"]                           = {"hipsparseSgtsv2_nopivot_bufferSizeExt",              "rocsparse_sgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgtsv2_nopivot_bufferSizeExt"]                           = {"hipsparseDgtsv2_nopivot_bufferSizeExt",              "rocsparse_dgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgtsv2_nopivot_bufferSizeExt"]                           = {"hipsparseCgtsv2_nopivot_bufferSizeExt",              "rocsparse_cgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgtsv2_nopivot_bufferSizeExt"]                           = {"hipsparseZgtsv2_nopivot_bufferSizeExt",              "rocsparse_zgtsv_no_pivot_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 12};
 
-  {"cusparseSgtsv2_nopivot",                               {"hipsparseSgtsv2_nopivot",                            "rocsparse_sgtsv_no_pivot",                                         CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgtsv2_nopivot",                               {"hipsparseDgtsv2_nopivot",                            "rocsparse_dgtsv_no_pivot",                                         CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgtsv2_nopivot",                               {"hipsparseCgtsv2_nopivot",                            "rocsparse_cgtsv_no_pivot",                                         CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgtsv2_nopivot",                               {"hipsparseZgtsv2_nopivot",                            "rocsparse_zgtsv_no_pivot",                                         CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgtsv2_nopivot"]                                         = {"hipsparseSgtsv2_nopivot",                            "rocsparse_sgtsv_no_pivot",                                         CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgtsv2_nopivot"]                                         = {"hipsparseDgtsv2_nopivot",                            "rocsparse_dgtsv_no_pivot",                                         CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgtsv2_nopivot"]                                         = {"hipsparseCgtsv2_nopivot",                            "rocsparse_cgtsv_no_pivot",                                         CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgtsv2_nopivot"]                                         = {"hipsparseZgtsv2_nopivot",                            "rocsparse_zgtsv_no_pivot",                                         CONV_LIB_FUNC, API_SPARSE, 12};
 
   // 12.4. Batched Tridiagonal Solve
-  {"cusparseSgtsvStridedBatch",                            {"hipsparseSgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDgtsvStridedBatch",                            {"hipsparseDgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCgtsvStridedBatch",                            {"hipsparseCgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZgtsvStridedBatch",                            {"hipsparseZgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseSgtsvStridedBatch"]                                      = {"hipsparseSgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDgtsvStridedBatch"]                                      = {"hipsparseDgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCgtsvStridedBatch"]                                      = {"hipsparseCgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZgtsvStridedBatch"]                                      = {"hipsparseZgtsvStridedBatch",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 12, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseSgtsv2StridedBatch_bufferSizeExt",             {"hipsparseSgtsv2StridedBatch_bufferSizeExt",          "rocsparse_sgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgtsv2StridedBatch_bufferSizeExt",             {"hipsparseDgtsv2StridedBatch_bufferSizeExt",          "rocsparse_dgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgtsv2StridedBatch_bufferSizeExt",             {"hipsparseCgtsv2StridedBatch_bufferSizeExt",          "rocsparse_cgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgtsv2StridedBatch_bufferSizeExt",             {"hipsparseZgtsv2StridedBatch_bufferSizeExt",          "rocsparse_zgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgtsv2StridedBatch_bufferSizeExt"]                       = {"hipsparseSgtsv2StridedBatch_bufferSizeExt",          "rocsparse_sgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgtsv2StridedBatch_bufferSizeExt"]                       = {"hipsparseDgtsv2StridedBatch_bufferSizeExt",          "rocsparse_dgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgtsv2StridedBatch_bufferSizeExt"]                       = {"hipsparseCgtsv2StridedBatch_bufferSizeExt",          "rocsparse_cgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgtsv2StridedBatch_bufferSizeExt"]                       = {"hipsparseZgtsv2StridedBatch_bufferSizeExt",          "rocsparse_zgtsv_no_pivot_strided_batch_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 12};
 
-  {"cusparseSgtsv2StridedBatch",                           {"hipsparseSgtsv2StridedBatch",                        "rocsparse_sgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgtsv2StridedBatch",                           {"hipsparseDgtsv2StridedBatch",                        "rocsparse_dgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgtsv2StridedBatch",                           {"hipsparseCgtsv2StridedBatch",                        "rocsparse_cgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgtsv2StridedBatch",                           {"hipsparseZgtsv2StridedBatch",                        "rocsparse_zgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgtsv2StridedBatch"]                                     = {"hipsparseSgtsv2StridedBatch",                        "rocsparse_sgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgtsv2StridedBatch"]                                     = {"hipsparseDgtsv2StridedBatch",                        "rocsparse_dgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgtsv2StridedBatch"]                                     = {"hipsparseCgtsv2StridedBatch",                        "rocsparse_cgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgtsv2StridedBatch"]                                     = {"hipsparseZgtsv2StridedBatch",                        "rocsparse_zgtsv_no_pivot_strided_batch",                           CONV_LIB_FUNC, API_SPARSE, 12};
 
-  {"cusparseSgtsvInterleavedBatch_bufferSizeExt",          {"hipsparseSgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_sgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgtsvInterleavedBatch_bufferSizeExt",          {"hipsparseDgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_dgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgtsvInterleavedBatch_bufferSizeExt",          {"hipsparseCgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_cgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgtsvInterleavedBatch_bufferSizeExt",          {"hipsparseZgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_zgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgtsvInterleavedBatch_bufferSizeExt"]                    = {"hipsparseSgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_sgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgtsvInterleavedBatch_bufferSizeExt"]                    = {"hipsparseDgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_dgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgtsvInterleavedBatch_bufferSizeExt"]                    = {"hipsparseCgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_cgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgtsvInterleavedBatch_bufferSizeExt"]                    = {"hipsparseZgtsvInterleavedBatch_bufferSizeExt",       "rocsparse_zgtsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12};
 
-  {"cusparseSgtsvInterleavedBatch",                        {"hipsparseSgtsvInterleavedBatch",                     "rocsparse_sgtsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgtsvInterleavedBatch",                        {"hipsparseDgtsvInterleavedBatch",                     "rocsparse_dgtsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgtsvInterleavedBatch",                        {"hipsparseCgtsvInterleavedBatch",                     "rocsparse_cgtsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgtsvInterleavedBatch",                        {"hipsparseZgtsvInterleavedBatch",                     "rocsparse_zgtsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgtsvInterleavedBatch"]                                  = {"hipsparseSgtsvInterleavedBatch",                     "rocsparse_sgtsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgtsvInterleavedBatch"]                                  = {"hipsparseDgtsvInterleavedBatch",                     "rocsparse_dgtsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgtsvInterleavedBatch"]                                  = {"hipsparseCgtsvInterleavedBatch",                     "rocsparse_cgtsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgtsvInterleavedBatch"]                                  = {"hipsparseZgtsvInterleavedBatch",                     "rocsparse_zgtsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12};
 
   // 12.5. Batched Pentadiagonal Solve
-  {"cusparseSgpsvInterleavedBatch_bufferSizeExt",          {"hipsparseSgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_sgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgpsvInterleavedBatch_bufferSizeExt",          {"hipsparseDgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_dgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgpsvInterleavedBatch_bufferSizeExt",          {"hipsparseCgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_cgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgpsvInterleavedBatch_bufferSizeExt",          {"hipsparseZgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_zgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgpsvInterleavedBatch_bufferSizeExt"]                    = {"hipsparseSgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_sgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgpsvInterleavedBatch_bufferSizeExt"]                    = {"hipsparseDgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_dgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgpsvInterleavedBatch_bufferSizeExt"]                    = {"hipsparseCgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_cgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgpsvInterleavedBatch_bufferSizeExt"]                    = {"hipsparseZgpsvInterleavedBatch_bufferSizeExt",       "rocsparse_zgpsv_interleaved_batch_buffer_size",                    CONV_LIB_FUNC, API_SPARSE, 12};
 
-  {"cusparseSgpsvInterleavedBatch",                        {"hipsparseSgpsvInterleavedBatch",                     "rocsparse_sgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseDgpsvInterleavedBatch",                        {"hipsparseDgpsvInterleavedBatch",                     "rocsparse_dgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseCgpsvInterleavedBatch",                        {"hipsparseCgpsvInterleavedBatch",                     "rocsparse_cgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
-  {"cusparseZgpsvInterleavedBatch",                        {"hipsparseZgpsvInterleavedBatch",                     "rocsparse_zgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12}},
+  m["cusparseSgpsvInterleavedBatch"]                                  = {"hipsparseSgpsvInterleavedBatch",                     "rocsparse_sgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseDgpsvInterleavedBatch"]                                  = {"hipsparseDgpsvInterleavedBatch",                     "rocsparse_dgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseCgpsvInterleavedBatch"]                                  = {"hipsparseCgpsvInterleavedBatch",                     "rocsparse_cgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12};
+  m["cusparseZgpsvInterleavedBatch"]                                  = {"hipsparseZgpsvInterleavedBatch",                     "rocsparse_zgpsv_interleaved_batch",                                CONV_LIB_FUNC, API_SPARSE, 12};
 
   // 13. cuSPARSE Matrix Reorderings Reference
-  {"cusparseScsrcolor",                                    {"hipsparseScsrcolor",                                 "rocsparse_scsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsrcolor",                                    {"hipsparseDcsrcolor",                                 "rocsparse_dcsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsrcolor",                                    {"hipsparseCcsrcolor",                                 "rocsparse_ccsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsrcolor",                                    {"hipsparseZcsrcolor",                                 "rocsparse_zcsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsrcolor"]                                              = {"hipsparseScsrcolor",                                 "rocsparse_scsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsrcolor"]                                              = {"hipsparseDcsrcolor",                                 "rocsparse_dcsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsrcolor"]                                              = {"hipsparseCcsrcolor",                                 "rocsparse_ccsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsrcolor"]                                              = {"hipsparseZcsrcolor",                                 "rocsparse_zcsrcolor",                                              CONV_LIB_FUNC, API_SPARSE, 13, CUDA_DEPRECATED | HIP_DEPRECATED};
 
   // 14. cuSPARSE Format Conversion Reference
-  {"cusparseSbsr2csr",                                     {"hipsparseSbsr2csr",                                  "rocsparse_sbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseDbsr2csr",                                     {"hipsparseDbsr2csr",                                  "rocsparse_dbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseCbsr2csr",                                     {"hipsparseCbsr2csr",                                  "rocsparse_cbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseZbsr2csr",                                     {"hipsparseZbsr2csr",                                  "rocsparse_zbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
+  m["cusparseSbsr2csr"]                                               = {"hipsparseSbsr2csr",                                  "rocsparse_sbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseDbsr2csr"]                                               = {"hipsparseDbsr2csr",                                  "rocsparse_dbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseCbsr2csr"]                                               = {"hipsparseCbsr2csr",                                  "rocsparse_cbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseZbsr2csr"]                                               = {"hipsparseZbsr2csr",                                  "rocsparse_zbsr2csr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
 
-  {"cusparseSgebsr2gebsc_bufferSize",                      {"hipsparseSgebsr2gebsc_bufferSize",                   "rocsparse_sgebsr2gebsc_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseSgebsr2gebsc_bufferSizeExt",                   {"hipsparseSgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
-  {"cusparseDgebsr2gebsc_bufferSize",                      {"hipsparseDgebsr2gebsc_bufferSize",                   "rocsparse_dgebsr2gebsc_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseDgebsr2gebsc_bufferSizeExt",                   {"hipsparseDgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
-  {"cusparseCgebsr2gebsc_bufferSize",                      {"hipsparseCgebsr2gebsc_bufferSize",                   "rocsparse_cgebsr2gebsc_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseCgebsr2gebsc_bufferSizeExt",                   {"hipsparseCgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
-  {"cusparseZgebsr2gebsc_bufferSize",                      {"hipsparseZgebsr2gebsc_bufferSize",                   "rocsparse_zgebsr2gebsc_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseZgebsr2gebsc_bufferSizeExt",                   {"hipsparseZgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
+  m["cusparseSgebsr2gebsc_bufferSize"]                                = {"hipsparseSgebsr2gebsc_bufferSize",                   "rocsparse_sgebsr2gebsc_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseSgebsr2gebsc_bufferSizeExt"]                             = {"hipsparseSgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED};
+  m["cusparseDgebsr2gebsc_bufferSize"]                                = {"hipsparseDgebsr2gebsc_bufferSize",                   "rocsparse_dgebsr2gebsc_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseDgebsr2gebsc_bufferSizeExt"]                             = {"hipsparseDgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED};
+  m["cusparseCgebsr2gebsc_bufferSize"]                                = {"hipsparseCgebsr2gebsc_bufferSize",                   "rocsparse_cgebsr2gebsc_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseCgebsr2gebsc_bufferSizeExt"]                             = {"hipsparseCgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED};
+  m["cusparseZgebsr2gebsc_bufferSize"]                                = {"hipsparseZgebsr2gebsc_bufferSize",                   "rocsparse_zgebsr2gebsc_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseZgebsr2gebsc_bufferSizeExt"]                             = {"hipsparseZgebsr2gebsc_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED};
 
-  {"cusparseSgebsr2gebsc",                                 {"hipsparseSgebsr2gebsc",                              "rocsparse_sgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseDgebsr2gebsc",                                 {"hipsparseDgebsr2gebsc",                              "rocsparse_dgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseCgebsr2gebsc",                                 {"hipsparseCgebsr2gebsc",                              "rocsparse_cgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseZgebsr2gebsc",                                 {"hipsparseZgebsr2gebsc",                              "rocsparse_zgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseSgebsr2gebsc"]                                           = {"hipsparseSgebsr2gebsc",                              "rocsparse_sgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseDgebsr2gebsc"]                                           = {"hipsparseDgebsr2gebsc",                              "rocsparse_dgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseCgebsr2gebsc"]                                           = {"hipsparseCgebsr2gebsc",                              "rocsparse_cgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseZgebsr2gebsc"]                                           = {"hipsparseZgebsr2gebsc",                              "rocsparse_zgebsr2gebsc",                                           CONV_LIB_FUNC, API_SPARSE, 14};
 
-  {"cusparseSgebsr2gebsr_bufferSize",                      {"hipsparseSgebsr2gebsr_bufferSize",                   "rocsparse_sgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseSgebsr2gebsr_bufferSizeExt",                   {"hipsparseSgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusparseDgebsr2gebsr_bufferSize",                      {"hipsparseDgebsr2gebsr_bufferSize",                   "rocsparse_dgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseDgebsr2gebsr_bufferSizeExt",                   {"hipsparseDgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusparseCgebsr2gebsr_bufferSize",                      {"hipsparseCgebsr2gebsr_bufferSize",                   "rocsparse_cgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseCgebsr2gebsr_bufferSizeExt",                   {"hipsparseCgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | UNSUPPORTED}},
-  {"cusparseZgebsr2gebsr_bufferSize",                      {"hipsparseZgebsr2gebsr_bufferSize",                   "rocsparse_zgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseZgebsr2gebsr_bufferSizeExt",                   {"hipsparseZgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | UNSUPPORTED}},
+  m["cusparseSgebsr2gebsr_bufferSize"]                                = {"hipsparseSgebsr2gebsr_bufferSize",                   "rocsparse_sgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseSgebsr2gebsr_bufferSizeExt"]                             = {"hipsparseSgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusparseDgebsr2gebsr_bufferSize"]                                = {"hipsparseDgebsr2gebsr_bufferSize",                   "rocsparse_dgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseDgebsr2gebsr_bufferSizeExt"]                             = {"hipsparseDgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusparseCgebsr2gebsr_bufferSize"]                                = {"hipsparseCgebsr2gebsr_bufferSize",                   "rocsparse_cgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseCgebsr2gebsr_bufferSizeExt"]                             = {"hipsparseCgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | UNSUPPORTED};
+  m["cusparseZgebsr2gebsr_bufferSize"]                                = {"hipsparseZgebsr2gebsr_bufferSize",                   "rocsparse_zgebsr2gebsr_buffer_size",                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseZgebsr2gebsr_bufferSizeExt"]                             = {"hipsparseZgebsr2gebsr_bufferSizeExt",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | UNSUPPORTED};
 
-  {"cusparseXgebsr2csr",                                   {"hipsparseXgebsr2csr",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSgebsr2csr",                                   {"hipsparseSgebsr2csr",                                "rocsparse_sgebsr2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseDgebsr2csr",                                   {"hipsparseDgebsr2csr",                                "rocsparse_dgebsr2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseCgebsr2csr",                                   {"hipsparseCgebsr2csr",                                "rocsparse_cgebsr2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseZgebsr2csr",                                   {"hipsparseZgebsr2csr",                                "rocsparse_zgebsr2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
+  m["cusparseXgebsr2csr"]                                             = {"hipsparseXgebsr2csr",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSgebsr2csr"]                                             = {"hipsparseSgebsr2csr",                                "rocsparse_sgebsr2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseDgebsr2csr"]                                             = {"hipsparseDgebsr2csr",                                "rocsparse_dgebsr2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseCgebsr2csr"]                                             = {"hipsparseCgebsr2csr",                                "rocsparse_cgebsr2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseZgebsr2csr"]                                             = {"hipsparseZgebsr2csr",                                "rocsparse_zgebsr2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
 
-  {"cusparseXgebsr2gebsrNnz",                              {"hipsparseXgebsr2gebsrNnz",                           "rocsparse_gebsr2gebsr_nnz",                                        CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseSgebsr2gebsr",                                 {"hipsparseSgebsr2gebsr",                              "rocsparse_sgebsr2gebsr",                                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseDgebsr2gebsr",                                 {"hipsparseDgebsr2gebsr",                              "rocsparse_dgebsr2gebsr",                                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseCgebsr2gebsr",                                 {"hipsparseCgebsr2gebsr",                              "rocsparse_cgebsr2gebsr",                                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseZgebsr2gebsr",                                 {"hipsparseZgebsr2gebsr",                              "rocsparse_zgebsr2gebsr",                                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
+  m["cusparseXgebsr2gebsrNnz"]                                        = {"hipsparseXgebsr2gebsrNnz",                           "rocsparse_gebsr2gebsr_nnz",                                        CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseSgebsr2gebsr"]                                           = {"hipsparseSgebsr2gebsr",                              "rocsparse_sgebsr2gebsr",                                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseDgebsr2gebsr"]                                           = {"hipsparseDgebsr2gebsr",                              "rocsparse_dgebsr2gebsr",                                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseCgebsr2gebsr"]                                           = {"hipsparseCgebsr2gebsr",                              "rocsparse_cgebsr2gebsr",                                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseZgebsr2gebsr"]                                           = {"hipsparseZgebsr2gebsr",                              "rocsparse_zgebsr2gebsr",                                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
 
-  {"cusparseScsr2gebsr_bufferSize",                        {"hipsparseScsr2gebsr_bufferSize",                     "rocsparse_scsr2gebsr_buffer_size",                                 CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseScsr2gebsr_bufferSizeExt",                     {"hipsparseScsr2gebsr_bufferSizeExt",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
-  {"cusparseDcsr2gebsr_bufferSize",                        {"hipsparseDcsr2gebsr_bufferSize",                     "rocsparse_dcsr2gebsr_buffer_size",                                 CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseDcsr2gebsr_bufferSizeExt",                     {"hipsparseDcsr2gebsr_bufferSizeExt",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
-  {"cusparseCcsr2gebsr_bufferSize",                        {"hipsparseCcsr2gebsr_bufferSize",                     "rocsparse_ccsr2gebsr_buffer_size",                                 CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseCcsr2gebsr_bufferSizeExt",                     {"hipsparseCcsr2gebsr_bufferSizeExt",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
-  {"cusparseZcsr2gebsr_bufferSize",                        {"hipsparseZcsr2gebsr_bufferSize",                     "rocsparse_zcsr2gebsr_buffer_size",                                 CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseZcsr2gebsr_bufferSizeExt",                     {"hipsparseZcsr2gebsr_bufferSizeExt",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED}},
+  m["cusparseScsr2gebsr_bufferSize"]                                  = {"hipsparseScsr2gebsr_bufferSize",                     "rocsparse_scsr2gebsr_buffer_size",                                 CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseScsr2gebsr_bufferSizeExt"]                               = {"hipsparseScsr2gebsr_bufferSizeExt",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED};
+  m["cusparseDcsr2gebsr_bufferSize"]                                  = {"hipsparseDcsr2gebsr_bufferSize",                     "rocsparse_dcsr2gebsr_buffer_size",                                 CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseDcsr2gebsr_bufferSizeExt"]                               = {"hipsparseDcsr2gebsr_bufferSizeExt",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED};
+  m["cusparseCcsr2gebsr_bufferSize"]                                  = {"hipsparseCcsr2gebsr_bufferSize",                     "rocsparse_ccsr2gebsr_buffer_size",                                 CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseCcsr2gebsr_bufferSizeExt"]                               = {"hipsparseCcsr2gebsr_bufferSizeExt",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED};
+  m["cusparseZcsr2gebsr_bufferSize"]                                  = {"hipsparseZcsr2gebsr_bufferSize",                     "rocsparse_zcsr2gebsr_buffer_size",                                 CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseZcsr2gebsr_bufferSizeExt"]                               = {"hipsparseZcsr2gebsr_bufferSizeExt",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED};
 
-  {"cusparseXcsr2gebsrNnz",                                {"hipsparseXcsr2gebsrNnz",                             "rocsparse_csr2gebsr_nnz",                                          CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseScsr2gebsr",                                   {"hipsparseScsr2gebsr",                                "rocsparse_scsr2gebsr",                                             CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseDcsr2gebsr",                                   {"hipsparseDcsr2gebsr",                                "rocsparse_dcsr2gebsr",                                             CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseCcsr2gebsr",                                   {"hipsparseCcsr2gebsr",                                "rocsparse_ccsr2gebsr",                                             CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseZcsr2gebsr",                                   {"hipsparseZcsr2gebsr",                                "rocsparse_zcsr2gebsr",                                             CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseXcsr2gebsrNnz"]                                          = {"hipsparseXcsr2gebsrNnz",                             "rocsparse_csr2gebsr_nnz",                                          CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseScsr2gebsr"]                                             = {"hipsparseScsr2gebsr",                                "rocsparse_scsr2gebsr",                                             CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseDcsr2gebsr"]                                             = {"hipsparseDcsr2gebsr",                                "rocsparse_dcsr2gebsr",                                             CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseCcsr2gebsr"]                                             = {"hipsparseCcsr2gebsr",                                "rocsparse_ccsr2gebsr",                                             CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseZcsr2gebsr"]                                             = {"hipsparseZcsr2gebsr",                                "rocsparse_zcsr2gebsr",                                             CONV_LIB_FUNC, API_SPARSE, 14};
 
-  {"cusparseXcoo2csr",                                     {"hipsparseXcoo2csr",                                  "rocsparse_coo2csr",                                                CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseXcoo2csr"]                                               = {"hipsparseXcoo2csr",                                  "rocsparse_coo2csr",                                                CONV_LIB_FUNC, API_SPARSE, 14};
 
-  {"cusparseScsc2dense",                                   {"hipsparseScsc2dense",                                "rocsparse_scsc2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsc2dense",                                   {"hipsparseDcsc2dense",                                "rocsparse_dcsc2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsc2dense",                                   {"hipsparseCcsc2dense",                                "rocsparse_ccsc2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsc2dense",                                   {"hipsparseZcsc2dense",                                "rocsparse_zcsc2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsc2dense"]                                             = {"hipsparseScsc2dense",                                "rocsparse_scsc2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsc2dense"]                                             = {"hipsparseDcsc2dense",                                "rocsparse_dcsc2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsc2dense"]                                             = {"hipsparseCcsc2dense",                                "rocsparse_ccsc2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsc2dense"]                                             = {"hipsparseZcsc2dense",                                "rocsparse_zcsc2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsc2hyb",                                     {"hipsparseScsc2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDcsc2hyb",                                     {"hipsparseDcsc2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCcsc2hyb",                                     {"hipsparseCcsc2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZcsc2hyb",                                     {"hipsparseZcsc2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseScsc2hyb"]                                               = {"hipsparseScsc2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDcsc2hyb"]                                               = {"hipsparseDcsc2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCcsc2hyb"]                                               = {"hipsparseCcsc2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZcsc2hyb"]                                               = {"hipsparseZcsc2hyb",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseXcsr2bsrNnz",                                  {"hipsparseXcsr2bsrNnz",                               "rocsparse_csr2bsr_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseScsr2bsr",                                     {"hipsparseScsr2bsr",                                  "rocsparse_scsr2bsr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseDcsr2bsr",                                     {"hipsparseDcsr2bsr",                                  "rocsparse_dcsr2bsr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseCcsr2bsr",                                     {"hipsparseCcsr2bsr",                                  "rocsparse_ccsr2bsr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseZcsr2bsr",                                     {"hipsparseZcsr2bsr",                                  "rocsparse_zcsr2bsr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
+  m["cusparseXcsr2bsrNnz"]                                            = {"hipsparseXcsr2bsrNnz",                               "rocsparse_csr2bsr_nnz",                                            CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseScsr2bsr"]                                               = {"hipsparseScsr2bsr",                                  "rocsparse_scsr2bsr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseDcsr2bsr"]                                               = {"hipsparseDcsr2bsr",                                  "rocsparse_dcsr2bsr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseCcsr2bsr"]                                               = {"hipsparseCcsr2bsr",                                  "rocsparse_ccsr2bsr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseZcsr2bsr"]                                               = {"hipsparseZcsr2bsr",                                  "rocsparse_zcsr2bsr",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
 
-  {"cusparseXcsr2coo",                                     {"hipsparseXcsr2coo",                                  "rocsparse_csr2coo",                                                CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseXcsr2coo"]                                               = {"hipsparseXcsr2coo",                                  "rocsparse_csr2coo",                                                CONV_LIB_FUNC, API_SPARSE, 14};
   // NOTE: rocsparse_(s|d|c|z)csr2csc have an additional parameter void* temp_buffer
-  {"cusparseScsr2csc",                                     {"hipsparseScsr2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsr2csc",                                     {"hipsparseDcsr2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsr2csc",                                     {"hipsparseCcsr2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsr2csc",                                     {"hipsparseZcsr2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsr2csc"]                                               = {"hipsparseScsr2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsr2csc"]                                               = {"hipsparseDcsr2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsr2csc"]                                               = {"hipsparseCcsr2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsr2csc"]                                               = {"hipsparseZcsr2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseCsr2cscEx",                                    {"hipsparseCsr2cscEx",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCsr2cscEx2",                                   {"hipsparseCsr2cscEx2",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED}},
-  {"cusparseCsr2cscEx2_bufferSize",                        {"hipsparseCsr2cscEx2_bufferSize",                     "rocsparse_csr2csc_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseCsr2cscEx"]                                              = {"hipsparseCsr2cscEx",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCsr2cscEx2"]                                             = {"hipsparseCsr2cscEx2",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED};
+  m["cusparseCsr2cscEx2_bufferSize"]                                  = {"hipsparseCsr2cscEx2_bufferSize",                     "rocsparse_csr2csc_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 14};
 
-  {"cusparseScsr2dense",                                   {"hipsparseScsr2dense",                                "rocsparse_scsr2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsr2dense",                                   {"hipsparseDcsr2dense",                                "rocsparse_dcsr2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsr2dense",                                   {"hipsparseCcsr2dense",                                "rocsparse_ccsr2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsr2dense",                                   {"hipsparseZcsr2dense",                                "rocsparse_zcsr2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsr2dense"]                                             = {"hipsparseScsr2dense",                                "rocsparse_scsr2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsr2dense"]                                             = {"hipsparseDcsr2dense",                                "rocsparse_dcsr2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsr2dense"]                                             = {"hipsparseCcsr2dense",                                "rocsparse_ccsr2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsr2dense"]                                             = {"hipsparseZcsr2dense",                                "rocsparse_zcsr2dense",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseScsr2csr_compress",                            {"hipsparseScsr2csr_compress",                         "rocsparse_scsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseDcsr2csr_compress",                            {"hipsparseDcsr2csr_compress",                         "rocsparse_dcsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseCcsr2csr_compress",                            {"hipsparseCcsr2csr_compress",                         "rocsparse_ccsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
-  {"cusparseZcsr2csr_compress",                            {"hipsparseZcsr2csr_compress",                         "rocsparse_zcsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED}},
+  m["cusparseScsr2csr_compress"]                                      = {"hipsparseScsr2csr_compress",                         "rocsparse_scsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseDcsr2csr_compress"]                                      = {"hipsparseDcsr2csr_compress",                         "rocsparse_dcsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseCcsr2csr_compress"]                                      = {"hipsparseCcsr2csr_compress",                         "rocsparse_ccsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
+  m["cusparseZcsr2csr_compress"]                                      = {"hipsparseZcsr2csr_compress",                         "rocsparse_zcsr2csr_compress",                                      CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED};
 
-  {"cusparseScsr2hyb",                                     {"hipsparseScsr2hyb",                                  "rocsparse_scsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDcsr2hyb",                                     {"hipsparseDcsr2hyb",                                  "rocsparse_dcsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCcsr2hyb",                                     {"hipsparseCcsr2hyb",                                  "rocsparse_ccsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZcsr2hyb",                                     {"hipsparseZcsr2hyb",                                  "rocsparse_zcsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseScsr2hyb"]                                               = {"hipsparseScsr2hyb",                                  "rocsparse_scsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDcsr2hyb"]                                               = {"hipsparseDcsr2hyb",                                  "rocsparse_dcsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCcsr2hyb"]                                               = {"hipsparseCcsr2hyb",                                  "rocsparse_ccsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZcsr2hyb"]                                               = {"hipsparseZcsr2hyb",                                  "rocsparse_zcsr2hyb",                                               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseSdense2csc",                                   {"hipsparseSdense2csc",                                "rocsparse_sdense2csc",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseDdense2csc",                                   {"hipsparseDdense2csc",                                "rocsparse_ddense2csc",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseCdense2csc",                                   {"hipsparseCdense2csc",                                "rocsparse_cdense2csc",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseZdense2csc",                                   {"hipsparseZdense2csc",                                "rocsparse_zdense2csc",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseSdense2csc"]                                             = {"hipsparseSdense2csc",                                "rocsparse_sdense2csc",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseDdense2csc"]                                             = {"hipsparseDdense2csc",                                "rocsparse_ddense2csc",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseCdense2csc"]                                             = {"hipsparseCdense2csc",                                "rocsparse_cdense2csc",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseZdense2csc"]                                             = {"hipsparseZdense2csc",                                "rocsparse_zdense2csc",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseSdense2csr",                                   {"hipsparseSdense2csr",                                "rocsparse_sdense2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDdense2csr",                                   {"hipsparseDdense2csr",                                "rocsparse_ddense2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCdense2csr",                                   {"hipsparseCdense2csr",                                "rocsparse_cdense2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZdense2csr",                                   {"hipsparseZdense2csr",                                "rocsparse_zdense2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseSdense2csr"]                                             = {"hipsparseSdense2csr",                                "rocsparse_sdense2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDdense2csr"]                                             = {"hipsparseDdense2csr",                                "rocsparse_ddense2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCdense2csr"]                                             = {"hipsparseCdense2csr",                                "rocsparse_cdense2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZdense2csr"]                                             = {"hipsparseZdense2csr",                                "rocsparse_zdense2csr",                                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseSdense2hyb",                                   {"hipsparseSdense2hyb",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDdense2hyb",                                   {"hipsparseDdense2hyb",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCdense2hyb",                                   {"hipsparseCdense2hyb",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZdense2hyb",                                   {"hipsparseZdense2hyb",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseSdense2hyb"]                                             = {"hipsparseSdense2hyb",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDdense2hyb"]                                             = {"hipsparseDdense2hyb",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCdense2hyb"]                                             = {"hipsparseCdense2hyb",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZdense2hyb"]                                             = {"hipsparseZdense2hyb",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseShyb2csc",                                     {"hipsparseShyb2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDhyb2csc",                                     {"hipsparseDhyb2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseChyb2csc",                                     {"hipsparseChyb2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZhyb2csc",                                     {"hipsparseZhyb2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseShyb2csc"]                                               = {"hipsparseShyb2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDhyb2csc"]                                               = {"hipsparseDhyb2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseChyb2csc"]                                               = {"hipsparseChyb2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZhyb2csc"]                                               = {"hipsparseZhyb2csc",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
   // NOTE: rocsparse_shyb2csr has one additioanl attribute void* temp_buffer; see hipsparseShyb2csr implementation, which wraps rocsparse_hyb2csr_buffer_size + rocsparse_shyb2csr
-  {"cusparseShyb2csr",                                     {"hipsparseShyb2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseShyb2csr"]                                               = {"hipsparseShyb2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
   // NOTE: rocsparse_dhyb2csr has one additioanl attribute void* temp_buffer; see hipsparseDhyb2csr implementation, which wraps rocsparse_hyb2csr_buffer_size + rocsparse_dhyb2csr
-  {"cusparseDhyb2csr",                                     {"hipsparseDhyb2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseDhyb2csr"]                                               = {"hipsparseDhyb2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
   // NOTE: rocsparse_chyb2csr has one additioanl attribute void* temp_buffer; see hipsparseChyb2csr implementation, which wraps rocsparse_hyb2csr_buffer_size + rocsparse_chyb2csr
-  {"cusparseChyb2csr",                                     {"hipsparseChyb2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseChyb2csr"]                                               = {"hipsparseChyb2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
   // NOTE: rocsparse_zhyb2csr has one additioanl attribute void* temp_buffer; see hipsparseZhyb2csr implementation, which wraps rocsparse_hyb2csr_buffer_size + rocsparse_zhyb2csr
-  {"cusparseZhyb2csr",                                     {"hipsparseZhyb2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
+  m["cusparseZhyb2csr"]                                               = {"hipsparseZhyb2csr",                                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
-  {"cusparseShyb2dense",                                   {"hipsparseShyb2dense",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseDhyb2dense",                                   {"hipsparseDhyb2dense",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseChyb2dense",                                   {"hipsparseChyb2dense",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseZhyb2dense",                                   {"hipsparseZhyb2dense",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseShyb2dense"]                                             = {"hipsparseShyb2dense",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseDhyb2dense"]                                             = {"hipsparseDhyb2dense",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseChyb2dense"]                                             = {"hipsparseChyb2dense",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseZhyb2dense"]                                             = {"hipsparseZhyb2dense",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
-  {"cusparseSnnz",                                         {"hipsparseSnnz",                                      "rocsparse_snnz",                                                   CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseDnnz",                                         {"hipsparseDnnz",                                      "rocsparse_dnnz",                                                   CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseCnnz",                                         {"hipsparseCnnz",                                      "rocsparse_cnnz",                                                   CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseZnnz",                                         {"hipsparseZnnz",                                      "rocsparse_znnz",                                                   CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseSnnz"]                                                   = {"hipsparseSnnz",                                      "rocsparse_snnz",                                                   CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseDnnz"]                                                   = {"hipsparseDnnz",                                      "rocsparse_dnnz",                                                   CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseCnnz"]                                                   = {"hipsparseCnnz",                                      "rocsparse_cnnz",                                                   CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseZnnz"]                                                   = {"hipsparseZnnz",                                      "rocsparse_znnz",                                                   CONV_LIB_FUNC, API_SPARSE, 14};
 
-  {"cusparseCreateIdentityPermutation",                    {"hipsparseCreateIdentityPermutation",                 "rocsparse_create_identity_permutation",                            CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseCreateIdentityPermutation"]                              = {"hipsparseCreateIdentityPermutation",                 "rocsparse_create_identity_permutation",                            CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseXcoosort_bufferSizeExt",                       {"hipsparseXcoosort_bufferSizeExt",                    "rocsparse_coosort_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseXcoosortByRow",                                {"hipsparseXcoosortByRow",                             "rocsparse_coosort_by_row",                                         CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseXcoosortByColumn",                             {"hipsparseXcoosortByColumn",                          "rocsparse_coosort_by_column",                                      CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseXcoosort_bufferSizeExt"]                                 = {"hipsparseXcoosort_bufferSizeExt",                    "rocsparse_coosort_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseXcoosortByRow"]                                          = {"hipsparseXcoosortByRow",                             "rocsparse_coosort_by_row",                                         CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseXcoosortByColumn"]                                       = {"hipsparseXcoosortByColumn",                          "rocsparse_coosort_by_column",                                      CONV_LIB_FUNC, API_SPARSE, 14};
 
-  {"cusparseXcsrsort_bufferSizeExt",                       {"hipsparseXcsrsort_bufferSizeExt",                    "rocsparse_csrsort_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseXcsrsort",                                     {"hipsparseXcsrsort",                                  "rocsparse_csrsort",                                                CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseXcsrsort_bufferSizeExt"]                                 = {"hipsparseXcsrsort_bufferSizeExt",                    "rocsparse_csrsort_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseXcsrsort"]                                               = {"hipsparseXcsrsort",                                  "rocsparse_csrsort",                                                CONV_LIB_FUNC, API_SPARSE, 14};
 
-  {"cusparseXcscsort_bufferSizeExt",                       {"hipsparseXcscsort_bufferSizeExt",                    "rocsparse_cscsort_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 14}},
-  {"cusparseXcscsort",                                     {"hipsparseXcscsort",                                  "rocsparse_cscsort",                                                CONV_LIB_FUNC, API_SPARSE, 14}},
+  m["cusparseXcscsort_bufferSizeExt"]                                 = {"hipsparseXcscsort_bufferSizeExt",                    "rocsparse_cscsort_buffer_size",                                    CONV_LIB_FUNC, API_SPARSE, 14};
+  m["cusparseXcscsort"]                                               = {"hipsparseXcscsort",                                  "rocsparse_cscsort",                                                CONV_LIB_FUNC, API_SPARSE, 14};
 
-  {"cusparseCreateCsru2csrInfo",                           {"hipsparseCreateCsru2csrInfo",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseDestroyCsru2csrInfo",                          {"hipsparseDestroyCsru2csrInfo",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cusparseCreateCsru2csrInfo"]                                     = {"hipsparseCreateCsru2csrInfo",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseDestroyCsru2csrInfo"]                                    = {"hipsparseDestroyCsru2csrInfo",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED};
 
-  {"cusparseScsru2csr",                                    {"hipsparseScsru2csr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsru2csr",                                    {"hipsparseDcsru2csr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsru2csr",                                    {"hipsparseCcsru2csr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsru2csr",                                    {"hipsparseZcsru2csr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsru2csr"]                                              = {"hipsparseScsru2csr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsru2csr"]                                              = {"hipsparseDcsru2csr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsru2csr"]                                              = {"hipsparseCcsru2csr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsru2csr"]                                              = {"hipsparseZcsru2csr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseScsru2csr_bufferSizeExt",                      {"hipsparseScsru2csr_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsru2csr_bufferSizeExt",                      {"hipsparseDcsru2csr_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsru2csr_bufferSizeExt",                      {"hipsparseCcsru2csr_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsru2csr_bufferSizeExt",                      {"hipsparseZcsru2csr_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsru2csr_bufferSizeExt"]                                = {"hipsparseScsru2csr_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsru2csr_bufferSizeExt"]                                = {"hipsparseDcsru2csr_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsru2csr_bufferSizeExt"]                                = {"hipsparseCcsru2csr_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsru2csr_bufferSizeExt"]                                = {"hipsparseZcsru2csr_bufferSizeExt",                   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseScsr2csru",                                    {"hipsparseScsr2csru",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDcsr2csru",                                    {"hipsparseDcsr2csru",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCcsr2csru",                                    {"hipsparseCcsr2csru",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZcsr2csru",                                    {"hipsparseZcsr2csru",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseScsr2csru"]                                              = {"hipsparseScsr2csru",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDcsr2csru"]                                              = {"hipsparseDcsr2csru",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCcsr2csru"]                                              = {"hipsparseCcsr2csru",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZcsr2csru"]                                              = {"hipsparseZcsr2csru",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, ROC_UNSUPPORTED | CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneDense2csr",                              {"hipsparseHpruneDense2csr",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneDense2csr",                              {"hipsparseSpruneDense2csr",                           "rocsparse_sprune_dense2csr",                                       CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneDense2csr",                              {"hipsparseDpruneDense2csr",                           "rocsparse_dprune_dense2csr",                                       CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneDense2csr"]                                        = {"hipsparseHpruneDense2csr",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneDense2csr"]                                        = {"hipsparseSpruneDense2csr",                           "rocsparse_sprune_dense2csr",                                       CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneDense2csr"]                                        = {"hipsparseDpruneDense2csr",                           "rocsparse_dprune_dense2csr",                                       CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  
+  m["cusparseHpruneDense2csr_bufferSizeExt"]                          = {"hipsparseHpruneDense2csr_bufferSizeExt",             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneDense2csr_bufferSizeExt"]                          = {"hipsparseSpruneDense2csr_bufferSizeExt",             "rocsparse_sprune_dense2csr_buffer_size",                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneDense2csr_bufferSizeExt"]                          = {"hipsparseDpruneDense2csr_bufferSizeExt",             "rocsparse_dprune_dense2csr_buffer_size",                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneDense2csr_bufferSizeExt",                {"hipsparseHpruneDense2csr_bufferSizeExt",             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneDense2csr_bufferSizeExt",                {"hipsparseSpruneDense2csr_bufferSizeExt",             "rocsparse_sprune_dense2csr_buffer_size",                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneDense2csr_bufferSizeExt",                {"hipsparseDpruneDense2csr_bufferSizeExt",             "rocsparse_dprune_dense2csr_buffer_size",                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneDense2csrNnz"]                                     = {"hipsparseHpruneDense2csrNnz",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneDense2csrNnz"]                                     = {"hipsparseSpruneDense2csrNnz",                        "rocsparse_sprune_dense2csr_nnz",                                   CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneDense2csrNnz"]                                     = {"hipsparseDpruneDense2csrNnz",                        "rocsparse_dprune_dense2csr_nnz",                                   CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneDense2csrNnz",                           {"hipsparseHpruneDense2csrNnz",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneDense2csrNnz",                           {"hipsparseSpruneDense2csrNnz",                        "rocsparse_sprune_dense2csr_nnz",                                   CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneDense2csrNnz",                           {"hipsparseDpruneDense2csrNnz",                        "rocsparse_dprune_dense2csr_nnz",                                   CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneCsr2csr"]                                          = {"hipsparseHpruneCsr2csr",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneCsr2csr"]                                          = {"hipsparseSpruneCsr2csr",                             "rocsparse_sprune_csr2csr",                                         CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneCsr2csr"]                                          = {"hipsparseDpruneCsr2csr",                             "rocsparse_dprune_csr2csr",                                         CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneCsr2csr",                                {"hipsparseHpruneCsr2csr",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneCsr2csr",                                {"hipsparseSpruneCsr2csr",                             "rocsparse_sprune_csr2csr",                                         CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneCsr2csr",                                {"hipsparseDpruneCsr2csr",                             "rocsparse_dprune_csr2csr",                                         CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneCsr2csr_bufferSizeExt"]                            = {"hipsparseHpruneCsr2csr_bufferSizeExt",               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneCsr2csr_bufferSizeExt"]                            = {"hipsparseSpruneCsr2csr_bufferSizeExt",               "rocsparse_sprune_csr2csr_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneCsr2csr_bufferSizeExt"]                            = {"hipsparseDpruneCsr2csr_bufferSizeExt",               "rocsparse_dprune_csr2csr_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneCsr2csr_bufferSizeExt",                  {"hipsparseHpruneCsr2csr_bufferSizeExt",               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneCsr2csr_bufferSizeExt",                  {"hipsparseSpruneCsr2csr_bufferSizeExt",               "rocsparse_sprune_csr2csr_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneCsr2csr_bufferSizeExt",                  {"hipsparseDpruneCsr2csr_bufferSizeExt",               "rocsparse_dprune_csr2csr_buffer_size",                             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneCsr2csrNnz"]                                       = {"hipsparseHpruneCsr2csrNnz",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneCsr2csrNnz"]                                       = {"hipsparseSpruneCsr2csrNnz",                          "rocsparse_sprune_csr2csr_nnz",                                     CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneCsr2csrNnz"]                                       = {"hipsparseDpruneCsr2csrNnz",                          "rocsparse_dprune_csr2csr_nnz",                                     CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneCsr2csrNnz",                             {"hipsparseHpruneCsr2csrNnz",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneCsr2csrNnz",                             {"hipsparseSpruneCsr2csrNnz",                          "rocsparse_sprune_csr2csr_nnz",                                     CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneCsr2csrNnz",                             {"hipsparseDpruneCsr2csrNnz",                          "rocsparse_dprune_csr2csr_nnz",                                     CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneDense2csrByPercentage"]                            = {"hipsparseHpruneDense2csrByPercentage",               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneDense2csrByPercentage"]                            = {"hipsparseSpruneDense2csrByPercentage",               "rocsparse_sprune_dense2csr_by_percentage",                         CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneDense2csrByPercentage"]                            = {"hipsparseDpruneDense2csrByPercentage",               "rocsparse_dprune_dense2csr_by_percentage",                         CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneDense2csrByPercentage",                  {"hipsparseHpruneDense2csrByPercentage",               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneDense2csrByPercentage",                  {"hipsparseSpruneDense2csrByPercentage",               "rocsparse_sprune_dense2csr_by_percentage",                         CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneDense2csrByPercentage",                  {"hipsparseDpruneDense2csrByPercentage",               "rocsparse_dprune_dense2csr_by_percentage",                         CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneDense2csrByPercentage_bufferSizeExt"]              = {"hipsparseHpruneDense2csrByPercentage_bufferSizeExt", "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneDense2csrByPercentage_bufferSizeExt"]              = {"hipsparseSpruneDense2csrByPercentage_bufferSizeExt", "rocsparse_sprune_dense2csr_by_percentage_buffer_size",             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneDense2csrByPercentage_bufferSizeExt"]              = {"hipsparseDpruneDense2csrByPercentage_bufferSizeExt", "rocsparse_dprune_dense2csr_by_percentage_buffer_size",             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneDense2csrByPercentage_bufferSizeExt",    {"hipsparseHpruneDense2csrByPercentage_bufferSizeExt", "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneDense2csrByPercentage_bufferSizeExt",    {"hipsparseSpruneDense2csrByPercentage_bufferSizeExt", "rocsparse_sprune_dense2csr_by_percentage_buffer_size",             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneDense2csrByPercentage_bufferSizeExt",    {"hipsparseDpruneDense2csrByPercentage_bufferSizeExt", "rocsparse_dprune_dense2csr_by_percentage_buffer_size",             CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneDense2csrNnzByPercentage"]                         = {"hipsparseHpruneDense2csrNnzByPercentage",            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneDense2csrNnzByPercentage"]                         = {"hipsparseSpruneDense2csrNnzByPercentage",            "rocsparse_sprune_dense2csr_nnz_by_percentage",                     CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneDense2csrNnzByPercentage"]                         = {"hipsparseDpruneDense2csrNnzByPercentage",            "rocsparse_dprune_dense2csr_nnz_by_percentage",                     CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneDense2csrNnzByPercentage",               {"hipsparseHpruneDense2csrNnzByPercentage",            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneDense2csrNnzByPercentage",               {"hipsparseSpruneDense2csrNnzByPercentage",            "rocsparse_sprune_dense2csr_nnz_by_percentage",                     CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneDense2csrNnzByPercentage",               {"hipsparseDpruneDense2csrNnzByPercentage",            "rocsparse_dprune_dense2csr_nnz_by_percentage",                     CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneCsr2csrByPercentage"]                              = {"hipsparseHpruneCsr2csrByPercentage",                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneCsr2csrByPercentage"]                              = {"hipsparseSpruneCsr2csrByPercentage",                 "rocsparse_sprune_csr2csr_by_percentage",                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneCsr2csrByPercentage"]                              = {"hipsparseDpruneCsr2csrByPercentage",                 "rocsparse_dprune_csr2csr_by_percentage",                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneCsr2csrByPercentage",                    {"hipsparseHpruneCsr2csrByPercentage",                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneCsr2csrByPercentage",                    {"hipsparseSpruneCsr2csrByPercentage",                 "rocsparse_sprune_csr2csr_by_percentage",                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneCsr2csrByPercentage",                    {"hipsparseDpruneCsr2csrByPercentage",                 "rocsparse_dprune_csr2csr_by_percentage",                           CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneCsr2csrByPercentage_bufferSizeExt"]                = {"hipsparseHpruneCsr2csrByPercentage_bufferSizeExt",   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneCsr2csrByPercentage_bufferSizeExt"]                = {"hipsparseSpruneCsr2csrByPercentage_bufferSizeExt",   "rocsparse_sprune_csr2csr_by_percentage_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneCsr2csrByPercentage_bufferSizeExt"]                = {"hipsparseDpruneCsr2csrByPercentage_bufferSizeExt",   "rocsparse_dprune_csr2csr_by_percentage_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneCsr2csrByPercentage_bufferSizeExt",      {"hipsparseHpruneCsr2csrByPercentage_bufferSizeExt",   "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneCsr2csrByPercentage_bufferSizeExt",      {"hipsparseSpruneCsr2csrByPercentage_bufferSizeExt",   "rocsparse_sprune_csr2csr_by_percentage_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneCsr2csrByPercentage_bufferSizeExt",      {"hipsparseDpruneCsr2csrByPercentage_bufferSizeExt",   "rocsparse_dprune_csr2csr_by_percentage_buffer_size",               CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseHpruneCsr2csrNnzByPercentage"]                           = {"hipsparseHpruneCsr2csrNnzByPercentage",              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpruneCsr2csrNnzByPercentage"]                           = {"hipsparseSpruneCsr2csrNnzByPercentage",              "rocsparse_sprune_csr2csr_nnz_by_percentage",                       CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDpruneCsr2csrNnzByPercentage"]                           = {"hipsparseDpruneCsr2csrNnzByPercentage",              "rocsparse_dprune_csr2csr_nnz_by_percentage",                       CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
-  {"cusparseHpruneCsr2csrNnzByPercentage",                 {"hipsparseHpruneCsr2csrNnzByPercentage",              "",                                                                 CONV_LIB_FUNC, API_SPARSE, 14, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cusparseSpruneCsr2csrNnzByPercentage",                 {"hipsparseSpruneCsr2csrNnzByPercentage",              "rocsparse_sprune_csr2csr_nnz_by_percentage",                       CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDpruneCsr2csrNnzByPercentage",                 {"hipsparseDpruneCsr2csrNnzByPercentage",              "rocsparse_dprune_csr2csr_nnz_by_percentage",                       CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-
-  {"cusparseSnnz_compress",                                {"hipsparseSnnz_compress",                             "rocsparse_snnz_compress",                                          CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseDnnz_compress",                                {"hipsparseDnnz_compress",                             "rocsparse_dnnz_compress",                                          CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseCnnz_compress",                                {"hipsparseCnnz_compress",                             "rocsparse_cnnz_compress",                                          CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
-  {"cusparseZnnz_compress",                                {"hipsparseZnnz_compress",                             "rocsparse_znnz_compress",                                          CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseSnnz_compress"]                                          = {"hipsparseSnnz_compress",                             "rocsparse_snnz_compress",                                          CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseDnnz_compress"]                                          = {"hipsparseDnnz_compress",                             "rocsparse_dnnz_compress",                                          CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseCnnz_compress"]                                          = {"hipsparseCnnz_compress",                             "rocsparse_cnnz_compress",                                          CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
+  m["cusparseZnnz_compress"]                                          = {"hipsparseZnnz_compress",                             "rocsparse_znnz_compress",                                          CONV_LIB_FUNC, API_SPARSE, 14, CUDA_DEPRECATED | HIP_DEPRECATED};
 
   // 15. cuSPARSE Generic API Reference
   // Generic Sparse API helper functions
   // Sparse Matrix descriptor
-  {"cusparseCreateCoo",                                    {"hipsparseCreateCoo",                                 "rocsparse_create_coo_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstCoo",                               {"hipsparseCreateConstCoo",                            "rocsparse_create_const_coo_descr",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateCooAoS",                                 {"hipsparseCreateCooAoS",                              "rocsparse_create_coo_aos_descr",                                   CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseCreateCsr",                                    {"hipsparseCreateCsr",                                 "rocsparse_create_csr_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstCsr",                               {"hipsparseCreateConstCsr",                            "rocsparse_create_const_csr_descr",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateCsc",                                    {"hipsparseCreateCsc",                                 "rocsparse_create_csc_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstCsc",                               {"hipsparseCreateConstCsc",                            "rocsparse_create_const_csc_descr",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDestroySpMat",                                 {"hipsparseDestroySpMat",                              "rocsparse_destroy_spmat_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCooGet",                                       {"hipsparseCooGet",                                    "rocsparse_coo_get",                                                CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCooAoSGet",                                    {"hipsparseCooAoSGet",                                 "rocsparse_coo_aos_get",                                            CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseConstCooGet",                                  {"hipsparseConstCooGet",                               "rocsparse_const_coo_get",                                          CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCooSetStridedBatch",                           {"hipsparseCooSetStridedBatch",                        "rocsparse_coo_set_strided_batch",                                  CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCsrGet",                                       {"hipsparseCsrGet",                                    "rocsparse_csr_get",                                                CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstCsrGet",                                  {"hipsparseConstCsrGet",                               "rocsparse_const_csr_get",                                          CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCsrSetPointers",                               {"hipsparseCsrSetPointers",                            "rocsparse_csr_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCscSetPointers",                               {"hipsparseCscSetPointers",                            "rocsparse_csc_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCscGet",                                       {"hipsparseCscGet",                                    "rocsparse_csc_get",                                                CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstCscGet",                                  {"hipsparseConstCscGet",                               "rocsparse_const_csc_get",                                          CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCooSetPointers",                               {"hipsparseCooSetPointers",                            "rocsparse_coo_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCsrSetStridedBatch",                           {"hipsparseCsrSetStridedBatch",                        "rocsparse_csr_set_strided_batch",                                  CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMatGetFormat",                               {"hipsparseSpMatGetFormat",                            "rocsparse_spmat_get_format",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMatGetIndexBase",                            {"hipsparseSpMatGetIndexBase",                         "rocsparse_spmat_get_index_base",                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMatGetValues",                               {"hipsparseSpMatGetValues",                            "rocsparse_spmat_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstSpMatGetValues",                          {"hipsparseConstSpMatGetValues",                       "rocsparse_const_spmat_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMatSetValues",                               {"hipsparseSpMatSetValues",                            "rocsparse_spmat_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMatGetStridedBatch",                         {"hipsparseSpMatGetStridedBatch",                      "rocsparse_spmat_get_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMatSetStridedBatch",                         {"hipsparseSpMatSetStridedBatch",                      "rocsparse_spmat_set_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15, CUDA_REMOVED | HIP_DEPRECATED}},
-  {"cusparseSpMatSetNumBatches",                           {"hipsparseSpMatSetNumBatches",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseSpMatGetNumBatches",                           {"hipsparseSpMatGetNumBatches",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseSpMatGetSize",                                 {"hipsparseSpMatGetSize",                              "rocsparse_spmat_get_size",                                         CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMatGetAttribute",                            {"hipsparseSpMatGetAttribute",                         "rocsparse_spmat_get_attribute",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMatSetAttribute",                            {"hipsparseSpMatSetAttribute",                         "rocsparse_spmat_set_attribute",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseBlockedEllGet",                                {"hipsparseBlockedEllGet",                             "rocsparse_bell_get",                                               CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstBlockedEllGet",                           {"hipsparseConstBlockedEllGet",                        "rocsparse_const_bell_get",                                         CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateBlockedEll",                             {"hipsparseCreateBlockedEll",                          "rocsparse_create_bell_descr",                                      CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstBlockedEll",                        {"hipsparseCreateConstBlockedEll",                     "rocsparse_create_const_bell_descr",                                CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseBsrSetStridedBatch",                           {"hipsparseBsrSetStridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  m["cusparseCreateCoo"]                                              = {"hipsparseCreateCoo",                                 "rocsparse_create_coo_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstCoo"]                                         = {"hipsparseCreateConstCoo",                            "rocsparse_create_const_coo_descr",                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateCooAoS"]                                           = {"hipsparseCreateCooAoS",                              "rocsparse_create_coo_aos_descr",                                   CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseCreateCsr"]                                              = {"hipsparseCreateCsr",                                 "rocsparse_create_csr_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstCsr"]                                         = {"hipsparseCreateConstCsr",                            "rocsparse_create_const_csr_descr",                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateCsc"]                                              = {"hipsparseCreateCsc",                                 "rocsparse_create_csc_descr",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstCsc"]                                         = {"hipsparseCreateConstCsc",                            "rocsparse_create_const_csc_descr",                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDestroySpMat"]                                           = {"hipsparseDestroySpMat",                              "rocsparse_destroy_spmat_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCooGet"]                                                 = {"hipsparseCooGet",                                    "rocsparse_coo_get",                                                CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCooAoSGet"]                                              = {"hipsparseCooAoSGet",                                 "rocsparse_coo_aos_get",                                            CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseConstCooGet"]                                            = {"hipsparseConstCooGet",                               "rocsparse_const_coo_get",                                          CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCooSetStridedBatch"]                                     = {"hipsparseCooSetStridedBatch",                        "rocsparse_coo_set_strided_batch",                                  CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCsrGet"]                                                 = {"hipsparseCsrGet",                                    "rocsparse_csr_get",                                                CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstCsrGet"]                                            = {"hipsparseConstCsrGet",                               "rocsparse_const_csr_get",                                          CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCsrSetPointers"]                                         = {"hipsparseCsrSetPointers",                            "rocsparse_csr_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCscSetPointers"]                                         = {"hipsparseCscSetPointers",                            "rocsparse_csc_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCscGet"]                                                 = {"hipsparseCscGet",                                    "rocsparse_csc_get",                                                CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstCscGet"]                                            = {"hipsparseConstCscGet",                               "rocsparse_const_csc_get",                                          CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCooSetPointers"]                                         = {"hipsparseCooSetPointers",                            "rocsparse_coo_set_pointers",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCsrSetStridedBatch"]                                     = {"hipsparseCsrSetStridedBatch",                        "rocsparse_csr_set_strided_batch",                                  CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMatGetFormat"]                                         = {"hipsparseSpMatGetFormat",                            "rocsparse_spmat_get_format",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMatGetIndexBase"]                                      = {"hipsparseSpMatGetIndexBase",                         "rocsparse_spmat_get_index_base",                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMatGetValues"]                                         = {"hipsparseSpMatGetValues",                            "rocsparse_spmat_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstSpMatGetValues"]                                    = {"hipsparseConstSpMatGetValues",                       "rocsparse_const_spmat_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMatSetValues"]                                         = {"hipsparseSpMatSetValues",                            "rocsparse_spmat_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMatGetStridedBatch"]                                   = {"hipsparseSpMatGetStridedBatch",                      "rocsparse_spmat_get_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMatSetStridedBatch"]                                   = {"hipsparseSpMatSetStridedBatch",                      "rocsparse_spmat_set_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15, CUDA_REMOVED | HIP_DEPRECATED};
+  m["cusparseSpMatSetNumBatches"]                                     = {"hipsparseSpMatSetNumBatches",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMatGetNumBatches"]                                     = {"hipsparseSpMatGetNumBatches",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMatGetSize"]                                           = {"hipsparseSpMatGetSize",                              "rocsparse_spmat_get_size",                                         CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMatGetAttribute"]                                      = {"hipsparseSpMatGetAttribute",                         "rocsparse_spmat_get_attribute",                                    CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMatSetAttribute"]                                      = {"hipsparseSpMatSetAttribute",                         "rocsparse_spmat_set_attribute",                                    CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseBlockedEllGet"]                                          = {"hipsparseBlockedEllGet",                             "rocsparse_bell_get",                                               CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstBlockedEllGet"]                                     = {"hipsparseConstBlockedEllGet",                        "rocsparse_const_bell_get",                                         CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateBlockedEll"]                                       = {"hipsparseCreateBlockedEll",                          "rocsparse_create_bell_descr",                                      CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstBlockedEll"]                                  = {"hipsparseCreateConstBlockedEll",                     "rocsparse_create_const_bell_descr",                                CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseBsrSetStridedBatch"]                                     = {"hipsparseBsrSetStridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
   // NOTE: rocsparse_create_bsr_descr has appeared earlier than cusparseCreateBsr and has a different signature
-  {"cusparseCreateBsr",                                    {"hipsparseCreateBsr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseCreateConstBsr",                               {"hipsparseCreateConstBsr",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseCreateSlicedEll",                              {"hipsparseCreateSlicedEll",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseCreateConstSlicedEll",                         {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  m["cusparseCreateBsr"]                                              = {"hipsparseCreateBsr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseCreateConstBsr"]                                         = {"hipsparseCreateConstBsr",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseCreateSlicedEll"]                                        = {"hipsparseCreateSlicedEll",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseCreateConstSlicedEll"]                                   = {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
   // Sparse Vector descriptor
-  {"cusparseCreateSpVec",                                  {"hipsparseCreateSpVec",                               "rocsparse_create_spvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstSpVec",                             {"hipsparseCreateConstSpVec",                          "rocsparse_create_const_spvec_descr",                               CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDestroySpVec",                                 {"hipsparseDestroySpVec",                              "rocsparse_destroy_spvec_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpVecGet",                                     {"hipsparseSpVecGet",                                  "rocsparse_spvec_get",                                              CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstSpVecGet",                                {"hipsparseConstSpVecGet",                             "rocsparse_const_spvec_get",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpVecGetIndexBase",                            {"hipsparseSpVecGetIndexBase",                         "rocsparse_spvec_get_index_base",                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpVecGetValues",                               {"hipsparseSpVecGetValues",                            "rocsparse_spvec_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstSpVecGetValues",                          {"hipsparseConstSpVecGetValues",                       "rocsparse_const_spvec_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpVecSetValues",                               {"hipsparseSpVecSetValues",                            "rocsparse_spvec_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
+  m["cusparseCreateSpVec"]                                            = {"hipsparseCreateSpVec",                               "rocsparse_create_spvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstSpVec"]                                       = {"hipsparseCreateConstSpVec",                          "rocsparse_create_const_spvec_descr",                               CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDestroySpVec"]                                           = {"hipsparseDestroySpVec",                              "rocsparse_destroy_spvec_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpVecGet"]                                               = {"hipsparseSpVecGet",                                  "rocsparse_spvec_get",                                              CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstSpVecGet"]                                          = {"hipsparseConstSpVecGet",                             "rocsparse_const_spvec_get",                                        CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpVecGetIndexBase"]                                      = {"hipsparseSpVecGetIndexBase",                         "rocsparse_spvec_get_index_base",                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpVecGetValues"]                                         = {"hipsparseSpVecGetValues",                            "rocsparse_spvec_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstSpVecGetValues"]                                    = {"hipsparseConstSpVecGetValues",                       "rocsparse_const_spvec_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpVecSetValues"]                                         = {"hipsparseSpVecSetValues",                            "rocsparse_spvec_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15};
 
   // Generic Dense API helper functions
   // Dense Matrix descriptor
-  {"cusparseCreateDnMat",                                  {"hipsparseCreateDnMat",                               "rocsparse_create_dnmat_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstDnMat",                             {"hipsparseCreateConstDnMat",                          "rocsparse_create_const_dnmat_descr",                               CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDestroyDnMat",                                 {"hipsparseDestroyDnMat",                              "rocsparse_destroy_dnmat_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDnMatGet",                                     {"hipsparseDnMatGet",                                  "rocsparse_dnmat_get",                                              CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstDnMatGet",                                {"hipsparseConstDnMatGet",                             "rocsparse_const_dnmat_get",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDnMatGetValues",                               {"hipsparseDnMatGetValues",                            "rocsparse_dnmat_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstDnMatGetValues",                          {"hipsparseConstDnMatGetValues",                       "rocsparse_const_dnmat_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDnMatSetValues",                               {"hipsparseDnMatSetValues",                            "rocsparse_dnmat_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDnMatSetStridedBatch",                         {"hipsparseDnMatSetStridedBatch",                      "rocsparse_dnmat_set_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDnMatGetStridedBatch",                         {"hipsparseDnMatGetStridedBatch",                      "rocsparse_dnmat_get_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15}},
+  m["cusparseCreateDnMat"]                                            = {"hipsparseCreateDnMat",                               "rocsparse_create_dnmat_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstDnMat"]                                       = {"hipsparseCreateConstDnMat",                          "rocsparse_create_const_dnmat_descr",                               CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDestroyDnMat"]                                           = {"hipsparseDestroyDnMat",                              "rocsparse_destroy_dnmat_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDnMatGet"]                                               = {"hipsparseDnMatGet",                                  "rocsparse_dnmat_get",                                              CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstDnMatGet"]                                          = {"hipsparseConstDnMatGet",                             "rocsparse_const_dnmat_get",                                        CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDnMatGetValues"]                                         = {"hipsparseDnMatGetValues",                            "rocsparse_dnmat_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstDnMatGetValues"]                                    = {"hipsparseConstDnMatGetValues",                       "rocsparse_const_dnmat_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDnMatSetValues"]                                         = {"hipsparseDnMatSetValues",                            "rocsparse_dnmat_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDnMatSetStridedBatch"]                                   = {"hipsparseDnMatSetStridedBatch",                      "rocsparse_dnmat_set_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDnMatGetStridedBatch"]                                   = {"hipsparseDnMatGetStridedBatch",                      "rocsparse_dnmat_get_strided_batch",                                CONV_LIB_FUNC, API_SPARSE, 15};
   // Dense Vector descriptor
-  {"cusparseCreateDnVec",                                  {"hipsparseCreateDnVec",                               "rocsparse_create_dnvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseCreateConstDnVec",                             {"hipsparseCreateConstDnVec",                          "rocsparse_create_const_dnvec_descr",                               CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDestroyDnVec",                                 {"hipsparseDestroyDnVec",                              "rocsparse_destroy_dnvec_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDnVecGet",                                     {"hipsparseDnVecGet",                                  "rocsparse_dnvec_get",                                              CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstDnVecGet",                                {"hipsparseConstDnVecGet",                             "rocsparse_const_dnvec_get",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDnVecGetValues",                               {"hipsparseDnVecGetValues",                            "rocsparse_dnvec_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseConstDnVecGetValues",                          {"hipsparseConstDnVecGetValues",                       "rocsparse_const_dnvec_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDnVecSetValues",                               {"hipsparseDnVecSetValues",                            "rocsparse_dnvec_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
+  m["cusparseCreateDnVec"]                                            = {"hipsparseCreateDnVec",                               "rocsparse_create_dnvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstDnVec"]                                       = {"hipsparseCreateConstDnVec",                          "rocsparse_create_const_dnvec_descr",                               CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDestroyDnVec"]                                           = {"hipsparseDestroyDnVec",                              "rocsparse_destroy_dnvec_descr",                                    CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDnVecGet"]                                               = {"hipsparseDnVecGet",                                  "rocsparse_dnvec_get",                                              CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstDnVecGet"]                                          = {"hipsparseConstDnVecGet",                             "rocsparse_const_dnvec_get",                                        CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDnVecGetValues"]                                         = {"hipsparseDnVecGetValues",                            "rocsparse_dnvec_get_values",                                       CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseConstDnVecGetValues"]                                    = {"hipsparseConstDnVecGetValues",                       "rocsparse_const_dnvec_get_values",                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDnVecSetValues"]                                         = {"hipsparseDnVecSetValues",                            "rocsparse_dnvec_set_values",                                       CONV_LIB_FUNC, API_SPARSE, 15};
 
-  {"cusparseSpGEMM_createDescr",                           {"hipsparseSpGEMM_createDescr",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpGEMM_destroyDescr",                          {"hipsparseSpGEMM_destroyDescr",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpGEMM_workEstimation",                        {"hipsparseSpGEMM_workEstimation",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpGEMM_compute",                               {"hipsparseSpGEMM_compute",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpGEMM_copy",                                  {"hipsparseSpGEMM_copy",                               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpGEMM_getNumProducts",                        {"hipsparseSpGEMM_getNumProducts",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseSpGEMM_estimateMemory",                        {"hipsparseSpGEMM_estimateMemory",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  m["cusparseSpGEMM_createDescr"]                                     = {"hipsparseSpGEMM_createDescr",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMM_destroyDescr"]                                    = {"hipsparseSpGEMM_destroyDescr",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMM_workEstimation"]                                  = {"hipsparseSpGEMM_workEstimation",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMM_compute"]                                         = {"hipsparseSpGEMM_compute",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMM_copy"]                                            = {"hipsparseSpGEMM_copy",                               "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMM_getNumProducts"]                                  = {"hipsparseSpGEMM_getNumProducts",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpGEMM_estimateMemory"]                                  = {"hipsparseSpGEMM_estimateMemory",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
 
   // Sparse Triangular Vector Solve
-  {"cusparseSpSV_createDescr",                             {"hipsparseSpSV_createDescr",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpSV_destroyDescr",                            {"hipsparseSpSV_destroyDescr",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpSV_bufferSize",                              {"hipsparseSpSV_bufferSize",                           "rocsparse_spsv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpSV_analysis",                                {"hipsparseSpSV_analysis",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpSV_solve",                                   {"hipsparseSpSV_solve",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpSV_updateMatrix",                            {"hipsparseSpSV_updateMatrix",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  m["cusparseSpSV_createDescr"]                                       = {"hipsparseSpSV_createDescr",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpSV_destroyDescr"]                                      = {"hipsparseSpSV_destroyDescr",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpSV_bufferSize"]                                        = {"hipsparseSpSV_bufferSize",                           "rocsparse_spsv",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpSV_analysis"]                                          = {"hipsparseSpSV_analysis",                             "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpSV_solve"]                                             = {"hipsparseSpSV_solve",                                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpSV_updateMatrix"]                                      = {"hipsparseSpSV_updateMatrix",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
 
   // Sparse Matrix * Matrix Multiplication
-  {"cusparseSpMM",                                         {"hipsparseSpMM",                                      "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMM_bufferSize",                              {"hipsparseSpMM_bufferSize",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMM_preprocess",                              {"hipsparseSpMM_preprocess",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMMOp",                                       {"hipsparseSpMMOp",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseSpMMOp_createPlan",                            {"hipsparseSpMMOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
-  {"cusparseSpMMOp_destroyPlan",                           {"hipsparseSpMMOp_destroyPlan",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  m["cusparseSpMM"]                                                   = {"hipsparseSpMM",                                      "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMM_bufferSize"]                                        = {"hipsparseSpMM_bufferSize",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMM_preprocess"]                                        = {"hipsparseSpMM_preprocess",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMMOp"]                                                 = {"hipsparseSpMMOp",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMMOp_createPlan"]                                      = {"hipsparseSpMMOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMMOp_destroyPlan"]                                     = {"hipsparseSpMMOp_destroyPlan",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
 
   // Sparse Triangular Matrix Solve
-  {"cusparseSpSM_createDescr",                             {"hipsparseSpSM_createDescr",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpSM_destroyDescr",                            {"hipsparseSpSM_destroyDescr",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  m["cusparseSpSM_createDescr"]                                       = {"hipsparseSpSM_createDescr",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpSM_destroyDescr"]                                      = {"hipsparseSpSM_destroyDescr",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
   // NTOE: Additional calculations are needed after calling rocsparse_spsm
-  {"cusparseSpSM_bufferSize",                              {"hipsparseSpSM_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpSM_analysis",                                {"hipsparseSpSM_analysis",                             "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpSM_solve",                                   {"hipsparseSpSM_solve",                                "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpSM_updateMatrix",                            {"hipsparseSpSM_updateMatrix",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED}},
+  m["cusparseSpSM_bufferSize"]                                        = {"hipsparseSpSM_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpSM_analysis"]                                          = {"hipsparseSpSM_analysis",                             "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpSM_solve"]                                             = {"hipsparseSpSM_solve",                                "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpSM_updateMatrix"]                                      = {"hipsparseSpSM_updateMatrix",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
 
   // Sparse Matrix Multiplication (SpGEMM) Structure Reuse
-  {"cusparseSpGEMMreuse_workEstimation",                   {"hipsparseSpGEMMreuse_workEstimation",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpGEMMreuse_nnz",                              {"hipsparseSpGEMMreuse_nnz",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpGEMMreuse_copy",                             {"hipsparseSpGEMMreuse_copy",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
-  {"cusparseSpGEMMreuse_compute",                          {"hipsparseSpGEMMreuse_compute",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  m["cusparseSpGEMMreuse_workEstimation"]                             = {"hipsparseSpGEMMreuse_workEstimation",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMMreuse_nnz"]                                        = {"hipsparseSpGEMMreuse_nnz",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMMreuse_copy"]                                       = {"hipsparseSpGEMMreuse_copy",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMMreuse_compute"]                                    = {"hipsparseSpGEMMreuse_compute",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
 
   // Sparse Matrix * Matrix Pattern-constrained Multiplication
-  {"cusparseConstrainedGeMM",                              {"hipsparseConstrainedGeMM",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cusparseConstrainedGeMM_bufferSize",                   {"hipsparseConstrainedGeMM_bufferSize",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cusparseConstrainedGeMM"]                                        = {"hipsparseConstrainedGeMM",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cusparseConstrainedGeMM_bufferSize"]                             = {"hipsparseConstrainedGeMM_bufferSize",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
   // Sparse Vector * Vector Operations
-  {"cusparseSpVV",                                         {"hipsparseSpVV",                                      "rocsparse_spvv",                                                   CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED}},
-  {"cusparseSpVV_bufferSize",                              {"hipsparseSpVV_bufferSize",                           "rocsparse_spvv",                                                   CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED}},
+  m["cusparseSpVV"]                                                   = {"hipsparseSpVV",                                      "rocsparse_spvv",                                                   CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED};
+  m["cusparseSpVV_bufferSize"]                                        = {"hipsparseSpVV_bufferSize",                           "rocsparse_spvv",                                                   CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED};
 
-  {"cusparseAxpby",                                        {"hipsparseAxpby",                                     "rocsparse_axpby",                                                  CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED}},
-  {"cusparseGather",                                       {"hipsparseGather",                                    "rocsparse_gather",                                                 CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseScatter",                                      {"hipsparseScatter",                                   "rocsparse_scatter",                                                CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseRot",                                          {"hipsparseRot",                                       "rocsparse_rot",                                                    CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED | HIP_DEPRECATED}},
+  m["cusparseAxpby"]                                                  = {"hipsparseAxpby",                                     "rocsparse_axpby",                                                  CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED};
+  m["cusparseGather"]                                                 = {"hipsparseGather",                                    "rocsparse_gather",                                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseScatter"]                                                = {"hipsparseScatter",                                   "rocsparse_scatter",                                                CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseRot"]                                                    = {"hipsparseRot",                                       "rocsparse_rot",                                                    CONV_LIB_FUNC, API_SPARSE, 15, CUDA_DEPRECATED | HIP_DEPRECATED};
 
   // Sparse Matrix * Vector Multiplication
-  {"cusparseSpMV",                                         {"hipsparseSpMV",                                      "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMV_bufferSize",                              {"hipsparseSpMV_bufferSize",                           "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSpMV_preprocess",                              {"hipsparseSpMV_preprocess",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  m["cusparseSpMV"]                                                   = {"hipsparseSpMV",                                      "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMV_bufferSize"]                                        = {"hipsparseSpMV_bufferSize",                           "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpMV_preprocess"]                                        = {"hipsparseSpMV_preprocess",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
 
-  {"cusparseSparseToDense",                                {"hipsparseSparseToDense",                             "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSparseToDense_bufferSize",                     {"hipsparseSparseToDense_bufferSize",                  "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDenseToSparse_bufferSize",                     {"hipsparseDenseToSparse_bufferSize",                  "rocsparse_dense_to_sparse",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseDenseToSparse_analysis",                       {"hipsparseDenseToSparse_analysis",                    "rocsparse_dense_to_sparse",                                        CONV_LIB_FUNC, API_SPARSE, 15}},
+  m["cusparseSparseToDense"]                                          = {"hipsparseSparseToDense",                             "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSparseToDense_bufferSize"]                               = {"hipsparseSparseToDense_bufferSize",                  "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDenseToSparse_bufferSize"]                               = {"hipsparseDenseToSparse_bufferSize",                  "rocsparse_dense_to_sparse",                                        CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseDenseToSparse_analysis"]                                 = {"hipsparseDenseToSparse_analysis",                    "rocsparse_dense_to_sparse",                                        CONV_LIB_FUNC, API_SPARSE, 15};
   // TODO: hipification cusparseDenseToSparse_convert into rocsparse_dense_to_sparse needs additional variable declared and allocated
-  {"cusparseDenseToSparse_convert",                        {"hipsparseDenseToSparse_convert",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED}},
+  m["cusparseDenseToSparse_convert"]                                  = {"hipsparseDenseToSparse_convert",                     "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
 
   // Sampled Dense-dense Matrix Multiplication
-  {"cusparseSDDMM",                                        {"hipsparseSDDMM",                                     "rocsparse_sddmm",                                                  CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSDDMM_bufferSize",                             {"hipsparseSDDMM_bufferSize",                          "rocsparse_sddmm_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 15}},
-  {"cusparseSDDMM_preprocess",                             {"hipsparseSDDMM_preprocess",                          "rocsparse_sddmm_preprocess",                                       CONV_LIB_FUNC, API_SPARSE, 15}},
-};
+  m["cusparseSDDMM"]                                                  = {"hipsparseSDDMM",                                     "rocsparse_sddmm",                                                  CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSDDMM_bufferSize"]                                       = {"hipsparseSDDMM_bufferSize",                          "rocsparse_sddmm_buffer_size",                                      CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSDDMM_preprocess"]                                       = {"hipsparseSDDMM_preprocess",                          "rocsparse_sddmm_preprocess",                                       CONV_LIB_FUNC, API_SPARSE, 15};
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP {
-  {"cusparseCreateCsrgemm2Info",                           {CUDA_0,   CUDA_110, CUDA_120}}, // D: CUSPARSE_VERSION 11000, R: CUSPARSE_VERSION 12000
-  {"cusparseDestroyCsrgemm2Info",                          {CUDA_0,   CUDA_110, CUDA_120}}, // D: CUSPARSE_VERSION 11000, R: CUSPARSE_VERSION 12000
-  {"cusparseCreateCsrsm2Info",                             {CUDA_92,  CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11600, R: CUSPARSE_VERSION 12000
-  {"cusparseDestroyCsrsm2Info",                            {CUDA_92,  CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11600, R: CUSPARSE_VERSION 12000
-  {"cusparseCreateHybMat",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDestroyHybMat",                                {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCreatePruneInfo",                              {CUDA_90,  CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDestroyPruneInfo",                             {CUDA_90,  CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCreateSolveAnalysisInfo",                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDestroySolveAnalysisInfo",                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseGetLevelInfo",                                 {CUDA_0,   CUDA_0,   CUDA_110}},
-  {"cusparseSdoti",                                        {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDdoti",                                        {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCdoti",                                        {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZdoti",                                        {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCdotci",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZdotci",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrmv",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrmv",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrmv",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrmv",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCsrmvEx",                                      {CUDA_80,  CUDA_112, CUDA_120}},
-  {"cusparseCsrmvEx_bufferSize",                           {CUDA_80,  CUDA_112, CUDA_120}},
-  {"cusparseScsrmv_mp",                                    {CUDA_80,  CUDA_102, CUDA_110}},
-  {"cusparseDcsrmv_mp",                                    {CUDA_80,  CUDA_102, CUDA_110}},
-  {"cusparseCcsrmv_mp",                                    {CUDA_80,  CUDA_102, CUDA_110}},
-  {"cusparseZcsrmv_mp",                                    {CUDA_80,  CUDA_102, CUDA_110}},
-  {"cusparseSgemvi",                                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusparseDgemvi",                                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusparseCgemvi",                                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusparseZgemvi",                                       {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusparseSgemvi_bufferSize",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusparseDgemvi_bufferSize",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusparseCgemvi_bufferSize",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusparseZgemvi_bufferSize",                            {CUDA_75,  CUDA_128, CUDA_0  }},
-  {"cusparseScsrsv_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrsv_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrsv_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrsv_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrsv_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrsv_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrsv_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrsv_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCsrsv_analysisEx",                             {CUDA_80,  CUDA_102, CUDA_110}},
-  {"cusparseCsrsv_solveEx",                                {CUDA_80,  CUDA_102, CUDA_110}},
-  {"cusparseShybmv",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDhybmv",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseChybmv",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZhybmv",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseShybsv_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDhybsv_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseChybsv_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZhybsv_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseShybsv_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDhybsv_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseChybsv_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZhybsv_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrmm",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrmm",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrmm",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrmm",                                       {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrmm2",                                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrmm2",                                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrmm2",                                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrmm2",                                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrsm_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrsm_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrsm_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrsm_analysis",                              {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrsm_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrsm_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrsm_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrsm_solve",                                 {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrsm2_bufferSizeExt",                        {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseDcsrsm2_bufferSizeExt",                        {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseCcsrsm2_bufferSizeExt",                        {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseZcsrsm2_bufferSizeExt",                        {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseScsrsm2_analysis",                             {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseDcsrsm2_analysis",                             {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseCcsrsm2_analysis",                             {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseZcsrsm2_analysis",                             {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseScsrsm2_solve",                                {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseDcsrsm2_solve",                                {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseCcsrsm2_solve",                                {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseZcsrsm2_solve",                                {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseXcsrsm2_zeroPivot",                            {CUDA_92,  CUDA_113, CUDA_120}},
-  {"cusparseSgemmi",                                       {CUDA_80,  CUDA_110, CUDA_120}},
-  {"cusparseDgemmi",                                       {CUDA_80,  CUDA_110, CUDA_120}},
-  {"cusparseCgemmi",                                       {CUDA_80,  CUDA_110, CUDA_120}},
-  {"cusparseZgemmi",                                       {CUDA_80,  CUDA_110, CUDA_120}},
-  {"cusparseScsrgeam",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrgeam",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrgeam",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrgeam",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseXcsrgeamNnz",                                  {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrgeam2",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseDcsrgeam2",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseCcsrgeam2",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseZcsrgeam2",                                    {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseXcsrgeam2Nnz",                                 {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseScsrgeam2_bufferSizeExt",                      {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseDcsrgeam2_bufferSizeExt",                      {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseCcsrgeam2_bufferSizeExt",                      {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseZcsrgeam2_bufferSizeExt",                      {CUDA_100, CUDA_0,   CUDA_0  }},
-  {"cusparseScsrgemm",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrgemm",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrgemm",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrgemm",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseXcsrgemmNnz",                                  {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrgemm2",                                    {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseDcsrgemm2",                                    {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseCcsrgemm2",                                    {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseZcsrgemm2",                                    {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseXcsrgemm2Nnz",                                 {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseScsrgemm2_bufferSizeExt",                      {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseDcsrgemm2_bufferSizeExt",                      {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseCcsrgemm2_bufferSizeExt",                      {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseZcsrgemm2_bufferSizeExt",                      {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseScsric0",                                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsric0",                                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsric0",                                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsric0",                                      {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseScsrilu0",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsrilu0",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsrilu0",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsrilu0",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCsrilu0Ex",                                    {CUDA_80,  CUDA_102, CUDA_110}},
-  {"cusparseSgtsv",                                        {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDgtsv",                                        {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCgtsv",                                        {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZgtsv",                                        {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseSgtsv_nopivot",                                {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDgtsv_nopivot",                                {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCgtsv_nopivot",                                {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZgtsv_nopivot",                                {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseSgtsv2_bufferSizeExt",                         {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgtsv2_bufferSizeExt",                         {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgtsv2_bufferSizeExt",                         {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgtsv2_bufferSizeExt",                         {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgtsv2",                                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgtsv2",                                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgtsv2",                                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgtsv2",                                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgtsv2_nopivot_bufferSizeExt",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgtsv2_nopivot_bufferSizeExt",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgtsv2_nopivot_bufferSizeExt",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgtsv2_nopivot_bufferSizeExt",                 {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgtsv2_nopivot",                               {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgtsv2_nopivot",                               {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgtsv2_nopivot",                               {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgtsv2_nopivot",                               {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgtsvStridedBatch",                            {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDgtsvStridedBatch",                            {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCgtsvStridedBatch",                            {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZgtsvStridedBatch",                            {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseSgtsv2StridedBatch_bufferSizeExt",             {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgtsv2StridedBatch_bufferSizeExt",             {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgtsv2StridedBatch_bufferSizeExt",             {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgtsv2StridedBatch_bufferSizeExt",             {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgtsv2StridedBatch",                           {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgtsv2StridedBatch",                           {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgtsv2StridedBatch",                           {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgtsv2StridedBatch",                           {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgtsvInterleavedBatch_bufferSizeExt",          {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgtsvInterleavedBatch_bufferSizeExt",          {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgtsvInterleavedBatch_bufferSizeExt",          {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgtsvInterleavedBatch_bufferSizeExt",          {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgtsvInterleavedBatch",                        {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgtsvInterleavedBatch",                        {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgtsvInterleavedBatch",                        {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgtsvInterleavedBatch",                        {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgpsvInterleavedBatch_bufferSizeExt",          {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgpsvInterleavedBatch_bufferSizeExt",          {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgpsvInterleavedBatch_bufferSizeExt",          {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgpsvInterleavedBatch_bufferSizeExt",          {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseSgpsvInterleavedBatch",                        {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseDgpsvInterleavedBatch",                        {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseCgpsvInterleavedBatch",                        {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseZgpsvInterleavedBatch",                        {CUDA_92,  CUDA_0,   CUDA_0  }},
-  {"cusparseScsc2hyb",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsc2hyb",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsc2hyb",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsc2hyb",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCsr2cscEx",                                    {CUDA_80,  CUDA_102, CUDA_110}},
-  {"cusparseCsr2cscEx2",                                   {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseCsr2cscEx2_bufferSize",                        {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseScsr2csr_compress",                            {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsr2csr_compress",                            {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsr2csr_compress",                            {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsr2csr_compress",                            {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsr2hyb",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsr2hyb",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsr2hyb",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsr2hyb",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseSdense2hyb",                                   {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDdense2hyb",                                   {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCdense2hyb",                                   {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZdense2hyb",                                   {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseShyb2csc",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDhyb2csc",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseChyb2csc",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZhyb2csc",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseShyb2csr",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDhyb2csr",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseChyb2csr",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZhyb2csr",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseShyb2dense",                                   {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDhyb2dense",                                   {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseChyb2dense",                                   {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZhyb2dense",                                   {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseHpruneDense2csr",                              {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneDense2csr",                              {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneDense2csr",                              {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneDense2csr_bufferSizeExt",                {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneDense2csr_bufferSizeExt",                {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneDense2csr_bufferSizeExt",                {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneDense2csrNnz",                           {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneDense2csrNnz",                           {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneDense2csrNnz",                           {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneCsr2csr",                                {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneCsr2csr",                                {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneCsr2csr",                                {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneCsr2csr_bufferSizeExt",                  {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneCsr2csr_bufferSizeExt",                  {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneCsr2csr_bufferSizeExt",                  {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneCsr2csrNnz",                             {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneCsr2csrNnz",                             {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneCsr2csrNnz",                             {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneDense2csrByPercentage",                  {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneDense2csrByPercentage",                  {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneDense2csrByPercentage",                  {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneDense2csrByPercentage_bufferSizeExt",    {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneDense2csrByPercentage_bufferSizeExt",    {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneDense2csrByPercentage_bufferSizeExt",    {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneDense2csrNnzByPercentage",               {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneDense2csrNnzByPercentage",               {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneDense2csrNnzByPercentage",               {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneCsr2csrByPercentage",                    {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneCsr2csrByPercentage",                    {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneCsr2csrByPercentage",                    {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneCsr2csrByPercentage_bufferSizeExt",      {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneCsr2csrByPercentage_bufferSizeExt",      {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneCsr2csrByPercentage_bufferSizeExt",      {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseHpruneCsr2csrNnzByPercentage",                 {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpruneCsr2csrNnzByPercentage",                 {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDpruneCsr2csrNnzByPercentage",                 {CUDA_90,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSnnz_compress",                                {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDnnz_compress",                                {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCnnz_compress",                                {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZnnz_compress",                                {CUDA_80,  CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseGetStream",                                    {CUDA_80,  CUDA_0,   CUDA_0  }},
-  {"cusparseCreateCoo",                                    {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateCooAoS",                                 {CUDA_102, CUDA_112, CUDA_120}},
-  {"cusparseCreateCsr",                                    {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseDestroySpMat",                                 {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseCooGet",                                       {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseCooAoSGet",                                    {CUDA_102, CUDA_112, CUDA_120}},
-  {"cusparseCsrGet",                                       {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMatGetFormat",                               {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMatGetIndexBase",                            {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMatGetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMatSetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMatGetStridedBatch",                         {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMatSetStridedBatch",                         {CUDA_102, CUDA_0,   CUDA_120}},
-  {"cusparseSpMatSetNumBatches",                           {CUDA_101, CUDA_0,   CUDA_102}},
-  {"cusparseSpMatGetNumBatches",                           {CUDA_101, CUDA_0,   CUDA_102}},
-  {"cusparseCreateSpVec",                                  {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseDestroySpVec",                                 {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpVecGet",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpVecGetIndexBase",                            {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpVecGetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpVecSetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateDnMat",                                  {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseDestroyDnMat",                                 {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseDnMatGet",                                     {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseDnMatGetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseDnMatSetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseDnMatSetStridedBatch",                         {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseDnMatGetStridedBatch",                         {CUDA_101, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateDnVec",                                  {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseDestroyDnVec",                                 {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseDnVecGet",                                     {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseDnVecGetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseDnVecSetValues",                               {CUDA_102, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMM",                                         {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
-  {"cusparseSpMM_bufferSize",                              {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
-  {"cusparseSpVV",                                         {CUDA_101, CUDA_128, CUDA_0  }}, // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
-  {"cusparseSpVV_bufferSize",                              {CUDA_101, CUDA_128, CUDA_0  }}, // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
-  {"cusparseSpMV",                                         {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
-  {"cusparseSpMV_bufferSize",                              {CUDA_101, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
-  {"cusparseSaxpyi",                                       {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseDaxpyi",                                       {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseCaxpyi",                                       {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseZaxpyi",                                       {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseSgthr",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseDgthr",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseCgthr",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseZgthr",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseSgthrz",                                       {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseDgthrz",                                       {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseCgthrz",                                       {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseZgthrz",                                       {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseSsctr",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseDsctr",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseCsctr",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseZsctr",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseSroti",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseDroti",                                        {CUDA_0,   CUDA_110, CUDA_120}},
-  {"cusparseScsr2csc",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseDcsr2csc",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseCcsr2csc",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseZcsr2csc",                                     {CUDA_0,   CUDA_102, CUDA_110}},
-  {"cusparseSpMatGetSize",                                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseCooSetStridedBatch",                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseCsrSetStridedBatch",                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseAxpby",                                        {CUDA_110, CUDA_128, CUDA_0  }},
-  {"cusparseGather",                                       {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseScatter",                                      {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseRot",                                          {CUDA_110, CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSpGEMM_createDescr",                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMM_destroyDescr",                          {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMM_compute",                               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMM_copy",                                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMM_workEstimation",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseConstrainedGeMM",                              {CUDA_102, CUDA_112, CUDA_120}},
-  {"cusparseConstrainedGeMM_bufferSize",                   {CUDA_102, CUDA_112, CUDA_120}},
-  {"cusparseSdense2csr",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseDdense2csr",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseCdense2csr",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseZdense2csr",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseScsr2dense",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseDcsr2dense",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseCcsr2dense",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseZcsr2dense",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseSdense2csc",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseDdense2csc",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseCdense2csc",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseZdense2csc",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseScsc2dense",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseDcsc2dense",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseCcsc2dense",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseZcsc2dense",                                   {CUDA_0,   CUDA_111, CUDA_120}},
-  {"cusparseCreateCsc",                                    {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusparseCsrSetPointers",                               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"cusparseCscSetPointers",                               {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusparseCooSetPointers",                               {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusparseSparseToDense_bufferSize",                     {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
-  {"cusparseSparseToDense",                                {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
-  {"cusparseDenseToSparse_bufferSize",                     {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
-  {"cusparseDenseToSparse_analysis",                       {CUDA_111, CUDA_0,   CUDA_0  }}, // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
-  {"cusparseDenseToSparse_convert",                        {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateCsrsv2Info",                             {CUDA_0,   CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
-  {"cusparseDestroyCsrsv2Info",                            {CUDA_0,   CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
-  {"cusparseXcsrsv2_zeroPivot",                            {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseScsrsv2_bufferSize",                           {CUDA_0,   CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
-  {"cusparseDcsrsv2_bufferSize",                           {CUDA_0,   CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
-  {"cusparseCcsrsv2_bufferSize",                           {CUDA_0,   CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
-  {"cusparseZcsrsv2_bufferSize",                           {CUDA_0,   CUDA_113, CUDA_120}}, // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
-  {"cusparseScsrsv2_bufferSizeExt",                        {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseDcsrsv2_bufferSizeExt",                        {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseCcsrsv2_bufferSizeExt",                        {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseZcsrsv2_bufferSizeExt",                        {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseScsrsv2_analysis",                             {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseDcsrsv2_analysis",                             {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseCcsrsv2_analysis",                             {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseZcsrsv2_analysis",                             {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseScsrsv2_solve",                                {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseDcsrsv2_solve",                                {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseCcsrsv2_solve",                                {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseZcsrsv2_solve",                                {CUDA_0,   CUDA_113, CUDA_120}},
-  {"cusparseSpMatGetAttribute",                            {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMatSetAttribute",                            {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSV_createDescr",                             {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSV_destroyDescr",                            {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSV_bufferSize",                              {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSV_analysis",                                {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSV_solve",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSM_createDescr",                             {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSM_destroyDescr",                            {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSM_bufferSize",                              {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSM_analysis",                                {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSM_solve",                                   {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMMreuse_workEstimation",                   {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMMreuse_nnz",                              {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMMreuse_copy",                             {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMMreuse_compute",                          {CUDA_113, CUDA_0,   CUDA_0  }},
-  {"cusparseSDDMM",                                        {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cusparseSDDMM_bufferSize",                             {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cusparseSDDMM_preprocess",                             {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateBlockedEll",                             {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cusparseBlockedEllGet",                                {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMM_preprocess",                              {CUDA_112, CUDA_0,   CUDA_0  }},
-  {"cusparseLoggerSetCallback",                            {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseLoggerSetFile",                                {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseLoggerOpenFile",                               {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseLoggerSetLevel",                               {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseLoggerSetMask",                                {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseLoggerForceDisable",                           {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMMOp",                                       {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMMOp_createPlan",                            {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseSpMMOp_destroyPlan",                           {CUDA_115, CUDA_0,   CUDA_0  }},
-  {"cusparseCscGet",                                       {CUDA_117, CUDA_0,   CUDA_0  }},
-  {"cusparseCopyMatDescr",                                 {CUDA_80,  CUDA_0,   CUDA_120}},
-  {"cusparseCreateConstSpVec",                             {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstSpVecGet",                                {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstSpVecGetValues",                          {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateConstDnVec",                             {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstDnVecGet",                                {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstDnVecGetValues",                          {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstSpMatGetValues",                          {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateConstCsr",                               {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateConstCsc",                               {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstCsrGet",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstCscGet",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateConstCoo",                               {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstCooGet",                                  {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateConstBlockedEll",                        {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstBlockedEllGet",                           {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseCreateConstDnMat",                             {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstDnMatGet",                                {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseConstDnMatGetValues",                          {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMM_getNumProducts",                        {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseSpGEMM_estimateMemory",                        {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"cusparseBsrSetStridedBatch",                           {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
-  {"cusparseCreateBsr",                                    {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
-  {"cusparseCreateConstBsr",                               {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
-  {"cusparseCreateSlicedEll",                              {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
-  {"cusparseCreateConstSlicedEll",                         {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
-  {"cusparseSpSV_updateMatrix",                            {CUDA_121, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 12100
-  {"cusparseCreateCsric02Info",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDestroyCsric02Info",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCreateBsric02Info",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDestroyBsric02Info",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCreateCsrilu02Info",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDestroyCsrilu02Info",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCreateBsrilu02Info",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDestroyBsrilu02Info",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCreateBsrsv2Info",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDestroyBsrsv2Info",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCreateBsrsm2Info",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDestroyBsrsm2Info",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCreateCsru2csrInfo",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDestroyCsru2csrInfo",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCreateColorInfo",                              {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDestroyColorInfo",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrxmv",                                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrxmv",                                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrxmv",                                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrxmv",                                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseXbsrsv2_zeroPivot",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrsv2_bufferSize",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDbsrsv2_bufferSize",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCbsrsv2_bufferSize",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseZbsrsv2_bufferSize",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseSbsrsv2_bufferSizeExt",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDbsrsv2_bufferSizeExt",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCbsrsv2_bufferSizeExt",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseZbsrsv2_bufferSizeExt",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseSbsrsv2_analysis",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrsv2_analysis",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrsv2_analysis",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrsv2_analysis",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrsv2_solve",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrsv2_solve",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrsv2_solve",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrsv2_solve",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseXbsrsm2_zeroPivot",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrsm2_bufferSize",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrsm2_bufferSize",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrsm2_bufferSize",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrsm2_bufferSize",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrsm2_bufferSizeExt",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrsm2_bufferSizeExt",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrsm2_bufferSizeExt",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrsm2_bufferSizeExt",                        {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrsm2_analysis",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrsm2_analysis",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrsm2_analysis",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrsm2_analysis",                             {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrsm2_solve",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrsm2_solve",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrsm2_solve",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrsm2_solve",                                {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsrilu02_numericBoost",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsrilu02_numericBoost",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsrilu02_numericBoost",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsrilu02_numericBoost",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseXcsrilu02_zeroPivot",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsrilu02_bufferSize",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDcsrilu02_bufferSize",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCcsrilu02_bufferSize",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseZcsrilu02_bufferSize",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseScsrilu02_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDcsrilu02_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCcsrilu02_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseZcsrilu02_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseScsrilu02_analysis",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsrilu02_analysis",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsrilu02_analysis",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsrilu02_analysis",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsrilu02",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsrilu02",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsrilu02",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsrilu02",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrilu02_numericBoost",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrilu02_numericBoost",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrilu02_numericBoost",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrilu02_numericBoost",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseXbsrilu02_zeroPivot",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrilu02_bufferSize",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseDbsrilu02_bufferSize",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseCbsrilu02_bufferSize",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseZbsrilu02_bufferSize",                         {CUDA_0,   CUDA_122, CUDA_0  }}, // D: CUSPARSE_VERSION 12102
-  {"cusparseSbsrilu02_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrilu02_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrilu02_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrilu02_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrilu02_analysis",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrilu02_analysis",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrilu02_analysis",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrilu02_analysis",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsrilu02",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsrilu02",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsrilu02",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsrilu02",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseXcsric02_zeroPivot",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsric02_bufferSize",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsric02_bufferSize",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsric02_bufferSize",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsric02_bufferSize",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsric02_bufferSizeExt",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsric02_bufferSizeExt",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsric02_bufferSizeExt",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsric02_bufferSizeExt",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsric02_analysis",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsric02_analysis",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsric02_analysis",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsric02_analysis",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsric02",                                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsric02",                                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsric02",                                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsric02",                                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseXcsric02_zeroPivot",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsric02_bufferSize",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsric02_bufferSize",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsric02_bufferSize",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsric02_bufferSize",                          {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsric02_bufferSizeExt",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsric02_bufferSizeExt",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsric02_bufferSizeExt",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsric02_bufferSizeExt",                       {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsric02_analysis",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsric02_analysis",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsric02_analysis",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsric02_analysis",                            {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseSbsric02",                                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDbsric02",                                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCbsric02",                                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZbsric02",                                     {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsrcolor",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsrcolor",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsrcolor",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsrcolor",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCreateIdentityPermutation",                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsru2csr_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsru2csr_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsru2csr_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsru2csr_bufferSizeExt",                      {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsru2csr",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsru2csr",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsru2csr",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsru2csr",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseScsr2csru",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseDcsr2csru",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseCcsr2csru",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseZcsr2csru",                                    {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseXbsric02_zeroPivot",                           {CUDA_0,   CUDA_122, CUDA_0  }}, // CUSPARSE_VERSION 12120
-  {"cusparseGetErrorName",                                 {CUDA_102, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 10301
-  {"cusparseGetErrorString",                               {CUDA_102, CUDA_0,   CUDA_0  }}, // CUSPARSE_VERSION 10301
-  {"cusparseXcsr2bsrNnz",                                  {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseScsr2bsr",                                     {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseDcsr2bsr",                                     {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseCcsr2bsr",                                     {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseZcsr2bsr",                                     {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseXgebsr2csr",                                   {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseSgebsr2csr",                                   {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseDgebsr2csr",                                   {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseCgebsr2csr",                                   {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseZgebsr2csr",                                   {CUDA_0,   CUDA_124, CUDA_0  }},
-  {"cusparseSpMV_preprocess",                              {CUDA_124, CUDA_0,   CUDA_0  }},
-  {"cusparseSpSM_updateMatrix",                            {CUDA_124, CUDA_0,   CUDA_0  }},
-  {"cusparseSbsrmm",                                       {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseDbsrmm",                                       {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseCbsrmm",                                       {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseZbsrmm",                                       {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseSbsr2csr",                                     {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseDbsr2csr",                                     {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseCbsr2csr",                                     {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseZbsr2csr",                                     {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseSgebsr2gebsr_bufferSize",                      {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseSgebsr2gebsr_bufferSizeExt",                   {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseDgebsr2gebsr_bufferSize",                      {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseDgebsr2gebsr_bufferSizeExt",                   {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseCgebsr2gebsr_bufferSize",                      {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseCgebsr2gebsr_bufferSizeExt",                   {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseZgebsr2gebsr_bufferSize",                      {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseZgebsr2gebsr_bufferSizeExt",                   {CUDA_0,   CUDA_128, CUDA_0  }},
-  { "cusparseXgebsr2gebsrNnz",                             {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseSgebsr2gebsr",                                 {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseDgebsr2gebsr",                                 {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseCgebsr2gebsr",                                 {CUDA_0,   CUDA_128, CUDA_0  }},
-  {"cusparseZgebsr2gebsr",                                 {CUDA_0,   CUDA_128, CUDA_0  }},
-};
+  return m;
+}();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP {
-  {"hipsparseCreate",                                      {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseDestroy",                                     {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseGetPointerMode",                              {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseGetVersion",                                  {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseSetPointerMode",                              {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseSetStream",                                   {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseGetStream",                                   {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseCreateHybMat",                                {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCreateMatDescr",                              {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseDestroyHybMat",                               {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDestroyMatDescr",                             {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseGetMatDiagType",                              {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseGetMatFillMode",                              {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseGetMatIndexBase",                             {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseGetMatType",                                  {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseSetMatDiagType",                              {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseSetMatFillMode",                              {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseSetMatIndexBase",                             {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseSetMatType",                                  {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseCreateCsrsv2Info",                            {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseDestroyCsrsv2Info",                           {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseCreateCsrsm2Info",                            {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseDestroyCsrsm2Info",                           {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseCreateCsric02Info",                           {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseDestroyCsric02Info",                          {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseCreateCsrilu02Info",                          {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseDestroyCsrilu02Info",                         {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseCreateBsrsv2Info",                            {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseDestroyBsrsv2Info",                           {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseCreateBsric02Info",                           {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseDestroyBsric02Info",                          {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseCreateBsrilu02Info",                          {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDestroyBsrilu02Info",                         {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseCreateCsrgemm2Info",                          {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseDestroyCsrgemm2Info",                         {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseCreatePruneInfo",                             {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDestroyPruneInfo",                            {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSaxpyi",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDaxpyi",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCaxpyi",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZaxpyi",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseSdoti",                                       {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDdoti",                                       {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCdoti",                                       {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZdoti",                                       {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseCdotci",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZdotci",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseSgthr",                                       {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDgthr",                                       {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCgthr",                                       {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZgthr",                                       {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseSgthrz",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDgthrz",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCgthrz",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZgthrz",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseSroti",                                       {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDroti",                                       {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseSsctr",                                       {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDsctr",                                       {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCsctr",                                       {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZsctr",                                       {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseSbsrmv",                                      {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseDbsrmv",                                      {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseCbsrmv",                                      {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseZbsrmv",                                      {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseScsrmv",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDcsrmv",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCcsrmv",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZcsrmv",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseSbsrsv2_bufferSize",                          {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrsv2_bufferSizeExt",                       {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipsparseDbsrsv2_bufferSize",                          {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrsv2_bufferSizeExt",                       {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipsparseCbsrsv2_bufferSize",                          {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrsv2_bufferSizeExt",                       {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipsparseZbsrsv2_bufferSize",                          {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrsv2_bufferSizeExt",                       {HIP_3060, HIP_0,    HIP_0   }},
-  {"hipsparseSbsrsv2_analysis",                            {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrsv2_analysis",                            {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrsv2_analysis",                            {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrsv2_analysis",                            {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrsv2_solve",                               {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrsv2_solve",                               {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrsv2_solve",                               {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrsv2_solve",                               {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseXbsrsv2_zeroPivot",                           {HIP_3060, HIP_6020, HIP_0   }},
-  {"hipsparseScsrsv2_bufferSize",                          {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseScsrsv2_bufferSizeExt",                       {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseDcsrsv2_bufferSize",                          {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseDcsrsv2_bufferSizeExt",                       {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseCcsrsv2_bufferSize",                          {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseCcsrsv2_bufferSizeExt",                       {HIP_3010, HIP_0,    HIP_0   }},
-  {"hipsparseZcsrsv2_bufferSize",                          {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseZcsrsv2_bufferSizeExt",                       {HIP_3010, HIP_0,    HIP_0   }},
-  {"hipsparseScsrsv2_analysis",                            {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseDcsrsv2_analysis",                            {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseCcsrsv2_analysis",                            {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseZcsrsv2_analysis",                            {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseScsrsv2_solve",                               {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseDcsrsv2_solve",                               {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseCcsrsv2_solve",                               {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseZcsrsv2_solve",                               {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseXcsrsv2_zeroPivot",                           {HIP_1092, HIP_5060, HIP_0   }},
-  {"hipsparseShybmv",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDhybmv",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseChybmv",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZhybmv",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseScsrmm",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDcsrmm",                                      {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCcsrmm",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZcsrmm",                                      {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseScsrmm2",                                     {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDcsrmm2",                                     {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCcsrmm2",                                     {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZcsrmm2",                                     {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseScsrsm2_bufferSizeExt",                       {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseDcsrsm2_bufferSizeExt",                       {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseCcsrsm2_bufferSizeExt",                       {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseZcsrsm2_bufferSizeExt",                       {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseScsrsm2_analysis",                            {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseDcsrsm2_analysis",                            {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseCcsrsm2_analysis",                            {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseZcsrsm2_analysis",                            {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseScsrsm2_solve",                               {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseDcsrsm2_solve",                               {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseCcsrsm2_solve",                               {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseZcsrsm2_solve",                               {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseXcsrsm2_zeroPivot",                           {HIP_3010, HIP_5060, HIP_0   }},
-  {"hipsparseSbsrmm",                                      {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipsparseDbsrmm",                                      {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipsparseCbsrmm",                                      {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipsparseZbsrmm",                                      {HIP_3070, HIP_0,    HIP_0   }},
-  {"hipsparseSgemmi",                                      {HIP_3070, HIP_3090, HIP_0   }},
-  {"hipsparseDgemmi",                                      {HIP_3070, HIP_3090, HIP_0   }},
-  {"hipsparseCgemmi",                                      {HIP_3070, HIP_3090, HIP_0   }},
-  {"hipsparseZgemmi",                                      {HIP_3070, HIP_3090, HIP_0   }},
-  {"hipsparseScsrgeam",                                    {HIP_3050, HIP_3090, HIP_0   }},
-  {"hipsparseDcsrgeam",                                    {HIP_3050, HIP_3090, HIP_0   }},
-  {"hipsparseCcsrgeam",                                    {HIP_3050, HIP_3090, HIP_0   }},
-  {"hipsparseZcsrgeam",                                    {HIP_3050, HIP_3090, HIP_0   }},
-  {"hipsparseXcsrgeamNnz",                                 {HIP_3050, HIP_3090, HIP_0   }},
-  {"hipsparseScsrgeam2",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseDcsrgeam2",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseCcsrgeam2",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseZcsrgeam2",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseXcsrgeam2Nnz",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseScsrgeam2_bufferSizeExt",                     {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseDcsrgeam2_bufferSizeExt",                     {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseCcsrgeam2_bufferSizeExt",                     {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseZcsrgeam2_bufferSizeExt",                     {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseScsrgemm",                                    {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseDcsrgemm",                                    {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseCcsrgemm",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZcsrgemm",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseXcsrgemmNnz",                                 {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseScsrgemm2",                                   {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseDcsrgemm2",                                   {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseCcsrgemm2",                                   {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZcsrgemm2",                                   {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseXcsrgemm2Nnz",                                {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseScsrgemm2_bufferSizeExt",                     {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseDcsrgemm2_bufferSizeExt",                     {HIP_2080, HIP_3090, HIP_0   }},
-  {"hipsparseCcsrgemm2_bufferSizeExt",                     {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZcsrgemm2_bufferSizeExt",                     {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseScsric02_bufferSize",                         {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseScsric02_bufferSizeExt",                      {HIP_3010, HIP_0,    HIP_0   }},
-  {"hipsparseDcsric02_bufferSize",                         {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseDcsric02_bufferSizeExt",                      {HIP_3010, HIP_0,    HIP_0   }},
-  {"hipsparseCcsric02_bufferSize",                         {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseCcsric02_bufferSizeExt",                      {HIP_3010, HIP_0,    HIP_0   }},
-  {"hipsparseZcsric02_bufferSize",                         {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseZcsric02_bufferSizeExt",                      {HIP_3010, HIP_0,    HIP_0   }},
-  {"hipsparseScsric02_analysis",                           {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseDcsric02_analysis",                           {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseCcsric02_analysis",                           {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseZcsric02_analysis",                           {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseScsric02",                                    {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseDcsric02",                                    {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseCcsric02",                                    {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseZcsric02",                                    {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseXcsric02_zeroPivot",                          {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseSbsric02_bufferSize",                         {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseDbsric02_bufferSize",                         {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseCbsric02_bufferSize",                         {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseZbsric02_bufferSize",                         {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseSbsric02_analysis",                           {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseDbsric02_analysis",                           {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseCbsric02_analysis",                           {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseZbsric02_analysis",                           {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseSbsric02",                                    {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseDbsric02",                                    {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseCbsric02",                                    {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseZbsric02",                                    {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseXbsric02_zeroPivot",                          {HIP_3080, HIP_6020, HIP_0   }},
-  {"hipsparseScsrilu02_numericBoost",                      {HIP_3100, HIP_6020, HIP_0   }},
-  {"hipsparseDcsrilu02_numericBoost",                      {HIP_3100, HIP_6020, HIP_0   }},
-  {"hipsparseCcsrilu02_numericBoost",                      {HIP_3100, HIP_6020, HIP_0   }},
-  {"hipsparseZcsrilu02_numericBoost",                      {HIP_3100, HIP_6020, HIP_0   }},
-  {"hipsparseXcsrilu02_zeroPivot",                         {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseScsrilu02_bufferSize",                        {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseScsrilu02_bufferSizeExt",                     {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseDcsrilu02_bufferSize",                        {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseDcsrilu02_bufferSizeExt",                     {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseCcsrilu02_bufferSize",                        {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseCcsrilu02_bufferSizeExt",                     {HIP_3010, HIP_0,    HIP_0   }},
-  {"hipsparseZcsrilu02_bufferSize",                        {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseZcsrilu02_bufferSizeExt",                     {HIP_3010, HIP_0,    HIP_0   }},
-  {"hipsparseScsrilu02_analysis",                          {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseDcsrilu02_analysis",                          {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseCcsrilu02_analysis",                          {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseZcsrilu02_analysis",                          {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseScsrilu02",                                   {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseDcsrilu02",                                   {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseCcsrilu02",                                   {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseZcsrilu02",                                   {HIP_3010, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrilu02_numericBoost",                      {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrilu02_numericBoost",                      {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrilu02_numericBoost",                      {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrilu02_numericBoost",                      {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrilu02_bufferSize",                        {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrilu02_bufferSize",                        {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrilu02_bufferSize",                        {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrilu02_bufferSize",                        {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrilu02_analysis",                          {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrilu02_analysis",                          {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrilu02_analysis",                          {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrilu02_analysis",                          {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrilu02",                                   {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrilu02",                                   {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrilu02",                                   {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrilu02",                                   {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseXbsrilu02_zeroPivot",                         {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSbsr2csr",                                    {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseDbsr2csr",                                    {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseCbsr2csr",                                    {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseZbsr2csr",                                    {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseXcoo2csr",                                    {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseScsc2dense",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseDcsc2dense",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseCcsc2dense",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseZcsc2dense",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseXcsr2bsrNnz",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseScsr2bsr",                                    {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseDcsr2bsr",                                    {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseCcsr2bsr",                                    {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseZcsr2bsr",                                    {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseXcsr2coo",                                    {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseScsr2csc",                                    {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDcsr2csc",                                    {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCcsr2csc",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZcsr2csc",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseScsr2dense",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseDcsr2dense",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseCcsr2dense",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseZcsr2dense",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseScsr2csr_compress",                           {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseDcsr2csr_compress",                           {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseCcsr2csr_compress",                           {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseZcsr2csr_compress",                           {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseScsr2hyb",                                    {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseDcsr2hyb",                                    {HIP_1092, HIP_3090, HIP_0   }},
-  {"hipsparseCcsr2hyb",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZcsr2hyb",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseSdense2csc",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseDdense2csc",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseCdense2csc",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseZdense2csc",                                  {HIP_3050, HIP_5060, HIP_0   }},
-  {"hipsparseSdense2csr",                                  {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseDdense2csr",                                  {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseCdense2csr",                                  {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseZdense2csr",                                  {HIP_3050, HIP_0,    HIP_0   }},
-  {"hipsparseShyb2csr",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseDhyb2csr",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseChyb2csr",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseZhyb2csr",                                    {HIP_3010, HIP_3090, HIP_0   }},
-  {"hipsparseSnnz",                                        {HIP_3020, HIP_0,    HIP_0   }},
-  {"hipsparseDnnz",                                        {HIP_3020, HIP_0,    HIP_0   }},
-  {"hipsparseCnnz",                                        {HIP_3020, HIP_0,    HIP_0   }},
-  {"hipsparseZnnz",                                        {HIP_3020, HIP_0,    HIP_0   }},
-  {"hipsparseCreateIdentityPermutation",                   {HIP_1092, HIP_6020, HIP_0   }},
-  {"hipsparseXcoosort_bufferSizeExt",                      {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseXcoosortByRow",                               {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseXcoosortByColumn",                            {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseXcsrsort_bufferSizeExt",                      {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseXcsrsort",                                    {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseXcscsort_bufferSizeExt",                      {HIP_2100, HIP_0,    HIP_0   }},
-  {"hipsparseXcscsort",                                    {HIP_2100, HIP_0,    HIP_0   }},
-  {"hipsparseSpruneDense2csr",                             {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneDense2csr",                             {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneDense2csr_bufferSizeExt",               {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneDense2csr_bufferSizeExt",               {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneDense2csrNnz",                          {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneDense2csrNnz",                          {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneCsr2csr",                               {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneCsr2csr",                               {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneCsr2csr_bufferSizeExt",                 {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneCsr2csr_bufferSizeExt",                 {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneCsr2csrNnz",                            {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneCsr2csrNnz",                            {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneDense2csrByPercentage",                 {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneDense2csrByPercentage",                 {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneDense2csrByPercentage_bufferSizeExt",   {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneDense2csrByPercentage_bufferSizeExt",   {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneDense2csrNnzByPercentage",              {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneDense2csrNnzByPercentage",              {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneCsr2csrByPercentage",                   {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneCsr2csrByPercentage",                   {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneCsr2csrByPercentage_bufferSizeExt",     {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneCsr2csrByPercentage_bufferSizeExt",     {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSpruneCsr2csrNnzByPercentage",                {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseDpruneCsr2csrNnzByPercentage",                {HIP_3090, HIP_6020, HIP_0   }},
-  {"hipsparseSnnz_compress",                               {HIP_3050, HIP_6020, HIP_0   }},
-  {"hipsparseDnnz_compress",                               {HIP_3050, HIP_6020, HIP_0   }},
-  {"hipsparseCnnz_compress",                               {HIP_3050, HIP_6020, HIP_0   }},
-  {"hipsparseZnnz_compress",                               {HIP_3050, HIP_6020, HIP_0   }},
-  {"hipsparseSgebsr2gebsc_bufferSize",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDgebsr2gebsc_bufferSize",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCgebsr2gebsc_bufferSize",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseZgebsr2gebsc_bufferSize",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSgebsr2gebsc",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDgebsr2gebsc",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCgebsr2gebsc",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseZgebsr2gebsc",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSgebsr2gebsr_bufferSize",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDgebsr2gebsr_bufferSize",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCgebsr2gebsr_bufferSize",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseZgebsr2gebsr_bufferSize",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSgebsr2csr",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDgebsr2csr",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCgebsr2csr",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseZgebsr2csr",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseXgebsr2gebsrNnz",                             {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSgebsr2gebsr",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDgebsr2gebsr",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCgebsr2gebsr",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseZgebsr2gebsr",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseScsr2gebsr_bufferSize",                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDcsr2gebsr_bufferSize",                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCcsr2gebsr_bufferSize",                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseZcsr2gebsr_bufferSize",                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseXcsr2gebsrNnz",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseScsr2gebsr",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDcsr2gebsr",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCcsr2gebsr",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseZcsr2gebsr",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCreateCoo",                                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCreateCooAoS",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCreateCsr",                                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDestroySpMat",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCooGet",                                      {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCooAoSGet",                                   {HIP_4010, HIP_5060, HIP_0   }},
-  {"hipsparseCsrGet",                                      {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCsrSetPointers",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatGetFormat",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatGetIndexBase",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatGetValues",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatSetValues",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatGetSize",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCreateSpVec",                                 {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDestroySpVec",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpVecGet",                                    {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpVecGetIndexBase",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpVecGetValues",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpVecSetValues",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCreateDnVec",                                 {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDestroyDnVec",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDnVecGet",                                    {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDnVecGetValues",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseDnVecSetValues",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMM_createDescr",                          {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMM_destroyDescr",                         {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMM_workEstimation",                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMM_compute",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMM_copy",                                 {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpVV",                                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpVV_bufferSize",                             {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseAxpby",                                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseGather",                                      {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseScatter",                                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseRot",                                         {HIP_4010, HIP_6020, HIP_0   }},
-  {"hipsparseSpMV",                                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseSpMV_bufferSize",                             {HIP_4010, HIP_0,    HIP_0   }},
-  {"hipsparseCreateCsru2csrInfo",                          {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDestroyCsru2csrInfo",                         {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseScsru2csr_bufferSizeExt",                     {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseDcsru2csr_bufferSizeExt",                     {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseCcsru2csr_bufferSizeExt",                     {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseZcsru2csr_bufferSizeExt",                     {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseScsru2csr",                                   {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseDcsru2csr",                                   {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseCcsru2csr",                                   {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseZcsru2csr",                                   {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseScsr2csru",                                   {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseDcsr2csru",                                   {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseCcsr2csru",                                   {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseZcsr2csru",                                   {HIP_4020, HIP_6020, HIP_0   }},
-  {"hipsparseCreateCsc",                                   {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseCscSetPointers",                              {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseCooSetPointers",                              {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseCreateDnMat",                                 {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDestroyDnMat",                                {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDnMatGet",                                    {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDnMatGetValues",                              {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDnMatSetValues",                              {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseSparseToDense_bufferSize",                    {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseSparseToDense",                               {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDenseToSparse_bufferSize",                    {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDenseToSparse_analysis",                      {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseDenseToSparse_convert",                       {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseSpMM_bufferSize",                             {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseSpMM",                                        {HIP_4020, HIP_0,    HIP_0   }},
-  {"hipsparseSgemvi_bufferSize",                           {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseDgemvi_bufferSize",                           {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseCgemvi_bufferSize",                           {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseZgemvi_bufferSize",                           {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseSgemvi",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseDgemvi",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseCgemvi",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseZgemvi",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseSgtsv2_bufferSizeExt",                        {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseDgtsv2_bufferSizeExt",                        {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseCgtsv2_bufferSizeExt",                        {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseZgtsv2_bufferSizeExt",                        {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseSgtsv2",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseDgtsv2",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseCgtsv2",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseZgtsv2",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseSgtsv2_nopivot_bufferSizeExt",                {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseDgtsv2_nopivot_bufferSizeExt",                {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseCgtsv2_nopivot_bufferSizeExt",                {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseZgtsv2_nopivot_bufferSizeExt",                {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseSgtsv2_nopivot",                              {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseDgtsv2_nopivot",                              {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseCgtsv2_nopivot",                              {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseZgtsv2_nopivot",                              {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseSDDMM",                                       {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseSDDMM_bufferSize",                            {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseSDDMM_preprocess",                            {HIP_4030, HIP_0,    HIP_0   }},
-  {"hipsparseCreateBsrsm2Info",                            {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseDestroyBsrsm2Info",                           {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseCreateColorInfo",                             {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseDestroyColorInfo",                            {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrxmv",                                     {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrxmv",                                     {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrxmv",                                     {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrxmv",                                     {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseXbsrsm2_zeroPivot",                           {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrsm2_bufferSize",                          {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrsm2_bufferSize",                          {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrsm2_bufferSize",                          {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrsm2_bufferSize",                          {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrsm2_analysis",                            {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrsm2_analysis",                            {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrsm2_analysis",                            {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrsm2_analysis",                            {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseSbsrsm2_solve",                               {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseDbsrsm2_solve",                               {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseCbsrsm2_solve",                               {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseZbsrsm2_solve",                               {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseScsrcolor",                                   {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseDcsrcolor",                                   {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseCcsrcolor",                                   {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseZcsrcolor",                                   {HIP_4050, HIP_6020, HIP_0   }},
-  {"hipsparseCreateBlockedEll",                            {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseBlockedEllGet",                               {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatGetAttribute",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatSetAttribute",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpMM_preprocess",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSV_createDescr",                            {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSV_destroyDescr",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSV_bufferSize",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSV_analysis",                               {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSV_solve",                                  {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSM_createDescr",                            {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSM_destroyDescr",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSM_bufferSize",                             {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSM_analysis",                               {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSpSM_solve",                                  {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSgtsv2StridedBatch_bufferSizeExt",            {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseDgtsv2StridedBatch_bufferSizeExt",            {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseCgtsv2StridedBatch_bufferSizeExt",            {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseZgtsv2StridedBatch_bufferSizeExt",            {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSgtsv2StridedBatch",                          {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseDgtsv2StridedBatch",                          {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseCgtsv2StridedBatch",                          {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseZgtsv2StridedBatch",                          {HIP_4050, HIP_0,    HIP_0   }},
-  {"hipsparseSgtsvInterleavedBatch_bufferSizeExt",         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseDgtsvInterleavedBatch_bufferSizeExt",         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseCgtsvInterleavedBatch_bufferSizeExt",         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseZgtsvInterleavedBatch_bufferSizeExt",         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseSgtsvInterleavedBatch",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseDgtsvInterleavedBatch",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseCgtsvInterleavedBatch",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseZgtsvInterleavedBatch",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseSgpsvInterleavedBatch_bufferSizeExt",         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseDgpsvInterleavedBatch_bufferSizeExt",         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseCgpsvInterleavedBatch_bufferSizeExt",         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseZgpsvInterleavedBatch_bufferSizeExt",         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseSgpsvInterleavedBatch",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseDgpsvInterleavedBatch",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseCgpsvInterleavedBatch",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseZgpsvInterleavedBatch",                       {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMMreuse_workEstimation",                  {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMMreuse_nnz",                             {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMMreuse_compute",                         {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseSpGEMMreuse_copy",                            {HIP_5010, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatGetStridedBatch",                        {HIP_5020, HIP_0,    HIP_0   }},
-  {"hipsparseSpMatSetStridedBatch",                        {HIP_5020, HIP_5020, HIP_0   }},
-  {"hipsparseCooSetStridedBatch",                          {HIP_5020, HIP_0,    HIP_0   }},
-  {"hipsparseCsrSetStridedBatch",                          {HIP_5020, HIP_0,    HIP_0   }},
-  {"hipsparseDnMatGetStridedBatch",                        {HIP_5020, HIP_0,    HIP_0   }},
-  {"hipsparseDnMatSetStridedBatch",                        {HIP_5020, HIP_0,    HIP_0   }},
-  {"hipsparseCsr2cscEx2_bufferSize",                       {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsparseCsr2cscEx2",                                  {HIP_5040, HIP_0,    HIP_0   }},
-  {"hipsparseCopyMatDescr",                                {HIP_1092, HIP_0,    HIP_0   }},
-  {"hipsparseGetErrorName",                                {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseGetErrorString",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseCreateConstSpVec",                            {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstSpVecGet",                               {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstSpVecGetValues",                         {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseCreateConstCoo",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseCreateConstCsr",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseCreateConstCsc",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseCreateConstBlockedEll",                       {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstCooGet",                                 {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstCsrGet",                                 {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstBlockedEllGet",                          {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstSpMatGetValues",                         {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseCreateConstDnVec",                            {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstDnVecGet",                               {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstDnVecGetValues",                         {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseCreateConstDnMat",                            {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstDnMatGet",                               {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseConstDnMatGetValues",                         {HIP_6000, HIP_0,    HIP_0   }},
-  {"hipsparseCscGet",                                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsparseConstCscGet",                                 {HIP_6020, HIP_0,    HIP_0   }},
-  {"hipsparseSpMV_preprocess",                             {HIP_5020, HIP_0,    HIP_0   }},
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIversions> m;
 
-  {"rocsparse_create_handle",                              {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_handle",                             {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_set_stream",                                 {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_get_stream",                                 {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_set_pointer_mode",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_get_pointer_mode",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_get_version",                                {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_create_mat_descr",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_copy_mat_descr",                             {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_mat_descr",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_set_mat_index_base",                         {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_get_mat_index_base",                         {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_set_mat_type",                               {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_get_mat_type",                               {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_set_mat_fill_mode",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_get_mat_fill_mode",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_set_mat_diag_type",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_get_mat_diag_type",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_create_hyb_mat",                             {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_hyb_mat",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_create_color_info",                          {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_color_info",                         {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_create_spvec_descr",                         {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_spvec_descr",                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spvec_get",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spvec_get_index_base",                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spvec_get_values",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spvec_set_values",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_create_coo_descr",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_create_coo_aos_descr",                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_create_csr_descr",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_create_csc_descr",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_create_bell_descr",                          {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_spmat_descr",                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_coo_get",                                    {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_coo_aos_get",                                {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_csr_get",                                    {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_bell_get",                                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_coo_set_pointers",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_csr_set_pointers",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_csc_set_pointers",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_get_size",                             {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_get_format",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_get_index_base",                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_get_values",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_set_values",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_get_strided_batch",                    {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_set_strided_batch",                    {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocsparse_coo_set_strided_batch",                      {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocsparse_csr_set_strided_batch",                      {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_get_attribute",                        {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_spmat_set_attribute",                        {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_create_dnvec_descr",                         {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_dnvec_descr",                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dnvec_get",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dnvec_get_values",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dnvec_set_values",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_create_dnmat_descr",                         {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_dnmat_descr",                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dnmat_get",                                  {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dnmat_get_values",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dnmat_set_values",                           {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dnmat_get_strided_batch",                    {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocsparse_dnmat_set_strided_batch",                    {HIP_5020, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrcolor",                                  {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrcolor",                                  {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrcolor",                                  {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrcolor",                                  {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_sddmm_preprocess",                           {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sddmm_buffer_size",                          {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sddmm",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_spmv",                                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_rot",                                        {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_scatter",                                    {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_gather",                                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_axpby",                                      {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_zgebsr2gebsr",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_zgebsr2gebsr_buffer_size",                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_cgebsr2gebsr",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_cgebsr2gebsr_buffer_size",                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dgebsr2gebsr",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dgebsr2gebsr_buffer_size",                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_sgebsr2gebsr",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_sgebsr2gebsr_buffer_size",                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_gebsr2gebsr_nnz",                            {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_zgebsr2csr",                                 {HIP_3100, HIP_0,    HIP_0   }},
-  {"rocsparse_cgebsr2csr",                                 {HIP_3100, HIP_0,    HIP_0   }},
-  {"rocsparse_dgebsr2csr",                                 {HIP_3100, HIP_0,    HIP_0   }},
-  {"rocsparse_sgebsr2csr",                                 {HIP_3100, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsr2csr",                                   {HIP_3100, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsr2csr",                                   {HIP_3100, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsr2csr",                                   {HIP_3100, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsr2csr",                                   {HIP_3100, HIP_0,    HIP_0   }},
-  {"rocsparse_coosort_by_column",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_coosort_by_row",                             {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_coosort_buffer_size",                        {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_cscsort",                                    {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_cscsort_buffer_size",                        {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_csrsort",                                    {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_csrsort_buffer_size",                        {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_create_identity_permutation",                {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_coo2csr",                                    {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_csr2csr_by_percentage",               {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_csr2csr_by_percentage",               {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_csr2csr_nnz_by_percentage",           {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_csr2csr_nnz_by_percentage",           {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_csr2csr_by_percentage_buffer_size",   {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_csr2csr_by_percentage_buffer_size",   {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_csr2csr",                             {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_csr2csr",                             {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_csr2csr_nnz",                         {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_csr2csr_nnz",                         {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_csr2csr_buffer_size",                 {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_csr2csr_buffer_size",                 {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsr2csr_compress",                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsr2csr_compress",                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsr2csr_compress",                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_scsr2csr_compress",                          {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsr2gebsr",                                 {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsr2gebsr",                                 {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsr2gebsr",                                 {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_scsr2gebsr",                                 {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_csr2gebsr_nnz",                              {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsr2gebsr_buffer_size",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsr2gebsr_buffer_size",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsr2gebsr_buffer_size",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_scsr2gebsr_buffer_size",                     {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsr2bsr",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsr2bsr",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsr2bsr",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_scsr2bsr",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_csr2bsr_nnz",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsr2hyb",                                   {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsr2hyb",                                   {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsr2hyb",                                   {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsr2hyb",                                   {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zgebsr2gebsc",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_cgebsr2gebsc",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dgebsr2gebsc",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_sgebsr2gebsc",                               {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_zgebsr2gebsc_buffer_size",                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_cgebsr2gebsc_buffer_size",                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dgebsr2gebsc_buffer_size",                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_sgebsr2gebsc_buffer_size",                   {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_csr2coo",                                    {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_znnz_compress",                              {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_cnnz_compress",                              {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_dnnz_compress",                              {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_snnz_compress",                              {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsc2dense",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsc2dense",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsc2dense",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_scsc2dense",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsr2dense",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsr2dense",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsr2dense",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_scsr2dense",                                 {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_zdense2csc",                                 {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_cdense2csc",                                 {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_ddense2csc",                                 {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_sdense2csc",                                 {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_dense2csr_by_percentage",             {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_dense2csr_by_percentage",             {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_dense2csr_nnz_by_percentage",         {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_dense2csr_nnz_by_percentage",         {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_dense2csr_by_percentage_buffer_size", {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_dense2csr_by_percentage_buffer_size", {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_dense2csr",                           {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_dense2csr",                           {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_dense2csr_nnz",                       {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_dense2csr_nnz",                       {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dprune_dense2csr_buffer_size",               {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sprune_dense2csr_buffer_size",               {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_zdense2csr",                                 {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_cdense2csr",                                 {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_ddense2csr",                                 {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_sdense2csr",                                 {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_znnz",                                       {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_cnnz",                                       {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_dnnz",                                       {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_snnz",                                       {HIP_3020, HIP_0,    HIP_0   }},
-  {"rocsparse_zgpsv_interleaved_batch",                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_cgpsv_interleaved_batch",                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_dgpsv_interleaved_batch",                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_sgpsv_interleaved_batch",                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_zgpsv_interleaved_batch_buffer_size",        {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_cgpsv_interleaved_batch_buffer_size",        {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_dgpsv_interleaved_batch_buffer_size",        {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_sgpsv_interleaved_batch_buffer_size",        {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_zgtsv_interleaved_batch",                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_cgtsv_interleaved_batch",                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_dgtsv_interleaved_batch",                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_sgtsv_interleaved_batch",                    {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_zgtsv_interleaved_batch_buffer_size",        {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_cgtsv_interleaved_batch_buffer_size",        {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_dgtsv_interleaved_batch_buffer_size",        {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_sgtsv_interleaved_batch_buffer_size",        {HIP_5010, HIP_0,    HIP_0   }},
-  {"rocsparse_zgtsv_no_pivot_strided_batch",               {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_cgtsv_no_pivot_strided_batch",               {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_dgtsv_no_pivot_strided_batch",               {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sgtsv_no_pivot_strided_batch",               {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zgtsv_no_pivot_strided_batch_buffer_size",   {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_cgtsv_no_pivot_strided_batch_buffer_size",   {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_dgtsv_no_pivot_strided_batch_buffer_size",   {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sgtsv_no_pivot_strided_batch_buffer_size",   {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zgtsv_no_pivot",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_cgtsv_no_pivot",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_dgtsv_no_pivot",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sgtsv_no_pivot",                             {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zgtsv_no_pivot_buffer_size",                 {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_cgtsv_no_pivot_buffer_size",                 {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_dgtsv_no_pivot_buffer_size",                 {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sgtsv_no_pivot_buffer_size",                 {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zgtsv",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_cgtsv",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_dgtsv",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sgtsv",                                      {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zgtsv_buffer_size",                          {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_cgtsv_buffer_size",                          {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_dgtsv_buffer_size",                          {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sgtsv_buffer_size",                          {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrilu0",                                   {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrilu0",                                   {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrilu0",                                   {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrilu0",                                   {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrilu0_analysis",                          {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrilu0_analysis",                          {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrilu0_analysis",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrilu0_analysis",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrilu0_buffer_size",                       {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrilu0_buffer_size",                       {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrilu0_buffer_size",                       {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrilu0_buffer_size",                       {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrilu0_numeric_boost",                     {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dccsrilu0_numeric_boost",                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrilu0_numeric_boost",                     {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dscsrilu0_numeric_boost",                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_csrilu0_zero_pivot",                         {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsric0",                                    {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsric0",                                    {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsric0",                                    {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_scsric0",                                    {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsric0_analysis",                           {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsric0_analysis",                           {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsric0_analysis",                           {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_scsric0_analysis",                           {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsric0_buffer_size",                        {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsric0_buffer_size",                        {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsric0_buffer_size",                        {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_scsric0_buffer_size",                        {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_csric0_zero_pivot",                          {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrilu0",                                   {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrilu0",                                   {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrilu0",                                   {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrilu0",                                   {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_bsrilu0_zero_pivot",                         {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrilu0_analysis",                          {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrilu0_analysis",                          {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrilu0_analysis",                          {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrilu0_analysis",                          {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_dcbsrilu0_numeric_boost",                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_dsbsrilu0_numeric_boost",                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrilu0_numeric_boost",                     {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrilu0_numeric_boost",                     {HIP_3090, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsric0",                                    {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsric0",                                    {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsric0",                                    {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsric0",                                    {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsric0_analysis",                           {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsric0_analysis",                           {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsric0_analysis",                           {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsric0_analysis",                           {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsric0_buffer_size",                        {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsric0_buffer_size",                        {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsric0_buffer_size",                        {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsric0_buffer_size",                        {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_bsric0_zero_pivot",                          {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_csrgemm_nnz",                                {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrgemm_buffer_size",                       {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrgemm_buffer_size",                       {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrgemm_buffer_size",                       {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrgemm_buffer_size",                       {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrgeam",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrgeam",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrgeam",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrgeam",                                   {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_csrgeam_nnz",                                {HIP_3050, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrsm_solve",                               {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrsm_solve",                               {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrsm_solve",                               {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrsm_solve",                               {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrsm_analysis",                            {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrsm_analysis",                            {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrsm_analysis",                            {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrsm_analysis",                            {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrsm_buffer_size",                         {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrsm_buffer_size",                         {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrsm_buffer_size",                         {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrsm_buffer_size",                         {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_bsrsm_zero_pivot",                           {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrsm_solve",                               {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrsm_solve",                               {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrsm_solve",                               {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrsm_solve",                               {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrsm_analysis",                            {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrsm_analysis",                            {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrsm_analysis",                            {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrsm_analysis",                            {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrsm_buffer_size",                         {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrsm_buffer_size",                         {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrsm_buffer_size",                         {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrsm_buffer_size",                         {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_csrsm_zero_pivot",                           {HIP_3010, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrmm",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrmm",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrmm",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrmm",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrmm",                                     {HIP_3070, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrmm",                                     {HIP_3070, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrmm",                                     {HIP_3070, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrmm",                                     {HIP_3070, HIP_0,    HIP_0   }},
-  {"rocsparse_sgemvi",                                     {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_dgemvi",                                     {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_cgemvi",                                     {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zgemvi",                                     {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_sgemvi_buffer_size",                         {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_dgemvi_buffer_size",                         {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_cgemvi_buffer_size",                         {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zgemvi_buffer_size",                         {HIP_4030, HIP_0,    HIP_0   }},
-  {"rocsparse_zhybmv",                                     {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_chybmv",                                     {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_dhybmv",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_shybmv",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrsv_solve",                               {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrsv_solve",                               {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrsv_solve",                               {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrsv_solve",                               {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrsv_analysis",                            {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrsv_analysis",                            {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrsv_analysis",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrsv_analysis",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrsv_buffer_size",                         {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrsv_buffer_size",                         {HIP_2100, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrsv_buffer_size",                         {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrsv_buffer_size",                         {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_csrsv_zero_pivot",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrmv",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrmv",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrmv",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrmv",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrsv_solve",                               {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrsv_solve",                               {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrsv_solve",                               {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrsv_solve",                               {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrsv_analysis",                            {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrsv_analysis",                            {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrsv_analysis",                            {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrsv_analysis",                            {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrsv_buffer_size",                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrsv_buffer_size",                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrsv_buffer_size",                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrsv_buffer_size",                         {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_bsrsv_zero_pivot",                           {HIP_3060, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrxmv",                                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrxmv",                                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrxmv",                                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrxmv",                                    {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrmv",                                     {HIP_3050, HIP_5040, HIP_0   }},
-  {"rocsparse_cbsrmv",                                     {HIP_3050, HIP_5040, HIP_0   }},
-  {"rocsparse_dbsrmv",                                     {HIP_3050, HIP_5040, HIP_0   }},
-  {"rocsparse_sbsrmv",                                     {HIP_3050, HIP_5040, HIP_0   }},
-  {"rocsparse_zsctr",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_csctr",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_dsctr",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_ssctr",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_droti",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_sroti",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zgthrz",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_cgthrz",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_dgthrz",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_sgthrz",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_sgthr",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_dgthr",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_cgthr",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zgthr",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_cdotci",                                     {HIP_3000, HIP_0,    HIP_0   }},
-  {"rocsparse_zdotci",                                     {HIP_3000, HIP_0,    HIP_0   }},
-  {"rocsparse_sdoti",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_ddoti",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_cdoti",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zdoti",                                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_saxpyi",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_daxpyi",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_caxpyi",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zaxpyi",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_get_status_name",                            {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_get_status_description",                     {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_create_const_spvec_descr",                   {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_spvec_get",                            {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_spvec_get_values",                     {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_create_const_coo_descr",                     {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_create_const_csr_descr",                     {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_create_const_csc_descr",                     {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_create_const_bell_descr",                    {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_coo_get",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_csr_get",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_csc_get",                              {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_bell_get",                             {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_spmat_get_values",                     {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_create_const_dnvec_descr",                   {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_dnvec_get",                            {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_dnvec_get_values",                     {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_create_const_dnmat_descr",                   {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_dnmat_get",                            {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_const_dnmat_get_values",                     {HIP_6000, HIP_0,    HIP_0   }},
-  {"rocsparse_create_mat_info",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_destroy_mat_info",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrmm",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrmm",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrmm",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrmm",                                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_scsrgemm",                                   {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_dcsrgemm",                                   {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_ccsrgemm",                                   {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_zcsrgemm",                                   {HIP_2080, HIP_0,    HIP_0   }},
-  {"rocsparse_sbsrilu0_buffer_size",                       {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_dbsrilu0_buffer_size",                       {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_cbsrilu0_buffer_size",                       {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_zbsrilu0_buffer_size",                       {HIP_3080, HIP_0,    HIP_0   }},
-  {"rocsparse_csr2csc_buffer_size",                        {HIP_1090, HIP_0,    HIP_0   }},
-  {"rocsparse_sparse_to_dense",                            {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_dense_to_sparse",                            {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spmm",                                       {HIP_4020, HIP_0,    HIP_0   }},
-  {"rocsparse_spsm",                                       {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_spvv",                                       {HIP_4010, HIP_0,    HIP_0   }},
-  {"rocsparse_spsv",                                       {HIP_4050, HIP_0,    HIP_0   }},
-  {"rocsparse_csc_get",                                    {HIP_6010, HIP_0,    HIP_0   }},
-};
+  m["cusparseCreateCsrgemm2Info"]                                     = {CUDA_0,   CUDA_110, CUDA_120}; // D: CUSPARSE_VERSION 11000, R: CUSPARSE_VERSION 12000
+  m["cusparseDestroyCsrgemm2Info"]                                    = {CUDA_0,   CUDA_110, CUDA_120}; // D: CUSPARSE_VERSION 11000, R: CUSPARSE_VERSION 12000
+  m["cusparseCreateCsrsm2Info"]                                       = {CUDA_92,  CUDA_113, CUDA_120}; // D: CUSPARSE_VERSION 11600, R: CUSPARSE_VERSION 12000
+  m["cusparseDestroyCsrsm2Info"]                                      = {CUDA_92,  CUDA_113, CUDA_120}; // D: CUSPARSE_VERSION 11600, R: CUSPARSE_VERSION 12000
+  m["cusparseCreateHybMat"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDestroyHybMat"]                                          = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCreatePruneInfo"]                                        = {CUDA_90,  CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDestroyPruneInfo"]                                       = {CUDA_90,  CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCreateSolveAnalysisInfo"]                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDestroySolveAnalysisInfo"]                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseGetLevelInfo"]                                           = {CUDA_0,   CUDA_0,   CUDA_110};
+  m["cusparseSdoti"]                                                  = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDdoti"]                                                  = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCdoti"]                                                  = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZdoti"]                                                  = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCdotci"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZdotci"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrmv"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrmv"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrmv"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrmv"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCsrmvEx"]                                                = {CUDA_80,  CUDA_112, CUDA_120};
+  m["cusparseCsrmvEx_bufferSize"]                                     = {CUDA_80,  CUDA_112, CUDA_120};
+  m["cusparseScsrmv_mp"]                                              = {CUDA_80,  CUDA_102, CUDA_110};
+  m["cusparseDcsrmv_mp"]                                              = {CUDA_80,  CUDA_102, CUDA_110};
+  m["cusparseCcsrmv_mp"]                                              = {CUDA_80,  CUDA_102, CUDA_110};
+  m["cusparseZcsrmv_mp"]                                              = {CUDA_80,  CUDA_102, CUDA_110};
+  m["cusparseSgemvi"]                                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusparseDgemvi"]                                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusparseCgemvi"]                                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusparseZgemvi"]                                                 = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusparseSgemvi_bufferSize"]                                      = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusparseDgemvi_bufferSize"]                                      = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusparseCgemvi_bufferSize"]                                      = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusparseZgemvi_bufferSize"]                                      = {CUDA_75,  CUDA_128, CUDA_0  };
+  m["cusparseScsrsv_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrsv_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrsv_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrsv_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrsv_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrsv_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrsv_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrsv_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCsrsv_analysisEx"]                                       = {CUDA_80,  CUDA_102, CUDA_110};
+  m["cusparseCsrsv_solveEx"]                                          = {CUDA_80,  CUDA_102, CUDA_110};
+  m["cusparseShybmv"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDhybmv"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseChybmv"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZhybmv"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseShybsv_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDhybsv_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseChybsv_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZhybsv_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseShybsv_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDhybsv_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseChybsv_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZhybsv_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrmm"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrmm"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrmm"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrmm"]                                                 = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrmm2"]                                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrmm2"]                                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrmm2"]                                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrmm2"]                                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrsm_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrsm_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrsm_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrsm_analysis"]                                        = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrsm_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrsm_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrsm_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrsm_solve"]                                           = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrsm2_bufferSizeExt"]                                  = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseDcsrsm2_bufferSizeExt"]                                  = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseCcsrsm2_bufferSizeExt"]                                  = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseZcsrsm2_bufferSizeExt"]                                  = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseScsrsm2_analysis"]                                       = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseDcsrsm2_analysis"]                                       = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseCcsrsm2_analysis"]                                       = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseZcsrsm2_analysis"]                                       = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseScsrsm2_solve"]                                          = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseDcsrsm2_solve"]                                          = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseCcsrsm2_solve"]                                          = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseZcsrsm2_solve"]                                          = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseXcsrsm2_zeroPivot"]                                      = {CUDA_92,  CUDA_113, CUDA_120};
+  m["cusparseSgemmi"]                                                 = {CUDA_80,  CUDA_110, CUDA_120};
+  m["cusparseDgemmi"]                                                 = {CUDA_80,  CUDA_110, CUDA_120};
+  m["cusparseCgemmi"]                                                 = {CUDA_80,  CUDA_110, CUDA_120};
+  m["cusparseZgemmi"]                                                 = {CUDA_80,  CUDA_110, CUDA_120};
+  m["cusparseScsrgeam"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrgeam"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrgeam"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrgeam"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseXcsrgeamNnz"]                                            = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrgeam2"]                                              = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseDcsrgeam2"]                                              = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseCcsrgeam2"]                                              = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseZcsrgeam2"]                                              = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseXcsrgeam2Nnz"]                                           = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseScsrgeam2_bufferSizeExt"]                                = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseDcsrgeam2_bufferSizeExt"]                                = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseCcsrgeam2_bufferSizeExt"]                                = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseZcsrgeam2_bufferSizeExt"]                                = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cusparseScsrgemm"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrgemm"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrgemm"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrgemm"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseXcsrgemmNnz"]                                            = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrgemm2"]                                              = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseDcsrgemm2"]                                              = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseCcsrgemm2"]                                              = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseZcsrgemm2"]                                              = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseXcsrgemm2Nnz"]                                           = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseScsrgemm2_bufferSizeExt"]                                = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseDcsrgemm2_bufferSizeExt"]                                = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseCcsrgemm2_bufferSizeExt"]                                = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseZcsrgemm2_bufferSizeExt"]                                = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseScsric0"]                                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsric0"]                                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsric0"]                                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsric0"]                                                = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseScsrilu0"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsrilu0"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsrilu0"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsrilu0"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCsrilu0Ex"]                                              = {CUDA_80,  CUDA_102, CUDA_110};
+  m["cusparseSgtsv"]                                                  = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDgtsv"]                                                  = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCgtsv"]                                                  = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZgtsv"]                                                  = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseSgtsv_nopivot"]                                          = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDgtsv_nopivot"]                                          = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCgtsv_nopivot"]                                          = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZgtsv_nopivot"]                                          = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseSgtsv2_bufferSizeExt"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseDgtsv2_bufferSizeExt"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseCgtsv2_bufferSizeExt"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseZgtsv2_bufferSizeExt"]                                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseSgtsv2"]                                                 = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseDgtsv2"]                                                 = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseCgtsv2"]                                                 = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseZgtsv2"]                                                 = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseSgtsv2_nopivot_bufferSizeExt"]                           = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseDgtsv2_nopivot_bufferSizeExt"]                           = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseCgtsv2_nopivot_bufferSizeExt"]                           = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseZgtsv2_nopivot_bufferSizeExt"]                           = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseSgtsv2_nopivot"]                                         = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseDgtsv2_nopivot"]                                         = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseCgtsv2_nopivot"]                                         = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseZgtsv2_nopivot"]                                         = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseSgtsvStridedBatch"]                                      = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDgtsvStridedBatch"]                                      = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCgtsvStridedBatch"]                                      = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZgtsvStridedBatch"]                                      = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseSgtsv2StridedBatch_bufferSizeExt"]                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseDgtsv2StridedBatch_bufferSizeExt"]                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseCgtsv2StridedBatch_bufferSizeExt"]                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseZgtsv2StridedBatch_bufferSizeExt"]                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseSgtsv2StridedBatch"]                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseDgtsv2StridedBatch"]                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseCgtsv2StridedBatch"]                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseZgtsv2StridedBatch"]                                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["cusparseSgtsvInterleavedBatch_bufferSizeExt"]                    = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseDgtsvInterleavedBatch_bufferSizeExt"]                    = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseCgtsvInterleavedBatch_bufferSizeExt"]                    = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseZgtsvInterleavedBatch_bufferSizeExt"]                    = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseSgtsvInterleavedBatch"]                                  = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseDgtsvInterleavedBatch"]                                  = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseCgtsvInterleavedBatch"]                                  = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseZgtsvInterleavedBatch"]                                  = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseSgpsvInterleavedBatch_bufferSizeExt"]                    = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseDgpsvInterleavedBatch_bufferSizeExt"]                    = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseCgpsvInterleavedBatch_bufferSizeExt"]                    = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseZgpsvInterleavedBatch_bufferSizeExt"]                    = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseSgpsvInterleavedBatch"]                                  = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseDgpsvInterleavedBatch"]                                  = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseCgpsvInterleavedBatch"]                                  = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseZgpsvInterleavedBatch"]                                  = {CUDA_92,  CUDA_0,   CUDA_0  };
+  m["cusparseScsc2hyb"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsc2hyb"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsc2hyb"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsc2hyb"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCsr2cscEx"]                                              = {CUDA_80,  CUDA_102, CUDA_110};
+  m["cusparseCsr2cscEx2"]                                             = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseCsr2cscEx2_bufferSize"]                                  = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseScsr2csr_compress"]                                      = {CUDA_80,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsr2csr_compress"]                                      = {CUDA_80,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsr2csr_compress"]                                      = {CUDA_80,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsr2csr_compress"]                                      = {CUDA_80,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsr2hyb"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsr2hyb"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsr2hyb"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsr2hyb"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseSdense2hyb"]                                             = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDdense2hyb"]                                             = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCdense2hyb"]                                             = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZdense2hyb"]                                             = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseShyb2csc"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDhyb2csc"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseChyb2csc"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZhyb2csc"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseShyb2csr"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDhyb2csr"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseChyb2csr"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZhyb2csr"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseShyb2dense"]                                             = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDhyb2dense"]                                             = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseChyb2dense"]                                             = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZhyb2dense"]                                             = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseHpruneDense2csr"]                                        = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneDense2csr"]                                        = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneDense2csr"]                                        = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneDense2csr_bufferSizeExt"]                          = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneDense2csr_bufferSizeExt"]                          = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneDense2csr_bufferSizeExt"]                          = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneDense2csrNnz"]                                     = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneDense2csrNnz"]                                     = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneDense2csrNnz"]                                     = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneCsr2csr"]                                          = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneCsr2csr"]                                          = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneCsr2csr"]                                          = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneCsr2csr_bufferSizeExt"]                            = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneCsr2csr_bufferSizeExt"]                            = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneCsr2csr_bufferSizeExt"]                            = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneCsr2csrNnz"]                                       = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneCsr2csrNnz"]                                       = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneCsr2csrNnz"]                                       = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneDense2csrByPercentage"]                            = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneDense2csrByPercentage"]                            = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneDense2csrByPercentage"]                            = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneDense2csrByPercentage_bufferSizeExt"]              = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneDense2csrByPercentage_bufferSizeExt"]              = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneDense2csrByPercentage_bufferSizeExt"]              = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneDense2csrNnzByPercentage"]                         = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneDense2csrNnzByPercentage"]                         = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneDense2csrNnzByPercentage"]                         = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneCsr2csrByPercentage"]                              = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneCsr2csrByPercentage"]                              = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneCsr2csrByPercentage"]                              = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneCsr2csrByPercentage_bufferSizeExt"]                = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneCsr2csrByPercentage_bufferSizeExt"]                = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneCsr2csrByPercentage_bufferSizeExt"]                = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseHpruneCsr2csrNnzByPercentage"]                           = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpruneCsr2csrNnzByPercentage"]                           = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDpruneCsr2csrNnzByPercentage"]                           = {CUDA_90,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSnnz_compress"]                                          = {CUDA_80,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDnnz_compress"]                                          = {CUDA_80,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCnnz_compress"]                                          = {CUDA_80,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZnnz_compress"]                                          = {CUDA_80,  CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseGetStream"]                                              = {CUDA_80,  CUDA_0,   CUDA_0  };
+  m["cusparseCreateCoo"]                                              = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseCreateCooAoS"]                                           = {CUDA_102, CUDA_112, CUDA_120};
+  m["cusparseCreateCsr"]                                              = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseDestroySpMat"]                                           = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseCooGet"]                                                 = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseCooAoSGet"]                                              = {CUDA_102, CUDA_112, CUDA_120};
+  m["cusparseCsrGet"]                                                 = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpMatGetFormat"]                                         = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseSpMatGetIndexBase"]                                      = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseSpMatGetValues"]                                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpMatSetValues"]                                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpMatGetStridedBatch"]                                   = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpMatSetStridedBatch"]                                   = {CUDA_102, CUDA_0,   CUDA_120};
+  m["cusparseSpMatSetNumBatches"]                                     = {CUDA_101, CUDA_0,   CUDA_102};
+  m["cusparseSpMatGetNumBatches"]                                     = {CUDA_101, CUDA_0,   CUDA_102};
+  m["cusparseCreateSpVec"]                                            = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseDestroySpVec"]                                           = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpVecGet"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpVecGetIndexBase"]                                      = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpVecGetValues"]                                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpVecSetValues"]                                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseCreateDnMat"]                                            = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseDestroyDnMat"]                                           = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseDnMatGet"]                                               = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseDnMatGetValues"]                                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseDnMatSetValues"]                                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseDnMatSetStridedBatch"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseDnMatGetStridedBatch"]                                   = {CUDA_101, CUDA_0,   CUDA_0  };
+  m["cusparseCreateDnVec"]                                            = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseDestroyDnVec"]                                           = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseDnVecGet"]                                               = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseDnVecGetValues"]                                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseDnVecSetValues"]                                         = {CUDA_102, CUDA_0,   CUDA_0  };
+  m["cusparseSpMM"]                                                   = {CUDA_101, CUDA_0,   CUDA_0  }; // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
+  m["cusparseSpMM_bufferSize"]                                        = {CUDA_101, CUDA_0,   CUDA_0  }; // A: CUDA_VERSION 10010 C: CUSPARSE_VERSION 12000
+  m["cusparseSpVV"]                                                   = {CUDA_101, CUDA_128, CUDA_0  }; // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  m["cusparseSpVV_bufferSize"]                                        = {CUDA_101, CUDA_128, CUDA_0  }; // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  m["cusparseSpMV"]                                                   = {CUDA_101, CUDA_0,   CUDA_0  }; // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  m["cusparseSpMV_bufferSize"]                                        = {CUDA_101, CUDA_0,   CUDA_0  }; // A: CUSPARSE_VERSION 10200 C: CUSPARSE_VERSION 12000
+  m["cusparseSaxpyi"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseDaxpyi"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseCaxpyi"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseZaxpyi"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseSgthr"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseDgthr"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseCgthr"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseZgthr"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseSgthrz"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseDgthrz"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseCgthrz"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseZgthrz"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseSsctr"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseDsctr"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseCsctr"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseZsctr"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseSroti"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseDroti"]                                                  = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseScsr2csc"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseDcsr2csc"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseCcsr2csc"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseZcsr2csc"]                                               = {CUDA_0,   CUDA_102, CUDA_110};
+  m["cusparseSpMatGetSize"]                                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseCooSetStridedBatch"]                                     = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseCsrSetStridedBatch"]                                     = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseAxpby"]                                                  = {CUDA_110, CUDA_128, CUDA_0  };
+  m["cusparseGather"]                                                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseScatter"]                                                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseRot"]                                                    = {CUDA_110, CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSpGEMM_createDescr"]                                     = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMM_destroyDescr"]                                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMM_compute"]                                         = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMM_copy"]                                            = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMM_workEstimation"]                                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseConstrainedGeMM"]                                        = {CUDA_102, CUDA_112, CUDA_120};
+  m["cusparseConstrainedGeMM_bufferSize"]                             = {CUDA_102, CUDA_112, CUDA_120};
+  m["cusparseSdense2csr"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseDdense2csr"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseCdense2csr"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseZdense2csr"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseScsr2dense"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseDcsr2dense"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseCcsr2dense"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseZcsr2dense"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseSdense2csc"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseDdense2csc"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseCdense2csc"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseZdense2csc"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseScsc2dense"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseDcsc2dense"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseCcsc2dense"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseZcsc2dense"]                                             = {CUDA_0,   CUDA_111, CUDA_120};
+  m["cusparseCreateCsc"]                                              = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusparseCsrSetPointers"]                                         = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["cusparseCscSetPointers"]                                         = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusparseCooSetPointers"]                                         = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusparseSparseToDense_bufferSize"]                               = {CUDA_111, CUDA_0,   CUDA_0  }; // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
+  m["cusparseSparseToDense"]                                          = {CUDA_111, CUDA_0,   CUDA_0  }; // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
+  m["cusparseDenseToSparse_bufferSize"]                               = {CUDA_111, CUDA_0,   CUDA_0  }; // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
+  m["cusparseDenseToSparse_analysis"]                                 = {CUDA_111, CUDA_0,   CUDA_0  }; // A: CUSPARSE_VERSION 11300 C: CUSPARSE_VERSION 12000
+  m["cusparseDenseToSparse_convert"]                                  = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["cusparseCreateCsrsv2Info"]                                       = {CUDA_0,   CUDA_113, CUDA_120}; // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
+  m["cusparseDestroyCsrsv2Info"]                                      = {CUDA_0,   CUDA_113, CUDA_120}; // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
+  m["cusparseXcsrsv2_zeroPivot"]                                      = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseScsrsv2_bufferSize"]                                     = {CUDA_0,   CUDA_113, CUDA_120}; // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
+  m["cusparseDcsrsv2_bufferSize"]                                     = {CUDA_0,   CUDA_113, CUDA_120}; // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
+  m["cusparseCcsrsv2_bufferSize"]                                     = {CUDA_0,   CUDA_113, CUDA_120}; // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
+  m["cusparseZcsrsv2_bufferSize"]                                     = {CUDA_0,   CUDA_113, CUDA_120}; // D: CUSPARSE_VERSION 11500 R: CUSPARSE_VERSION 12000
+  m["cusparseScsrsv2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseDcsrsv2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseCcsrsv2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseZcsrsv2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseScsrsv2_analysis"]                                       = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseDcsrsv2_analysis"]                                       = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseCcsrsv2_analysis"]                                       = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseZcsrsv2_analysis"]                                       = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseScsrsv2_solve"]                                          = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseDcsrsv2_solve"]                                          = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseCcsrsv2_solve"]                                          = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseZcsrsv2_solve"]                                          = {CUDA_0,   CUDA_113, CUDA_120};
+  m["cusparseSpMatGetAttribute"]                                      = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpMatSetAttribute"]                                      = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSV_createDescr"]                                       = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSV_destroyDescr"]                                      = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSV_bufferSize"]                                        = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSV_analysis"]                                          = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSV_solve"]                                             = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSM_createDescr"]                                       = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSM_destroyDescr"]                                      = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSM_bufferSize"]                                        = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSM_analysis"]                                          = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpSM_solve"]                                             = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMMreuse_workEstimation"]                             = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMMreuse_nnz"]                                        = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMMreuse_copy"]                                       = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMMreuse_compute"]                                    = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSDDMM"]                                                  = {CUDA_112, CUDA_0,   CUDA_0  };
+  m["cusparseSDDMM_bufferSize"]                                       = {CUDA_112, CUDA_0,   CUDA_0  };
+  m["cusparseSDDMM_preprocess"]                                       = {CUDA_112, CUDA_0,   CUDA_0  };
+  m["cusparseCreateBlockedEll"]                                       = {CUDA_112, CUDA_0,   CUDA_0  };
+  m["cusparseBlockedEllGet"]                                          = {CUDA_112, CUDA_0,   CUDA_0  };
+  m["cusparseSpMM_preprocess"]                                        = {CUDA_112, CUDA_0,   CUDA_0  };
+  m["cusparseLoggerSetCallback"]                                      = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseLoggerSetFile"]                                          = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseLoggerOpenFile"]                                         = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseLoggerSetLevel"]                                         = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseLoggerSetMask"]                                          = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseLoggerForceDisable"]                                     = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseSpMMOp"]                                                 = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseSpMMOp_createPlan"]                                      = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseSpMMOp_destroyPlan"]                                     = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseCscGet"]                                                 = {CUDA_117, CUDA_0,   CUDA_0  };
+  m["cusparseCopyMatDescr"]                                           = {CUDA_80,  CUDA_0,   CUDA_120};
+  m["cusparseCreateConstSpVec"]                                       = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstSpVecGet"]                                          = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstSpVecGetValues"]                                    = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseCreateConstDnVec"]                                       = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstDnVecGet"]                                          = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstDnVecGetValues"]                                    = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstSpMatGetValues"]                                    = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseCreateConstCsr"]                                         = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseCreateConstCsc"]                                         = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstCsrGet"]                                            = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstCscGet"]                                            = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseCreateConstCoo"]                                         = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstCooGet"]                                            = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseCreateConstBlockedEll"]                                  = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstBlockedEllGet"]                                     = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseCreateConstDnMat"]                                       = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstDnMatGet"]                                          = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseConstDnMatGetValues"]                                    = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMM_getNumProducts"]                                  = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMM_estimateMemory"]                                  = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["cusparseBsrSetStridedBatch"]                                     = {CUDA_121, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 12100
+  m["cusparseCreateBsr"]                                              = {CUDA_121, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 12100
+  m["cusparseCreateConstBsr"]                                         = {CUDA_121, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 12100
+  m["cusparseCreateSlicedEll"]                                        = {CUDA_121, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 12100
+  m["cusparseCreateConstSlicedEll"]                                   = {CUDA_121, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 12100
+  m["cusparseSpSV_updateMatrix"]                                      = {CUDA_121, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 12100
+  m["cusparseCreateCsric02Info"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDestroyCsric02Info"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCreateBsric02Info"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDestroyBsric02Info"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCreateCsrilu02Info"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDestroyCsrilu02Info"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCreateBsrilu02Info"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDestroyBsrilu02Info"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCreateBsrsv2Info"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDestroyBsrsv2Info"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCreateBsrsm2Info"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDestroyBsrsm2Info"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCreateCsru2csrInfo"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDestroyCsru2csrInfo"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCreateColorInfo"]                                        = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDestroyColorInfo"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrxmv"]                                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrxmv"]                                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrxmv"]                                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrxmv"]                                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseXbsrsv2_zeroPivot"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrsv2_bufferSize"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDbsrsv2_bufferSize"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCbsrsv2_bufferSize"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseZbsrsv2_bufferSize"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseSbsrsv2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDbsrsv2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCbsrsv2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseZbsrsv2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseSbsrsv2_analysis"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrsv2_analysis"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrsv2_analysis"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrsv2_analysis"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrsv2_solve"]                                          = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrsv2_solve"]                                          = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrsv2_solve"]                                          = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrsv2_solve"]                                          = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseXbsrsm2_zeroPivot"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrsm2_bufferSize"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrsm2_bufferSize"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrsm2_bufferSize"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrsm2_bufferSize"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrsm2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrsm2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrsm2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrsm2_bufferSizeExt"]                                  = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrsm2_analysis"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrsm2_analysis"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrsm2_analysis"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrsm2_analysis"]                                       = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrsm2_solve"]                                          = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrsm2_solve"]                                          = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrsm2_solve"]                                          = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrsm2_solve"]                                          = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsrilu02_numericBoost"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsrilu02_numericBoost"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsrilu02_numericBoost"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsrilu02_numericBoost"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseXcsrilu02_zeroPivot"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsrilu02_bufferSize"]                                   = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDcsrilu02_bufferSize"]                                   = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCcsrilu02_bufferSize"]                                   = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseZcsrilu02_bufferSize"]                                   = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseScsrilu02_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDcsrilu02_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCcsrilu02_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseZcsrilu02_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseScsrilu02_analysis"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsrilu02_analysis"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsrilu02_analysis"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsrilu02_analysis"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsrilu02"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsrilu02"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsrilu02"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsrilu02"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrilu02_numericBoost"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrilu02_numericBoost"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrilu02_numericBoost"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrilu02_numericBoost"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseXbsrilu02_zeroPivot"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrilu02_bufferSize"]                                   = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseDbsrilu02_bufferSize"]                                   = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseCbsrilu02_bufferSize"]                                   = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseZbsrilu02_bufferSize"]                                   = {CUDA_0,   CUDA_122, CUDA_0  }; // D: CUSPARSE_VERSION 12102
+  m["cusparseSbsrilu02_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrilu02_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrilu02_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrilu02_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrilu02_analysis"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrilu02_analysis"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrilu02_analysis"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrilu02_analysis"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsrilu02"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsrilu02"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsrilu02"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsrilu02"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseXcsric02_zeroPivot"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsric02_bufferSize"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsric02_bufferSize"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsric02_bufferSize"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsric02_bufferSize"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsric02_bufferSizeExt"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsric02_bufferSizeExt"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsric02_bufferSizeExt"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsric02_bufferSizeExt"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsric02_analysis"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsric02_analysis"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsric02_analysis"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsric02_analysis"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsric02"]                                               = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsric02"]                                               = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsric02"]                                               = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsric02"]                                               = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseXcsric02_zeroPivot"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsric02_bufferSize"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsric02_bufferSize"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsric02_bufferSize"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsric02_bufferSize"]                                    = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsric02_bufferSizeExt"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsric02_bufferSizeExt"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsric02_bufferSizeExt"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsric02_bufferSizeExt"]                                 = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsric02_analysis"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsric02_analysis"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsric02_analysis"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsric02_analysis"]                                      = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseSbsric02"]                                               = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDbsric02"]                                               = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCbsric02"]                                               = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZbsric02"]                                               = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsrcolor"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsrcolor"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsrcolor"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsrcolor"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCreateIdentityPermutation"]                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsru2csr_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsru2csr_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsru2csr_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsru2csr_bufferSizeExt"]                                = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsru2csr"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsru2csr"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsru2csr"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsru2csr"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseScsr2csru"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseDcsr2csru"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseCcsr2csru"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseZcsr2csru"]                                              = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseXbsric02_zeroPivot"]                                     = {CUDA_0,   CUDA_122, CUDA_0  }; // CUSPARSE_VERSION 12120
+  m["cusparseGetErrorName"]                                           = {CUDA_102, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 10301
+  m["cusparseGetErrorString"]                                         = {CUDA_102, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 10301
+  m["cusparseXcsr2bsrNnz"]                                            = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseScsr2bsr"]                                               = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseDcsr2bsr"]                                               = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseCcsr2bsr"]                                               = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseZcsr2bsr"]                                               = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseXgebsr2csr"]                                             = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseSgebsr2csr"]                                             = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseDgebsr2csr"]                                             = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseCgebsr2csr"]                                             = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseZgebsr2csr"]                                             = {CUDA_0,   CUDA_124, CUDA_0  };
+  m["cusparseSpMV_preprocess"]                                        = {CUDA_124, CUDA_0,   CUDA_0  };
+  m["cusparseSpSM_updateMatrix"]                                      = {CUDA_124, CUDA_0,   CUDA_0  };
+  m["cusparseSbsrmm"]                                                 = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseDbsrmm"]                                                 = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseCbsrmm"]                                                 = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseZbsrmm"]                                                 = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseSbsr2csr"]                                               = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseDbsr2csr"]                                               = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseCbsr2csr"]                                               = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseZbsr2csr"]                                               = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseSgebsr2gebsr_bufferSize"]                                = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseSgebsr2gebsr_bufferSizeExt"]                             = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseDgebsr2gebsr_bufferSize"]                                = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseDgebsr2gebsr_bufferSizeExt"]                             = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseCgebsr2gebsr_bufferSize"]                                = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseCgebsr2gebsr_bufferSizeExt"]                             = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseZgebsr2gebsr_bufferSize"]                                = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseZgebsr2gebsr_bufferSizeExt"]                             = {CUDA_0,   CUDA_128, CUDA_0  };
+  m[ "cusparseXgebsr2gebsrNnz"]                                       = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseSgebsr2gebsr"]                                           = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseDgebsr2gebsr"]                                           = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseCgebsr2gebsr"]                                           = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseZgebsr2gebsr"]                                           = {CUDA_0,   CUDA_128, CUDA_0  };
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP {
-  {"cusparseSpVecGetIndexBase",                            {CUDA_120}},
-  {"cusparseDestroySpVec",                                 {CUDA_120}},
-  {"cusparseDestroyDnVec",                                 {CUDA_120}},
-  {"cusparseSpMatGetAttribute",                            {CUDA_120}},
-  {"cusparseSpMatGetFormat",                               {CUDA_120}},
-  {"cusparseSpMatGetSize",                                 {CUDA_120}},
-  {"cusparseSpMatGetIndexBase",                            {CUDA_120}},
-  {"cusparseSpMatGetStridedBatch",                         {CUDA_120}},
-  {"cusparseDestroySpMat",                                 {CUDA_120}},
-  {"cusparseSpGEMM_compute",                               {CUDA_120}},
-  {"cusparseSpGEMM_copy",                                  {CUDA_120}},
-  {"cusparseSpGEMM_workEstimation",                        {CUDA_120}},
-  {"cusparseSpGEMMreuse_compute",                          {CUDA_120}},
-  {"cusparseSpGEMMreuse_copy",                             {CUDA_120}},
-  {"cusparseSpGEMMreuse_nnz",                              {CUDA_120}},
-  {"cusparseSpGEMMreuse_workEstimation",                   {CUDA_120}},
-  {"cusparseDnMatGetStridedBatch",                         {CUDA_120}},
-  {"cusparseDestroyDnMat",                                 {CUDA_120}},
-  {"cusparseSpMM",                                         {CUDA_120}},
-  {"cusparseSpMM_bufferSize",                              {CUDA_120}},
-  {"cusparseSpMM_preprocess",                              {CUDA_120}},
-  {"cusparseSpMV",                                         {CUDA_120}},
-  {"cusparseSpMV_bufferSize",                              {CUDA_120}},
-  {"cusparseSpSM_analysis",                                {CUDA_120}},
-  {"cusparseSpSM_bufferSize",                              {CUDA_120}},
-  {"cusparseSpSM_solve",                                   {CUDA_120}},
-  {"cusparseSpSV_analysis",                                {CUDA_120}},
-  {"cusparseSpSV_bufferSize",                              {CUDA_120}},
-  {"cusparseSpSV_solve",                                   {CUDA_120}},
-  {"cusparseSpVV",                                         {CUDA_120}},
-  {"cusparseSpVV_bufferSize",                              {CUDA_120}},
-  {"cusparseSDDMM",                                        {CUDA_120}},
-  {"cusparseSDDMM_bufferSize",                             {CUDA_120}},
-  {"cusparseSDDMM_preprocess",                             {CUDA_120}},
-  {"cusparseAxpby",                                        {CUDA_120}},
-  {"cusparseGather",                                       {CUDA_120}},
-  {"cusparseScatter",                                      {CUDA_120}},
-  {"cusparseSparseToDense",                                {CUDA_120}}, // C: CUSPARSE_VERSION 12000
-  {"cusparseSparseToDense_bufferSize",                     {CUDA_120}},
-  {"cusparseDenseToSparse_analysis",                       {CUDA_120}},
-  {"cusparseDenseToSparse_bufferSize",                     {CUDA_120}},
-  {"cusparseDenseToSparse_convert",                        {CUDA_120}},
-};
+  return m;
+}();
 
-const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANGED_VER_MAP {
-  {"hipsparseSpVecGetIndexBase",                           {HIP_6000}},
-  {"hipsparseDestroySpVec",                                {HIP_6000}},
-  {"hipsparseDestroyDnVec",                                {HIP_6000}},
-  {"hipsparseSpMatGetAttribute",                           {HIP_6000}},
-  {"hipsparseSpMatGetFormat",                              {HIP_6000}},
-  {"hipsparseSpMatGetSize",                                {HIP_6000}},
-  {"hipsparseSpMatGetIndexBase",                           {HIP_6000}},
-  {"hipsparseSpMatGetStridedBatch",                        {HIP_6000}},
-  {"hipsparseDestroySpMat",                                {HIP_6000}},
-  {"hipsparseSpGEMM_compute",                              {HIP_6000}},
-  {"hipsparseSpGEMM_copy",                                 {HIP_6000}},
-  {"hipsparseSpGEMM_workEstimation",                       {HIP_6000}},
-  {"hipsparseSpGEMMreuse_compute",                         {HIP_6000}},
-  {"hipsparseSpGEMMreuse_copy",                            {HIP_6000}},
-  {"hipsparseSpGEMMreuse_nnz",                             {HIP_6000}},
-  {"hipsparseSpGEMMreuse_workEstimation",                  {HIP_6000}},
-  {"hipsparseDnMatGetStridedBatch",                        {HIP_6000}},
-  {"hipsparseDestroyDnMat",                                {HIP_6000}},
-  {"hipsparseSpMM",                                        {HIP_6000}},
-  {"hipsparseSpMM_bufferSize",                             {HIP_6000}},
-  {"hipsparseSpMM_preprocess",                             {HIP_6000}},
-  {"hipsparseSpMV",                                        {HIP_6000}},
-  {"hipsparseSpMV_bufferSize",                             {HIP_6000}},
-  {"hipsparseSpSM_analysis",                               {HIP_6000}},
-  {"hipsparseSpSM_bufferSize",                             {HIP_6000}},
-  {"hipsparseSpSM_solve",                                  {HIP_6000}},
-  {"hipsparseSpSV_analysis",                               {HIP_6000}},
-  {"hipsparseSpSV_bufferSize",                             {HIP_6000}},
-  {"hipsparseSpSV_solve",                                  {HIP_6000}},
-  {"hipsparseSpVV",                                        {HIP_6000}},
-  {"hipsparseSpVV_bufferSize",                             {HIP_6000}},
-  {"hipsparseSDDMM",                                       {HIP_6000}},
-  {"hipsparseSDDMM_bufferSize",                            {HIP_6000}},
-  {"hipsparseSDDMM_preprocess",                            {HIP_6000}},
-  {"hipsparseAxpby",                                       {HIP_6000}},
-  {"hipsparseGather",                                      {HIP_6000}},
-  {"hipsparseScatter",                                     {HIP_6000}},
-  {"hipsparseSparseToDense",                               {HIP_6000}},
-  {"hipsparseSparseToDense_bufferSize",                    {HIP_6000}},
-  {"hipsparseDenseToSparse_analysis",                      {HIP_6000}},
-  {"hipsparseDenseToSparse_bufferSize",                    {HIP_6000}},
-  {"hipsparseDenseToSparse_convert",                       {HIP_6000}},
-  {"hipsparseSpMV_preprocess",                             {HIP_6000}},
+const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP = [] {
+  std::map<llvm::StringRef, hipAPIversions> m;
 
-  {"rocsparse_destroy_spvec_descr",                        {HIP_6000}},
-  {"rocsparse_spvec_get_index_base",                       {HIP_6000}},
-  {"rocsparse_destroy_spmat_descr",                        {HIP_6000}},
-  {"rocsparse_spmat_get_size",                             {HIP_6000}},
-  {"rocsparse_spmat_get_format",                           {HIP_6000}},
-  {"rocsparse_spmat_get_index_base",                       {HIP_6000}},
-  {"rocsparse_spmat_get_strided_batch",                    {HIP_6000}},
-  {"rocsparse_spmat_get_attribute",                        {HIP_6000}},
-  {"rocsparse_destroy_dnvec_descr",                        {HIP_6000}},
-  {"rocsparse_destroy_dnmat_descr",                        {HIP_6000}},
-  {"rocsparse_dnmat_get_strided_batch",                    {HIP_6000}},
-  {"rocsparse_sparse_to_dense",                            {HIP_6000}},
-  {"rocsparse_dense_to_sparse",                            {HIP_6000}},
-  {"rocsparse_spmm",                                       {HIP_6000}},
-  {"rocsparse_spsm",                                       {HIP_6000}},
-  {"rocsparse_spvv",                                       {HIP_6000}},
-  {"rocsparse_spmv",                                       {HIP_6000}},
-  {"rocsparse_scatter",                                    {HIP_6000}},
-  {"rocsparse_gather",                                     {HIP_6000}},
-  {"rocsparse_axpby",                                      {HIP_6000}},
-  {"rocsparse_sddmm",                                      {HIP_6000}},
-  {"rocsparse_sddmm_buffer_size",                          {HIP_6000}},
-  {"rocsparse_sddmm_preprocess",                           {HIP_6000}},
-  {"rocsparse_spsv",                                       {HIP_6000}},
-};
+  m["hipsparseCreate"]                                                = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseDestroy"]                                               = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseGetPointerMode"]                                        = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseGetVersion"]                                            = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseSetPointerMode"]                                        = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseSetStream"]                                             = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseGetStream"]                                             = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseCreateHybMat"]                                          = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCreateMatDescr"]                                        = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseDestroyHybMat"]                                         = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDestroyMatDescr"]                                       = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseGetMatDiagType"]                                        = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseGetMatFillMode"]                                        = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseGetMatIndexBase"]                                       = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseGetMatType"]                                            = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseSetMatDiagType"]                                        = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseSetMatFillMode"]                                        = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseSetMatIndexBase"]                                       = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseSetMatType"]                                            = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseCreateCsrsv2Info"]                                      = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseDestroyCsrsv2Info"]                                     = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseCreateCsrsm2Info"]                                      = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseDestroyCsrsm2Info"]                                     = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseCreateCsric02Info"]                                     = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseDestroyCsric02Info"]                                    = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseCreateCsrilu02Info"]                                    = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseDestroyCsrilu02Info"]                                   = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseCreateBsrsv2Info"]                                      = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseDestroyBsrsv2Info"]                                     = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseCreateBsric02Info"]                                     = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseDestroyBsric02Info"]                                    = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseCreateBsrilu02Info"]                                    = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDestroyBsrilu02Info"]                                   = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseCreateCsrgemm2Info"]                                    = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseDestroyCsrgemm2Info"]                                   = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseCreatePruneInfo"]                                       = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDestroyPruneInfo"]                                      = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSaxpyi"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDaxpyi"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCaxpyi"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZaxpyi"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseSdoti"]                                                 = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDdoti"]                                                 = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCdoti"]                                                 = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZdoti"]                                                 = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseCdotci"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZdotci"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseSgthr"]                                                 = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDgthr"]                                                 = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCgthr"]                                                 = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZgthr"]                                                 = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseSgthrz"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDgthrz"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCgthrz"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZgthrz"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseSroti"]                                                 = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDroti"]                                                 = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseSsctr"]                                                 = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDsctr"]                                                 = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCsctr"]                                                 = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZsctr"]                                                 = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseSbsrmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseDbsrmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseCbsrmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseZbsrmv"]                                                = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseScsrmv"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDcsrmv"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCcsrmv"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZcsrmv"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseSbsrsv2_bufferSize"]                                    = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseSbsrsv2_bufferSizeExt"]                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipsparseDbsrsv2_bufferSize"]                                    = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseDbsrsv2_bufferSizeExt"]                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipsparseCbsrsv2_bufferSize"]                                    = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseCbsrsv2_bufferSizeExt"]                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipsparseZbsrsv2_bufferSize"]                                    = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseZbsrsv2_bufferSizeExt"]                                 = {HIP_3060, HIP_0,    HIP_0   };
+  m["hipsparseSbsrsv2_analysis"]                                      = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseDbsrsv2_analysis"]                                      = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseCbsrsv2_analysis"]                                      = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseZbsrsv2_analysis"]                                      = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseSbsrsv2_solve"]                                         = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseDbsrsv2_solve"]                                         = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseCbsrsv2_solve"]                                         = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseZbsrsv2_solve"]                                         = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseXbsrsv2_zeroPivot"]                                     = {HIP_3060, HIP_6020, HIP_0   };
+  m["hipsparseScsrsv2_bufferSize"]                                    = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseScsrsv2_bufferSizeExt"]                                 = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseDcsrsv2_bufferSize"]                                    = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseDcsrsv2_bufferSizeExt"]                                 = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseCcsrsv2_bufferSize"]                                    = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseCcsrsv2_bufferSizeExt"]                                 = {HIP_3010, HIP_0,    HIP_0   };
+  m["hipsparseZcsrsv2_bufferSize"]                                    = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseZcsrsv2_bufferSizeExt"]                                 = {HIP_3010, HIP_0,    HIP_0   };
+  m["hipsparseScsrsv2_analysis"]                                      = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseDcsrsv2_analysis"]                                      = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseCcsrsv2_analysis"]                                      = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseZcsrsv2_analysis"]                                      = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseScsrsv2_solve"]                                         = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseDcsrsv2_solve"]                                         = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseCcsrsv2_solve"]                                         = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseZcsrsv2_solve"]                                         = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseXcsrsv2_zeroPivot"]                                     = {HIP_1092, HIP_5060, HIP_0   };
+  m["hipsparseShybmv"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDhybmv"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseChybmv"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZhybmv"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseScsrmm"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDcsrmm"]                                                = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCcsrmm"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZcsrmm"]                                                = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseScsrmm2"]                                               = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDcsrmm2"]                                               = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCcsrmm2"]                                               = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZcsrmm2"]                                               = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseScsrsm2_bufferSizeExt"]                                 = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseDcsrsm2_bufferSizeExt"]                                 = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseCcsrsm2_bufferSizeExt"]                                 = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseZcsrsm2_bufferSizeExt"]                                 = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseScsrsm2_analysis"]                                      = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseDcsrsm2_analysis"]                                      = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseCcsrsm2_analysis"]                                      = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseZcsrsm2_analysis"]                                      = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseScsrsm2_solve"]                                         = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseDcsrsm2_solve"]                                         = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseCcsrsm2_solve"]                                         = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseZcsrsm2_solve"]                                         = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseXcsrsm2_zeroPivot"]                                     = {HIP_3010, HIP_5060, HIP_0   };
+  m["hipsparseSbsrmm"]                                                = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipsparseDbsrmm"]                                                = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipsparseCbsrmm"]                                                = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipsparseZbsrmm"]                                                = {HIP_3070, HIP_0,    HIP_0   };
+  m["hipsparseSgemmi"]                                                = {HIP_3070, HIP_3090, HIP_0   };
+  m["hipsparseDgemmi"]                                                = {HIP_3070, HIP_3090, HIP_0   };
+  m["hipsparseCgemmi"]                                                = {HIP_3070, HIP_3090, HIP_0   };
+  m["hipsparseZgemmi"]                                                = {HIP_3070, HIP_3090, HIP_0   };
+  m["hipsparseScsrgeam"]                                              = {HIP_3050, HIP_3090, HIP_0   };
+  m["hipsparseDcsrgeam"]                                              = {HIP_3050, HIP_3090, HIP_0   };
+  m["hipsparseCcsrgeam"]                                              = {HIP_3050, HIP_3090, HIP_0   };
+  m["hipsparseZcsrgeam"]                                              = {HIP_3050, HIP_3090, HIP_0   };
+  m["hipsparseXcsrgeamNnz"]                                           = {HIP_3050, HIP_3090, HIP_0   };
+  m["hipsparseScsrgeam2"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseDcsrgeam2"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseCcsrgeam2"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseZcsrgeam2"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseXcsrgeam2Nnz"]                                          = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseScsrgeam2_bufferSizeExt"]                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseDcsrgeam2_bufferSizeExt"]                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseCcsrgeam2_bufferSizeExt"]                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseZcsrgeam2_bufferSizeExt"]                               = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseScsrgemm"]                                              = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseDcsrgemm"]                                              = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseCcsrgemm"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZcsrgemm"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseXcsrgemmNnz"]                                           = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseScsrgemm2"]                                             = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseDcsrgemm2"]                                             = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseCcsrgemm2"]                                             = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZcsrgemm2"]                                             = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseXcsrgemm2Nnz"]                                          = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseScsrgemm2_bufferSizeExt"]                               = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseDcsrgemm2_bufferSizeExt"]                               = {HIP_2080, HIP_3090, HIP_0   };
+  m["hipsparseCcsrgemm2_bufferSizeExt"]                               = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZcsrgemm2_bufferSizeExt"]                               = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseScsric02_bufferSize"]                                   = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseScsric02_bufferSizeExt"]                                = {HIP_3010, HIP_0,    HIP_0   };
+  m["hipsparseDcsric02_bufferSize"]                                   = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseDcsric02_bufferSizeExt"]                                = {HIP_3010, HIP_0,    HIP_0   };
+  m["hipsparseCcsric02_bufferSize"]                                   = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseCcsric02_bufferSizeExt"]                                = {HIP_3010, HIP_0,    HIP_0   };
+  m["hipsparseZcsric02_bufferSize"]                                   = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseZcsric02_bufferSizeExt"]                                = {HIP_3010, HIP_0,    HIP_0   };
+  m["hipsparseScsric02_analysis"]                                     = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseDcsric02_analysis"]                                     = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseCcsric02_analysis"]                                     = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseZcsric02_analysis"]                                     = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseScsric02"]                                              = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseDcsric02"]                                              = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseCcsric02"]                                              = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseZcsric02"]                                              = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseXcsric02_zeroPivot"]                                    = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseSbsric02_bufferSize"]                                   = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseDbsric02_bufferSize"]                                   = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseCbsric02_bufferSize"]                                   = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseZbsric02_bufferSize"]                                   = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseSbsric02_analysis"]                                     = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseDbsric02_analysis"]                                     = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseCbsric02_analysis"]                                     = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseZbsric02_analysis"]                                     = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseSbsric02"]                                              = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseDbsric02"]                                              = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseCbsric02"]                                              = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseZbsric02"]                                              = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseXbsric02_zeroPivot"]                                    = {HIP_3080, HIP_6020, HIP_0   };
+  m["hipsparseScsrilu02_numericBoost"]                                = {HIP_3100, HIP_6020, HIP_0   };
+  m["hipsparseDcsrilu02_numericBoost"]                                = {HIP_3100, HIP_6020, HIP_0   };
+  m["hipsparseCcsrilu02_numericBoost"]                                = {HIP_3100, HIP_6020, HIP_0   };
+  m["hipsparseZcsrilu02_numericBoost"]                                = {HIP_3100, HIP_6020, HIP_0   };
+  m["hipsparseXcsrilu02_zeroPivot"]                                   = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseScsrilu02_bufferSize"]                                  = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseScsrilu02_bufferSizeExt"]                               = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseDcsrilu02_bufferSize"]                                  = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseDcsrilu02_bufferSizeExt"]                               = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseCcsrilu02_bufferSize"]                                  = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseCcsrilu02_bufferSizeExt"]                               = {HIP_3010, HIP_0,    HIP_0   };
+  m["hipsparseZcsrilu02_bufferSize"]                                  = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseZcsrilu02_bufferSizeExt"]                               = {HIP_3010, HIP_0,    HIP_0   };
+  m["hipsparseScsrilu02_analysis"]                                    = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseDcsrilu02_analysis"]                                    = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseCcsrilu02_analysis"]                                    = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseZcsrilu02_analysis"]                                    = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseScsrilu02"]                                             = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseDcsrilu02"]                                             = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseCcsrilu02"]                                             = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseZcsrilu02"]                                             = {HIP_3010, HIP_6020, HIP_0   };
+  m["hipsparseSbsrilu02_numericBoost"]                                = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDbsrilu02_numericBoost"]                                = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseCbsrilu02_numericBoost"]                                = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseZbsrilu02_numericBoost"]                                = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSbsrilu02_bufferSize"]                                  = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDbsrilu02_bufferSize"]                                  = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseCbsrilu02_bufferSize"]                                  = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseZbsrilu02_bufferSize"]                                  = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSbsrilu02_analysis"]                                    = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDbsrilu02_analysis"]                                    = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseCbsrilu02_analysis"]                                    = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseZbsrilu02_analysis"]                                    = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSbsrilu02"]                                             = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDbsrilu02"]                                             = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseCbsrilu02"]                                             = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseZbsrilu02"]                                             = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseXbsrilu02_zeroPivot"]                                   = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSbsr2csr"]                                              = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseDbsr2csr"]                                              = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseCbsr2csr"]                                              = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseZbsr2csr"]                                              = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseXcoo2csr"]                                              = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseScsc2dense"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseDcsc2dense"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseCcsc2dense"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseZcsc2dense"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseXcsr2bsrNnz"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseScsr2bsr"]                                              = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseDcsr2bsr"]                                              = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseCcsr2bsr"]                                              = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseZcsr2bsr"]                                              = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseXcsr2coo"]                                              = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseScsr2csc"]                                              = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDcsr2csc"]                                              = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCcsr2csc"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZcsr2csc"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseScsr2dense"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseDcsr2dense"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseCcsr2dense"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseZcsr2dense"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseScsr2csr_compress"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseDcsr2csr_compress"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseCcsr2csr_compress"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseZcsr2csr_compress"]                                     = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseScsr2hyb"]                                              = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseDcsr2hyb"]                                              = {HIP_1092, HIP_3090, HIP_0   };
+  m["hipsparseCcsr2hyb"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZcsr2hyb"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseSdense2csc"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseDdense2csc"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseCdense2csc"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseZdense2csc"]                                            = {HIP_3050, HIP_5060, HIP_0   };
+  m["hipsparseSdense2csr"]                                            = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseDdense2csr"]                                            = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseCdense2csr"]                                            = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseZdense2csr"]                                            = {HIP_3050, HIP_0,    HIP_0   };
+  m["hipsparseShyb2csr"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseDhyb2csr"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseChyb2csr"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseZhyb2csr"]                                              = {HIP_3010, HIP_3090, HIP_0   };
+  m["hipsparseSnnz"]                                                  = {HIP_3020, HIP_0,    HIP_0   };
+  m["hipsparseDnnz"]                                                  = {HIP_3020, HIP_0,    HIP_0   };
+  m["hipsparseCnnz"]                                                  = {HIP_3020, HIP_0,    HIP_0   };
+  m["hipsparseZnnz"]                                                  = {HIP_3020, HIP_0,    HIP_0   };
+  m["hipsparseCreateIdentityPermutation"]                             = {HIP_1092, HIP_6020, HIP_0   };
+  m["hipsparseXcoosort_bufferSizeExt"]                                = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseXcoosortByRow"]                                         = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseXcoosortByColumn"]                                      = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseXcsrsort_bufferSizeExt"]                                = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseXcsrsort"]                                              = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseXcscsort_bufferSizeExt"]                                = {HIP_2100, HIP_0,    HIP_0   };
+  m["hipsparseXcscsort"]                                              = {HIP_2100, HIP_0,    HIP_0   };
+  m["hipsparseSpruneDense2csr"]                                       = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneDense2csr"]                                       = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneDense2csr_bufferSizeExt"]                         = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneDense2csr_bufferSizeExt"]                         = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneDense2csrNnz"]                                    = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneDense2csrNnz"]                                    = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneCsr2csr"]                                         = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneCsr2csr"]                                         = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneCsr2csr_bufferSizeExt"]                           = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneCsr2csr_bufferSizeExt"]                           = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneCsr2csrNnz"]                                      = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneCsr2csrNnz"]                                      = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneDense2csrByPercentage"]                           = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneDense2csrByPercentage"]                           = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneDense2csrByPercentage_bufferSizeExt"]             = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneDense2csrByPercentage_bufferSizeExt"]             = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneDense2csrNnzByPercentage"]                        = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneDense2csrNnzByPercentage"]                        = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneCsr2csrByPercentage"]                             = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneCsr2csrByPercentage"]                             = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneCsr2csrByPercentage_bufferSizeExt"]               = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneCsr2csrByPercentage_bufferSizeExt"]               = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSpruneCsr2csrNnzByPercentage"]                          = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseDpruneCsr2csrNnzByPercentage"]                          = {HIP_3090, HIP_6020, HIP_0   };
+  m["hipsparseSnnz_compress"]                                         = {HIP_3050, HIP_6020, HIP_0   };
+  m["hipsparseDnnz_compress"]                                         = {HIP_3050, HIP_6020, HIP_0   };
+  m["hipsparseCnnz_compress"]                                         = {HIP_3050, HIP_6020, HIP_0   };
+  m["hipsparseZnnz_compress"]                                         = {HIP_3050, HIP_6020, HIP_0   };
+  m["hipsparseSgebsr2gebsc_bufferSize"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDgebsr2gebsc_bufferSize"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCgebsr2gebsc_bufferSize"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseZgebsr2gebsc_bufferSize"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSgebsr2gebsc"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDgebsr2gebsc"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCgebsr2gebsc"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseZgebsr2gebsc"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSgebsr2gebsr_bufferSize"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDgebsr2gebsr_bufferSize"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCgebsr2gebsr_bufferSize"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseZgebsr2gebsr_bufferSize"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSgebsr2csr"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDgebsr2csr"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCgebsr2csr"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseZgebsr2csr"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseXgebsr2gebsrNnz"]                                       = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSgebsr2gebsr"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDgebsr2gebsr"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCgebsr2gebsr"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseZgebsr2gebsr"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseScsr2gebsr_bufferSize"]                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDcsr2gebsr_bufferSize"]                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCcsr2gebsr_bufferSize"]                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseZcsr2gebsr_bufferSize"]                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseXcsr2gebsrNnz"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseScsr2gebsr"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDcsr2gebsr"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCcsr2gebsr"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseZcsr2gebsr"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCreateCoo"]                                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCreateCooAoS"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCreateCsr"]                                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDestroySpMat"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCooGet"]                                                = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCooAoSGet"]                                             = {HIP_4010, HIP_5060, HIP_0   };
+  m["hipsparseCsrGet"]                                                = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCsrSetPointers"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpMatGetFormat"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpMatGetIndexBase"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpMatGetValues"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpMatSetValues"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpMatGetSize"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCreateSpVec"]                                           = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDestroySpVec"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpVecGet"]                                              = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpVecGetIndexBase"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpVecGetValues"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpVecSetValues"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCreateDnVec"]                                           = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDestroyDnVec"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDnVecGet"]                                              = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDnVecGetValues"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseDnVecSetValues"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMM_createDescr"]                                    = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMM_destroyDescr"]                                   = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMM_workEstimation"]                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMM_compute"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMM_copy"]                                           = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpVV"]                                                  = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpVV_bufferSize"]                                       = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseAxpby"]                                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseGather"]                                                = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseScatter"]                                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseRot"]                                                   = {HIP_4010, HIP_6020, HIP_0   };
+  m["hipsparseSpMV"]                                                  = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseSpMV_bufferSize"]                                       = {HIP_4010, HIP_0,    HIP_0   };
+  m["hipsparseCreateCsru2csrInfo"]                                    = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseDestroyCsru2csrInfo"]                                   = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseScsru2csr_bufferSizeExt"]                               = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseDcsru2csr_bufferSizeExt"]                               = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseCcsru2csr_bufferSizeExt"]                               = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseZcsru2csr_bufferSizeExt"]                               = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseScsru2csr"]                                             = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseDcsru2csr"]                                             = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseCcsru2csr"]                                             = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseZcsru2csr"]                                             = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseScsr2csru"]                                             = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseDcsr2csru"]                                             = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseCcsr2csru"]                                             = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseZcsr2csru"]                                             = {HIP_4020, HIP_6020, HIP_0   };
+  m["hipsparseCreateCsc"]                                             = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseCscSetPointers"]                                        = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseCooSetPointers"]                                        = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseCreateDnMat"]                                           = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseDestroyDnMat"]                                          = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseDnMatGet"]                                              = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseDnMatGetValues"]                                        = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseDnMatSetValues"]                                        = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseSparseToDense_bufferSize"]                              = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseSparseToDense"]                                         = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseDenseToSparse_bufferSize"]                              = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseDenseToSparse_analysis"]                                = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseDenseToSparse_convert"]                                 = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseSpMM_bufferSize"]                                       = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseSpMM"]                                                  = {HIP_4020, HIP_0,    HIP_0   };
+  m["hipsparseSgemvi_bufferSize"]                                     = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseDgemvi_bufferSize"]                                     = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseCgemvi_bufferSize"]                                     = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseZgemvi_bufferSize"]                                     = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseSgemvi"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseDgemvi"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseCgemvi"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseZgemvi"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseSgtsv2_bufferSizeExt"]                                  = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseDgtsv2_bufferSizeExt"]                                  = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseCgtsv2_bufferSizeExt"]                                  = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseZgtsv2_bufferSizeExt"]                                  = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseSgtsv2"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseDgtsv2"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseCgtsv2"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseZgtsv2"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseSgtsv2_nopivot_bufferSizeExt"]                          = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseDgtsv2_nopivot_bufferSizeExt"]                          = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseCgtsv2_nopivot_bufferSizeExt"]                          = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseZgtsv2_nopivot_bufferSizeExt"]                          = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseSgtsv2_nopivot"]                                        = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseDgtsv2_nopivot"]                                        = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseCgtsv2_nopivot"]                                        = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseZgtsv2_nopivot"]                                        = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseSDDMM"]                                                 = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseSDDMM_bufferSize"]                                      = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseSDDMM_preprocess"]                                      = {HIP_4030, HIP_0,    HIP_0   };
+  m["hipsparseCreateBsrsm2Info"]                                      = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseDestroyBsrsm2Info"]                                     = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseCreateColorInfo"]                                       = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseDestroyColorInfo"]                                      = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseSbsrxmv"]                                               = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseDbsrxmv"]                                               = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseCbsrxmv"]                                               = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseZbsrxmv"]                                               = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseXbsrsm2_zeroPivot"]                                     = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseSbsrsm2_bufferSize"]                                    = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseDbsrsm2_bufferSize"]                                    = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseCbsrsm2_bufferSize"]                                    = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseZbsrsm2_bufferSize"]                                    = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseSbsrsm2_analysis"]                                      = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseDbsrsm2_analysis"]                                      = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseCbsrsm2_analysis"]                                      = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseZbsrsm2_analysis"]                                      = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseSbsrsm2_solve"]                                         = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseDbsrsm2_solve"]                                         = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseCbsrsm2_solve"]                                         = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseZbsrsm2_solve"]                                         = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseScsrcolor"]                                             = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseDcsrcolor"]                                             = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseCcsrcolor"]                                             = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseZcsrcolor"]                                             = {HIP_4050, HIP_6020, HIP_0   };
+  m["hipsparseCreateBlockedEll"]                                      = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseBlockedEllGet"]                                         = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpMatGetAttribute"]                                     = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpMatSetAttribute"]                                     = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpMM_preprocess"]                                       = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSV_createDescr"]                                      = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSV_destroyDescr"]                                     = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSV_bufferSize"]                                       = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSV_analysis"]                                         = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSV_solve"]                                            = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSM_createDescr"]                                      = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSM_destroyDescr"]                                     = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSM_bufferSize"]                                       = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSM_analysis"]                                         = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSM_solve"]                                            = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseDgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseCgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseZgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSgtsv2StridedBatch"]                                    = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseDgtsv2StridedBatch"]                                    = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseCgtsv2StridedBatch"]                                    = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseZgtsv2StridedBatch"]                                    = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSgtsvInterleavedBatch_bufferSizeExt"]                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseDgtsvInterleavedBatch_bufferSizeExt"]                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseCgtsvInterleavedBatch_bufferSizeExt"]                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseZgtsvInterleavedBatch_bufferSizeExt"]                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseSgtsvInterleavedBatch"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseDgtsvInterleavedBatch"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseCgtsvInterleavedBatch"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseZgtsvInterleavedBatch"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseSgpsvInterleavedBatch_bufferSizeExt"]                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseDgpsvInterleavedBatch_bufferSizeExt"]                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseCgpsvInterleavedBatch_bufferSizeExt"]                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseZgpsvInterleavedBatch_bufferSizeExt"]                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseSgpsvInterleavedBatch"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseDgpsvInterleavedBatch"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseCgpsvInterleavedBatch"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseZgpsvInterleavedBatch"]                                 = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMMreuse_workEstimation"]                            = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMMreuse_nnz"]                                       = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMMreuse_compute"]                                   = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseSpGEMMreuse_copy"]                                      = {HIP_5010, HIP_0,    HIP_0   };
+  m["hipsparseSpMatGetStridedBatch"]                                  = {HIP_5020, HIP_0,    HIP_0   };
+  m["hipsparseSpMatSetStridedBatch"]                                  = {HIP_5020, HIP_5020, HIP_0   };
+  m["hipsparseCooSetStridedBatch"]                                    = {HIP_5020, HIP_0,    HIP_0   };
+  m["hipsparseCsrSetStridedBatch"]                                    = {HIP_5020, HIP_0,    HIP_0   };
+  m["hipsparseDnMatGetStridedBatch"]                                  = {HIP_5020, HIP_0,    HIP_0   };
+  m["hipsparseDnMatSetStridedBatch"]                                  = {HIP_5020, HIP_0,    HIP_0   };
+  m["hipsparseCsr2cscEx2_bufferSize"]                                 = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsparseCsr2cscEx2"]                                            = {HIP_5040, HIP_0,    HIP_0   };
+  m["hipsparseCopyMatDescr"]                                          = {HIP_1092, HIP_0,    HIP_0   };
+  m["hipsparseGetErrorName"]                                          = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseGetErrorString"]                                        = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstSpVec"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstSpVecGet"]                                         = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstSpVecGetValues"]                                   = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstCoo"]                                        = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstCsr"]                                        = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstCsc"]                                        = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstBlockedEll"]                                 = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstCooGet"]                                           = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstCsrGet"]                                           = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstBlockedEllGet"]                                    = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstSpMatGetValues"]                                   = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstDnVec"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstDnVecGet"]                                         = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstDnVecGetValues"]                                   = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstDnMat"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstDnMatGet"]                                         = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseConstDnMatGetValues"]                                   = {HIP_6000, HIP_0,    HIP_0   };
+  m["hipsparseCscGet"]                                                = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsparseConstCscGet"]                                           = {HIP_6020, HIP_0,    HIP_0   };
+  m["hipsparseSpMV_preprocess"]                                       = {HIP_5020, HIP_0,    HIP_0   };
 
-const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP {
-  {4, "CUSPARSE Types References"},
-  {5, "CUSPARSE Management Function Reference"},
-  {6, "CUSPARSE Logging"},
-  {7, "CUSPARSE Helper Function Reference"},
-  {8, "CUSPARSE Level 1 Function Reference"},
-  {9, "CUSPARSE Level 2 Function Reference"},
-  {10, "CUSPARSE Level 3 Function Reference"},
-  {11, "CUSPARSE Extra Function Reference"},
-  {12, "CUSPARSE Preconditioners Reference"},
-  {13, "CUSPARSE Reorderings Reference"},
-  {14, "CUSPARSE Format Conversion Reference"},
-  {15, "CUSPARSE Generic API Reference"},
-};
+  m["rocsparse_create_handle"]                                        = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_handle"]                                       = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_set_stream"]                                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_get_stream"]                                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_set_pointer_mode"]                                     = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_get_pointer_mode"]                                     = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_get_version"]                                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_create_mat_descr"]                                     = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_copy_mat_descr"]                                       = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_mat_descr"]                                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_set_mat_index_base"]                                   = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_get_mat_index_base"]                                   = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_set_mat_type"]                                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_get_mat_type"]                                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_set_mat_fill_mode"]                                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_get_mat_fill_mode"]                                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_set_mat_diag_type"]                                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_get_mat_diag_type"]                                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_create_hyb_mat"]                                       = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_hyb_mat"]                                      = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_create_color_info"]                                    = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_color_info"]                                   = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_create_spvec_descr"]                                   = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_spvec_descr"]                                  = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spvec_get"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spvec_get_index_base"]                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spvec_get_values"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spvec_set_values"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_create_coo_descr"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_create_coo_aos_descr"]                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_create_csr_descr"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_create_csc_descr"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_create_bell_descr"]                                    = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_spmat_descr"]                                  = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_coo_get"]                                              = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_coo_aos_get"]                                          = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_csr_get"]                                              = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_bell_get"]                                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_coo_set_pointers"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_csr_set_pointers"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_csc_set_pointers"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_get_size"]                                       = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_get_format"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_get_index_base"]                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_get_values"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_set_values"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_get_strided_batch"]                              = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_set_strided_batch"]                              = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocsparse_coo_set_strided_batch"]                                = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocsparse_csr_set_strided_batch"]                                = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_get_attribute"]                                  = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_spmat_set_attribute"]                                  = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_create_dnvec_descr"]                                   = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_dnvec_descr"]                                  = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dnvec_get"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dnvec_get_values"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dnvec_set_values"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_create_dnmat_descr"]                                   = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_dnmat_descr"]                                  = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dnmat_get"]                                            = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dnmat_get_values"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dnmat_set_values"]                                     = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dnmat_get_strided_batch"]                              = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocsparse_dnmat_set_strided_batch"]                              = {HIP_5020, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrcolor"]                                            = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrcolor"]                                            = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrcolor"]                                            = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_scsrcolor"]                                            = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_sddmm_preprocess"]                                     = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sddmm_buffer_size"]                                    = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sddmm"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_spmv"]                                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_rot"]                                                  = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_scatter"]                                              = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_gather"]                                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_axpby"]                                                = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_zgebsr2gebsr"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_zgebsr2gebsr_buffer_size"]                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_cgebsr2gebsr"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_cgebsr2gebsr_buffer_size"]                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dgebsr2gebsr"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dgebsr2gebsr_buffer_size"]                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_sgebsr2gebsr"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_sgebsr2gebsr_buffer_size"]                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_gebsr2gebsr_nnz"]                                      = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_zgebsr2csr"]                                           = {HIP_3100, HIP_0,    HIP_0   };
+  m["rocsparse_cgebsr2csr"]                                           = {HIP_3100, HIP_0,    HIP_0   };
+  m["rocsparse_dgebsr2csr"]                                           = {HIP_3100, HIP_0,    HIP_0   };
+  m["rocsparse_sgebsr2csr"]                                           = {HIP_3100, HIP_0,    HIP_0   };
+  m["rocsparse_zbsr2csr"]                                             = {HIP_3100, HIP_0,    HIP_0   };
+  m["rocsparse_cbsr2csr"]                                             = {HIP_3100, HIP_0,    HIP_0   };
+  m["rocsparse_dbsr2csr"]                                             = {HIP_3100, HIP_0,    HIP_0   };
+  m["rocsparse_sbsr2csr"]                                             = {HIP_3100, HIP_0,    HIP_0   };
+  m["rocsparse_coosort_by_column"]                                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_coosort_by_row"]                                       = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_coosort_buffer_size"]                                  = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_cscsort"]                                              = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_cscsort_buffer_size"]                                  = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_csrsort"]                                              = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_csrsort_buffer_size"]                                  = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_create_identity_permutation"]                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_coo2csr"]                                              = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_csr2csr_by_percentage"]                         = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_csr2csr_by_percentage"]                         = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_csr2csr_nnz_by_percentage"]                     = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_csr2csr_nnz_by_percentage"]                     = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_csr2csr_by_percentage_buffer_size"]             = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_csr2csr_by_percentage_buffer_size"]             = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_csr2csr"]                                       = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_csr2csr"]                                       = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_csr2csr_nnz"]                                   = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_csr2csr_nnz"]                                   = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_csr2csr_buffer_size"]                           = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_csr2csr_buffer_size"]                           = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsr2csr_compress"]                                    = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_ccsr2csr_compress"]                                    = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_dcsr2csr_compress"]                                    = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_scsr2csr_compress"]                                    = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_zcsr2gebsr"]                                           = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_ccsr2gebsr"]                                           = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dcsr2gebsr"]                                           = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_scsr2gebsr"]                                           = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_csr2gebsr_nnz"]                                        = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_zcsr2gebsr_buffer_size"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_ccsr2gebsr_buffer_size"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dcsr2gebsr_buffer_size"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_scsr2gebsr_buffer_size"]                               = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_zcsr2bsr"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_ccsr2bsr"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_dcsr2bsr"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_scsr2bsr"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_csr2bsr_nnz"]                                          = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_zcsr2hyb"]                                             = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_ccsr2hyb"]                                             = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_dcsr2hyb"]                                             = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsr2hyb"]                                             = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zgebsr2gebsc"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_cgebsr2gebsc"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dgebsr2gebsc"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_sgebsr2gebsc"]                                         = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_zgebsr2gebsc_buffer_size"]                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_cgebsr2gebsc_buffer_size"]                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dgebsr2gebsc_buffer_size"]                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_sgebsr2gebsc_buffer_size"]                             = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_csr2coo"]                                              = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_znnz_compress"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_cnnz_compress"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_dnnz_compress"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_snnz_compress"]                                        = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_zcsc2dense"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_ccsc2dense"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_dcsc2dense"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_scsc2dense"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_zcsr2dense"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_ccsr2dense"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_dcsr2dense"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_scsr2dense"]                                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_zdense2csc"]                                           = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_cdense2csc"]                                           = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_ddense2csc"]                                           = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_sdense2csc"]                                           = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_dense2csr_by_percentage"]                       = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_dense2csr_by_percentage"]                       = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_dense2csr_nnz_by_percentage"]                   = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_dense2csr_nnz_by_percentage"]                   = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_dense2csr_by_percentage_buffer_size"]           = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_dense2csr_by_percentage_buffer_size"]           = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_dense2csr"]                                     = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_dense2csr"]                                     = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_dense2csr_nnz"]                                 = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_dense2csr_nnz"]                                 = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dprune_dense2csr_buffer_size"]                         = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sprune_dense2csr_buffer_size"]                         = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_zdense2csr"]                                           = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_cdense2csr"]                                           = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_ddense2csr"]                                           = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_sdense2csr"]                                           = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_znnz"]                                                 = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_cnnz"]                                                 = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_dnnz"]                                                 = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_snnz"]                                                 = {HIP_3020, HIP_0,    HIP_0   };
+  m["rocsparse_zgpsv_interleaved_batch"]                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_cgpsv_interleaved_batch"]                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_dgpsv_interleaved_batch"]                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_sgpsv_interleaved_batch"]                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_zgpsv_interleaved_batch_buffer_size"]                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_cgpsv_interleaved_batch_buffer_size"]                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_dgpsv_interleaved_batch_buffer_size"]                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_sgpsv_interleaved_batch_buffer_size"]                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_zgtsv_interleaved_batch"]                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_cgtsv_interleaved_batch"]                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_dgtsv_interleaved_batch"]                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_sgtsv_interleaved_batch"]                              = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_zgtsv_interleaved_batch_buffer_size"]                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_cgtsv_interleaved_batch_buffer_size"]                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_dgtsv_interleaved_batch_buffer_size"]                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_sgtsv_interleaved_batch_buffer_size"]                  = {HIP_5010, HIP_0,    HIP_0   };
+  m["rocsparse_zgtsv_no_pivot_strided_batch"]                         = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_cgtsv_no_pivot_strided_batch"]                         = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_dgtsv_no_pivot_strided_batch"]                         = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sgtsv_no_pivot_strided_batch"]                         = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zgtsv_no_pivot_strided_batch_buffer_size"]             = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_cgtsv_no_pivot_strided_batch_buffer_size"]             = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_dgtsv_no_pivot_strided_batch_buffer_size"]             = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sgtsv_no_pivot_strided_batch_buffer_size"]             = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zgtsv_no_pivot"]                                       = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_cgtsv_no_pivot"]                                       = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_dgtsv_no_pivot"]                                       = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sgtsv_no_pivot"]                                       = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zgtsv_no_pivot_buffer_size"]                           = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_cgtsv_no_pivot_buffer_size"]                           = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_dgtsv_no_pivot_buffer_size"]                           = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sgtsv_no_pivot_buffer_size"]                           = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zgtsv"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_cgtsv"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_dgtsv"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sgtsv"]                                                = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zgtsv_buffer_size"]                                    = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_cgtsv_buffer_size"]                                    = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_dgtsv_buffer_size"]                                    = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sgtsv_buffer_size"]                                    = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrilu0"]                                             = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrilu0"]                                             = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrilu0"]                                             = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrilu0"]                                             = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrilu0_analysis"]                                    = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrilu0_analysis"]                                    = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrilu0_analysis"]                                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrilu0_analysis"]                                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrilu0_buffer_size"]                                 = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrilu0_buffer_size"]                                 = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrilu0_buffer_size"]                                 = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrilu0_buffer_size"]                                 = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrilu0_numeric_boost"]                               = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dccsrilu0_numeric_boost"]                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrilu0_numeric_boost"]                               = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dscsrilu0_numeric_boost"]                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_csrilu0_zero_pivot"]                                   = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsric0"]                                              = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_ccsric0"]                                              = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_dcsric0"]                                              = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_scsric0"]                                              = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_zcsric0_analysis"]                                     = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_ccsric0_analysis"]                                     = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_dcsric0_analysis"]                                     = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_scsric0_analysis"]                                     = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_zcsric0_buffer_size"]                                  = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_ccsric0_buffer_size"]                                  = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_dcsric0_buffer_size"]                                  = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_scsric0_buffer_size"]                                  = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_csric0_zero_pivot"]                                    = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrilu0"]                                             = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrilu0"]                                             = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrilu0"]                                             = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrilu0"]                                             = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_bsrilu0_zero_pivot"]                                   = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrilu0_analysis"]                                    = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrilu0_analysis"]                                    = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrilu0_analysis"]                                    = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrilu0_analysis"]                                    = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_dcbsrilu0_numeric_boost"]                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_dsbsrilu0_numeric_boost"]                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrilu0_numeric_boost"]                               = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrilu0_numeric_boost"]                               = {HIP_3090, HIP_0,    HIP_0   };
+  m["rocsparse_zbsric0"]                                              = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_cbsric0"]                                              = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_dbsric0"]                                              = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_sbsric0"]                                              = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_zbsric0_analysis"]                                     = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_cbsric0_analysis"]                                     = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_dbsric0_analysis"]                                     = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_sbsric0_analysis"]                                     = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_zbsric0_buffer_size"]                                  = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_cbsric0_buffer_size"]                                  = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_dbsric0_buffer_size"]                                  = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_sbsric0_buffer_size"]                                  = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_bsric0_zero_pivot"]                                    = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_csrgemm_nnz"]                                          = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrgemm_buffer_size"]                                 = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrgemm_buffer_size"]                                 = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrgemm_buffer_size"]                                 = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_scsrgemm_buffer_size"]                                 = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrgeam"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrgeam"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrgeam"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_scsrgeam"]                                             = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_csrgeam_nnz"]                                          = {HIP_3050, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrsm_solve"]                                         = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrsm_solve"]                                         = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrsm_solve"]                                         = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrsm_solve"]                                         = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrsm_analysis"]                                      = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrsm_analysis"]                                      = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrsm_analysis"]                                      = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrsm_analysis"]                                      = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrsm_buffer_size"]                                   = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrsm_buffer_size"]                                   = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrsm_buffer_size"]                                   = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrsm_buffer_size"]                                   = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_bsrsm_zero_pivot"]                                     = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrsm_solve"]                                         = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrsm_solve"]                                         = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrsm_solve"]                                         = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_scsrsm_solve"]                                         = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_scsrsm_analysis"]                                      = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrsm_analysis"]                                      = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrsm_analysis"]                                      = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrsm_analysis"]                                      = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_scsrsm_buffer_size"]                                   = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrsm_buffer_size"]                                   = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrsm_buffer_size"]                                   = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrsm_buffer_size"]                                   = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_csrsm_zero_pivot"]                                     = {HIP_3010, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrmm"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrmm"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrmm"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrmm"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrmm"]                                               = {HIP_3070, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrmm"]                                               = {HIP_3070, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrmm"]                                               = {HIP_3070, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrmm"]                                               = {HIP_3070, HIP_0,    HIP_0   };
+  m["rocsparse_sgemvi"]                                               = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_dgemvi"]                                               = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_cgemvi"]                                               = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zgemvi"]                                               = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_sgemvi_buffer_size"]                                   = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_dgemvi_buffer_size"]                                   = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_cgemvi_buffer_size"]                                   = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zgemvi_buffer_size"]                                   = {HIP_4030, HIP_0,    HIP_0   };
+  m["rocsparse_zhybmv"]                                               = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_chybmv"]                                               = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_dhybmv"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_shybmv"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrsv_solve"]                                         = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrsv_solve"]                                         = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrsv_solve"]                                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrsv_solve"]                                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrsv_analysis"]                                      = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrsv_analysis"]                                      = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrsv_analysis"]                                      = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrsv_analysis"]                                      = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrsv_buffer_size"]                                   = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrsv_buffer_size"]                                   = {HIP_2100, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrsv_buffer_size"]                                   = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrsv_buffer_size"]                                   = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_csrsv_zero_pivot"]                                     = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrmv"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrmv"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrmv"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrmv"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrsv_solve"]                                         = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrsv_solve"]                                         = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrsv_solve"]                                         = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrsv_solve"]                                         = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrsv_analysis"]                                      = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrsv_analysis"]                                      = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrsv_analysis"]                                      = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrsv_analysis"]                                      = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrsv_buffer_size"]                                   = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrsv_buffer_size"]                                   = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrsv_buffer_size"]                                   = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrsv_buffer_size"]                                   = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_bsrsv_zero_pivot"]                                     = {HIP_3060, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrxmv"]                                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrxmv"]                                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrxmv"]                                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrxmv"]                                              = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrmv"]                                               = {HIP_3050, HIP_5040, HIP_0   };
+  m["rocsparse_cbsrmv"]                                               = {HIP_3050, HIP_5040, HIP_0   };
+  m["rocsparse_dbsrmv"]                                               = {HIP_3050, HIP_5040, HIP_0   };
+  m["rocsparse_sbsrmv"]                                               = {HIP_3050, HIP_5040, HIP_0   };
+  m["rocsparse_zsctr"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_csctr"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_dsctr"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_ssctr"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_droti"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_sroti"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zgthrz"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_cgthrz"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_dgthrz"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_sgthrz"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_sgthr"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_dgthr"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_cgthr"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zgthr"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_cdotci"]                                               = {HIP_3000, HIP_0,    HIP_0   };
+  m["rocsparse_zdotci"]                                               = {HIP_3000, HIP_0,    HIP_0   };
+  m["rocsparse_sdoti"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_ddoti"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_cdoti"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zdoti"]                                                = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_saxpyi"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_daxpyi"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_caxpyi"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zaxpyi"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_get_status_name"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_get_status_description"]                               = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_create_const_spvec_descr"]                             = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_spvec_get"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_spvec_get_values"]                               = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_create_const_coo_descr"]                               = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_create_const_csr_descr"]                               = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_create_const_csc_descr"]                               = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_create_const_bell_descr"]                              = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_coo_get"]                                        = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_csr_get"]                                        = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_csc_get"]                                        = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_bell_get"]                                       = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_spmat_get_values"]                               = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_create_const_dnvec_descr"]                             = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_dnvec_get"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_dnvec_get_values"]                               = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_create_const_dnmat_descr"]                             = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_dnmat_get"]                                      = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_const_dnmat_get_values"]                               = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_create_mat_info"]                                      = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_destroy_mat_info"]                                     = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrmm"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrmm"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrmm"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrmm"]                                               = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_scsrgemm"]                                             = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_dcsrgemm"]                                             = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_ccsrgemm"]                                             = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_zcsrgemm"]                                             = {HIP_2080, HIP_0,    HIP_0   };
+  m["rocsparse_sbsrilu0_buffer_size"]                                 = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_dbsrilu0_buffer_size"]                                 = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_cbsrilu0_buffer_size"]                                 = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_zbsrilu0_buffer_size"]                                 = {HIP_3080, HIP_0,    HIP_0   };
+  m["rocsparse_csr2csc_buffer_size"]                                  = {HIP_1090, HIP_0,    HIP_0   };
+  m["rocsparse_sparse_to_dense"]                                      = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_dense_to_sparse"]                                      = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spmm"]                                                 = {HIP_4020, HIP_0,    HIP_0   };
+  m["rocsparse_spsm"]                                                 = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_spvv"]                                                 = {HIP_4010, HIP_0,    HIP_0   };
+  m["rocsparse_spsv"]                                                 = {HIP_4050, HIP_0,    HIP_0   };
+  m["rocsparse_csc_get"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+  return m;
+}();
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+  m["cusparseSpVecGetIndexBase"]                                      = {CUDA_120};
+  m["cusparseDestroySpVec"]                                           = {CUDA_120};
+  m["cusparseDestroyDnVec"]                                           = {CUDA_120};
+  m["cusparseSpMatGetAttribute"]                                      = {CUDA_120};
+  m["cusparseSpMatGetFormat"]                                         = {CUDA_120};
+  m["cusparseSpMatGetSize"]                                           = {CUDA_120};
+  m["cusparseSpMatGetIndexBase"]                                      = {CUDA_120};
+  m["cusparseSpMatGetStridedBatch"]                                   = {CUDA_120};
+  m["cusparseDestroySpMat"]                                           = {CUDA_120};
+  m["cusparseSpGEMM_compute"]                                         = {CUDA_120};
+  m["cusparseSpGEMM_copy"]                                            = {CUDA_120};
+  m["cusparseSpGEMM_workEstimation"]                                  = {CUDA_120};
+  m["cusparseSpGEMMreuse_compute"]                                    = {CUDA_120};
+  m["cusparseSpGEMMreuse_copy"]                                       = {CUDA_120};
+  m["cusparseSpGEMMreuse_nnz"]                                        = {CUDA_120};
+  m["cusparseSpGEMMreuse_workEstimation"]                             = {CUDA_120};
+  m["cusparseDnMatGetStridedBatch"]                                   = {CUDA_120};
+  m["cusparseDestroyDnMat"]                                           = {CUDA_120};
+  m["cusparseSpMM"]                                                   = {CUDA_120};
+  m["cusparseSpMM_bufferSize"]                                        = {CUDA_120};
+  m["cusparseSpMM_preprocess"]                                        = {CUDA_120};
+  m["cusparseSpMV"]                                                   = {CUDA_120};
+  m["cusparseSpMV_bufferSize"]                                        = {CUDA_120};
+  m["cusparseSpSM_analysis"]                                          = {CUDA_120};
+  m["cusparseSpSM_bufferSize"]                                        = {CUDA_120};
+  m["cusparseSpSM_solve"]                                             = {CUDA_120};
+  m["cusparseSpSV_analysis"]                                          = {CUDA_120};
+  m["cusparseSpSV_bufferSize"]                                        = {CUDA_120};
+  m["cusparseSpSV_solve"]                                             = {CUDA_120};
+  m["cusparseSpVV"]                                                   = {CUDA_120};
+  m["cusparseSpVV_bufferSize"]                                        = {CUDA_120};
+  m["cusparseSDDMM"]                                                  = {CUDA_120};
+  m["cusparseSDDMM_bufferSize"]                                       = {CUDA_120};
+  m["cusparseSDDMM_preprocess"]                                       = {CUDA_120};
+  m["cusparseAxpby"]                                                  = {CUDA_120};
+  m["cusparseGather"]                                                 = {CUDA_120};
+  m["cusparseScatter"]                                                = {CUDA_120};
+  m["cusparseSparseToDense"]                                          = {CUDA_120}; // C: CUSPARSE_VERSION 12000
+  m["cusparseSparseToDense_bufferSize"]                               = {CUDA_120};
+  m["cusparseDenseToSparse_analysis"]                                 = {CUDA_120};
+  m["cusparseDenseToSparse_bufferSize"]                               = {CUDA_120};
+  m["cusparseDenseToSparse_convert"]                                  = {CUDA_120};
+
+  return m;
+}();
+
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANGED_VER_MAP = [] {
+  std::map<llvm::StringRef, hipAPIChangedVersions> m;
+
+  m["hipsparseSpVecGetIndexBase"]                                     = {HIP_6000};
+  m["hipsparseDestroySpVec"]                                          = {HIP_6000};
+  m["hipsparseDestroyDnVec"]                                          = {HIP_6000};
+  m["hipsparseSpMatGetAttribute"]                                     = {HIP_6000};
+  m["hipsparseSpMatGetFormat"]                                        = {HIP_6000};
+  m["hipsparseSpMatGetSize"]                                          = {HIP_6000};
+  m["hipsparseSpMatGetIndexBase"]                                     = {HIP_6000};
+  m["hipsparseSpMatGetStridedBatch"]                                  = {HIP_6000};
+  m["hipsparseDestroySpMat"]                                          = {HIP_6000};
+  m["hipsparseSpGEMM_compute"]                                        = {HIP_6000};
+  m["hipsparseSpGEMM_copy"]                                           = {HIP_6000};
+  m["hipsparseSpGEMM_workEstimation"]                                 = {HIP_6000};
+  m["hipsparseSpGEMMreuse_compute"]                                   = {HIP_6000};
+  m["hipsparseSpGEMMreuse_copy"]                                      = {HIP_6000};
+  m["hipsparseSpGEMMreuse_nnz"]                                       = {HIP_6000};
+  m["hipsparseSpGEMMreuse_workEstimation"]                            = {HIP_6000};
+  m["hipsparseDnMatGetStridedBatch"]                                  = {HIP_6000};
+  m["hipsparseDestroyDnMat"]                                          = {HIP_6000};
+  m["hipsparseSpMM"]                                                  = {HIP_6000};
+  m["hipsparseSpMM_bufferSize"]                                       = {HIP_6000};
+  m["hipsparseSpMM_preprocess"]                                       = {HIP_6000};
+  m["hipsparseSpMV"]                                                  = {HIP_6000};
+  m["hipsparseSpMV_bufferSize"]                                       = {HIP_6000};
+  m["hipsparseSpSM_analysis"]                                         = {HIP_6000};
+  m["hipsparseSpSM_bufferSize"]                                       = {HIP_6000};
+  m["hipsparseSpSM_solve"]                                            = {HIP_6000};
+  m["hipsparseSpSV_analysis"]                                         = {HIP_6000};
+  m["hipsparseSpSV_bufferSize"]                                       = {HIP_6000};
+  m["hipsparseSpSV_solve"]                                            = {HIP_6000};
+  m["hipsparseSpVV"]                                                  = {HIP_6000};
+  m["hipsparseSpVV_bufferSize"]                                       = {HIP_6000};
+  m["hipsparseSDDMM"]                                                 = {HIP_6000};
+  m["hipsparseSDDMM_bufferSize"]                                      = {HIP_6000};
+  m["hipsparseSDDMM_preprocess"]                                      = {HIP_6000};
+  m["hipsparseAxpby"]                                                 = {HIP_6000};
+  m["hipsparseGather"]                                                = {HIP_6000};
+  m["hipsparseScatter"]                                               = {HIP_6000};
+  m["hipsparseSparseToDense"]                                         = {HIP_6000};
+  m["hipsparseSparseToDense_bufferSize"]                              = {HIP_6000};
+  m["hipsparseDenseToSparse_analysis"]                                = {HIP_6000};
+  m["hipsparseDenseToSparse_bufferSize"]                              = {HIP_6000};
+  m["hipsparseDenseToSparse_convert"]                                 = {HIP_6000};
+  m["hipsparseSpMV_preprocess"]                                       = {HIP_6000};
+  m["rocsparse_destroy_spvec_descr"]                                  = {HIP_6000};
+  m["rocsparse_spvec_get_index_base"]                                 = {HIP_6000};
+  m["rocsparse_destroy_spmat_descr"]                                  = {HIP_6000};
+  m["rocsparse_spmat_get_size"]                                       = {HIP_6000};
+  m["rocsparse_spmat_get_format"]                                     = {HIP_6000};
+  m["rocsparse_spmat_get_index_base"]                                 = {HIP_6000};
+  m["rocsparse_spmat_get_strided_batch"]                              = {HIP_6000};
+  m["rocsparse_spmat_get_attribute"]                                  = {HIP_6000};
+  m["rocsparse_destroy_dnvec_descr"]                                  = {HIP_6000};
+  m["rocsparse_destroy_dnmat_descr"]                                  = {HIP_6000};
+  m["rocsparse_dnmat_get_strided_batch"]                              = {HIP_6000};
+  m["rocsparse_sparse_to_dense"]                                      = {HIP_6000};
+  m["rocsparse_dense_to_sparse"]                                      = {HIP_6000};
+  m["rocsparse_spmm"]                                                 = {HIP_6000};
+  m["rocsparse_spsm"]                                                 = {HIP_6000};
+  m["rocsparse_spvv"]                                                 = {HIP_6000};
+  m["rocsparse_spmv"]                                                 = {HIP_6000};
+  m["rocsparse_scatter"]                                              = {HIP_6000};
+  m["rocsparse_gather"]                                               = {HIP_6000};
+  m["rocsparse_axpby"]                                                = {HIP_6000};
+  m["rocsparse_sddmm"]                                                = {HIP_6000};
+  m["rocsparse_sddmm_buffer_size"]                                    = {HIP_6000};
+  m["rocsparse_sddmm_preprocess"]                                     = {HIP_6000};
+  m["rocsparse_spsv"]                                                 = {HIP_6000};
+
+  return m;
+}();
+
+const std::map<unsigned int, llvm::StringRef> CUDA_SPARSE_API_SECTION_MAP = [] {
+  std::map<unsigned int, llvm::StringRef> m;
+
+  m[4]                                                                = "CUSPARSE Types References";
+  m[5]                                                                = "CUSPARSE Management Function Reference";
+  m[6]                                                                = "CUSPARSE Logging";
+  m[7]                                                                = "CUSPARSE Helper Function Reference";
+  m[8]                                                                = "CUSPARSE Level 1 Function Reference";
+  m[9]                                                                = "CUSPARSE Level 2 Function Reference";
+  m[10]                                                               = "CUSPARSE Level 3 Function Reference";
+  m[11]                                                               = "CUSPARSE Extra Function Reference";
+  m[12]                                                               = "CUSPARSE Preconditioners Reference";
+  m[13]                                                               = "CUSPARSE Reorderings Reference";
+  m[14]                                                               = "CUSPARSE Format Conversion Reference";
+  m[15]                                                               = "CUSPARSE Generic API Reference";
+
+  return m;
+}();
