@@ -20,19 +20,12 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <cstdio>
 #include <fstream>
-#include <set>
-#include <cmath>
-#include <chrono>
-#include <iomanip>
-#include <sstream>
 #include "CUDA2HIP.h"
 #include "CUDA2HIP_Scripting.h"
 #include "LLVMCompat.h"
 #include "HipifyAction.h"
 #include "ArgParse.h"
-#include "StringUtils.h"
 #include "llvm/Support/Debug.h"
 #include "clang/Basic/Diagnostic.h"
 #include "clang/Basic/DiagnosticIDs.h"
