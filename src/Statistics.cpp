@@ -24,7 +24,6 @@ THE SOFTWARE.
 #include <assert.h>
 #include <sstream>
 #include <iomanip>
-#include <cmath>
 
 #if defined(__has_include) && __has_include(<optional>)
 #include <optional>

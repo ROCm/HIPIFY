@@ -20,16 +20,11 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <sstream>
-#include "llvm/ADT/StringRef.h"
+#include <fstream>
 #include "llvm/ADT/SmallString.h"
-#include "llvm/Support/Path.h"
 #include "CUDA2HIP.h"
-#include "CUDA2HIP_Scripting.h"
 #include "ArgParse.h"
-#include "StringUtils.h"
 #include "LLVMCompat.h"
-#include "Statistics.h"
 
 using namespace llvm;
 

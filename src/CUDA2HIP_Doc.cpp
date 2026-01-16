@@ -22,11 +22,8 @@ THE SOFTWARE.
 
 #include <sstream>
 #include <vector>
-#include <map>
 #include "CUDA2HIP.h"
-#include "CUDA2HIP_Scripting.h"
 #include "ArgParse.h"
-#include "StringUtils.h"
 #include "LLVMCompat.h"
 
 namespace doc {
@@ -182,7 +179,7 @@ namespace doc {
 
   class DOC {
     public:
-      DOC(const string &outDir): dir(outDir), types(0), format(0), hasROC(false), isROC(false) {}
+      DOC(const string &outDir): dir(outDir), types(0), format(0), hasROC(false), isROC(false), roc(skip) {}
       virtual ~DOC() {}
       void setTypesAndFormat(unsigned int docTypes, unsigned int docFormat = full, unsigned int docRoc = skip) {
         types = docTypes;
