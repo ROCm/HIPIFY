@@ -428,15 +428,15 @@ enum hipVersions {
 };
 
 struct cudaAPIversions {
-  cudaVersions appeared;
-  cudaVersions deprecated;
-  cudaVersions removed;
+  cudaVersions appeared = CUDA_0;
+  cudaVersions deprecated = CUDA_0;
+  cudaVersions removed = CUDA_0;
 };
 
 struct hipAPIversions {
-  hipVersions appeared;
-  hipVersions deprecated;
-  hipVersions removed;
+  hipVersions appeared = HIP_0;
+  hipVersions deprecated = HIP_0;
+  hipVersions removed = HIP_0;
   hipVersions experimental = HIP_0;
 };
 
@@ -453,10 +453,10 @@ extern const char *apiTypes[NUM_API_TYPES];
 struct hipCounter {
   llvm::StringRef hipName;
   llvm::StringRef rocName;
-  ConvTypes type;
-  ApiTypes apiType;
-  unsigned int apiSection;
-  unsigned int supportDegree;
+  ConvTypes type = CONV_ERROR;
+  ApiTypes apiType = API_DRIVER;
+  unsigned int apiSection = 1;
+  unsigned int supportDegree = FULL;
 };
 
 /**
