@@ -22,7 +22,6 @@ THE SOFTWARE.
 
 #include "ArgParse.h"
 #include "LLVMCompat.h"
-#include "llvm/Support/Path.h"
 #if LLVM_VERSION_MAJOR < 13
 #include "clang/Lex/HeaderSearch.h"
 #endif

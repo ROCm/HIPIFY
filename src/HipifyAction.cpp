@@ -21,7 +21,6 @@ THE SOFTWARE.
 */
 
 #include <algorithm>
-#include <set>
 #include <string>
 #include "HipifyAction.h"
 #include "CUDA2HIP_Scripting.h"
@@ -29,13 +28,11 @@ THE SOFTWARE.
 #include "clang/Frontend/CompilerInstance.h"
 #include "clang/ASTMatchers/ASTMatchFinder.h"
 #include "clang/ASTMatchers/ASTMatchers.h"
-#include "clang/Lex/HeaderSearch.h"
 #if LLVM_VERSION_MAJOR < 17
 #include "clang/Basic/TargetInfo.h"
 #endif
 #include "LLVMCompat.h"
 #include "CUDA2HIP.h"
-#include "StringUtils.h"
 #include "ArgParse.h"
 
 using namespace hipify;

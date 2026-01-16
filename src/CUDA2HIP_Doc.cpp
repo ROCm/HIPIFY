@@ -22,11 +22,8 @@ THE SOFTWARE.
 
 #include <sstream>
 #include <vector>
-#include <map>
 #include "CUDA2HIP.h"
-#include "CUDA2HIP_Scripting.h"
 #include "ArgParse.h"
-#include "StringUtils.h"
 #include "LLVMCompat.h"
 
 namespace doc {

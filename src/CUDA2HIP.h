@@ -22,9 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "llvm/ADT/StringRef.h"
-#include <set>
-#include <map>
 #include "Statistics.h"
 
 const std::string sHIP_version = Statistics::getHipVersion(HIP_LATEST);
