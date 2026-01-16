@@ -40,7 +40,7 @@ using namespace llvm;
 class HipifyAction : public clang::ASTFrontendAction,
                      public mat::MatchFinder::MatchCallback {
 private:
-  ct::Replacements *replacements;
+  ct::Replacements *replacements = nullptr;
   std::map<std::string, clang::SourceLocation> Ifndefs;
   std::vector<clang::SourceRange> SkippedSourceRanges;
   std::unique_ptr<mat::MatchFinder> Finder;
