@@ -36,7 +36,7 @@ namespace ct = clang::tooling;
   */
 template <typename T>
 class ReplacementsFrontendActionFactory : public ct::FrontendActionFactory {
-  ct::Replacements *replacements;
+  ct::Replacements *replacements = nullptr;
 
 public:
   explicit ReplacementsFrontendActionFactory(ct::Replacements *r):

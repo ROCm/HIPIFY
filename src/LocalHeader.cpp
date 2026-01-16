@@ -11,12 +11,7 @@
 #include "llvm/Support/MemoryBuffer.h"
 #include "llvm/Support/raw_ostream.h"
 
-#include "clang/Tooling/Refactoring.h"
-#include "clang/Tooling/Tooling.h"
-
-#include "CUDA2HIP.h"       
-#include "LLVMCompat.h"     
-#include "HipifyAction.h"   
+#include "LLVMCompat.h"
 
 using namespace clang;
 using namespace clang::tooling;
