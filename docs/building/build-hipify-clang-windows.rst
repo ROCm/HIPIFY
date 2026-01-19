@@ -92,7 +92,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
   .. code-block:: bash
 
-   -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.4.0.0
+   -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.4.1.0
 
 - [Optional] Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding to the CUDA version:
 
@@ -264,7 +264,7 @@ Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
   -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9" \
   -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9" \
   -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.16.0 \
-  -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.4.0.0 \
+  -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.4.1.0 \
   -DLLVM_EXTERNAL_LIT=%ROOT_DIR%/build/Release/bin/llvm-lit.py \
   ../hipify
 
@@ -302,14 +302,14 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/21.1.8`
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9
   --    - CUDA Samples path     : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9
   --    - cuDNN path            : D:/CUDA/cuDNN/9.16.0
-  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.4.0.0
+  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.4.1.0
   --    - CUB path              :
   -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include (found version "12.9.86")
   -- Found CUDA config:
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9
   --    - CUDA Samples path     : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9
   --    - cuDNN path            : D:/CUDA/cuDNN/9.16.0/include
-  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.4.0.0/include
+  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.4.1.0/include
   --    - CUB path              : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/cub
   -- Configuring done (4.4s)
   -- Generating done (0.1s)
