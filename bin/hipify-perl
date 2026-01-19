@@ -9128,6 +9128,7 @@ sub simpleSubstitutions {
     subst("CU_STREAM_CAPTURE_STATUS_INVALIDATED", "hipStreamCaptureStatusInvalidated", "numeric_literal");
     subst("CU_STREAM_CAPTURE_STATUS_NONE", "hipStreamCaptureStatusNone", "numeric_literal");
     subst("CU_STREAM_DEFAULT", "hipStreamDefault", "numeric_literal");
+    subst("CU_STREAM_MEM_OP_ATOMIC_REDUCTION", "hipStreamMemOpAtomicReduction", "numeric_literal");
     subst("CU_STREAM_MEM_OP_BARRIER", "hipStreamMemOpBarrier", "numeric_literal");
     subst("CU_STREAM_MEM_OP_FLUSH_REMOTE_WRITES", "hipStreamMemOpFlushRemoteWrites", "numeric_literal");
     subst("CU_STREAM_MEM_OP_WAIT_VALUE_32", "hipStreamMemOpWaitValue32", "numeric_literal");
@@ -12738,6 +12739,11 @@ sub warnRemovedFunctions {
     "CUstreamMemoryBarrier_flags_enum",
     "CUstreamMemoryBarrier_flags",
     "CUstreamMemOpMemoryBarrierParams_st",
+    "CUstreamMemOpAtomicReductionParams_st",
+    "CUstreamAtomicReductionOpType_enum",
+    "CUstreamAtomicReductionOpType",
+    "CUstreamAtomicReductionDataType_enum",
+    "CUstreamAtomicReductionDataType",
     "CUshared_carveout_enum",
     "CUshared_carveout",
     "CUprocessState_enum",
@@ -12978,6 +12984,11 @@ sub warnRemovedFunctions {
     "CU_STREAM_WAIT_VALUE_FLUSH",
     "CU_STREAM_MEMORY_BARRIER_TYPE_SYS",
     "CU_STREAM_MEMORY_BARRIER_TYPE_GPU",
+    "CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_64",
+    "CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_32",
+    "CU_STREAM_ATOMIC_REDUCTION_OP_OR",
+    "CU_STREAM_ATOMIC_REDUCTION_OP_AND",
+    "CU_STREAM_ATOMIC_REDUCTION_OP_ADD",
     "CU_SHAREDMEM_CARVEOUT_MAX_SHARED",
     "CU_SHAREDMEM_CARVEOUT_MAX_L1",
     "CU_SHAREDMEM_CARVEOUT_DEFAULT",
