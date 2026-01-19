@@ -541,6 +541,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaLogsCallbackHandle
   {"CUlogsCallbackHandle",                                             {"hipLogsCallbackHandle",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  //
+  {"CUstreamMemOpAtomicReductionParams_st",                            {"hipStreamMemOpAtomicReductionParams_st",                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 2. Unions
 
   {"CUstreamBatchMemOpParams",                                         {"hipStreamBatchMemOpParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -2090,6 +2093,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_STREAM_MEM_OP_WAIT_VALUE_64",                                   {"hipStreamMemOpWaitValue64",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 4
   {"CU_STREAM_MEM_OP_WRITE_VALUE_64",                                  {"hipStreamMemOpWriteValue64",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 5
   {"CU_STREAM_MEM_OP_BARRIER",                                         {"hipStreamMemOpBarrier",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 6
+  {"CU_STREAM_MEM_OP_ATOMIC_REDUCTION",                                {"hipStreamMemOpAtomicReduction",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 8
 
   // cudaStreamCaptureStatus
   {"CUstreamCaptureStatus",                                            {"hipStreamCaptureStatus",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES}},
@@ -3102,6 +3106,28 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CU_ATOMIC_CAPABILITY_SCALAR_128",                                  {"hipAtomicCapabilityScalar128",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // cudaAtomicCapabilityVector32x4
   {"CU_ATOMIC_CAPABILITY_VECTOR_32x4",                                 {"hipAtomicCapabilityVector32x4",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUstreamAtomicReductionOpType",                                    {"hipStreamAtomicReductionOpType",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUstreamAtomicReductionOpType_enum",                               {"hipStreamAtomicReductionOpType",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUstreamAtomicReductionOpType enum values
+  //
+  {"CU_STREAM_ATOMIC_REDUCTION_OP_OR",                                 {"hipStreamAtomicReductionOpPr",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_STREAM_ATOMIC_REDUCTION_OP_AND",                                {"hipStreamAtomicReductionOpAnd",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_STREAM_ATOMIC_REDUCTION_OP_ADD",                                {"hipStreamAtomicReductionOpAdd",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  //
+  {"CUstreamAtomicReductionDataType",                                  {"hipStreamAtomicReductionDataType",                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CUstreamAtomicReductionDataType_enum",                             {"hipStreamAtomicReductionOpType",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // CUstreamAtomicReductionOpType enum values
+  //
+  {"CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_32",                           {"hipStreamAtomicReductionUnsigned32",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  //
+  {"CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_64",                           {"hipStreamAtomicReductionUnsigned64",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
   // 4. Typedefs
 
@@ -4387,6 +4413,17 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP {
   {"CU_MEM_ALLOCATION_TYPE_MANAGED",                                   {CUDA_130, CUDA_0,   CUDA_0  }},
   {"CUcheckpointGpuPair_st",                                           {CUDA_130, CUDA_0,   CUDA_0  }},
   {"CUcheckpointGpuPair",                                              {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_MEM_OP_ATOMIC_REDUCTION",                                {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CUstreamAtomicReductionOpType",                                    {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CUstreamAtomicReductionOpType_enum",                               {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_ATOMIC_REDUCTION_OP_OR",                                 {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_ATOMIC_REDUCTION_OP_AND",                                {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_ATOMIC_REDUCTION_OP_ADD",                                {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CUstreamAtomicReductionDataType",                                  {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CUstreamAtomicReductionDataType_enum",                             {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_32",                           {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_64",                           {CUDA_131, CUDA_0,   CUDA_0  }},
+  {"CUstreamMemOpAtomicReductionParams_st",                            {CUDA_131, CUDA_0,   CUDA_0  }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
