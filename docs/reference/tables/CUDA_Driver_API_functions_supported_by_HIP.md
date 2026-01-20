@@ -1068,6 +1068,11 @@
 |`CU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE`| | | | |`hipSharedMemBankSizeEightByte`|1.6.0| | | | | |
 |`CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE`| | | | |`hipSharedMemBankSizeFourByte`|1.6.0| | | | | |
 |`CU_STREAM_ADD_CAPTURE_DEPENDENCIES`|11.3| | | |`hipStreamAddCaptureDependencies`|5.0.0| | | | | |
+|`CU_STREAM_ATOMIC_REDUCTION_OP_ADD`|13.1| | | | | | | | | | |
+|`CU_STREAM_ATOMIC_REDUCTION_OP_AND`|13.1| | | | | | | | | | |
+|`CU_STREAM_ATOMIC_REDUCTION_OP_OR`|13.1| | | | | | | | | | |
+|`CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_32`|13.1| | | | | | | | | | |
+|`CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_64`|13.1| | | | | | | | | | |
 |`CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.0| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
 |`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | | |
 |`CU_STREAM_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | | |
@@ -1083,6 +1088,7 @@
 |`CU_STREAM_LEGACY`| | | | |`hipStreamLegacy`|6.2.0| | | | | |
 |`CU_STREAM_MEMORY_BARRIER_TYPE_GPU`|11.7| | | | | | | | | | |
 |`CU_STREAM_MEMORY_BARRIER_TYPE_SYS`|11.7| | | | | | | | | | |
+|`CU_STREAM_MEM_OP_ATOMIC_REDUCTION`|13.1| | | |`hipStreamMemOpAtomicReduction`| | | | | | |
 |`CU_STREAM_MEM_OP_BARRIER`|11.7| | | |`hipStreamMemOpBarrier`|6.4.0| | | | | |
 |`CU_STREAM_MEM_OP_FLUSH_REMOTE_WRITES`|8.0| | | |`hipStreamMemOpFlushRemoteWrites`|6.4.0| | | | | |
 |`CU_STREAM_MEM_OP_WAIT_VALUE_32`|8.0| | | |`hipStreamMemOpWaitValue32`|6.4.0| | | | | |
@@ -1536,6 +1542,10 @@
 |`CUsharedconfig`| | | | |`hipSharedMemConfig`|1.6.0| | | | | |
 |`CUsharedconfig_enum`| | | | |`hipSharedMemConfig`|1.6.0| | | | | |
 |`CUstream`| | | | |`hipStream_t`|1.5.0| | | | | |
+|`CUstreamAtomicReductionDataType`|13.1| | | | | | | | | | |
+|`CUstreamAtomicReductionDataType_enum`|13.1| | | | | | | | | | |
+|`CUstreamAtomicReductionOpType`|13.1| | | | | | | | | | |
+|`CUstreamAtomicReductionOpType_enum`|13.1| | | | | | | | | | |
 |`CUstreamAttrID`|11.0| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
 |`CUstreamAttrID_enum`|11.0| | |11.8|`hipLaunchAttributeID`|6.2.0| | | | | |
 |`CUstreamAttrValue`|11.0| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
@@ -1551,6 +1561,7 @@
 |`CUstreamCaptureMode_enum`|10.1| | | |`hipStreamCaptureMode`|4.3.0| | | | | |
 |`CUstreamCaptureStatus`|10.0| | | |`hipStreamCaptureStatus`|4.3.0| | | | | |
 |`CUstreamCaptureStatus_enum`|10.0| | | |`hipStreamCaptureStatus`|4.3.0| | | | | |
+|`CUstreamMemOpAtomicReductionParams_st`|13.1| | | | | | | | | | |
 |`CUstreamMemOpMemoryBarrierParams_st`|11.7| | | | | | | | | | |
 |`CUstreamMemoryBarrier_flags`|11.7| | | | | | | | | | |
 |`CUstreamMemoryBarrier_flags_enum`|11.7| | | | | | | | | | |
