@@ -574,6 +574,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_ENGINE_BEHAVIOR_NOTE",                                  {"HIPDNN_ATTR_ENGINE_BEHAVIOR_NOTE",                                "MIOPEN_ATTR_ENGINE_BEHAVIOR_NOTE",                                CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1305
   {"CUDNN_ATTR_ENGINE_SM_COUNT_TARGET",                                {"HIPDNN_ATTR_ENGINE_SM_COUNT_TARGET",                              "MIOPEN_ATTR_ENGINE_SM_COUNT_TARGET",                              CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1306
   {"CUDNN_ATTR_ENGINE_DEVICEPROP",                                     {"HIPDNN_ATTR_ENGINE_DEVICEPROP",                                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1307
+  {"CUDNN_ATTR_ENGINE_DISABLE_CLUSTER_COOPERATIVE",                    {"HIPDNN_ATTR_ENGINE_DISABLE_CLUSTER_COOPERATIVE",                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 1308
   {"CUDNN_ATTR_MATMUL_COMP_TYPE",                                      {"HIPDNN_ATTR_MATMUL_COMP_TYPE",                                    "MIOPEN_ATTR_MATMUL_COMP_TYPE",                                    CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1500
   {"CUDNN_ATTR_MATMUL_PADDING_VALUE",                                  {"HIPDNN_ATTR_MATMUL_PADDING_VALUE",                                "MIOPEN_ATTR_MATMUL_PADDING_VALUE",                                CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1503
   {"CUDNN_ATTR_OPERATION_MATMUL_ADESC",                                {"HIPDNN_ATTR_OPERATION_MATMUL_ADESC",                              "MIOPEN_ATTR_OPERATION_MATMUL_ADESC",                              CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED}},    // 1520
@@ -719,6 +720,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_VDESC",                   {"HIPDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_VDESC",                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2808
   {"CUDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_QDESC",                      {"HIPDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_QDESC",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2809
   {"CUDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_KVDESC",                     {"HIPDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_KVDESC",                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2810
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_QDESC",                              {"HIPDNN_ATTR_OPERATION_SDPA_BWD_QDESC",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2851
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_KDESC",                              {"HIPDNN_ATTR_OPERATION_SDPA_BWD_KDESC",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2852
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_VDESC",                              {"HIPDNN_ATTR_OPERATION_SDPA_BWD_VDESC",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2853
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_ODESC",                              {"HIPDNN_ATTR_OPERATION_SDPA_BWD_ODESC",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2854
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_STATSDESC",                          {"HIPDNN_ATTR_OPERATION_SDPA_BWD_STATSDESC",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2855
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_SCALEDESC",                          {"HIPDNN_ATTR_OPERATION_SDPA_BWD_SCALEDESC",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2856
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_SEQ_LEN_QDESC",                      {"HIPDNN_ATTR_OPERATION_SDPA_BWD_SEQ_LEN_QDESC",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2857
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_SEQ_LEN_KVDESC",                     {"HIPDNN_ATTR_OPERATION_SDPA_BWD_SEQ_LEN_KVDESC",                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2858
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_DQDESC",                             {"HIPDNN_ATTR_OPERATION_SDPA_BWD_DQDESC",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2859
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_DKDESC",                             {"HIPDNN_ATTR_OPERATION_SDPA_BWD_DKDESC",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2860
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_DVDESC",                             {"HIPDNN_ATTR_OPERATION_SDPA_BWD_DVDESC",                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2861
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_DODDESC",                            {"HIPDNN_ATTR_OPERATION_SDPA_BWD_DODDESC",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2862
   {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MODE",                     {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MODE",                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2900
   {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MATH_PREC",                {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MATH_PREC",              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2901
   {"CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_DESC",               {"HIPDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_TOKEN_DESC",             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},    // 2902
@@ -804,6 +817,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP {
   {"CUDNN_BACKEND_OPERATION_BLOCK_SCALE_DEQUANTIZE_DESCRIPTOR",        {"HIPDNN_BACKEND_OPERATION_BLOCK_SCALE_DEQUANTIZE_DESCRIPTOR",      "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_BACKEND_DEVICEPROP_DESCRIPTOR",                              {"HIPDNN_BACKEND_DEVICEPROP_DESCRIPTOR",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_BACKEND_OPERATION_MOE_GROUPED_MATMUL_DESCRIPTOR",            {"HIPDNN_BACKEND_DEVICEPROP_DESCRIPTOR",                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
+  {"CUDNN_BACKEND_OPERATION_SDPA_BWD_DESCRIPTOR",                      {"HIPDNN_BACKEND_OPERATION_SDPA_BWD_DESCRIPTOR",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"cudnnBackendNumericalNote_t",                                      {"hipdnnBackendNumericalNote_t",                                    "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_TENSOR_CORE",                                 {"HIPDNN_NUMERICAL_NOTE_TENSOR_CORE",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
   {"CUDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS",                         {"HIPDNN_NUMERICAL_NOTE_DOWN_CONVERT_INPUTS",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED}},
@@ -1969,6 +1983,20 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_TYPE_MOE_GROUPED_MATMUL_MODE",                               {CUDNN_9150,CUDA_0,    CUDA_0   }},
   {"CUDNN_BACKEND_OPERATION_MOE_GROUPED_MATMUL_DESCRIPTOR",            {CUDNN_9150,CUDA_0,    CUDA_0   }},
   {"CUDNN_BEHAVIOR_NOTE_CUBLASLT_DEPENDENCY",                          {CUDNN_9150,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_ENGINE_DISABLE_CLUSTER_COOPERATIVE",                    {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_QDESC",                              {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_KDESC",                              {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_VDESC",                              {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_ODESC",                              {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_STATSDESC",                          {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_SCALEDESC",                          {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_SEQ_LEN_QDESC",                      {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_SEQ_LEN_KVDESC",                     {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_DQDESC",                             {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_DKDESC",                             {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_DVDESC",                             {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_ATTR_OPERATION_SDPA_BWD_DODDESC",                            {CUDNN_9170,CUDA_0,    CUDA_0   }},
+  {"CUDNN_BACKEND_OPERATION_SDPA_BWD_DESCRIPTOR",                      {CUDNN_9170,CUDA_0,    CUDA_0   }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP {
