@@ -185,7 +185,6 @@ enum ApiTypes {
   API_SPARSE,
   API_SOLVER,
   API_CUB,
-  API_CAFFE2,
   API_RTC,
   API_TENSOR,
   API_LAST

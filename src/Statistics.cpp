@@ -158,7 +158,6 @@ const char *apiNames[NUM_API_TYPES] = {
   "cuSPARSE API",
   "cuSOLVER API",
   "CUB API",
-  "CAFFE2 API",
   "RTC API",
   "TENSOR API"
 };
@@ -174,7 +173,6 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_CUB",
   "API_SPARSE",
   "API_SOLVER",
-  "API_CAFFE2",
   "API_RTC",
   "API_TENSOR"
 };

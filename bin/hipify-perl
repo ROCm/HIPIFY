@@ -5462,7 +5462,6 @@ sub simpleSubstitutions {
     subst("cublasZtrsv_64", "hipblasZtrsv_64", "library");
     subst("cublasZtrsv_v2", "hipblasZtrsv", "library");
     subst("cublasZtrsv_v2_64", "hipblasZtrsv_64", "library");
-    subst("cuda_stream", "hip_stream", "library");
     subst("cudnnActivationBackward", "hipdnnActivationBackward", "library");
     subst("cudnnActivationForward", "hipdnnActivationForward", "library");
     subst("cudnnAddTensor", "hipdnnAddTensor", "library");
@@ -7313,8 +7312,6 @@ sub simpleSubstitutions {
     subst("ushort2", "ushort2", "device_type");
     subst("ushort3", "ushort3", "device_type");
     subst("ushort4", "ushort4", "device_type");
-    subst("caffe2\/core\/common_cudnn.h", "caffe2\/core\/hip\/common_miopen.h", "include");
-    subst("caffe2\/operators\/spatial_batch_norm_op.h", "caffe2\/operators\/hip\/spatial_batch_norm_op_miopen.hip", "include");
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
     subst("cooperative_groups.h", "hip\/hip_cooperative_groups.h", "include");
     subst("cublasLt.h", "hipblaslt.h", "include");
@@ -7373,7 +7370,6 @@ sub simpleSubstitutions {
     subst("nvrtc.h", "hip\/hiprtc.h", "include_cuda_main_header");
     subst("cublas_v2.h", "hipblas.h", "include_cuda_main_header_v2");
     subst("cusparse_v2.h", "hipsparse.h", "include_cuda_main_header_v2");
-    subst("CUDAContext", "HIPContext", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR", "HIP_ARRAY3D_DESCRIPTOR", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR_st", "HIP_ARRAY3D_DESCRIPTOR", "type");
     subst("CUDA_ARRAY3D_DESCRIPTOR_v2", "HIP_ARRAY3D_DESCRIPTOR", "type");
@@ -9741,8 +9737,6 @@ sub simpleSubstitutions {
     subst("FFTW_PRESERVE_INPUT", "FFTW_PRESERVE_INPUT", "define");
     subst("FFTW_UNALIGNED", "FFTW_UNALIGNED", "define");
     subst("FFTW_WISDOM_ONLY", "FFTW_WISDOM_ONLY", "define");
-    subst("REGISTER_CUDA_OPERATOR", "REGISTER_HIP_OPERATOR", "define");
-    subst("REGISTER_CUDA_OPERATOR_CREATOR", "REGISTER_HIP_OPERATOR_CREATOR", "define");
     subst("_CubLog", "_HipcubLog", "define");
     subst("__CUB_ALIGN_BYTES", "__HIPCUB_ALIGN_BYTES", "define");
     subst("__CUDACC__", "__HIPCC__", "define");
