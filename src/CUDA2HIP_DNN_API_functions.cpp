@@ -23,704 +23,720 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP {
+const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP = [] {
+  std::map<llvm::StringRef, hipCounter> m;
+
   // NOTE: MIOPEN_EXPORT miopenStatus_t miopenGetVersion(size_t* major, size_t* minor, size_t* patch) and size_t CUDNNWINAPI cudnnGetVersion(void) have different signatures
-  {"cudnnGetVersion",                                          {"hipdnnGetVersion",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
-  {"cudnnGetCudartVersion",                                    {"hipdnnGetCudartVersion",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetMaxDeviceVersion",                                 {"hipdnnGetMaxDeviceVersion",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnQueryRuntimeError",                                   {"hipdnnQueryRuntimeError",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetProperty",                                         {"hipdnnGetProperty",                                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetErrorString",                                      {"hipdnnGetErrorString",                                      "miopenGetErrorString",                                               CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetLastErrorString",                                  {"hipdnnGetLastErrorString",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnIm2Col",                                              {"hipdnnIm2Col",                                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnCreate",                                              {"hipdnnCreate",                                              "miopenCreate",                                                       CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroy",                                             {"hipdnnDestroy",                                             "miopenDestroy",                                                      CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetStream",                                           {"hipdnnSetStream",                                           "miopenSetStream",                                                    CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetStream",                                           {"hipdnnGetStream",                                           "miopenGetStream",                                                    CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetCallback",                                         {"hipdnnSetCallback",                                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetCallback",                                         {"hipdnnGetCallback",                                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnAdvInferVersionCheck",                                {"hipdnnAdvInferVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_REMOVED}},
-  {"cudnnAdvVersionCheck",                                     {"hipdnnAdvVersionCheck",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnAdvTrainVersionCheck",                                {"hipdnnAdvTrainVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_REMOVED}},
-  {"cudnnCnnInferVersionCheck",                                {"hipdnnCnnInferVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnCnnTrainVersionCheck",                                {"hipdnnCnnTrainVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnOpsInferVersionCheck",                                {"hipdnnOpsInferVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnOpsTrainVersionCheck",                                {"hipdnnOpsTrainVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_REMOVED}},
-  {"cudnnGraphVersionCheck",                                   {"hipdnnGraphVersionCheck",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnOpsVersionCheck",                                     {"hipdnnOpsVersionCheck",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  m["cudnnGetVersion"]                                          = {"hipdnnGetVersion",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED};
+  m["cudnnGetCudartVersion"]                                    = {"hipdnnGetCudartVersion",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetMaxDeviceVersion"]                                 = {"hipdnnGetMaxDeviceVersion",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnQueryRuntimeError"]                                   = {"hipdnnQueryRuntimeError",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetProperty"]                                         = {"hipdnnGetProperty",                                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetErrorString"]                                      = {"hipdnnGetErrorString",                                      "miopenGetErrorString",                                               CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnGetLastErrorString"]                                  = {"hipdnnGetLastErrorString",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnIm2Col"]                                              = {"hipdnnIm2Col",                                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnCreate"]                                              = {"hipdnnCreate",                                              "miopenCreate",                                                       CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnDestroy"]                                             = {"hipdnnDestroy",                                             "miopenDestroy",                                                      CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnSetStream"]                                           = {"hipdnnSetStream",                                           "miopenSetStream",                                                    CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnGetStream"]                                           = {"hipdnnGetStream",                                           "miopenGetStream",                                                    CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnSetCallback"]                                         = {"hipdnnSetCallback",                                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetCallback"]                                         = {"hipdnnGetCallback",                                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnAdvInferVersionCheck"]                                = {"hipdnnAdvInferVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_REMOVED};
+  m["cudnnAdvVersionCheck"]                                     = {"hipdnnAdvVersionCheck",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnAdvTrainVersionCheck"]                                = {"hipdnnAdvTrainVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_REMOVED};
+  m["cudnnCnnInferVersionCheck"]                                = {"hipdnnCnnInferVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnCnnTrainVersionCheck"]                                = {"hipdnnCnnTrainVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnOpsInferVersionCheck"]                                = {"hipdnnOpsInferVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnOpsTrainVersionCheck"]                                = {"hipdnnOpsTrainVersionCheck",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_REMOVED};
+  m["cudnnGraphVersionCheck"]                                   = {"hipdnnGraphVersionCheck",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnOpsVersionCheck"]                                     = {"hipdnnOpsVersionCheck",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   // cuDNN Tensor functions
-  {"cudnnCreateTensorDescriptor",                              {"hipdnnCreateTensorDescriptor",                              "miopenCreateTensorDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetTensor4dDescriptor",                               {"hipdnnSetTensor4dDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
-  {"cudnnSetTensor4dDescriptorEx",                             {"hipdnnSetTensor4dDescriptorEx",                             "miopenSet4dTensorDescriptorEx",                                      CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetTensor4dDescriptor",                               {"hipdnnGetTensor4dDescriptor",                               "miopenGet4dTensorDescriptor",                                        CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetTensorNdDescriptor",                               {"hipdnnSetTensorNdDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
-  {"cudnnSetTensorNdDescriptorEx",                             {"hipdnnSetTensorNdDescriptorEx",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetTensorNdDescriptor",                               {"hipdnnGetTensorNdDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
-  {"cudnnGetTensorSizeInBytes",                                {"hipdnnGetTensorSizeInBytes",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnDestroyTensorDescriptor",                             {"hipdnnDestroyTensorDescriptor",                             "miopenDestroyTensorDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnTransformTensor",                                     {"hipdnnTransformTensor",                                     "miopenTransformTensor",                                              CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnTransformTensorEx",                                   {"hipdnnTransformTensorEx",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnInitTransformDest",                                   {"hipdnnInitTransformDest",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnCreateTensorTransformDescriptor",                     {"hipdnnCreateTensorTransformDescriptor",                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetTensorTransformDescriptor",                        {"hipdnnSetTensorTransformDescriptor",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetTensorTransformDescriptor",                        {"hipdnnGetTensorTransformDescriptor",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyTensorTransformDescriptor",                    {"hipdnnDestroyTensorTransformDescriptor",                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnAddTensor",                                           {"hipdnnAddTensor",                                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnCreateOpTensorDescriptor",                            {"hipdnnCreateOpTensorDescriptor",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetOpTensorDescriptor",                               {"hipdnnSetOpTensorDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetOpTensorDescriptor",                               {"hipdnnGetOpTensorDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyOpTensorDescriptor",                           {"hipdnnDestroyOpTensorDescriptor",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnOpTensor",                                            {"hipdnnOpTensor",                                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetFoldedConvBackwardDataDescriptors",                {"hipdnnGetFoldedConvBackwardDataDescriptors",                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnCreateTensorDescriptor"]                              = {"hipdnnCreateTensorDescriptor",                              "miopenCreateTensorDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnSetTensor4dDescriptor"]                               = {"hipdnnSetTensor4dDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED};
+  m["cudnnSetTensor4dDescriptorEx"]                             = {"hipdnnSetTensor4dDescriptorEx",                             "miopenSet4dTensorDescriptorEx",                                      CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnGetTensor4dDescriptor"]                               = {"hipdnnGetTensor4dDescriptor",                               "miopenGet4dTensorDescriptor",                                        CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnSetTensorNdDescriptor"]                               = {"hipdnnSetTensorNdDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED};
+  m["cudnnSetTensorNdDescriptorEx"]                             = {"hipdnnSetTensorNdDescriptorEx",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetTensorNdDescriptor"]                               = {"hipdnnGetTensorNdDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED};
+  m["cudnnGetTensorSizeInBytes"]                                = {"hipdnnGetTensorSizeInBytes",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnDestroyTensorDescriptor"]                             = {"hipdnnDestroyTensorDescriptor",                             "miopenDestroyTensorDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnTransformTensor"]                                     = {"hipdnnTransformTensor",                                     "miopenTransformTensor",                                              CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnTransformTensorEx"]                                   = {"hipdnnTransformTensorEx",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnInitTransformDest"]                                   = {"hipdnnInitTransformDest",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnCreateTensorTransformDescriptor"]                     = {"hipdnnCreateTensorTransformDescriptor",                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetTensorTransformDescriptor"]                        = {"hipdnnSetTensorTransformDescriptor",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetTensorTransformDescriptor"]                        = {"hipdnnGetTensorTransformDescriptor",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyTensorTransformDescriptor"]                    = {"hipdnnDestroyTensorTransformDescriptor",                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnAddTensor"]                                           = {"hipdnnAddTensor",                                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnCreateOpTensorDescriptor"]                            = {"hipdnnCreateOpTensorDescriptor",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetOpTensorDescriptor"]                               = {"hipdnnSetOpTensorDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetOpTensorDescriptor"]                               = {"hipdnnGetOpTensorDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyOpTensorDescriptor"]                           = {"hipdnnDestroyOpTensorDescriptor",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnOpTensor"]                                            = {"hipdnnOpTensor",                                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetFoldedConvBackwardDataDescriptors"]                = {"hipdnnGetFoldedConvBackwardDataDescriptors",                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN Reduce Tensor functions
-  {"cudnnCreateReduceTensorDescriptor",                        {"hipdnnCreateReduceTensorDescriptor",                        "miopenCreateReduceTensorDescriptor",                                 CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnSetReduceTensorDescriptor",                           {"hipdnnSetReduceTensorDescriptor",                           "miopenSetReduceTensorDescriptor",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnGetReduceTensorDescriptor",                           {"hipdnnGetReduceTensorDescriptor",                           "miopenGetReduceTensorDescriptor",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnDestroyReduceTensorDescriptor",                       {"hipdnnDestroyReduceTensorDescriptor",                       "miopenDestroyReduceTensorDescriptor",                                CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnGetReductionIndicesSize",                             {"hipdnnGetReductionIndicesSize",                             "miopenGetReductionIndicesSize",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetReductionWorkspaceSize",                           {"hipdnnGetReductionWorkspaceSize",                           "miopenGetReductionWorkspaceSize",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnReduceTensor",                                        {"hipdnnReduceTensor",                                        "miopenReduceTensor",                                                 CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnSetTensor",                                           {"hipdnnSetTensor",                                           "miopenSetTensor",                                                    CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnScaleTensor",                                         {"hipdnnScaleTensor",                                         "miopenScaleTensor",                                                  CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnDeriveNormTensorDescriptor",                          {"hipdnnDeriveNormTensorDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnCreateReduceTensorDescriptor"]                        = {"hipdnnCreateReduceTensorDescriptor",                        "miopenCreateReduceTensorDescriptor",                                 CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnSetReduceTensorDescriptor"]                           = {"hipdnnSetReduceTensorDescriptor",                           "miopenSetReduceTensorDescriptor",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnGetReduceTensorDescriptor"]                           = {"hipdnnGetReduceTensorDescriptor",                           "miopenGetReduceTensorDescriptor",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnDestroyReduceTensorDescriptor"]                       = {"hipdnnDestroyReduceTensorDescriptor",                       "miopenDestroyReduceTensorDescriptor",                                CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnGetReductionIndicesSize"]                             = {"hipdnnGetReductionIndicesSize",                             "miopenGetReductionIndicesSize",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetReductionWorkspaceSize"]                           = {"hipdnnGetReductionWorkspaceSize",                           "miopenGetReductionWorkspaceSize",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnReduceTensor"]                                        = {"hipdnnReduceTensor",                                        "miopenReduceTensor",                                                 CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnSetTensor"]                                           = {"hipdnnSetTensor",                                           "miopenSetTensor",                                                    CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnScaleTensor"]                                         = {"hipdnnScaleTensor",                                         "miopenScaleTensor",                                                  CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnDeriveNormTensorDescriptor"]                          = {"hipdnnDeriveNormTensorDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN Filter functions
-  {"cudnnCreateFilterDescriptor",                              {"hipdnnCreateFilterDescriptor",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetFilter4dDescriptor",                               {"hipdnnSetFilter4dDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetFilter4dDescriptor",                               {"hipdnnGetFilter4dDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetFilterNdDescriptor",                               {"hipdnnSetFilterNdDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetFilterNdDescriptor",                               {"hipdnnGetFilterNdDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetFilterSizeInBytes",                                {"hipdnnGetFilterSizeInBytes",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnTransformFilter",                                     {"hipdnnTransformFilter",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyFilterDescriptor",                             {"hipdnnDestroyFilterDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnReorderFilterAndBias",                                {"hipdnnReorderFilterAndBias",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnCreateFilterDescriptor"]                              = {"hipdnnCreateFilterDescriptor",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetFilter4dDescriptor"]                               = {"hipdnnSetFilter4dDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetFilter4dDescriptor"]                               = {"hipdnnGetFilter4dDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetFilterNdDescriptor"]                               = {"hipdnnSetFilterNdDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetFilterNdDescriptor"]                               = {"hipdnnGetFilterNdDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetFilterSizeInBytes"]                                = {"hipdnnGetFilterSizeInBytes",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnTransformFilter"]                                     = {"hipdnnTransformFilter",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyFilterDescriptor"]                             = {"hipdnnDestroyFilterDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnReorderFilterAndBias"]                                = {"hipdnnReorderFilterAndBias",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN Convolution functions
-  {"cudnnCreateConvolutionDescriptor",                         {"hipdnnCreateConvolutionDescriptor",                         "miopenCreateConvolutionDescriptor",                                  CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnSetConvolutionMathType",                              {"hipdnnSetConvolutionMathType",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionMathType",                              {"hipdnnGetConvolutionMathType",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetConvolutionGroupCount",                            {"hipdnnSetConvolutionGroupCount",                            "miopenSetConvolutionGroupCount",                                     CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionGroupCount",                            {"hipdnnGetConvolutionGroupCount",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetConvolutionReorderType",                           {"hipdnnSetConvolutionReorderType",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionReorderType",                           {"hipdnnGetConvolutionReorderType",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetConvolution2dDescriptor",                          {"hipdnnSetConvolution2dDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolution2dDescriptor",                          {"hipdnnGetConvolution2dDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolution2dForwardOutputDim",                    {"hipdnnGetConvolution2dForwardOutputDim",                    "miopenGetConvolutionForwardOutputDim",                               CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnSetConvolutionNdDescriptor",                          {"hipdnnSetConvolutionNdDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionNdDescriptor",                          {"hipdnnGetConvolutionNdDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionNdForwardOutputDim",                    {"hipdnnGetConvolutionNdForwardOutputDim",                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyConvolutionDescriptor",                        {"hipdnnDestroyConvolutionDescriptor",                        "miopenDestroyConvolutionDescriptor",                                 CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionForwardAlgorithmMaxCount",              {"hipdnnGetConvolutionForwardAlgorithmMaxCount",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnFindConvolutionForwardAlgorithm",                     {"hipdnnFindConvolutionForwardAlgorithm",                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnFindConvolutionForwardAlgorithmEx",                   {"hipdnnFindConvolutionForwardAlgorithmEx",                   "miopenFindConvolutionForwardAlgorithm",                              CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionForwardAlgorithm",                      {"hipdnnGetConvolutionForwardAlgorithm",                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetConvolutionForwardAlgorithm_v7",                   {"hipdnnGetConvolutionForwardAlgorithm_v7",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionForwardWorkspaceSize",                  {"hipdnnGetConvolutionForwardWorkspaceSize",                  "miopenConvolutionForwardGetWorkSpaceSize",                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnConvolutionForward",                                  {"hipdnnConvolutionForward",                                  "miopenConvolutionForward",                                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnConvolutionBiasActivationForward",                    {"hipdnnConvolutionBiasActivationForward",                    "miopenConvolutionBiasActivationForward",                             CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnConvolutionBackwardBias",                             {"hipdnnConvolutionBackwardBias",                             "miopenConvolutionBackwardBias",                                      CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionBackwardFilterAlgorithmMaxCount",       {"hipdnnGetConvolutionBackwardFilterAlgorithmMaxCount",       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnFindConvolutionBackwardFilterAlgorithm",              {"hipdnnFindConvolutionBackwardFilterAlgorithm",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnFindConvolutionBackwardFilterAlgorithmEx",            {"hipdnnFindConvolutionBackwardFilterAlgorithmEx",            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionBackwardFilterAlgorithm",               {"hipdnnGetConvolutionBackwardFilterAlgorithm",               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetConvolutionBackwardFilterAlgorithm_v7",            {"hipdnnGetConvolutionBackwardFilterAlgorithm_v7",            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionBackwardFilterWorkspaceSize",           {"hipdnnGetConvolutionBackwardFilterWorkspaceSize",           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnConvolutionBackwardFilter",                           {"hipdnnConvolutionBackwardFilter",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionBackwardDataAlgorithmMaxCount",         {"hipdnnGetConvolutionBackwardDataAlgorithmMaxCount",         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnFindConvolutionBackwardDataAlgorithm",                {"hipdnnFindConvolutionBackwardDataAlgorithm",                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnFindConvolutionBackwardDataAlgorithmEx",              {"hipdnnFindConvolutionBackwardDataAlgorithmEx",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionBackwardDataAlgorithm",                 {"hipdnnGetConvolutionBackwardDataAlgorithm",                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetConvolutionBackwardDataAlgorithm_v7",              {"hipdnnGetConvolutionBackwardDataAlgorithm_v7",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetConvolutionBackwardDataWorkspaceSize",             {"hipdnnGetConvolutionBackwardDataWorkspaceSize",             "miopenConvolutionBackwardDataGetWorkSpaceSize",                      CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnConvolutionBackwardData",                             {"hipdnnConvolutionBackwardData",                             "miopenConvolutionBackwardData",                                      CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
+  m["cudnnCreateConvolutionDescriptor"]                         = {"hipdnnCreateConvolutionDescriptor",                         "miopenCreateConvolutionDescriptor",                                  CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnSetConvolutionMathType"]                              = {"hipdnnSetConvolutionMathType",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionMathType"]                              = {"hipdnnGetConvolutionMathType",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetConvolutionGroupCount"]                            = {"hipdnnSetConvolutionGroupCount",                            "miopenSetConvolutionGroupCount",                                     CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnGetConvolutionGroupCount"]                            = {"hipdnnGetConvolutionGroupCount",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetConvolutionReorderType"]                           = {"hipdnnSetConvolutionReorderType",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionReorderType"]                           = {"hipdnnGetConvolutionReorderType",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetConvolution2dDescriptor"]                          = {"hipdnnSetConvolution2dDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolution2dDescriptor"]                          = {"hipdnnGetConvolution2dDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolution2dForwardOutputDim"]                    = {"hipdnnGetConvolution2dForwardOutputDim",                    "miopenGetConvolutionForwardOutputDim",                               CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnSetConvolutionNdDescriptor"]                          = {"hipdnnSetConvolutionNdDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionNdDescriptor"]                          = {"hipdnnGetConvolutionNdDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionNdForwardOutputDim"]                    = {"hipdnnGetConvolutionNdForwardOutputDim",                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyConvolutionDescriptor"]                        = {"hipdnnDestroyConvolutionDescriptor",                        "miopenDestroyConvolutionDescriptor",                                 CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnGetConvolutionForwardAlgorithmMaxCount"]              = {"hipdnnGetConvolutionForwardAlgorithmMaxCount",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnFindConvolutionForwardAlgorithm"]                     = {"hipdnnFindConvolutionForwardAlgorithm",                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnFindConvolutionForwardAlgorithmEx"]                   = {"hipdnnFindConvolutionForwardAlgorithmEx",                   "miopenFindConvolutionForwardAlgorithm",                              CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnGetConvolutionForwardAlgorithm"]                      = {"hipdnnGetConvolutionForwardAlgorithm",                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetConvolutionForwardAlgorithm_v7"]                   = {"hipdnnGetConvolutionForwardAlgorithm_v7",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionForwardWorkspaceSize"]                  = {"hipdnnGetConvolutionForwardWorkspaceSize",                  "miopenConvolutionForwardGetWorkSpaceSize",                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnConvolutionForward"]                                  = {"hipdnnConvolutionForward",                                  "miopenConvolutionForward",                                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnConvolutionBiasActivationForward"]                    = {"hipdnnConvolutionBiasActivationForward",                    "miopenConvolutionBiasActivationForward",                             CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnConvolutionBackwardBias"]                             = {"hipdnnConvolutionBackwardBias",                             "miopenConvolutionBackwardBias",                                      CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnGetConvolutionBackwardFilterAlgorithmMaxCount"]       = {"hipdnnGetConvolutionBackwardFilterAlgorithmMaxCount",       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnFindConvolutionBackwardFilterAlgorithm"]              = {"hipdnnFindConvolutionBackwardFilterAlgorithm",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnFindConvolutionBackwardFilterAlgorithmEx"]            = {"hipdnnFindConvolutionBackwardFilterAlgorithmEx",            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionBackwardFilterAlgorithm"]               = {"hipdnnGetConvolutionBackwardFilterAlgorithm",               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetConvolutionBackwardFilterAlgorithm_v7"]            = {"hipdnnGetConvolutionBackwardFilterAlgorithm_v7",            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionBackwardFilterWorkspaceSize"]           = {"hipdnnGetConvolutionBackwardFilterWorkspaceSize",           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnConvolutionBackwardFilter"]                           = {"hipdnnConvolutionBackwardFilter",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionBackwardDataAlgorithmMaxCount"]         = {"hipdnnGetConvolutionBackwardDataAlgorithmMaxCount",         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnFindConvolutionBackwardDataAlgorithm"]                = {"hipdnnFindConvolutionBackwardDataAlgorithm",                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnFindConvolutionBackwardDataAlgorithmEx"]              = {"hipdnnFindConvolutionBackwardDataAlgorithmEx",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionBackwardDataAlgorithm"]                 = {"hipdnnGetConvolutionBackwardDataAlgorithm",                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetConvolutionBackwardDataAlgorithm_v7"]              = {"hipdnnGetConvolutionBackwardDataAlgorithm_v7",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetConvolutionBackwardDataWorkspaceSize"]             = {"hipdnnGetConvolutionBackwardDataWorkspaceSize",             "miopenConvolutionBackwardDataGetWorkSpaceSize",                      CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnConvolutionBackwardData"]                             = {"hipdnnConvolutionBackwardData",                             "miopenConvolutionBackwardData",                                      CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
 
   // cuDNN Softmax functions
-  {"cudnnSoftmaxForward",                                      {"hipdnnSoftmaxForward",                                      "miopenSoftmaxForward_V2",                                            CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSoftmaxBackward",                                     {"hipdnnSoftmaxBackward",                                     "miopenSoftmaxBackward_V2",                                           CONV_LIB_FUNC, API_DNN, 2}},
+  m["cudnnSoftmaxForward"]                                      = {"hipdnnSoftmaxForward",                                      "miopenSoftmaxForward_V2",                                            CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnSoftmaxBackward"]                                     = {"hipdnnSoftmaxBackward",                                     "miopenSoftmaxBackward_V2",                                           CONV_LIB_FUNC, API_DNN, 2};
 
   // cuDNN Pooling functions
-  {"cudnnCreatePoolingDescriptor",                             {"hipdnnCreatePoolingDescriptor",                             "miopenCreatePoolingDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnSetPooling2dDescriptor",                              {"hipdnnSetPooling2dDescriptor",                              "miopenSet2dPoolingDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnGetPooling2dDescriptor",                              {"hipdnnGetPooling2dDescriptor",                              "miopenGet2dPoolingDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnSetPoolingNdDescriptor",                              {"hipdnnSetPoolingNdDescriptor",                              "miopenSetNdPoolingDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnGetPoolingNdDescriptor",                              {"hipdnnGetPoolingNdDescriptor",                              "miopenGetNdPoolingDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetPoolingNdForwardOutputDim",                        {"hipdnnGetPoolingNdForwardOutputDim",                        "miopenGetPoolingNdForwardOutputDim",                                 CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetPooling2dForwardOutputDim",                        {"hipdnnGetPooling2dForwardOutputDim",                        "miopenGetPoolingForwardOutputDim",                                   CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnDestroyPoolingDescriptor",                            {"hipdnnDestroyPoolingDescriptor",                            "miopenDestroyPoolingDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnPoolingForward",                                      {"hipdnnPoolingForward",                                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnPoolingBackward",                                     {"hipdnnPoolingBackward",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnCreatePoolingDescriptor"]                             = {"hipdnnCreatePoolingDescriptor",                             "miopenCreatePoolingDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnSetPooling2dDescriptor"]                              = {"hipdnnSetPooling2dDescriptor",                              "miopenSet2dPoolingDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnGetPooling2dDescriptor"]                              = {"hipdnnGetPooling2dDescriptor",                              "miopenGet2dPoolingDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnSetPoolingNdDescriptor"]                              = {"hipdnnSetPoolingNdDescriptor",                              "miopenSetNdPoolingDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnGetPoolingNdDescriptor"]                              = {"hipdnnGetPoolingNdDescriptor",                              "miopenGetNdPoolingDescriptor",                                       CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetPoolingNdForwardOutputDim"]                        = {"hipdnnGetPoolingNdForwardOutputDim",                        "miopenGetPoolingNdForwardOutputDim",                                 CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetPooling2dForwardOutputDim"]                        = {"hipdnnGetPooling2dForwardOutputDim",                        "miopenGetPoolingForwardOutputDim",                                   CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnDestroyPoolingDescriptor"]                            = {"hipdnnDestroyPoolingDescriptor",                            "miopenDestroyPoolingDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnPoolingForward"]                                      = {"hipdnnPoolingForward",                                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnPoolingBackward"]                                     = {"hipdnnPoolingBackward",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN Activation functions
-  {"cudnnCreateActivationDescriptor",                          {"hipdnnCreateActivationDescriptor",                          "miopenCreateActivationDescriptor",                                   CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnSetActivationDescriptor",                             {"hipdnnSetActivationDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetActivationDescriptor",                             {"hipdnnGetActivationDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyActivationDescriptor",                         {"hipdnnDestroyActivationDescriptor",                         "miopenDestroyActivationDescriptor",                                  CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnActivationForward",                                   {"hipdnnActivationForward",                                   "miopenActivationForward",                                            CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnActivationBackward",                                  {"hipdnnActivationBackward",                                  "miopenActivationBackward",                                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnSetActivationDescriptorSwishBeta",                    {"hipdnnSetActivationDescriptorSwishBeta",                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetActivationDescriptorSwishBeta",                    {"hipdnnGetActivationDescriptorSwishBeta",                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnCreateActivationDescriptor"]                          = {"hipdnnCreateActivationDescriptor",                          "miopenCreateActivationDescriptor",                                   CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnSetActivationDescriptor"]                             = {"hipdnnSetActivationDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetActivationDescriptor"]                             = {"hipdnnGetActivationDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyActivationDescriptor"]                         = {"hipdnnDestroyActivationDescriptor",                         "miopenDestroyActivationDescriptor",                                  CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnActivationForward"]                                   = {"hipdnnActivationForward",                                   "miopenActivationForward",                                            CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnActivationBackward"]                                  = {"hipdnnActivationBackward",                                  "miopenActivationBackward",                                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnSetActivationDescriptorSwishBeta"]                    = {"hipdnnSetActivationDescriptorSwishBeta",                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetActivationDescriptorSwishBeta"]                    = {"hipdnnGetActivationDescriptorSwishBeta",                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN LRN functions
-  {"cudnnCreateLRNDescriptor",                                 {"hipdnnCreateLRNDescriptor",                                 "miopenCreateLRNDescriptor",                                          CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnSetLRNDescriptor",                                    {"hipdnnSetLRNDescriptor",                                    "miopenSetLRNDescriptor",                                             CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetLRNDescriptor",                                    {"hipdnnGetLRNDescriptor",                                    "miopenGetLRNDescriptor",                                             CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroyLRNDescriptor",                                {"hipdnnDestroyLRNDescriptor",                                "miopenDestroyLRNDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnLRNCrossChannelForward",                              {"hipdnnLRNCrossChannelForward",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
-  {"cudnnLRNCrossChannelBackward",                             {"hipdnnLRNCrossChannelBackward",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED}},
+  m["cudnnCreateLRNDescriptor"]                                 = {"hipdnnCreateLRNDescriptor",                                 "miopenCreateLRNDescriptor",                                          CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnSetLRNDescriptor"]                                    = {"hipdnnSetLRNDescriptor",                                    "miopenSetLRNDescriptor",                                             CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnGetLRNDescriptor"]                                    = {"hipdnnGetLRNDescriptor",                                    "miopenGetLRNDescriptor",                                             CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnDestroyLRNDescriptor"]                                = {"hipdnnDestroyLRNDescriptor",                                "miopenDestroyLRNDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnLRNCrossChannelForward"]                              = {"hipdnnLRNCrossChannelForward",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED};
+  m["cudnnLRNCrossChannelBackward"]                             = {"hipdnnLRNCrossChannelBackward",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED};
 
   // cuDNN Divisive Normalization functions
-  {"cudnnDivisiveNormalizationForward",                        {"hipdnnDivisiveNormalizationForward",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnDivisiveNormalizationBackward",                       {"hipdnnDivisiveNormalizationBackward",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  m["cudnnDivisiveNormalizationForward"]                        = {"hipdnnDivisiveNormalizationForward",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnDivisiveNormalizationBackward"]                       = {"hipdnnDivisiveNormalizationBackward",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   // cuDNN Batch Normalization functions
-  {"cudnnDeriveBNTensorDescriptor",                            {"hipdnnDeriveBNTensorDescriptor",                            "miopenDeriveBNTensorDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnBatchNormalizationForwardTraining",                   {"hipdnnBatchNormalizationForwardTraining",                   "miopenBatchNormalizationForwardTraining",                            CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnBatchNormalizationForwardTrainingEx",                 {"hipdnnBatchNormalizationForwardTrainingEx",                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnBatchNormalizationForwardInference",                  {"hipdnnBatchNormalizationForwardInference",                  "miopenBatchNormalizationForwardInference",                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnBatchNormalizationBackward",                          {"hipdnnBatchNormalizationBackward",                          "miopenBatchNormalizationBackward",                                   CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED}},
-  {"cudnnBatchNormalizationBackwardEx",                        {"hipdnnBatchNormalizationBackwardEx",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize", {"hipdnnGetBatchNormalizationForwardTrainingExWorkspaceSize", "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetBatchNormalizationBackwardExWorkspaceSize",        {"hipdnnGetBatchNormalizationBackwardExWorkspaceSize",        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetBatchNormalizationTrainingExReserveSpaceSize",     {"hipdnnGetBatchNormalizationTrainingExReserveSpaceSize",     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnNormalizationForwardInference",                       {"hipdnnNormalizationForwardInference",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetNormalizationForwardTrainingWorkspaceSize",        {"hipdnnGetNormalizationForwardTrainingWorkspaceSize",        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetNormalizationBackwardWorkspaceSize",               {"hipdnnGetNormalizationBackwardWorkspaceSize",               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetNormalizationTrainingReserveSpaceSize",            {"hipdnnGetNormalizationTrainingReserveSpaceSize",            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnNormalizationForwardTraining",                        {"hipdnnNormalizationForwardTraining",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnNormalizationBackward",                               {"hipdnnNormalizationBackward",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnDeriveBNTensorDescriptor"]                            = {"hipdnnDeriveBNTensorDescriptor",                            "miopenDeriveBNTensorDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnBatchNormalizationForwardTraining"]                   = {"hipdnnBatchNormalizationForwardTraining",                   "miopenBatchNormalizationForwardTraining",                            CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnBatchNormalizationForwardTrainingEx"]                 = {"hipdnnBatchNormalizationForwardTrainingEx",                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnBatchNormalizationForwardInference"]                  = {"hipdnnBatchNormalizationForwardInference",                  "miopenBatchNormalizationForwardInference",                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnBatchNormalizationBackward"]                          = {"hipdnnBatchNormalizationBackward",                          "miopenBatchNormalizationBackward",                                   CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED};
+  m["cudnnBatchNormalizationBackwardEx"]                        = {"hipdnnBatchNormalizationBackwardEx",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize"] = {"hipdnnGetBatchNormalizationForwardTrainingExWorkspaceSize", "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetBatchNormalizationBackwardExWorkspaceSize"]        = {"hipdnnGetBatchNormalizationBackwardExWorkspaceSize",        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetBatchNormalizationTrainingExReserveSpaceSize"]     = {"hipdnnGetBatchNormalizationTrainingExReserveSpaceSize",     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnNormalizationForwardInference"]                       = {"hipdnnNormalizationForwardInference",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetNormalizationForwardTrainingWorkspaceSize"]        = {"hipdnnGetNormalizationForwardTrainingWorkspaceSize",        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetNormalizationBackwardWorkspaceSize"]               = {"hipdnnGetNormalizationBackwardWorkspaceSize",               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetNormalizationTrainingReserveSpaceSize"]            = {"hipdnnGetNormalizationTrainingReserveSpaceSize",            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnNormalizationForwardTraining"]                        = {"hipdnnNormalizationForwardTraining",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnNormalizationBackward"]                               = {"hipdnnNormalizationBackward",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN Spatial Transformer functions
-  {"cudnnCreateSpatialTransformerDescriptor",                  {"hipdnnCreateSpatialTransformerDescriptor",                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSetSpatialTransformerNdDescriptor",                   {"hipdnnSetSpatialTransformerNdDescriptor",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnDestroySpatialTransformerDescriptor",                 {"hipdnnDestroySpatialTransformerDescriptor",                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSpatialTfGridGeneratorForward",                       {"hipdnnSpatialTfGridGeneratorForward",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSpatialTfGridGeneratorBackward",                      {"hipdnnSpatialTfGridGeneratorBackward",                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSpatialTfSamplerForward",                             {"hipdnnSpatialTfSamplerForward",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSpatialTfSamplerBackward",                            {"hipdnnSpatialTfSamplerBackward",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  m["cudnnCreateSpatialTransformerDescriptor"]                  = {"hipdnnCreateSpatialTransformerDescriptor",                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSetSpatialTransformerNdDescriptor"]                   = {"hipdnnSetSpatialTransformerNdDescriptor",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnDestroySpatialTransformerDescriptor"]                 = {"hipdnnDestroySpatialTransformerDescriptor",                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSpatialTfGridGeneratorForward"]                       = {"hipdnnSpatialTfGridGeneratorForward",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSpatialTfGridGeneratorBackward"]                      = {"hipdnnSpatialTfGridGeneratorBackward",                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSpatialTfSamplerForward"]                             = {"hipdnnSpatialTfSamplerForward",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSpatialTfSamplerBackward"]                            = {"hipdnnSpatialTfSamplerBackward",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   // cuDNN Dropout functions
-  {"cudnnCreateDropoutDescriptor",                             {"hipdnnCreateDropoutDescriptor",                             "miopenCreateDropoutDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroyDropoutDescriptor",                            {"hipdnnDestroyDropoutDescriptor",                            "miopenDestroyDropoutDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDropoutGetStatesSize",                                {"hipdnnDropoutGetStatesSize",                                "miopenDropoutGetStatesSize",                                         CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDropoutGetReserveSpaceSize",                          {"hipdnnDropoutGetReserveSpaceSize",                          "miopenDropoutGetReserveSpaceSize",                                   CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnSetDropoutDescriptor",                                {"hipdnnSetDropoutDescriptor",                                "miopenSetDropoutDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetDropoutDescriptor",                                {"hipdnnGetDropoutDescriptor",                                "miopenGetDropoutDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnRestoreDropoutDescriptor",                            {"hipdnnRestoreDropoutDescriptor",                            "miopenRestoreDropoutDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnDropoutForward",                                      {"hipdnnDropoutForward",                                      "miopenDropoutForward",                                               CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnDropoutBackward",                                     {"hipdnnDropoutBackward",                                     "miopenDropoutBackward",                                              CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  m["cudnnCreateDropoutDescriptor"]                             = {"hipdnnCreateDropoutDescriptor",                             "miopenCreateDropoutDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnDestroyDropoutDescriptor"]                            = {"hipdnnDestroyDropoutDescriptor",                            "miopenDestroyDropoutDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnDropoutGetStatesSize"]                                = {"hipdnnDropoutGetStatesSize",                                "miopenDropoutGetStatesSize",                                         CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnDropoutGetReserveSpaceSize"]                          = {"hipdnnDropoutGetReserveSpaceSize",                          "miopenDropoutGetReserveSpaceSize",                                   CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnSetDropoutDescriptor"]                                = {"hipdnnSetDropoutDescriptor",                                "miopenSetDropoutDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnGetDropoutDescriptor"]                                = {"hipdnnGetDropoutDescriptor",                                "miopenGetDropoutDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnRestoreDropoutDescriptor"]                            = {"hipdnnRestoreDropoutDescriptor",                            "miopenRestoreDropoutDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnDropoutForward"]                                      = {"hipdnnDropoutForward",                                      "miopenDropoutForward",                                               CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnDropoutBackward"]                                     = {"hipdnnDropoutBackward",                                     "miopenDropoutBackward",                                              CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
 
   // cuDNN RNN functions
-  {"cudnnCreateRNNDescriptor",                                 {"hipdnnCreateRNNDescriptor",                                 "miopenCreateRNNDescriptor",                                          CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnDestroyRNNDescriptor",                                {"hipdnnDestroyRNNDescriptor",                                "miopenDestroyRNNDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2}},
-  {"cudnnGetRNNForwardInferenceAlgorithmMaxCount",             {"hipdnnGetRNNForwardInferenceAlgorithmMaxCount",             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnFindRNNForwardInferenceAlgorithmEx",                  {"hipdnnFindRNNForwardInferenceAlgorithmEx",                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNForwardTrainingAlgorithmMaxCount",              {"hipdnnGetRNNForwardTrainingAlgorithmMaxCount",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnFindRNNForwardTrainingAlgorithmEx",                   {"hipdnnFindRNNForwardTrainingAlgorithmEx",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNBackwardDataAlgorithmMaxCount",                 {"hipdnnGetRNNBackwardDataAlgorithmMaxCount",                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnFindRNNBackwardDataAlgorithmEx",                      {"hipdnnFindRNNBackwardDataAlgorithmEx",                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNBackwardWeightsAlgorithmMaxCount",              {"hipdnnGetRNNBackwardWeightsAlgorithmMaxCount",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnFindRNNBackwardWeightsAlgorithmEx",                   {"hipdnnFindRNNBackwardWeightsAlgorithmEx",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnCreatePersistentRNNPlan",                             {"hipdnnCreatePersistentRNNPlan",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetPersistentRNNPlan",                                {"hipdnnSetPersistentRNNPlan",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnDestroyPersistentRNNPlan",                            {"hipdnnDestroyPersistentRNNPlan",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cudnnCreateRNNDescriptor"]                                 = {"hipdnnCreateRNNDescriptor",                                 "miopenCreateRNNDescriptor",                                          CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnDestroyRNNDescriptor"]                                = {"hipdnnDestroyRNNDescriptor",                                "miopenDestroyRNNDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2};
+  m["cudnnGetRNNForwardInferenceAlgorithmMaxCount"]             = {"hipdnnGetRNNForwardInferenceAlgorithmMaxCount",             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnFindRNNForwardInferenceAlgorithmEx"]                  = {"hipdnnFindRNNForwardInferenceAlgorithmEx",                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNForwardTrainingAlgorithmMaxCount"]              = {"hipdnnGetRNNForwardTrainingAlgorithmMaxCount",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnFindRNNForwardTrainingAlgorithmEx"]                   = {"hipdnnFindRNNForwardTrainingAlgorithmEx",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNBackwardDataAlgorithmMaxCount"]                 = {"hipdnnGetRNNBackwardDataAlgorithmMaxCount",                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnFindRNNBackwardDataAlgorithmEx"]                      = {"hipdnnFindRNNBackwardDataAlgorithmEx",                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNBackwardWeightsAlgorithmMaxCount"]              = {"hipdnnGetRNNBackwardWeightsAlgorithmMaxCount",              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnFindRNNBackwardWeightsAlgorithmEx"]                   = {"hipdnnFindRNNBackwardWeightsAlgorithmEx",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnCreatePersistentRNNPlan"]                             = {"hipdnnCreatePersistentRNNPlan",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSetPersistentRNNPlan"]                                = {"hipdnnSetPersistentRNNPlan",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnDestroyPersistentRNNPlan"]                            = {"hipdnnDestroyPersistentRNNPlan",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
   // NOTE" hipdnnSetRNNDescriptor has additional argument hipdnnRNNBiasMode_t *biasMode without default value
-  {"cudnnSetRNNDescriptor",                                    {"hipdnnSetRNNDescriptor",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cudnnSetRNNDescriptor"]                                    = {"hipdnnSetRNNDescriptor",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
   // NOTE" hipdnnGetRNNDescriptor has additional argument hipdnnRNNBiasMode_t *biasMode without default value
-  {"cudnnGetRNNDescriptor",                                    {"hipdnnGetRNNDescriptor",                                    "miopenGetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNDescriptor_v6",                                 {"hipdnnGetRNNDescriptor_v6",                                 "miopenGetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNDescriptor_v8",                                 {"hipdnnGetRNNDescriptor_v8",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSetRNNProjectionLayers",                              {"hipdnnSetRNNProjectionLayers",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNProjectionLayers",                              {"hipdnnGetRNNProjectionLayers",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetRNNAlgorithmDescriptor",                           {"hipdnnSetRNNAlgorithmDescriptor",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetRNNMatrixMathType",                                {"hipdnnSetRNNMatrixMathType",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNMatrixMathType",                                {"hipdnnGetRNNMatrixMathType",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNWorkspaceSize",                                 {"hipdnnGetRNNWorkspaceSize",                                 "miopenGetRNNWorkspaceSize",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNTrainingReserveSize",                           {"hipdnnGetRNNTrainingReserveSize",                           "miopenGetRNNTrainingReserveSize",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNParamsSize",                                    {"hipdnnGetRNNParamsSize",                                    "miopenGetRNNParamsSize",                                             CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNLinLayerMatrixParams",                          {"hipdnnGetRNNLinLayerMatrixParams",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNLinLayerBiasParams",                            {"hipdnnGetRNNLinLayerBiasParams",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNForward",                                          {"hipdnnRNNForward",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnRNNForwardInference",                                 {"hipdnnRNNForwardInference",                                 "miopenRNNForwardInference",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNForwardInferenceEx",                               {"hipdnnRNNForwardInferenceEx",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNForwardTraining",                                  {"hipdnnRNNForwardTraining",                                  "miopenRNNForwardTraining",                                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNForwardTrainingEx",                                {"hipdnnRNNForwardTrainingEx",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNBackwardData",                                     {"hipdnnRNNBackwardData",                                     "miopenRNNBackwardData",                                              CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNBackwardData_v8",                                  {"hipdnnRNNBackwardData_v8",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnRNNBackwardDataEx",                                   {"hipdnnRNNBackwardDataEx",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNBackwardWeights",                                  {"hipdnnRNNBackwardWeights",                                  "miopenRNNBackwardWeights",                                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNBackwardWeights_v8",                               {"hipdnnRNNBackwardWeights_v8",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnRNNBackwardWeightsEx",                                {"hipdnnRNNBackwardWeightsEx",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetRNNDescriptor_v5",                                 {"hipdnnSetRNNDescriptor_v5",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetRNNDescriptor_v6",                                 {"hipdnnSetRNNDescriptor_v6",                                 "miopenSetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetRNNDescriptor_v8",                                 {"hipdnnSetRNNDescriptor_v8",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSetRNNPaddingMode",                                   {"hipdnnSetRNNPaddingMode",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNPaddingMode",                                   {"hipdnnGetRNNPaddingMode",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnCreateRNNDataDescriptor",                             {"hipdnnCreateRNNDataDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnDestroyRNNDataDescriptor",                            {"hipdnnDestroyRNNDataDescriptor",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSetRNNDataDescriptor",                                {"hipdnnSetRNNDataDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetRNNDataDescriptor",                                {"hipdnnGetRNNDataDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSetRNNBiasMode",                                      {"hipdnnSetRNNBiasMode",                                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetRNNBiasMode",                                      {"hipdnnGetRNNBiasMode",                                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnBuildRNNDynamic",                                     {"hipdnnBuildRNNDynamic",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetRNNTempSpaceSizes",                                {"hipdnnGetRNNTempSpaceSizes",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetRNNWeightSpaceSize",                               {"hipdnnGetRNNWeightSpaceSize",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetRNNWeightParams",                                  {"hipdnnGetRNNWeightParams",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  m["cudnnGetRNNDescriptor"]                                    = {"hipdnnGetRNNDescriptor",                                    "miopenGetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNDescriptor_v6"]                                 = {"hipdnnGetRNNDescriptor_v6",                                 "miopenGetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNDescriptor_v8"]                                 = {"hipdnnGetRNNDescriptor_v8",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSetRNNProjectionLayers"]                              = {"hipdnnSetRNNProjectionLayers",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNProjectionLayers"]                              = {"hipdnnGetRNNProjectionLayers",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSetRNNAlgorithmDescriptor"]                           = {"hipdnnSetRNNAlgorithmDescriptor",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSetRNNMatrixMathType"]                                = {"hipdnnSetRNNMatrixMathType",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNMatrixMathType"]                                = {"hipdnnGetRNNMatrixMathType",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNWorkspaceSize"]                                 = {"hipdnnGetRNNWorkspaceSize",                                 "miopenGetRNNWorkspaceSize",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNTrainingReserveSize"]                           = {"hipdnnGetRNNTrainingReserveSize",                           "miopenGetRNNTrainingReserveSize",                                    CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNParamsSize"]                                    = {"hipdnnGetRNNParamsSize",                                    "miopenGetRNNParamsSize",                                             CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNLinLayerMatrixParams"]                          = {"hipdnnGetRNNLinLayerMatrixParams",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNLinLayerBiasParams"]                            = {"hipdnnGetRNNLinLayerBiasParams",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNForward"]                                          = {"hipdnnRNNForward",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnRNNForwardInference"]                                 = {"hipdnnRNNForwardInference",                                 "miopenRNNForwardInference",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNForwardInferenceEx"]                               = {"hipdnnRNNForwardInferenceEx",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNForwardTraining"]                                  = {"hipdnnRNNForwardTraining",                                  "miopenRNNForwardTraining",                                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNForwardTrainingEx"]                                = {"hipdnnRNNForwardTrainingEx",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNBackwardData"]                                     = {"hipdnnRNNBackwardData",                                     "miopenRNNBackwardData",                                              CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNBackwardData_v8"]                                  = {"hipdnnRNNBackwardData_v8",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnRNNBackwardDataEx"]                                   = {"hipdnnRNNBackwardDataEx",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNBackwardWeights"]                                  = {"hipdnnRNNBackwardWeights",                                  "miopenRNNBackwardWeights",                                           CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNBackwardWeights_v8"]                               = {"hipdnnRNNBackwardWeights_v8",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnRNNBackwardWeightsEx"]                                = {"hipdnnRNNBackwardWeightsEx",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSetRNNDescriptor_v5"]                                 = {"hipdnnSetRNNDescriptor_v5",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, ROC_UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSetRNNDescriptor_v6"]                                 = {"hipdnnSetRNNDescriptor_v6",                                 "miopenSetRNNDescriptor_V2",                                          CONV_LIB_FUNC, API_DNN, 2, CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSetRNNDescriptor_v8"]                                 = {"hipdnnSetRNNDescriptor_v8",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSetRNNPaddingMode"]                                   = {"hipdnnSetRNNPaddingMode",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNPaddingMode"]                                   = {"hipdnnGetRNNPaddingMode",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnCreateRNNDataDescriptor"]                             = {"hipdnnCreateRNNDataDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnDestroyRNNDataDescriptor"]                            = {"hipdnnDestroyRNNDataDescriptor",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSetRNNDataDescriptor"]                                = {"hipdnnSetRNNDataDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetRNNDataDescriptor"]                                = {"hipdnnGetRNNDataDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSetRNNBiasMode"]                                      = {"hipdnnSetRNNBiasMode",                                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetRNNBiasMode"]                                      = {"hipdnnGetRNNBiasMode",                                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnBuildRNNDynamic"]                                     = {"hipdnnBuildRNNDynamic",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetRNNTempSpaceSizes"]                                = {"hipdnnGetRNNTempSpaceSizes",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetRNNWeightSpaceSize"]                               = {"hipdnnGetRNNWeightSpaceSize",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetRNNWeightParams"]                                  = {"hipdnnGetRNNWeightParams",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   // cuDNN Connectionist Temporal Classification loss functions
-  {"cudnnCreateCTCLossDescriptor",                             {"hipdnnCreateCTCLossDescriptor",                             "miopenCreateCTCLossDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnSetCTCLossDescriptor",                                {"hipdnnSetCTCLossDescriptor",                                "miopenSetCTCLossDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetCTCLossDescriptor_v8",                             {"hipdnnSetCTCLossDescriptor_v8",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetCTCLossDescriptor_v9",                             {"hipdnnSetCTCLossDescriptor_v9",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnSetCTCLossDescriptorEx",                              {"hipdnnSetCTCLossDescriptorEx",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetCTCLossDescriptor",                                {"hipdnnGetCTCLossDescriptor",                                "miopenGetCTCLossDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetCTCLossDescriptor_v8",                             {"hipdnnGetCTCLossDescriptor_v8",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetCTCLossDescriptor_v9",                             {"hipdnnGetCTCLossDescriptor_v9",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetCTCLossDescriptorEx",                              {"hipdnnGetCTCLossDescriptorEx",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyCTCLossDescriptor",                            {"hipdnnDestroyCTCLossDescriptor",                            "miopenDestroyCTCLossDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnCTCLoss",                                             {"hipdnnCTCLoss",                                             "miopenCTCLoss",                                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnCTCLoss_v8",                                          {"hipdnnCTCLoss_v8",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnGetCTCLossWorkspaceSize",                             {"hipdnnGetCTCLossWorkspaceSize",                             "miopenGetCTCLossWorkspaceSize",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnGetCTCLossWorkspaceSize_v8",                          {"hipdnnGetCTCLossWorkspaceSize_v8",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  m["cudnnCreateCTCLossDescriptor"]                             = {"hipdnnCreateCTCLossDescriptor",                             "miopenCreateCTCLossDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnSetCTCLossDescriptor"]                                = {"hipdnnSetCTCLossDescriptor",                                "miopenSetCTCLossDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetCTCLossDescriptor_v8"]                             = {"hipdnnSetCTCLossDescriptor_v8",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetCTCLossDescriptor_v9"]                             = {"hipdnnSetCTCLossDescriptor_v9",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnSetCTCLossDescriptorEx"]                              = {"hipdnnSetCTCLossDescriptorEx",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetCTCLossDescriptor"]                                = {"hipdnnGetCTCLossDescriptor",                                "miopenGetCTCLossDescriptor",                                         CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetCTCLossDescriptor_v8"]                             = {"hipdnnGetCTCLossDescriptor_v8",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetCTCLossDescriptor_v9"]                             = {"hipdnnGetCTCLossDescriptor_v9",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetCTCLossDescriptorEx"]                              = {"hipdnnGetCTCLossDescriptorEx",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyCTCLossDescriptor"]                            = {"hipdnnDestroyCTCLossDescriptor",                            "miopenDestroyCTCLossDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnCTCLoss"]                                             = {"hipdnnCTCLoss",                                             "miopenCTCLoss",                                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnCTCLoss_v8"]                                          = {"hipdnnCTCLoss_v8",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetCTCLossWorkspaceSize"]                             = {"hipdnnGetCTCLossWorkspaceSize",                             "miopenGetCTCLossWorkspaceSize",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnGetCTCLossWorkspaceSize_v8"]                          = {"hipdnnGetCTCLossWorkspaceSize_v8",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   // cuDNN Algorithm functions
-  {"cudnnCreateAlgorithmDescriptor",                           {"hipdnnCreateAlgorithmDescriptor",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetAlgorithmDescriptor",                              {"hipdnnSetAlgorithmDescriptor",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetAlgorithmDescriptor",                              {"hipdnnGetAlgorithmDescriptor",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnCopyAlgorithmDescriptor",                             {"hipdnnCopyAlgorithmDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnDestroyAlgorithmDescriptor",                          {"hipdnnDestroyAlgorithmDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnCreateAlgorithmPerformance",                          {"hipdnnCreateAlgorithmPerformance",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSetAlgorithmPerformance",                             {"hipdnnSetAlgorithmPerformance",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetAlgorithmPerformance",                             {"hipdnnGetAlgorithmPerformance",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnDestroyAlgorithmPerformance",                         {"hipdnnDestroyAlgorithmPerformance",                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnGetAlgorithmSpaceSize",                               {"hipdnnGetAlgorithmSpaceSize",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnSaveAlgorithm",                                       {"hipdnnSaveAlgorithm",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRestoreAlgorithm",                                    {"hipdnnRestoreAlgorithm",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
+  m["cudnnCreateAlgorithmDescriptor"]                           = {"hipdnnCreateAlgorithmDescriptor",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSetAlgorithmDescriptor"]                              = {"hipdnnSetAlgorithmDescriptor",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetAlgorithmDescriptor"]                              = {"hipdnnGetAlgorithmDescriptor",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnCopyAlgorithmDescriptor"]                             = {"hipdnnCopyAlgorithmDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnDestroyAlgorithmDescriptor"]                          = {"hipdnnDestroyAlgorithmDescriptor",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnCreateAlgorithmPerformance"]                          = {"hipdnnCreateAlgorithmPerformance",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSetAlgorithmPerformance"]                             = {"hipdnnSetAlgorithmPerformance",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetAlgorithmPerformance"]                             = {"hipdnnGetAlgorithmPerformance",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnDestroyAlgorithmPerformance"]                         = {"hipdnnDestroyAlgorithmPerformance",                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnGetAlgorithmSpaceSize"]                               = {"hipdnnGetAlgorithmSpaceSize",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnSaveAlgorithm"]                                       = {"hipdnnSaveAlgorithm",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRestoreAlgorithm"]                                    = {"hipdnnRestoreAlgorithm",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
 
   // cuDNN Clipping functions
-  {"cudnnRNNSetClip",                                          {"hipdnnRNNSetClip",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNSetClip_v8",                                       {"hipdnnRNNSetClip_v8",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnRNNSetClip_v9",                                       {"hipdnnRNNSetClip_v9",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnRNNGetClip",                                          {"hipdnnRNNGetClip",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED}},
-  {"cudnnRNNGetClip_v8",                                       {"hipdnnRNNGetClip_v8",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnRNNGetClip_v9",                                       {"hipdnnRNNGetClip_v9",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
+  m["cudnnRNNSetClip"]                                          = {"hipdnnRNNSetClip",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNSetClip_v8"]                                       = {"hipdnnRNNSetClip_v8",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnRNNSetClip_v9"]                                       = {"hipdnnRNNSetClip_v9",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnRNNGetClip"]                                          = {"hipdnnRNNGetClip",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
+  m["cudnnRNNGetClip_v8"]                                       = {"hipdnnRNNGetClip_v8",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnRNNGetClip_v9"]                                       = {"hipdnnRNNGetClip_v9",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   // cuDNN Sequence functions
-  {"cudnnCreateSeqDataDescriptor",                             {"hipdnnCreateSeqDataDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroySeqDataDescriptor",                            {"hipdnnDestroySeqDataDescriptor",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetSeqDataDescriptor",                                {"hipdnnSetSeqDataDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetSeqDataDescriptor",                                {"hipdnnGetSeqDataDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnCreateSeqDataDescriptor"]                             = {"hipdnnCreateSeqDataDescriptor",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroySeqDataDescriptor"]                            = {"hipdnnDestroySeqDataDescriptor",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetSeqDataDescriptor"]                                = {"hipdnnSetSeqDataDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetSeqDataDescriptor"]                                = {"hipdnnGetSeqDataDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN Multihead Attention functions
-  {"cudnnCreateAttnDescriptor",                                {"hipdnnCreateAttnDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyAttnDescriptor",                               {"hipdnnDestroyAttnDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetAttnDescriptor",                                   {"hipdnnSetAttnDescriptor",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetAttnDescriptor",                                   {"hipdnnGetAttnDescriptor",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetMultiHeadAttnBuffers",                             {"hipdnnGetMultiHeadAttnBuffers",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetMultiHeadAttnWeights",                             {"hipdnnGetMultiHeadAttnWeights",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnMultiHeadAttnForward",                                {"hipdnnMultiHeadAttnForward",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnMultiHeadAttnBackwardData",                           {"hipdnnMultiHeadAttnBackwardData",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnMultiHeadAttnBackwardWeights",                        {"hipdnnMultiHeadAttnBackwardWeights",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnCreateAttnDescriptor"]                                = {"hipdnnCreateAttnDescriptor",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyAttnDescriptor"]                               = {"hipdnnDestroyAttnDescriptor",                               "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetAttnDescriptor"]                                   = {"hipdnnSetAttnDescriptor",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetAttnDescriptor"]                                   = {"hipdnnGetAttnDescriptor",                                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetMultiHeadAttnBuffers"]                             = {"hipdnnGetMultiHeadAttnBuffers",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetMultiHeadAttnWeights"]                             = {"hipdnnGetMultiHeadAttnWeights",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnMultiHeadAttnForward"]                                = {"hipdnnMultiHeadAttnForward",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnMultiHeadAttnBackwardData"]                           = {"hipdnnMultiHeadAttnBackwardData",                           "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnMultiHeadAttnBackwardWeights"]                        = {"hipdnnMultiHeadAttnBackwardWeights",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN Fuse functions
-  {"cudnnCreateFusedOpsConstParamPack",                        {"hipdnnCreateFusedOpsConstParamPack",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyFusedOpsConstParamPack",                       {"hipdnnDestroyFusedOpsConstParamPack",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetFusedOpsConstParamPackAttribute",                  {"hipdnnSetFusedOpsConstParamPackAttribute",                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetFusedOpsConstParamPackAttribute",                  {"hipdnnGetFusedOpsConstParamPackAttribute",                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnCreateFusedOpsVariantParamPack",                      {"hipdnnCreateFusedOpsVariantParamPack",                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyFusedOpsVariantParamPack",                     {"hipdnnDestroyFusedOpsVariantParamPack",                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnSetFusedOpsVariantParamPackAttribute",                {"hipdnnSetFusedOpsVariantParamPackAttribute",                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnGetFusedOpsVariantParamPackAttribute",                {"hipdnnGetFusedOpsVariantParamPackAttribute",                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnCreateFusedOpsPlan",                                  {"hipdnnCreateFusedOpsPlan",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnDestroyFusedOpsPlan",                                 {"hipdnnDestroyFusedOpsPlan",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnMakeFusedOpsPlan",                                    {"hipdnnMakeFusedOpsPlan",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
-  {"cudnnFusedOpsExecute",                                     {"hipdnnFusedOpsExecute",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED}},
+  m["cudnnCreateFusedOpsConstParamPack"]                        = {"hipdnnCreateFusedOpsConstParamPack",                        "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyFusedOpsConstParamPack"]                       = {"hipdnnDestroyFusedOpsConstParamPack",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetFusedOpsConstParamPackAttribute"]                  = {"hipdnnSetFusedOpsConstParamPackAttribute",                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetFusedOpsConstParamPackAttribute"]                  = {"hipdnnGetFusedOpsConstParamPackAttribute",                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnCreateFusedOpsVariantParamPack"]                      = {"hipdnnCreateFusedOpsVariantParamPack",                      "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyFusedOpsVariantParamPack"]                     = {"hipdnnDestroyFusedOpsVariantParamPack",                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnSetFusedOpsVariantParamPackAttribute"]                = {"hipdnnSetFusedOpsVariantParamPackAttribute",                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnGetFusedOpsVariantParamPackAttribute"]                = {"hipdnnGetFusedOpsVariantParamPackAttribute",                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnCreateFusedOpsPlan"]                                  = {"hipdnnCreateFusedOpsPlan",                                  "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnDestroyFusedOpsPlan"]                                 = {"hipdnnDestroyFusedOpsPlan",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnMakeFusedOpsPlan"]                                    = {"hipdnnMakeFusedOpsPlan",                                    "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cudnnFusedOpsExecute"]                                     = {"hipdnnFusedOpsExecute",                                     "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
 
   // cuDNN Backend
-  {"cudnnBackendCreateDescriptor",                             {"hipdnnBackendCreateDescriptor",                             "miopenBackendCreateDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnBackendDestroyDescriptor",                            {"hipdnnBackendDestroyDescriptor",                            "miopenBackendDestroyDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
+  m["cudnnBackendCreateDescriptor"]                             = {"hipdnnBackendCreateDescriptor",                             "miopenBackendCreateDescriptor",                                      CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnBackendDestroyDescriptor"]                            = {"hipdnnBackendDestroyDescriptor",                            "miopenBackendDestroyDescriptor",                                     CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
   // NOTE: cudnnBackendInitialize and miopenBackendInitialize have different signatures
-  {"cudnnBackendInitialize",                                   {"hipdnnBackendInitialize",                                   "miopenBackendInitialize",                                            CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnBackendFinalize",                                     {"hipdnnBackendFinalize",                                     "miopenBackendFinalize",                                              CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnBackendSetAttribute",                                 {"hipdnnBackendSetAttribute",                                 "miopenBackendSetAttribute",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnBackendGetAttribute",                                 {"hipdnnBackendGetAttribute",                                 "miopenBackendGetAttribute",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnBackendExecute",                                      {"hipdnnBackendExecute",                                      "miopenBackendExecute",                                               CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED}},
-  {"cudnnBackendPopulateCudaGraph",                            {"hipdnnBackendPopulateCudaGraph",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-  {"cudnnBackendUpdateCudaGraph",                              {"hipdnnBackendUpdateCudaGraph",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED}},
-};
+  m["cudnnBackendInitialize"]                                   = {"hipdnnBackendInitialize",                                   "miopenBackendInitialize",                                            CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnBackendFinalize"]                                     = {"hipdnnBackendFinalize",                                     "miopenBackendFinalize",                                              CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnBackendSetAttribute"]                                 = {"hipdnnBackendSetAttribute",                                 "miopenBackendSetAttribute",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnBackendGetAttribute"]                                 = {"hipdnnBackendGetAttribute",                                 "miopenBackendGetAttribute",                                          CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnBackendExecute"]                                      = {"hipdnnBackendExecute",                                      "miopenBackendExecute",                                               CONV_LIB_FUNC, API_DNN, 2, HIP_UNSUPPORTED};
+  m["cudnnBackendPopulateCudaGraph"]                            = {"hipdnnBackendPopulateCudaGraph",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnBackendUpdateCudaGraph"]                              = {"hipdnnBackendUpdateCudaGraph",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP {
-  {"cudnnCreateRNNDescriptor",                                 {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnDestroyRNNDescriptor",                                {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetRNNDescriptor_v8",                                 {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnGetRNNDescriptor_v8",                                 {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnSetRNNDescriptor_v6",                                 {CUDNN_60,  CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNDescriptor_v6",                                 {CUDNN_801, CUDNN_801, CUDNN_900}},
-  {"cudnnSetRNNMatrixMathType",                                {CUDNN_705, CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNMatrixMathType",                                {CUDNN_713, CUDNN_801, CUDNN_900}},
-  {"cudnnSetRNNBiasMode",                                      {CUDNN_750, CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNBiasMode",                                      {CUDNN_750, CUDNN_801, CUDNN_900}},
-  {"cudnnRNNSetClip_v8",                                       {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnRNNGetClip_v8",                                       {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnRNNSetClip",                                          {CUDNN_721, CUDNN_801, CUDNN_900}},
-  {"cudnnRNNGetClip",                                          {CUDNN_721, CUDNN_801, CUDNN_900}},
-  {"cudnnSetRNNProjectionLayers",                              {CUDNN_713, CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNProjectionLayers",                              {CUDNN_713, CUDNN_801, CUDNN_900}},
-  {"cudnnCreatePersistentRNNPlan",                             {CUDNN_60,  CUDNN_801, CUDNN_900}},
-  {"cudnnDestroyPersistentRNNPlan",                            {CUDNN_60,  CUDNN_801, CUDNN_900}},
-  {"cudnnSetPersistentRNNPlan",                                {CUDNN_60,  CUDNN_801, CUDNN_900}},
-  {"cudnnBuildRNNDynamic",                                     {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnGetRNNWorkspaceSize",                                 {CUDNN_50,  CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNTrainingReserveSize",                           {CUDNN_50,  CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNTempSpaceSizes",                                {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnGetRNNParamsSize",                                    {CUDNN_50,  CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNWeightSpaceSize",                               {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnGetRNNLinLayerMatrixParams",                          {CUDNN_50,  CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNLinLayerBiasParams",                            {CUDNN_50,  CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNWeightParams",                                  {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnRNNForwardInference",                                 {CUDNN_50,  CUDNN_801, CUDNN_900}},
-  {"cudnnSetRNNPaddingMode",                                   {CUDNN_721, CUDNN_801, CUDNN_900}},
-  {"cudnnGetRNNPaddingMode",                                   {CUDNN_721, CUDNN_801, CUDNN_900}},
-  {"cudnnCreateRNNDataDescriptor",                             {CUDNN_721, CUDA_0,    CUDA_0   }},
-  {"cudnnDestroyRNNDataDescriptor",                            {CUDNN_721, CUDA_0,    CUDA_0   }},
-  {"cudnnSetRNNDataDescriptor",                                {CUDNN_721, CUDA_0,    CUDA_0   }},
-  {"cudnnGetRNNDataDescriptor",                                {CUDNN_721, CUDA_0,    CUDA_0   }},
-  {"cudnnRNNForwardInferenceEx",                               {CUDNN_721, CUDNN_801, CUDNN_900}},
-  {"cudnnRNNForward",                                          {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnSetRNNAlgorithmDescriptor",                           {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnGetRNNForwardInferenceAlgorithmMaxCount",             {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnFindRNNForwardInferenceAlgorithmEx",                  {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnCreateSeqDataDescriptor",                             {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnDestroySeqDataDescriptor",                            {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnSetSeqDataDescriptor",                                {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnGetSeqDataDescriptor",                                {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnCreateAttnDescriptor",                                {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyAttnDescriptor",                               {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnSetAttnDescriptor",                                   {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnGetAttnDescriptor",                                   {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnGetMultiHeadAttnBuffers",                             {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnGetMultiHeadAttnWeights",                             {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnMultiHeadAttnForward",                                {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnAdvInferVersionCheck",                                {CUDNN_801, CUDA_0,    CUDNN_900}},
-  {"cudnnRNNForwardTraining",                                  {CUDNN_50,  CUDNN_801, CUDNN_900}},
-  {"cudnnRNNBackwardData",                                     {CUDNN_50,  CUDNN_802, CUDNN_900}},
-  {"cudnnRNNBackwardData_v8",                                  {CUDNN_802, CUDA_0,    CUDA_0   }},
-  {"cudnnRNNBackwardWeights",                                  {CUDNN_50,  CUDNN_802, CUDNN_900}},
-  {"cudnnRNNBackwardWeights_v8",                               {CUDNN_802, CUDA_0,    CUDA_0   }},
-  {"cudnnRNNForwardTrainingEx",                                {CUDNN_721, CUDNN_801, CUDNN_900}},
-  {"cudnnRNNBackwardDataEx",                                   {CUDNN_721, CUDNN_802, CUDNN_900}},
-  {"cudnnRNNBackwardWeightsEx",                                {CUDNN_721, CUDNN_802, CUDNN_900}},
-  {"cudnnGetRNNForwardTrainingAlgorithmMaxCount",              {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnFindRNNForwardTrainingAlgorithmEx",                   {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnGetRNNBackwardDataAlgorithmMaxCount",                 {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnFindRNNBackwardDataAlgorithmEx",                      {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnGetRNNBackwardWeightsAlgorithmMaxCount",              {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnFindRNNBackwardWeightsAlgorithmEx",                   {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnMultiHeadAttnBackwardData",                           {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnMultiHeadAttnBackwardWeights",                        {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnCreateCTCLossDescriptor",                             {CUDNN_705, CUDA_0,    CUDA_0   }},
-  {"cudnnSetCTCLossDescriptor",                                {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnSetCTCLossDescriptorEx",                              {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnSetCTCLossDescriptor_v8",                             {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnGetCTCLossDescriptor",                                {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnGetCTCLossDescriptorEx",                              {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnGetCTCLossDescriptor_v8",                             {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyCTCLossDescriptor",                            {CUDNN_705, CUDA_0,    CUDA_0   }},
-  {"cudnnCTCLoss",                                             {CUDNN_705, CUDA_0,    CUDA_0   }},
-  {"cudnnCTCLoss_v8",                                          {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnGetCTCLossWorkspaceSize",                             {CUDNN_705, CUDA_0,    CUDA_0   }},
-  {"cudnnGetCTCLossWorkspaceSize_v8",                          {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnAdvTrainVersionCheck",                                {CUDNN_801, CUDA_0,    CUDNN_900}},
-  {"cudnnBackendCreateDescriptor",                             {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnBackendDestroyDescriptor",                            {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnBackendInitialize",                                   {CUDNN_801, CUDNN_930, CUDA_0   }},
-  {"cudnnBackendFinalize",                                     {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnBackendSetAttribute",                                 {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnBackendGetAttribute",                                 {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnBackendExecute",                                      {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnCreateConvolutionDescriptor",                         {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyConvolutionDescriptor",                        {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetConvolutionMathType",                              {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionMathType",                              {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnSetConvolutionGroupCount",                            {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionGroupCount",                            {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnSetConvolutionReorderType",                           {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionReorderType",                           {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnSetConvolution2dDescriptor",                          {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolution2dDescriptor",                          {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetConvolutionNdDescriptor",                          {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionNdDescriptor",                          {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolution2dForwardOutputDim",                    {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionNdForwardOutputDim",                    {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionForwardAlgorithmMaxCount",              {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionForwardAlgorithm_v7",                   {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnFindConvolutionForwardAlgorithm",                     {CUDNN_30,  CUDNN_900, CUDA_0   }},
-  {"cudnnFindConvolutionForwardAlgorithmEx",                   {CUDNN_50,  CUDNN_900, CUDA_0   }},
-  {"cudnnIm2Col",                                              {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnReorderFilterAndBias",                                {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionForwardWorkspaceSize",                  {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnConvolutionForward",                                  {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnConvolutionBiasActivationForward",                    {CUDNN_60,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionBackwardDataAlgorithmMaxCount",         {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnFindConvolutionBackwardDataAlgorithm",                {CUDNN_30,  CUDNN_900, CUDA_0   }},
-  {"cudnnFindConvolutionBackwardDataAlgorithmEx",              {CUDNN_50,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionBackwardDataAlgorithm_v7",              {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionBackwardDataWorkspaceSize",             {CUDNN_30,  CUDNN_900, CUDA_0   }},
-  {"cudnnConvolutionBackwardData",                             {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetFoldedConvBackwardDataDescriptors",                {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnCnnInferVersionCheck",                                {CUDNN_802, CUDA_0,    CUDA_0   }},
-  {"cudnnGetConvolutionBackwardFilterAlgorithmMaxCount",       {CUDNN_705, CUDA_0,    CUDA_0   }},
-  {"cudnnFindConvolutionBackwardFilterAlgorithm",              {CUDNN_30,  CUDNN_900, CUDA_0   }},
-  {"cudnnFindConvolutionBackwardFilterAlgorithmEx",            {CUDNN_50,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionBackwardFilterAlgorithm_v7",            {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnGetConvolutionBackwardFilterWorkspaceSize",           {CUDNN_30,  CUDNN_900, CUDA_0   }},
-  {"cudnnConvolutionBackwardFilter",                           {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnConvolutionBackwardBias",                             {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnCreateFusedOpsConstParamPack",                        {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyFusedOpsConstParamPack",                       {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnSetFusedOpsConstParamPackAttribute",                  {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnGetFusedOpsConstParamPackAttribute",                  {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnCreateFusedOpsVariantParamPack",                      {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyFusedOpsVariantParamPack",                     {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnSetFusedOpsVariantParamPackAttribute",                {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnGetFusedOpsVariantParamPackAttribute",                {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnCreateFusedOpsPlan",                                  {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyFusedOpsPlan",                                 {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnMakeFusedOpsPlan",                                    {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnFusedOpsExecute",                                     {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnCnnTrainVersionCheck",                                {CUDNN_802, CUDA_0,    CUDA_0   }},
-  {"cudnnGetVersion",                                          {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnGetCudartVersion",                                    {CUDNN_60,  CUDA_0,    CUDA_0   }},
-  {"cudnnGetErrorString",                                      {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnQueryRuntimeError",                                   {CUDNN_705, CUDNN_900, CUDA_0   }},
-  {"cudnnGetProperty",                                         {CUDNN_60,  CUDA_0,    CUDA_0   }},
-  {"cudnnCreate",                                              {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnDestroy",                                             {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetStream",                                           {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnGetStream",                                           {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnCreateTensorDescriptor",                              {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetTensor4dDescriptor",                               {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetTensor4dDescriptorEx",                             {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnGetTensor4dDescriptor",                               {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetTensorNdDescriptor",                               {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetTensorNdDescriptorEx",                             {CUDNN_60,  CUDA_0,    CUDA_0   }},
-  {"cudnnGetTensorNdDescriptor",                               {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnGetTensorSizeInBytes",                                {CUDNN_60,  CUDA_0,    CUDA_0   }},
-  {"cudnnDestroyTensorDescriptor",                             {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnInitTransformDest",                                   {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnCreateTensorTransformDescriptor",                     {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnSetTensorTransformDescriptor",                        {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnGetTensorTransformDescriptor",                        {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyTensorTransformDescriptor",                    {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnTransformTensor",                                     {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnTransformTensorEx",                                   {CUDNN_750, CUDNN_900, CUDA_0   }},
-  {"cudnnAddTensor",                                           {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnCreateOpTensorDescriptor",                            {CUDNN_50,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetOpTensorDescriptor",                               {CUDNN_50,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetOpTensorDescriptor",                               {CUDNN_50,  CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyOpTensorDescriptor",                           {CUDNN_50,  CUDNN_900, CUDA_0   }},
-  {"cudnnOpTensor",                                            {CUDNN_50,  CUDNN_900, CUDA_0   }},
-  {"cudnnCreateReduceTensorDescriptor",                        {CUDNN_60,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetReduceTensorDescriptor",                           {CUDNN_60,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetReduceTensorDescriptor",                           {CUDNN_60,  CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyReduceTensorDescriptor",                       {CUDNN_60,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetReductionIndicesSize",                             {CUDNN_60,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetReductionWorkspaceSize",                           {CUDNN_60,  CUDNN_900, CUDA_0   }},
-  {"cudnnReduceTensor",                                        {CUDNN_60,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetTensor",                                           {CUDNN_20,  CUDA_0,    CUDA_0   }},
-  {"cudnnScaleTensor",                                         {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnCreateFilterDescriptor",                              {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetFilter4dDescriptor",                               {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetFilter4dDescriptor",                               {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetFilterNdDescriptor",                               {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetFilterNdDescriptor",                               {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetFilterSizeInBytes",                                {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnTransformFilter",                                     {CUDNN_760, CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyFilterDescriptor",                             {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnSoftmaxForward",                                      {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnCreatePoolingDescriptor",                             {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetPooling2dDescriptor",                              {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetPooling2dDescriptor",                              {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetPoolingNdDescriptor",                              {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetPoolingNdDescriptor",                              {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetPoolingNdForwardOutputDim",                        {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetPooling2dForwardOutputDim",                        {CUDNN_20,  CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyPoolingDescriptor",                            {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnPoolingForward",                                      {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnCreateActivationDescriptor",                          {CUDNN_40,  CUDNN_900, CUDA_0   }},
-  {"cudnnSetActivationDescriptor",                             {CUDNN_40,  CUDNN_900, CUDA_0   }},
-  {"cudnnGetActivationDescriptor",                             {CUDNN_40,  CUDNN_900, CUDA_0   }},
-  {"cudnnDestroyActivationDescriptor",                         {CUDNN_40,  CUDNN_900, CUDA_0   }},
-  {"cudnnActivationForward",                                   {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnCreateLRNDescriptor",                                 {CUDNN_30,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetLRNDescriptor",                                    {CUDNN_30,  CUDA_0,    CUDA_0   }},
-  {"cudnnGetLRNDescriptor",                                    {CUDNN_30,  CUDA_0,    CUDA_0   }},
-  {"cudnnDestroyLRNDescriptor",                                {CUDNN_30,  CUDA_0,    CUDA_0   }},
-  {"cudnnLRNCrossChannelForward",                              {CUDNN_30,  CUDA_0,    CUDA_0   }},
-  {"cudnnDivisiveNormalizationForward",                        {CUDNN_30,  CUDA_0,    CUDA_0   }},
-  {"cudnnDeriveBNTensorDescriptor",                            {CUDNN_40,  CUDNN_900, CUDA_0   }},
-  {"cudnnBatchNormalizationForwardInference",                  {CUDNN_40,  CUDNN_900, CUDA_0   }},
-  {"cudnnDeriveNormTensorDescriptor",                          {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnNormalizationForwardInference",                       {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnCreateSpatialTransformerDescriptor",                  {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetSpatialTransformerNdDescriptor",                   {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnDestroySpatialTransformerDescriptor",                 {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnSpatialTfGridGeneratorForward",                       {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnSpatialTfSamplerForward",                             {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnCreateDropoutDescriptor",                             {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnDestroyDropoutDescriptor",                            {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnDropoutGetStatesSize",                                {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnDropoutGetReserveSpaceSize",                          {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnSetDropoutDescriptor",                                {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnRestoreDropoutDescriptor",                            {CUDNN_705, CUDA_0,    CUDA_0   }},
-  {"cudnnGetDropoutDescriptor",                                {CUDNN_705, CUDA_0,    CUDA_0   }},
-  {"cudnnDropoutForward",                                      {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnCreateAlgorithmDescriptor",                           {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnSetAlgorithmDescriptor",                              {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnGetAlgorithmDescriptor",                              {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnCopyAlgorithmDescriptor",                             {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnDestroyAlgorithmDescriptor",                          {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnCreateAlgorithmPerformance",                          {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnSetAlgorithmPerformance",                             {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnGetAlgorithmPerformance",                             {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnDestroyAlgorithmPerformance",                         {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnGetAlgorithmSpaceSize",                               {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnSaveAlgorithm",                                       {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnRestoreAlgorithm",                                    {CUDNN_713, CUDNN_802, CUDNN_900}},
-  {"cudnnSetCallback",                                         {CUDNN_713, CUDA_0,    CUDA_0   }},
-  {"cudnnGetCallback",                                         {CUDNN_713, CUDA_0,    CUDA_0   }},
-  {"cudnnOpsInferVersionCheck",                                {CUDNN_801, CUDA_0,    CUDA_0   }},
-  {"cudnnSoftmaxBackward",                                     {CUDNN_10,  CUDA_0,    CUDA_0   }},
-  {"cudnnPoolingBackward",                                     {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnActivationBackward",                                  {CUDNN_10,  CUDNN_900, CUDA_0   }},
-  {"cudnnLRNCrossChannelBackward",                             {CUDNN_30,  CUDA_0,    CUDA_0   }},
-  {"cudnnDivisiveNormalizationBackward",                       {CUDNN_30,  CUDA_0,    CUDA_0   }},
-  {"cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize", {CUDNN_741, CUDNN_900, CUDA_0   }},
-  {"cudnnGetBatchNormalizationBackwardExWorkspaceSize",        {CUDNN_741, CUDNN_900, CUDA_0   }},
-  {"cudnnGetBatchNormalizationTrainingExReserveSpaceSize",     {CUDNN_741, CUDNN_900, CUDA_0   }},
-  {"cudnnBatchNormalizationForwardTraining",                   {CUDNN_40,  CUDNN_900, CUDA_0   }},
-  {"cudnnBatchNormalizationForwardTrainingEx",                 {CUDNN_741, CUDNN_900, CUDA_0   }},
-  {"cudnnBatchNormalizationBackward",                          {CUDNN_40,  CUDNN_900, CUDA_0   }},
-  {"cudnnBatchNormalizationBackwardEx",                        {CUDNN_741, CUDNN_900, CUDA_0   }},
-  {"cudnnGetNormalizationForwardTrainingWorkspaceSize",        {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnGetNormalizationBackwardWorkspaceSize",               {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnGetNormalizationTrainingReserveSpaceSize",            {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnNormalizationForwardTraining",                        {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnNormalizationBackward",                               {CUDNN_801, CUDNN_900, CUDA_0   }},
-  {"cudnnSpatialTfGridGeneratorBackward",                      {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnSpatialTfSamplerBackward",                            {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnDropoutBackward",                                     {CUDNN_50,  CUDA_0,    CUDA_0   }},
-  {"cudnnOpsTrainVersionCheck",                                {CUDNN_801, CUDA_0,    CUDNN_900}},
-  {"cudnnGetConvolutionBackwardDataAlgorithm",                 {CUDNN_30,  CUDNN_765, CUDNN_801}},
-  {"cudnnGetConvolutionBackwardFilterAlgorithm",               {CUDNN_30,  CUDNN_765, CUDNN_801}},
-  {"cudnnGetConvolutionForwardAlgorithm",                      {CUDNN_20,  CUDNN_765, CUDNN_801}},
-  {"cudnnGetRNNDescriptor",                                    {CUDNN_705, CUDNN_765, CUDNN_801}},
-  {"cudnnSetRNNDescriptor",                                    {CUDNN_50,  CUDNN_765, CUDNN_801}},
-  {"cudnnSetRNNDescriptor_v5",                                 {CUDNN_705, CUDNN_765, CUDNN_801}},
-  {"cudnnSetActivationDescriptorSwishBeta",                    {CUDNN_820, CUDNN_900, CUDA_0   }},
-  {"cudnnGetActivationDescriptorSwishBeta",                    {CUDNN_820, CUDNN_900, CUDA_0   }},
-  {"cudnnGetMaxDeviceVersion",                                 {CUDNN_860, CUDA_0,    CUDA_0   }},
-  {"cudnnRNNSetClip_v9",                                       {CUDNN_900, CUDA_0,    CUDA_0   }},
-  {"cudnnRNNGetClip_v9",                                       {CUDNN_900, CUDA_0,    CUDA_0   }},
-  {"cudnnAdvVersionCheck",                                     {CUDNN_900, CUDA_0,    CUDA_0   }},
-  {"cudnnSetCTCLossDescriptor_v9",                             {CUDNN_900, CUDA_0,    CUDA_0   }},
-  {"cudnnGetCTCLossDescriptor_v9",                             {CUDNN_900, CUDA_0,    CUDA_0   }},
-  {"cudnnGetLastErrorString",                                  {CUDNN_900, CUDA_0,    CUDA_0   }},
-  {"cudnnGraphVersionCheck",                                   {CUDNN_900, CUDA_0,    CUDA_0   }},
-  {"cudnnOpsVersionCheck",                                     {CUDNN_900, CUDA_0,    CUDA_0   }},
-  {"cudnnBackendPopulateCudaGraph",                            {CUDNN_950, CUDA_0,    CUDA_0   }},
-  {"cudnnBackendUpdateCudaGraph",                              {CUDNN_950, CUDA_0,    CUDA_0   }},
-};
+  return m;
+}();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_FUNCTION_VER_MAP {
-  {"miopenGetErrorString",                                     {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenCreate",                                             {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenDestroy",                                            {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenSetStream",                                          {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenGetStream",                                          {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenCreateTensorDescriptor",                             {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenSet4dTensorDescriptorEx",                            {HIP_5030,  HIP_0,     HIP_0    }},
-  {"miopenGet4dTensorDescriptor",                              {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenDestroyTensorDescriptor",                            {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenTransformTensor",                                    {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenCreateReduceTensorDescriptor",                       {HIP_3090,  HIP_0,     HIP_0    }},
-  {"miopenSetReduceTensorDescriptor",                          {HIP_3090,  HIP_0,     HIP_0    }},
-  {"miopenGetReduceTensorDescriptor",                          {HIP_3090,  HIP_0,     HIP_0    }},
-  {"miopenDestroyReduceTensorDescriptor",                      {HIP_3090,  HIP_0,     HIP_0    }},
-  {"miopenGetReductionIndicesSize",                            {HIP_3090,  HIP_0,     HIP_0    }},
-  {"miopenGetReductionWorkspaceSize",                          {HIP_3090,  HIP_0,     HIP_0    }},
-  {"miopenReduceTensor",                                       {HIP_3090,  HIP_0,     HIP_0    }},
-  {"miopenSetTensor",                                          {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenScaleTensor",                                        {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenCreateConvolutionDescriptor",                        {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenSetConvolutionGroupCount",                           {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenGetConvolutionForwardOutputDim",                     {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenDestroyConvolutionDescriptor",                       {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenFindConvolutionForwardAlgorithm",                    {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenConvolutionForwardGetWorkSpaceSize",                 {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenConvolutionForward",                                 {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenConvolutionBiasActivationForward",                   {HIP_5040,  HIP_0,     HIP_0    }},
-  {"miopenConvolutionBackwardBias",                            {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenConvolutionBackwardDataGetWorkSpaceSize",            {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenConvolutionBackwardData",                            {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenSoftmaxForward_V2",                                  {HIP_2060,  HIP_0,     HIP_0    }},
-  {"miopenSoftmaxBackward_V2",                                 {HIP_2060,  HIP_0,     HIP_0    }},
-  {"miopenCreatePoolingDescriptor",                            {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenSet2dPoolingDescriptor",                             {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenGet2dPoolingDescriptor",                             {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenSetNdPoolingDescriptor",                             {HIP_3030,  HIP_0,     HIP_0    }},
-  {"miopenGetNdPoolingDescriptor",                             {HIP_3030,  HIP_0,     HIP_0    }},
-  {"miopenGetPoolingNdForwardOutputDim",                       {HIP_3030,  HIP_0,     HIP_0    }},
-  {"miopenGetPoolingForwardOutputDim",                         {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenDestroyPoolingDescriptor",                           {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenCreateActivationDescriptor",                         {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenDestroyActivationDescriptor",                        {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenActivationForward",                                  {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenActivationBackward",                                 {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenCreateLRNDescriptor",                                {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenSetLRNDescriptor",                                   {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenGetLRNDescriptor",                                   {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenDestroyLRNDescriptor",                               {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenDeriveBNTensorDescriptor",                           {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenBatchNormalizationForwardTraining",                  {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenBatchNormalizationForwardInference",                 {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenBatchNormalizationBackward",                         {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenCreateDropoutDescriptor",                            {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenDestroyDropoutDescriptor",                           {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenDropoutGetStatesSize",                               {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenDropoutGetReserveSpaceSize",                         {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenSetDropoutDescriptor",                               {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenGetDropoutDescriptor",                               {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenRestoreDropoutDescriptor",                           {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenDropoutForward",                                     {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenDropoutBackward",                                    {HIP_2080,  HIP_0,     HIP_0    }},
-  {"miopenCreateRNNDescriptor",                                {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenDestroyRNNDescriptor",                               {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenGetRNNDescriptor_V2",                                {HIP_3050,  HIP_0,     HIP_0    }},
-  {"miopenGetRNNWorkspaceSize",                                {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenGetRNNTrainingReserveSize",                          {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenGetRNNParamsSize",                                   {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenRNNForwardInference",                                {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenRNNForwardTraining",                                 {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenRNNBackwardData",                                    {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenRNNBackwardWeights",                                 {HIP_2010,  HIP_0,     HIP_0    }},
-  {"miopenSetRNNDescriptor_V2",                                {HIP_3050,  HIP_0,     HIP_0    }},
-  {"miopenCreateCTCLossDescriptor",                            {HIP_2060,  HIP_0,     HIP_0    }},
-  {"miopenSetCTCLossDescriptor",                               {HIP_2060,  HIP_0,     HIP_0    }},
-  {"miopenGetCTCLossDescriptor",                               {HIP_2060,  HIP_0,     HIP_0    }},
-  {"miopenDestroyCTCLossDescriptor",                           {HIP_2060,  HIP_0,     HIP_0    }},
-  {"miopenCTCLoss",                                            {HIP_2060,  HIP_0,     HIP_0    }},
-  {"miopenGetCTCLossWorkspaceSize",                            {HIP_2060,  HIP_0,     HIP_0    }},
-  {"miopenBackendCreateDescriptor",                            {HIP_6020,  HIP_0,     HIP_0    }},
-  {"miopenBackendDestroyDescriptor",                           {HIP_6020,  HIP_0,     HIP_0    }},
-  {"miopenBackendFinalize",                                    {HIP_6020,  HIP_0,     HIP_0    }},
-  {"miopenBackendSetAttribute",                                {HIP_6020,  HIP_0,     HIP_0    }},
-  {"miopenBackendGetAttribute",                                {HIP_6020,  HIP_0,     HIP_0    }},
-  {"miopenBackendExecute",                                     {HIP_6020,  HIP_0,     HIP_0    }},
-};
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIversions> m;
 
-const std::map<unsigned int, llvm::StringRef> CUDA_DNN_API_SECTION_MAP {
-  {1, "CUDNN Data types"},
-  {2, "CUDNN Functions"},
-};
+  m["cudnnCreateRNNDescriptor"]                                 = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnDestroyRNNDescriptor"]                                = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnSetRNNDescriptor_v8"]                                 = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnGetRNNDescriptor_v8"]                                 = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnSetRNNDescriptor_v6"]                                 = {CUDNN_60,  CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNDescriptor_v6"]                                 = {CUDNN_801, CUDNN_801, CUDNN_900};
+  m["cudnnSetRNNMatrixMathType"]                                = {CUDNN_705, CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNMatrixMathType"]                                = {CUDNN_713, CUDNN_801, CUDNN_900};
+  m["cudnnSetRNNBiasMode"]                                      = {CUDNN_750, CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNBiasMode"]                                      = {CUDNN_750, CUDNN_801, CUDNN_900};
+  m["cudnnRNNSetClip_v8"]                                       = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnRNNGetClip_v8"]                                       = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnRNNSetClip"]                                          = {CUDNN_721, CUDNN_801, CUDNN_900};
+  m["cudnnRNNGetClip"]                                          = {CUDNN_721, CUDNN_801, CUDNN_900};
+  m["cudnnSetRNNProjectionLayers"]                              = {CUDNN_713, CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNProjectionLayers"]                              = {CUDNN_713, CUDNN_801, CUDNN_900};
+  m["cudnnCreatePersistentRNNPlan"]                             = {CUDNN_60,  CUDNN_801, CUDNN_900};
+  m["cudnnDestroyPersistentRNNPlan"]                            = {CUDNN_60,  CUDNN_801, CUDNN_900};
+  m["cudnnSetPersistentRNNPlan"]                                = {CUDNN_60,  CUDNN_801, CUDNN_900};
+  m["cudnnBuildRNNDynamic"]                                     = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnGetRNNWorkspaceSize"]                                 = {CUDNN_50,  CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNTrainingReserveSize"]                           = {CUDNN_50,  CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNTempSpaceSizes"]                                = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnGetRNNParamsSize"]                                    = {CUDNN_50,  CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNWeightSpaceSize"]                               = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnGetRNNLinLayerMatrixParams"]                          = {CUDNN_50,  CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNLinLayerBiasParams"]                            = {CUDNN_50,  CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNWeightParams"]                                  = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnRNNForwardInference"]                                 = {CUDNN_50,  CUDNN_801, CUDNN_900};
+  m["cudnnSetRNNPaddingMode"]                                   = {CUDNN_721, CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNPaddingMode"]                                   = {CUDNN_721, CUDNN_801, CUDNN_900};
+  m["cudnnCreateRNNDataDescriptor"]                             = {CUDNN_721, CUDA_0,    CUDA_0   };
+  m["cudnnDestroyRNNDataDescriptor"]                            = {CUDNN_721, CUDA_0,    CUDA_0   };
+  m["cudnnSetRNNDataDescriptor"]                                = {CUDNN_721, CUDA_0,    CUDA_0   };
+  m["cudnnGetRNNDataDescriptor"]                                = {CUDNN_721, CUDA_0,    CUDA_0   };
+  m["cudnnRNNForwardInferenceEx"]                               = {CUDNN_721, CUDNN_801, CUDNN_900};
+  m["cudnnRNNForward"]                                          = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnSetRNNAlgorithmDescriptor"]                           = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnGetRNNForwardInferenceAlgorithmMaxCount"]             = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnFindRNNForwardInferenceAlgorithmEx"]                  = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnCreateSeqDataDescriptor"]                             = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnDestroySeqDataDescriptor"]                            = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnSetSeqDataDescriptor"]                                = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnGetSeqDataDescriptor"]                                = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnCreateAttnDescriptor"]                                = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnDestroyAttnDescriptor"]                               = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnSetAttnDescriptor"]                                   = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnGetAttnDescriptor"]                                   = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnGetMultiHeadAttnBuffers"]                             = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnGetMultiHeadAttnWeights"]                             = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnMultiHeadAttnForward"]                                = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnAdvInferVersionCheck"]                                = {CUDNN_801, CUDA_0,    CUDNN_900};
+  m["cudnnRNNForwardTraining"]                                  = {CUDNN_50,  CUDNN_801, CUDNN_900};
+  m["cudnnRNNBackwardData"]                                     = {CUDNN_50,  CUDNN_802, CUDNN_900};
+  m["cudnnRNNBackwardData_v8"]                                  = {CUDNN_802, CUDA_0,    CUDA_0   };
+  m["cudnnRNNBackwardWeights"]                                  = {CUDNN_50,  CUDNN_802, CUDNN_900};
+  m["cudnnRNNBackwardWeights_v8"]                               = {CUDNN_802, CUDA_0,    CUDA_0   };
+  m["cudnnRNNForwardTrainingEx"]                                = {CUDNN_721, CUDNN_801, CUDNN_900};
+  m["cudnnRNNBackwardDataEx"]                                   = {CUDNN_721, CUDNN_802, CUDNN_900};
+  m["cudnnRNNBackwardWeightsEx"]                                = {CUDNN_721, CUDNN_802, CUDNN_900};
+  m["cudnnGetRNNForwardTrainingAlgorithmMaxCount"]              = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnFindRNNForwardTrainingAlgorithmEx"]                   = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnGetRNNBackwardDataAlgorithmMaxCount"]                 = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnFindRNNBackwardDataAlgorithmEx"]                      = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnGetRNNBackwardWeightsAlgorithmMaxCount"]              = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnFindRNNBackwardWeightsAlgorithmEx"]                   = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnMultiHeadAttnBackwardData"]                           = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnMultiHeadAttnBackwardWeights"]                        = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnCreateCTCLossDescriptor"]                             = {CUDNN_705, CUDA_0,    CUDA_0   };
+  m["cudnnSetCTCLossDescriptor"]                                = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnSetCTCLossDescriptorEx"]                              = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnSetCTCLossDescriptor_v8"]                             = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnGetCTCLossDescriptor"]                                = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnGetCTCLossDescriptorEx"]                              = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnGetCTCLossDescriptor_v8"]                             = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnDestroyCTCLossDescriptor"]                            = {CUDNN_705, CUDA_0,    CUDA_0   };
+  m["cudnnCTCLoss"]                                             = {CUDNN_705, CUDA_0,    CUDA_0   };
+  m["cudnnCTCLoss_v8"]                                          = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnGetCTCLossWorkspaceSize"]                             = {CUDNN_705, CUDA_0,    CUDA_0   };
+  m["cudnnGetCTCLossWorkspaceSize_v8"]                          = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnAdvTrainVersionCheck"]                                = {CUDNN_801, CUDA_0,    CUDNN_900};
+  m["cudnnBackendCreateDescriptor"]                             = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnBackendDestroyDescriptor"]                            = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnBackendInitialize"]                                   = {CUDNN_801, CUDNN_930, CUDA_0   };
+  m["cudnnBackendFinalize"]                                     = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnBackendSetAttribute"]                                 = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnBackendGetAttribute"]                                 = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnBackendExecute"]                                      = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnCreateConvolutionDescriptor"]                         = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnDestroyConvolutionDescriptor"]                        = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnSetConvolutionMathType"]                              = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionMathType"]                              = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnSetConvolutionGroupCount"]                            = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionGroupCount"]                            = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnSetConvolutionReorderType"]                           = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionReorderType"]                           = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnSetConvolution2dDescriptor"]                          = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolution2dDescriptor"]                          = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnSetConvolutionNdDescriptor"]                          = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionNdDescriptor"]                          = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolution2dForwardOutputDim"]                    = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionNdForwardOutputDim"]                    = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionForwardAlgorithmMaxCount"]              = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionForwardAlgorithm_v7"]                   = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnFindConvolutionForwardAlgorithm"]                     = {CUDNN_30,  CUDNN_900, CUDA_0   };
+  m["cudnnFindConvolutionForwardAlgorithmEx"]                   = {CUDNN_50,  CUDNN_900, CUDA_0   };
+  m["cudnnIm2Col"]                                              = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnReorderFilterAndBias"]                                = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionForwardWorkspaceSize"]                  = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnConvolutionForward"]                                  = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnConvolutionBiasActivationForward"]                    = {CUDNN_60,  CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionBackwardDataAlgorithmMaxCount"]         = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnFindConvolutionBackwardDataAlgorithm"]                = {CUDNN_30,  CUDNN_900, CUDA_0   };
+  m["cudnnFindConvolutionBackwardDataAlgorithmEx"]              = {CUDNN_50,  CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionBackwardDataAlgorithm_v7"]              = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionBackwardDataWorkspaceSize"]             = {CUDNN_30,  CUDNN_900, CUDA_0   };
+  m["cudnnConvolutionBackwardData"]                             = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnGetFoldedConvBackwardDataDescriptors"]                = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnCnnInferVersionCheck"]                                = {CUDNN_802, CUDA_0,    CUDA_0   };
+  m["cudnnGetConvolutionBackwardFilterAlgorithmMaxCount"]       = {CUDNN_705, CUDA_0,    CUDA_0   };
+  m["cudnnFindConvolutionBackwardFilterAlgorithm"]              = {CUDNN_30,  CUDNN_900, CUDA_0   };
+  m["cudnnFindConvolutionBackwardFilterAlgorithmEx"]            = {CUDNN_50,  CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionBackwardFilterAlgorithm_v7"]            = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnGetConvolutionBackwardFilterWorkspaceSize"]           = {CUDNN_30,  CUDNN_900, CUDA_0   };
+  m["cudnnConvolutionBackwardFilter"]                           = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnConvolutionBackwardBias"]                             = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnCreateFusedOpsConstParamPack"]                        = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnDestroyFusedOpsConstParamPack"]                       = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnSetFusedOpsConstParamPackAttribute"]                  = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnGetFusedOpsConstParamPackAttribute"]                  = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnCreateFusedOpsVariantParamPack"]                      = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnDestroyFusedOpsVariantParamPack"]                     = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnSetFusedOpsVariantParamPackAttribute"]                = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnGetFusedOpsVariantParamPackAttribute"]                = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnCreateFusedOpsPlan"]                                  = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnDestroyFusedOpsPlan"]                                 = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnMakeFusedOpsPlan"]                                    = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnFusedOpsExecute"]                                     = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnCnnTrainVersionCheck"]                                = {CUDNN_802, CUDA_0,    CUDA_0   };
+  m["cudnnGetVersion"]                                          = {CUDNN_20,  CUDA_0,    CUDA_0   };
+  m["cudnnGetCudartVersion"]                                    = {CUDNN_60,  CUDA_0,    CUDA_0   };
+  m["cudnnGetErrorString"]                                      = {CUDNN_20,  CUDA_0,    CUDA_0   };
+  m["cudnnQueryRuntimeError"]                                   = {CUDNN_705, CUDNN_900, CUDA_0   };
+  m["cudnnGetProperty"]                                         = {CUDNN_60,  CUDA_0,    CUDA_0   };
+  m["cudnnCreate"]                                              = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnDestroy"]                                             = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnSetStream"]                                           = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnGetStream"]                                           = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnCreateTensorDescriptor"]                              = {CUDNN_20,  CUDA_0,    CUDA_0   };
+  m["cudnnSetTensor4dDescriptor"]                               = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnSetTensor4dDescriptorEx"]                             = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnGetTensor4dDescriptor"]                               = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnSetTensorNdDescriptor"]                               = {CUDNN_20,  CUDA_0,    CUDA_0   };
+  m["cudnnSetTensorNdDescriptorEx"]                             = {CUDNN_60,  CUDA_0,    CUDA_0   };
+  m["cudnnGetTensorNdDescriptor"]                               = {CUDNN_20,  CUDA_0,    CUDA_0   };
+  m["cudnnGetTensorSizeInBytes"]                                = {CUDNN_60,  CUDA_0,    CUDA_0   };
+  m["cudnnDestroyTensorDescriptor"]                             = {CUDNN_20,  CUDA_0,    CUDA_0   };
+  m["cudnnInitTransformDest"]                                   = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnCreateTensorTransformDescriptor"]                     = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnSetTensorTransformDescriptor"]                        = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnGetTensorTransformDescriptor"]                        = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnDestroyTensorTransformDescriptor"]                    = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnTransformTensor"]                                     = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnTransformTensorEx"]                                   = {CUDNN_750, CUDNN_900, CUDA_0   };
+  m["cudnnAddTensor"]                                           = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnCreateOpTensorDescriptor"]                            = {CUDNN_50,  CUDNN_900, CUDA_0   };
+  m["cudnnSetOpTensorDescriptor"]                               = {CUDNN_50,  CUDNN_900, CUDA_0   };
+  m["cudnnGetOpTensorDescriptor"]                               = {CUDNN_50,  CUDNN_900, CUDA_0   };
+  m["cudnnDestroyOpTensorDescriptor"]                           = {CUDNN_50,  CUDNN_900, CUDA_0   };
+  m["cudnnOpTensor"]                                            = {CUDNN_50,  CUDNN_900, CUDA_0   };
+  m["cudnnCreateReduceTensorDescriptor"]                        = {CUDNN_60,  CUDNN_900, CUDA_0   };
+  m["cudnnSetReduceTensorDescriptor"]                           = {CUDNN_60,  CUDNN_900, CUDA_0   };
+  m["cudnnGetReduceTensorDescriptor"]                           = {CUDNN_60,  CUDNN_900, CUDA_0   };
+  m["cudnnDestroyReduceTensorDescriptor"]                       = {CUDNN_60,  CUDNN_900, CUDA_0   };
+  m["cudnnGetReductionIndicesSize"]                             = {CUDNN_60,  CUDNN_900, CUDA_0   };
+  m["cudnnGetReductionWorkspaceSize"]                           = {CUDNN_60,  CUDNN_900, CUDA_0   };
+  m["cudnnReduceTensor"]                                        = {CUDNN_60,  CUDNN_900, CUDA_0   };
+  m["cudnnSetTensor"]                                           = {CUDNN_20,  CUDA_0,    CUDA_0   };
+  m["cudnnScaleTensor"]                                         = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnCreateFilterDescriptor"]                              = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnSetFilter4dDescriptor"]                               = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetFilter4dDescriptor"]                               = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnSetFilterNdDescriptor"]                               = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetFilterNdDescriptor"]                               = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetFilterSizeInBytes"]                                = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnTransformFilter"]                                     = {CUDNN_760, CUDNN_900, CUDA_0   };
+  m["cudnnDestroyFilterDescriptor"]                             = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnSoftmaxForward"]                                      = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnCreatePoolingDescriptor"]                             = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnSetPooling2dDescriptor"]                              = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetPooling2dDescriptor"]                              = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnSetPoolingNdDescriptor"]                              = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetPoolingNdDescriptor"]                              = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetPoolingNdForwardOutputDim"]                        = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnGetPooling2dForwardOutputDim"]                        = {CUDNN_20,  CUDNN_900, CUDA_0   };
+  m["cudnnDestroyPoolingDescriptor"]                            = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnPoolingForward"]                                      = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnCreateActivationDescriptor"]                          = {CUDNN_40,  CUDNN_900, CUDA_0   };
+  m["cudnnSetActivationDescriptor"]                             = {CUDNN_40,  CUDNN_900, CUDA_0   };
+  m["cudnnGetActivationDescriptor"]                             = {CUDNN_40,  CUDNN_900, CUDA_0   };
+  m["cudnnDestroyActivationDescriptor"]                         = {CUDNN_40,  CUDNN_900, CUDA_0   };
+  m["cudnnActivationForward"]                                   = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnCreateLRNDescriptor"]                                 = {CUDNN_30,  CUDA_0,    CUDA_0   };
+  m["cudnnSetLRNDescriptor"]                                    = {CUDNN_30,  CUDA_0,    CUDA_0   };
+  m["cudnnGetLRNDescriptor"]                                    = {CUDNN_30,  CUDA_0,    CUDA_0   };
+  m["cudnnDestroyLRNDescriptor"]                                = {CUDNN_30,  CUDA_0,    CUDA_0   };
+  m["cudnnLRNCrossChannelForward"]                              = {CUDNN_30,  CUDA_0,    CUDA_0   };
+  m["cudnnDivisiveNormalizationForward"]                        = {CUDNN_30,  CUDA_0,    CUDA_0   };
+  m["cudnnDeriveBNTensorDescriptor"]                            = {CUDNN_40,  CUDNN_900, CUDA_0   };
+  m["cudnnBatchNormalizationForwardInference"]                  = {CUDNN_40,  CUDNN_900, CUDA_0   };
+  m["cudnnDeriveNormTensorDescriptor"]                          = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnNormalizationForwardInference"]                       = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnCreateSpatialTransformerDescriptor"]                  = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnSetSpatialTransformerNdDescriptor"]                   = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnDestroySpatialTransformerDescriptor"]                 = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnSpatialTfGridGeneratorForward"]                       = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnSpatialTfSamplerForward"]                             = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnCreateDropoutDescriptor"]                             = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnDestroyDropoutDescriptor"]                            = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnDropoutGetStatesSize"]                                = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnDropoutGetReserveSpaceSize"]                          = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnSetDropoutDescriptor"]                                = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnRestoreDropoutDescriptor"]                            = {CUDNN_705, CUDA_0,    CUDA_0   };
+  m["cudnnGetDropoutDescriptor"]                                = {CUDNN_705, CUDA_0,    CUDA_0   };
+  m["cudnnDropoutForward"]                                      = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnCreateAlgorithmDescriptor"]                           = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnSetAlgorithmDescriptor"]                              = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnGetAlgorithmDescriptor"]                              = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnCopyAlgorithmDescriptor"]                             = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnDestroyAlgorithmDescriptor"]                          = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnCreateAlgorithmPerformance"]                          = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnSetAlgorithmPerformance"]                             = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnGetAlgorithmPerformance"]                             = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnDestroyAlgorithmPerformance"]                         = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnGetAlgorithmSpaceSize"]                               = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnSaveAlgorithm"]                                       = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnRestoreAlgorithm"]                                    = {CUDNN_713, CUDNN_802, CUDNN_900};
+  m["cudnnSetCallback"]                                         = {CUDNN_713, CUDA_0,    CUDA_0   };
+  m["cudnnGetCallback"]                                         = {CUDNN_713, CUDA_0,    CUDA_0   };
+  m["cudnnOpsInferVersionCheck"]                                = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnSoftmaxBackward"]                                     = {CUDNN_10,  CUDA_0,    CUDA_0   };
+  m["cudnnPoolingBackward"]                                     = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnActivationBackward"]                                  = {CUDNN_10,  CUDNN_900, CUDA_0   };
+  m["cudnnLRNCrossChannelBackward"]                             = {CUDNN_30,  CUDA_0,    CUDA_0   };
+  m["cudnnDivisiveNormalizationBackward"]                       = {CUDNN_30,  CUDA_0,    CUDA_0   };
+  m["cudnnGetBatchNormalizationForwardTrainingExWorkspaceSize"] = {CUDNN_741, CUDNN_900, CUDA_0   };
+  m["cudnnGetBatchNormalizationBackwardExWorkspaceSize"]        = {CUDNN_741, CUDNN_900, CUDA_0   };
+  m["cudnnGetBatchNormalizationTrainingExReserveSpaceSize"]     = {CUDNN_741, CUDNN_900, CUDA_0   };
+  m["cudnnBatchNormalizationForwardTraining"]                   = {CUDNN_40,  CUDNN_900, CUDA_0   };
+  m["cudnnBatchNormalizationForwardTrainingEx"]                 = {CUDNN_741, CUDNN_900, CUDA_0   };
+  m["cudnnBatchNormalizationBackward"]                          = {CUDNN_40,  CUDNN_900, CUDA_0   };
+  m["cudnnBatchNormalizationBackwardEx"]                        = {CUDNN_741, CUDNN_900, CUDA_0   };
+  m["cudnnGetNormalizationForwardTrainingWorkspaceSize"]        = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnGetNormalizationBackwardWorkspaceSize"]               = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnGetNormalizationTrainingReserveSpaceSize"]            = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnNormalizationForwardTraining"]                        = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnNormalizationBackward"]                               = {CUDNN_801, CUDNN_900, CUDA_0   };
+  m["cudnnSpatialTfGridGeneratorBackward"]                      = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnSpatialTfSamplerBackward"]                            = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnDropoutBackward"]                                     = {CUDNN_50,  CUDA_0,    CUDA_0   };
+  m["cudnnOpsTrainVersionCheck"]                                = {CUDNN_801, CUDA_0,    CUDNN_900};
+  m["cudnnGetConvolutionBackwardDataAlgorithm"]                 = {CUDNN_30,  CUDNN_765, CUDNN_801};
+  m["cudnnGetConvolutionBackwardFilterAlgorithm"]               = {CUDNN_30,  CUDNN_765, CUDNN_801};
+  m["cudnnGetConvolutionForwardAlgorithm"]                      = {CUDNN_20,  CUDNN_765, CUDNN_801};
+  m["cudnnGetRNNDescriptor"]                                    = {CUDNN_705, CUDNN_765, CUDNN_801};
+  m["cudnnSetRNNDescriptor"]                                    = {CUDNN_50,  CUDNN_765, CUDNN_801};
+  m["cudnnSetRNNDescriptor_v5"]                                 = {CUDNN_705, CUDNN_765, CUDNN_801};
+  m["cudnnSetActivationDescriptorSwishBeta"]                    = {CUDNN_820, CUDNN_900, CUDA_0   };
+  m["cudnnGetActivationDescriptorSwishBeta"]                    = {CUDNN_820, CUDNN_900, CUDA_0   };
+  m["cudnnGetMaxDeviceVersion"]                                 = {CUDNN_860, CUDA_0,    CUDA_0   };
+  m["cudnnRNNSetClip_v9"]                                       = {CUDNN_900, CUDA_0,    CUDA_0   };
+  m["cudnnRNNGetClip_v9"]                                       = {CUDNN_900, CUDA_0,    CUDA_0   };
+  m["cudnnAdvVersionCheck"]                                     = {CUDNN_900, CUDA_0,    CUDA_0   };
+  m["cudnnSetCTCLossDescriptor_v9"]                             = {CUDNN_900, CUDA_0,    CUDA_0   };
+  m["cudnnGetCTCLossDescriptor_v9"]                             = {CUDNN_900, CUDA_0,    CUDA_0   };
+  m["cudnnGetLastErrorString"]                                  = {CUDNN_900, CUDA_0,    CUDA_0   };
+  m["cudnnGraphVersionCheck"]                                   = {CUDNN_900, CUDA_0,    CUDA_0   };
+  m["cudnnOpsVersionCheck"]                                     = {CUDNN_900, CUDA_0,    CUDA_0   };
+  m["cudnnBackendPopulateCudaGraph"]                            = {CUDNN_950, CUDA_0,    CUDA_0   };
+  m["cudnnBackendUpdateCudaGraph"]                              = {CUDNN_950, CUDA_0,    CUDA_0   };
+
+  return m;
+}();
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_FUNCTION_VER_MAP = [] {
+  std::map<llvm::StringRef, hipAPIversions> m;
+
+  m["miopenGetErrorString"]                                     = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenCreate"]                                             = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenDestroy"]                                            = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenSetStream"]                                          = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenGetStream"]                                          = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenCreateTensorDescriptor"]                             = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenSet4dTensorDescriptorEx"]                            = {HIP_5030,  HIP_0,     HIP_0    };
+  m["miopenGet4dTensorDescriptor"]                              = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenDestroyTensorDescriptor"]                            = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenTransformTensor"]                                    = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenCreateReduceTensorDescriptor"]                       = {HIP_3090,  HIP_0,     HIP_0    };
+  m["miopenSetReduceTensorDescriptor"]                          = {HIP_3090,  HIP_0,     HIP_0    };
+  m["miopenGetReduceTensorDescriptor"]                          = {HIP_3090,  HIP_0,     HIP_0    };
+  m["miopenDestroyReduceTensorDescriptor"]                      = {HIP_3090,  HIP_0,     HIP_0    };
+  m["miopenGetReductionIndicesSize"]                            = {HIP_3090,  HIP_0,     HIP_0    };
+  m["miopenGetReductionWorkspaceSize"]                          = {HIP_3090,  HIP_0,     HIP_0    };
+  m["miopenReduceTensor"]                                       = {HIP_3090,  HIP_0,     HIP_0    };
+  m["miopenSetTensor"]                                          = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenScaleTensor"]                                        = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenCreateConvolutionDescriptor"]                        = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenSetConvolutionGroupCount"]                           = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenGetConvolutionForwardOutputDim"]                     = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenDestroyConvolutionDescriptor"]                       = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenFindConvolutionForwardAlgorithm"]                    = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenConvolutionForwardGetWorkSpaceSize"]                 = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenConvolutionForward"]                                 = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenConvolutionBiasActivationForward"]                   = {HIP_5040,  HIP_0,     HIP_0    };
+  m["miopenConvolutionBackwardBias"]                            = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenConvolutionBackwardDataGetWorkSpaceSize"]            = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenConvolutionBackwardData"]                            = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenSoftmaxForward_V2"]                                  = {HIP_2060,  HIP_0,     HIP_0    };
+  m["miopenSoftmaxBackward_V2"]                                 = {HIP_2060,  HIP_0,     HIP_0    };
+  m["miopenCreatePoolingDescriptor"]                            = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenSet2dPoolingDescriptor"]                             = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenGet2dPoolingDescriptor"]                             = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenSetNdPoolingDescriptor"]                             = {HIP_3030,  HIP_0,     HIP_0    };
+  m["miopenGetNdPoolingDescriptor"]                             = {HIP_3030,  HIP_0,     HIP_0    };
+  m["miopenGetPoolingNdForwardOutputDim"]                       = {HIP_3030,  HIP_0,     HIP_0    };
+  m["miopenGetPoolingForwardOutputDim"]                         = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenDestroyPoolingDescriptor"]                           = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenCreateActivationDescriptor"]                         = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenDestroyActivationDescriptor"]                        = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenActivationForward"]                                  = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenActivationBackward"]                                 = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenCreateLRNDescriptor"]                                = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenSetLRNDescriptor"]                                   = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenGetLRNDescriptor"]                                   = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenDestroyLRNDescriptor"]                               = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenDeriveBNTensorDescriptor"]                           = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenBatchNormalizationForwardTraining"]                  = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenBatchNormalizationForwardInference"]                 = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenBatchNormalizationBackward"]                         = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenCreateDropoutDescriptor"]                            = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenDestroyDropoutDescriptor"]                           = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenDropoutGetStatesSize"]                               = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenDropoutGetReserveSpaceSize"]                         = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenSetDropoutDescriptor"]                               = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenGetDropoutDescriptor"]                               = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenRestoreDropoutDescriptor"]                           = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenDropoutForward"]                                     = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenDropoutBackward"]                                    = {HIP_2080,  HIP_0,     HIP_0    };
+  m["miopenCreateRNNDescriptor"]                                = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenDestroyRNNDescriptor"]                               = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenGetRNNDescriptor_V2"]                                = {HIP_3050,  HIP_0,     HIP_0    };
+  m["miopenGetRNNWorkspaceSize"]                                = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenGetRNNTrainingReserveSize"]                          = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenGetRNNParamsSize"]                                   = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenRNNForwardInference"]                                = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenRNNForwardTraining"]                                 = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenRNNBackwardData"]                                    = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenRNNBackwardWeights"]                                 = {HIP_2010,  HIP_0,     HIP_0    };
+  m["miopenSetRNNDescriptor_V2"]                                = {HIP_3050,  HIP_0,     HIP_0    };
+  m["miopenCreateCTCLossDescriptor"]                            = {HIP_2060,  HIP_0,     HIP_0    };
+  m["miopenSetCTCLossDescriptor"]                               = {HIP_2060,  HIP_0,     HIP_0    };
+  m["miopenGetCTCLossDescriptor"]                               = {HIP_2060,  HIP_0,     HIP_0    };
+  m["miopenDestroyCTCLossDescriptor"]                           = {HIP_2060,  HIP_0,     HIP_0    };
+  m["miopenCTCLoss"]                                            = {HIP_2060,  HIP_0,     HIP_0    };
+  m["miopenGetCTCLossWorkspaceSize"]                            = {HIP_2060,  HIP_0,     HIP_0    };
+  m["miopenBackendCreateDescriptor"]                            = {HIP_6020,  HIP_0,     HIP_0    };
+  m["miopenBackendDestroyDescriptor"]                           = {HIP_6020,  HIP_0,     HIP_0    };
+  m["miopenBackendFinalize"]                                    = {HIP_6020,  HIP_0,     HIP_0    };
+  m["miopenBackendSetAttribute"]                                = {HIP_6020,  HIP_0,     HIP_0    };
+  m["miopenBackendGetAttribute"]                                = {HIP_6020,  HIP_0,     HIP_0    };
+  m["miopenBackendExecute"]                                     = {HIP_6020,  HIP_0,     HIP_0    };
+
+  return m;
+}();
+
+const std::map<unsigned int, llvm::StringRef> CUDA_DNN_API_SECTION_MAP = [] {
+  std::map<unsigned int, llvm::StringRef> m;
+
+  m[1] = "CUDNN Data types";
+  m[2] = "CUDNN Functions";
+
+  return m;
+}();
