@@ -60,10 +60,6 @@ extern const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP;
 extern const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP;
 // Maps the names of CUDA SPARSE API functions to the corresponding HIP functions
 extern const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP;
-// Maps the names of CUDA CAFFE2 API types to the corresponding HIP types
-extern const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_TYPE_NAME_MAP;
-// Maps the names of CUDA CAFFE2 API functions to the corresponding HIP functions
-extern const std::map<llvm::StringRef, hipCounter> CUDA_CAFFE2_FUNCTION_MAP;
 // Maps the names of CUDA Device types to the corresponding HIP types
 extern const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP;
 // Maps the names of CUDA Device functions to the corresponding HIP functions
@@ -113,8 +109,6 @@ extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_M
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP;
-extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_TYPE_NAME_VER_MAP;
-extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CAFFE2_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP;
@@ -156,8 +150,6 @@ extern const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_SPARSE_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP;
-extern const std::map<llvm::StringRef, hipAPIversions> HIP_CAFFE2_TYPE_NAME_VER_MAP;
-extern const std::map<llvm::StringRef, hipAPIversions> HIP_CAFFE2_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP;
