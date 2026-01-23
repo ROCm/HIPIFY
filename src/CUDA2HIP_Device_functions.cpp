@@ -1836,7 +1836,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
   {"__reduce_add_sync",                 {HIP_7000, HIP_0,    HIP_0   }},
   {"__reduce_min_sync",                 {HIP_7000, HIP_0,    HIP_0   }},
   {"__reduce_max_sync",                 {HIP_7000, HIP_0,    HIP_0   }},
-  {"__reduce_max_sync",                 {HIP_7000, HIP_0,    HIP_0   }},
   {"__hip_cvt_bfloat16raw_to_fp6",      {HIP_7000, HIP_0,    HIP_0   }},
   {"__hip_cvt_bfloat16raw2_to_fp6x2",   {HIP_7000, HIP_0,    HIP_0   }},
   {"__hip_cvt_double_to_fp6",           {HIP_7000, HIP_0,    HIP_0   }},

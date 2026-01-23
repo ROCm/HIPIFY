@@ -1671,7 +1671,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP = []
   m["cublasGetFixedPointEmulationMantissaBitOffset"]                = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   m["cublasSetFixedPointEmulationMantissaBitOffset"]                = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   m["cublasGetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
-  m["cublasGetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasSetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   return m;
 }();
 
