@@ -656,6 +656,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = []() {
   m["CU_AD_FORMAT_YUV444_8bit_SemiPlanar"]                               = {"HIP_AD_FORMAT_YUV444_8bit_SemiPlanar",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0xb4
   m["CU_AD_FORMAT_YUV444_16bit_SemiPlanar"]                              = {"HIP_AD_FORMAT_YUV444_16bit_SemiPlanar",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0xb5
   m["CU_AD_FORMAT_UNORM_INT_101010_2"]                                   = {"HIP_AD_FORMAT_UNORM_INT_101010_2",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x50
+  m["CU_AD_FORMAT_UINT8_PACKED_422"]                                     = {"HIP_AD_FORMAT_UINT8_PACKED_422",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x51
+  m["CU_AD_FORMAT_UINT8_PACKED_444"]                                     = {"HIP_AD_FORMAT_UINT8_PACKED_444",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x52
+  m["CU_AD_FORMAT_UINT8_SEMIPLANAR_420"]                                 = {"HIP_AD_FORMAT_UINT8_SEMIPLANAR_420",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x53
+  m["CU_AD_FORMAT_UINT16_SEMIPLANAR_420"]                                = {"HIP_AD_FORMAT_UINT16_SEMIPLANAR_420",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x54
+  m["CU_AD_FORMAT_UINT8_SEMIPLANAR_422"]                                 = {"HIP_AD_FORMAT_UINT8_SEMIPLANAR_422",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x55
+  m["CU_AD_FORMAT_UINT16_SEMIPLANAR_422"]                                = {"HIP_AD_FORMAT_UINT16_SEMIPLANAR_422",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x56
+  m["CU_AD_FORMAT_UINT8_SEMIPLANAR_444"]                                 = {"HIP_AD_FORMAT_UINT8_SEMIPLANAR_444",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x57
+  m["CU_AD_FORMAT_UINT16_SEMIPLANAR_444"]                                = {"HIP_AD_FORMAT_UINT16_SEMIPLANAR_444",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x58
+  m["CU_AD_FORMAT_UINT8_PLANAR_420"]                                     = {"HIP_AD_FORMAT_UINT8_PLANAR_420",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x59
+  m["CU_AD_FORMAT_UINT16_PLANAR_420"]                                    = {"HIP_AD_FORMAT_UINT16_PLANAR_420",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x5a
+  m["CU_AD_FORMAT_UINT8_PLANAR_422"]                                     = {"HIP_AD_FORMAT_UINT8_PLANAR_422",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x5b
+  m["CU_AD_FORMAT_UINT16_PLANAR_422"]                                    = {"HIP_AD_FORMAT_UINT16_PLANAR_422",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x5c
+  m["CU_AD_FORMAT_UINT8_PLANAR_444"]                                     = {"HIP_AD_FORMAT_UINT8_PLANAR_444",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x5d
+  m["CU_AD_FORMAT_UINT16_PLANAR_444"]                                    = {"HIP_AD_FORMAT_UINT16_PLANAR_444",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x5e
   m["CU_AD_FORMAT_MAX"]                                                  = {"HIP_AD_FORMAT_MAX",                                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x7FFFFFFF
 
   // cudaComputeMode
@@ -1058,6 +1072,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = []() {
   m["CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED"]                  = {"hipDeviceAttributeHostHostAllocDmaBufSupported",             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 146
   // cudaDevAttrOnlyPartialHostNativeAtomicSupported
   m["CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED"]     = {"hipDevAttributeOnlyPartialHostNativeAtomicSupported",        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 147
+  //
+  m["CU_DEVICE_ATTRIBUTE_ATOMIC_REDUCTION_SUPPORTED"]                    = {"hipDevAttributeAtomicReductionSupported",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 148
   // cudaDevAttrMax
   m["CU_DEVICE_ATTRIBUTE_MAX"]                                           = {"hipDeviceAttributeMax",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
@@ -1561,7 +1577,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = []() {
   // cudaJitOverrideDirectiveValues
   m["CU_JIT_OVERRIDE_DIRECTIVE_VALUES"]                                  = {"hipJitOptionOverrideDirectiveValues",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 33
   //
-  m["CU_JIT_SPLIT_COMPILE"]                                              = {"hipJitOptionSplitCompile",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 33
+  m["CU_JIT_SPLIT_COMPILE"]                                              = {"hipJitOptionSplitCompile",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 34
+  //
+  m["CU_JIT_BINARY_LOADER_THREAD_COUNT"]                                 = {"hipJitBinaryLoadedThreadCount",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 35
   //
   m["CU_JIT_NUM_OPTIONS"]                                                = {"hipJitOptionNumOptions",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES};
 
@@ -2050,6 +2068,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = []() {
   m["CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION"]                         = {"hipErrorInvalidResourceConfiguration",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 915
   //
   m["CUDA_ERROR_KEY_ROTATION"]                                           = {"hipErrorKeyRotation",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 916
+  //
+  m["CUDA_ERROR_STREAM_DETACHED"]                                        = {"hipErrorStreamDetached",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 917
   // cudaErrorUnknown
   m["CUDA_ERROR_UNKNOWN"]                                                = {"hipErrorUnknown",                                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 999
 
@@ -2861,6 +2881,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = []() {
   m["CU_COREDUMP_SKIP_ABORT"]                                            = {"HIP_COREDUMP_SKIP_ABORT",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   //
   m["CU_COREDUMP_SKIP_CONSTBANK_MEMORY"]                                 = {"HIP_COREDUMP_SKIP_CONSTBANK_MEMORY",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_COREDUMP_GZIP_COMPRESS"]                                         = {"HIP_COREDUMP_GZIP_COMPRESS",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   //
   m["CU_COREDUMP_LIGHTWEIGHT_FLAGS"]                                     = {"HIP_COREDUMP_LIGHTWEIGHT_FLAGS",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
@@ -4424,6 +4446,24 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP =
   m["CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_32"]                            = {CUDA_131, CUDA_0,   CUDA_0  };
   m["CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_64"]                            = {CUDA_131, CUDA_0,   CUDA_0  };
   m["CUstreamMemOpAtomicReductionParams_st"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT8_PACKED_422"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT8_PACKED_444"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT8_SEMIPLANAR_420"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT16_SEMIPLANAR_420"]                                = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT8_SEMIPLANAR_422"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT16_SEMIPLANAR_422"]                                = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT8_SEMIPLANAR_444"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT16_SEMIPLANAR_444"]                                = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT8_PLANAR_420"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT16_PLANAR_420"]                                    = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT8_PLANAR_422"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT16_PLANAR_422"]                                    = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT8_PLANAR_444"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_AD_FORMAT_UINT16_PLANAR_444"]                                    = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_DEVICE_ATTRIBUTE_ATOMIC_REDUCTION_SUPPORTED"]                    = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_JIT_BINARY_LOADER_THREAD_COUNT"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUDA_ERROR_STREAM_DETACHED"]                                        = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CU_COREDUMP_GZIP_COMPRESS"]                                         = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();

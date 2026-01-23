@@ -141,6 +141,7 @@
 |`CUDA_ERROR_STREAM_CAPTURE_UNMATCHED`|10.0| | | |`hipErrorStreamCaptureUnmatched`|4.3.0| | | | | |
 |`CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED`|10.0| | | |`hipErrorStreamCaptureUnsupported`|4.3.0| | | | | |
 |`CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD`|10.1| | | |`hipErrorStreamCaptureWrongThread`|4.3.0| | | | | |
+|`CUDA_ERROR_STREAM_DETACHED`|13.1| | | | | | | | | | |
 |`CUDA_ERROR_STUB_LIBRARY`|11.1| | | | | | | | | | |
 |`CUDA_ERROR_SYSTEM_DRIVER_MISMATCH`|10.1| | | | | | | | | | |
 |`CUDA_ERROR_SYSTEM_NOT_READY`|10.0| | | | | | | | | | |
@@ -305,6 +306,20 @@
 |`CU_AD_FORMAT_SNORM_INT8X1`|11.5| | | | | | | | | | |
 |`CU_AD_FORMAT_SNORM_INT8X2`|11.5| | | | | | | | | | |
 |`CU_AD_FORMAT_SNORM_INT8X4`|11.5| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT16_PLANAR_420`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT16_PLANAR_422`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT16_PLANAR_444`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT16_SEMIPLANAR_420`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT16_SEMIPLANAR_422`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT16_SEMIPLANAR_444`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT8_PACKED_422`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT8_PACKED_444`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT8_PLANAR_420`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT8_PLANAR_422`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT8_PLANAR_444`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT8_SEMIPLANAR_420`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT8_SEMIPLANAR_422`|13.1| | | | | | | | | | |
+|`CU_AD_FORMAT_UINT8_SEMIPLANAR_444`|13.1| | | | | | | | | | |
 |`CU_AD_FORMAT_UNORM_INT16X1`|11.5| | | | | | | | | | |
 |`CU_AD_FORMAT_UNORM_INT16X2`|11.5| | | | | | | | | | |
 |`CU_AD_FORMAT_UNORM_INT16X4`|11.5| | | | | | | | | | |
@@ -363,6 +378,7 @@
 |`CU_COREDUMP_ENABLE_USER_TRIGGER`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_FILE`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_GENERATION_FLAGS`|12.5| | | | | | | | | | |
+|`CU_COREDUMP_GZIP_COMPRESS`|13.1| | | | | | | | | | |
 |`CU_COREDUMP_LIGHTWEIGHT`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_LIGHTWEIGHT_FLAGS`|12.5| | | | | | | | | | |
 |`CU_COREDUMP_MAX`|12.1| | | | | | | | | | |
@@ -412,6 +428,7 @@
 |`CU_D3D9_REGISTER_FLAGS_ARRAY`| | | | | | | | | | | |
 |`CU_D3D9_REGISTER_FLAGS_NONE`| | | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_ASYNC_ENGINE_COUNT`| | | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
+|`CU_DEVICE_ATTRIBUTE_ATOMIC_REDUCTION_SUPPORTED`|13.1| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_CAN_FLUSH_REMOTE_WRITES`|9.2| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_CAN_MAP_HOST_MEMORY`| | | | |`hipDeviceAttributeCanMapHostMemory`|2.10.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_CAN_TEX2D_GATHER`| |5.0| | | | | | | | | |
@@ -805,6 +822,7 @@
 |`CU_GREEN_CTX_DEFAULT_STREAM`|12.4| | | | | | | | | | |
 |`CU_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | | |
 |`CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS`| | | | |`hipIpcMemLazyEnablePeerAccess`|1.6.0| | | | | |
+|`CU_JIT_BINARY_LOADER_THREAD_COUNT`|13.1| | | | | | | | | | |
 |`CU_JIT_CACHE_MODE`| | | | |`hipJitOptionCacheMode`|6.4.0| | | | | |
 |`CU_JIT_CACHE_OPTION_CA`| | | | | | | | | | | |
 |`CU_JIT_CACHE_OPTION_CG`| | | | | | | | | | | |
