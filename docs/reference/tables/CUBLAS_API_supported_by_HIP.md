@@ -1155,7 +1155,7 @@
 |`cublasSetAtomicsMode`| | | | |`hipblasSetAtomicsMode`|3.10.0| | | | | |
 |`cublasSetEmulationSpecialValuesSupport`|13.0| | | | | | | | | | |
 |`cublasSetEmulationStrategy`|12.9| | | | | | | | | | |
-|`cublasSetFixedPointEmulationMantissaBitCountPointer`| | | | | | | | | | | |
+|`cublasSetFixedPointEmulationMantissaBitCountPointer`|13.0| | | | | | | | | | |
 |`cublasSetFixedPointEmulationMantissaBitOffset`|13.0| | | | | | | | | | |
 |`cublasSetFixedPointEmulationMantissaControl`|13.0| | | | | | | | | | |
 |`cublasSetFixedPointEmulationMaxMantissaBitCount`|13.0| | | | | | | | | | |

@@ -1895,7 +1895,6 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP {
   {"CUDNN_CTC_SKIP_OOB_GRADIENTS",                                     {CUDNN_900, CUDA_0,    CUDA_0   }},
   {"CUDNN_STATUS_BAD_PARAM_CUDA_GRAPH_MISMATCH",                       {CUDNN_950, CUDA_0,    CUDA_0   }},
   {"CUDNN_STATUS_NOT_SUPPORTED_CUDA_GRAPH_NATIVE_API",                 {CUDNN_950, CUDA_0,    CUDA_0   }},
-  {"CUDNN_ATTR_KERNEL_CACHE_OPERATION_GRAPH",                          {CUDNN_950, CUDA_0,    CUDA_0   }},
   {"CUDNN_BEHAVIOR_NOTE_SUPPORTS_CUDA_GRAPH_NATIVE_API",               {CUDNN_950, CUDA_0,    CUDA_0   }},
   {"CUDNN_ATTR_KERNEL_CACHE_OPERATION_GRAPH",                          {CUDNN_950, CUDA_0,    CUDA_0   }},
   {"CUDNN_STATUS_BAD_PARAM_DESCRIPTOR_TYPE",                           {CUDNN_960, CUDA_0,    CUDA_0   }},
