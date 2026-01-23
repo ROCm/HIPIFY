@@ -158,7 +158,6 @@ const char *apiNames[NUM_API_TYPES] = {
   "cuSPARSE API",
   "cuSOLVER API",
   "CUB API",
-  "CAFFE2 API",
   "RTC API",
   "TENSOR API"
 };
@@ -174,7 +173,6 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_CUB",
   "API_SPARSE",
   "API_SOLVER",
-  "API_CAFFE2",
   "API_RTC",
   "API_TENSOR"
 };
@@ -583,6 +581,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDNN_9130: return "9.13.0";
     case CUDNN_9140: return "9.14.0";
     case CUDNN_9150: return "9.15.0";
+    case CUDNN_9170: return "9.17.0";
     case CUTENSOR_1010: return "1.0.1.0";
     case CUTENSOR_1100: return "1.1.0.0";
     case CUTENSOR_1200: return "1.2.0.0";
