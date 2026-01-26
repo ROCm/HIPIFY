@@ -43,77 +43,77 @@ using namespace std;
 using hipify::StderrCapture;
 
 // Matches local (quoted) includes
-static const std::regex LocalIncludeRe(
-    R"(^\s*#\s*include\s*\"([^\"\n]+)\"\s*(?://.*)?$)", std::regex::ECMAScript);
+static const regex LocalIncludeRe(
+    R"(^\s*#\s*include\s*\"([^\"\n]+)\"\s*(?://.*)?$)", regex::ECMAScript);
 
-static std::string normalizeSmallStringPath(SmallString<256> &p) {
-  llvm::sys::path::remove_dots(p, true);
+static string normalizeSmallStringPath(SmallString<256> &p) {
+  sys::path::remove_dots(p, true);
 
   SmallString<256> realBuf;
-  std::error_code ec = llvm::sys::fs::real_path(p, realBuf);
+  error_code ec = sys::fs::real_path(p, realBuf);
   if (!ec) {
-    return std::string(realBuf.str());
+    return string(realBuf.str());
   }
 
-  return std::string(p.str());
+  return string(p.str());
 }
 
-static bool pathExists(const std::string &p) {
+static bool pathExists(const string &p) {
   SmallString<256> in(p.begin(), p.end());
 
   SmallString<256> realBuf;
-  std::error_code ec = llvm::sys::fs::real_path(in, realBuf);
+  error_code ec = sys::fs::real_path(in, realBuf);
   if (!ec) return true;
 
   SmallString<256> norm = in;
-  llvm::sys::path::remove_dots(norm, true);
-  return llvm::sys::fs::exists(norm);
+  sys::path::remove_dots(norm, true);
+  return sys::fs::exists(norm);
 }
 
-bool readFile(const std::string &path, std::string &out) {
-  auto MBOrErr = llvm::MemoryBuffer::getFile(path);
+bool readFile(const string &path, string &out) {
+  auto MBOrErr = MemoryBuffer::getFile(path);
   if (!MBOrErr) return false;
   out = MBOrErr->get()->getBuffer().str();
   return true;
 }
 
-bool resolveLocalIncludeInternal(const std::string &mainSourceAbsPath,
-                                const std::string &includeTok,
-                                std::string &outAbs) {
+bool resolveLocalIncludeInternal(const string &mainSourceAbsPath,
+                                const string &includeTok,
+                                string &outAbs) {
   SmallString<256> base(mainSourceAbsPath);
   sys::path::remove_filename(base);
   SmallString<256> candidate(base);
   sys::path::append(candidate, includeTok);
   sys::path::remove_dots(candidate, true);
-  if (pathExists(std::string(candidate.str()))) {
+  if (pathExists(string(candidate.str()))) {
     outAbs = normalizeSmallStringPath(candidate);
     return true;
   }
   return false;
 }
 
-bool resolveLocalInclude(const std::string &mainSourceAbsPath,
-                         const std::string &includeToken,
-                         std::string &outAbsPath) {
+bool resolveLocalInclude(const string &mainSourceAbsPath,
+                         const string &includeToken,
+                         string &outAbsPath) {
   return resolveLocalIncludeInternal(mainSourceAbsPath, includeToken, outAbsPath);
 }
 
-bool collectLocalQuotedIncludes(const std::string &mainSourceAbsPath,
-                                std::vector<std::string> &outHeaders) {
-  std::string content;
+bool collectLocalQuotedIncludes(const string &mainSourceAbsPath,
+                                vector<string> &outHeaders) {
+  string content;
   if (!readFile(mainSourceAbsPath, content)) {
     errs() << "\n" << sHipify << sError << "Cannot read source file: " << mainSourceAbsPath << "\n";
     return false;
   }
 
-  std::set<std::string> uniq;
-  std::smatch m;
-  std::istringstream iss(content);
-  std::string line;
-  while (std::getline(iss, line)) {
-    if (std::regex_match(line, m, LocalIncludeRe)) {
-      std::string rel = m[1].str();
-      std::string abs;
+  set<string> uniq;
+  smatch m;
+  istringstream iss(content);
+  string line;
+  while (getline(iss, line)) {
+    if (regex_match(line, m, LocalIncludeRe)) {
+      string rel = m[1].str();
+      string abs;
       if (resolveLocalIncludeInternal(mainSourceAbsPath, rel, abs)){
         uniq.insert(abs);
       } else {
@@ -127,13 +127,13 @@ bool collectLocalQuotedIncludes(const std::string &mainSourceAbsPath,
   return true;
 }
 
-bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
+bool hipifyLocalHeaders(const string &mainSourceAbsPath,
                              const ct::CompilationDatabase *compDB,
                              ct::CommonOptionsParser *OptionsParserPtr,
                              const char *hipify_exe,
                              bool recursive) {
 
-  std::vector<std::string> initial;
+  vector<string> initial;
   if (!collectLocalQuotedIncludes(mainSourceAbsPath, initial)) {
     return false;
   }
@@ -150,33 +150,33 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
   outs() << "\n";
   outs().flush();
 
-  std::vector<std::string> work(initial.begin(), initial.end());
-  std::set<std::string> processed;
+  vector<string> work(initial.begin(), initial.end());
+  set<string> processed;
   
-  std::vector<std::string> directSuccess;
-  std::vector<std::string> injectionSuccess;
-  std::vector<std::string> failed;
+  vector<string> directSuccess;
+  vector<string> injectionSuccess;
+  vector<string> failed;
   
   // Store captured error output for failed files
-  std::map<std::string, std::string> capturedErrors;
+  map<string, string> capturedErrors;
 
   while (!work.empty()) {
-    std::string hdr = work.back();
+    string hdr = work.back();
     work.pop_back();
     if (processed.count(hdr)) {
       continue;
     }
     processed.insert(hdr);
 
-    std::string original;
+    string original;
     if (!readFile(hdr, original)) {
       errs() << sHipify << sError << "Cannot read header: " << hdr << "\n";
       failed.push_back(hdr);
       continue;
     }
 
-    std::string hipOut = hdr + ".hip";
-    std::string hdrFileName = std::string(sys::path::filename(hdr));
+    string hipOut = hdr + ".hip";
+    string hdrFileName = string(sys::path::filename(hdr));
     bool ok = false;
 
     // HYBRID APPROACH:
@@ -186,7 +186,7 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
            << "/" << initial.size() << "] Hipifying source: " << hdr << "\n";
     outs().flush();
     
-    std::string directErrors;
+    string directErrors;
     {
       // Capture stderr during direct attempt
       StderrCapture capture;
@@ -205,7 +205,7 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
       outs() << sHipify << "  -> Trying injection approach...\n";
       outs().flush();
       
-      std::string injectionErrors;
+      string injectionErrors;
       {
         // Capture stderr during injection attempt
         StderrCapture capture;
@@ -224,7 +224,7 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
         failed.push_back(hdrFileName);
         
         // Store errors for this file - combine both attempts' errors
-        std::string combinedErrors;
+        string combinedErrors;
         if (!directErrors.empty()) {
           combinedErrors += "=== Direct approach errors ===\n" + directErrors;
         }
@@ -240,13 +240,13 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
 
     // If recursive, find and queue nested local headers
     if (recursive) {
-      std::smatch m;
-      std::istringstream iss(original);
-      std::string line;
-      while (std::getline(iss, line)) {
-        if (std::regex_match(line, m, LocalIncludeRe)) {
-          std::string rel = m[1].str();
-          std::string abs;
+      smatch m;
+      istringstream iss(original);
+      string line;
+      while (getline(iss, line)) {
+        if (regex_match(line, m, LocalIncludeRe)) {
+          string rel = m[1].str();
+          string abs;
           if (resolveLocalIncludeInternal(hdr, rel, abs) &&
               !processed.count(abs))
             work.push_back(abs);

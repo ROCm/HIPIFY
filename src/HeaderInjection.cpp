@@ -39,34 +39,34 @@ using namespace std;
 namespace {
 
 // Matches system/library includes
-static const std::regex SystemIncludeRe(
-    R"(^\s*#\s*include\s*<([^>\n]+)>)", std::regex::ECMAScript);
+static const regex SystemIncludeRe(
+    R"(^\s*#\s*include\s*<([^>\n]+)>)", regex::ECMAScript);
 
 // Matches local (quoted) includes
-static const std::regex LocalIncludeRe(
-    R"(^\s*#\s*include\s*\"([^\"\n]+)\")", std::regex::ECMAScript);
+static const regex LocalIncludeRe(
+    R"(^\s*#\s*include\s*\"([^\"\n]+)\")", regex::ECMAScript);
 
 // Matches #ifndef guard
-static const std::regex IfndefGuardRe(
-    R"(^\s*#\s*ifndef\s+(\w+)\s*$)", std::regex::ECMAScript);
+static const regex IfndefGuardRe(
+    R"(^\s*#\s*ifndef\s+(\w+)\s*$)", regex::ECMAScript);
 
 // Matches #define for guard
-static const std::regex DefineGuardRe(
-    R"(^\s*#\s*define\s+(\w+)\s*$)", std::regex::ECMAScript);
+static const regex DefineGuardRe(
+    R"(^\s*#\s*define\s+(\w+)\s*$)", regex::ECMAScript);
 
-static const std::regex PragmaOnceRe(
-    R"(^\s*#\s*pragma\s+once\s*$)", std::regex::ECMAScript);
+static const regex PragmaOnceRe(
+    R"(^\s*#\s*pragma\s+once\s*$)", regex::ECMAScript);
 
-bool readFileContent(const std::string &path, std::string &out) {
-  auto MBOrErr = llvm::MemoryBuffer::getFile(path);
+bool readFileContent(const string &path, string &out) {
+  auto MBOrErr = MemoryBuffer::getFile(path);
   if (!MBOrErr) return false;
   out = MBOrErr->get()->getBuffer().str();
   return true;
 }
 
-std::string extractIncludePath(const std::string &line) {
-  std::smatch m;
-  if (std::regex_search(line, m, SystemIncludeRe)) {
+string extractIncludePath(const string &line) {
+  smatch m;
+  if (regex_search(line, m, SystemIncludeRe)) {
     return m[1].str();
   }
   return "";
@@ -74,32 +74,32 @@ std::string extractIncludePath(const std::string &line) {
 
 }
 
-bool collectPrecedingSystemIncludes(const std::string &mainSourceAbsPath,
-                                     const std::string &targetHeaderAbsPath,
-                                     std::vector<std::string> &outSystemIncludes) {
-  std::string content;
+bool collectPrecedingSystemIncludes(const string &mainSourceAbsPath,
+                                     const string &targetHeaderAbsPath,
+                                     vector<string> &outSystemIncludes) {
+  string content;
   if (!readFileContent(mainSourceAbsPath, content)) {
     errs() << sHipify << sError << "Cannot read source file: " << mainSourceAbsPath << "\n";
     return false;
   }
 
-  std::string targetFileName = std::string(sys::path::filename(targetHeaderAbsPath));
+  string targetFileName = string(sys::path::filename(targetHeaderAbsPath));
 
-  std::istringstream iss(content);
-  std::string line;
-  std::smatch sysMatch, localMatch;
+  istringstream iss(content);
+  string line;
+  smatch sysMatch, localMatch;
 
-  while (std::getline(iss, line)) {
-    if (std::regex_search(line, localMatch, LocalIncludeRe)) {
-      std::string localInc = localMatch[1].str();
-      std::string localFileName = std::string(sys::path::filename(localInc));
+  while (getline(iss, line)) {
+    if (regex_search(line, localMatch, LocalIncludeRe)) {
+      string localInc = localMatch[1].str();
+      string localFileName = string(sys::path::filename(localInc));
       if (localFileName == targetFileName) {
         break;
       }
       continue;
     }
 
-    if (std::regex_search(line, sysMatch, SystemIncludeRe)) {
+    if (regex_search(line, sysMatch, SystemIncludeRe)) {
       outSystemIncludes.push_back(line);
     }
   }
@@ -107,31 +107,31 @@ bool collectPrecedingSystemIncludes(const std::string &mainSourceAbsPath,
   return true;
 }
 
-void detectIncludeGuard(const std::string &headerContent,
+void detectIncludeGuard(const string &headerContent,
                         size_t &guardEndLine,
-                        std::string &guardType) {
+                        string &guardType) {
   guardEndLine = 0;
   guardType = "none";
 
-  std::istringstream iss(headerContent);
-  std::string line;
+  istringstream iss(headerContent);
+  string line;
   size_t lineNum = 0;
-  std::string ifndefSymbol;
+  string ifndefSymbol;
 
-  while (std::getline(iss, line)) {
-    std::smatch m;
+  while (getline(iss, line)) {
+    smatch m;
 
-    if (std::regex_match(line, PragmaOnceRe)) {
+    if (regex_match(line, PragmaOnceRe)) {
       guardType = "pragma_once";
       guardEndLine = lineNum;
       return;
     }
 
-    if (std::regex_match(line, m, IfndefGuardRe)) {
+    if (regex_match(line, m, IfndefGuardRe)) {
       ifndefSymbol = m[1].str();
-      for (int i = 0; i < 5 && std::getline(iss, line); ++i) {
+      for (int i = 0; i < 5 && getline(iss, line); ++i) {
         lineNum++;
-        if (std::regex_match(line, m, DefineGuardRe)) {
+        if (regex_match(line, m, DefineGuardRe)) {
           if (m[1].str() == ifndefSymbol) {
             guardType = "ifndef";
             guardEndLine = lineNum;
@@ -149,39 +149,39 @@ void detectIncludeGuard(const std::string &headerContent,
   }
 }
 
-void getExistingIncludes(const std::string &headerContent,
-                         std::set<std::string> &existingIncludes) {
-  std::istringstream iss(headerContent);
-  std::string line;
-  std::smatch m;
+void getExistingIncludes(const string &headerContent,
+                         set<string> &existingIncludes) {
+  istringstream iss(headerContent);
+  string line;
+  smatch m;
 
-  while (std::getline(iss, line)) {
-    if (std::regex_search(line, m, SystemIncludeRe)) {
+  while (getline(iss, line)) {
+    if (regex_search(line, m, SystemIncludeRe)) {
       existingIncludes.insert(m[1].str());
     }
   }
 }
 
-bool createInjectedHeader(const std::string &mainSourceAbsPath,
-                          const std::string &targetHeaderAbsPath,
-                          const std::string &injectedFilePath) {
-  std::string headerContent;
+bool createInjectedHeader(const string &mainSourceAbsPath,
+                          const string &targetHeaderAbsPath,
+                          const string &injectedFilePath) {
+  string headerContent;
   if (!readFileContent(targetHeaderAbsPath, headerContent)) {
     errs() << sHipify << sError << "Cannot read target header: " << targetHeaderAbsPath << "\n";
     return false;
   }
 
-  std::vector<std::string> systemIncludes;
+  vector<string> systemIncludes;
   if (!collectPrecedingSystemIncludes(mainSourceAbsPath, targetHeaderAbsPath,
                                        systemIncludes)) {
   }
 
-  std::set<std::string> existingIncludes;
+  set<string> existingIncludes;
   getExistingIncludes(headerContent, existingIncludes);
 
-  std::vector<std::string> uniqueIncludes;
+  vector<string> uniqueIncludes;
   for (const auto &inc : systemIncludes) {
-    std::string path = extractIncludePath(inc);
+    string path = extractIncludePath(inc);
     if (!path.empty() && existingIncludes.find(path) == existingIncludes.end()) {
       uniqueIncludes.push_back(inc);
       existingIncludes.insert(path);
@@ -189,7 +189,7 @@ bool createInjectedHeader(const std::string &mainSourceAbsPath,
   }
 
   if (uniqueIncludes.empty()) {
-    std::ofstream out(injectedFilePath);
+    ofstream out(injectedFilePath);
     if (!out.is_open()) {
       errs() << sHipify << sError << "Cannot create injected file: " << injectedFilePath << "\n";
       return false;
@@ -200,11 +200,11 @@ bool createInjectedHeader(const std::string &mainSourceAbsPath,
   }
 
   size_t guardEndLine;
-  std::string guardType;
+  string guardType;
   detectIncludeGuard(headerContent, guardEndLine, guardType);
 
-  std::string mainFileName = std::string(sys::path::filename(mainSourceAbsPath));
-  std::ostringstream injection;
+  string mainFileName = string(sys::path::filename(mainSourceAbsPath));
+  ostringstream injection;
   injection << "// --- HIPIFY: Injected dependencies from " << mainFileName << " ---\n";
   for (const auto &inc : uniqueIncludes) {
     injection << inc << "\n";
@@ -212,18 +212,18 @@ bool createInjectedHeader(const std::string &mainSourceAbsPath,
   injection << "// --- End injected dependencies ---\n";
   injection << "\n";
 
-  std::ofstream out(injectedFilePath);
+  ofstream out(injectedFilePath);
   if (!out.is_open()) {
     errs() << sHipify << sError << "Cannot create injected file: " << injectedFilePath << "\n";
     return false;
   }
 
-  std::istringstream iss(headerContent);
-  std::string line;
+  istringstream iss(headerContent);
+  string line;
   size_t lineNum = 0;
   bool injected = false;
 
-  while (std::getline(iss, line)) {
+  while (getline(iss, line)) {
     out << line << "\n";
 
     if (!injected && lineNum == guardEndLine && guardType != "none") {
@@ -236,7 +236,7 @@ bool createInjectedHeader(const std::string &mainSourceAbsPath,
 
   if (!injected && guardType == "none") {
     out.close();
-    std::ofstream outNew(injectedFilePath);
+    ofstream outNew(injectedFilePath);
     if (!outNew.is_open()) {
       errs() << sHipify << sError << "Cannot create injected file: " << injectedFilePath << "\n";
       return false;
@@ -251,14 +251,14 @@ bool createInjectedHeader(const std::string &mainSourceAbsPath,
   return true;
 }
 
-bool hipifyHeaderWithInjection(const std::string &headerAbsPath,
-                               const std::string &outputPath,
-                               const std::string &mainSourceAbsPath,
+bool hipifyHeaderWithInjection(const string &headerAbsPath,
+                               const string &outputPath,
+                               const string &mainSourceAbsPath,
                                const ct::CompilationDatabase *compDB,
                                ct::CommonOptionsParser *OptionsParserPtr,
                                const char *hipify_exe) {
-  std::string headerStem = std::string(sys::path::stem(headerAbsPath));
-  std::string headerExt = std::string(sys::path::extension(headerAbsPath));
+  string headerStem = string(sys::path::stem(headerAbsPath));
+  string headerExt = string(sys::path::extension(headerAbsPath));
   
   if (!headerExt.empty() && headerExt[0] == '.') {
     headerExt = headerExt.substr(1);
@@ -267,22 +267,22 @@ bool hipifyHeaderWithInjection(const std::string &headerAbsPath,
     headerExt = "h";
   }
   
-  std::string tempPrefix = "inject_" + headerStem;
+  string tempPrefix = "inject_" + headerStem;
   
   SmallString<256> injectedPath;
-  std::error_code EC = sys::fs::createTemporaryFile(tempPrefix, headerExt, injectedPath);
+  error_code EC = sys::fs::createTemporaryFile(tempPrefix, headerExt, injectedPath);
   if (EC) {
     errs() << sHipify << sError << "Cannot create temporary file: " << EC.message() << "\n";
     return false;
   }
 
-  if (!createInjectedHeader(mainSourceAbsPath, headerAbsPath, std::string(injectedPath.str()))) {
+  if (!createInjectedHeader(mainSourceAbsPath, headerAbsPath, string(injectedPath.str()))) {
     sys::fs::remove(injectedPath);
     return false;
   }
 
   bool hipifyOk = hipifySingleSource(
-      std::string(injectedPath.str()),
+      string(injectedPath.str()),
       outputPath,
       compDB,
       OptionsParserPtr,
