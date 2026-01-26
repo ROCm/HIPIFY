@@ -44,6 +44,11 @@ THE SOFTWARE.
 #endif
 #include "clang/Driver/Tool.h"
 #include "clang/Frontend/TextDiagnosticPrinter.h"
+#if LLVM_VERSION_MAJOR >= 16
+#include "llvm/TargetParser/Host.h"
+#else
+#include "llvm/Support/Host.h"
+#endif
 
 #include "LocalHeader.h"
 
@@ -106,7 +111,7 @@ void Init(int argc, const char **argv, std::vector<std::string> &files) {
   clang::TextDiagnosticPrinter diagClient(llvm::errs(), &*diagOpts);
   clang::DiagnosticsEngine Diagnostics(IntrusiveRefCntPtr<clang::DiagnosticIDs>(new clang::DiagnosticIDs()), &*diagOpts, &diagClient, false);
 #endif
-  std::unique_ptr<clang::driver::Driver> driver(new clang::driver::Driver("", "nvptx64-nvidia-cuda", Diagnostics));
+  std::unique_ptr<clang::driver::Driver> driver(new clang::driver::Driver("", llvm::sys::getDefaultTargetTriple(), Diagnostics));
   std::vector<const char*> Args(argv, argv + argc);
   cleanupHipifyOptions(Args);
   std::unique_ptr<clang::driver::Compilation> C(driver->BuildCompilation(Args));
