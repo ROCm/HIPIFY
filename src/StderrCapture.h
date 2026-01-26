@@ -26,6 +26,7 @@ THE SOFTWARE.
 #include <sstream>
 #include <fstream>
 #include <cstdio>
+#include <mutex>
 
 #ifdef _WIN32
   #ifndef NOMINMAX
@@ -53,7 +54,7 @@ namespace hipify {
 // Capture stderr output to a temp file.
 class StderrCapture {
 public:
-  StderrCapture() : saved_stderr_(-1), temp_fd_(-1), active_(false) {
+  StderrCapture() : lock_(getMutex()), saved_stderr_(-1), temp_fd_(-1), active_(false) {
 #ifdef _WIN32
     char tempDir[MAX_PATH];
     DWORD tempDirLen = GetTempPathA(MAX_PATH, tempDir);
@@ -133,6 +134,11 @@ public:
   bool isActive() const { return active_; }
   
 private:
+  static std::mutex& getMutex() {
+    static std::mutex mtx;
+    return mtx;
+  }
+
   void removeTempFile() {
     if (!tempFilePath_.empty()) {
 #ifdef _WIN32
@@ -152,6 +158,7 @@ private:
     removeTempFile();
   }
 
+  std::unique_lock<std::mutex> lock_;
   int saved_stderr_;
   int temp_fd_;
   bool active_;
