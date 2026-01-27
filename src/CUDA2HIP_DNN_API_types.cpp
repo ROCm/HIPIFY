@@ -86,6 +86,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["CUDNN_STATUS_NOT_SUPPORTED_PADDING"]                              = {"HIPDNN_STATUS_NOT_SUPPORTED_PADDING",                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM"]                     = {"HIPDNN_STATUS_NOT_SUPPORTED_BAD_LAUNCH_PARAM",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_STATUS_NOT_SUPPORTED_CUDA_GRAPH_NATIVE_API"]                = {"HIPDNN_STATUS_NOT_SUPPORTED_CUDA_GRAPH_NATIVE_API",               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
+  m["CUDNN_STATUS_NOT_SUPPORTED_INVALID_DYNAMIC_SHAPE"]                = {"HIPDNN_STATUS_NOT_SUPPORTED_INVALID_DYNAMIC_SHAPE",               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_STATUS_INTERNAL_ERROR_COMPILATION_FAILED"]                  = {"HIPDNN_STATUS_INTERNAL_ERROR_COMPILATION_FAILED",                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_STATUS_INTERNAL_ERROR_UNEXPECTED_VALUE"]                    = {"HIPDNN_STATUS_INTERNAL_ERROR_UNEXPECTED_VALUE",                   "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_STATUS_INTERNAL_ERROR_HOST_ALLOCATION_FAILED"]              = {"HIPDNN_STATUS_INTERNAL_ERROR_HOST_ALLOCATION_FAILED",             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
@@ -562,6 +563,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["CUDNN_ATTR_VARIANT_PACK_DATA_POINTERS"]                           = {"HIPDNN_ATTR_VARIANT_PACK_DATA_POINTERS",                          "MIOPEN_ATTR_VARIANT_PACK_DATA_POINTERS",                          CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};    // 1001
   m["CUDNN_ATTR_VARIANT_PACK_INTERMEDIATES"]                           = {"HIPDNN_ATTR_VARIANT_PACK_INTERMEDIATES",                          "MIOPEN_ATTR_VARIANT_PACK_INTERMEDIATES",                          CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};    // 1002
   m["CUDNN_ATTR_VARIANT_PACK_WORKSPACE"]                               = {"HIPDNN_ATTR_VARIANT_PACK_WORKSPACE",                              "MIOPEN_ATTR_VARIANT_PACK_WORKSPACE",                              CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};    // 1003
+  m["CUDNN_ATTR_VARIANT_PACK_OVERRIDE_UNIQUE_IDS"]                     = {"HIPDNN_ATTR_VARIANT_PACK_OVERRIDE_UNIQUE_IDS",                    "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};        // 1010
+  m["CUDNN_ATTR_VARIANT_PACK_OVERRIDE_SHAPES"]                         = {"HIPDNN_ATTR_VARIANT_PACK_OVERRIDE_SHAPES",                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};        // 1011
+  m["CUDNN_ATTR_VARIANT_PACK_OVERRIDE_STRIDES"]                        = {"HIPDNN_ATTR_VARIANT_PACK_OVERRIDE_STRIDES",                       "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};        // 1012
   m["CUDNN_ATTR_LAYOUT_INFO_TENSOR_UID"]                               = {"HIPDNN_ATTR_LAYOUT_INFO_TENSOR_UID",                              "MIOPEN_ATTR_LAYOUT_INFO_TENSOR_UID",                              CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};    // 1100
   m["CUDNN_ATTR_LAYOUT_INFO_TYPES"]                                    = {"HIPDNN_ATTR_LAYOUT_INFO_TYPES",                                   "MIOPEN_ATTR_LAYOUT_INFO_TYPES",                                   CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};    // 1101
   m["CUDNN_ATTR_KNOB_INFO_TYPE"]                                       = {"HIPDNN_ATTR_KNOB_INFO_TYPE",                                      "MIOPEN_ATTR_KNOB_INFO_TYPE",                                      CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};    // 1200
@@ -882,6 +886,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["CUDNN_KNOB_TYPE_TILE_M"]                                          = {"HIPDNN_KNOB_TYPE_TILE_M",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_KNOB_TYPE_TILE_N"]                                          = {"HIPDNN_KNOB_TYPE_TILE_N",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_KNOB_TYPE_WARP_SPEC_CFG"]                                   = {"HIPDNN_KNOB_TYPE_WARP_SPEC_CFG",                                  "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
+  m["CUDNN_KNOB_TYPE_SWAP_AB"]                                         = {"HIPDNN_KNOB_TYPE_SWAP_AB",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_KNOB_TYPE_COUNTS"]                                          = {"HIPDNN_KNOB_TYPE_COUNTS",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["cudnnBackendHeurMode_t"]                                          = {"hipdnnBackendHeurMode_t",                                         "miopenBackendHeurMode_t",                                         CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED};
   m["CUDNN_HEUR_MODE_INSTANT"]                                         = {"HIPDNN_HEUR_MODE_INSTANT",                                        "MIOPEN_HEUR_MODE_INSTANT",                                        CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};
@@ -2002,6 +2007,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP = []
   m["CUDNN_ATTR_OPERATION_SDPA_BWD_DVDESC"]                            = {CUDNN_9170,CUDA_0,    CUDA_0   };
   m["CUDNN_ATTR_OPERATION_SDPA_BWD_DODDESC"]                           = {CUDNN_9170,CUDA_0,    CUDA_0   };
   m["CUDNN_BACKEND_OPERATION_SDPA_BWD_DESCRIPTOR"]                     = {CUDNN_9170,CUDA_0,    CUDA_0   };
+  m["CUDNN_STATUS_NOT_SUPPORTED_INVALID_DYNAMIC_SHAPE"]                = {CUDNN_9180,CUDA_0,    CUDA_0   };
+  m["CUDNN_ATTR_VARIANT_PACK_OVERRIDE_UNIQUE_IDS"]                     = {CUDNN_9180,CUDA_0,    CUDA_0   };
+  m["CUDNN_ATTR_VARIANT_PACK_OVERRIDE_SHAPES"]                         = {CUDNN_9180,CUDA_0,    CUDA_0   };
+  m["CUDNN_ATTR_VARIANT_PACK_OVERRIDE_STRIDES"]                        = {CUDNN_9180,CUDA_0,    CUDA_0   };
+  m["CUDNN_KNOB_TYPE_SWAP_AB"]                                         = {CUDNN_9180,CUDA_0,    CUDA_0   };
 
   return m;
 }();
