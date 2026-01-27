@@ -57,8 +57,8 @@ namespace hipify {
   };
 
   struct CastInfo {
-    CastTypes castType;
-    CastWarning castWarn;
+    CastTypes castType = e_HIP_SYMBOL;
+    CastWarning castWarn = cw_None;
     std::string constValToAddOrReplace = "";
     unsigned moveOrCopyTo = 0;
     unsigned numberToMoveOrCopy = 1;
@@ -73,9 +73,9 @@ namespace hipify {
   };
 
   struct OverloadInfo {
-    hipCounter counter;
-    OverloadTypes overloadType;
-    OverloadWarning overloadWarn;
+    hipCounter counter = {};
+    OverloadTypes overloadType = ot_arguments_number;
+    OverloadWarning overloadWarn = ow_None;
   };
 
   typedef std::map<unsigned, OverloadInfo> OverloadMap;
