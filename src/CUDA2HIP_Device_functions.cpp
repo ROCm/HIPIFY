@@ -23,1855 +23,1875 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps CUDA header names to HIP header names
-const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP {
+const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP = []() {
+  std::map<llvm::StringRef, hipCounter> m;
+
   // math functions
-  {"abs",                               {"abs",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"labs",                              {"labs",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"llabs",                             {"llabs",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fabs",                              {"fabs",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fabsf",                             {"fabsf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"min",                               {"min",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fminf",                             {"fminf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fmin",                              {"fmin",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"max",                               {"max",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fmaxf",                             {"fmaxf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fmax",                              {"fmax",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sin",                               {"sin",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cos",                               {"cos",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sincos",                            {"sincos",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sincosf",                           {"sincosf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"tan",                               {"tan",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sqrt",                              {"sqrt",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rsqrt",                             {"rsqrt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rsqrtf",                            {"rsqrtf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"log2",                              {"log2",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"exp2",                              {"exp2",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"exp2f",                             {"exp2f",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"exp10",                             {"exp10",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"exp10f",                            {"exp10f",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"expm1",                             {"expm1",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"expm1f",                            {"expm1f",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"log2f",                             {"log2f",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"log10",                             {"log10",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"log",                               {"log",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"log1p",                             {"log1p",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"log1pf",                            {"log1pf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"floor",                             {"floor",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"exp",                               {"exp",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cosh",                              {"cosh",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sinh",                              {"sinh",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"tanh",                              {"tanh",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"acosh",                             {"acosh",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"acoshf",                            {"acoshf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"asinh",                             {"asinh",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"asinhf",                            {"asinhf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atanh",                             {"atanh",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atanhf",                            {"atanhf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"ldexp",                             {"ldexp",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"ldexpf",                            {"ldexpf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"logb",                              {"logb",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"logbf",                             {"logbf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"ilogb",                             {"ilogb",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"ilogbf",                            {"ilogbf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"scalbn",                            {"scalbn",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"scalbnf",                           {"scalbnf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"scalbln",                           {"scalbln",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"scalblnf",                          {"scalblnf",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"frexp",                             {"frexp",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"frexpf",                            {"frexpf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"round",                             {"round",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"roundf",                            {"roundf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"lround",                            {"lround",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"lroundf",                           {"lroundf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"llround",                           {"llround",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"llroundf",                          {"llroundf",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rint",                              {"rint",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rintf",                             {"rintf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"lrint",                             {"lrint",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"lrintf",                            {"lrintf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"llrint",                            {"llrint",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"llrintf",                           {"llrintf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"nearbyint",                         {"nearbyint",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"nearbyintf",                        {"nearbyintf",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"ceil",                              {"ceil",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"trunc",                             {"trunc",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"truncf",                            {"truncf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fdim",                              {"fdim",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fdimf",                             {"fdimf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atan2",                             {"atan2",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atan",                              {"atan",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"acos",                              {"acos",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"asin",                              {"asin",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hypot",                             {"hypot",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rhypot",                            {"rhypot",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hypotf",                            {"hypotf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rhypotf",                           {"rhypotf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"norm3d",                            {"norm3d",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rnorm3d",                           {"rnorm3d",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"norm4d",                            {"norm4d",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rnorm4d",                           {"rnorm4d",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"norm",                              {"norm",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rnorm",                             {"rnorm",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rnormf",                            {"rnormf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"normf",                             {"normf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"norm3df",                           {"norm3df",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rnorm3df",                          {"rnorm3df",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"norm4df",                           {"norm4df",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rnorm4df",                          {"rnorm4df",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cbrt",                              {"cbrt",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cbrtf",                             {"cbrtf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rcbrt",                             {"rcbrt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"rcbrtf",                            {"rcbrtf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sinpi",                             {"sinpi",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sinpif",                            {"sinpif",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cospi",                             {"cospi",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cospif",                            {"cospif",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sincospi",                          {"sincospi",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sincospif",                         {"sincospif",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"pow",                               {"pow",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"modf",                              {"modf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fmod",                              {"fmod",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"remainder",                         {"remainder",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"remainderf",                        {"remainderf",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"remquo",                            {"remquo",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"remquof",                           {"remquof",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"j0",                                {"j0",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"j0f",                               {"j0f",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"j1",                                {"j1",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"j1f",                               {"j1f",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"jn",                                {"jn",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"jnf",                               {"jnf",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"y0",                                {"y0",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"y0f",                               {"y0f",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"y1",                                {"y1",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"y1f",                               {"y1f",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"yn",                                {"yn",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"ynf",                               {"ynf",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cyl_bessel_i0",                     {"cyl_bessel_i0",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cyl_bessel_i0f",                    {"cyl_bessel_i0f",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cyl_bessel_i1",                     {"cyl_bessel_i1",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cyl_bessel_i1f",                    {"cyl_bessel_i1f",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erf",                               {"erf",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erff",                              {"erff",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erfinv",                            {"erfinv",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erfinvf",                           {"erfinvf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erfc",                              {"erfc",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erfcf",                             {"erfcf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"lgamma",                            {"lgamma",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erfcinv",                           {"erfcinv",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erfcinvf",                          {"erfcinvf",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"normcdfinv",                        {"normcdfinv",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"normcdfinvf",                       {"normcdfinvf",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"normcdf",                           {"normcdf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"normcdff",                          {"normcdff",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erfcx",                             {"erfcx",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"erfcxf",                            {"erfcxf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"lgammaf",                           {"lgammaf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"tgamma",                            {"tgamma",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"tgammaf",                           {"tgammaf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"copysign",                          {"copysign",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"copysignf",                         {"copysignf",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"nextafter",                         {"nextafter",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"nextafterf",                        {"nextafterf",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"nan",                               {"nan",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"nanf",                              {"nanf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fma",                               {"fma",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fmaf",                              {"fmaf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"acosf",                             {"acosf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"asinf",                             {"asinf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atanf",                             {"atanf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atan2f",                            {"atan2f",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"cosf",                              {"cosf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sinf",                              {"sinf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"tanf",                              {"tanf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"coshf",                             {"coshf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sinhf",                             {"sinhf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"tanhf",                             {"tanhf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"expf",                              {"expf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"logf",                              {"logf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"log10f",                            {"log10f",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"modff",                             {"modff",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"powf",                              {"powf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"sqrtf",                             {"sqrtf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"ceilf",                             {"ceilf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"floorf",                            {"floorf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fmodf",                             {"fmodf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"signbit",                           {"signbit",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"isfinite",                          {"isfinite",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"isnan",                             {"isnan",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"isinf",                             {"isinf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"umin",                              {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"llmin",                             {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"ullmin",                            {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"umax",                              {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"llmax",                             {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"ullmax",                            {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__isinff",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__isnanf",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__finite",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__finitef",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__signbit",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__isnan",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__isinf",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__signbitf",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__signbitl",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__finitel",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__isinfl",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__isnanl",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"_ldsign",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"_fdsign",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"_Pow_int",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  m["abs"]                              = {"abs",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["labs"]                             = {"labs",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["llabs"]                            = {"llabs",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fabs"]                             = {"fabs",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fabsf"]                            = {"fabsf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["min"]                              = {"min",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fminf"]                            = {"fminf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fmin"]                             = {"fmin",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["max"]                              = {"max",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fmaxf"]                            = {"fmaxf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fmax"]                             = {"fmax",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sin"]                              = {"sin",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cos"]                              = {"cos",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sincos"]                           = {"sincos",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sincosf"]                          = {"sincosf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["tan"]                              = {"tan",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sqrt"]                             = {"sqrt",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rsqrt"]                            = {"rsqrt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rsqrtf"]                           = {"rsqrtf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["log2"]                             = {"log2",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["exp2"]                             = {"exp2",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["exp2f"]                            = {"exp2f",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["exp10"]                            = {"exp10",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["exp10f"]                           = {"exp10f",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["expm1"]                            = {"expm1",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["expm1f"]                           = {"expm1f",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["log2f"]                            = {"log2f",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["log10"]                            = {"log10",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["log"]                              = {"log",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["log1p"]                            = {"log1p",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["log1pf"]                           = {"log1pf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["floor"]                            = {"floor",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["exp"]                              = {"exp",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cosh"]                             = {"cosh",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sinh"]                             = {"sinh",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["tanh"]                             = {"tanh",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["acosh"]                            = {"acosh",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["acoshf"]                           = {"acoshf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["asinh"]                            = {"asinh",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["asinhf"]                           = {"asinhf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atanh"]                            = {"atanh",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atanhf"]                           = {"atanhf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["ldexp"]                            = {"ldexp",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["ldexpf"]                           = {"ldexpf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["logb"]                             = {"logb",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["logbf"]                            = {"logbf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["ilogb"]                            = {"ilogb",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["ilogbf"]                           = {"ilogbf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["scalbn"]                           = {"scalbn",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["scalbnf"]                          = {"scalbnf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["scalbln"]                          = {"scalbln",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["scalblnf"]                         = {"scalblnf",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["frexp"]                            = {"frexp",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["frexpf"]                           = {"frexpf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["round"]                            = {"round",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["roundf"]                           = {"roundf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["lround"]                           = {"lround",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["lroundf"]                          = {"lroundf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["llround"]                          = {"llround",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["llroundf"]                         = {"llroundf",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rint"]                             = {"rint",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rintf"]                            = {"rintf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["lrint"]                            = {"lrint",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["lrintf"]                           = {"lrintf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["llrint"]                           = {"llrint",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["llrintf"]                          = {"llrintf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["nearbyint"]                        = {"nearbyint",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["nearbyintf"]                       = {"nearbyintf",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["ceil"]                             = {"ceil",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["trunc"]                            = {"trunc",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["truncf"]                           = {"truncf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fdim"]                             = {"fdim",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fdimf"]                            = {"fdimf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atan2"]                            = {"atan2",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atan"]                             = {"atan",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["acos"]                             = {"acos",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["asin"]                             = {"asin",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hypot"]                            = {"hypot",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rhypot"]                           = {"rhypot",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hypotf"]                           = {"hypotf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rhypotf"]                          = {"rhypotf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["norm3d"]                           = {"norm3d",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rnorm3d"]                          = {"rnorm3d",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["norm4d"]                           = {"norm4d",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rnorm4d"]                          = {"rnorm4d",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["norm"]                             = {"norm",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rnorm"]                            = {"rnorm",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rnormf"]                           = {"rnormf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["normf"]                            = {"normf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["norm3df"]                          = {"norm3df",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rnorm3df"]                         = {"rnorm3df",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["norm4df"]                          = {"norm4df",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rnorm4df"]                         = {"rnorm4df",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cbrt"]                             = {"cbrt",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cbrtf"]                            = {"cbrtf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rcbrt"]                            = {"rcbrt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["rcbrtf"]                           = {"rcbrtf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sinpi"]                            = {"sinpi",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sinpif"]                           = {"sinpif",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cospi"]                            = {"cospi",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cospif"]                           = {"cospif",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sincospi"]                         = {"sincospi",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sincospif"]                        = {"sincospif",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["pow"]                              = {"pow",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["modf"]                             = {"modf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fmod"]                             = {"fmod",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["remainder"]                        = {"remainder",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["remainderf"]                       = {"remainderf",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["remquo"]                           = {"remquo",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["remquof"]                          = {"remquof",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["j0"]                               = {"j0",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["j0f"]                              = {"j0f",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["j1"]                               = {"j1",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["j1f"]                              = {"j1f",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["jn"]                               = {"jn",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["jnf"]                              = {"jnf",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["y0"]                               = {"y0",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["y0f"]                              = {"y0f",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["y1"]                               = {"y1",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["y1f"]                              = {"y1f",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["yn"]                               = {"yn",                                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["ynf"]                              = {"ynf",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cyl_bessel_i0"]                    = {"cyl_bessel_i0",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cyl_bessel_i0f"]                   = {"cyl_bessel_i0f",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cyl_bessel_i1"]                    = {"cyl_bessel_i1",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cyl_bessel_i1f"]                   = {"cyl_bessel_i1f",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erf"]                              = {"erf",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erff"]                             = {"erff",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erfinv"]                           = {"erfinv",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erfinvf"]                          = {"erfinvf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erfc"]                             = {"erfc",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erfcf"]                            = {"erfcf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["lgamma"]                           = {"lgamma",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erfcinv"]                          = {"erfcinv",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erfcinvf"]                         = {"erfcinvf",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["normcdfinv"]                       = {"normcdfinv",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["normcdfinvf"]                      = {"normcdfinvf",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["normcdf"]                          = {"normcdf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["normcdff"]                         = {"normcdff",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erfcx"]                            = {"erfcx",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["erfcxf"]                           = {"erfcxf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["lgammaf"]                          = {"lgammaf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["tgamma"]                           = {"tgamma",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["tgammaf"]                          = {"tgammaf",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["copysign"]                         = {"copysign",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["copysignf"]                        = {"copysignf",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["nextafter"]                        = {"nextafter",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["nextafterf"]                       = {"nextafterf",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["nan"]                              = {"nan",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["nanf"]                             = {"nanf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fma"]                              = {"fma",                                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fmaf"]                             = {"fmaf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["acosf"]                            = {"acosf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["asinf"]                            = {"asinf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atanf"]                            = {"atanf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atan2f"]                           = {"atan2f",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["cosf"]                             = {"cosf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sinf"]                             = {"sinf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["tanf"]                             = {"tanf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["coshf"]                            = {"coshf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sinhf"]                            = {"sinhf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["tanhf"]                            = {"tanhf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["expf"]                             = {"expf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["logf"]                             = {"logf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["log10f"]                           = {"log10f",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["modff"]                            = {"modff",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["powf"]                             = {"powf",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["sqrtf"]                            = {"sqrtf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["ceilf"]                            = {"ceilf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["floorf"]                           = {"floorf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fmodf"]                            = {"fmodf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["signbit"]                          = {"signbit",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["isfinite"]                         = {"isfinite",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["isnan"]                            = {"isnan",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["isinf"]                            = {"isinf",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["umin"]                             = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["llmin"]                            = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["ullmin"]                           = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["umax"]                             = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["llmax"]                            = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["ullmax"]                           = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__isinff"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__isnanf"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__finite"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__finitef"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__signbit"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__isnan"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__isinf"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__signbitf"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__signbitl"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__finitel"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__isinfl"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__isnanl"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["_ldsign"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["_fdsign"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["_Pow_int"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
   // static math functions declared in device-functions.h
-  {"mulhi",                             {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"mul64hi",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"float_as_int",                      {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"int_as_float",                      {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"float_as_uint",                     {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"uint_as_float",                     {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"saturate",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"mul24",                             {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"umul24",                            {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"float2int",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"int2float",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"uint2float",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  m["mulhi"]                            = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["mul64hi"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["float_as_int"]                     = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["int_as_float"]                     = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["float_as_uint"]                    = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["uint_as_float"]                    = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["saturate"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["mul24"]                            = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["umul24"]                           = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["float2int"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["int2float"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["uint2float"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
   // device functions
-  {"__mulhi",                           {"__mulhi",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__umulhi",                          {"__umulhi",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__mul64hi",                         {"__mul64hi",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__umul64hi",                        {"__umul64hi",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int_as_float",                    {"__int_as_float",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float_as_int",                    {"__float_as_int",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint_as_float",                   {"__uint_as_float",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float_as_uint",                   {"__float_as_uint",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__syncthreads",                     {"__syncthreads",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__syncthreads_count",               {"__syncthreads_count",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__syncthreads_and",                 {"__syncthreads_and",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__syncthreads_or",                  {"__syncthreads_or",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__threadfence",                     {"__threadfence",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__threadfence_block",               {"__threadfence_block",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__threadfence_system",              {"__threadfence_system",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__saturatef",                       {"__saturatef",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__sad",                             {"__sad",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__usad",                            {"__usad",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__mul24",                           {"__mul24",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__umul24",                          {"__umul24",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fdividef",                          {"fdividef",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fdividef",                        {"__fdividef",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"fdivide",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__sinf",                            {"__sinf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__cosf",                            {"__cosf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__tanf",                            {"__tanf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__sincosf",                         {"__sincosf",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__expf",                            {"__expf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__exp10f",                          {"__exp10f",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__log2f",                           {"__log2f",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__log10f",                          {"__log10f",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__logf",                            {"__logf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__powf",                            {"__powf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2int_rn",                    {"__float2int_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2int_rz",                    {"__float2int_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2int_ru",                    {"__float2int_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2int_rd",                    {"__float2int_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2uint_rn",                   {"__float2uint_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2uint_rz",                   {"__float2uint_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2uint_ru",                   {"__float2uint_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2uint_rd",                   {"__float2uint_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2float_rn",                    {"__int2float_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2float_rz",                    {"__int2float_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2float_ru",                    {"__int2float_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2float_rd",                    {"__int2float_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2float_rn",                   {"__uint2float_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2float_rz",                   {"__uint2float_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2float_ru",                   {"__uint2float_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2float_rd",                   {"__uint2float_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2ll_rn",                     {"__float2ll_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2ll_rz",                     {"__float2ll_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2ll_ru",                     {"__float2ll_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2ll_rd",                     {"__float2ll_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2ull_rn",                    {"__float2ull_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2ull_rz",                    {"__float2ull_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2ull_ru",                    {"__float2ull_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2ull_rd",                    {"__float2ull_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2float_rn",                     {"__ll2float_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2float_rz",                     {"__ll2float_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2float_ru",                     {"__ll2float_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2float_rd",                     {"__ll2float_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2float_rn",                    {"__ull2float_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2float_rz",                    {"__ull2float_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2float_ru",                    {"__ull2float_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2float_rd",                    {"__ull2float_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fadd_rn",                         {"__fadd_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fadd_rz",                         {"__fadd_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fadd_ru",                         {"__fadd_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fadd_rd",                         {"__fadd_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fsub_rn",                         {"__fsub_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fsub_rz",                         {"__fsub_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fsub_ru",                         {"__fsub_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fsub_rd",                         {"__fsub_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fmul_rn",                         {"__fmul_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fmul_rz",                         {"__fmul_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fmul_ru",                         {"__fmul_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fmul_rd",                         {"__fmul_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fmaf_rn",                         {"__fmaf_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fmaf_rz",                         {"__fmaf_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fmaf_ru",                         {"__fmaf_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fmaf_rd",                         {"__fmaf_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__frcp_rn",                         {"__frcp_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__frcp_rz",                         {"__frcp_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__frcp_ru",                         {"__frcp_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__frcp_rd",                         {"__frcp_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fsqrt_rn",                        {"__fsqrt_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fsqrt_rz",                        {"__fsqrt_rz",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fsqrt_ru",                        {"__fsqrt_ru",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fsqrt_rd",                        {"__fsqrt_rd",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__frsqrt_rn",                       {"__frsqrt_rn",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fdiv_rn",                         {"__fdiv_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fdiv_rz",                         {"__fdiv_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fdiv_ru",                         {"__fdiv_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fdiv_rd",                         {"__fdiv_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__clz",                             {"__clz",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ffs",                             {"__ffs",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__popc",                            {"__popc",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__brev",                            {"__brev",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__clzll",                           {"__clzll",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ffsll",                           {"__ffsll",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__popcll",                          {"__popcll",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__brevll",                          {"__brevll",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__byte_perm",                       {"__byte_perm",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hadd",                            {"__hadd",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hadd_rn",                         {"__hadd_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__rhadd",                           {"__rhadd",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uhadd",                           {"__uhadd",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__urhadd",                          {"__urhadd",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__prof_trigger",                    {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__trap",                            {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__brkpt",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__pm0",                             {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__pm1",                             {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__pm2",                             {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__pm3",                             {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  m["__mulhi"]                          = {"__mulhi",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__umulhi"]                         = {"__umulhi",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__mul64hi"]                        = {"__mul64hi",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__umul64hi"]                       = {"__umul64hi",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int_as_float"]                   = {"__int_as_float",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float_as_int"]                   = {"__float_as_int",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint_as_float"]                  = {"__uint_as_float",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float_as_uint"]                  = {"__float_as_uint",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__syncthreads"]                    = {"__syncthreads",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__syncthreads_count"]              = {"__syncthreads_count",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__syncthreads_and"]                = {"__syncthreads_and",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__syncthreads_or"]                 = {"__syncthreads_or",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__threadfence"]                    = {"__threadfence",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__threadfence_block"]              = {"__threadfence_block",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__threadfence_system"]             = {"__threadfence_system",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__saturatef"]                      = {"__saturatef",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__sad"]                            = {"__sad",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__usad"]                           = {"__usad",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__mul24"]                          = {"__mul24",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__umul24"]                         = {"__umul24",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fdividef"]                         = {"fdividef",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fdividef"]                       = {"__fdividef",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["fdivide"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__sinf"]                           = {"__sinf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__cosf"]                           = {"__cosf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__tanf"]                           = {"__tanf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__sincosf"]                        = {"__sincosf",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__expf"]                           = {"__expf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__exp10f"]                         = {"__exp10f",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__log2f"]                          = {"__log2f",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__log10f"]                         = {"__log10f",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__logf"]                           = {"__logf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__powf"]                           = {"__powf",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2int_rn"]                   = {"__float2int_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2int_rz"]                   = {"__float2int_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2int_ru"]                   = {"__float2int_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2int_rd"]                   = {"__float2int_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2uint_rn"]                  = {"__float2uint_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2uint_rz"]                  = {"__float2uint_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2uint_ru"]                  = {"__float2uint_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2uint_rd"]                  = {"__float2uint_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2float_rn"]                   = {"__int2float_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2float_rz"]                   = {"__int2float_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2float_ru"]                   = {"__int2float_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2float_rd"]                   = {"__int2float_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2float_rn"]                  = {"__uint2float_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2float_rz"]                  = {"__uint2float_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2float_ru"]                  = {"__uint2float_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2float_rd"]                  = {"__uint2float_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2ll_rn"]                    = {"__float2ll_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2ll_rz"]                    = {"__float2ll_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2ll_ru"]                    = {"__float2ll_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2ll_rd"]                    = {"__float2ll_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2ull_rn"]                   = {"__float2ull_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2ull_rz"]                   = {"__float2ull_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2ull_ru"]                   = {"__float2ull_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2ull_rd"]                   = {"__float2ull_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2float_rn"]                    = {"__ll2float_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2float_rz"]                    = {"__ll2float_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2float_ru"]                    = {"__ll2float_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2float_rd"]                    = {"__ll2float_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2float_rn"]                   = {"__ull2float_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2float_rz"]                   = {"__ull2float_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2float_ru"]                   = {"__ull2float_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2float_rd"]                   = {"__ull2float_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fadd_rn"]                        = {"__fadd_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fadd_rz"]                        = {"__fadd_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fadd_ru"]                        = {"__fadd_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fadd_rd"]                        = {"__fadd_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fsub_rn"]                        = {"__fsub_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fsub_rz"]                        = {"__fsub_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fsub_ru"]                        = {"__fsub_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fsub_rd"]                        = {"__fsub_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fmul_rn"]                        = {"__fmul_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fmul_rz"]                        = {"__fmul_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fmul_ru"]                        = {"__fmul_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fmul_rd"]                        = {"__fmul_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fmaf_rn"]                        = {"__fmaf_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fmaf_rz"]                        = {"__fmaf_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fmaf_ru"]                        = {"__fmaf_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fmaf_rd"]                        = {"__fmaf_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__frcp_rn"]                        = {"__frcp_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__frcp_rz"]                        = {"__frcp_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__frcp_ru"]                        = {"__frcp_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__frcp_rd"]                        = {"__frcp_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fsqrt_rn"]                       = {"__fsqrt_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fsqrt_rz"]                       = {"__fsqrt_rz",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fsqrt_ru"]                       = {"__fsqrt_ru",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fsqrt_rd"]                       = {"__fsqrt_rd",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__frsqrt_rn"]                      = {"__frsqrt_rn",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fdiv_rn"]                        = {"__fdiv_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fdiv_rz"]                        = {"__fdiv_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fdiv_ru"]                        = {"__fdiv_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fdiv_rd"]                        = {"__fdiv_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__clz"]                            = {"__clz",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ffs"]                            = {"__ffs",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__popc"]                           = {"__popc",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__brev"]                           = {"__brev",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__clzll"]                          = {"__clzll",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ffsll"]                          = {"__ffsll",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__popcll"]                         = {"__popcll",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__brevll"]                         = {"__brevll",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__byte_perm"]                      = {"__byte_perm",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hadd"]                           = {"__hadd",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hadd_rn"]                        = {"__hadd_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__rhadd"]                          = {"__rhadd",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uhadd"]                          = {"__uhadd",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__urhadd"]                         = {"__urhadd",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__prof_trigger"]                   = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__trap"]                           = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__brkpt"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__pm0"]                            = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__pm1"]                            = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__pm2"]                            = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__pm3"]                            = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
   // device double functions
-  {"__dadd_rz",                         {"__dadd_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dadd_ru",                         {"__dadd_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dadd_rd",                         {"__dadd_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dadd_rn",                         {"__dadd_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ddiv_rz",                         {"__ddiv_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ddiv_ru",                         {"__ddiv_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ddiv_rd",                         {"__ddiv_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ddiv_rn",                         {"__ddiv_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__dmul_rz",                         {"__dmul_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dmul_ru",                         {"__dmul_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dmul_rd",                         {"__dmul_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dmul_rn",                         {"__dmul_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__drcp_rz",                         {"__drcp_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__drcp_ru",                         {"__drcp_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__drcp_rd",                         {"__drcp_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__drcp_rn",                         {"__drcp_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__dsqrt_rz",                        {"__dsqrt_rz",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dsqrt_ru",                        {"__dsqrt_ru",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dsqrt_rd",                        {"__dsqrt_rd",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dsqrt_rn",                        {"__dsqrt_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__dsub_rz",                         {"__dsub_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dsub_ru",                         {"__dsub_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dsub_rd",                         {"__dsub_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__dsub_rn",                         {"__dsub_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__fma_rz",                          {"__fma_rz",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fma_ru",                          {"__fma_ru",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fma_rd",                          {"__fma_rd",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__fma_rn",                          {"__fma_rn",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2float_rd",                 {"__double2float_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2float_rn",                 {"__double2float_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2float_ru",                 {"__double2float_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2float_rz",                 {"__double2float_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2hiint",                    {"__double2hiint",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2loint",                    {"__double2loint",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2int_rd",                   {"__double2int_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2int_rn",                   {"__double2int_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2int_ru",                   {"__double2int_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2int_rz",                   {"__double2int_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2ll_rd",                    {"__double2ll_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2ll_rn",                    {"__double2ll_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2ll_ru",                    {"__double2ll_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2ll_rz",                    {"__double2ll_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2uint_rd",                  {"__double2uint_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2uint_rn",                  {"__double2uint_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2uint_ru",                  {"__double2uint_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2uint_rz",                  {"__double2uint_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2ull_rd",                   {"__double2ull_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2ull_rn",                   {"__double2ull_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2ull_ru",                   {"__double2ull_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2ull_rz",                   {"__double2ull_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double_as_longlong",              {"__double_as_longlong",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hiloint2double",                  {"__hiloint2double",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2double_rn",                   {"__int2double_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2double_rd",                    {"__ll2double_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2double_rn",                    {"__ll2double_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2double_ru",                    {"__ll2double_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2double_rz",                    {"__ll2double_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__longlong_as_double",              {"__longlong_as_double",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2double_rn",                  {"__uint2double_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2double_rd",                   {"__ull2double_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2double_rn",                   {"__ull2double_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2double_ru",                   {"__ull2double_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2double_rz",                   {"__ull2double_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  m["__dadd_rz"]                        = {"__dadd_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dadd_ru"]                        = {"__dadd_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dadd_rd"]                        = {"__dadd_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dadd_rn"]                        = {"__dadd_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ddiv_rz"]                        = {"__ddiv_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ddiv_ru"]                        = {"__ddiv_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ddiv_rd"]                        = {"__ddiv_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ddiv_rn"]                        = {"__ddiv_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__dmul_rz"]                        = {"__dmul_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dmul_ru"]                        = {"__dmul_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dmul_rd"]                        = {"__dmul_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dmul_rn"]                        = {"__dmul_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__drcp_rz"]                        = {"__drcp_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__drcp_ru"]                        = {"__drcp_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__drcp_rd"]                        = {"__drcp_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__drcp_rn"]                        = {"__drcp_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__dsqrt_rz"]                       = {"__dsqrt_rz",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dsqrt_ru"]                       = {"__dsqrt_ru",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dsqrt_rd"]                       = {"__dsqrt_rd",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dsqrt_rn"]                       = {"__dsqrt_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__dsub_rz"]                        = {"__dsub_rz",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dsub_ru"]                        = {"__dsub_ru",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dsub_rd"]                        = {"__dsub_rd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__dsub_rn"]                        = {"__dsub_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__fma_rz"]                         = {"__fma_rz",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fma_ru"]                         = {"__fma_ru",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fma_rd"]                         = {"__fma_rd",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__fma_rn"]                         = {"__fma_rn",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2float_rd"]                = {"__double2float_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2float_rn"]                = {"__double2float_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2float_ru"]                = {"__double2float_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2float_rz"]                = {"__double2float_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2hiint"]                   = {"__double2hiint",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2loint"]                   = {"__double2loint",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2int_rd"]                  = {"__double2int_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2int_rn"]                  = {"__double2int_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2int_ru"]                  = {"__double2int_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2int_rz"]                  = {"__double2int_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2ll_rd"]                   = {"__double2ll_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2ll_rn"]                   = {"__double2ll_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2ll_ru"]                   = {"__double2ll_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2ll_rz"]                   = {"__double2ll_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2uint_rd"]                 = {"__double2uint_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2uint_rn"]                 = {"__double2uint_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2uint_ru"]                 = {"__double2uint_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2uint_rz"]                 = {"__double2uint_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2ull_rd"]                  = {"__double2ull_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2ull_rn"]                  = {"__double2ull_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2ull_ru"]                  = {"__double2ull_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2ull_rz"]                  = {"__double2ull_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double_as_longlong"]             = {"__double_as_longlong",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hiloint2double"]                 = {"__hiloint2double",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2double_rn"]                  = {"__int2double_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2double_rd"]                   = {"__ll2double_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2double_rn"]                   = {"__ll2double_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2double_ru"]                   = {"__ll2double_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2double_rz"]                   = {"__ll2double_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__longlong_as_double"]             = {"__longlong_as_double",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2double_rn"]                 = {"__uint2double_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2double_rd"]                  = {"__ull2double_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2double_rn"]                  = {"__ull2double_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2double_ru"]                  = {"__ull2double_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2double_rz"]                  = {"__ull2double_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
   // SIMD functions
-  {"__vabs2",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vabsss2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vadd2",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vaddss2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vaddus2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vavgs2",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vavgu2",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vhaddu2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpeq2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpges2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpgeu2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpgts2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpgtu2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmples2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmplts2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpltu2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpne2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vabsdiffu2",                      {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vmaxs2",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vmaxu2",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vmins2",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vminu2",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vseteq2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetges2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetgeu2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetgts2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetles2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetleu2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetlts2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetltu2",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetne2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsadu2",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsub2",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsubss2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsubus2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vneg2",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vnegss2",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vabsdiffs2",                      {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsads2",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vabs4",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vabsss4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vadd4",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vaddss4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vaddus4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vavgs4",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vavgu4",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vhaddu4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpeq4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpges4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpgeu4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpgts4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpgtu4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmples4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpleu4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmplts4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpltu4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vcmpne4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vabsdiffu4",                      {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vmaxs4",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vmaxu4",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vmins4",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vminu4",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vseteq4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetles4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetleu4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetlts4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetltu4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetges4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetgeu4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetgts4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetgtu4",                        {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsetne4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsadu4",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsub4",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsubss4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsubus4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vneg4",                           {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vnegss4",                         {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vabsdiffs4",                      {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__vsads4",                          {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  m["__vabs2"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vabsss2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vadd2"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vaddss2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vaddus2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vavgs2"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vavgu2"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vhaddu2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpeq2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpges2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpgeu2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpgts2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpgtu2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmples2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmplts2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpltu2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpne2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vabsdiffu2"]                     = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vmaxs2"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vmaxu2"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vmins2"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vminu2"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vseteq2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetges2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetgeu2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetgts2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetles2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetleu2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetlts2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetltu2"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetne2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsadu2"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsub2"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsubss2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsubus2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vneg2"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vnegss2"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vabsdiffs2"]                     = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsads2"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vabs4"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vabsss4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vadd4"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vaddss4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vaddus4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vavgs4"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vavgu4"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vhaddu4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpeq4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpges4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpgeu4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpgts4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpgtu4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmples4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpleu4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmplts4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpltu4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vcmpne4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vabsdiffu4"]                     = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vmaxs4"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vmaxu4"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vmins4"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vminu4"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vseteq4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetles4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetleu4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetlts4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetltu4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetges4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetgeu4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetgts4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetgtu4"]                       = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsetne4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsadu4"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsub4"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsubss4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsubus4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vneg4"]                          = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vnegss4"]                        = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vabsdiffs4"]                     = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__vsads4"]                         = {"",                                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
   // fp16 functions
-  {"__float2half",                      {"__float2half",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2half_rn",                   {"__float2half_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2half_rz",                   {"__float2half_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2half_rd",                   {"__float2half_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2half_ru",                   {"__float2half_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2float",                      {"__half2float",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2half2_rn",                  {"__float2half2_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__floats2half2_rn",                 {"__floats2half2_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__low2float",                       {"__low2float",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__high2float",                      {"__high2float",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float22half2_rn",                 {"__float22half2_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half22float2",                    {"__half22float2",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2int_rn",                     {"__half2int_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2int_rz",                     {"__half2int_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2int_rd",                     {"__half2int_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2int_ru",                     {"__half2int_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2half_rn",                     {"__int2half_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2half_rz",                     {"__int2half_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2half_rd",                     {"__int2half_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2half_ru",                     {"__int2half_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2short_rn",                   {"__half2short_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2short_rz",                   {"__half2short_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2short_rd",                   {"__half2short_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2short_ru",                   {"__half2short_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__short2half_rn",                   {"__short2half_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__short2half_rz",                   {"__short2half_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__short2half_rd",                   {"__short2half_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__short2half_ru",                   {"__short2half_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2uint_rn",                    {"__half2uint_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2uint_rz",                    {"__half2uint_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2uint_rd",                    {"__half2uint_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2uint_ru",                    {"__half2uint_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2half_rn",                    {"__uint2half_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2half_rz",                    {"__uint2half_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2half_rd",                    {"__uint2half_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__uint2half_ru",                    {"__uint2half_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ushort_rn",                  {"__half2ushort_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ushort_rz",                  {"__half2ushort_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ushort_rd",                  {"__half2ushort_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ushort_ru",                  {"__half2ushort_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ushort2half_rn",                  {"__ushort2half_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ushort2half_rz",                  {"__ushort2half_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ushort2half_rd",                  {"__ushort2half_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ushort2half_ru",                  {"__ushort2half_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ull_rn",                     {"__half2ull_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ull_rz",                     {"__half2ull_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ull_rd",                     {"__half2ull_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ull_ru",                     {"__half2ull_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2half_rn",                     {"__ull2half_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2half_rz",                     {"__ull2half_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2half_rd",                     {"__ull2half_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ull2half_ru",                     {"__ull2half_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ll_rn",                      {"__half2ll_rn",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ll_rz",                      {"__half2ll_rz",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ll_rd",                      {"__half2ll_rd",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2ll_ru",                      {"__half2ll_ru",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2half_rn",                      {"__ll2half_rn",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2half_rz",                      {"__ll2half_rz",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2half_rd",                      {"__ll2half_rd",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ll2half_ru",                      {"__ll2half_ru",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"htrunc",                            {"htrunc",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hceil",                             {"hceil",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hfloor",                            {"hfloor",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hrint",                             {"hrint",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2trunc",                           {"h2trunc",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2ceil",                            {"h2ceil",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2floor",                           {"h2floor",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2rint",                            {"h2rint",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2half2",                      {"__half2half2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__lowhigh2highlow",                 {"__lowhigh2highlow",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__lows2half2",                      {"__lows2half2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__highs2half2",                     {"__highs2half2",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__high2half",                       {"__high2half",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__low2half",                        {"__low2half",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hisinf",                          {"__hisinf",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__halves2half2",                    {"__halves2half2",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__low2half2",                       {"__low2half2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__high2half2",                      {"__high2half2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half_as_short",                   {"__half_as_short",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half_as_ushort",                  {"__half_as_ushort",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__short_as_half",                   {"__short_as_half",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ushort_as_half",                  {"__ushort_as_half",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ldg",                             {"__ldg",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ldcg",                            {"__ldcg",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ldca",                            {"__ldca",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ldcs",                            {"__ldcs",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ldlu",                            {"__ldlu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ldcv",                            {"__ldcv",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__heq2",                            {"__heq2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hne2",                            {"__hne2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hle2",                            {"__hle2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hge2",                            {"__hge2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hlt2",                            {"__hlt2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hgt2",                            {"__hgt2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hequ2",                           {"__hequ2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hneu2",                           {"__hneu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hleu2",                           {"__hleu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hgeu2",                           {"__hgeu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hltu2",                           {"__hltu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hgtu2",                           {"__hgtu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hisnan2",                         {"__hisnan2",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hadd2",                           {"__hadd2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hadd2_rn",                        {"__hadd2_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hsub2",                           {"__hsub2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hsub2_rn",                        {"__hsub2_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmul2",                           {"__hmul2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmul2_rn",                        {"__hmul2_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__h2div",                           {"__h2div",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hadd2_sat",                       {"__hadd2_sat",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hsub2_sat",                       {"__hsub2_sat",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmul2_sat",                       {"__hmul2_sat",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hfma2",                           {"__hfma2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hfma2_sat",                       {"__hfma2_sat",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hfma2_relu",                      {"__hfma2_relu",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hneg2",                           {"__hneg2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hsub",                            {"__hsub",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hsub_rn",                         {"__hsub_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmul",                            {"__hmul",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmul_rn",                         {"__hmul_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hdiv",                            {"__hdiv",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hadd_sat",                        {"__hadd_sat",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hsub_sat",                        {"__hsub_sat",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmul_sat",                        {"__hmul_sat",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hfma",                            {"__hfma",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hfma_relu",                       {"__hfma_relu",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hfma_sat",                        {"__hfma_sat",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hneg",                            {"__hneg",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__habs2",                           {"__habs2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__habs",                            {"__habs",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbeq2",                           {"__hbeq2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbne2",                           {"__hbne2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hble2",                           {"__hble2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbge2",                           {"__hbge2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hblt2",                           {"__hblt2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbgt2",                           {"__hbgt2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbequ2",                          {"__hbequ2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbneu2",                          {"__hbneu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbleu2",                          {"__hbleu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbgeu2",                          {"__hbgeu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbltu2",                          {"__hbltu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hbgtu2",                          {"__hbgtu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__heq",                             {"__heq",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hne",                             {"__hne",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hle",                             {"__hle",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hge",                             {"__hge",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hlt",                             {"__hlt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hgt",                             {"__hgt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hequ",                            {"__hequ",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hneu",                            {"__hneu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hleu",                            {"__hleu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hgeu",                            {"__hgeu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hltu",                            {"__hltu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hgtu",                            {"__hgtu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hisnan",                          {"__hisnan",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hsqrt",                             {"hsqrt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hrsqrt",                            {"hrsqrt",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hrcp",                              {"hrcp",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hlog",                              {"hlog",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hlog2",                             {"hlog2",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hlog10",                            {"hlog10",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hexp",                              {"hexp",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hexp2",                             {"hexp2",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hexp10",                            {"hexp10",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hcos",                              {"hcos",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"hsin",                              {"hsin",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2sqrt",                            {"h2sqrt",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2rsqrt",                           {"h2rsqrt",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2rcp",                             {"h2rcp",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2log",                             {"h2log",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2log2",                            {"h2log2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2log10",                           {"h2log10",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2exp",                             {"h2exp",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2exp2",                            {"h2exp2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2exp10",                           {"h2exp10",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2cos",                             {"h2cos",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"h2sin",                             {"h2sin",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__shfl_sync",                       {"__shfl_sync",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__shfl",                            {"__shfl",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"__shfl_up_sync",                    {"__shfl_up_sync",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__shfl_up",                         {"__shfl_up",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"__shfl_down_sync",                  {"__shfl_down_sync",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__shfl_down",                       {"__shfl_down",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"__shfl_xor_sync",                   {"__shfl_xor_sync",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__shfl_xor",                        {"__shfl_xor",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"__funnelshift_l",                   {"__funnelshift_l",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__funnelshift_lc",                  {"__funnelshift_lc",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__funnelshift_r",                   {"__funnelshift_r",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__funnelshift_rc",                  {"__funnelshift_rc",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__double2half",                     {"__double2half",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hmax",                            {"__hmax",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmax_nan",                        {"__hmax_nan",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmax2",                           {"__hmax2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmax2_nan",                       {"__hmax2_nan",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hmin",                            {"__hmin",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmin_nan",                        {"__hmin_nan",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmin2",                           {"__hmin2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__hmin2_nan",                       {"__hmin2_nan",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__stwb",                            {"__stwb",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__stcg",                            {"__stcg",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__stcs",                            {"__stcs",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__stwt",                            {"__stwt",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hcmadd",                          {"__hcmadd",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__heq2_mask",                       {"__heq2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hne2_mask",                       {"__hne2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hle2_mask",                       {"__hle2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hge2_mask",                       {"__hge2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hlt2_mask",                       {"__hlt2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hgt2_mask",                       {"__hgt2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hequ2_mask",                      {"__hequ2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hneu2_mask",                      {"__hneu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hleu2_mask",                      {"__hleu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hgeu2_mask",                      {"__hgeu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hltu2_mask",                      {"__hltu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__hgtu2_mask",                      {"__hgtu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_half2",                        {"make_half2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__half2char_rz",                    {"__half2char_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__half2uchar_rz",                   {"__half2uchar_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"htanh",                             {"htanh",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"h2tanh",                            {"h2tanh",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"htanh_approx",                      {"htanh_approx",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"h2tanh_approx",                     {"h2tanh_approx",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__reduce_add_sync",                 {"__reduce_add_sync",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__reduce_min_sync",                 {"__reduce_min_sync",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__reduce_max_sync",                 {"__reduce_max_sync",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  m["__float2half"]                     = {"__float2half",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2half_rn"]                  = {"__float2half_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2half_rz"]                  = {"__float2half_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2half_rd"]                  = {"__float2half_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2half_ru"]                  = {"__float2half_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2float"]                     = {"__half2float",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2half2_rn"]                 = {"__float2half2_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__floats2half2_rn"]                = {"__floats2half2_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__low2float"]                      = {"__low2float",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__high2float"]                     = {"__high2float",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float22half2_rn"]                = {"__float22half2_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half22float2"]                   = {"__half22float2",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2int_rn"]                    = {"__half2int_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2int_rz"]                    = {"__half2int_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2int_rd"]                    = {"__half2int_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2int_ru"]                    = {"__half2int_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2half_rn"]                    = {"__int2half_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2half_rz"]                    = {"__int2half_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2half_rd"]                    = {"__int2half_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2half_ru"]                    = {"__int2half_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2short_rn"]                  = {"__half2short_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2short_rz"]                  = {"__half2short_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2short_rd"]                  = {"__half2short_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2short_ru"]                  = {"__half2short_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__short2half_rn"]                  = {"__short2half_rn",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__short2half_rz"]                  = {"__short2half_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__short2half_rd"]                  = {"__short2half_rd",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__short2half_ru"]                  = {"__short2half_ru",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2uint_rn"]                   = {"__half2uint_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2uint_rz"]                   = {"__half2uint_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2uint_rd"]                   = {"__half2uint_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2uint_ru"]                   = {"__half2uint_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2half_rn"]                   = {"__uint2half_rn",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2half_rz"]                   = {"__uint2half_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2half_rd"]                   = {"__uint2half_rd",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__uint2half_ru"]                   = {"__uint2half_ru",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ushort_rn"]                 = {"__half2ushort_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ushort_rz"]                 = {"__half2ushort_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ushort_rd"]                 = {"__half2ushort_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ushort_ru"]                 = {"__half2ushort_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ushort2half_rn"]                 = {"__ushort2half_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ushort2half_rz"]                 = {"__ushort2half_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ushort2half_rd"]                 = {"__ushort2half_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ushort2half_ru"]                 = {"__ushort2half_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ull_rn"]                    = {"__half2ull_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ull_rz"]                    = {"__half2ull_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ull_rd"]                    = {"__half2ull_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ull_ru"]                    = {"__half2ull_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2half_rn"]                    = {"__ull2half_rn",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2half_rz"]                    = {"__ull2half_rz",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2half_rd"]                    = {"__ull2half_rd",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ull2half_ru"]                    = {"__ull2half_ru",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ll_rn"]                     = {"__half2ll_rn",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ll_rz"]                     = {"__half2ll_rz",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ll_rd"]                     = {"__half2ll_rd",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2ll_ru"]                     = {"__half2ll_ru",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2half_rn"]                     = {"__ll2half_rn",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2half_rz"]                     = {"__ll2half_rz",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2half_rd"]                     = {"__ll2half_rd",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ll2half_ru"]                     = {"__ll2half_ru",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["htrunc"]                           = {"htrunc",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hceil"]                            = {"hceil",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hfloor"]                           = {"hfloor",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hrint"]                            = {"hrint",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2trunc"]                          = {"h2trunc",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2ceil"]                           = {"h2ceil",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2floor"]                          = {"h2floor",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2rint"]                           = {"h2rint",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2half2"]                     = {"__half2half2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__lowhigh2highlow"]                = {"__lowhigh2highlow",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__lows2half2"]                     = {"__lows2half2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__highs2half2"]                    = {"__highs2half2",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__high2half"]                      = {"__high2half",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__low2half"]                       = {"__low2half",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hisinf"]                         = {"__hisinf",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__halves2half2"]                   = {"__halves2half2",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__low2half2"]                      = {"__low2half2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__high2half2"]                     = {"__high2half2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half_as_short"]                  = {"__half_as_short",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half_as_ushort"]                 = {"__half_as_ushort",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__short_as_half"]                  = {"__short_as_half",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ushort_as_half"]                 = {"__ushort_as_half",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ldg"]                            = {"__ldg",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ldcg"]                           = {"__ldcg",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ldca"]                           = {"__ldca",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ldcs"]                           = {"__ldcs",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ldlu"]                           = {"__ldlu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ldcv"]                           = {"__ldcv",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__heq2"]                           = {"__heq2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hne2"]                           = {"__hne2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hle2"]                           = {"__hle2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hge2"]                           = {"__hge2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hlt2"]                           = {"__hlt2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hgt2"]                           = {"__hgt2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hequ2"]                          = {"__hequ2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hneu2"]                          = {"__hneu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hleu2"]                          = {"__hleu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hgeu2"]                          = {"__hgeu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hltu2"]                          = {"__hltu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hgtu2"]                          = {"__hgtu2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hisnan2"]                        = {"__hisnan2",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hadd2"]                          = {"__hadd2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hadd2_rn"]                       = {"__hadd2_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hsub2"]                          = {"__hsub2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hsub2_rn"]                       = {"__hsub2_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmul2"]                          = {"__hmul2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmul2_rn"]                       = {"__hmul2_rn",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__h2div"]                          = {"__h2div",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hadd2_sat"]                      = {"__hadd2_sat",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hsub2_sat"]                      = {"__hsub2_sat",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmul2_sat"]                      = {"__hmul2_sat",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hfma2"]                          = {"__hfma2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hfma2_sat"]                      = {"__hfma2_sat",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hfma2_relu"]                     = {"__hfma2_relu",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hneg2"]                          = {"__hneg2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hsub"]                           = {"__hsub",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hsub_rn"]                        = {"__hsub_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmul"]                           = {"__hmul",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmul_rn"]                        = {"__hmul_rn",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hdiv"]                           = {"__hdiv",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hadd_sat"]                       = {"__hadd_sat",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hsub_sat"]                       = {"__hsub_sat",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmul_sat"]                       = {"__hmul_sat",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hfma"]                           = {"__hfma",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hfma_relu"]                      = {"__hfma_relu",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hfma_sat"]                       = {"__hfma_sat",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hneg"]                           = {"__hneg",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__habs2"]                          = {"__habs2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__habs"]                           = {"__habs",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbeq2"]                          = {"__hbeq2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbne2"]                          = {"__hbne2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hble2"]                          = {"__hble2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbge2"]                          = {"__hbge2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hblt2"]                          = {"__hblt2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbgt2"]                          = {"__hbgt2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbequ2"]                         = {"__hbequ2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbneu2"]                         = {"__hbneu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbleu2"]                         = {"__hbleu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbgeu2"]                         = {"__hbgeu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbltu2"]                         = {"__hbltu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hbgtu2"]                         = {"__hbgtu2",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__heq"]                            = {"__heq",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hne"]                            = {"__hne",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hle"]                            = {"__hle",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hge"]                            = {"__hge",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hlt"]                            = {"__hlt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hgt"]                            = {"__hgt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hequ"]                           = {"__hequ",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hneu"]                           = {"__hneu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hleu"]                           = {"__hleu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hgeu"]                           = {"__hgeu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hltu"]                           = {"__hltu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hgtu"]                           = {"__hgtu",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hisnan"]                         = {"__hisnan",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hsqrt"]                            = {"hsqrt",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hrsqrt"]                           = {"hrsqrt",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hrcp"]                             = {"hrcp",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hlog"]                             = {"hlog",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hlog2"]                            = {"hlog2",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hlog10"]                           = {"hlog10",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hexp"]                             = {"hexp",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hexp2"]                            = {"hexp2",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hexp10"]                           = {"hexp10",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hcos"]                             = {"hcos",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["hsin"]                             = {"hsin",                               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2sqrt"]                           = {"h2sqrt",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2rsqrt"]                          = {"h2rsqrt",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2rcp"]                            = {"h2rcp",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2log"]                            = {"h2log",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2log2"]                           = {"h2log2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2log10"]                          = {"h2log10",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2exp"]                            = {"h2exp",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2exp2"]                           = {"h2exp2",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2exp10"]                          = {"h2exp10",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2cos"]                            = {"h2cos",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["h2sin"]                            = {"h2sin",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__shfl_sync"]                      = {"__shfl_sync",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__shfl"]                           = {"__shfl",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["__shfl_up_sync"]                   = {"__shfl_up_sync",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__shfl_up"]                        = {"__shfl_up",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["__shfl_down_sync"]                 = {"__shfl_down_sync",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__shfl_down"]                      = {"__shfl_down",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["__shfl_xor_sync"]                  = {"__shfl_xor_sync",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__shfl_xor"]                       = {"__shfl_xor",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["__funnelshift_l"]                  = {"__funnelshift_l",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__funnelshift_lc"]                 = {"__funnelshift_lc",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__funnelshift_r"]                  = {"__funnelshift_r",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__funnelshift_rc"]                 = {"__funnelshift_rc",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__double2half"]                    = {"__double2half",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hmax"]                           = {"__hmax",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmax_nan"]                       = {"__hmax_nan",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmax2"]                          = {"__hmax2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmax2_nan"]                      = {"__hmax2_nan",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hmin"]                           = {"__hmin",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmin_nan"]                       = {"__hmin_nan",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmin2"]                          = {"__hmin2",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__hmin2_nan"]                      = {"__hmin2_nan",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__stwb"]                           = {"__stwb",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__stcg"]                           = {"__stcg",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__stcs"]                           = {"__stcs",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__stwt"]                           = {"__stwt",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hcmadd"]                         = {"__hcmadd",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__heq2_mask"]                      = {"__heq2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hne2_mask"]                      = {"__hne2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hle2_mask"]                      = {"__hle2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hge2_mask"]                      = {"__hge2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hlt2_mask"]                      = {"__hlt2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hgt2_mask"]                      = {"__hgt2_mask",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hequ2_mask"]                     = {"__hequ2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hneu2_mask"]                     = {"__hneu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hleu2_mask"]                     = {"__hleu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hgeu2_mask"]                     = {"__hgeu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hltu2_mask"]                     = {"__hltu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__hgtu2_mask"]                     = {"__hgtu2_mask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_half2"]                       = {"make_half2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__half2char_rz"]                   = {"__half2char_rz",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__half2uchar_rz"]                  = {"__half2uchar_rz",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["htanh"]                            = {"htanh",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["h2tanh"]                           = {"h2tanh",                             "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["htanh_approx"]                     = {"htanh_approx",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["h2tanh_approx"]                    = {"h2tanh_approx",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__reduce_add_sync"]                = {"__reduce_add_sync",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__reduce_min_sync"]                = {"__reduce_min_sync",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__reduce_max_sync"]                = {"__reduce_max_sync",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
   // bfp16 functions
-  {"__double2bfloat16",                 {"__double2bfloat16",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2bfloat16",                  {"__float2bfloat16",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2bfloat16_rn",               {"__float2bfloat16_rn",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__float2bfloat16_rz",               {"__float2bfloat16_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__float2bfloat16_rd",               {"__float2bfloat16_rd",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__float2bfloat16_ru",               {"__float2bfloat16_ru",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162float",                  {"__bfloat162float",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float2bfloat162_rn",              {"__float2bfloat162_rn",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__floats2bfloat162_rn",             {"__floats2bfloat162_rn",              "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat1622float2",                {"__bfloat1622float2",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__bfloat162int_rn",                 {"__bfloat162int_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162int_rz",                 {"__bfloat162int_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162int_rd",                 {"__bfloat162int_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162int_ru",                 {"__bfloat162int_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__int2bfloat16_rn",                 {"__int2bfloat16_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__int2bfloat16_rz",                 {"__int2bfloat16_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__int2bfloat16_rd",                 {"__int2bfloat16_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__int2bfloat16_ru",                 {"__int2bfloat16_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162short_rn",               {"__bfloat162short_rn",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162short_rz",               {"__bfloat162short_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162short_rd",               {"__bfloat162short_rd",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162short_ru",               {"__bfloat162short_ru",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__short2bfloat16_rn",               {"__short2bfloat16_rn",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__short2bfloat16_rz",               {"__short2bfloat16_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__short2bfloat16_rd",               {"__short2bfloat16_rd",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__short2bfloat16_ru",               {"__short2bfloat16_ru",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162uint_rn",                {"__bfloat162uint_rn",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162uint_rz",                {"__bfloat162uint_rz",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162uint_rd",                {"__bfloat162uint_rd",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162uint_ru",                {"__bfloat162uint_ru",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__uint2bfloat16_rn",                {"__uint2bfloat16_rn",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__uint2bfloat16_rz",                {"__uint2bfloat16_rz",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__uint2bfloat16_rd",                {"__uint2bfloat16_rd",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__uint2bfloat16_ru",                {"__uint2bfloat16_ru",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ushort_rn",              {"__bfloat162ushort_rn",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ushort_rz",              {"__bfloat162ushort_rz",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ushort_rd",              {"__bfloat162ushort_rd",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ushort_ru",              {"__bfloat162ushort_ru",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ushort2bfloat16_rn",              {"__ushort2bfloat16_rn",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ushort2bfloat16_rz",              {"__ushort2bfloat16_rz",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ushort2bfloat16_rd",              {"__ushort2bfloat16_rd",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ushort2bfloat16_ru",              {"__ushort2bfloat16_ru",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ull_rn",                 {"__bfloat162ull_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ull_rz",                 {"__bfloat162ull_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ull_rd",                 {"__bfloat162ull_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ull_ru",                 {"__bfloat162ull_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ull2bfloat16_rn",                 {"__ull2bfloat16_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ull2bfloat16_rz",                 {"__ull2bfloat16_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ull2bfloat16_rd",                 {"__ull2bfloat16_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ull2bfloat16_ru",                 {"__ull2bfloat16_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ll_rn",                  {"__bfloat162ll_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ll_rz",                  {"__bfloat162ll_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ll_rd",                  {"__bfloat162ll_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162ll_ru",                  {"__bfloat162ll_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ll2bfloat16_rn",                  {"__ll2bfloat16_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ll2bfloat16_rz",                  {"__ll2bfloat16_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ll2bfloat16_rd",                  {"__ll2bfloat16_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__ll2bfloat16_ru",                  {"__ll2bfloat16_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162bfloat162",              {"__bfloat162bfloat162",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__lows2bfloat162",                  {"__lows2bfloat162",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__highs2bfloat162",                 {"__highs2bfloat162",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__high2bfloat16",                   {"__high2bfloat16",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__low2bfloat16",                    {"__low2bfloat16",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__halves2bfloat162",                {"__halves2bfloat162",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__low2bfloat162",                   {"__low2bfloat162",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__high2bfloat162",                  {"__high2bfloat162",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__bfloat16_as_short",               {"__bfloat16_as_short",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__bfloat16_as_ushort",              {"__bfloat16_as_ushort",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__short_as_bfloat16",               {"__short_as_bfloat16",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ushort_as_bfloat16",              {"__ushort_as_bfloat16",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__float22bfloat162_rn",             {"__float22bfloat162_rn",              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__bfloat162char_rz",                {"__bfloat162char_rz",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__bfloat162uchar_rz",               {"__bfloat162uchar_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_bfloat162",                    {"make_bfloat162",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  m["__double2bfloat16"]                = {"__double2bfloat16",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2bfloat16"]                 = {"__float2bfloat16",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2bfloat16_rn"]              = {"__float2bfloat16_rn",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__float2bfloat16_rz"]              = {"__float2bfloat16_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__float2bfloat16_rd"]              = {"__float2bfloat16_rd",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__float2bfloat16_ru"]              = {"__float2bfloat16_ru",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162float"]                 = {"__bfloat162float",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float2bfloat162_rn"]             = {"__float2bfloat162_rn",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__floats2bfloat162_rn"]            = {"__floats2bfloat162_rn",              "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat1622float2"]               = {"__bfloat1622float2",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__bfloat162int_rn"]                = {"__bfloat162int_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162int_rz"]                = {"__bfloat162int_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162int_rd"]                = {"__bfloat162int_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162int_ru"]                = {"__bfloat162int_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__int2bfloat16_rn"]                = {"__int2bfloat16_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__int2bfloat16_rz"]                = {"__int2bfloat16_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__int2bfloat16_rd"]                = {"__int2bfloat16_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__int2bfloat16_ru"]                = {"__int2bfloat16_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162short_rn"]              = {"__bfloat162short_rn",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162short_rz"]              = {"__bfloat162short_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162short_rd"]              = {"__bfloat162short_rd",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162short_ru"]              = {"__bfloat162short_ru",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__short2bfloat16_rn"]              = {"__short2bfloat16_rn",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__short2bfloat16_rz"]              = {"__short2bfloat16_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__short2bfloat16_rd"]              = {"__short2bfloat16_rd",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__short2bfloat16_ru"]              = {"__short2bfloat16_ru",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162uint_rn"]               = {"__bfloat162uint_rn",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162uint_rz"]               = {"__bfloat162uint_rz",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162uint_rd"]               = {"__bfloat162uint_rd",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162uint_ru"]               = {"__bfloat162uint_ru",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__uint2bfloat16_rn"]               = {"__uint2bfloat16_rn",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__uint2bfloat16_rz"]               = {"__uint2bfloat16_rz",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__uint2bfloat16_rd"]               = {"__uint2bfloat16_rd",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__uint2bfloat16_ru"]               = {"__uint2bfloat16_ru",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ushort_rn"]             = {"__bfloat162ushort_rn",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ushort_rz"]             = {"__bfloat162ushort_rz",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ushort_rd"]             = {"__bfloat162ushort_rd",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ushort_ru"]             = {"__bfloat162ushort_ru",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ushort2bfloat16_rn"]             = {"__ushort2bfloat16_rn",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ushort2bfloat16_rz"]             = {"__ushort2bfloat16_rz",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ushort2bfloat16_rd"]             = {"__ushort2bfloat16_rd",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ushort2bfloat16_ru"]             = {"__ushort2bfloat16_ru",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ull_rn"]                = {"__bfloat162ull_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ull_rz"]                = {"__bfloat162ull_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ull_rd"]                = {"__bfloat162ull_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ull_ru"]                = {"__bfloat162ull_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ull2bfloat16_rn"]                = {"__ull2bfloat16_rn",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ull2bfloat16_rz"]                = {"__ull2bfloat16_rz",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ull2bfloat16_rd"]                = {"__ull2bfloat16_rd",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ull2bfloat16_ru"]                = {"__ull2bfloat16_ru",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ll_rn"]                 = {"__bfloat162ll_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ll_rz"]                 = {"__bfloat162ll_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ll_rd"]                 = {"__bfloat162ll_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162ll_ru"]                 = {"__bfloat162ll_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ll2bfloat16_rn"]                 = {"__ll2bfloat16_rn",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ll2bfloat16_rz"]                 = {"__ll2bfloat16_rz",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ll2bfloat16_rd"]                 = {"__ll2bfloat16_rd",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__ll2bfloat16_ru"]                 = {"__ll2bfloat16_ru",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162bfloat162"]             = {"__bfloat162bfloat162",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__lows2bfloat162"]                 = {"__lows2bfloat162",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__highs2bfloat162"]                = {"__highs2bfloat162",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__high2bfloat16"]                  = {"__high2bfloat16",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__low2bfloat16"]                   = {"__low2bfloat16",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__halves2bfloat162"]               = {"__halves2bfloat162",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__low2bfloat162"]                  = {"__low2bfloat162",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__high2bfloat162"]                 = {"__high2bfloat162",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__bfloat16_as_short"]              = {"__bfloat16_as_short",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__bfloat16_as_ushort"]             = {"__bfloat16_as_ushort",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__short_as_bfloat16"]              = {"__short_as_bfloat16",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ushort_as_bfloat16"]             = {"__ushort_as_bfloat16",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__float22bfloat162_rn"]            = {"__float22bfloat162_rn",              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__bfloat162char_rz"]               = {"__bfloat162char_rz",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__bfloat162uchar_rz"]              = {"__bfloat162uchar_rz",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_bfloat162"]                   = {"make_bfloat162",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
   // atomic functions
-  {"atomicAdd",                         {"atomicAdd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicAdd_system",                  {"atomicAdd_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicSub",                         {"atomicSub",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicSub_system",                  {"atomicSub_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicExch",                        {"atomicExch",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicExch_system",                 {"atomicExch_system",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicMin",                         {"atomicMin",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicMin_system",                  {"atomicMin_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicMax",                         {"atomicMax",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicMax_system",                  {"atomicMax_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicInc",                         {"atomicInc",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicDec",                         {"atomicDec",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicAnd",                         {"atomicAnd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicAnd_system",                  {"atomicAnd_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicOr",                          {"atomicOr",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicOr_system",                   {"atomicOr_system",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicXor",                         {"atomicXor",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicXor_system",                  {"atomicXor_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicCAS",                         {"atomicCAS",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"atomicCAS_system",                  {"atomicCAS_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__all",                             {"__all",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__any",                             {"__any",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ballot",                          {"__ballot",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  m["atomicAdd"]                        = {"atomicAdd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicAdd_system"]                 = {"atomicAdd_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicSub"]                        = {"atomicSub",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicSub_system"]                 = {"atomicSub_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicExch"]                       = {"atomicExch",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicExch_system"]                = {"atomicExch_system",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicMin"]                        = {"atomicMin",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicMin_system"]                 = {"atomicMin_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicMax"]                        = {"atomicMax",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicMax_system"]                 = {"atomicMax_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicInc"]                        = {"atomicInc",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicDec"]                        = {"atomicDec",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicAnd"]                        = {"atomicAnd",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicAnd_system"]                 = {"atomicAnd_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicOr"]                         = {"atomicOr",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicOr_system"]                  = {"atomicOr_system",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicXor"]                        = {"atomicXor",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicXor_system"]                 = {"atomicXor_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicCAS"]                        = {"atomicCAS",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["atomicCAS_system"]                 = {"atomicCAS_system",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__all"]                            = {"__all",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__any"]                            = {"__any",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ballot"]                         = {"__ballot",                           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
   // clock functions
-  {"clock64",                           {"clock64",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"clock",                             {"clock",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  m["clock64"]                          = {"clock64",                            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["clock"]                            = {"clock",                              "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
   // common functions
-  {"__assert_fail",                     {"__assert_fail",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__assertfail",                      {"__assertfail",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  m["__assert_fail"]                    = {"__assert_fail",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__assertfail"]                     = {"__assertfail",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
   // fp128 functions
-  {"__nv_fp128_sqrt",                   {"__hip_fp128_sqrt",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_sin",                    {"__hip_fp128_sin",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_cos",                    {"__hip_fp128_cos",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_tan",                    {"__hip_fp128_tan",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_asin",                   {"__hip_fp128_asin",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_acos",                   {"__hip_fp128_acos",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_atan",                   {"__hip_fp128_atan",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_exp",                    {"__hip_fp128_exp",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_exp2",                   {"__hip_fp128_exp2",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_exp10",                  {"__hip_fp128_exp10",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_expm1",                  {"__hip_fp128_expm1",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_log",                    {"__hip_fp128_log",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_log2",                   {"__hip_fp128_log2",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_log10",                  {"__hip_fp128_log10",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_log1p",                  {"__hip_fp128_log1p",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_pow",                    {"__hip_fp128_pow",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_sinh",                   {"__hip_fp128_sinh",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_cosh",                   {"__hip_fp128_cosh",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_tanh",                   {"__hip_fp128_tanh",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_asinh",                  {"__hip_fp128_asinh",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_acosh",                  {"__hip_fp128_acosh",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_atanh",                  {"__hip_fp128_atanh",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_trunc",                  {"__hip_fp128_trunc",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_floor",                  {"__hip_fp128_floor",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_ceil",                   {"__hip_fp128_ceil",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_round",                  {"__hip_fp128_round",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_rint",                   {"__hip_fp128_rint",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_fabs",                   {"__hip_fp128_fabs",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_copysign",               {"__hip_fp128_copysign",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_fmax",                   {"__hip_fp128_fmax",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_fmin",                   {"__hip_fp128_fmin",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_fdim",                   {"__hip_fp128_fdim",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_fmod",                   {"__hip_fp128_fmod",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_remainder",              {"__hip_fp128_remainder",              "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_frexp",                  {"__hip_fp128_frexp",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_modf",                   {"__hip_fp128_modf",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_hypot",                  {"__hip_fp128_hypot",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_fma",                    {"__hip_fp128_fma",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_ldexp",                  {"__hip_fp128_ldexp",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_ilogb",                  {"__hip_fp128_ilogb",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_mul",                    {"__hip_fp128_mul",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_add",                    {"__hip_fp128_add",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_sub",                    {"__hip_fp128_sub",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_div",                    {"__hip_fp128_div",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_isnan",                  {"__hip_fp128_isnan",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_fp128_isunordered",            {"__hip_fp128_isunordered",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  m["__nv_fp128_sqrt"]                  = {"__hip_fp128_sqrt",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_sin"]                   = {"__hip_fp128_sin",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_cos"]                   = {"__hip_fp128_cos",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_tan"]                   = {"__hip_fp128_tan",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_asin"]                  = {"__hip_fp128_asin",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_acos"]                  = {"__hip_fp128_acos",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_atan"]                  = {"__hip_fp128_atan",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_exp"]                   = {"__hip_fp128_exp",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_exp2"]                  = {"__hip_fp128_exp2",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_exp10"]                 = {"__hip_fp128_exp10",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_expm1"]                 = {"__hip_fp128_expm1",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_log"]                   = {"__hip_fp128_log",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_log2"]                  = {"__hip_fp128_log2",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_log10"]                 = {"__hip_fp128_log10",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_log1p"]                 = {"__hip_fp128_log1p",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_pow"]                   = {"__hip_fp128_pow",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_sinh"]                  = {"__hip_fp128_sinh",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_cosh"]                  = {"__hip_fp128_cosh",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_tanh"]                  = {"__hip_fp128_tanh",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_asinh"]                 = {"__hip_fp128_asinh",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_acosh"]                 = {"__hip_fp128_acosh",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_atanh"]                 = {"__hip_fp128_atanh",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_trunc"]                 = {"__hip_fp128_trunc",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_floor"]                 = {"__hip_fp128_floor",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_ceil"]                  = {"__hip_fp128_ceil",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_round"]                 = {"__hip_fp128_round",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_rint"]                  = {"__hip_fp128_rint",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_fabs"]                  = {"__hip_fp128_fabs",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_copysign"]              = {"__hip_fp128_copysign",               "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_fmax"]                  = {"__hip_fp128_fmax",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_fmin"]                  = {"__hip_fp128_fmin",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_fdim"]                  = {"__hip_fp128_fdim",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_fmod"]                  = {"__hip_fp128_fmod",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_remainder"]             = {"__hip_fp128_remainder",              "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_frexp"]                 = {"__hip_fp128_frexp",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_modf"]                  = {"__hip_fp128_modf",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_hypot"]                 = {"__hip_fp128_hypot",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_fma"]                   = {"__hip_fp128_fma",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_ldexp"]                 = {"__hip_fp128_ldexp",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_ilogb"]                 = {"__hip_fp128_ilogb",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_mul"]                   = {"__hip_fp128_mul",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_add"]                   = {"__hip_fp128_add",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_sub"]                   = {"__hip_fp128_sub",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_div"]                   = {"__hip_fp128_div",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_isnan"]                 = {"__hip_fp128_isnan",                  "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_fp128_isunordered"]           = {"__hip_fp128_isunordered",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
   // fp8 functions
-  {"__nv_cvt_double_to_fp8",            {"__hip_cvt_double_to_fp8",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_double2_to_fp8x2",         {"__hip_cvt_double2_to_fp8x2",         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_float_to_fp8",             {"__hip_cvt_float_to_fp8",             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_float2_to_fp8x2",          {"__hip_cvt_float2_to_fp8x2",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_halfraw_to_fp8",           {"__hip_cvt_halfraw_to_fp8",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_halfraw2_to_fp8x2",        {"__hip_cvt_halfraw2_to_fp8x2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_bfloat16raw_to_fp8",       {"__hip_cvt_bfloat16raw_to_fp8",       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_bfloat16raw2_to_fp8x2",    {"__hip_cvt_bfloat16raw2_to_fp8x2",    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_fp8_to_halfraw",           {"__hip_cvt_fp8_to_halfraw",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_fp8x2_to_halfraw2",        {"__hip_cvt_fp8x2_to_halfraw2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_bfloat16raw_to_e8m0",      {"__hip_cvt_bfloat16raw_to_e8m0",      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_cvt_bfloat162raw_to_e8m0x2",   {"__hip_cvt_bfloat162raw_to_e8m0x2",   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_cvt_float_to_e8m0",            {"__hip_cvt_float_to_e8m0",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_cvt_float2_to_e8m0x2",         {"__hip_cvt_float2_to_e8m0x2",         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_cvt_double_to_e8m0",           {"__hip_cvt_double_to_e8m0",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_cvt_double2_to_e8m0x2",        {"__hip_cvt_double2_to_e8m0x2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_cvt_e8m0_to_bf16raw",          {"__hip_cvt_e8m0_to_bf16raw",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_cvt_e8m0x2_to_bf162raw",       {"__hip_cvt_e8m0x2_to_bf162raw",       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  m["__nv_cvt_double_to_fp8"]           = {"__hip_cvt_double_to_fp8",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_double2_to_fp8x2"]        = {"__hip_cvt_double2_to_fp8x2",         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_float_to_fp8"]            = {"__hip_cvt_float_to_fp8",             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_float2_to_fp8x2"]         = {"__hip_cvt_float2_to_fp8x2",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_halfraw_to_fp8"]          = {"__hip_cvt_halfraw_to_fp8",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_halfraw2_to_fp8x2"]       = {"__hip_cvt_halfraw2_to_fp8x2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_bfloat16raw_to_fp8"]      = {"__hip_cvt_bfloat16raw_to_fp8",       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_bfloat16raw2_to_fp8x2"]   = {"__hip_cvt_bfloat16raw2_to_fp8x2",    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_fp8_to_halfraw"]          = {"__hip_cvt_fp8_to_halfraw",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_fp8x2_to_halfraw2"]       = {"__hip_cvt_fp8x2_to_halfraw2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_bfloat16raw_to_e8m0"]     = {"__hip_cvt_bfloat16raw_to_e8m0",      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_cvt_bfloat162raw_to_e8m0x2"]  = {"__hip_cvt_bfloat162raw_to_e8m0x2",   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_cvt_float_to_e8m0"]           = {"__hip_cvt_float_to_e8m0",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_cvt_float2_to_e8m0x2"]        = {"__hip_cvt_float2_to_e8m0x2",         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_cvt_double_to_e8m0"]          = {"__hip_cvt_double_to_e8m0",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_cvt_double2_to_e8m0x2"]       = {"__hip_cvt_double2_to_e8m0x2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_cvt_e8m0_to_bf16raw"]         = {"__hip_cvt_e8m0_to_bf16raw",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_cvt_e8m0x2_to_bf162raw"]      = {"__hip_cvt_e8m0x2_to_bf162raw",       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
   // fp6 functions
-  {"__nv_cvt_double_to_fp6",            {"__hip_cvt_double_to_fp6",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_double2_to_fp6x2",         {"__hip_cvt_double2_to_fp6x2",         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_float_to_fp6",             {"__hip_cvt_float_to_fp6",             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_float2_to_fp6x2",          {"__hip_cvt_float2_to_fp6x2",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_halfraw_to_fp6",           {"__hip_cvt_halfraw_to_fp6",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_halfraw2_to_fp6x2",        {"__hip_cvt_halfraw2_to_fp6x2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_bfloat16raw_to_fp6",       {"__hip_cvt_bfloat16raw_to_fp6",       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_bfloat16raw2_to_fp6x2",    {"__hip_cvt_bfloat16raw2_to_fp6x2",    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_fp6_to_halfraw",           {"__hip_cvt_fp6_to_halfraw",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_fp6x2_to_halfraw2",        {"__hip_cvt_fp6x2_to_halfraw2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  m["__nv_cvt_double_to_fp6"]           = {"__hip_cvt_double_to_fp6",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_double2_to_fp6x2"]        = {"__hip_cvt_double2_to_fp6x2",         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_float_to_fp6"]            = {"__hip_cvt_float_to_fp6",             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_float2_to_fp6x2"]         = {"__hip_cvt_float2_to_fp6x2",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_halfraw_to_fp6"]          = {"__hip_cvt_halfraw_to_fp6",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_halfraw2_to_fp6x2"]       = {"__hip_cvt_halfraw2_to_fp6x2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_bfloat16raw_to_fp6"]      = {"__hip_cvt_bfloat16raw_to_fp6",       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_bfloat16raw2_to_fp6x2"]   = {"__hip_cvt_bfloat16raw2_to_fp6x2",    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_fp6_to_halfraw"]          = {"__hip_cvt_fp6_to_halfraw",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_fp6x2_to_halfraw2"]       = {"__hip_cvt_fp6x2_to_halfraw2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
   // fp4 functions
-  {"__nv_cvt_double_to_fp4",            {"__hip_cvt_double_to_fp4",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_double2_to_fp4x2",         {"__hip_cvt_double2_to_fp4x2",         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_float_to_fp4",             {"__hip_cvt_float_to_fp4",             "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_float2_to_fp4x2",          {"__hip_cvt_float2_to_fp4x2",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_halfraw_to_fp4",           {"__hip_cvt_halfraw_to_fp4",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_halfraw2_to_fp4x2",        {"__hip_cvt_halfraw2_to_fp4x2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_bfloat16raw_to_fp4",       {"__hip_cvt_bfloat16raw_to_fp4",       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_bfloat16raw2_to_fp4x2",    {"__hip_cvt_bfloat16raw2_to_fp4x2",    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_fp4_to_halfraw",           {"__hip_cvt_fp4_to_halfraw",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_cvt_fp4x2_to_halfraw2",        {"__hip_cvt_fp4x2_to_halfraw2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  m["__nv_cvt_double_to_fp4"]           = {"__hip_cvt_double_to_fp4",            "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_double2_to_fp4x2"]        = {"__hip_cvt_double2_to_fp4x2",         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_float_to_fp4"]            = {"__hip_cvt_float_to_fp4",             "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_float2_to_fp4x2"]         = {"__hip_cvt_float2_to_fp4x2",          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_halfraw_to_fp4"]          = {"__hip_cvt_halfraw_to_fp4",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_halfraw2_to_fp4x2"]       = {"__hip_cvt_halfraw2_to_fp4x2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_bfloat16raw_to_fp4"]      = {"__hip_cvt_bfloat16raw_to_fp4",       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_bfloat16raw2_to_fp4x2"]   = {"__hip_cvt_bfloat16raw2_to_fp4x2",    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_fp4_to_halfraw"]          = {"__hip_cvt_fp4_to_halfraw",           "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_cvt_fp4x2_to_halfraw2"]       = {"__hip_cvt_fp4x2_to_halfraw2",        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
   // intrinsics
-  {"__all_sync",                        {"__all_sync",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__any_sync",                        {"__any_sync",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__ballot_sync",                     {"__ballot_sync",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__activemask",                      {"__activemask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__nv_bswap16",                      {"__hip_bswap16",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_bswap32",                      {"__hip_bswap32",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"__nv_bswap64",                      {"__hip_bswap64",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
+  m["__all_sync"]                       = {"__all_sync",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__any_sync"]                       = {"__any_sync",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__ballot_sync"]                    = {"__ballot_sync",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__activemask"]                     = {"__activemask",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__nv_bswap16"]                     = {"__hip_bswap16",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_bswap32"]                     = {"__hip_bswap32",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["__nv_bswap64"]                     = {"__hip_bswap64",                      "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
   // built-ins
-  {"__match_any_sync",                  {"__match_any_sync",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"__match_all_sync",                  {"__match_all_sync",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
+  m["__match_any_sync"]                 = {"__match_any_sync",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["__match_all_sync"]                 = {"__match_all_sync",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
   // vector functions
   // NOTE: The below all make_ functions are implemented in HIP by DECLOP_MAKE_(ONE|TWO|THREE|FOUR)_COMPONENT preprocessor define (make_##type(...))
-  {"make_char1",                        {"make_char1",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_char2",                        {"make_char2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_char3",                        {"make_char3",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_char4",                        {"make_char4",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_uchar1",                       {"make_uchar1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_uchar2",                       {"make_uchar2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_uchar3",                       {"make_uchar3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_uchar4",                       {"make_uchar4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_short1",                       {"make_short1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_short2",                       {"make_short2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_short3",                       {"make_short3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_short4",                       {"make_short4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ushort1",                      {"make_ushort1",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ushort2",                      {"make_ushort2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ushort3",                      {"make_ushort3",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ushort4",                      {"make_ushort4",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_int1",                         {"make_int1",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_int2",                         {"make_int2",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_int3",                         {"make_int3",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_int4",                         {"make_int4",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_uint1",                        {"make_uint1",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_uint2",                        {"make_uint2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_uint3",                        {"make_uint3",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_uint4",                        {"make_uint4",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_long1",                        {"make_long1",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_long2",                        {"make_long2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_long3",                        {"make_long3",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_long4",                        {"make_long4",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"make_long4_16a",                    {"make_long4_16a",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_long4_32a",                    {"make_long4_32a",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_ulong1",                       {"make_ulong1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ulong2",                       {"make_ulong2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ulong3",                       {"make_ulong3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ulong4",                       {"make_ulong4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"make_ulong4_16a",                   {"make_ulong4_16a",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_ulong4_32a",                   {"make_ulong4_32a",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_float1",                       {"make_float1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_float2",                       {"make_float2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_float3",                       {"make_float3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_float4",                       {"make_float4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_double1",                      {"make_double1",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_double2",                      {"make_double2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_double3",                      {"make_double3",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_double4",                      {"make_double4",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"make_double4_16a",                  {"make_double4_16a",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_double4_32a",                  {"make_double4_32a",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_longlong1",                    {"make_longlong1",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_longlong2",                    {"make_longlong2",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_longlong3",                    {"make_longlong3",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_longlong4",                    {"make_longlong4",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"make_longlong4_16a",                {"make_longlong4_16a",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_longlong4_32a",                {"make_longlong4_32a",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_ulonglong1",                   {"make_ulonglong1",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ulonglong2",                   {"make_ulonglong2",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ulonglong3",                   {"make_ulonglong3",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1}},
-  {"make_ulonglong4",                   {"make_ulonglong4",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED}},
-  {"make_ulonglong4_16a",               {"make_ulonglong4_16a",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-  {"make_ulonglong4_32a",               {"make_ulonglong4_32a",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED}},
-};
+  m["make_char1"]                       = {"make_char1",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_char2"]                       = {"make_char2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_char3"]                       = {"make_char3",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_char4"]                       = {"make_char4",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_uchar1"]                      = {"make_uchar1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_uchar2"]                      = {"make_uchar2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_uchar3"]                      = {"make_uchar3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_uchar4"]                      = {"make_uchar4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_short1"]                      = {"make_short1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_short2"]                      = {"make_short2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_short3"]                      = {"make_short3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_short4"]                      = {"make_short4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ushort1"]                     = {"make_ushort1",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ushort2"]                     = {"make_ushort2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ushort3"]                     = {"make_ushort3",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ushort4"]                     = {"make_ushort4",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_int1"]                        = {"make_int1",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_int2"]                        = {"make_int2",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_int3"]                        = {"make_int3",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_int4"]                        = {"make_int4",                          "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_uint1"]                       = {"make_uint1",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_uint2"]                       = {"make_uint2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_uint3"]                       = {"make_uint3",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_uint4"]                       = {"make_uint4",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_long1"]                       = {"make_long1",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_long2"]                       = {"make_long2",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_long3"]                       = {"make_long3",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_long4"]                       = {"make_long4",                         "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["make_long4_16a"]                   = {"make_long4_16a",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_long4_32a"]                   = {"make_long4_32a",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_ulong1"]                      = {"make_ulong1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ulong2"]                      = {"make_ulong2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ulong3"]                      = {"make_ulong3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ulong4"]                      = {"make_ulong4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["make_ulong4_16a"]                  = {"make_ulong4_16a",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_ulong4_32a"]                  = {"make_ulong4_32a",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_float1"]                      = {"make_float1",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_float2"]                      = {"make_float2",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_float3"]                      = {"make_float3",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_float4"]                      = {"make_float4",                        "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_double1"]                     = {"make_double1",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_double2"]                     = {"make_double2",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_double3"]                     = {"make_double3",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_double4"]                     = {"make_double4",                       "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["make_double4_16a"]                 = {"make_double4_16a",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_double4_32a"]                 = {"make_double4_32a",                   "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_longlong1"]                   = {"make_longlong1",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_longlong2"]                   = {"make_longlong2",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_longlong3"]                   = {"make_longlong3",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_longlong4"]                   = {"make_longlong4",                     "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["make_longlong4_16a"]               = {"make_longlong4_16a",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_longlong4_32a"]               = {"make_longlong4_32a",                 "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_ulonglong1"]                  = {"make_ulonglong1",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ulonglong2"]                  = {"make_ulonglong2",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ulonglong3"]                  = {"make_ulonglong3",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1};
+  m["make_ulonglong4"]                  = {"make_ulonglong4",                    "", CONV_DEVICE_FUNC, API_RUNTIME, 1, CUDA_DEPRECATED};
+  m["make_ulonglong4_16a"]              = {"make_ulonglong4_16a",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
+  m["make_ulonglong4_32a"]              = {"make_ulonglong4_32a",                "", CONV_DEVICE_FUNC, API_RUNTIME, 1, UNSUPPORTED};
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP {
-  {"__shfl",                            {CUDA_75,  CUDA_90,  CUDA_0  }},
-  {"__shfl_up",                         {CUDA_75,  CUDA_90,  CUDA_0  }},
-  {"__shfl_down",                       {CUDA_75,  CUDA_90,  CUDA_0  }},
-  {"__shfl_xor",                        {CUDA_75,  CUDA_90,  CUDA_0  }},
-  {"__double2half",                     {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hmax",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hmax2",                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hmin",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hmin2",                           {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ldlu",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ldcv",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__stwb",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__stcg",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__stcs",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__stwt",                            {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hmax_nan",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hmin_nan",                        {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hmax2_nan",                       {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hmin2_nan",                       {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hfma_relu",                       {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hfma2_relu",                      {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__double2bfloat16",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__float2bfloat16",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__float2bfloat16_rn",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__float2bfloat16_rz",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__float2bfloat16_rd",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__float2bfloat16_ru",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162float",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__float2bfloat162_rn",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__floats2bfloat162_rn",             {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat1622float2",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162int_rn",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162int_rz",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162int_rd",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162int_ru",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__int2bfloat16_rn",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__int2bfloat16_rz",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__int2bfloat16_rd",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__int2bfloat16_ru",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162short_rn",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162short_rz",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162short_rd",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162short_ru",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__short2bfloat16_rn",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__short2bfloat16_rz",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__short2bfloat16_rd",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__short2bfloat16_ru",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162uint_rn",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162uint_rz",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162uint_rd",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162uint_ru",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__uint2bfloat16_rn",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__uint2bfloat16_rz",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__uint2bfloat16_rd",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__uint2bfloat16_ru",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ushort_rn",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ushort_rz",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ushort_rd",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ushort_ru",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ushort2bfloat16_rn",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ushort2bfloat16_rz",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ushort2bfloat16_rd",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ushort2bfloat16_ru",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ull_rn",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ull_rz",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ull_rd",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ull_ru",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ull2bfloat16_rn",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ull2bfloat16_rz",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ull2bfloat16_rd",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ull2bfloat16_ru",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ll_rn",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ll_rz",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ll_rd",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162ll_ru",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ll2bfloat16_rn",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ll2bfloat16_rz",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ll2bfloat16_rd",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ll2bfloat16_ru",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162bfloat162",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__lows2bfloat162",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__highs2bfloat162",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__high2bfloat16",                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__low2bfloat16",                    {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__halves2bfloat162",                {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__low2bfloat162",                   {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__high2bfloat162",                  {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat16_as_short",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat16_as_ushort",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__short_as_bfloat16",               {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__ushort_as_bfloat16",              {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__hcmadd",                          {CUDA_111, CUDA_0,   CUDA_0  }},
-  {"__hadd2_rn",                        {CUDA_116, CUDA_0,   CUDA_0  }},
-  {"__hsub2_rn",                        {CUDA_116, CUDA_0,   CUDA_0  }},
-  {"__hmul2_rn",                        {CUDA_116, CUDA_0,   CUDA_0  }},
-  {"__hadd_rn",                         {CUDA_116, CUDA_0,   CUDA_0  }},
-  {"__hsub_rn",                         {CUDA_116, CUDA_0,   CUDA_0  }},
-  {"__hmul_rn",                         {CUDA_116, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_double_to_fp8",            {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_double2_to_fp8x2",         {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_float_to_fp8",             {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_float2_to_fp8x2",          {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_halfraw_to_fp8",           {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_halfraw2_to_fp8x2",        {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_bfloat16raw_to_fp8",       {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_bfloat16raw2_to_fp8x2",    {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_fp8_to_halfraw",           {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_fp8x2_to_halfraw2",        {CUDA_118, CUDA_0,   CUDA_0  }},
-  {"__heq2_mask",                       {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hne2_mask",                       {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hle2_mask",                       {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hge2_mask",                       {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hlt2_mask",                       {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hgt2_mask",                       {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hequ2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hneu2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hleu2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hgeu2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hltu2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__hgtu2_mask",                      {CUDA_120, CUDA_0,   CUDA_0  }},
-  {"__float22bfloat162_rn",             {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__bfloat162char_rz",                {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"__bfloat162uchar_rz",               {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"make_bfloat162",                    {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"make_half2",                        {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"__half2char_rz",                    {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"__half2uchar_rz",                   {CUDA_122, CUDA_0,   CUDA_0  }},
-  {"__all_sync",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__any_sync",                        {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__ballot_sync",                     {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__activemask",                      {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__match_any_sync",                  {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__match_all_sync",                  {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__shfl_sync",                       {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__shfl_up_sync",                    {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__shfl_down_sync",                  {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__shfl_xor_sync",                   {CUDA_90,  CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_double_to_fp6",            {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_double2_to_fp6x2",         {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_float_to_fp6",             {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_float2_to_fp6x2",          {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_halfraw_to_fp6",           {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_halfraw2_to_fp6x2",        {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_bfloat16raw_to_fp6",       {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_bfloat16raw2_to_fp6x2",    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_fp6_to_halfraw",           {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_fp6x2_to_halfraw2",        {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_double_to_fp4",            {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_double2_to_fp4x2",         {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_float_to_fp4",             {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_float2_to_fp4x2",          {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_halfraw_to_fp4",           {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_halfraw2_to_fp4x2",        {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_bfloat16raw_to_fp4",       {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_bfloat16raw2_to_fp4x2",    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_fp4_to_halfraw",           {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_fp4x2_to_halfraw2",        {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_sqrt",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_sin",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_cos",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_tan",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_asin",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_acos",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_atan",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_exp",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_exp2",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_exp10",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_expm1",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_log",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_log2",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_log10",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_log1p",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_pow",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_sinh",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_cosh",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_tanh",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_asinh",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_acosh",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_atanh",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_trunc",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_floor",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_ceil",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_round",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_rint",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_fabs",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_copysign",               {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_fmax",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_fmin",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_fdim",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_fmod",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_remainder",              {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_frexp",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_modf",                   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_hypot",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_fma",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_ldexp",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_ilogb",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_mul",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_add",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_sub",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_div",                    {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_isnan",                  {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_fp128_isunordered",            {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"htanh",                             {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"h2tanh",                            {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"htanh_approx",                      {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"h2tanh_approx",                     {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_bfloat16raw_to_e8m0",      {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_bfloat162raw_to_e8m0x2",   {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_float_to_e8m0",            {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_float2_to_e8m0x2",         {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_double_to_e8m0",           {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_double2_to_e8m0x2",        {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_e8m0_to_bf16raw",          {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_cvt_e8m0x2_to_bf162raw",       {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_bswap16",                      {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_bswap32",                      {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"__nv_bswap64",                      {CUDA_128, CUDA_0,   CUDA_0  }},
-  {"make_long4",                        {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"make_long4_16a",                    {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_long4_32a",                    {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_ulong4",                       {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"make_ulong4_16a",                   {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_ulong4_32a",                   {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_double4",                      {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"make_double4_16a",                  {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_double4_32a",                  {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_longlong4",                    {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"make_longlong4_16a",                {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_longlong4_32a",                {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_ulonglong4",                   {CUDA_0,   CUDA_130, CUDA_0  }},
-  {"make_ulonglong4_16a",               {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"make_ulonglong4_32a",               {CUDA_130, CUDA_0,   CUDA_0  }},
-  {"__reduce_add_sync",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__reduce_min_sync",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-  {"__reduce_max_sync",                 {CUDA_110, CUDA_0,   CUDA_0  }},
-};
+  return m;
+}();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP {
-  {"abs",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"labs",                              {HIP_1090, HIP_0,    HIP_0   }},
-  {"llabs",                             {HIP_1090, HIP_0,    HIP_0   }},
-  {"fabs",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"fabsf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"min",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"fminf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"fmin",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"max",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"fmaxf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"fmax",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"sin",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"cos",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"sincos",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"sincosf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"tan",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"sqrt",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"rsqrt",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"rsqrtf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"log2",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"exp2",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"exp2f",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"exp10",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"exp10f",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"expm1",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"expm1f",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"log2f",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"log10",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"log",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"log1p",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"log1pf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"floor",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"exp",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"cosh",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"sinh",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"tanh",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"acosh",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"acoshf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"asinh",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"asinhf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"atanh",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"atanhf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"ldexp",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"ldexpf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"logb",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"logbf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"ilogb",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"ilogbf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"scalbn",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"scalbnf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"scalbln",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"scalblnf",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"frexp",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"frexpf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"round",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"roundf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"lround",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"lroundf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"llround",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"llroundf",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"rint",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"rintf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"lrint",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"lrintf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"llrint",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"llrintf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"nearbyint",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"nearbyintf",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"ceil",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"trunc",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"truncf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"fdim",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"fdimf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"atan2",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"atan",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"acos",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"asin",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"hypot",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"rhypot",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"hypotf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"rhypotf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"norm3d",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"rnorm3d",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"norm4d",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"rnorm4d",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"norm",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"rnorm",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"rnormf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"normf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"norm3df",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"rnorm3df",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"norm4df",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"rnorm4df",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"cbrt",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"cbrtf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"rcbrt",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"rcbrtf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"sinpi",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"sinpif",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"cospi",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"cospif",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"sincospi",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"sincospif",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"pow",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"modf",                              {HIP_1090, HIP_0,    HIP_0   }},
-  {"fmod",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"remainder",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"remainderf",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"remquo",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"remquof",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"j0",                                {HIP_1060, HIP_0,    HIP_0   }},
-  {"j0f",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"j1",                                {HIP_1060, HIP_0,    HIP_0   }},
-  {"j1f",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"jn",                                {HIP_1060, HIP_0,    HIP_0   }},
-  {"jnf",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"y0",                                {HIP_1060, HIP_0,    HIP_0   }},
-  {"y0f",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"y1",                                {HIP_1060, HIP_0,    HIP_0   }},
-  {"y1f",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"yn",                                {HIP_1060, HIP_0,    HIP_0   }},
-  {"ynf",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"cyl_bessel_i0",                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"cyl_bessel_i0f",                    {HIP_1090, HIP_0,    HIP_0   }},
-  {"cyl_bessel_i1",                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"cyl_bessel_i1f",                    {HIP_1090, HIP_0,    HIP_0   }},
-  {"erf",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"erff",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"erfinv",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"erfinvf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"erfc",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"erfcf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"lgamma",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"erfcinv",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"erfcinvf",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"normcdfinv",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"normcdfinvf",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"normcdf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"normcdff",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"erfcx",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"erfcxf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"lgammaf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"tgamma",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"tgammaf",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"copysign",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"copysignf",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"nextafter",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"nextafterf",                        {HIP_1090, HIP_0,    HIP_0   }},
-  {"nan",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"nanf",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"fma",                               {HIP_1060, HIP_0,    HIP_0   }},
-  {"fmaf",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"acosf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"asinf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"atanf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"atan2f",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"cosf",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"sinf",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"tanf",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"coshf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"sinhf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"tanhf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"expf",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"logf",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"log10f",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"modff",                             {HIP_1090, HIP_0,    HIP_0   }},
-  {"powf",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"sqrtf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"ceilf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"floorf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"fmodf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"signbit",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"isfinite",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"isnan",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"isinf",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__mulhi",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__umulhi",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__mul64hi",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__umul64hi",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int_as_float",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float_as_int",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float_as_uint",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint_as_float",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__syncthreads",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__syncthreads_count",               {HIP_3070, HIP_0,    HIP_0   }},
-  {"__syncthreads_and",                 {HIP_3070, HIP_0,    HIP_0   }},
-  {"__syncthreads_or",                  {HIP_3070, HIP_0,    HIP_0   }},
-  {"__threadfence",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__threadfence_block",               {HIP_1060, HIP_0,    HIP_0   }},
-  {"__threadfence_system",              {HIP_1060, HIP_0,    HIP_0   }},
-  {"__saturatef",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__sad",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__usad",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__mul24",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__umul24",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"fdividef",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__fdividef",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__sinf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__cosf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__tanf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__sincosf",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__expf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__exp10f",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__log2f",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__log10f",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__logf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__powf",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2int_rn",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2int_rz",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2int_ru",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2int_rd",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2uint_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2uint_rz",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2uint_ru",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2uint_rd",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2float_rn",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2float_rz",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2float_ru",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2float_rd",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2float_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2float_rz",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2float_ru",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2float_rd",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2ll_rn",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2ll_rz",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2ll_ru",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2ll_rd",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2ull_rn",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2ull_rz",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2ull_ru",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2ull_rd",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2float_rn",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2float_rz",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2float_ru",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2float_rd",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2float_rn",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2float_rz",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2float_ru",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2float_rd",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__fadd_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__fsub_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__fmul_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__fmaf_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__frcp_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__fsqrt_rn",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__frsqrt_rn",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__fdiv_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__clz",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ffs",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__popc",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__brev",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__clzll",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ffsll",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__popcll",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__brevll",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__byte_perm",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hadd",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__rhadd",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uhadd",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__urhadd",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2float_rd",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2float_rn",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2float_ru",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2float_rz",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2hiint",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2loint",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2int_rd",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2int_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2int_ru",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2int_rz",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2ll_rd",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2ll_rn",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2ll_ru",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2ll_rz",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2uint_rd",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2uint_rn",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2uint_ru",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2uint_rz",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2ull_rd",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2ull_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2ull_ru",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double2ull_rz",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__double_as_longlong",              {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hiloint2double",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2double_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2double_rd",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2double_rn",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2double_ru",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2double_rz",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__longlong_as_double",              {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2double_rn",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2double_rd",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2double_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2double_ru",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2double_rz",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2half",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2half_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2half_rz",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2half_rd",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2half_ru",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2float",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float2half2_rn",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__floats2half2_rn",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"__low2float",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__high2float",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__float22half2_rn",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half22float2",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2int_rn",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2int_rz",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2int_rd",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2int_ru",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2half_rn",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2half_rz",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2half_rd",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2half_ru",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2short_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2short_rz",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2short_rd",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2short_ru",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__short2half_rn",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__short2half_rz",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__short2half_rd",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__short2half_ru",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2uint_rn",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2uint_rz",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2uint_rd",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2uint_ru",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2half_rn",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2half_rz",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2half_rd",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__uint2half_ru",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ushort_rn",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ushort_rz",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ushort_rd",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ushort_ru",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ushort2half_rn",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ushort2half_rz",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ushort2half_rd",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ushort2half_ru",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ull_rn",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ull_rz",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ull_rd",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ull_ru",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2half_rn",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2half_rz",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2half_rd",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ull2half_ru",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ll_rn",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ll_rz",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ll_rd",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half2ll_ru",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2half_rn",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2half_rz",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2half_rd",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ll2half_ru",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"htrunc",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"hceil",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"hfloor",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"hrint",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2trunc",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2ceil",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2floor",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2rint",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__half2half2",                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"__lowhigh2highlow",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"__lows2half2",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__highs2half2",                     {HIP_1060, HIP_0,    HIP_0   }},
-  {"__high2half",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__low2half",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hisinf",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__halves2half2",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"__low2half2",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__high2half2",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half_as_short",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__half_as_ushort",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__short_as_half",                   {HIP_1090, HIP_0,    HIP_0   }},
-  {"__ushort_as_half",                  {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ldg",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ldcg",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__ldca",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__ldcs",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__heq2",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hne2",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hle2",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hge2",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hlt2",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hgt2",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hequ2",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hneu2",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hleu2",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hgeu2",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hltu2",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hgtu2",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hisnan2",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hadd2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hsub2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hmul2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__h2div",                           {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hadd2_sat",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hsub2_sat",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hmul2_sat",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hfma2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hfma2_sat",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hneg2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hsub",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hmul",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hdiv",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hadd_sat",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hsub_sat",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hmul_sat",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hfma",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hfma_sat",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hneg",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__habs2",                           {HIP_3050, HIP_0,    HIP_0   }},
-  {"__habs",                            {HIP_3050, HIP_0,    HIP_0   }},
-  {"__hbeq2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hbne2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hble2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hbge2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hblt2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hbgt2",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hbequ2",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hbneu2",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hbleu2",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hbgeu2",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hbltu2",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hbgtu2",                          {HIP_1090, HIP_0,    HIP_0   }},
-  {"__heq",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hne",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hle",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hge",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hlt",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hgt",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__hequ",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hneu",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hleu",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hgeu",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hltu",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hgtu",                            {HIP_1090, HIP_0,    HIP_0   }},
-  {"__hisnan",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"hsqrt",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"hrsqrt",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"hrcp",                              {HIP_1090, HIP_0,    HIP_0   }},
-  {"hlog",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"hlog2",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"hlog10",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"hexp",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"hexp2",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"hexp10",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"hcos",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"hsin",                              {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2sqrt",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2rsqrt",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2rcp",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2log",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2log2",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2log10",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2exp",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2exp2",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2exp10",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2cos",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"h2sin",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__shfl",                            {HIP_1060, HIP_0,    HIP_0   }},
-  {"__shfl_up",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__shfl_down",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"__shfl_xor",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicAdd",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicSub",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicExch",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicMin",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicMax",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicInc",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicDec",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicAnd",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicOr",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicXor",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"atomicCAS",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__all",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__any",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ballot",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"clock64",                           {HIP_1060, HIP_0,    HIP_0   }},
-  {"clock",                             {HIP_1060, HIP_0,    HIP_0   }},
-  {"__dadd_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__ddiv_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__dmul_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__drcp_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__dsqrt_rn",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"__dsub_rn",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"__fma_rn",                          {HIP_1060, HIP_0,    HIP_0   }},
-  {"__assert_fail",                     {HIP_1090, HIP_0,    HIP_0   }},
-  {"__assertfail",                      {HIP_1090, HIP_0,    HIP_0   }},
-  {"atomicCAS_system",                  {HIP_4030, HIP_0,    HIP_0   }},
-  {"atomicSub_system",                  {HIP_4030, HIP_0,    HIP_0   }},
-  {"atomicAdd_system",                  {HIP_4030, HIP_0,    HIP_0   }},
-  {"atomicExch_system",                 {HIP_4030, HIP_0,    HIP_0   }},
-  {"atomicMin_system",                  {HIP_4030, HIP_0,    HIP_0   }},
-  {"atomicMax_system",                  {HIP_4030, HIP_0,    HIP_0   }},
-  {"atomicAnd_system",                  {HIP_4030, HIP_0,    HIP_0   }},
-  {"atomicOr_system",                   {HIP_4030, HIP_0,    HIP_0   }},
-  {"atomicXor_system",                  {HIP_4030, HIP_0,    HIP_0   }},
-  {"__funnelshift_l",                   {HIP_4040, HIP_0,    HIP_0   }},
-  {"__funnelshift_lc",                  {HIP_4040, HIP_0,    HIP_0   }},
-  {"__funnelshift_r",                   {HIP_4040, HIP_0,    HIP_0   }},
-  {"__funnelshift_rc",                  {HIP_4040, HIP_0,    HIP_0   }},
-  {"__hmax",                            {HIP_5050, HIP_0,    HIP_0   }},
-  {"__hmax_nan",                        {HIP_5050, HIP_0,    HIP_0   }},
-  {"__hmin",                            {HIP_5050, HIP_0,    HIP_0   }},
-  {"__hmin_nan",                        {HIP_5050, HIP_0,    HIP_0   }},
-  {"__all_sync",                        {HIP_6020, HIP_0,    HIP_0   }},
-  {"__any_sync",                        {HIP_6020, HIP_0,    HIP_0   }},
-  {"__ballot_sync",                     {HIP_6020, HIP_0,    HIP_0   }},
-  {"__activemask",                      {HIP_6020, HIP_0,    HIP_0   }},
-  {"__match_any_sync",                  {HIP_6020, HIP_0,    HIP_0   }},
-  {"__match_all_sync",                  {HIP_6020, HIP_0,    HIP_0   }},
-  {"__shfl_sync",                       {HIP_6020, HIP_0,    HIP_0   }},
-  {"__shfl_up_sync",                    {HIP_6020, HIP_0,    HIP_0   }},
-  {"__shfl_down_sync",                  {HIP_6020, HIP_0,    HIP_0   }},
-  {"__shfl_xor_sync",                   {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_double_to_fp8",           {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_double2_to_fp8x2",        {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_float_to_fp8",            {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_float2_to_fp8x2",         {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_halfraw_to_fp8",          {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_halfraw2_to_fp8x2",       {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_bfloat16raw_to_fp8",      {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_bfloat16raw2_to_fp8x2",   {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_fp8_to_halfraw",          {HIP_6020, HIP_0,    HIP_0   }},
-  {"__hip_cvt_fp8x2_to_halfraw2",       {HIP_6020, HIP_0,    HIP_0   }},
-  {"__double2bfloat16",                 {HIP_5070, HIP_0,    HIP_0   }},
-  {"__float2bfloat16",                  {HIP_5070, HIP_0,    HIP_0   }},
-  {"__bfloat162float",                  {HIP_5070, HIP_0,    HIP_0   }},
-  {"__bfloat1622float2",                {HIP_5070, HIP_0,    HIP_0   }},
-  {"__bfloat162bfloat162",              {HIP_5070, HIP_0,    HIP_0   }},
-  {"__lows2bfloat162",                  {HIP_5070, HIP_0,    HIP_0   }},
-  {"__highs2bfloat162",                 {HIP_5070, HIP_0,    HIP_0   }},
-  {"__high2bfloat16",                   {HIP_5070, HIP_0,    HIP_0   }},
-  {"__hmin2",                           {HIP_5070, HIP_0,    HIP_0   }},
-  {"__hmax2",                           {HIP_5070, HIP_0,    HIP_0   }},
-  {"make_half2",                        {HIP_4050, HIP_0,    HIP_0   }},
-  {"__low2bfloat16",                    {HIP_5070, HIP_0,    HIP_0   }},
-  {"__halves2bfloat162",                {HIP_5070, HIP_0,    HIP_0   }},
-  {"__low2bfloat162",                   {HIP_5070, HIP_0,    HIP_0   }},
-  {"__high2bfloat162",                  {HIP_5070, HIP_0,    HIP_0   }},
-  {"__bfloat16_as_short",               {HIP_5070, HIP_0,    HIP_0   }},
-  {"__bfloat16_as_ushort",              {HIP_5070, HIP_0,    HIP_0   }},
-  {"__short_as_bfloat16",               {HIP_5070, HIP_0,    HIP_0   }},
-  {"__ushort_as_bfloat16",              {HIP_5070, HIP_0,    HIP_0   }},
-  {"__float22bfloat162_rn",             {HIP_5070, HIP_0,    HIP_0   }},
-  {"__hip_cvt_bfloat16raw_to_fp4",      {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_bfloat16raw2_to_fp4x2",   {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_double_to_fp4",           {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_double2_to_fp4x2",        {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_float_to_fp4",            {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_float2_to_fp4x2",         {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_fp4_to_halfraw",          {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_fp4x2_to_halfraw2",       {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_halfraw_to_fp4",          {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_halfraw2_to_fp4x2",       {HIP_7000, HIP_0,    HIP_0   }},
-  {"make_char1",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_char2",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_char3",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_char4",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_uchar1",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_uchar2",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_uchar3",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_uchar4",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_short1",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_short2",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_short3",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_short4",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ushort1",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ushort2",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ushort3",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ushort4",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_int1",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_int2",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_int3",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_int4",                         {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_uint1",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_uint2",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_uint3",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_uint4",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_long1",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_long2",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_long3",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_long4",                        {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ulong1",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ulong2",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ulong3",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ulong4",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_float1",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_float2",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_float3",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_float4",                       {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_double1",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_double2",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_double3",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_double4",                      {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_longlong1",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_longlong2",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_longlong3",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_longlong4",                    {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ulonglong1",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ulonglong2",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ulonglong3",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_ulonglong4",                   {HIP_1060, HIP_0,    HIP_0   }},
-  {"__int2bfloat16_rn",                 {HIP_7000, HIP_0,    HIP_0   }},
-  {"__reduce_add_sync",                 {HIP_7000, HIP_0,    HIP_0   }},
-  {"__reduce_min_sync",                 {HIP_7000, HIP_0,    HIP_0   }},
-  {"__reduce_max_sync",                 {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_bfloat16raw_to_fp6",      {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_bfloat16raw2_to_fp6x2",   {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_double_to_fp6",           {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_double2_to_fp6x2",        {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_float_to_fp6",            {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_float2_to_fp6x2",         {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_fp6_to_halfraw",          {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_fp6x2_to_halfraw2",       {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_halfraw_to_fp6",          {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hip_cvt_halfraw2_to_fp6x2",       {HIP_7000, HIP_0,    HIP_0   }},
-  {"__hadd_rn",                         {HIP_7010, HIP_0,    HIP_0   }},
-  {"__hsub_rn",                         {HIP_7010, HIP_0,    HIP_0   }},
-  {"__hmul_rn",                         {HIP_7010, HIP_0,    HIP_0   }},
-  {"__hadd2_rn",                        {HIP_7010, HIP_0,    HIP_0   }},
-  {"__hmul2_rn",                        {HIP_7010, HIP_0,    HIP_0   }},
-  {"__hsub2_rn",                        {HIP_7010, HIP_0,    HIP_0   }},
-};
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP = []() {
+  std::map<llvm::StringRef, cudaAPIversions> m;
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP {
-  {"__hmax2",                           {CUDA_122}},
-  {"__hmin2",                           {CUDA_122}},
-  {"__low2bfloat16",                    {CUDA_122}},
-  {"__halves2bfloat162",                {CUDA_122}},
-  {"__low2bfloat162",                   {CUDA_122}},
-  {"__high2bfloat162",                  {CUDA_122}},
-  {"__bfloat16_as_short",               {CUDA_122}},
-  {"__bfloat16_as_ushort",              {CUDA_122}},
-  {"__short_as_bfloat16",               {CUDA_122}},
-  {"__ushort_as_bfloat16",              {CUDA_122}},
-  {"__bfloat162bfloat162",              {CUDA_122}},
-  {"__lows2bfloat162",                  {CUDA_122}},
-  {"__highs2bfloat162",                 {CUDA_122}},
-  {"__high2bfloat16",                   {CUDA_122}},
-};
+  m["__shfl"]                           = {CUDA_75,  CUDA_90,  CUDA_0  };
+  m["__shfl_up"]                        = {CUDA_75,  CUDA_90,  CUDA_0  };
+  m["__shfl_down"]                      = {CUDA_75,  CUDA_90,  CUDA_0  };
+  m["__shfl_xor"]                       = {CUDA_75,  CUDA_90,  CUDA_0  };
+  m["__double2half"]                    = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hmax"]                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hmax2"]                          = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hmin"]                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hmin2"]                          = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ldlu"]                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ldcv"]                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__stwb"]                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__stcg"]                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__stcs"]                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__stwt"]                           = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hmax_nan"]                       = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hmin_nan"]                       = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hmax2_nan"]                      = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hmin2_nan"]                      = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hfma_relu"]                      = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hfma2_relu"]                     = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__double2bfloat16"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__float2bfloat16"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__float2bfloat16_rn"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__float2bfloat16_rz"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__float2bfloat16_rd"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__float2bfloat16_ru"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162float"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__float2bfloat162_rn"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__floats2bfloat162_rn"]            = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat1622float2"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162int_rn"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162int_rz"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162int_rd"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162int_ru"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__int2bfloat16_rn"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__int2bfloat16_rz"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__int2bfloat16_rd"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__int2bfloat16_ru"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162short_rn"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162short_rz"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162short_rd"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162short_ru"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__short2bfloat16_rn"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__short2bfloat16_rz"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__short2bfloat16_rd"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__short2bfloat16_ru"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162uint_rn"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162uint_rz"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162uint_rd"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162uint_ru"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__uint2bfloat16_rn"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__uint2bfloat16_rz"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__uint2bfloat16_rd"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__uint2bfloat16_ru"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ushort_rn"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ushort_rz"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ushort_rd"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ushort_ru"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ushort2bfloat16_rn"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ushort2bfloat16_rz"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ushort2bfloat16_rd"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ushort2bfloat16_ru"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ull_rn"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ull_rz"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ull_rd"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ull_ru"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ull2bfloat16_rn"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ull2bfloat16_rz"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ull2bfloat16_rd"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ull2bfloat16_ru"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ll_rn"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ll_rz"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ll_rd"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162ll_ru"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ll2bfloat16_rn"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ll2bfloat16_rz"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ll2bfloat16_rd"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ll2bfloat16_ru"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162bfloat162"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__lows2bfloat162"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__highs2bfloat162"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__high2bfloat16"]                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__low2bfloat16"]                   = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__halves2bfloat162"]               = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__low2bfloat162"]                  = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__high2bfloat162"]                 = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat16_as_short"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat16_as_ushort"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__short_as_bfloat16"]              = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__ushort_as_bfloat16"]             = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__hcmadd"]                         = {CUDA_111, CUDA_0,   CUDA_0  };
+  m["__hadd2_rn"]                       = {CUDA_116, CUDA_0,   CUDA_0  };
+  m["__hsub2_rn"]                       = {CUDA_116, CUDA_0,   CUDA_0  };
+  m["__hmul2_rn"]                       = {CUDA_116, CUDA_0,   CUDA_0  };
+  m["__hadd_rn"]                        = {CUDA_116, CUDA_0,   CUDA_0  };
+  m["__hsub_rn"]                        = {CUDA_116, CUDA_0,   CUDA_0  };
+  m["__hmul_rn"]                        = {CUDA_116, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_double_to_fp8"]           = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_double2_to_fp8x2"]        = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_float_to_fp8"]            = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_float2_to_fp8x2"]         = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_halfraw_to_fp8"]          = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_halfraw2_to_fp8x2"]       = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_bfloat16raw_to_fp8"]      = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_bfloat16raw2_to_fp8x2"]   = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_fp8_to_halfraw"]          = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_fp8x2_to_halfraw2"]       = {CUDA_118, CUDA_0,   CUDA_0  };
+  m["__heq2_mask"]                      = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hne2_mask"]                      = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hle2_mask"]                      = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hge2_mask"]                      = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hlt2_mask"]                      = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hgt2_mask"]                      = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hequ2_mask"]                     = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hneu2_mask"]                     = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hleu2_mask"]                     = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hgeu2_mask"]                     = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hltu2_mask"]                     = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__hgtu2_mask"]                     = {CUDA_120, CUDA_0,   CUDA_0  };
+  m["__float22bfloat162_rn"]            = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__bfloat162char_rz"]               = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["__bfloat162uchar_rz"]              = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["make_bfloat162"]                   = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["make_half2"]                       = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["__half2char_rz"]                   = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["__half2uchar_rz"]                  = {CUDA_122, CUDA_0,   CUDA_0  };
+  m["__all_sync"]                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__any_sync"]                       = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__ballot_sync"]                    = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__activemask"]                     = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__match_any_sync"]                 = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__match_all_sync"]                 = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__shfl_sync"]                      = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__shfl_up_sync"]                   = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__shfl_down_sync"]                 = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__shfl_xor_sync"]                  = {CUDA_90,  CUDA_0,   CUDA_0  };
+  m["__nv_cvt_double_to_fp6"]           = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_double2_to_fp6x2"]        = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_float_to_fp6"]            = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_float2_to_fp6x2"]         = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_halfraw_to_fp6"]          = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_halfraw2_to_fp6x2"]       = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_bfloat16raw_to_fp6"]      = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_bfloat16raw2_to_fp6x2"]   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_fp6_to_halfraw"]          = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_fp6x2_to_halfraw2"]       = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_double_to_fp4"]           = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_double2_to_fp4x2"]        = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_float_to_fp4"]            = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_float2_to_fp4x2"]         = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_halfraw_to_fp4"]          = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_halfraw2_to_fp4x2"]       = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_bfloat16raw_to_fp4"]      = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_bfloat16raw2_to_fp4x2"]   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_fp4_to_halfraw"]          = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_fp4x2_to_halfraw2"]       = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_sqrt"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_sin"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_cos"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_tan"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_asin"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_acos"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_atan"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_exp"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_exp2"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_exp10"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_expm1"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_log"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_log2"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_log10"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_log1p"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_pow"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_sinh"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_cosh"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_tanh"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_asinh"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_acosh"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_atanh"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_trunc"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_floor"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_ceil"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_round"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_rint"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_fabs"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_copysign"]              = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_fmax"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_fmin"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_fdim"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_fmod"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_remainder"]             = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_frexp"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_modf"]                  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_hypot"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_fma"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_ldexp"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_ilogb"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_mul"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_add"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_sub"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_div"]                   = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_isnan"]                 = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_fp128_isunordered"]           = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["htanh"]                            = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["h2tanh"]                           = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["htanh_approx"]                     = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["h2tanh_approx"]                    = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_bfloat16raw_to_e8m0"]     = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_bfloat162raw_to_e8m0x2"]  = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_float_to_e8m0"]           = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_float2_to_e8m0x2"]        = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_double_to_e8m0"]          = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_double2_to_e8m0x2"]       = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_e8m0_to_bf16raw"]         = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_cvt_e8m0x2_to_bf162raw"]      = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_bswap16"]                     = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_bswap32"]                     = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["__nv_bswap64"]                     = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["make_long4"]                       = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["make_long4_16a"]                   = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_long4_32a"]                   = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_ulong4"]                      = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["make_ulong4_16a"]                  = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_ulong4_32a"]                  = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_double4"]                     = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["make_double4_16a"]                 = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_double4_32a"]                 = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_longlong4"]                   = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["make_longlong4_16a"]               = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_longlong4_32a"]               = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_ulonglong4"]                  = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["make_ulonglong4_16a"]              = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["make_ulonglong4_32a"]              = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["__reduce_add_sync"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__reduce_min_sync"]                = {CUDA_110, CUDA_0,   CUDA_0  };
+  m["__reduce_max_sync"]                = {CUDA_110, CUDA_0,   CUDA_0  };
 
-const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP {
-  {1, "Device Functions"},
-  {2, "Device Types"},
-};
+  return m;
+}();
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP = []() {
+  std::map<llvm::StringRef, hipAPIversions> m;
+
+  m["abs"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["labs"]                             = {HIP_1090, HIP_0,    HIP_0   };
+  m["llabs"]                            = {HIP_1090, HIP_0,    HIP_0   };
+  m["fabs"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["fabsf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["min"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["fminf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["fmin"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["max"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["fmaxf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["fmax"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["sin"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["cos"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["sincos"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["sincosf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["tan"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["sqrt"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["rsqrt"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["rsqrtf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["log2"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["exp2"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["exp2f"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["exp10"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["exp10f"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["expm1"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["expm1f"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["log2f"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["log10"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["log"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["log1p"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["log1pf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["floor"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["exp"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["cosh"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["sinh"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["tanh"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["acosh"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["acoshf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["asinh"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["asinhf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["atanh"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["atanhf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["ldexp"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["ldexpf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["logb"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["logbf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["ilogb"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["ilogbf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["scalbn"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["scalbnf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["scalbln"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["scalblnf"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["frexp"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["frexpf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["round"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["roundf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["lround"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["lroundf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["llround"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["llroundf"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["rint"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["rintf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["lrint"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["lrintf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["llrint"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["llrintf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["nearbyint"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["nearbyintf"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["ceil"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["trunc"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["truncf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["fdim"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["fdimf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["atan2"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["atan"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["acos"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["asin"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["hypot"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["rhypot"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["hypotf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["rhypotf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["norm3d"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["rnorm3d"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["norm4d"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["rnorm4d"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["norm"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["rnorm"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["rnormf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["normf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["norm3df"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["rnorm3df"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["norm4df"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["rnorm4df"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["cbrt"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["cbrtf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["rcbrt"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["rcbrtf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["sinpi"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["sinpif"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["cospi"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["cospif"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["sincospi"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["sincospif"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["pow"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["modf"]                             = {HIP_1090, HIP_0,    HIP_0   };
+  m["fmod"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["remainder"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["remainderf"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["remquo"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["remquof"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["j0"]                               = {HIP_1060, HIP_0,    HIP_0   };
+  m["j0f"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["j1"]                               = {HIP_1060, HIP_0,    HIP_0   };
+  m["j1f"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["jn"]                               = {HIP_1060, HIP_0,    HIP_0   };
+  m["jnf"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["y0"]                               = {HIP_1060, HIP_0,    HIP_0   };
+  m["y0f"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["y1"]                               = {HIP_1060, HIP_0,    HIP_0   };
+  m["y1f"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["yn"]                               = {HIP_1060, HIP_0,    HIP_0   };
+  m["ynf"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["cyl_bessel_i0"]                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["cyl_bessel_i0f"]                   = {HIP_1090, HIP_0,    HIP_0   };
+  m["cyl_bessel_i1"]                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["cyl_bessel_i1f"]                   = {HIP_1090, HIP_0,    HIP_0   };
+  m["erf"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["erff"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["erfinv"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["erfinvf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["erfc"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["erfcf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["lgamma"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["erfcinv"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["erfcinvf"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["normcdfinv"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["normcdfinvf"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["normcdf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["normcdff"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["erfcx"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["erfcxf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["lgammaf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["tgamma"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["tgammaf"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["copysign"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["copysignf"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["nextafter"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["nextafterf"]                       = {HIP_1090, HIP_0,    HIP_0   };
+  m["nan"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["nanf"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["fma"]                              = {HIP_1060, HIP_0,    HIP_0   };
+  m["fmaf"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["acosf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["asinf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["atanf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["atan2f"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["cosf"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["sinf"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["tanf"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["coshf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["sinhf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["tanhf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["expf"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["logf"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["log10f"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["modff"]                            = {HIP_1090, HIP_0,    HIP_0   };
+  m["powf"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["sqrtf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["ceilf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["floorf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["fmodf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["signbit"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["isfinite"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["isnan"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["isinf"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__mulhi"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__umulhi"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__mul64hi"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__umul64hi"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int_as_float"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float_as_int"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float_as_uint"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint_as_float"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__syncthreads"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__syncthreads_count"]              = {HIP_3070, HIP_0,    HIP_0   };
+  m["__syncthreads_and"]                = {HIP_3070, HIP_0,    HIP_0   };
+  m["__syncthreads_or"]                 = {HIP_3070, HIP_0,    HIP_0   };
+  m["__threadfence"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__threadfence_block"]              = {HIP_1060, HIP_0,    HIP_0   };
+  m["__threadfence_system"]             = {HIP_1060, HIP_0,    HIP_0   };
+  m["__saturatef"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__sad"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__usad"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__mul24"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__umul24"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["fdividef"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__fdividef"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__sinf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__cosf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__tanf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__sincosf"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__expf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__exp10f"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__log2f"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__log10f"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__logf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__powf"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2int_rn"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2int_rz"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2int_ru"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2int_rd"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2uint_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2uint_rz"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2uint_ru"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2uint_rd"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2float_rn"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2float_rz"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2float_ru"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2float_rd"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2float_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2float_rz"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2float_ru"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2float_rd"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2ll_rn"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2ll_rz"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2ll_ru"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2ll_rd"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2ull_rn"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2ull_rz"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2ull_ru"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2ull_rd"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2float_rn"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2float_rz"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2float_ru"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2float_rd"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2float_rn"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2float_rz"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2float_ru"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2float_rd"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__fadd_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__fsub_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__fmul_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__fmaf_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__frcp_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__fsqrt_rn"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__frsqrt_rn"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__fdiv_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__clz"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ffs"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__popc"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__brev"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__clzll"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ffsll"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__popcll"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__brevll"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__byte_perm"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hadd"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__rhadd"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uhadd"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__urhadd"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2float_rd"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2float_rn"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2float_ru"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2float_rz"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2hiint"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2loint"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2int_rd"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2int_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2int_ru"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2int_rz"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2ll_rd"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2ll_rn"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2ll_ru"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2ll_rz"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2uint_rd"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2uint_rn"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2uint_ru"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2uint_rz"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2ull_rd"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2ull_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2ull_ru"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double2ull_rz"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__double_as_longlong"]             = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hiloint2double"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2double_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2double_rd"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2double_rn"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2double_ru"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2double_rz"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__longlong_as_double"]             = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2double_rn"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2double_rd"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2double_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2double_ru"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2double_rz"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2half"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2half_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2half_rz"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2half_rd"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2half_ru"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2float"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float2half2_rn"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__floats2half2_rn"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["__low2float"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__high2float"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__float22half2_rn"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half22float2"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2int_rn"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2int_rz"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2int_rd"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2int_ru"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2half_rn"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2half_rz"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2half_rd"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2half_ru"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2short_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2short_rz"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2short_rd"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2short_ru"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__short2half_rn"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__short2half_rz"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__short2half_rd"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__short2half_ru"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2uint_rn"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2uint_rz"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2uint_rd"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2uint_ru"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2half_rn"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2half_rz"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2half_rd"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__uint2half_ru"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ushort_rn"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ushort_rz"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ushort_rd"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ushort_ru"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ushort2half_rn"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ushort2half_rz"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ushort2half_rd"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ushort2half_ru"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ull_rn"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ull_rz"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ull_rd"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ull_ru"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2half_rn"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2half_rz"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2half_rd"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ull2half_ru"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ll_rn"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ll_rz"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ll_rd"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half2ll_ru"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2half_rn"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2half_rz"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2half_rd"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ll2half_ru"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["htrunc"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["hceil"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["hfloor"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["hrint"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2trunc"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2ceil"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2floor"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2rint"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__half2half2"]                     = {HIP_1090, HIP_0,    HIP_0   };
+  m["__lowhigh2highlow"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["__lows2half2"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__highs2half2"]                    = {HIP_1060, HIP_0,    HIP_0   };
+  m["__high2half"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__low2half"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hisinf"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__halves2half2"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["__low2half2"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__high2half2"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half_as_short"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__half_as_ushort"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__short_as_half"]                  = {HIP_1090, HIP_0,    HIP_0   };
+  m["__ushort_as_half"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ldg"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ldcg"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__ldca"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__ldcs"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__heq2"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hne2"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hle2"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hge2"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hlt2"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hgt2"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hequ2"]                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hneu2"]                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hleu2"]                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hgeu2"]                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hltu2"]                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hgtu2"]                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hisnan2"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hadd2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hsub2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hmul2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__h2div"]                          = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hadd2_sat"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hsub2_sat"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hmul2_sat"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hfma2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hfma2_sat"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hneg2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hsub"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hmul"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hdiv"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hadd_sat"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hsub_sat"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hmul_sat"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hfma"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hfma_sat"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hneg"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__habs2"]                          = {HIP_3050, HIP_0,    HIP_0   };
+  m["__habs"]                           = {HIP_3050, HIP_0,    HIP_0   };
+  m["__hbeq2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hbne2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hble2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hbge2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hblt2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hbgt2"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hbequ2"]                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hbneu2"]                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hbleu2"]                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hbgeu2"]                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hbltu2"]                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hbgtu2"]                         = {HIP_1090, HIP_0,    HIP_0   };
+  m["__heq"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hne"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hle"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hge"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hlt"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hgt"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__hequ"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hneu"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hleu"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hgeu"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hltu"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hgtu"]                           = {HIP_1090, HIP_0,    HIP_0   };
+  m["__hisnan"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["hsqrt"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["hrsqrt"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["hrcp"]                             = {HIP_1090, HIP_0,    HIP_0   };
+  m["hlog"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["hlog2"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["hlog10"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["hexp"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["hexp2"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["hexp10"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["hcos"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["hsin"]                             = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2sqrt"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2rsqrt"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2rcp"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2log"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2log2"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2log10"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2exp"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2exp2"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2exp10"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2cos"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["h2sin"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__shfl"]                           = {HIP_1060, HIP_0,    HIP_0   };
+  m["__shfl_up"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__shfl_down"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["__shfl_xor"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicAdd"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicSub"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicExch"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicMin"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicMax"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicInc"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicDec"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicAnd"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicOr"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicXor"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["atomicCAS"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__all"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__any"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ballot"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["clock64"]                          = {HIP_1060, HIP_0,    HIP_0   };
+  m["clock"]                            = {HIP_1060, HIP_0,    HIP_0   };
+  m["__dadd_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__ddiv_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__dmul_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__drcp_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__dsqrt_rn"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["__dsub_rn"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["__fma_rn"]                         = {HIP_1060, HIP_0,    HIP_0   };
+  m["__assert_fail"]                    = {HIP_1090, HIP_0,    HIP_0   };
+  m["__assertfail"]                     = {HIP_1090, HIP_0,    HIP_0   };
+  m["atomicCAS_system"]                 = {HIP_4030, HIP_0,    HIP_0   };
+  m["atomicSub_system"]                 = {HIP_4030, HIP_0,    HIP_0   };
+  m["atomicAdd_system"]                 = {HIP_4030, HIP_0,    HIP_0   };
+  m["atomicExch_system"]                = {HIP_4030, HIP_0,    HIP_0   };
+  m["atomicMin_system"]                 = {HIP_4030, HIP_0,    HIP_0   };
+  m["atomicMax_system"]                 = {HIP_4030, HIP_0,    HIP_0   };
+  m["atomicAnd_system"]                 = {HIP_4030, HIP_0,    HIP_0   };
+  m["atomicOr_system"]                  = {HIP_4030, HIP_0,    HIP_0   };
+  m["atomicXor_system"]                 = {HIP_4030, HIP_0,    HIP_0   };
+  m["__funnelshift_l"]                  = {HIP_4040, HIP_0,    HIP_0   };
+  m["__funnelshift_lc"]                 = {HIP_4040, HIP_0,    HIP_0   };
+  m["__funnelshift_r"]                  = {HIP_4040, HIP_0,    HIP_0   };
+  m["__funnelshift_rc"]                 = {HIP_4040, HIP_0,    HIP_0   };
+  m["__hmax"]                           = {HIP_5050, HIP_0,    HIP_0   };
+  m["__hmax_nan"]                       = {HIP_5050, HIP_0,    HIP_0   };
+  m["__hmin"]                           = {HIP_5050, HIP_0,    HIP_0   };
+  m["__hmin_nan"]                       = {HIP_5050, HIP_0,    HIP_0   };
+  m["__all_sync"]                       = {HIP_6020, HIP_0,    HIP_0   };
+  m["__any_sync"]                       = {HIP_6020, HIP_0,    HIP_0   };
+  m["__ballot_sync"]                    = {HIP_6020, HIP_0,    HIP_0   };
+  m["__activemask"]                     = {HIP_6020, HIP_0,    HIP_0   };
+  m["__match_any_sync"]                 = {HIP_6020, HIP_0,    HIP_0   };
+  m["__match_all_sync"]                 = {HIP_6020, HIP_0,    HIP_0   };
+  m["__shfl_sync"]                      = {HIP_6020, HIP_0,    HIP_0   };
+  m["__shfl_up_sync"]                   = {HIP_6020, HIP_0,    HIP_0   };
+  m["__shfl_down_sync"]                 = {HIP_6020, HIP_0,    HIP_0   };
+  m["__shfl_xor_sync"]                  = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_double_to_fp8"]          = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_double2_to_fp8x2"]       = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_float_to_fp8"]           = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_float2_to_fp8x2"]        = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_halfraw_to_fp8"]         = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_halfraw2_to_fp8x2"]      = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_bfloat16raw_to_fp8"]     = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_bfloat16raw2_to_fp8x2"]  = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_fp8_to_halfraw"]         = {HIP_6020, HIP_0,    HIP_0   };
+  m["__hip_cvt_fp8x2_to_halfraw2"]      = {HIP_6020, HIP_0,    HIP_0   };
+  m["__double2bfloat16"]                = {HIP_5070, HIP_0,    HIP_0   };
+  m["__float2bfloat16"]                 = {HIP_5070, HIP_0,    HIP_0   };
+  m["__bfloat162float"]                 = {HIP_5070, HIP_0,    HIP_0   };
+  m["__bfloat1622float2"]               = {HIP_5070, HIP_0,    HIP_0   };
+  m["__bfloat162bfloat162"]             = {HIP_5070, HIP_0,    HIP_0   };
+  m["__lows2bfloat162"]                 = {HIP_5070, HIP_0,    HIP_0   };
+  m["__highs2bfloat162"]                = {HIP_5070, HIP_0,    HIP_0   };
+  m["__high2bfloat16"]                  = {HIP_5070, HIP_0,    HIP_0   };
+  m["__hmin2"]                          = {HIP_5070, HIP_0,    HIP_0   };
+  m["__hmax2"]                          = {HIP_5070, HIP_0,    HIP_0   };
+  m["make_half2"]                       = {HIP_4050, HIP_0,    HIP_0   };
+  m["__low2bfloat16"]                   = {HIP_5070, HIP_0,    HIP_0   };
+  m["__halves2bfloat162"]               = {HIP_5070, HIP_0,    HIP_0   };
+  m["__low2bfloat162"]                  = {HIP_5070, HIP_0,    HIP_0   };
+  m["__high2bfloat162"]                 = {HIP_5070, HIP_0,    HIP_0   };
+  m["__bfloat16_as_short"]              = {HIP_5070, HIP_0,    HIP_0   };
+  m["__bfloat16_as_ushort"]             = {HIP_5070, HIP_0,    HIP_0   };
+  m["__short_as_bfloat16"]              = {HIP_5070, HIP_0,    HIP_0   };
+  m["__ushort_as_bfloat16"]             = {HIP_5070, HIP_0,    HIP_0   };
+  m["__float22bfloat162_rn"]            = {HIP_5070, HIP_0,    HIP_0   };
+  m["__hip_cvt_bfloat16raw_to_fp4"]     = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_bfloat16raw2_to_fp4x2"]  = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_double_to_fp4"]          = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_double2_to_fp4x2"]       = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_float_to_fp4"]           = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_float2_to_fp4x2"]        = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_fp4_to_halfraw"]         = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_fp4x2_to_halfraw2"]      = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_halfraw_to_fp4"]         = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_halfraw2_to_fp4x2"]      = {HIP_7000, HIP_0,    HIP_0   };
+  m["make_char1"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_char2"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_char3"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_char4"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_uchar1"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_uchar2"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_uchar3"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_uchar4"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_short1"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_short2"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_short3"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_short4"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ushort1"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ushort2"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ushort3"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ushort4"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_int1"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_int2"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_int3"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_int4"]                        = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_uint1"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_uint2"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_uint3"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_uint4"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_long1"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_long2"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_long3"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_long4"]                       = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ulong1"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ulong2"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ulong3"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ulong4"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_float1"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_float2"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_float3"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_float4"]                      = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_double1"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_double2"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_double3"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_double4"]                     = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_longlong1"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_longlong2"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_longlong3"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_longlong4"]                   = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ulonglong1"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ulonglong2"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ulonglong3"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_ulonglong4"]                  = {HIP_1060, HIP_0,    HIP_0   };
+  m["__int2bfloat16_rn"]                = {HIP_7000, HIP_0,    HIP_0   };
+  m["__reduce_add_sync"]                = {HIP_7000, HIP_0,    HIP_0   };
+  m["__reduce_min_sync"]                = {HIP_7000, HIP_0,    HIP_0   };
+  m["__reduce_max_sync"]                = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_bfloat16raw_to_fp6"]     = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_bfloat16raw2_to_fp6x2"]  = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_double_to_fp6"]          = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_double2_to_fp6x2"]       = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_float_to_fp6"]           = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_float2_to_fp6x2"]        = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_fp6_to_halfraw"]         = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_fp6x2_to_halfraw2"]      = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_halfraw_to_fp6"]         = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_cvt_halfraw2_to_fp6x2"]      = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hadd_rn"]                        = {HIP_7010, HIP_0,    HIP_0   };
+  m["__hsub_rn"]                        = {HIP_7010, HIP_0,    HIP_0   };
+  m["__hmul_rn"]                        = {HIP_7010, HIP_0,    HIP_0   };
+  m["__hadd2_rn"]                       = {HIP_7010, HIP_0,    HIP_0   };
+  m["__hmul2_rn"]                       = {HIP_7010, HIP_0,    HIP_0   };
+  m["__hsub2_rn"]                       = {HIP_7010, HIP_0,    HIP_0   };
+
+  return m;
+}();
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP = []() {
+  std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+
+  m["__hmax2"]                          = {CUDA_122};
+  m["__hmin2"]                          = {CUDA_122};
+  m["__low2bfloat16"]                   = {CUDA_122};
+  m["__halves2bfloat162"]               = {CUDA_122};
+  m["__low2bfloat162"]                  = {CUDA_122};
+  m["__high2bfloat162"]                 = {CUDA_122};
+  m["__bfloat16_as_short"]              = {CUDA_122};
+  m["__bfloat16_as_ushort"]             = {CUDA_122};
+  m["__short_as_bfloat16"]              = {CUDA_122};
+  m["__ushort_as_bfloat16"]             = {CUDA_122};
+  m["__bfloat162bfloat162"]             = {CUDA_122};
+  m["__lows2bfloat162"]                 = {CUDA_122};
+  m["__highs2bfloat162"]                = {CUDA_122};
+  m["__high2bfloat16"]                  = {CUDA_122};
+
+  return m;
+}();
+
+const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP = []() {
+  std::map<unsigned int, llvm::StringRef> m;
+
+  m[1]                                  = "Device Functions";
+  m[2]                                  = "Device Types";
+
+  return m;
+}();
