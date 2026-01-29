@@ -519,6 +519,7 @@ namespace doc {
       const hipChangedVersionMap &getHipChangedFunctionVersions() const override { return HIP_DRIVER_FUNCTION_CHANGED_VER_MAP; }
       const hipChangedVersionMap &getHipChangedTypeVersions() const override { return HIP_DRIVER_TYPE_CHANGED_VER_MAP; };
       const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP; }
+      const cudaChangedVersionMap &getCudaChangedTypeVersions() const override { return CUDA_DRIVER_TYPE_CHANGED_VER_MAP; }
       const cudaUnsupportedVersionMap &getCudaUnsupportedFunctionVersions() const override { return CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP; };
       const versionMap &getTypeVersions() const override { return CUDA_DRIVER_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_DRIVER_TYPE_NAME_VER_MAP; }

@@ -597,8 +597,14 @@
 |`CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED`|13.0| | | | | | | | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | | |
 |`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | | | | | | | | |
-|`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | |13.1| | | | | | | |
 |`CU_DEV_RESOURCE_TYPE_SM`|12.4| | | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_WORKQUEUE`|13.1| | | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG`|13.1| | | | | | | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_BACKFILL`|13.1| | | | | | | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_DEFAULT`|13.1| | | | | | | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_PARAMS`|13.1| | | | | | | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_PARAMS_st`|13.1| | | | | | | | | | |
 |`CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING`|12.5| | | | | | | | | | |
 |`CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE`|12.5| | | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_A`|9.1| | | | | | | | | | |
@@ -1219,6 +1225,8 @@
 |`CU_TR_FILTER_MODE_LINEAR`| | | | |`HIP_TR_FILTER_MODE_LINEAR`|3.5.0| | | | | |
 |`CU_TR_FILTER_MODE_POINT`| | | | |`HIP_TR_FILTER_MODE_POINT`|3.5.0| | | | | |
 |`CU_USER_OBJECT_NO_DESTRUCTOR_SYNC`|11.3| | | |`hipUserObjectNoDestructorSync`|5.3.0| | | | | |
+|`CU_WORKQUEUE_SCOPE_DEVICE_CTX`|13.1| | | | | | | | | | |
+|`CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED`|13.1| | | | | | | | | | |
 |`CUaccessPolicyWindow`|11.0| | | |`hipAccessPolicyWindow`|5.2.0| | | | | |
 |`CUaccessPolicyWindow_st`|11.0| | | |`hipAccessPolicyWindow`|5.2.0| | | | | |
 |`CUaccessProperty`|11.0| | | |`hipAccessProperty`|5.2.0| | | | | |
@@ -1291,10 +1299,17 @@
 |`CUdevResourceDesc`|12.4| | | | | | | | | | |
 |`CUdevResourceDesc_st`|12.4| | | | | | | | | | |
 |`CUdevResourceType`|12.4| | | | | | | | | | |
-|`CUdevResource_st`|12.4| | | | | | | | | | |
+|`CUdevResource_st`|12.4| |13.1| | | | | | | | |
 |`CUdevSmResource`|12.4| | | | | | | | | | |
-|`CUdevSmResourceSplit_flags`|12.5| | | | | | | | | | |
-|`CUdevSmResource_st`|12.4| | | | | | | | | | |
+|`CUdevSmResourceGroup_flags`|13.1| | | | | | | | | | |
+|`CUdevSmResourceSplitByCount_flags`|13.1| | | | | | | | | | |
+|`CUdevSmResourceSplit_flags`|12.5| | |13.1| | | | | | | |
+|`CUdevSmResource_st`|12.4| |13.1| | | | | | | | |
+|`CUdevWorkqueueConfigResource`|13.1| | | | | | | | | | |
+|`CUdevWorkqueueConfigResource_st`|13.1| | | | | | | | | | |
+|`CUdevWorkqueueConfigScope`|13.1| | | | | | | | | | |
+|`CUdevWorkqueueResource`|13.1| | | | | | | | | | |
+|`CUdevWorkqueueResource_st`|13.1| | | | | | | | | | |
 |`CUdevice`| | | | |`hipDevice_t`|1.6.0| | | | | |
 |`CUdeviceNumaConfig`|12.2| | | | | | | | | | |
 |`CUdeviceNumaConfig_enum`|12.2| | | | | | | | | | |
@@ -1570,7 +1585,7 @@
 |`CUstreamAttrValue_union`|11.0| | |11.8|`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`CUstreamAttrValue_v1`|11.3| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`CUstreamBatchMemOpParams`|8.0| | | |`hipStreamBatchMemOpParams`|6.4.0| | | | | |
-|`CUstreamBatchMemOpParams_union`|8.0| | | |`hipStreamBatchMemOpParams_union`|6.4.0| | | | | |
+|`CUstreamBatchMemOpParams_union`|8.0| |13.1| |`hipStreamBatchMemOpParams_union`|6.4.0| | | | | |
 |`CUstreamBatchMemOpParams_v1`|11.3| | | |`hipStreamBatchMemOpParams`|6.4.0| | | | | |
 |`CUstreamBatchMemOpType`|8.0| | | |`hipStreamBatchMemOpType`|6.4.0| | | | | |
 |`CUstreamBatchMemOpType_enum`|8.0| | | |`hipStreamBatchMemOpType`|6.4.0| | | | | |
