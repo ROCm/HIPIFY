@@ -23,17 +23,27 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA Complex API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_TYPE_NAME_MAP {
-  {"cuFloatComplex",  {"hipFloatComplex",  "rocblas_float_complex",  CONV_TYPE, API_COMPLEX, 1}},
-  {"cuDoubleComplex", {"hipDoubleComplex", "rocblas_double_complex", CONV_TYPE, API_COMPLEX, 1}},
-  {"cuComplex",       {"hipComplex",       "rocblas_float_complex",  CONV_TYPE, API_COMPLEX, 1}},
-};
+const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_TYPE_NAME_MAP = []() {
+  std::map<llvm::StringRef, hipCounter> m;
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_TYPE_NAME_VER_MAP {
-};
+  m["cuFloatComplex"]  = {"hipFloatComplex",  "rocblas_float_complex",  CONV_TYPE, API_COMPLEX, 1};
+  m["cuDoubleComplex"] = {"hipDoubleComplex", "rocblas_double_complex", CONV_TYPE, API_COMPLEX, 1};
+  m["cuComplex"]       = {"hipComplex",       "rocblas_float_complex",  CONV_TYPE, API_COMPLEX, 1};\
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_TYPE_NAME_VER_MAP {
-  {"hipFloatComplex", {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipDoubleComplex",{HIP_1060, HIP_0,    HIP_0   }},
-  {"hipComplex",      {HIP_1060, HIP_0,    HIP_0   }},
-};
+  return m;
+}();
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_TYPE_NAME_VER_MAP = []() {
+  std::map<llvm::StringRef, cudaAPIversions> m;
+  return m;
+}();
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_TYPE_NAME_VER_MAP = []() {
+  std::map<llvm::StringRef, hipAPIversions> m;
+
+  m["hipFloatComplex"]  = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipDoubleComplex"] = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipComplex"]       = {HIP_1060, HIP_0,    HIP_0   };
+
+  return m;
+}();

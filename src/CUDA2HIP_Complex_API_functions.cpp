@@ -23,62 +23,76 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA Complex API functions to the corresponding HIP functions
-const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP {
-  {"cuCrealf",                {"hipCrealf",               "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCimagf",                {"hipCimagf",               "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"make_cuFloatComplex",     {"make_hipFloatComplex",    "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuConjf",                 {"hipConjf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCaddf",                 {"hipCaddf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCsubf",                 {"hipCsubf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCmulf",                 {"hipCmulf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCdivf",                 {"hipCdivf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCabsf",                 {"hipCabsf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCreal",                 {"hipCreal",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCimag",                 {"hipCimag",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"make_cuDoubleComplex",    {"make_hipDoubleComplex",   "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuConj",                  {"hipConj",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCadd",                  {"hipCadd",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCsub",                  {"hipCsub",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCmul",                  {"hipCmul",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCdiv",                  {"hipCdiv",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCabs",                  {"hipCabs",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"make_cuComplex",          {"make_hipComplex",         "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuComplexFloatToDouble",  {"hipComplexFloatToDouble", "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuComplexDoubleToFloat",  {"hipComplexDoubleToFloat", "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCfmaf",                 {"hipCfmaf",                "", CONV_COMPLEX, API_COMPLEX, 2}},
-  {"cuCfma",                  {"hipCfma",                 "", CONV_COMPLEX, API_COMPLEX, 2}},
-};
+const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP = []() {
+  std::map<llvm::StringRef, hipCounter> m;
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_FUNCTION_VER_MAP {
-};
+  m["cuCrealf"]                = {"hipCrealf",               "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCimagf"]                = {"hipCimagf",               "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["make_cuFloatComplex"]     = {"make_hipFloatComplex",    "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuConjf"]                 = {"hipConjf",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCaddf"]                 = {"hipCaddf",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCsubf"]                 = {"hipCsubf",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCmulf"]                 = {"hipCmulf",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCdivf"]                 = {"hipCdivf",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCabsf"]                 = {"hipCabsf",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCreal"]                 = {"hipCreal",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCimag"]                 = {"hipCimag",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["make_cuDoubleComplex"]    = {"make_hipDoubleComplex",   "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuConj"]                  = {"hipConj",                 "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCadd"]                  = {"hipCadd",                 "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCsub"]                  = {"hipCsub",                 "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCmul"]                  = {"hipCmul",                 "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCdiv"]                  = {"hipCdiv",                 "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCabs"]                  = {"hipCabs",                 "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["make_cuComplex"]          = {"make_hipComplex",         "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuComplexFloatToDouble"]  = {"hipComplexFloatToDouble", "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuComplexDoubleToFloat"]  = {"hipComplexDoubleToFloat", "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCfmaf"]                 = {"hipCfmaf",                "", CONV_COMPLEX, API_COMPLEX, 2};
+  m["cuCfma"]                  = {"hipCfma",                 "", CONV_COMPLEX, API_COMPLEX, 2};
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_FUNCTION_VER_MAP {
-  {"hipCrealf",               {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCimagf",               {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_hipFloatComplex",    {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipConjf",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCaddf",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCsubf",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCmulf",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCdivf",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCabsf",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCreal",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCimag",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_hipDoubleComplex",   {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipConj",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCadd",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCsub",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCmul",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCdiv",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCabs",                 {HIP_1060, HIP_0,    HIP_0   }},
-  {"make_hipComplex",         {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipComplexFloatToDouble", {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipComplexDoubleToFloat", {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCfmaf",                {HIP_1060, HIP_0,    HIP_0   }},
-  {"hipCfma",                 {HIP_1060, HIP_0,    HIP_0   }},
-};
+  return m;
+}();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_COMPLEX_API_SECTION_MAP {
-  {1, "cuComplex Data types"},
-  {2, "cuComplex API functions"},
-};
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_FUNCTION_VER_MAP = []() {
+  std::map<llvm::StringRef, cudaAPIversions> m;
+  return m;
+}();
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_FUNCTION_VER_MAP = []() {
+  std::map<llvm::StringRef, hipAPIversions> m;
+
+  m["hipCrealf"]               = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCimagf"]               = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_hipFloatComplex"]    = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipConjf"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCaddf"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCsubf"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCmulf"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCdivf"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCabsf"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCreal"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCimag"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_hipDoubleComplex"]   = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipConj"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCadd"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCsub"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCmul"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCdiv"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCabs"]                 = {HIP_1060, HIP_0,    HIP_0   };
+  m["make_hipComplex"]         = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipComplexFloatToDouble"] = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipComplexDoubleToFloat"] = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCfmaf"]                = {HIP_1060, HIP_0,    HIP_0   };
+  m["hipCfma"]                 = {HIP_1060, HIP_0,    HIP_0   };
+
+  return m;
+}();
+
+const std::map<unsigned int, llvm::StringRef> CUDA_COMPLEX_API_SECTION_MAP = []() {
+  std::map<unsigned int, llvm::StringRef> m;
+
+  m[1]                         = "cuComplex Data types";
+  m[2]                         = "cuComplex API functions";
+
+  return m;
+}();
