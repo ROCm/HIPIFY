@@ -16,7 +16,7 @@ on:
         value: true
       linux_variants:
         description: Matrix variants to run on Linux
-        value: ${{ jobs.setup.outputs.linux_variants }}
+        value:  ${{ jobs.setup.outputs.linux_variants }}
       linux_test_labels:
         description: ROCm projects to run Linux tests on. Optional filter.
         value: ${{ jobs.setup.outputs.linux_test_labels }}
@@ -40,24 +40,23 @@ jobs:
   setup:
     runs-on: ubuntu-24.04
     env:
-      # The commit being checked out is the merge commit for a PR. Its first
-      # parent will be the tip of the base branch.
-      BASE_REF: HEAD^
+      BASE_REF: '5a23b542e1d03fbb515e014a7d9635c8884b12e6'
     outputs:
       enable_build_jobs: true
-      linux_variants: ${{ steps.configure.outputs.linux_variants }}
+      linux_variants: >
+        [ {"test-runs-on": "", "family": "gfx110X-all", "bypass_tests_for_releases": true, "sanity_check_only_for_family": true, "build_variant_label": "release", "build_variant_suffix": "", "build_variant_cmake_preset": "", "artifact_group": "gfx110X-all"}, {"test-runs-on": "linux-mi325-1gpu-ossci-rocm", "test-runs-on-multi-gpu": "linux-mi325-4gpu-ossci-rocm", "benchmark-runs-on": "linux-mi325-1gpu-ossci-rocm", "family": "gfx94X-dcgpu", "build_variant_label": "release", "build_variant_suffix": "", "build_variant_cmake_preset": "", "artifact_group": "gfx94X-dcgpu"}]
       linux_test_labels: ${{ steps.configure.outputs.linux_test_labels }}
-      windows_variants: ${{ steps.configure.outputs.windows_variants }}
+      windows_variants: >
+            [{"test-runs-on": "windows-gfx1151-gpu-rocm", "benchmark-runs-on": "windows-gfx1151-gpu-rocm", "family": "gfx1151", "build_variant_label": "release", "build_variant_suffix": "", "build_variant_cmake_preset": "windows-release", "artifact_group": "gfx1151"}]
       test_type: 'smoke'
       windows_test_labels: ${{ steps.configure.outputs.windows_test_labels }}
       rocm_package_version: ${{ steps.rocm_package_version.outputs.rocm_package_version }}
     steps:
       - name: Checkout TheRock repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: "ROCm/TheRock"
-          ref: ${{ secrets.THEROCK_MAINLINE_REF }}
-          fetch-depth: 10
+          ref: '5a23b542e1d03fbb515e014a7d9635c8884b12e6'
       - name: SHA of TheRock
         run: |
              git rev-parse HEAD
@@ -74,7 +73,7 @@ jobs:
         id: configure
         env:
           #INPUT_LINUX_AMDGPU_FAMILIES: ${{ github.event.inputs.linux_amdgpu_families }}
-          INPUT_LINUX_AMDGPU_FAMILIES: "gfx94X"
+          INPUT_LINUX_AMDGPU_FAMILIES: 'gfx94X-dcgpu,gfx110X-all,gfx1151'
           LINUX_TEST_LABELS: ${{ github.event.inputs.linux_test_labels }}
           LINUX_USE_PREBUILT_ARTIFACTS: ${{ github.event.inputs.linux_use_prebuilt_artifacts }}
           #INPUT_WINDOWS_AMDGPU_FAMILIES: ${{ github.event.inputs.windows_amdgpu_families }}
