@@ -75,16 +75,25 @@ jobs:
       IS_PR_FROM_FORK: ${{ github.event.pull_request.head.repo.fork }}
     steps:
       - name: Checkout TheRock repository
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: "ROCm/TheRock"
-          ref: ${{ secrets.THEROCK_MAINLINE_REF }}
-          fetch-depth: 10
 
-      - name: SHA of TheRock
+
+      - name: Update Submodule Pointer to the PR
         run: |
-             git rev-parse HEAD
-             git log -1
+          git config --global --add safe.directory $PWD
+          # Fetch the latest commit SHA from the PR branch
+          PR_SHA=${{ github.event.pull_request.head.sha }}
+          # Update the submodule pointer using cacheinfo
+          git update-index --cacheinfo 160000,$PR_SHA,compiler/hipify
+          git config --global user.email "z1-cciauto@amd.com"
+          git config --global user.name "Z1 cciauto"
+          git commit -m "Update submodule reference for compiler/hipify"
+          # Verify the pointer update
+          git submodule status
+          git submodule
+
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
         with:
@@ -126,16 +135,6 @@ jobs:
         run: |
           python -m pytest build_tools/tests build_tools/github_actions/tests
 
-      # TODO: We shouldn't be using a cache on actual release branches, but it
-      # really helps for iteration time.
-      - name: Enable cache
-        uses: actions/cache/restore@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
-        with:
-          path: ${{ env.CACHE_DIR }}
-          key: windows-build-packages-v4-${{ inputs.amdgpu_families }}-${{ github.sha }}
-          restore-keys: |
-            windows-build-packages-v4-${{ inputs.amdgpu_families }}-
-
       - name: Fetch sources
         timeout-minutes: 30
         run: |
@@ -147,16 +146,36 @@ jobs:
       - name: "Checking out repository for llvm-project"
         uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
         with:
-           path: compiler/amd-llvm
+          repository: "ROCm/llvm-project"
+          path: compiler/amd-llvm
+          ref: amd-mainline
+
+      - name: "Checking out repository for spirv-llvm-translator"
+        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
+        with:
+          repository: "ROCm/spirv-llvm-translator"
+          path: compiler/spirv-llvm-translator
+          ref: amd-mainline
 
       - name: Apply patches
         run: |
              cp -v patches/amd-mainline/llvm-project/*.patch compiler/amd-llvm
              cd compiler/amd-llvm
-             git config --global --add safe.directory /__w/llvm-project/llvm-project
+             git log -10
+             git config --global --add safe.directory $PWD
              find . -type f -name '*.patch' -exec git apply --check {} \;
              find . -type f -name '*.patch' -exec git apply {} \;
              git log -15
+             cd -
+
+      - name: TheRock and llvm SHA
+        run: |
+             git config --global --add safe.directory $PWD
+             git log --oneline -1
+             ls -l compiler/amd-llvm
+             cd compiler/amd-llvm/llvm
+             ls -l
+             git log --oneline -3
              cd -
 
       - name: Configure Projects
@@ -164,14 +183,15 @@ jobs:
           cmake_preset: ${{ inputs.build_variant_cmake_preset }}
           amdgpu_families: ${{ inputs.amdgpu_families }}
           package_version: ${{ inputs.package_version }}
-          extra_cmake_options: ${{ inputs.extra_cmake_options }}
+          #extra_cmake_options: ${{ inputs.extra_cmake_options }}
+          extra_cmake_options: "-DTHEROCK_ENABLE_ALL=OFF -DTHEROCK_ENABLE_COMPILER=ON -DTHEROCK_ENABLE_HIP_RUNTIME=ON -DTHEROCK_ENABLE_PRIM=ON -DTHEROCK_ENABLE_BLAS=ON -DTHEROCK_ENABLE_RAND=ON -DTHEROCK_ENABLE_SOLVER=ON -DTHEROCK_ENABLE_SPARSE=ON -DTHEROCK_ENABLE_SYSDEPS=OFF  -DTHEROCK_ENABLE_COMPOSABLE_KERNEL=OFF -DTHEROCK_ENABLE_OCL_RUNTIME=ON  -DTHEROCK_ENABLE_MATH_LIBS=ON -DLLVM_SMREV_REPO='' -DLLVM_SMREV_REVISION=''"
         run: |
           # clear cache before build and after download
           ccache -z
           python3 build_tools/github_actions/build_configure.py
 
       - name: Build therock-archives and therock-dist
-        run: cmake --build "${{ env.BUILD_DIR }}" --target therock-archives therock-dist -- -k 0
+        run: cmake --build "${{ env.BUILD_DIR }}" --target therock-archives therock-dist -- -j32
 
       - name: Report
         if: ${{ !cancelled() }}
@@ -210,7 +230,7 @@ jobs:
         uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
         with:
           aws-region: us-east-2
-          role-to-assume: arn:aws:iam::692859939525:role/therock-ci
+          role-to-assume: arn:aws:iam::692859939525:role/therock-ci-external
           special-characters-workaround: true
 
       - name: Post Build Upload
@@ -222,9 +242,3 @@ jobs:
             --build-dir ${{ env.BUILD_DIR }} \
             --upload
 
-      - name: Save cache
-        uses: actions/cache/save@0057852bfaa89a56745cba8c7296529d2fc39830 # v4.3.0
-        if: ${{ !cancelled() }}
-        with:
-          path: ${{ env.CACHE_DIR }}
-          key: windows-build-packages-v4-${{ inputs.amdgpu_families }}-${{ github.sha }}
