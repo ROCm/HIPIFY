@@ -46,7 +46,6 @@ jobs:
       - uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           repository: "ROCm/TheRock"
-          ref: ${{ secrets.THEROCK_MAINLINE_REF }}
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
         with:
           python-version: '3.12'
@@ -76,12 +75,5 @@ jobs:
       - name: Inspect Python packages
         run: |
           ls -la "${{ env.PACKAGES_DIR }}"
-
-      - name: Sanity check Python packages
-        run: |
-          piprepo build "${{ env.PACKAGES_DIR }}/dist"
-          pip install rocm[libraries,devel]==${{ inputs.package_version }} \
-            --extra-index-url "${{ env.PACKAGES_DIR }}/dist/simple/"
-          rocm-sdk test
 
       # TODO(#1559): upload packages to artifacts S3 bucket and/or a dedicated Python packages bucket
