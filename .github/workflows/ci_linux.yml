@@ -19,6 +19,9 @@ on:
         type: string
       test_runs_on:
         type: string
+      benchmark_runs_on:
+        type: string
+        default: ""
       expect_failure:
         type: boolean
       use_prebuilt_artifacts:
@@ -84,6 +87,7 @@ jobs:
       test_type: ${{ inputs.test_type }}
       test_labels: ${{ inputs.test_labels }}
       sanity_check_only_for_family: ${{ inputs.sanity_check_only_for_family == true }}
+
 
   build_portable_linux_python_packages:
     needs: [build_portable_linux_artifacts]
