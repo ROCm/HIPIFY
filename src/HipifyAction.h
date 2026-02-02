@@ -62,6 +62,7 @@ private:
   bool insertedSPARSEHeader_V2 = false;
   bool insertedComplexHeader = false;
   bool insertedSOLVERHeader = false;
+  bool insertedFILEHeader = false;
   bool firstHeader = false;
   bool pragmaOnce = false;
   clang::SourceLocation firstHeaderLoc;
