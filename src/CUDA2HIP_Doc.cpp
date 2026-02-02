@@ -871,17 +871,13 @@ namespace doc {
     protected:
       const string sMetaKeywords = "hipFile, cuFile";
       const string &getAdditionalMetaKeywords() const override { return sMetaKeywords; }
-
       const sectionMap &getSections() const override { return CUDA_FILE_API_SECTION_MAP; }
       const functionMap &getFunctions() const override { return CUDA_FILE_FUNCTION_MAP; }
       const typeMap &getTypes() const override { return CUDA_FILE_TYPE_NAME_MAP; }
       const versionMap &getFunctionVersions() const override { return CUDA_FILE_FUNCTION_VER_MAP; }
       const hipVersionMap &getHipFunctionVersions() const override { return HIP_FILE_FUNCTION_VER_MAP; }
-      const hipChangedVersionMap &getHipChangedFunctionVersions() const override { return HIP_FILE_FUNCTION_CHANGED_VER_MAP; }
-      const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_FILE_FUNCTION_CHANGED_VER_MAP; }
       const versionMap &getTypeVersions() const override { return CUDA_FILE_TYPE_NAME_VER_MAP; }
       const hipVersionMap &getHipTypeVersions() const override { return HIP_FILE_TYPE_NAME_VER_MAP; }
-
       const string &getName() const override { return sCUFILE; }
       const string &getSecondAPI() const override { return sEmpty; }
       const string &getJointAPI() const override { return sEmpty; }
