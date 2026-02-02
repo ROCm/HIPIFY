@@ -159,7 +159,8 @@ const char *apiNames[NUM_API_TYPES] = {
   "cuSOLVER API",
   "CUB API",
   "RTC API",
-  "TENSOR API"
+  "TENSOR API",
+  "cuFile API",
 };
 
 const char *apiTypes[NUM_API_TYPES] = {
@@ -174,7 +175,8 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_SPARSE",
   "API_SOLVER",
   "API_RTC",
-  "API_TENSOR"
+  "API_TENSOR",
+  "API_FILE"
 };
 
 namespace {
@@ -380,8 +382,8 @@ void Statistics::setActive(const std::string &name) {
 
 bool Statistics::isToRoc(const hipCounter &counter) {
   return ((counter.apiType == API_BLAS || counter.apiType == API_DNN || counter.apiType == API_SPARSE || counter.apiType == API_SOLVER ||
-           counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX || counter.apiType == API_RAND) && TranslateToRoc) || 
-           isToMIOpen(counter);
+           counter.apiType == API_RUNTIME || counter.apiType == API_COMPLEX || counter.apiType == API_RAND || counter.apiType == API_FILE)
+          && TranslateToRoc) || isToMIOpen(counter);
 }
 
 bool Statistics::isToMIOpen(const hipCounter &counter) {
@@ -606,6 +608,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUTENSOR_2200: return "2.2.0.0";
     case CUTENSOR_2300: return "2.3.0.0";
     case CUTENSOR_2400: return "2.4.0.0";
+    case CUTENSOR_2500: return "2.5.0.0";
   }
   return "";
 }

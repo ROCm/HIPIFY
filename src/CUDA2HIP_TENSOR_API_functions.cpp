@@ -24,6 +24,7 @@ THE SOFTWARE.
 
 const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
+
   m["cutensorCreate"]                                               = {"hiptensorCreate",                                     "", CONV_LIB_FUNC, API_TENSOR, 2};
   m["cutensorDestroy"]                                              = {"hiptensorDestroy",                                    "", CONV_LIB_FUNC, API_TENSOR, 2};
   m["cutensorHandleResizePlanCache"]                                = {"hiptensorHandleResizePlanCache",                      "", CONV_LIB_FUNC, API_TENSOR, 2};
@@ -92,11 +93,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_FUNCTION_MAP = [] {
   m["cutensorDestroyBlockSparseTensorDescriptor"]                   = {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED};
   m["cutensorCreateBlockSparseContraction"]                         = {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED};
   m["cutensorBlockSparseContract"]                                  = {"",                                                    "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED};
+
   return m;
 }();
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
+
   m["cutensorCreate"]                                               = {CUTENSOR_1700, CUDA_0,        CUDA_0       };
   m["cutensorDestroy"]                                              = {CUTENSOR_1700, CUDA_0,        CUDA_0       };
   m["cutensorHandleResizePlanCache"]                                = {CUTENSOR_2000, CUDA_0,        CUDA_0       };
@@ -165,73 +168,82 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_FUNCTION_VER_MAP = 
   m["cutensorDestroyBlockSparseTensorDescriptor"]                   = {CUTENSOR_2300, CUDA_0,        CUDA_0       };
   m["cutensorCreateBlockSparseContraction"]                         = {CUTENSOR_2300, CUDA_0,        CUDA_0       };
   m["cutensorBlockSparseContract"]                                  = {CUTENSOR_2300, CUDA_0,        CUDA_0       };
+
   return m;
 }();
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
-  m["hiptensorCreate"]                                              = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorDestroy"]                                             = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorInitTensorDescriptor"]                                = {HIP_5070,      HIP_0,         HIP_7000      };
-  m["hiptensorPermutation"]                                         = {HIP_6010,      HIP_0,         HIP_0         };
-  m["hiptensorContraction"]                                         = {HIP_6010,      HIP_0,         HIP_7000      };
-  m["hiptensorReduction"]                                           = {HIP_6030,      HIP_0,         HIP_0         };
-  m["hiptensorGetErrorString"]                                      = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorGetHiprtVersion"]                                     = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorLoggerSetCallback"]                                   = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorLoggerSetFile"]                                       = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorLoggerOpenFile"]                                      = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorLoggerSetLevel"]                                      = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorLoggerSetMask"]                                       = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorLoggerForceDisable"]                                  = {HIP_5070,      HIP_0,         HIP_0         };
-  m["hiptensorHandleResizePlanCache"]                               = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorHandleWritePlanCacheToFile"]                          = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorHandleReadPlanCacheFromFile"]                         = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorWriteKernelCacheToFile"]                              = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorReadKernelCacheFromFile"]                             = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorCreateTensorDescriptor"]                              = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorDestroyTensorDescriptor"]                             = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorCreateContraction"]                                   = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorDestroyOperationDescriptor"]                          = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorOperationDescriptorSetAttribute"]                     = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorOperationDescriptorGetAttribute"]                     = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorCreatePlanPreference"]                                = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorDestroyPlanPreference"]                               = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorPlanPreferenceSetAttribute"]                          = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorPlanGetAttribute"]                                    = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorEstimateWorkspaceSize"]                               = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorCreatePermutation"]                                   = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorCreatePlan"]                                          = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorDestroyPlan"]                                         = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorContract"]                                            = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorPermute"]                                             = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorCreateElementwiseBinary"]                             = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorElementwiseBinaryExecute"]                            = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorCreateElementwiseTrinary"]                            = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorElementwiseTrinaryExecute"]                           = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorCreateReduction"]                                     = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorReduce"]                                              = {HIP_7000,      HIP_0,         HIP_0         };
-  m["hiptensorGetVersion"]                                          = {HIP_7020,      HIP_0,         HIP_0         };
+
+  m["hiptensorCreate"]                                              = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorDestroy"]                                             = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorInitTensorDescriptor"]                                = {HIP_5070,      HIP_0,         HIP_7000     };
+  m["hiptensorPermutation"]                                         = {HIP_6010,      HIP_0,         HIP_0        };
+  m["hiptensorContraction"]                                         = {HIP_6010,      HIP_0,         HIP_7000     };
+  m["hiptensorReduction"]                                           = {HIP_6030,      HIP_0,         HIP_0        };
+  m["hiptensorGetErrorString"]                                      = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorGetHiprtVersion"]                                     = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorLoggerSetCallback"]                                   = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorLoggerSetFile"]                                       = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorLoggerOpenFile"]                                      = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorLoggerSetLevel"]                                      = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorLoggerSetMask"]                                       = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorLoggerForceDisable"]                                  = {HIP_5070,      HIP_0,         HIP_0        };
+  m["hiptensorHandleResizePlanCache"]                               = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorHandleWritePlanCacheToFile"]                          = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorHandleReadPlanCacheFromFile"]                         = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorWriteKernelCacheToFile"]                              = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorReadKernelCacheFromFile"]                             = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorCreateTensorDescriptor"]                              = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorDestroyTensorDescriptor"]                             = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorCreateContraction"]                                   = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorDestroyOperationDescriptor"]                          = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorOperationDescriptorSetAttribute"]                     = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorOperationDescriptorGetAttribute"]                     = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorCreatePlanPreference"]                                = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorDestroyPlanPreference"]                               = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorPlanPreferenceSetAttribute"]                          = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorPlanGetAttribute"]                                    = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorEstimateWorkspaceSize"]                               = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorCreatePermutation"]                                   = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorCreatePlan"]                                          = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorDestroyPlan"]                                         = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorContract"]                                            = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorPermute"]                                             = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorCreateElementwiseBinary"]                             = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorElementwiseBinaryExecute"]                            = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorCreateElementwiseTrinary"]                            = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorElementwiseTrinaryExecute"]                           = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorCreateReduction"]                                     = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorReduce"]                                              = {HIP_7000,      HIP_0,         HIP_0        };
+  m["hiptensorGetVersion"]                                          = {HIP_7020,      HIP_0,         HIP_0        };
+
   return m;
 }();
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+
   m["cutensorCreate"]                                               = {CUTENSOR_2000};
   m["cutensorDestroy"]                                              = {CUTENSOR_2000};
+
   return m;
 }();
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_TENSOR_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIChangedVersions> m;
+
   m["hiptensorCreate"]                                              = {HIP_7000};
   m["hiptensorDestroy"]                                             = {HIP_7000};
+
   return m;
 }();
 
 const std::map<unsigned int, llvm::StringRef> CUDA_TENSOR_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
+
   m[1]                                                              = "CUTENSOR Data types";
   m[2]                                                              = "CUTENSOR Function Reference";
+
   return m;
 }();
