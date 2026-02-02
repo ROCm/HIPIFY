@@ -187,6 +187,7 @@ enum ApiTypes {
   API_CUB,
   API_RTC,
   API_TENSOR,
+  API_FILE,
   API_LAST
 };
 constexpr int NUM_API_TYPES = (int) ApiTypes::API_LAST;
@@ -350,7 +351,8 @@ enum cudaVersions {
   CUTENSOR_2200 = 200200,
   CUTENSOR_2300 = 200300,
   CUTENSOR_2400 = 200400,
-  CUTENSOR_LATEST = CUTENSOR_2400,
+  CUTENSOR_2500 = 200500,
+  CUTENSOR_LATEST = CUTENSOR_2500,
 };
 
 enum hipVersions {

@@ -82,6 +82,10 @@ extern const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP;
 extern const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP;
 // Maps the names of CUDA TENSOR API functions to the corresponding HIP functions
 extern const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_FUNCTION_MAP;
+// Maps the names of cuFile API types to the corresponding HIP types
+extern const std::map<llvm::StringRef, hipCounter> CUDA_FILE_TYPE_NAME_MAP;
+// Maps the names of cuFile API functions to the corresponding HIP types
+extern const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP;
 
 /**
   * The union of all the above maps, except includes.
@@ -119,6 +123,8 @@ extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VE
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_FUNCTION_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_TYPE_NAME_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_FUNCTION_VER_MAP;
 
 // The union of all the above maps.
 const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP();
@@ -167,6 +173,8 @@ extern const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_FUNCTION_VER_M
 extern const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_TENSOR_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_FUNCTION_CHANGED_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_TYPE_CHANGED_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_TYPE_NAME_VER_MAP;
+extern const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_FUNCTION_VER_MAP;
 
 // The union of all the above maps.
 const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP();
@@ -184,6 +192,7 @@ extern const std::map<unsigned int, llvm::StringRef> CUDA_RTC_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_CUB_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_SOLVER_API_SECTION_MAP;
 extern const std::map<unsigned int, llvm::StringRef> CUDA_TENSOR_API_SECTION_MAP;
+extern const std::map<unsigned int, llvm::StringRef> CUDA_FILE_API_SECTION_MAP;
 
 extern const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP;

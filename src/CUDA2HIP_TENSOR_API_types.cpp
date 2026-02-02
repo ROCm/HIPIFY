@@ -25,6 +25,7 @@ THE SOFTWARE.
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
+
   // cuTENSOR enums
   m["cutensorDataType_t"]                                             = {"hiptensorDataType_t",                                      "", CONV_TYPE, API_TENSOR, 1};
   m["CUTENSOR_R_16F"]                                                 = {"HIPTENSOR_R_16F",                                          "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
@@ -247,11 +248,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP = [] {
   m["CUTENSOR_COMPUTE_DESC_64F"]                                      = {"HIPTENSOR_COMPUTE_DESC_64F",                               "", CONV_TYPE, API_TENSOR, 1};
   m["CUTENSOR_COMPUTE_DESC_9X16BF"]                                   = {"HIPTENSOR_COMPUTE_DESC_9X16BF",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
   m["CUTENSOR_COMPUTE_DESC_8XINT8"]                                   = {"HIPTENSOR_COMPUTE_DESC_8XINT8",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+  m["CUTENSOR_COMPUTE_DESC_4X16F"]                                    = {"HIPTENSOR_COMPUTE_DESC_4X16F",                             "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED};
+
   return m;
 }();
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
+
   m["cutensorDataType_t"]                                             = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
   m["CUTENSOR_R_16F"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
   m["CUTENSOR_C_16F"]                                                 = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
@@ -438,11 +442,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP =
   m["cutensorBlockSparseTensorDescriptor_t"]                          = {CUTENSOR_2300, CUDA_0,        CUDA_0        };
   m["cutensorBlockSparseTensorDescriptor"]                            = {CUTENSOR_2300, CUDA_0,        CUDA_0        };
   m["CUTENSOR_COMPUTE_DESC_8XINT8"]                                   = {CUTENSOR_2400, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_COMPUTE_DESC_4X16F"]                                    = {CUTENSOR_2500, CUDA_0,        CUDA_0        };
+
   return m;
 }();
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
+
   m["hiptensorComputeDescriptor_t"]                                   = {HIP_7000,      HIP_0,         HIP_0         };
   m["HIPTENSOR_COMPUTE_DESC_16F"]                                     = {HIP_7000,      HIP_0,         HIP_0         };
   m["HIPTENSOR_COMPUTE_DESC_16BF"]                                    = {HIP_7000,      HIP_0,         HIP_0         };
@@ -569,11 +576,14 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_TYPE_NAME_VER_MAP = [
   m["hiptensorOperationDescriptor_t"]                                 = {HIP_7000,      HIP_0,         HIP_0         };
   m["hiptensorOperationDescriptor"]                                   = {HIP_7000,      HIP_0,         HIP_0         };
   m["hiptensorTensorDescriptor"]                                      = {HIP_7000,      HIP_0,         HIP_0         };
+
   return m;
 }();
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_TYPE_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+
   m["cutensorAutotuneMode_t"]                                         = {CUTENSOR_2000};
+
   return m;
 }();

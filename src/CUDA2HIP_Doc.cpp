@@ -122,6 +122,12 @@ namespace doc {
   const string sROCSPARSE_csv = sROCSPARSE + csv_ext;
   const string sCUSPARSE = "CUSPARSE";
 
+  /* hipFile */
+  const string sHIPFILE             = "cuFile_API_supported_by_HIP";
+  const string sHIPFILE_md          = sHIPFILE + md_ext;
+  const string sHIPFILE_csv         = sHIPFILE + csv_ext;
+  const string sCUFILE              = "cuFile";
+
   const string sDEVICE = "CUDA_Device_API_supported_by_HIP";
   const string sDEVICE_md = sDEVICE + md_ext;
   const string sDEVICE_csv = sDEVICE + csv_ext;
@@ -858,7 +864,34 @@ namespace doc {
     }
   };
 
-   class DEVICE : public DOC {
+  class HIPFILE: public DOC {
+    public:
+      HIPFILE(const string &outDir): DOC(outDir) { hasROC = true; }
+      virtual ~HIPFILE() {}
+    protected:
+      const string sMetaKeywords = "hipFile, cuFile";
+      const string &getAdditionalMetaKeywords() const override { return sMetaKeywords; }
+      const sectionMap &getSections() const override { return CUDA_FILE_API_SECTION_MAP; }
+      const functionMap &getFunctions() const override { return CUDA_FILE_FUNCTION_MAP; }
+      const typeMap &getTypes() const override { return CUDA_FILE_TYPE_NAME_MAP; }
+      const versionMap &getFunctionVersions() const override { return CUDA_FILE_FUNCTION_VER_MAP; }
+      const hipVersionMap &getHipFunctionVersions() const override { return HIP_FILE_FUNCTION_VER_MAP; }
+      const versionMap &getTypeVersions() const override { return CUDA_FILE_TYPE_NAME_VER_MAP; }
+      const hipVersionMap &getHipTypeVersions() const override { return HIP_FILE_TYPE_NAME_VER_MAP; }
+      const string &getName() const override { return sCUFILE; }
+      const string &getSecondAPI() const override { return sEmpty; }
+      const string &getJointAPI() const override { return sEmpty; }
+      const string &getFileName(docType format) const override {
+        switch (format) {
+          case none:
+          default: return sEmpty;
+          case md: return sHIPFILE_md;
+          case csv: return sHIPFILE_csv;
+        }
+      }
+  };
+
+  class DEVICE : public DOC {
     public:
       DEVICE(const string &outDir): DOC(outDir) {}
       virtual ~DEVICE() {}
@@ -1026,6 +1059,8 @@ namespace doc {
     docs.addDoc(&fft);
     SPARSE sparse(sOut);
     docs.addDoc(&sparse);
+    HIPFILE hipfile(sOut);
+    docs.addDoc(&hipfile);
     DEVICE device(sOut);
     docs.addDoc(&device);
     RTC rtc(sOut);
