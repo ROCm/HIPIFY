@@ -245,6 +245,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP {
   {"CUTENSOR_COMPUTE_DESC_32F",                        {"HIPTENSOR_COMPUTE_DESC_32F",                               "", CONV_TYPE, API_TENSOR, 1}},
   {"CUTENSOR_COMPUTE_DESC_64F",                        {"HIPTENSOR_COMPUTE_DESC_64F",                               "", CONV_TYPE, API_TENSOR, 1}},
   {"CUTENSOR_COMPUTE_DESC_9X16BF",                     {"HIPTENSOR_COMPUTE_DESC_9X16BF",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
+  {"CUTENSOR_COMPUTE_DESC_8XINT8",                     {"HIPTENSOR_COMPUTE_DESC_8XINT8",                            "", CONV_TYPE, API_TENSOR, 1, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP {
@@ -433,6 +434,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP {
   {"CUTENSOR_COMPUTE_DESC_9X16BF",                     {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
   {"cutensorBlockSparseTensorDescriptor_t",            {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
   {"cutensorBlockSparseTensorDescriptor",              {CUTENSOR_2300, CUDA_0,        CUDA_0        }},
+  {"CUTENSOR_COMPUTE_DESC_8XINT8",                     {CUTENSOR_2400, CUDA_0,        CUDA_0        }},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_TYPE_NAME_VER_MAP {

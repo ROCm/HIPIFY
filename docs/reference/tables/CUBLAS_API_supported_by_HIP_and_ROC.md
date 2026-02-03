@@ -252,6 +252,12 @@
 |`CUBLASLT_CLUSTER_SHAPE_9x1x1`|11.8| | | | | | | | | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_AUTO`|11.8| | | | | | | | | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_END`|11.8| | | | | | | | | | | | | | | | |
+|`CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER`|13.0| | | | | | | | | | | | | | | | |
+|`CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET`|13.0| | | | | | | | | | | | | | | | |
+|`CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_CONTROL`|13.0| | | | | | | | | | | | | | | | |
+|`CUBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT`|13.0| | | | | | | | | | | | | | | | |
+|`CUBLASLT_EMULATION_DESC_SPECIAL_VALUES_SUPPORT`|13.0| | | | | | | | | | | | | | | | |
+|`CUBLASLT_EMULATION_DESC_STRATEGY`|13.0| | | | | | | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_BGRADA`|11.4| | | |`HIPBLASLT_EPILOGUE_BGRADA`|5.7.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_BGRADB`|11.4| | | |`HIPBLASLT_EPILOGUE_BGRADB`|5.7.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_BIAS`|10.1| | | |`HIPBLASLT_EPILOGUE_BIAS`|5.5.0| | | | | | | | | | | |
@@ -288,6 +294,7 @@
 |`CUBLASLT_MATMUL_DESC_D_OUT_SCALE_POINTER`|12.8| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_D_SCALE_MODE`|12.8| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_D_SCALE_POINTER`|11.8| | | |`HIPBLASLT_MATMUL_DESC_D_SCALE_POINTER`|5.5.0| | | | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_EMULATION_DESCRIPTOR`|13.0| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_EPILOGUE`|10.1| | | |`HIPBLASLT_MATMUL_DESC_EPILOGUE`|5.5.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_AMAX_POINTER`|11.8| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_EPILOGUE_AUX_BATCH_STRIDE`|11.3| | | |`HIPBLASLT_MATMUL_DESC_EPILOGUE_AUX_BATCH_STRIDE`|5.7.0| | | | | | | | | | | |
@@ -1066,6 +1073,9 @@
 |`cublasLtBatchMode_t`|12.9| | | | | | | | | | | | | | | | |
 |`cublasLtClusterShape_t`|11.8| | | | | | | | | | | | | | | | |
 |`cublasLtContext`|10.1| | | | | | | | | | | | | | | | |
+|`cublasLtEmulationDescAttributes_t`|13.0| | | | | | | | | | | | | | | | |
+|`cublasLtEmulationDescOpaque_t`|13.0| | | | | | | | | | | | | | | | |
+|`cublasLtEmulationDesc_t`|13.0| | | | | | | | | | | | | | | | |
 |`cublasLtEpilogue_t`|10.1| | | |`hipblasLtEpilogue_t`|5.5.0| | | | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | |`hipblasLtHandle_t`|5.5.0| | | | | | | | | | | |
 |`cublasLtLoggerCallback_t`|11.0| | | | | | | | | | | | | | | | |

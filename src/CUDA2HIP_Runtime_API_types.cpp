@@ -684,7 +684,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_MPS_ENABLED
   {"cudaDevAttrMpsEnabled",                                            {"hipDeviceAttributeMpsEnables",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 133
   // CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID
-  {"cudaDevAttrHostNumaId",                                            {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}}, // 134
+  {"cudaDevAttrHostNumaId",                                            {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 134
   // CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED
   {"cudaDevAttrD3D12CigSupported",                                     {"hipDeviceAttributeD3D12CigSupported",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 135
   // CU_DEVICE_ATTRIBUTE_VULKAN_CIG_SUPPORTED
@@ -1481,7 +1481,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // NOTE: CUmemorytype is partial analogue
   {"cudaMemoryType",                                                   {"hipMemoryType",                                            "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES}},
   // cudaMemoryType enum values
-  {"cudaMemoryTypeUnregistered",                                       {"hipMemoryTypeUnregistered",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0
+  {"cudaMemoryTypeUnregistered",                                       {"hipMemoryTypeUnregistered",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 0
   {"cudaMemoryTypeHost",                                               {"hipMemoryTypeHost",                                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 1
   {"cudaMemoryTypeDevice",                                             {"hipMemoryTypeDevice",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 2
   {"cudaMemoryTypeManaged",                                            {"hipMemoryTypeManaged",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 3
@@ -2274,6 +2274,22 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   {"CUDA_EMULATION_STRATEGY_PERFORMANT",                               {"HIP_EMULATION_STRATEGY_PERFORMANT",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUDA_EMULATION_STRATEGY_EAGER",                                    {"HIP_EMULATION_STRATEGY_EAGER",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
 
+  // [ToDo] Move to a separated Library types, common for Runtime, Driver and Libraries APIs
+  {"cudaEmulationMantissaControl_t",                                   {"hipEmulationMantissaControl_t",                            "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaEmulationMantissaControl",                                     {"hipEmulationMantissaControl",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaEmulationMantissaControl enum values
+  {"CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC",                          {"HIP_EMULATION_MANTISSA_CONTROL_DYNAMIC",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_MANTISSA_CONTROL_FIXED",                            {"HIP_EMULATION_MANTISSA_CONTROL_FIXED",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
+  // [ToDo] Move to a separated Library types, common for Runtime, Driver and Libraries APIs
+  {"cudaEmulationSpecialValuesSupport_t",                              {"hipEmulationSpecialValuesSupport_t",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"cudaEmulationSpecialValuesSupport",                                {"hipEmulationSpecialValuesSupport",                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  // cudaEmulationSpecialValuesSupport enum values
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_DEFAULT",                    {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_DEFAULT",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NONE",                       {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_NONE",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY",                   {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN",                        {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_NAN",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
+
   // 4. Typedefs
 
   // CUhostFn
@@ -2856,6 +2872,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"cudaCpuDeviceId",                                                  {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaInvalidDeviceId",                                              {CUDA_80,  CUDA_0,   CUDA_0  }},
   {"cudaExternalMemoryDedicated",                                      {CUDA_100, CUDA_0,   CUDA_0  }},
+  {"cudaMemoryTypeUnregistered",                                       {CUDA_100, CUDA_0,   CUDA_0  }},
   {"cudaExternalSemaphoreSignalSkipNvSciBufMemSync",                   {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cudaExternalSemaphoreWaitSkipNvSciBufMemSync",                     {CUDA_102, CUDA_0,   CUDA_0  }},
   {"cudaNvSciSyncAttrSignal",                                          {CUDA_102, CUDA_0,   CUDA_0  }},
@@ -3313,6 +3330,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   {"CUDA_EMULATION_STRATEGY_DEFAULT",                                  {CUDA_130, CUDA_0,   CUDA_0  }},
   {"CUDA_EMULATION_STRATEGY_PERFORMANT",                               {CUDA_130, CUDA_0,   CUDA_0  }},
   {"CUDA_EMULATION_STRATEGY_EAGER",                                    {CUDA_130, CUDA_0,   CUDA_0  }},
+  {"cudaEmulationMantissaControl_t",                                   {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"cudaEmulationMantissaControl",                                     {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC",                          {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_MANTISSA_CONTROL_FIXED",                            {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"cudaEmulationSpecialValuesSupport_t",                              {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"cudaEmulationSpecialValuesSupport",                                {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_DEFAULT",                    {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NONE",                       {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY",                   {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
+  {"CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN",                        {CUDA_130, CUDA_0,   CUDA_0  }}, // [#2143] CUDA 13.0.2
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGED_VER_MAP {
@@ -3689,6 +3716,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"HIP_TWO_TO_M1022",                                                 {HIP_5070, HIP_0,    HIP_0   }},
   {"HIP_TRIG_PLOSS",                                                   {HIP_5070, HIP_0,    HIP_0   }},
   {"HIP_DBL2INT_CVT",                                                  {HIP_5070, HIP_0,    HIP_0   }},
+  {"hipMemoryTypeUnregistered",                                        {HIP_6000, HIP_0,    HIP_0   }},
   {"hipErrorInvalidChannelDescriptor",                                 {HIP_6040, HIP_0,    HIP_0   }},
   {"hipErrorInvalidTexture",                                           {HIP_6040, HIP_0,    HIP_0   }},
   {"hipEventRecordDefault",                                            {HIP_6040, HIP_0,    HIP_0   }},
@@ -3741,5 +3769,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipLibraryOption",                                                 {HIP_7010, HIP_0,    HIP_0   }},
   {"hipLibraryHostUniversalFunctionAndDataTable",                      {HIP_7010, HIP_0,    HIP_0   }},
   {"hipLibraryBinaryIsPreserved",                                      {HIP_7010, HIP_0,    HIP_0   }},
-  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0,  HIP_7020}},
+  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0   }},
 };

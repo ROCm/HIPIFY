@@ -934,11 +934,6 @@ int main() {
   result = cuGraphicsResourceGetMappedPointer(&deviceptr, &bytes, graphicsResource);
   result = cuGraphicsResourceGetMappedPointer_v2(&deviceptr, &bytes, graphicsResource);
 
-  // CUDA: CUresult CUDAAPI cuGraphicsSubResourceGetMappedArray(CUarray *pArray, CUgraphicsResource resource, unsigned int arrayIndex, unsigned int mipLevel);
-  // HIP: hipError_t hipGraphicsSubResourceGetMappedArray(hipArray_t* array, hipGraphicsResource_t resource, unsigned int arrayIndex, unsigned int mipLevel);
-  // CHECK: result = hipGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
-  result = cuGraphicsSubResourceGetMappedArray(&array_, graphicsResource, flags, flags_2);
-
   // CUDA: CUresult CUDAAPI cuGraphicsUnmapResources(unsigned int count, CUgraphicsResource *resources, CUstream hStream);
   // HIP: hipError_t hipGraphicsUnmapResources(int count, hipGraphicsResource_t* resources, hipStream_t stream __dparm(0));
   // CHECK: result = hipGraphicsUnmapResources(iBlockSize, &graphicsResource, stream);

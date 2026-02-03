@@ -73,7 +73,7 @@
 |`cudaStreamAttachMemAsync`| | | | |`hipStreamAttachMemAsync`|3.7.0| | | | | |
 |`cudaStreamBeginCapture`|10.0| | | |`hipStreamBeginCapture`|4.3.0| | | | | |
 |`cudaStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | | | |
-|`cudaStreamCopyAttributes`|11.0| | | |`hipStreamCopyAttributes`|7.2.0| | | | |7.2.0|
+|`cudaStreamCopyAttributes`|11.0| | | |`hipStreamCopyAttributes`|7.2.0| | | | | |
 |`cudaStreamCreate`| | | | |`hipStreamCreate`|1.6.0| | | | | |
 |`cudaStreamCreateWithFlags`| | | | |`hipStreamCreateWithFlags`|1.6.0| | | | | |
 |`cudaStreamCreateWithPriority`| | | | |`hipStreamCreateWithPriority`|2.0.0| | | | | |
@@ -151,7 +151,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cudaOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | |7.2.0|
+|`cudaOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | | |
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessor`| | | | |`hipOccupancyMaxActiveBlocksPerMultiprocessor`|1.6.0| | | | | |
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | | |`hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|2.6.0| | | | | |
 |`cudaOccupancyMaxActiveClusters`|11.8| | | | | | | | | | |
@@ -553,7 +553,7 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaKernelSetAttributeForDevice`|12.8| | | | | | | | | | |
-|`cudaLibraryEnumerateKernels`|12.8| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | |7.2.0|
+|`cudaLibraryEnumerateKernels`|12.8| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | | |
 |`cudaLibraryGetGlobal`|12.8| | | | | | | | | | |
 |`cudaLibraryGetKernel`|12.8| | | |`hipLibraryGetKernel`|7.1.0| | | | | |
 |`cudaLibraryGetKernelCount`|12.8| | | |`hipLibraryGetKernelCount`|7.1.0| | | | | |
@@ -682,6 +682,12 @@
 |`CUDART_ZERO`| | | | |`HIP_ZERO`|5.7.0| | | | | |
 |`CUDART_ZERO_F`| | | | |`HIP_ZERO_F`|5.3.0| | | | | |
 |`CUDA_EGL_MAX_PLANES`|9.1| | | | | | | | | | |
+|`CUDA_EMULATION_MANTISSA_CONTROL_DYNAMIC`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_MANTISSA_CONTROL_FIXED`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_DEFAULT`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN`|13.0| | | | | | | | | | |
+|`CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NONE`|13.0| | | | | | | | | | |
 |`CUDA_EMULATION_STRATEGY_DEFAULT`|13.0| | | | | | | | | | |
 |`CUDA_EMULATION_STRATEGY_EAGER`|13.0| | | | | | | | | | |
 |`CUDA_EMULATION_STRATEGY_PERFORMANT`|13.0| | | | | | | | | | |
@@ -858,7 +864,7 @@
 |`cudaDevAttrGpuPciSubsystemId`|12.8| | | | | | | | | | |
 |`cudaDevAttrHostMemoryPoolsSupported`|13.0| | | | | | | | | | |
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | | |
-|`cudaDevAttrHostNumaId`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | |7.2.0|
+|`cudaDevAttrHostNumaId`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | | |
 |`cudaDevAttrHostNumaMemoryPoolsSupported`|12.9| | | | | | | | | | |
 |`cudaDevAttrHostNumaMultinodeIpcSupported`|12.8| | | | | | | | | | |
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | | | | | |
@@ -1124,6 +1130,10 @@
 |`cudaEglResourceLocationSysmem`|9.1| | | | | | | | | | |
 |`cudaEglResourceLocationVidmem`|9.1| | | | | | | | | | |
 |`cudaEglStreamConnection`|9.1| | | | | | | | | | |
+|`cudaEmulationMantissaControl`|13.0| | | | | | | | | | |
+|`cudaEmulationMantissaControl_t`|13.0| | | | | | | | | | |
+|`cudaEmulationSpecialValuesSupport`|13.0| | | | | | | | | | |
+|`cudaEmulationSpecialValuesSupport_t`|13.0| | | | | | | | | | |
 |`cudaEmulationStrategy`|13.0| | | | | | | | | | |
 |`cudaEmulationStrategy_t`|13.0| | | | | | | | | | |
 |`cudaEnableDefault`|11.3| | | |`hipEnableDefault`|7.1.0| | | | | |
@@ -1656,7 +1666,7 @@
 |`cudaMemoryTypeDevice`| | | | |`hipMemoryTypeDevice`|1.6.0| | | | | |
 |`cudaMemoryTypeHost`| | | | |`hipMemoryTypeHost`|1.6.0| | | | | |
 |`cudaMemoryTypeManaged`|10.0| | | |`hipMemoryTypeManaged`|5.3.0| | | | | |
-|`cudaMemoryTypeUnregistered`| | | | | | | | | | | |
+|`cudaMemoryTypeUnregistered`|10.0| | | |`hipMemoryTypeUnregistered`|6.0.0| | | | | |
 |`cudaMemsetParams`|10.0| | | |`hipMemsetParams`|4.3.0| | | | | |
 |`cudaMemsetParamsV2`|12.2| | | | | | | | | | |
 |`cudaMipmappedArray`| | | | |`hipMipmappedArray`|1.7.0| | | | | |

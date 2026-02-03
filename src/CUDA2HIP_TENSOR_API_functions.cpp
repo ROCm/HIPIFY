@@ -48,6 +48,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_FUNCTION_MAP {
   {"cutensorCreatePlanPreference",                   {"hiptensorCreatePlanPreference",                       "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorDestroyPlanPreference",                  {"hiptensorDestroyPlanPreference",                      "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorPlanPreferenceSetAttribute",             {"hiptensorPlanPreferenceSetAttribute",                 "", CONV_LIB_FUNC, API_TENSOR, 2}},
+  {"cutensorPlanPreferenceGetAttribute",             {"hiptensorPlanPreferenceGetAttribute",                 "", CONV_LIB_FUNC, API_TENSOR, 2, UNSUPPORTED}},
   {"cutensorPlanGetAttribute",                       {"hiptensorPlanGetAttribute",                           "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorEstimateWorkspaceSize",                  {"hiptensorEstimateWorkspaceSize",                      "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorCreatePlan",                             {"hiptensorCreatePlan",                                 "", CONV_LIB_FUNC, API_TENSOR, 2}},
@@ -57,7 +58,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_FUNCTION_MAP {
   {"cutensorCreateReduction",                        {"hiptensorCreateReduction",                            "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorReduce",                                 {"hiptensorReduce",                                     "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorGetErrorString",                         {"hiptensorGetErrorString",                             "", CONV_LIB_FUNC, API_TENSOR, 2}},
-  {"cutensorGetVersion",                             {"hiptensorGetVersion",                                 "", CONV_LIB_FUNC, API_TENSOR, 2, HIP_EXPERIMENTAL}},
+  {"cutensorGetVersion",                             {"hiptensorGetVersion",                                 "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorGetCudartVersion",                       {"hiptensorGetHiprtVersion",                            "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorLoggerSetCallback",                      {"hiptensorLoggerSetCallback",                          "", CONV_LIB_FUNC, API_TENSOR, 2}},
   {"cutensorLoggerSetFile",                          {"hiptensorLoggerSetFile",                              "", CONV_LIB_FUNC, API_TENSOR, 2}},
@@ -118,6 +119,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_FUNCTION_VER_MAP {
   {"cutensorCreatePlanPreference",                   {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorDestroyPlanPreference",                  {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorPlanPreferenceSetAttribute",             {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
+  {"cutensorPlanPreferenceGetAttribute",             {CUTENSOR_2400, CUDA_0,        CUDA_0        }},
   {"cutensorPlanGetAttribute",                       {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorEstimateWorkspaceSize",                  {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
   {"cutensorCreatePlan",                             {CUTENSOR_2000, CUDA_0,        CUDA_0        }},
@@ -204,7 +206,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_TENSOR_FUNCTION_VER_MAP {
   {"hiptensorElementwiseTrinaryExecute",             {HIP_7000,      HIP_0,         HIP_0         }},
   {"hiptensorCreateReduction",                       {HIP_7000,      HIP_0,         HIP_0         }},
   {"hiptensorReduce",                                {HIP_7000,      HIP_0,         HIP_0         }},
-  {"hiptensorGetVersion",                            {HIP_7020,      HIP_0,         HIP_0,        HIP_7020}},
+  {"hiptensorGetVersion",                            {HIP_7020,      HIP_0,         HIP_0         }},
 };
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_FUNCTION_CHANGED_VER_MAP {

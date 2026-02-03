@@ -449,14 +449,14 @@
 |`CU_DEVICE_ATTRIBUTE_GPU_OVERLAP`| |5.0| | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_DEVICE_ID`|12.8| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_SUBSYSTEM_ID`|12.8| | | | | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED`|12.3| | | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED`|12.3| | | |`hipDeviceAttributeHandleTypeFabricSupported`|8.0.0| | | | |8.0.0|
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED`|10.2| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED`|10.2| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED`|10.2| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED`|13.0| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_MEMORY_POOLS_SUPPORTED`|13.0| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | | |
-|`CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | |7.2.0|
+|`CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED`|12.9| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED`|12.8| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED`|12.9| | | | | | | | | | |
@@ -957,7 +957,7 @@
 |`CU_MEM_DECOMPRESS_ALGORITHM_LZ4`|12.9| | | | | | | | | | |
 |`CU_MEM_DECOMPRESS_ALGORITHM_SNAPPY`|12.8| | | | | | | | | | |
 |`CU_MEM_DECOMPRESS_UNSUPPORTED`|12.8| | | | | | | | | | |
-|`CU_MEM_HANDLE_TYPE_FABRIC`|12.3| | | | | | | | | | |
+|`CU_MEM_HANDLE_TYPE_FABRIC`|12.3| | | |`hipMemHandleTypeFabric`|8.0.0| | | | |8.0.0|
 |`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | | |`hipMemHandleTypeGeneric`|5.2.0| | | | | |
 |`CU_MEM_HANDLE_TYPE_MAX`|10.2| | | | | | | | | | |
 |`CU_MEM_HANDLE_TYPE_NONE`|11.2| | | |`hipMemHandleTypeNone`|5.2.0| | | | | |
@@ -1753,12 +1753,12 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cuKernelGetAttribute`|12.0| | | | | | | | | | |
 |`cuKernelGetFunction`|12.0| | | | | | | | | | |
-|`cuKernelGetLibrary`|12.5| | | |`hipKernelGetLibrary`|7.2.0| | | | |7.2.0|
-|`cuKernelGetName`|12.3| | | |`hipKernelGetName`|7.2.0| | | | |7.2.0|
+|`cuKernelGetLibrary`|12.5| | | |`hipKernelGetLibrary`|7.2.0| | | | | |
+|`cuKernelGetName`|12.3| | | |`hipKernelGetName`|7.2.0| | | | | |
 |`cuKernelGetParamInfo`|12.4| | | | | | | | | | |
 |`cuKernelSetAttribute`|12.0| | | | | | | | | | |
 |`cuKernelSetCacheConfig`|12.0| | | | | | | | | | |
-|`cuLibraryEnumerateKernels`|12.4| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | |7.2.0|
+|`cuLibraryEnumerateKernels`|12.4| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | | |
 |`cuLibraryGetGlobal`|12.0| | | | | | | | | | |
 |`cuLibraryGetKernel`|12.0| | | |`hipLibraryGetKernel`|7.1.0| | | | | |
 |`cuLibraryGetKernelCount`|12.4| | | |`hipLibraryGetKernelCount`|7.1.0| | | | | |
@@ -1963,7 +1963,7 @@
 |`cuStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | | | |
 |`cuStreamBeginCapture_ptsz`|10.1| | | | | | | | | | |
 |`cuStreamBeginCapture_v2`|10.1| | | |`hipStreamBeginCapture`|4.3.0| | | | | |
-|`cuStreamCopyAttributes`|11.0| | | |`hipStreamCopyAttributes`|7.2.0| | | | |7.2.0|
+|`cuStreamCopyAttributes`|11.0| | | |`hipStreamCopyAttributes`|7.2.0| | | | | |
 |`cuStreamCreate`| | | | |`hipStreamCreateWithFlags`|1.6.0| | | | | |
 |`cuStreamCreateWithPriority`| | | | |`hipStreamCreateWithPriority`|2.0.0| | | | | |
 |`cuStreamDestroy`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
@@ -2163,7 +2163,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cuOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | |7.2.0|
+|`cuOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | | |
 |`cuOccupancyMaxActiveBlocksPerMultiprocessor`| | | | |`hipModuleOccupancyMaxActiveBlocksPerMultiprocessor`|3.5.0| | | | | |
 |`cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | | |`hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|3.5.0| | | | | |
 |`cuOccupancyMaxActiveClusters`|11.8| | | | | | | | | | |

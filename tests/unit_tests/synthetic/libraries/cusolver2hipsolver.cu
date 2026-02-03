@@ -627,11 +627,6 @@ int main() {
   // CHECK: status = hipsolverRfGetResetValuesFastMode(RfHandle, &RfResetValuesFastMode);
   status = cusolverRfGetResetValuesFastMode(RfHandle, &RfResetValuesFastMode);
 
-  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfGetResetValuesFastMode(cusolverRfHandle_t handle, cusolverRfResetValuesFastMode_t* fastMode);
-  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfGetResetValuesFastMode(hipsolverRfHandle_t handle, hipsolverRfResetValuesFastMode_t* fastMode);
-  // CHECK: status = hipsolverRfGetResetValuesFastMode(RfHandle, &RfResetValuesFastMode);
-  status = cusolverRfGetResetValuesFastMode(RfHandle, &RfResetValuesFastMode);
-
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverRfSetResetValuesFastMode(cusolverRfHandle_t handle, cusolverRfResetValuesFastMode_t fastMode);
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverRfSetResetValuesFastMode(hipsolverRfHandle_t handle, hipsolverRfResetValuesFastMode_t fastMode);
   // CHECK: status = hipsolverRfSetResetValuesFastMode(RfHandle, RfResetValuesFastMode);

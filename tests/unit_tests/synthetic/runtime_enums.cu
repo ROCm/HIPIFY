@@ -638,7 +638,9 @@ int main() {
   // CHECK: hipGraphNodeType GraphNodeTypeCount = hipGraphNodeTypeCount;
   cudaGraphNodeType GraphNodeTypeCount = cudaGraphNodeTypeCount;
 
-  // CHECK: hipMemoryType MemoryTypeManaged = hipMemoryTypeManaged;
+  // CHECK: hipMemoryType MemoryTypeUnregistered = hipMemoryTypeUnregistered;
+  // CHECK-NEXT: hipMemoryType MemoryTypeManaged = hipMemoryTypeManaged;
+  cudaMemoryType MemoryTypeUnregistered = cudaMemoryTypeUnregistered;
   cudaMemoryType MemoryTypeManaged = cudaMemoryTypeManaged;
 
   // CHECK: hipStreamCaptureStatus StreamCaptureStatus;
