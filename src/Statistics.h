@@ -353,6 +353,40 @@ enum cudaVersions {
   CUTENSOR_2400 = 200400,
   CUTENSOR_2500 = 200500,
   CUTENSOR_LATEST = CUTENSOR_2500,
+  CUFILE_1000 = 1000000,
+  CUFILE_1001 = 1000001,
+  CUFILE_1002 = 1000002,
+  CUFILE_1010 = 1000010,
+  CUFILE_1011 = 1000011,
+  CUFILE_1020 = 1000020,
+  CUFILE_1021 = 1000021,
+  CUFILE_1030 = 1000030,
+  CUFILE_1031 = 1000031,
+  CUFILE_1040 = 1000040,
+  CUFILE_1050 = 1000050,
+  CUFILE_1051 = 1000051,
+  CUFILE_1060 = 1000060,
+  CUFILE_1061 = 1000061,
+  CUFILE_1070 = 1000070,
+  CUFILE_1071 = 1000071,
+  CUFILE_1072 = 1000072,
+  CUFILE_1080 = 1000080,
+  CUFILE_1081 = 1000081,
+  CUFILE_1090 = 1000090,
+  CUFILE_1091 = 1000091,
+  CUFILE_1100 = 1000100,
+  CUFILE_1101 = 1000101,
+  CUFILE_1110 = 1000110,
+  CUFILE_1111 = 1000111,
+  CUFILE_1130 = 1000130,
+  CUFILE_1131 = 1000131,
+  CUFILE_1140 = 1000140,
+  CUFILE_1141 = 1000141,
+  CUFILE_1150 = 1000150,
+  CUFILE_1151 = 1000151,
+  CUFILE_1160 = 1000160,
+  CUFILE_1161 = 1000161,
+  CUFILE_LATEST = CUFILE_1161,
 };
 
 enum hipVersions {
@@ -453,6 +487,24 @@ extern const char *counterNames[NUM_CONV_TYPES];
 extern const char *counterTypes[NUM_CONV_TYPES];
 extern const char *apiNames[NUM_API_TYPES];
 extern const char *apiTypes[NUM_API_TYPES];
+
+extern const std::vector<cudaVersions> CUDA_114_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_115_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_116_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_117_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_118_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_120_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_121_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_122_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_123_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_124_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_125_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_126_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_128_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_129_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_130_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_131_cuFule_version;
+extern const std::vector<cudaVersions> Empty_vector;
 
 struct hipCounter {
   llvm::StringRef hipName;
@@ -578,6 +630,10 @@ public:
   static std::string getCudaVersion(const cudaVersions &ver);
   // Get string HIP version.
   static std::string getHipVersion(const hipVersions &ver);
+  // Get CUDA version by cuFile version.
+  static cudaVersions getCudaVersionForCuFileVersion(const cudaVersions &ver);
+  // Get cuFile versions by CUDA version.
+  static const std::vector<cudaVersions> &getCuFileVersionsForCudaVersion(const cudaVersions &ver);
   // Set this flag in case of hipification errors.
   bool hasErrors = false;
 #if LLVM_VERSION_MAJOR > 3
