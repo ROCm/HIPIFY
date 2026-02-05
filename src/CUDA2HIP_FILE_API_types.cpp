@@ -146,8 +146,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_TYPE_NAME_MAP {
   {"CUFILE_PARAM_LOG_DIR",                                  {"hipFileParamLogDir",                             "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
   {"IS_CUFILE_ERR", {"IS_HIPFILE_ERR", "", CONV_DEFINE, API_FILE, 1}},
   {"CUFILE_ERRSTR", {"HIPFILE_ERRSTR", "", CONV_DEFINE, API_FILE, 1}},
-  // TODO: Check CUDA_DRV_ERR for existence in cuFile
-  {"CUDA_DRV_ERR",  {"HIP_DRV_ERR",    "", CONV_DEFINE, API_FILE, 1}},
+  {"CU_FILE_CUDA_ERR",  {"HIP_DRV_ERR", "", CONV_DEFINE, API_FILE, 1}},
   {"IS_CUDA_ERR",   {"IS_HIP_DRV_ERR", "", CONV_DEFINE, API_FILE, 1}},
 };
 
@@ -275,7 +274,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_TYPE_NAME_VER_MAP {
   {"CUFILE_PARAM_LOG_DIR",                                  {CUFILE_1140, CUDA_0, CUDA_0}},
   {"IS_CUFILE_ERR",                     {CUFILE_1000, CUDA_0, CUDA_0}},
   {"CUFILE_ERRSTR",                     {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUDA_DRV_ERR",                      {CUDA_129, CUDA_0, CUDA_0}},
+  {"CU_FILE_CUDA_ERR",                  {CUFILE_1000, CUDA_0, CUDA_0}},
   {"IS_CUDA_ERR",                       {CUFILE_1000, CUDA_0, CUDA_0}},
 };
 
