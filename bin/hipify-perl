@@ -9855,12 +9855,12 @@ sub simpleSubstitutions {
     subst("CUDA_ARRAY3D_TEXTURE_GATHER", "hipArrayTextureGather", "define");
     subst("CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_POST_LAUNCH_SYNC", "hipCooperativeLaunchMultiDeviceNoPostSync", "define");
     subst("CUDA_COOPERATIVE_LAUNCH_MULTI_DEVICE_NO_PRE_LAUNCH_SYNC", "hipCooperativeLaunchMultiDeviceNoPreSync", "define");
-    subst("CUDA_DRV_ERR", "HIP_DRV_ERR", "define");
     subst("CUDA_EXTERNAL_MEMORY_DEDICATED", "hipExternalMemoryDedicated", "define");
     subst("CUDA_IPC_HANDLE_SIZE", "HIP_IPC_HANDLE_SIZE", "define");
     subst("CUFILE_ERRSTR", "HIPFILE_ERRSTR", "define");
     subst("CU_DEVICE_CPU", "hipCpuDeviceId", "define");
     subst("CU_DEVICE_INVALID", "hipInvalidDeviceId", "define");
+    subst("CU_FILE_CUDA_ERR", "HIP_DRV_ERR", "define");
     subst("CU_GRAPH_KERNEL_NODE_PORT_DEFAULT", "hipGraphKernelNodePortDefault", "define");
     subst("CU_GRAPH_KERNEL_NODE_PORT_LAUNCH_ORDER", "hipGraphKernelNodePortLaunchCompletion", "define");
     subst("CU_GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC", "hipGraphKernelNodePortProgrammatic", "define");
