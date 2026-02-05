@@ -14,7 +14,6 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`CUDA_DRV_ERR`|12.9| | | |`HIP_DRV_ERR`|7.2.0| | | | | |
 |`CUFILE_BATCH`|1.2.0| | | |`hipFileBatch`|7.2.0| | | | | |
 |`CUFILE_CANCELED`|1.2.0| | | |`hipFileCanceled`|7.2.0| | | | | |
 |`CUFILE_COMPLETE`|1.2.0| | | |`hipFileComplete`|7.2.0| | | | | |
@@ -64,6 +63,7 @@
 |`CU_FILE_BEEGFS_SUPPORTED`|1.1.1| | | |`hipFileBEEGFSSupported`|7.2.0| | | | | |
 |`CU_FILE_CUDA_CONTEXT_MISMATCH`|1.0.0| | | |`hipFileHipContextMismatch`|7.2.0| | | | | |
 |`CU_FILE_CUDA_DRIVER_ERROR`|1.0.0| | | |`hipFileHipDriverError`|7.2.0| | | | | |
+|`CU_FILE_CUDA_ERR`|1.0.0| | | |`HIP_DRV_ERR`|7.2.0| | | | | |
 |`CU_FILE_CUDA_MEMORY_TYPE_INVALID`|1.0.0| | | |`hipFileHipMemoryTypeInvalid`|7.2.0| | | | | |
 |`CU_FILE_CUDA_POINTER_INVALID`|1.0.0| | | |`hipFileHipPointerInvalid`|7.2.0| | | | | |
 |`CU_FILE_CUDA_POINTER_RANGE_ERROR`|1.0.0| | | |`hipFileHipPointerRangeError`|7.2.0| | | | | |
