@@ -1,0 +1,228 @@
+// RUN: %run_test hipify "%s" "%t" %hipify_args 3 --amap --skip-excluded-preprocessor-conditional-blocks --experimental %clang_args -D__CUDA_API_VERSION_INTERNAL -ferror-limit=500
+
+// CHECK: #include <hip/hip_runtime.h>
+#include <cuda_runtime.h>
+#include <stdio.h>
+// CHECK: #include "hipfile.h"
+#include "cufile.h"
+// CHECK-NOT: #include "hipfile.h"
+
+int main() {
+  printf("27. cuFile API to hipFile API synthetic test\n");
+
+  // CHECK: hipFileOpError_t fileOpError;
+  CUfileOpError fileOpError;
+
+  // CHECK: hipFileError_t fileError;
+  CUfileError_t fileError;
+
+  // CHECK: hipFileDriverStatusFlags_t driverStatusFlags;
+  CUfileDriverStatusFlags_t driverStatusFlags;
+
+  // CHECK: hipFileDriverControlFlags_t driverControlFlags;
+  CUfileDriverControlFlags_t driverControlFlags;
+
+  // CHECK: hipFileFeatureFlags_t featureFlags;
+  CUfileFeatureFlags_t featureFlags;
+
+  // CHECK: hipFileFileHandleType fileHandleType;
+  CUfileFileHandleType fileHandleType;
+
+  // CHECK: hipFileDriverProps_t driverProps;
+  CUfileDrvProps_t driverProps;
+
+  // CHECK: hipFileRDMAInfo_t rdmaInfo;
+  cufileRDMAInfo_t rdmaInfo;
+
+  // CHECK: hipFileFSOps_t fsOps;
+  CUfileFSOps_t fsOps;
+
+  // CHECK: hipFileDescr_t fileDescr;
+  CUfileDescr_t fileDescr;
+
+  // CHECK: hipFileHandle_t fileHandle;
+  CUfileHandle_t fileHandle;
+
+#if CUDA_VERSION >= 11060
+  // CHECK: hipFileOpcode_t opcode;
+  CUfileOpcode_t opcode;
+#endif
+
+  // CHECK: hipFileOpError_t FILE_SUCCESS = hipFileSuccess;
+  // CHECK-NEXT: hipFileOpError_t FILE_DRIVER_NOT_INITIALIZED = hipFileDriverNotInitialized;
+  // CHECK-NEXT: hipFileOpError_t FILE_DRIVER_INVALID_PROPS = hipFileDriverInvalidProps;
+  // CHECK-NEXT: hipFileOpError_t FILE_DRIVER_UNSUPPORTED_LIMIT = hipFileDriverUnsupportedLimit;
+  // CHECK-NEXT: hipFileOpError_t FILE_DRIVER_VERSION_MISMATCH = hipFileDriverVersionMismatch;
+  // CHECK-NEXT: hipFileOpError_t FILE_DRIVER_VERSION_READ_ERROR = hipFileDriverVersionReadError;
+  // CHECK-NEXT: hipFileOpError_t FILE_DRIVER_CLOSING = hipFileDriverClosing;
+  CUfileOpError FILE_SUCCESS = CU_FILE_SUCCESS;
+  CUfileOpError FILE_DRIVER_NOT_INITIALIZED = CU_FILE_DRIVER_NOT_INITIALIZED;
+  CUfileOpError FILE_DRIVER_INVALID_PROPS = CU_FILE_DRIVER_INVALID_PROPS;
+  CUfileOpError FILE_DRIVER_UNSUPPORTED_LIMIT = CU_FILE_DRIVER_UNSUPPORTED_LIMIT;
+  CUfileOpError FILE_DRIVER_VERSION_MISMATCH = CU_FILE_DRIVER_VERSION_MISMATCH;
+  CUfileOpError FILE_DRIVER_VERSION_READ_ERROR = CU_FILE_DRIVER_VERSION_READ_ERROR;
+  CUfileOpError FILE_DRIVER_CLOSING = CU_FILE_DRIVER_CLOSING;
+
+  // CHECK: hipFileOpError_t FILE_PLATFORM_NOT_SUPPORTED = hipFilePlatformNotSupported;
+  // CHECK-NEXT: hipFileOpError_t FILE_IO_NOT_SUPPORTED = hipFileIONotSupported;
+  // CHECK-NEXT: hipFileOpError_t FILE_DEVICE_NOT_SUPPORTED = hipFileDeviceNotSupported;
+  CUfileOpError FILE_PLATFORM_NOT_SUPPORTED = CU_FILE_PLATFORM_NOT_SUPPORTED;
+  CUfileOpError FILE_IO_NOT_SUPPORTED = CU_FILE_IO_NOT_SUPPORTED;
+  CUfileOpError FILE_DEVICE_NOT_SUPPORTED = CU_FILE_DEVICE_NOT_SUPPORTED;
+
+  // CHECK: hipFileOpError_t FILE_NVFS_DRIVER_ERROR = hipFileDriverError;
+  // CHECK-NEXT: hipFileOpError_t FILE_CUDA_DRIVER_ERROR = hipFileHipDriverError;
+  // CHECK-NEXT: hipFileOpError_t FILE_CUDA_POINTER_INVALID = hipFileHipPointerInvalid;
+  // CHECK-NEXT: hipFileOpError_t FILE_CUDA_MEMORY_TYPE_INVALID = hipFileHipMemoryTypeInvalid;
+  // CHECK-NEXT: hipFileOpError_t FILE_CUDA_POINTER_RANGE_ERROR = hipFileHipPointerRangeError;
+  // CHECK-NEXT: hipFileOpError_t FILE_CUDA_CONTEXT_MISMATCH = hipFileHipContextMismatch;
+  CUfileOpError FILE_NVFS_DRIVER_ERROR = CU_FILE_NVFS_DRIVER_ERROR;
+  CUfileOpError FILE_CUDA_DRIVER_ERROR = CU_FILE_CUDA_DRIVER_ERROR;
+  CUfileOpError FILE_CUDA_POINTER_INVALID = CU_FILE_CUDA_POINTER_INVALID;
+  CUfileOpError FILE_CUDA_MEMORY_TYPE_INVALID = CU_FILE_CUDA_MEMORY_TYPE_INVALID;
+  CUfileOpError FILE_CUDA_POINTER_RANGE_ERROR = CU_FILE_CUDA_POINTER_RANGE_ERROR;
+  CUfileOpError FILE_CUDA_CONTEXT_MISMATCH = CU_FILE_CUDA_CONTEXT_MISMATCH;
+
+  // CHECK: hipFileOpError_t FILE_INVALID_MAPPING_SIZE = hipFileInvalidMappingSize;
+  // CHECK-NEXT: hipFileOpError_t FILE_INVALID_MAPPING_RANGE = hipFileInvalidMappingRange;
+  // CHECK-NEXT: hipFileOpError_t FILE_INVALID_FILE_TYPE = hipFileInvalidFileType;
+  // CHECK-NEXT: hipFileOpError_t FILE_INVALID_FILE_OPEN_FLAG = hipFileInvalidFileOpenFlag;
+  // CHECK-NEXT: hipFileOpError_t FILE_DIO_NOT_SET = hipFileDIONotSet;
+  // CHECK-NEXT: hipFileOpError_t FILE_INVALID_VALUE = hipFileInvalidValue;
+  CUfileOpError FILE_INVALID_MAPPING_SIZE = CU_FILE_INVALID_MAPPING_SIZE;
+  CUfileOpError FILE_INVALID_MAPPING_RANGE = CU_FILE_INVALID_MAPPING_RANGE;
+  CUfileOpError FILE_INVALID_FILE_TYPE = CU_FILE_INVALID_FILE_TYPE;
+  CUfileOpError FILE_INVALID_FILE_OPEN_FLAG = CU_FILE_INVALID_FILE_OPEN_FLAG;
+  CUfileOpError FILE_DIO_NOT_SET = CU_FILE_DIO_NOT_SET;
+  CUfileOpError FILE_INVALID_VALUE = CU_FILE_INVALID_VALUE;
+
+  // CHECK: hipFileOpError_t FILE_MEMORY_ALREADY_REGISTERED = hipFileMemoryAlreadyRegistered;
+  // CHECK-NEXT: hipFileOpError_t FILE_MEMORY_NOT_REGISTERED = hipFileMemoryNotRegistered;
+  // CHECK-NEXT: hipFileOpError_t FILE_PERMISSION_DENIED = hipFilePermissionDenied;
+  // CHECK-NEXT: hipFileOpError_t FILE_DRIVER_ALREADY_OPEN = hipFileDriverAlreadyOpen;
+  // CHECK-NEXT: hipFileOpError_t FILE_HANDLE_NOT_REGISTERED = hipFileHandleNotRegistered;
+  // CHECK-NEXT: hipFileOpError_t FILE_HANDLE_ALREADY_REGISTERED = hipFileHandleAlreadyRegistered;
+  CUfileOpError FILE_MEMORY_ALREADY_REGISTERED = CU_FILE_MEMORY_ALREADY_REGISTERED;
+  CUfileOpError FILE_MEMORY_NOT_REGISTERED = CU_FILE_MEMORY_NOT_REGISTERED;
+  CUfileOpError FILE_PERMISSION_DENIED = CU_FILE_PERMISSION_DENIED;
+  CUfileOpError FILE_DRIVER_ALREADY_OPEN = CU_FILE_DRIVER_ALREADY_OPEN;
+  CUfileOpError FILE_HANDLE_NOT_REGISTERED = CU_FILE_HANDLE_NOT_REGISTERED;
+  CUfileOpError FILE_HANDLE_ALREADY_REGISTERED = CU_FILE_HANDLE_ALREADY_REGISTERED;
+
+  // CHECK: hipFileOpError_t FILE_DEVICE_NOT_FOUND = hipFileDeviceNotFound;
+  // CHECK-NEXT: hipFileOpError_t FILE_INTERNAL_ERROR = hipFileInternalError;
+  // CHECK-NEXT: hipFileOpError_t FILE_GETNEWFD_FAILED = hipFileGetNewFDFailed;
+  // CHECK-NEXT: hipFileOpError_t FILE_NVFS_SETUP_ERROR = hipFileDriverSetupError;
+  // CHECK-NEXT: hipFileOpError_t FILE_IO_DISABLED = hipFileIODisabled;
+  CUfileOpError FILE_DEVICE_NOT_FOUND = CU_FILE_DEVICE_NOT_FOUND;
+  CUfileOpError FILE_INTERNAL_ERROR = CU_FILE_INTERNAL_ERROR;
+  CUfileOpError FILE_GETNEWFD_FAILED = CU_FILE_GETNEWFD_FAILED;
+  CUfileOpError FILE_NVFS_SETUP_ERROR = CU_FILE_NVFS_SETUP_ERROR;
+  CUfileOpError FILE_IO_DISABLED = CU_FILE_IO_DISABLED;
+
+#if CUDA_VERSION >= 11060
+  // CHECK: hipFileOpError_t FILE_BATCH_SUBMIT_FAILED = hipFileBatchSubmitFailed;
+  CUfileOpError FILE_BATCH_SUBMIT_FAILED = CU_FILE_BATCH_SUBMIT_FAILED;
+#endif
+
+#if CUDA_VERSION >= 12000
+  // CHECK: hipFileOpError_t FILE_GPU_MEMORY_PINNING_FAILED = hipFileGPUMemoryPinningFailed;
+  CUfileOpError FILE_GPU_MEMORY_PINNING_FAILED = CU_FILE_GPU_MEMORY_PINNING_FAILED;
+#endif
+
+#if CUDA_VERSION >= 12010
+  // CHECK: hipFileOpError_t FILE_BATCH_FULL = hipFileBatchFull;
+  CUfileOpError FILE_BATCH_FULL = CU_FILE_BATCH_FULL;
+#endif
+
+#if CUDA_VERSION >= 12020
+  // CHECK: hipFileOpError_t FILE_ASYNC_NOT_SUPPORTED = hipFileAsyncNotSupported;
+  CUfileOpError FILE_ASYNC_NOT_SUPPORTED = CU_FILE_ASYNC_NOT_SUPPORTED;
+#endif
+
+  // CHECK: hipFileOpError_t FILE_IO_MAX_ERROR = hipFileIOMaxError;
+  CUfileOpError FILE_IO_MAX_ERROR = CU_FILE_IO_MAX_ERROR;
+
+  // CHECK: hipFileDriverStatusFlags_t FILE_LUSTRE_SUPPORTED = hipFileLustreSupported;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_WEKAFS_SUPPORTED = hipFileWekaFSSupported;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_NFS_SUPPORTED = hipFileNFSSupported;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_GPFS_SUPPORTED = hipFileGPFSSupported;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_NVME_SUPPORTED = hipFileNVMeSupported;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_NVMEOF_SUPPORTED = hipFileNVMeoFSupported;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_SCSI_SUPPORTED = hipFileSCSISupported;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_SCALEFLUX_CSD_SUPPORTED = hipFileScaleFluxCSDSupported;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_NVMESH_SUPPORTED = hipFileNVMeshSupported;
+  CUfileDriverStatusFlags_t FILE_LUSTRE_SUPPORTED = CU_FILE_LUSTRE_SUPPORTED;
+  CUfileDriverStatusFlags_t FILE_WEKAFS_SUPPORTED = CU_FILE_WEKAFS_SUPPORTED;
+  CUfileDriverStatusFlags_t FILE_NFS_SUPPORTED = CU_FILE_NFS_SUPPORTED;
+  CUfileDriverStatusFlags_t FILE_GPFS_SUPPORTED = CU_FILE_GPFS_SUPPORTED;
+  CUfileDriverStatusFlags_t FILE_NVME_SUPPORTED = CU_FILE_NVME_SUPPORTED;
+  CUfileDriverStatusFlags_t FILE_NVMEOF_SUPPORTED = CU_FILE_NVMEOF_SUPPORTED;
+  CUfileDriverStatusFlags_t FILE_SCSI_SUPPORTED = CU_FILE_SCSI_SUPPORTED;
+  CUfileDriverStatusFlags_t FILE_SCALEFLUX_CSD_SUPPORTED = CU_FILE_SCALEFLUX_CSD_SUPPORTED;
+  CUfileDriverStatusFlags_t FILE_NVMESH_SUPPORTED = CU_FILE_NVMESH_SUPPORTED;
+
+#if CUDA_VERSION >= 11060
+  // CHECK: hipFileDriverStatusFlags_t FILE_BEEGFS_SUPPORTED = hipFileBEEGFSSupported;
+  CUfileDriverStatusFlags_t FILE_BEEGFS_SUPPORTED = CU_FILE_BEEGFS_SUPPORTED;
+#endif
+
+#if CUDA_VERSION >= 12050
+  // CHECK: hipFileDriverStatusFlags_t FILE_NVME_P2P_SUPPORTED = hipFileNVMeP2PSsupported;
+  CUfileDriverStatusFlags_t FILE_NVME_P2P_SUPPORTED = CU_FILE_NVME_P2P_SUPPORTED;
+#endif
+
+  // CHECK: hipFileDriverControlFlags_t FILE_USE_POLL_MODE = hipFileUsePollMode;
+  // CHECK-NEXT: hipFileDriverControlFlags_t FILE_ALLOW_COMPAT_MODE = hipFileAllowCompatMode;
+  CUfileDriverControlFlags_t FILE_USE_POLL_MODE = CU_FILE_USE_POLL_MODE;
+  CUfileDriverControlFlags_t FILE_ALLOW_COMPAT_MODE = CU_FILE_ALLOW_COMPAT_MODE;
+
+  // CHECK: hipFileFeatureFlags_t FILE_DYN_ROUTING_SUPPORTED = hipFileDynRoutingSupported;
+  // CHECK-NEXT: hipFileFeatureFlags_t FILE_BATCH_IO_SUPPORTED = hipFileBatchIOSupported;
+  // CHECK-NEXT: hipFileFeatureFlags_t FILE_STREAMS_SUPPORTED = hipFileStreamsSupported;
+  CUfileFeatureFlags_t FILE_DYN_ROUTING_SUPPORTED = CU_FILE_DYN_ROUTING_SUPPORTED;
+  CUfileFeatureFlags_t FILE_BATCH_IO_SUPPORTED = CU_FILE_BATCH_IO_SUPPORTED;
+  CUfileFeatureFlags_t FILE_STREAMS_SUPPORTED = CU_FILE_STREAMS_SUPPORTED;
+
+#if CUDA_VERSION >= 12030
+  // CHECK: hipFileFeatureFlags_t FILE_PARALLEL_IO_SUPPORTED = hipFileParallelIOSupported;
+  CUfileFeatureFlags_t FILE_PARALLEL_IO_SUPPORTED = CU_FILE_PARALLEL_IO_SUPPORTED;
+#endif
+
+  // CHECK: int RDMA_REGISTER = HIPFILE_RDMA_REGISTER;
+  // CHECK-NEXT: int RDMA_RELAXED_ORDERING = HIPFILE_RDMA_RELAXED_ORDERING;
+  int RDMA_REGISTER = CU_FILE_RDMA_REGISTER;
+  int RDMA_RELAXED_ORDERING = CU_FILE_RDMA_RELAXED_ORDERING;
+
+  // CHECK: hipFileFileHandleType HANDLE_TYPE_OPAQUE_FD = hipFileHandleTypeOpaqueFD;
+  // CHECK-NEXT: hipFileFileHandleType HANDLE_TYPE_OPAQUE_WIN32 = hipFileHandleTypeOpaqueWin32;
+  // CHECK-NEXT: hipFileFileHandleType HANDLE_TYPE_USERSPACE_FS = hipFileHandleTypeUserspaceFS;
+  CUfileFileHandleType HANDLE_TYPE_OPAQUE_FD = CU_FILE_HANDLE_TYPE_OPAQUE_FD;
+  CUfileFileHandleType HANDLE_TYPE_OPAQUE_WIN32 = CU_FILE_HANDLE_TYPE_OPAQUE_WIN32;
+  CUfileFileHandleType HANDLE_TYPE_USERSPACE_FS = CU_FILE_HANDLE_TYPE_USERSPACE_FS;
+
+#if CUDA_VERSION >= 11060
+  // CHECK: hipFileOpcode_t FILE_OPCODE_READ = hipFileBatchRead;
+  // CHECK-NEXT: hipFileOpcode_t FILE_OPCODE_WRITE = hipFileBatchWrite;
+  CUfileOpcode_t FILE_OPCODE_READ = CUFILE_READ;
+  CUfileOpcode_t FILE_OPCODE_WRITE = CUFILE_WRITE;
+#endif
+
+  // Test error checking macros
+  CUfileError_t testErr;
+  testErr.err = CU_FILE_SUCCESS;
+
+  // CHECK: bool isFileErr = IS_HIPFILE_ERR(testErr.err);
+  bool isFileErr = IS_CUFILE_ERR(testErr.err);
+
+  // CHECK: const char* errStr = HIPFILE_ERRSTR(testErr.err);
+  const char* errStr = CUFILE_ERRSTR(testErr.err);
+
+  // CHECK: bool isCudaErr = IS_HIP_DRV_ERR(testErr);
+  bool isCudaErr = IS_CUDA_ERR(testErr);
+
+  // [CHECK]: CUresult cudaErr = HIP_DRV_ERR(testErr);
+  // CUresult cudaErr = CU_FILE_CUDA_ERR(testErr);
+
+  return 0;
+}
