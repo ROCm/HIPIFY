@@ -179,6 +179,24 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_FILE"
 };
 
+const std::vector<cudaVersions> CUDA_114_cuFule_version = { CUFILE_1000, CUFILE_1001, CUFILE_1002 };
+const std::vector<cudaVersions> CUDA_115_cuFule_version = { CUFILE_1010, CUFILE_1011 };
+const std::vector<cudaVersions> CUDA_116_cuFule_version = { CUFILE_1020, CUFILE_1021 };
+const std::vector<cudaVersions> CUDA_117_cuFule_version = { CUFILE_1030, CUFILE_1031 };
+const std::vector<cudaVersions> CUDA_118_cuFule_version = { CUFILE_1040 };
+const std::vector<cudaVersions> CUDA_120_cuFule_version = { CUFILE_1050, CUFILE_1051 };
+const std::vector<cudaVersions> CUDA_121_cuFule_version = { CUFILE_1060, CUFILE_1061 };
+const std::vector<cudaVersions> CUDA_122_cuFule_version = { CUFILE_1070, CUFILE_1071, CUFILE_1072 };
+const std::vector<cudaVersions> CUDA_123_cuFule_version = { CUFILE_1080, CUFILE_1081 };
+const std::vector<cudaVersions> CUDA_124_cuFule_version = { CUFILE_1090, CUFILE_1091 };
+const std::vector<cudaVersions> CUDA_125_cuFule_version = { CUFILE_1100, CUFILE_1101 };
+const std::vector<cudaVersions> CUDA_126_cuFule_version = { CUFILE_1110, CUFILE_1111 };
+const std::vector<cudaVersions> CUDA_128_cuFule_version = { CUFILE_1130, CUFILE_1131 };
+const std::vector<cudaVersions> CUDA_129_cuFule_version = { CUFILE_1140, CUFILE_1141 };
+const std::vector<cudaVersions> CUDA_130_cuFule_version = { CUFILE_1150, CUFILE_1151 };
+const std::vector<cudaVersions> CUDA_131_cuFule_version = { CUFILE_1160, CUFILE_1161 };
+const std::vector<cudaVersions> Empty_vector = {};
+
 namespace {
 
 template<typename ST, typename ST2>
@@ -609,8 +627,136 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUTENSOR_2300: return "2.3.0.0";
     case CUTENSOR_2400: return "2.4.0.0";
     case CUTENSOR_2500: return "2.5.0.0";
+    case CUFILE_1000: return "1.0.0";
+    case CUFILE_1001: return "1.0.1";
+    case CUFILE_1002: return "1.0.2";
+    case CUFILE_1010: return "1.1.0";
+    case CUFILE_1011: return "1.1.1";
+    case CUFILE_1020: return "1.2.0";
+    case CUFILE_1021: return "1.2.1";
+    case CUFILE_1030: return "1.3.0";
+    case CUFILE_1031: return "1.3.1";
+    case CUFILE_1040: return "1.4.0";
+    case CUFILE_1050: return "1.5.0";
+    case CUFILE_1051: return "1.5.1";
+    case CUFILE_1060: return "1.6.0";
+    case CUFILE_1061: return "1.6.1";
+    case CUFILE_1070: return "1.7.0";
+    case CUFILE_1071: return "1.7.1";
+    case CUFILE_1072: return "1.7.2";
+    case CUFILE_1080: return "1.8.0";
+    case CUFILE_1081: return "1.8.1";
+    case CUFILE_1090: return "1.9.0";
+    case CUFILE_1091: return "1.9.1";
+    case CUFILE_1100: return "1.10.0";
+    case CUFILE_1101: return "1.10.1";
+    case CUFILE_1110: return "1.11.0";
+    case CUFILE_1111: return "1.11.1";
+    case CUFILE_1130: return "1.13.0";
+    case CUFILE_1131: return "1.13.1";
+    case CUFILE_1140: return "1.14.0";
+    case CUFILE_1141: return "1.14.1";
+    case CUFILE_1150: return "1.15.0";
+    case CUFILE_1151: return "1.15.1";
+    case CUFILE_1160: return "1.16.0";
+    case CUFILE_1161: return "1.16.1";
   }
   return "";
+}
+
+cudaVersions Statistics::getCudaVersionForCuFileVersion(const cudaVersions &ver) {
+  switch (ver) {
+    case CUFILE_1000:
+    case CUFILE_1001:
+    case CUFILE_1002:
+      return CUDA_114;
+    case CUFILE_1010:
+    case CUFILE_1011:
+      return CUDA_115;
+    case CUFILE_1020:
+    case CUFILE_1021:
+      return CUDA_116;
+    case CUFILE_1030:
+    case CUFILE_1031:
+      return CUDA_117;
+    case CUFILE_1040:
+      return CUDA_118;
+    case CUFILE_1050:
+    case CUFILE_1051:
+      return CUDA_120;
+    case CUFILE_1060:
+    case CUFILE_1061:
+      return CUDA_121;
+    case CUFILE_1070:
+    case CUFILE_1071:
+    case CUFILE_1072:
+      return CUDA_122;
+    case CUFILE_1080:
+    case CUFILE_1081:
+      return CUDA_123;
+    case CUFILE_1090:
+    case CUFILE_1091:
+      return CUDA_124;
+    case CUFILE_1100:
+    case CUFILE_1101:
+      return CUDA_125;
+    case CUFILE_1110:
+    case CUFILE_1111:
+      return CUDA_126;
+    case CUFILE_1130:
+    case CUFILE_1131:
+      return CUDA_128;
+    case CUFILE_1140:
+    case CUFILE_1141:
+      return CUDA_129;
+    case CUFILE_1150:
+    case CUFILE_1151:
+      return CUDA_130;
+    case CUFILE_1160:
+    case CUFILE_1161:
+      return CUDA_131;
+    default:
+      return CUDA_0;
+  }
+}
+
+const std::vector<cudaVersions> &Statistics::getCuFileVersionsForCudaVersion(const cudaVersions &ver) {
+  switch (ver) {
+    case CUDA_114:
+      return CUDA_114_cuFule_version;
+    case CUDA_115:
+      return CUDA_115_cuFule_version;
+    case CUDA_116:
+      return CUDA_116_cuFule_version;
+    case CUDA_117:
+      return CUDA_117_cuFule_version;
+    case CUDA_118:
+      return CUDA_118_cuFule_version;
+    case CUDA_120:
+      return CUDA_120_cuFule_version;
+    case CUDA_121:
+      return CUDA_121_cuFule_version;
+    case CUDA_122:
+      return CUDA_122_cuFule_version;
+    case CUDA_123:
+      return CUDA_123_cuFule_version;
+    case CUDA_124:
+      return CUDA_124_cuFule_version;
+    case CUDA_125:
+      return CUDA_125_cuFule_version;
+    case CUDA_126:
+      return CUDA_126_cuFule_version;
+    case CUDA_128:
+      return CUDA_128_cuFule_version;
+    case CUDA_129:
+      return CUDA_129_cuFule_version;
+    case CUDA_130:
+      return CUDA_130_cuFule_version;
+    case CUDA_131:
+      return CUDA_131_cuFule_version;
+    default:
+      return Empty_vector;
+  }
 }
 
 std::string Statistics::getHipVersion(const hipVersions &ver) {
