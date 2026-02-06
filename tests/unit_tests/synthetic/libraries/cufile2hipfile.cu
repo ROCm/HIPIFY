@@ -221,8 +221,8 @@ int main() {
   // CHECK: bool isCudaErr = IS_HIP_DRV_ERR(testErr);
   bool isCudaErr = IS_CUDA_ERR(testErr);
 
-  // [CHECK]: CUresult cudaErr = HIP_DRV_ERR(testErr);
-  // CUresult cudaErr = CU_FILE_CUDA_ERR(testErr);
+  // CHECK: hipError_t cudaErr = HIP_DRV_ERR(testErr);
+  CUresult cudaErr = CU_FILE_CUDA_ERR(testErr);
 
   return 0;
 }
