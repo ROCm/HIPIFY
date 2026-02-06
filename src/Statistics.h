@@ -488,22 +488,22 @@ extern const char *counterTypes[NUM_CONV_TYPES];
 extern const char *apiNames[NUM_API_TYPES];
 extern const char *apiTypes[NUM_API_TYPES];
 
-extern const std::vector<cudaVersions> CUDA_114_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_115_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_116_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_117_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_118_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_120_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_121_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_122_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_123_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_124_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_125_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_126_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_128_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_129_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_130_cuFule_version;
-extern const std::vector<cudaVersions> CUDA_131_cuFule_version;
+extern const std::vector<cudaVersions> CUDA_114_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_115_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_116_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_117_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_118_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_120_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_121_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_122_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_123_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_124_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_125_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_126_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_128_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_129_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_130_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_131_cuFile_version;
 extern const std::vector<cudaVersions> Empty_vector;
 
 struct hipCounter {
