@@ -319,6 +319,7 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   message(STATUS "   - cuDNN path            : ${CUDA_DNN_ROOT_DIR}")
   message(STATUS "   - cuTENSOR path         : ${CUDA_TENSOR_ROOT_DIR}")
   message(STATUS "   - CUB path              : ${CUDA_CUB_ROOT_DIR}")
+  message(STATUS "   - cuFile path           : ${CUDA_FILE_ROOT_DIR}")
 
   if(${CMAKE_VERSION} VERSION_LESS "3.27.0")
     find_package(CUDA REQUIRED)
@@ -402,11 +403,7 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   endif()
 
   if(CUDA_FILE_ROOT_DIR STREQUAL "")
-    if(CUDA_VERSION VERSION_GREATER_EQUAL "11.4")
-      set(CUDA_FILE_ROOT_DIR "${CUDA_TOOLKIT_ROOT_DIR}/include")
-    else()
-      set(CUDA_FILE_ROOT_DIR OFF)
-    endif()
+    set(CUDA_FILE_ROOT_DIR OFF)
   endif()
 
   message(STATUS "Found CUDA config:")
@@ -415,6 +412,7 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
   message(STATUS "   - cuDNN path            : ${CUDA_DNN_ROOT_DIR}")
   message(STATUS "   - cuTENSOR path         : ${CUDA_TENSOR_ROOT_DIR}")
   message(STATUS "   - CUB path              : ${CUDA_CUB_ROOT_DIR}")
+  message(STATUS "   - cuFile path           : ${CUDA_FILE_ROOT_DIR}")
 
   if((CUDA_VERSION VERSION_LESS "7.0") OR (LLVM_PACKAGE_VERSION VERSION_LESS "3.8") OR
      (CUDA_VERSION VERSION_GREATER "7.5" AND LLVM_PACKAGE_VERSION VERSION_LESS "4.0") OR
