@@ -1,5 +1,5 @@
 /*
-Copyright (c) 2015 - present Advanced Micro Devices, Inc. All rights reserved.
+Copyright (c) 2026 - present Advanced Micro Devices, Inc. All rights reserved.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
@@ -25,24 +25,13 @@ THE SOFTWARE.
 
 namespace hipify {
 
-std::vector<std::string> getImplicitCudaHeaders() {
-  return {
-    "cuda_runtime.h"
-  };
-}
+static const char *const ImplicitCudaHeader = "cuda_runtime.h";
 
 void addImplicitCudaHeaders(ct::RefactoringTool &Tool) {
-  
-  std::vector<std::string> headers = getImplicitCudaHeaders();
-  
-  for (const auto &header : headers) {
-    Tool.appendArgumentsAdjuster(
-        ct::getInsertArgumentAdjuster(header.c_str(), 
-                                       ct::ArgumentInsertPosition::BEGIN));
-    Tool.appendArgumentsAdjuster(
-        ct::getInsertArgumentAdjuster("-include", 
-                                       ct::ArgumentInsertPosition::BEGIN));
-  }
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(
+      ImplicitCudaHeader, ct::ArgumentInsertPosition::BEGIN));
+  Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(
+      "-include", ct::ArgumentInsertPosition::BEGIN));
 }
 
 } // namespace hipify
