@@ -309,3 +309,9 @@ namespace blas {
     BLAS_LT = 9,
   };
 }
+
+namespace cub {
+  enum CUB_API_SECTIONS {
+    DATA_TYPES = 1,
+  };
+}
