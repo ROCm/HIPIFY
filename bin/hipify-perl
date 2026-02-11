@@ -7545,17 +7545,21 @@ sub simpleSubstitutions {
     subst("CUfileBatchHandle_t", "hipFileBatchHandle_t", "type");
     subst("CUfileBatchMode_t", "hipFileBatchMode_t", "type");
     subst("CUfileDescr_t", "hipFileDescr_t", "type");
+    subst("CUfileDriverControlFlags", "hipFileDriverControlFlags_t", "type");
     subst("CUfileDriverControlFlags_t", "hipFileDriverControlFlags_t", "type");
     subst("CUfileDriverStatusFlags_t", "hipFileDriverStatusFlags_t", "type");
+    subst("CUfileDrvProps", "hipFileDriverProps_t", "type");
     subst("CUfileDrvProps_t", "hipFileDriverProps_t", "type");
     subst("CUfileError_t", "hipFileError_t", "type");
     subst("CUfileFSOps_t", "hipFileFSOps_t", "type");
+    subst("CUfileFeatureFlags", "hipFileFeatureFlags_t", "type");
     subst("CUfileFeatureFlags_t", "hipFileFeatureFlags_t", "type");
     subst("CUfileFileHandleType", "hipFileFileHandleType", "type");
     subst("CUfileHandle_t", "hipFileHandle_t", "type");
     subst("CUfileIOEvents_t", "hipFileIOEvents_t", "type");
     subst("CUfileIOParams_t", "hipFileIOParams_t", "type");
     subst("CUfileOpError", "hipFileOpError_t", "type");
+    subst("CUfileOpcode", "hipFileDriverProps_t", "type");
     subst("CUfileOpcode_t", "hipFileOpcode_t", "type");
     subst("CUfileStatus_t", "hipFileStatus_t", "type");
     subst("CUfilter_mode", "HIPfilter_mode", "type");
@@ -8131,6 +8135,7 @@ sub simpleSubstitutions {
     subst("nvrtcResult", "hiprtcResult", "type");
     subst("pruneInfo", "pruneInfo", "type");
     subst("pruneInfo_t", "pruneInfo_t", "type");
+    subst("sockaddr_t", "sockaddr", "type");
     subst("surfaceReference", "surfaceReference", "type");
     subst("syevjInfo_t", "hipsolverSyevjInfo_t", "type");
     subst("texture", "texture", "type");
@@ -9000,7 +9005,7 @@ sub simpleSubstitutions {
     subst("CU_FILE_NVFS_SETUP_ERROR", "hipFileDriverSetupError", "numeric_literal");
     subst("CU_FILE_NVMEOF_SUPPORTED", "hipFileNVMeoFSupported", "numeric_literal");
     subst("CU_FILE_NVMESH_SUPPORTED", "hipFileNVMeshSupported", "numeric_literal");
-    subst("CU_FILE_NVME_P2P_SUPPORTED", "hipFileNVMeP2PSsupported", "numeric_literal");
+    subst("CU_FILE_NVME_P2P_SUPPORTED", "hipFileNVMeP2PSupported", "numeric_literal");
     subst("CU_FILE_NVME_SUPPORTED", "hipFileNVMeSupported", "numeric_literal");
     subst("CU_FILE_PARALLEL_IO_SUPPORTED", "hipFileParallelIOSupported", "numeric_literal");
     subst("CU_FILE_PERMISSION_DENIED", "hipFilePermissionDenied", "numeric_literal");
@@ -12956,6 +12961,8 @@ sub warnRemovedFunctions {
     "CUflushGPUDirectRDMAWritesTarget",
     "CUflushGPUDirectRDMAWritesScope_enum",
     "CUflushGPUDirectRDMAWritesScope",
+    "CUfileP2PFlags_t",
+    "CUfileP2PFlags",
     "CUexternalSemaphore_st",
     "CUexternalMemory_st",
     "CUextent3D_v1",
@@ -13261,6 +13268,14 @@ sub warnRemovedFunctions {
     "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER",
     "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES",
     "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX",
+    "CU_FILE_VIRTIOFS_SUPPORTED",
+    "CU_FILE_SCATEFS_SUPPORTED",
+    "CU_FILE_P2P_SUPPORTED",
+    "CU_FILE_P2P_FLAG_PCI_P2PDMA",
+    "CU_FILE_P2P_FLAG_NVFS",
+    "CU_FILE_P2P_FLAG_DMABUF",
+    "CU_FILE_P2P_FLAG_C2C",
+    "CU_FILE_MAX_TARGET_TYPES",
     "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_WIN32",
     "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_FD",
     "CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_NVSCISYNC",
@@ -13678,6 +13693,11 @@ sub warnRemovedFunctions {
     "CURAND_3RD",
     "CUGLmap_flags_enum",
     "CUGLmap_flags",
+    "CUFILE_P2PDMA",
+    "CUFILE_NVIDIA_PEERMEM",
+    "CUFILE_NVFS",
+    "CUFILE_DMABUF",
+    "CUFILE_C2C",
     "CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT",
     "CUFFT_XT_FORMAT_DISTRIBUTED_INPUT",
     "CUFFT_WORKAREA_USER",

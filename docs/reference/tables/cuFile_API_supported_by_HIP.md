@@ -15,11 +15,16 @@
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`CUFILE_BATCH`|1.2.0| | | |`hipFileBatch`|7.2.0| | | | | |
+|`CUFILE_C2C`|1.16.0| | | | | | | | | | |
 |`CUFILE_CANCELED`|1.2.0| | | |`hipFileCanceled`|7.2.0| | | | | |
 |`CUFILE_COMPLETE`|1.2.0| | | |`hipFileComplete`|7.2.0| | | | | |
+|`CUFILE_DMABUF`|1.16.0| | | | | | | | | | |
 |`CUFILE_ERRSTR`|1.0.0| | | |`HIPFILE_ERRSTR`|7.2.0| | | | | |
 |`CUFILE_FAILED`|1.2.0| | | |`hipFileFailed`|7.2.0| | | | | |
 |`CUFILE_INVALID`|1.2.0| | | |`hipFileInvalid`|7.2.0| | | | | |
+|`CUFILE_NVFS`|1.16.0| | | | | | | | | | |
+|`CUFILE_NVIDIA_PEERMEM`|1.16.0| | | | | | | | | | |
+|`CUFILE_P2PDMA`|1.16.0| | | | | | | | | | |
 |`CUFILE_PARAM_ENV_LOGFILE_PATH`|1.14.0| | | |`hipFileParamEnvLogfilePath`|7.2.0| | | | | |
 |`CUFILE_PARAM_EXECUTION_MAX_IO_QUEUE_DEPTH`|1.14.0| | | |`hipFileParamExecutionMaxIOQueueDepth`|7.2.0| | | | | |
 |`CUFILE_PARAM_EXECUTION_MAX_IO_THREADS`|1.14.0| | | |`hipFileParamExecutionMaxIOThreads`|7.2.0| | | | | |
@@ -96,6 +101,7 @@
 |`CU_FILE_IO_MAX_ERROR`|1.1.0| | | |`hipFileIOMaxError`|7.2.0| | | | | |
 |`CU_FILE_IO_NOT_SUPPORTED`|1.0.0| | | |`hipFileIONotSupported`|7.2.0| | | | | |
 |`CU_FILE_LUSTRE_SUPPORTED`|1.0.0| | | |`hipFileLustreSupported`|7.2.0| | | | | |
+|`CU_FILE_MAX_TARGET_TYPES`|1.16.0| | | | | | | | | | |
 |`CU_FILE_MEMORY_ALREADY_REGISTERED`|1.0.0| | | |`hipFileMemoryAlreadyRegistered`|7.2.0| | | | | |
 |`CU_FILE_MEMORY_NOT_REGISTERED`|1.0.0| | | |`hipFileMemoryNotRegistered`|7.2.0| | | | | |
 |`CU_FILE_NFS_SUPPORTED`|1.0.0| | | |`hipFileNFSSupported`|7.2.0| | | | | |
@@ -103,14 +109,20 @@
 |`CU_FILE_NVFS_SETUP_ERROR`|1.0.0| | | |`hipFileDriverSetupError`|7.2.0| | | | | |
 |`CU_FILE_NVMEOF_SUPPORTED`|1.0.0| | | |`hipFileNVMeoFSupported`|7.2.0| | | | | |
 |`CU_FILE_NVMESH_SUPPORTED`|1.0.0| | | |`hipFileNVMeshSupported`|7.2.0| | | | | |
-|`CU_FILE_NVME_P2P_SUPPORTED`|1.13.0| | | |`hipFileNVMeP2PSsupported`|7.2.0| | | | | |
+|`CU_FILE_NVME_P2P_SUPPORTED`|1.13.0| | | |`hipFileNVMeP2PSupported`|7.2.0| | | | | |
 |`CU_FILE_NVME_SUPPORTED`|1.0.0| | | |`hipFileNVMeSupported`|7.2.0| | | | | |
+|`CU_FILE_P2P_FLAG_C2C`|1.16.0| | | | | | | | | | |
+|`CU_FILE_P2P_FLAG_DMABUF`|1.16.0| | | | | | | | | | |
+|`CU_FILE_P2P_FLAG_NVFS`|1.16.0| | | | | | | | | | |
+|`CU_FILE_P2P_FLAG_PCI_P2PDMA`|1.16.0| | | | | | | | | | |
+|`CU_FILE_P2P_SUPPORTED`|1.16.0| | | | | | | | | | |
 |`CU_FILE_PARALLEL_IO_SUPPORTED`|1.8.0| | | |`hipFileParallelIOSupported`|7.2.0| | | | | |
 |`CU_FILE_PERMISSION_DENIED`|1.0.0| | | |`hipFilePermissionDenied`|7.2.0| | | | | |
 |`CU_FILE_PLATFORM_NOT_SUPPORTED`|1.0.0| | | |`hipFilePlatformNotSupported`|7.2.0| | | | | |
 |`CU_FILE_RDMA_REGISTER`|1.0.0| | | |`HIPFILE_RDMA_REGISTER`|7.2.0| | | | | |
 |`CU_FILE_RDMA_RELAXED_ORDERING`|1.0.0| | | |`HIPFILE_RDMA_RELAXED_ORDERING`|7.2.0| | | | | |
 |`CU_FILE_SCALEFLUX_CSD_SUPPORTED`|1.0.0| | | |`hipFileScaleFluxCSDSupported`|7.2.0| | | | | |
+|`CU_FILE_SCATEFS_SUPPORTED`|1.14.0| | | | | | | | | | |
 |`CU_FILE_SCSI_SUPPORTED`|1.0.0| | | |`hipFileSCSISupported`|7.2.0| | | | | |
 |`CU_FILE_STREAMS_SUPPORTED`|1.0.0| | | |`hipFileStreamsSupported`|7.2.0| | | | | |
 |`CU_FILE_STREAM_FIXED_BUF_OFFSET`|1.7.0| | | |`HIPFILE_STREAM_FIXED_BUF_OFFSET`|7.2.0| | | | | |
@@ -119,26 +131,34 @@
 |`CU_FILE_STREAM_PAGE_ALIGNED_INPUTS`|1.7.0| | | |`HIPFILE_STREAM_PAGE_ALIGNED_INPUTS`|7.2.0| | | | | |
 |`CU_FILE_SUCCESS`|1.0.0| | | |`hipFileSuccess`|7.2.0| | | | | |
 |`CU_FILE_USE_POLL_MODE`|1.0.0| | | |`hipFileUsePollMode`|7.2.0| | | | | |
+|`CU_FILE_VIRTIOFS_SUPPORTED`|1.16.0| | | | | | | | | | |
 |`CU_FILE_WEKAFS_SUPPORTED`|1.0.0| | | |`hipFileWekaFSSupported`|7.2.0| | | | | |
 |`CUfileBatchHandle_t`|1.2.0| | | |`hipFileBatchHandle_t`|7.2.0| | | | | |
 |`CUfileBatchMode_t`|1.2.0| | | |`hipFileBatchMode_t`|7.2.0| | | | | |
 |`CUfileDescr_t`|1.0.0| | | |`hipFileDescr_t`|7.2.0| | | | | |
+|`CUfileDriverControlFlags`|1.0.0| | | |`hipFileDriverControlFlags_t`|7.2.0| | | | | |
 |`CUfileDriverControlFlags_t`|1.0.0| | | |`hipFileDriverControlFlags_t`|7.2.0| | | | | |
 |`CUfileDriverStatusFlags_t`|1.0.0| | | |`hipFileDriverStatusFlags_t`|7.2.0| | | | | |
+|`CUfileDrvProps`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
 |`CUfileDrvProps_t`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
 |`CUfileError_t`|1.0.0| | | |`hipFileError_t`|7.2.0| | | | | |
 |`CUfileFSOps_t`|1.0.0| | | |`hipFileFSOps_t`|7.2.0| | | | | |
+|`CUfileFeatureFlags`|1.0.0| | | |`hipFileFeatureFlags_t`|7.2.0| | | | | |
 |`CUfileFeatureFlags_t`|1.0.0| | | |`hipFileFeatureFlags_t`|7.2.0| | | | | |
 |`CUfileFileHandleType`|1.0.0| | | |`hipFileFileHandleType`|7.2.0| | | | | |
 |`CUfileHandle_t`|1.0.0| | | |`hipFileHandle_t`|7.2.0| | | | | |
 |`CUfileIOEvents_t`|1.2.0| | | |`hipFileIOEvents_t`|7.2.0| | | | | |
 |`CUfileIOParams_t`|1.2.0| | | |`hipFileIOParams_t`|7.2.0| | | | | |
 |`CUfileOpError`|1.0.0| | | |`hipFileOpError_t`|7.2.0| | | | | |
+|`CUfileOpcode`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
 |`CUfileOpcode_t`|1.2.0| | | |`hipFileOpcode_t`|7.2.0| | | | | |
+|`CUfileP2PFlags`|1.16.0| | | | | | | | | | |
+|`CUfileP2PFlags_t`|1.16.0| | | | | | | | | | |
 |`CUfileStatus_t`|1.2.0| | | |`hipFileStatus_t`|7.2.0| | | | | |
 |`IS_CUDA_ERR`|1.0.0| | | |`IS_HIP_DRV_ERR`|7.2.0| | | | | |
 |`IS_CUFILE_ERR`|1.0.0| | | |`IS_HIPFILE_ERR`|7.2.0| | | | | |
 |`cufileRDMAInfo_t`|1.0.0| | | |`hipFileRDMAInfo_t`|7.2.0| | | | | |
+|`sockaddr_t`|1.0.0| | | |`sockaddr`| | | | | | |
 
 ## **2. cuFile Functions**
 
