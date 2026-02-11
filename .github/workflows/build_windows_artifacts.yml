@@ -94,6 +94,21 @@ jobs:
           git submodule status
           git submodule
 
+      - name: "Map Current Directory to L Drive"
+        id: subst
+        shell: cmd
+        run: |
+          REM Get the current working directory
+          set currentDir=%cd%
+
+          REM Substitute the current directory with L: drive
+          subst L: %currentDir%
+          cd L:
+          dir L:
+
+      - name: map details
+        run: |
+          wmic logicaldisk get name
 
       - uses: actions/setup-python@83679a892e2d95755f2dac6acb0bfd1e9ac5d548 # v6.1.0
         with:
@@ -138,6 +153,7 @@ jobs:
       - name: Fetch sources
         timeout-minutes: 30
         run: |
+          cd L:
           git config fetch.parallel 10
           git config --global core.symlinks true
           git config --global core.longpaths true
@@ -183,15 +199,17 @@ jobs:
           cmake_preset: ${{ inputs.build_variant_cmake_preset }}
           amdgpu_families: ${{ inputs.amdgpu_families }}
           package_version: ${{ inputs.package_version }}
-          #extra_cmake_options: ${{ inputs.extra_cmake_options }}
-          extra_cmake_options: "-DTHEROCK_ENABLE_ALL=OFF -DTHEROCK_ENABLE_COMPILER=ON -DTHEROCK_ENABLE_HIP_RUNTIME=ON -DTHEROCK_ENABLE_PRIM=ON -DTHEROCK_ENABLE_BLAS=ON -DTHEROCK_ENABLE_RAND=ON -DTHEROCK_ENABLE_SOLVER=ON -DTHEROCK_ENABLE_SPARSE=ON -DTHEROCK_ENABLE_SYSDEPS=OFF  -DTHEROCK_ENABLE_COMPOSABLE_KERNEL=OFF -DTHEROCK_ENABLE_OCL_RUNTIME=ON  -DTHEROCK_ENABLE_MATH_LIBS=ON -DLLVM_SMREV_REPO='' -DLLVM_SMREV_REVISION=''"
+          extra_cmake_options: ${{ inputs.extra_cmake_options }}
         run: |
           # clear cache before build and after download
+          cd L:
           ccache -z
-          python3 build_tools/github_actions/build_configure.py
+          cmake -B 'B:\build' -GNinja -S 'L:\' --preset windows-release -DTHEROCK_AMDGPU_FAMILIES=gfx1151 '-DCMAKE_C_COMPILER=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\/bin/Hostx64/x64/cl.exe' '-DCMAKE_CXX_COMPILER=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\/bin/Hostx64/x64/cl.exe' '-DCMAKE_LINKER=C:\Program Files\Microsoft Visual Studio\2022\Community\VC\Tools\MSVC\14.44.35207\/bin/Hostx64/x64/link.exe' -DTHEROCK_BACKGROUND_BUILD_JOBS=4
 
       - name: Build therock-archives and therock-dist
-        run: cmake --build "${{ env.BUILD_DIR }}" --target therock-archives therock-dist -- -j32
+        run: |
+          cd L:
+          cmake --build "${{ env.BUILD_DIR }}" --target therock-archives therock-dist -- -j32
 
       - name: Report
         if: ${{ !cancelled() }}
@@ -242,3 +260,9 @@ jobs:
             --build-dir ${{ env.BUILD_DIR }} \
             --upload
 
+      - name: Remove Drive Substitution
+        if: always() && steps.subst.outcome == 'success'
+        shell: cmd
+        run: |
+          REM Remove the drive mapping
+          subst L: /D
