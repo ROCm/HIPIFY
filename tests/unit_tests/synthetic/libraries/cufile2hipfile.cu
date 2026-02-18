@@ -168,7 +168,7 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 12050
-  // CHECK: hipFileDriverStatusFlags_t FILE_NVME_P2P_SUPPORTED = hipFileNVMeP2PSsupported;
+  // CHECK: hipFileDriverStatusFlags_t FILE_NVME_P2P_SUPPORTED = hipFileNVMeP2PSupported;
   CUfileDriverStatusFlags_t FILE_NVME_P2P_SUPPORTED = CU_FILE_NVME_P2P_SUPPORTED;
 #endif
 
