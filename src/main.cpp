@@ -44,6 +44,7 @@ THE SOFTWARE.
 #endif
 
 #include "LocalHeader.h"
+#include "ImplicitCudaHeaders.h"
 
 #if LLVM_VERSION_MAJOR < 8
 #include "llvm/Support/Path.h"
@@ -221,6 +222,9 @@ bool appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSou
     std::string sCudaPath = "--cuda-path=" + CudaPath;
     Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(sCudaPath.c_str(), ct::ArgumentInsertPosition::BEGIN));
   }
+
+  // Implicit CUDA headers to mimic nvcc behavior
+  hipify::addImplicitCudaHeaders(Tool);
   llcompat::addTargetIfNeeded(Tool);
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("cuda", ct::ArgumentInsertPosition::BEGIN));
   Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster("-x", ct::ArgumentInsertPosition::BEGIN));
