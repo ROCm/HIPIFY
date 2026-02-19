@@ -14,6 +14,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
+|`CUFILEStatus_enum`|1.2.0| | | |`hipFileStatus_t`|7.2.0| | | | | |
 |`CUFILE_BATCH`|1.2.0| | | |`hipFileBatch`|7.2.0| | | | | |
 |`CUFILE_C2C`|1.16.0| | | | | | | | | | |
 |`CUFILE_CANCELED`|1.2.0| | | |`hipFileCanceled`|7.2.0| | | | | |
@@ -21,6 +22,7 @@
 |`CUFILE_DMABUF`|1.16.0| | | | | | | | | | |
 |`CUFILE_ERRSTR`|1.0.0| | | |`HIPFILE_ERRSTR`|7.2.0| | | | | |
 |`CUFILE_FAILED`|1.2.0| | | |`hipFileFailed`|7.2.0| | | | | |
+|`CUFILE_GPU_UUID_LEN`|1.15.0| | | | | | | | | | |
 |`CUFILE_INVALID`|1.2.0| | | |`hipFileInvalid`|7.2.0| | | | | |
 |`CUFILE_NVFS`|1.16.0| | | | | | | | | | |
 |`CUFILE_NVIDIA_PEERMEM`|1.16.0| | | | | | | | | | |
@@ -37,6 +39,8 @@
 |`CUFILE_PARAM_LOGGING_LEVEL`|1.14.0| | | |`hipFileParamLoggingLevel`|7.2.0| | | | | |
 |`CUFILE_PARAM_LOG_DIR`|1.14.0| | | |`hipFileParamLogDir`|7.2.0| | | | | |
 |`CUFILE_PARAM_POLLTHRESHOLD_SIZE_KB`|1.14.0| | | |`hipFileParamPollthresholdSizeKB`|7.2.0| | | | | |
+|`CUFILE_PARAM_POSIX_POOL_SLAB_COUNT`|1.15.0| | | | | | | | | | |
+|`CUFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB`|1.15.0| | | | | | | | | | |
 |`CUFILE_PARAM_PREFER_IO_URING`|1.14.0| | | |`hipFileParamPreferIOUring`|7.2.0| | | | | |
 |`CUFILE_PARAM_PROFILE_NVTX`|1.14.0| | | |`hipFileParamProfileNvtx`|7.2.0| | | | | |
 |`CUFILE_PARAM_PROFILE_STATS`|1.14.0| | | |`hipFileParamProfileStats`|7.2.0| | | | | |
@@ -57,6 +61,7 @@
 |`CUFILE_TIMEOUT`|1.2.0| | | |`hipFileTimeout`|7.2.0| | | | | |
 |`CUFILE_WAITING`|1.2.0| | | |`hipFileWaiting`|7.2.0| | | | | |
 |`CUFILE_WRITE`|1.2.0| | | |`hipFileBatchWrite`|7.2.0| | | | | |
+|`CUFileArrayConfigParameter_t`|1.15.0| | | | | | | | | | |
 |`CUFileBoolConfigParameter_t`|1.14.0| | | |`hipFileBoolConfigParameter_t`|7.2.0| | | | | |
 |`CUFileSizeTConfigParameter_t`|1.14.0| | | |`hipFileSizeTConfigParameter_t`|7.2.0| | | | | |
 |`CUFileStringConfigParameter_t`|1.14.0| | | |`hipFileStringConfigParameter_t`|7.2.0| | | | | |
@@ -142,21 +147,36 @@
 |`CUfileDrvProps`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
 |`CUfileDrvProps_t`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
 |`CUfileError_t`|1.0.0| | | |`hipFileError_t`|7.2.0| | | | | |
+|`CUfileFSOps`|1.0.0| | | |`hipFileFSOps_t`|7.2.0| | | | | |
 |`CUfileFSOps_t`|1.0.0| | | |`hipFileFSOps_t`|7.2.0| | | | | |
 |`CUfileFeatureFlags`|1.0.0| | | |`hipFileFeatureFlags_t`|7.2.0| | | | | |
 |`CUfileFeatureFlags_t`|1.0.0| | | |`hipFileFeatureFlags_t`|7.2.0| | | | | |
 |`CUfileFileHandleType`|1.0.0| | | |`hipFileFileHandleType`|7.2.0| | | | | |
 |`CUfileHandle_t`|1.0.0| | | |`hipFileHandle_t`|7.2.0| | | | | |
+|`CUfileIOEvents`|1.2.0| | | |`hipFileIOEvents_t`|7.2.0| | | | | |
 |`CUfileIOEvents_t`|1.2.0| | | |`hipFileIOEvents_t`|7.2.0| | | | | |
+|`CUfileIOParams`|1.2.0| | | |`hipFileIOParams_t`|7.2.0| | | | | |
 |`CUfileIOParams_t`|1.2.0| | | |`hipFileIOParams_t`|7.2.0| | | | | |
+|`CUfileOpCounter`|1.15.0| | | | | | | | | | |
+|`CUfileOpCounter_t`|1.15.0| | | | | | | | | | |
 |`CUfileOpError`|1.0.0| | | |`hipFileOpError_t`|7.2.0| | | | | |
 |`CUfileOpcode`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
 |`CUfileOpcode_t`|1.2.0| | | |`hipFileOpcode_t`|7.2.0| | | | | |
 |`CUfileP2PFlags`|1.16.0| | | | | | | | | | |
 |`CUfileP2PFlags_t`|1.16.0| | | | | | | | | | |
+|`CUfilePerGpuStats`|1.15.0| | | | | | | | | | |
+|`CUfilePerGpuStats_t`|1.15.0| | | | | | | | | | |
+|`CUfileStatsLevel1`|1.15.0| | | | | | | | | | |
+|`CUfileStatsLevel1_t`|1.15.0| | | | | | | | | | |
+|`CUfileStatsLevel2`|1.15.0| | | | | | | | | | |
+|`CUfileStatsLevel2_t`|1.15.0| | | | | | | | | | |
+|`CUfileStatsLevel3`|1.15.0| | | | | | | | | | |
+|`CUfileStatsLevel3_t`|1.15.0| | | | | | | | | | |
 |`CUfileStatus_t`|1.2.0| | | |`hipFileStatus_t`|7.2.0| | | | | |
 |`IS_CUDA_ERR`|1.0.0| | | |`IS_HIP_DRV_ERR`|7.2.0| | | | | |
 |`IS_CUFILE_ERR`|1.0.0| | | |`IS_HIPFILE_ERR`|7.2.0| | | | | |
+|`cufileBatchMode`|1.2.0| | | |`hipFileBatchMode_t`|7.2.0| | | | | |
+|`cufileRDMAInfo`|1.0.0| | | |`hipFileRDMAInfo_t`|7.2.0| | | | | |
 |`cufileRDMAInfo_t`|1.0.0| | | |`hipFileRDMAInfo_t`|7.2.0| | | | | |
 |`sockaddr_t`|1.0.0| | | |`sockaddr`| | | | | | |
 
@@ -173,22 +193,37 @@
 |`cuFileBufRegister`|1.0.0| | | |`hipFileBufRegister`|7.2.0| | | | | |
 |`cuFileDriverClose`|1.0.0| | | |`hipFileDriverClose`|7.2.0| | | | | |
 |`cuFileDriverClose_v2`|1.4.0| | | |`hipFileDriverClose`|7.2.0| | | | | |
+|`cuFileDriverGetP2PFlags`|1.15.0| | | | | | | | | | |
 |`cuFileDriverGetProperties`|1.0.0| | | |`hipFileDriverGetProperties`|7.2.0| | | | | |
 |`cuFileDriverOpen`|1.0.0| | | |`hipFileDriverOpen`|7.2.0| | | | | |
 |`cuFileDriverSetMaxCacheSize`|1.0.0| | | |`hipFileDriverSetMaxCacheSize`|7.2.0| | | | | |
 |`cuFileDriverSetMaxDirectIOSize`|1.0.0| | | |`hipFileDriverSetMaxDirectIOSize`|7.2.0| | | | | |
 |`cuFileDriverSetMaxPinnedMemSize`|1.0.0| | | |`hipFileDriverSetMaxPinnedMemSize`|7.2.0| | | | | |
+|`cuFileDriverSetP2PFlags`|1.15.0| | | | | | | | | | |
 |`cuFileDriverSetPollMode`|1.0.0| | | |`hipFileDriverSetPollMode`|7.2.0| | | | | |
+|`cuFileGetBARSizeInKB`|1.15.0| | | | | | | | | | |
 |`cuFileGetParameterBool`|1.14.0| | | |`hipFileGetParameterBool`|7.2.0| | | | | |
+|`cuFileGetParameterMinMaxValue`|1.15.0| | | | | | | | | | |
+|`cuFileGetParameterPosixPoolSlabArray`|1.15.0| | | | | | | | | | |
 |`cuFileGetParameterSizeT`|1.14.0| | | |`hipFileGetParameterSizeT`|7.2.0| | | | | |
 |`cuFileGetParameterString`|1.14.0| | | |`hipFileGetParameterString`|7.2.0| | | | | |
+|`cuFileGetStatsL1`|1.15.0| | | | | | | | | | |
+|`cuFileGetStatsL2`|1.15.0| | | | | | | | | | |
+|`cuFileGetStatsL3`|1.15.0| | | | | | | | | | |
+|`cuFileGetStatsLevel`|1.15.0| | | | | | | | | | |
+|`cuFileGetVersion`|1.8.0| | | | | | | | | | |
 |`cuFileHandleDeregister`|1.0.0| | | |`hipFileHandleDeregister`|7.2.0| | | | | |
 |`cuFileHandleRegister`|1.0.0| | | |`hipFileHandleRegister`|7.2.0| | | | | |
 |`cuFileRead`|1.0.0| | | |`hipFileRead`|7.2.0| | | | | |
 |`cuFileReadAsync`|1.7.0| | | |`hipFileReadAsync`|7.2.0| | | | | |
 |`cuFileSetParameterBool`|1.14.0| | | |`hipFileSetParameterBool`|7.2.0| | | | | |
+|`cuFileSetParameterPosixPoolSlabArray`|1.15.0| | | | | | | | | | |
 |`cuFileSetParameterSizeT`|1.14.0| | | |`hipFileSetParameterSizeT`|7.2.0| | | | | |
 |`cuFileSetParameterString`|1.14.0| | | |`hipFileSetParameterString`|7.2.0| | | | | |
+|`cuFileSetStatsLevel`|1.15.0| | | | | | | | | | |
+|`cuFileStatsReset`|1.15.0| | | | | | | | | | |
+|`cuFileStatsStart`|1.15.0| | | | | | | | | | |
+|`cuFileStatsStop`|1.15.0| | | | | | | | | | |
 |`cuFileStreamDeregister`|1.7.0| | | |`hipFileStreamDeregister`|7.2.0| | | | | |
 |`cuFileStreamRegister`|1.7.0| | | |`hipFileStreamRegister`|7.2.0| | | | | |
 |`cuFileUseCount`|1.4.0| | | |`hipFileUseCount`|7.2.0| | | | | |

@@ -54,6 +54,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP {
   {"cuFileSetParameterSizeT",         {"hipFileSetParameterSizeT",         "", CONV_LIB_FUNC, API_FILE, 2}},
   {"cuFileSetParameterBool",          {"hipFileSetParameterBool",          "", CONV_LIB_FUNC, API_FILE, 2}},
   {"cuFileSetParameterString",        {"hipFileSetParameterString",        "", CONV_LIB_FUNC, API_FILE, 2}},
+  {"cuFileGetVersion",                {"hipFileGetVersion",                "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileGetParameterMinMaxValue",   {"hipFileGetParameterMinMaxValue",   "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileSetStatsLevel",             {"hipFileSetStatsLevel",             "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileGetStatsLevel",             {"hipFileGetStatsLevel",             "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileStatsStart",                {"hipFileStatsStart",                "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileStatsStop",                 {"hipFileStatsStop",                 "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileStatsReset",                {"hipFileStatsReset",                "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileGetStatsL1",                {"hipFileGetStatsL1",                "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileGetStatsL2",                {"hipFileGetStatsL2",                "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileGetStatsL3",                {"hipFileGetStatsL3",                "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileGetBARSizeInKB",            {"hipFileGetBARSizeInKB",            "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileSetParameterPosixPoolSlabArray",  {"hipFileSetParameterPosixPoolSlabArray",  "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileGetParameterPosixPoolSlabArray",  {"hipFileGetParameterPosixPoolSlabArray",  "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileDriverGetP2PFlags",         {"hipFileDriverGetP2PFlags",         "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
+  {"cuFileDriverSetP2PFlags",         {"hipFileDriverSetP2PFlags",         "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_FUNCTION_VER_MAP {
@@ -121,6 +136,21 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_FUNCTION_VER_MAP {
   {"cuFileSetParameterSizeT",         {CUFILE_1140, CUDA_0, CUDA_0}},
   {"cuFileSetParameterBool",          {CUFILE_1140, CUDA_0, CUDA_0}},
   {"cuFileSetParameterString",        {CUFILE_1140, CUDA_0, CUDA_0}},
+  {"cuFileGetVersion",                {CUFILE_1080, CUDA_0, CUDA_0}},
+  {"cuFileGetParameterMinMaxValue",   {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileSetStatsLevel",             {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileGetStatsLevel",             {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileStatsStart",                {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileStatsStop",                 {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileStatsReset",                {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileGetStatsL1",                {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileGetStatsL2",                {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileGetStatsL3",                {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileGetBARSizeInKB",            {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileSetParameterPosixPoolSlabArray",  {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileGetParameterPosixPoolSlabArray",  {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileDriverGetP2PFlags",         {CUFILE_1150, CUDA_0, CUDA_0}},
+  {"cuFileDriverSetP2PFlags",         {CUFILE_1150, CUDA_0, CUDA_0}},
 };
 
 const std::map<unsigned int, llvm::StringRef> CUDA_FILE_API_SECTION_MAP {
