@@ -7491,6 +7491,7 @@ sub simpleSubstitutions {
     subst("CUDA_TEXTURE_DESC", "HIP_TEXTURE_DESC", "type");
     subst("CUDA_TEXTURE_DESC_st", "HIP_TEXTURE_DESC_st", "type");
     subst("CUDA_TEXTURE_DESC_v1", "HIP_TEXTURE_DESC", "type");
+    subst("CUFILEStatus_enum", "hipFileStatus_t", "type");
     subst("CUFileBoolConfigParameter_t", "hipFileBoolConfigParameter_t", "type");
     subst("CUFileSizeTConfigParameter_t", "hipFileSizeTConfigParameter_t", "type");
     subst("CUFileStringConfigParameter_t", "hipFileStringConfigParameter_t", "type");
@@ -7549,12 +7550,15 @@ sub simpleSubstitutions {
     subst("CUfileDrvProps", "hipFileDriverProps_t", "type");
     subst("CUfileDrvProps_t", "hipFileDriverProps_t", "type");
     subst("CUfileError_t", "hipFileError_t", "type");
+    subst("CUfileFSOps", "hipFileFSOps_t", "type");
     subst("CUfileFSOps_t", "hipFileFSOps_t", "type");
     subst("CUfileFeatureFlags", "hipFileFeatureFlags_t", "type");
     subst("CUfileFeatureFlags_t", "hipFileFeatureFlags_t", "type");
     subst("CUfileFileHandleType", "hipFileFileHandleType", "type");
     subst("CUfileHandle_t", "hipFileHandle_t", "type");
+    subst("CUfileIOEvents", "hipFileIOEvents_t", "type");
     subst("CUfileIOEvents_t", "hipFileIOEvents_t", "type");
+    subst("CUfileIOParams", "hipFileIOParams_t", "type");
     subst("CUfileIOParams_t", "hipFileIOParams_t", "type");
     subst("CUfileOpError", "hipFileOpError_t", "type");
     subst("CUfileOpcode", "hipFileDriverProps_t", "type");
@@ -8007,6 +8011,8 @@ sub simpleSubstitutions {
     subst("cufftXtCopyType_t", "hipfftXtCopyType_t", "type");
     subst("cufftXtSubFormat", "hipfftXtSubFormat", "type");
     subst("cufftXtSubFormat_t", "hipfftXtSubFormat_t", "type");
+    subst("cufileBatchMode", "hipFileBatchMode_t", "type");
+    subst("cufileRDMAInfo", "hipFileRDMAInfo_t", "type");
     subst("cufileRDMAInfo_t", "hipFileRDMAInfo_t", "type");
     subst("curandDirectionVectorSet", "hiprandDirectionVectorSet_t", "type");
     subst("curandDirectionVectorSet_t", "hiprandDirectionVectorSet_t", "type");
@@ -12744,6 +12750,21 @@ sub warnRemovedFunctions {
     "cuFuncGetName",
     "cuFuncGetModule",
     "cuFlushGPUDirectRDMAWrites",
+    "cuFileStatsStop",
+    "cuFileStatsStart",
+    "cuFileStatsReset",
+    "cuFileSetStatsLevel",
+    "cuFileSetParameterPosixPoolSlabArray",
+    "cuFileGetVersion",
+    "cuFileGetStatsLevel",
+    "cuFileGetStatsL3",
+    "cuFileGetStatsL2",
+    "cuFileGetStatsL1",
+    "cuFileGetParameterPosixPoolSlabArray",
+    "cuFileGetParameterMinMaxValue",
+    "cuFileGetBARSizeInKB",
+    "cuFileDriverSetP2PFlags",
+    "cuFileDriverGetP2PFlags",
     "cuExternalMemoryGetMappedMipmappedArray",
     "cuEventCreateFromEGLSync",
     "cuEGLStreamProducerReturnFrame",
@@ -12957,8 +12978,18 @@ sub warnRemovedFunctions {
     "CUflushGPUDirectRDMAWritesTarget",
     "CUflushGPUDirectRDMAWritesScope_enum",
     "CUflushGPUDirectRDMAWritesScope",
+    "CUfileStatsLevel3_t",
+    "CUfileStatsLevel3",
+    "CUfileStatsLevel2_t",
+    "CUfileStatsLevel2",
+    "CUfileStatsLevel1_t",
+    "CUfileStatsLevel1",
+    "CUfilePerGpuStats_t",
+    "CUfilePerGpuStats",
     "CUfileP2PFlags_t",
     "CUfileP2PFlags",
+    "CUfileOpCounter_t",
+    "CUfileOpCounter",
     "CUexternalSemaphore_st",
     "CUexternalMemory_st",
     "CUextent3D_v1",
@@ -13689,9 +13720,13 @@ sub warnRemovedFunctions {
     "CURAND_3RD",
     "CUGLmap_flags_enum",
     "CUGLmap_flags",
+    "CUFileArrayConfigParameter_t",
+    "CUFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB",
+    "CUFILE_PARAM_POSIX_POOL_SLAB_COUNT",
     "CUFILE_P2PDMA",
     "CUFILE_NVIDIA_PEERMEM",
     "CUFILE_NVFS",
+    "CUFILE_GPU_UUID_LEN",
     "CUFILE_DMABUF",
     "CUFILE_C2C",
     "CUFFT_XT_FORMAT_DISTRIBUTED_OUTPUT",
