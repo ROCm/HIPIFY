@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 #include <fstream>
+#include <vector>
 #include "CUDA2HIP.h"
 #include "CUDA2HIP_Scripting.h"
 #include "LLVMCompat.h"
@@ -241,7 +242,8 @@ bool hipifySingleSource(const std::string &srcPath,
                                ct::CommonOptionsParser *OptionsParserPtr,
                                const char *hipify_exe_path,
                                const std::string &mainContextPath,
-                               bool preserveTemp) {
+                               bool preserveTemp,
+                               const std::vector<std::string> &additionalIncludes) {
   std::error_code EC;
   SmallString<128> tmpFile;
   StringRef srcFileName = sys::path::filename(srcPath);
@@ -274,6 +276,15 @@ bool hipifySingleSource(const std::string &srcPath,
                  << "LLVM/resource config failed for: " << srcPath << "\n";
     if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
     return false;
+  }
+
+  for (auto it = additionalIncludes.rbegin(); it != additionalIncludes.rend(); ++it) {
+    Tool.appendArgumentsAdjuster(
+        ct::getInsertArgumentAdjuster(it->c_str(),
+                                       ct::ArgumentInsertPosition::BEGIN));
+    Tool.appendArgumentsAdjuster(
+        ct::getInsertArgumentAdjuster("-include",
+                                       ct::ArgumentInsertPosition::BEGIN));
   }
 
   // Hipify _all_ the things!
@@ -516,15 +527,20 @@ int main(int argc, const char **argv) {
     }
     // Initialise the statistics counters for this file.
     Statistics::setActive(src);
-    // Checks the local headers if --local-headers/--local-header-recursive specified.
     if (OptLocalHeaders || OptLocalHeadersRecursive) {
+      llvm::outs() << "\n" << sHipify
+                   << "Local header hipification enabled ("
+                   << (OptLocalHeadersRecursive ? "recursive" : "non-recursive")
+                   << ") for: " << sys::path::filename(sSourceAbsPath) << "\n";
       if (!hipifyLocalHeaders(sSourceAbsPath,
                               compilationDatabase.get(),
                               &OptionsParser,
                               argv[0],
                               OptLocalHeadersRecursive)) {
+        llvm::errs() << "\n" << sHipify << sError
+                     << "Local header hipification failed for: "
+                     << sys::path::filename(sSourceAbsPath) << "\n";
         Statistics::current().hasErrors = true;
-        LLVM_DEBUG(llvm::dbgs() << "Local header hipification failed for: " << sSourceAbsPath << "\n");
         Result = 1;
       }
     }
@@ -535,7 +551,7 @@ int main(int argc, const char **argv) {
                             &OptionsParser,
                             argv[0],
                             sSourceAbsPath,
-                            false)) {
+                            false, {})) {
       Statistics::current().hasErrors = true;
       Result = 1;
       LLVM_DEBUG(llvm::dbgs() << "Hipification failed for: " << src << "\n");

@@ -1,4 +1,5 @@
 #include "LocalHeader.h"
+#include "LLVMCompat.h"
 
 #include <sstream>
 #include <regex>
@@ -10,8 +11,6 @@
 #include "llvm/Support/Path.h"
 #include "llvm/Support/MemoryBuffer.h"
 #include "llvm/Support/raw_ostream.h"
-
-#include "LLVMCompat.h"
 
 using namespace clang;
 using namespace clang::tooling;
@@ -46,6 +45,9 @@ namespace {
   static const std::regex LocalIncludeRe(
       R"(^\s*#\s*include\s*\"([^\"\n]+)\"\s*(?://.*)?$)", std::regex::ECMAScript);
 
+  static const std::regex SystemIncludeRe(
+      R"(^\s*#\s*include\s*<([^>\n]+)>)", std::regex::ECMAScript);
+
   bool readFile(const std::string &path, std::string &out) {
     auto MBOrErr = llvm::MemoryBuffer::getFile(path);
     if (!MBOrErr) return false;
@@ -67,7 +69,41 @@ namespace {
     }
     return false;
   }
-} 
+
+  bool collectPrecedingIncludes(const std::string &mainSourceAbspath,
+                                const std::string &targetHeaderAbspath,
+                                std::vector<std::string> &outIncludes) {
+    std::string mainSourceContent;
+    if (!readFile(mainSourceAbspath, mainSourceContent)) {
+      errs() << sHipify << sError << "Cannot read source files: "
+            << mainSourceAbspath << "\n";
+      return false;
+    }
+
+    std::string targetFileName = std::string(sys::path::filename(targetHeaderAbspath));
+    std::istringstream iss(mainSourceContent);
+    std::string line;
+    std::smatch m;
+
+    while (std::getline(iss, line)) {
+      if (std::regex_match(line, m, LocalIncludeRe)) {
+        std::string quotedName = m[1].str();
+        std::string quotedFileName = std::string(sys::path::filename(quotedName));
+        if (quotedFileName == targetFileName)
+          break;
+        std::string absPath;
+        if (resolveLocalIncludeInternal(mainSourceAbspath, quotedName, absPath))
+          outIncludes.push_back(absPath);
+      }
+
+      if (std::regex_search(line, m, SystemIncludeRe)) {
+        outIncludes.push_back(m[1].str());
+      }
+    }
+
+    return true;
+  }
+}
 
 bool resolveLocalInclude(const std::string &mainSourceAbsPath,
                          const std::string &includeToken,
@@ -116,52 +152,87 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
   }
   
   if (initial.empty()) {
-    outs() << sHipify << "No local headers detected in " << mainSourceAbsPath << "\n";
+    outs() << "\n" << sHipify << "No local headers detected in "
+           << sys::path::filename(mainSourceAbsPath) << "\n";
     return true;
+  }
+
+  outs() << "\n" << sHipify << "Local headers found: " << initial.size()
+         << " in " << sys::path::filename(mainSourceAbsPath) << "\n";
+  for (size_t i = 0; i < initial.size(); ++i) {
+    outs() << (i + 1) << "/" << initial.size()
+           << ": " << sys::path::filename(initial[i]) << "\n";
   }
 
   std::vector<std::string> work(initial.begin(), initial.end());
   std::set<std::string> processed;
+  size_t total = initial.size();
+  size_t current = 0;
 
   while (!work.empty()) {
     std::string hdr = work.back();
     work.pop_back();
     if (processed.count(hdr)) {
-      errs() << sHipify << sWarning << "Duplicate local header reference ignored: " << hdr << "\n";
+      outs() << sHipify << sWarning
+             << "Duplicate local header reference ignored: "
+             << sys::path::filename(hdr) << "\n";
       continue;
     }
     processed.insert(hdr);
+    ++current;
 
     std::string original;
     if (!readFile(hdr, original)) {
-      errs() << sHipify << sError << "Cannot read header: " << hdr << "\n";
+      errs() << "\n" << sHipify << sError
+             << "Cannot read header: " << sys::path::filename(hdr) << "\n";
       continue;
     }
 
     std::string hipOut = hdr + ".hip";
+    std::vector<std::string> precedingIncludes;
+    collectPrecedingIncludes(mainSourceAbsPath, hdr, precedingIncludes);
+
+    outs() << "\n" << sHipify << "Hipifying local header [" << current
+           << "/" << total << "]: " << sys::path::filename(hdr) << "\n";
+
     bool ok = hipifySingleSource(hdr, hipOut, compDB, OptionsParserPtr,
-                                  hipify_exe, mainSourceAbsPath, false);
+                                  hipify_exe, mainSourceAbsPath, false,
+                                  precedingIncludes);
 
     if (!ok) {
-      errs() << sHipify << sError << "Hipify failed for header: " << hdr << "\n";
+      errs() << "\n" << sHipify << sError
+             << "Hipify failed for header [" << current << "/" << total
+             << "]: " << sys::path::filename(hdr) << "\n";
       return false;
     }
+    outs() << sHipify << "Successfully hipified header file" << "\n";
 
     if (recursive) {
       std::smatch m;
       std::istringstream iss(original);
       std::string line;
+      std::vector<std::string> newHeaders;
       while (std::getline(iss, line)) {
         if (std::regex_match(line, m, LocalIncludeRe)) {
           std::string rel = m[1].str();
           std::string abs;
           if (resolveLocalIncludeInternal(hdr, rel, abs) &&
-              !processed.count(abs))
+              !processed.count(abs)) {
             work.push_back(abs);
+            newHeaders.push_back(abs);
+          }
         }
+      }
+      if (!newHeaders.empty()) {
+        total += newHeaders.size();
+        outs() << sHipify << "  Recursive: found " << newHeaders.size()
+               << " additional local header(s) in "
+               << sys::path::filename(hdr) << "\n";
       }
     }
   }
 
+  outs() << "\n" << sHipify << "Local header hipification complete: "
+         << processed.size() << " header(s) processed.\n";
   return true;
 }
