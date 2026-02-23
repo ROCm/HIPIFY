@@ -404,6 +404,8 @@ if(HIPIFY_CLANG_TESTS OR HIPIFY_CLANG_TESTS_ONLY)
 
   if(CUDA_FILE_ROOT_DIR STREQUAL "")
     set(CUDA_FILE_ROOT_DIR OFF)
+  else()
+    set(CUDA_FILE_ROOT_DIR "${CUDA_FILE_ROOT_DIR}/include")
   endif()
 
   message(STATUS "Found CUDA config:")
