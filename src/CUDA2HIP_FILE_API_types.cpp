@@ -22,466 +22,478 @@ THE SOFTWARE.
 
 #include "CUDA2HIP.h"
 
-const std::map<llvm::StringRef, hipCounter> CUDA_FILE_TYPE_NAME_MAP {
-  {"CUfileOpError",                     {"hipFileOpError_t",               "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileError_t",                     {"hipFileError_t",                 "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileDriverStatusFlags_t",         {"hipFileDriverStatusFlags_t",     "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileDriverControlFlags",          {"hipFileDriverControlFlags_t",    "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileDriverControlFlags_t",        {"hipFileDriverControlFlags_t",    "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileFeatureFlags_t",              {"hipFileFeatureFlags_t",          "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileFeatureFlags",                {"hipFileFeatureFlags_t",          "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileFileHandleType",              {"hipFileFileHandleType",          "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileDrvProps_t",                  {"hipFileDriverProps_t",           "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileDrvProps",                    {"hipFileDriverProps_t",           "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileOpcode",                      {"hipFileDriverProps_t",           "", CONV_TYPE, API_FILE, 1}},
-  {"cufileRDMAInfo_t",                  {"hipFileRDMAInfo_t",              "", CONV_TYPE, API_FILE, 1}},
-  {"cufileRDMAInfo",                    {"hipFileRDMAInfo_t",              "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileFSOps_t",                     {"hipFileFSOps_t",                 "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileFSOps",                       {"hipFileFSOps_t",                 "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileDescr_t",                     {"hipFileDescr_t",                 "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileHandle_t",                    {"hipFileHandle_t",                "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileIOParams_t",                  {"hipFileIOParams_t",              "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileIOParams",                    {"hipFileIOParams_t",              "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileIOEvents_t",                  {"hipFileIOEvents_t",              "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileIOEvents",                    {"hipFileIOEvents_t",              "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileOpcode_t",                    {"hipFileOpcode_t",                "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileStatus_t",                    {"hipFileStatus_t",                "", CONV_TYPE, API_FILE, 1}},
-  {"CUFILEStatus_enum",                 {"hipFileStatus_t",                "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileBatchHandle_t",               {"hipFileBatchHandle_t",           "", CONV_TYPE, API_FILE, 1}},
-  {"CUfileBatchMode_t",                 {"hipFileBatchMode_t",             "", CONV_TYPE, API_FILE, 1}},
-  {"cufileBatchMode",                   {"hipFileBatchMode_t",             "", CONV_TYPE, API_FILE, 1}},
-  {"CUFileSizeTConfigParameter_t",      {"hipFileSizeTConfigParameter_t",  "", CONV_TYPE, API_FILE, 1}},
-  {"CUFileBoolConfigParameter_t",       {"hipFileBoolConfigParameter_t",   "", CONV_TYPE, API_FILE, 1}},
-  {"CUFileStringConfigParameter_t",     {"hipFileStringConfigParameter_t", "", CONV_TYPE, API_FILE, 1}},
-  {"CU_FILE_SUCCESS",                   {"hipFileSuccess",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DRIVER_NOT_INITIALIZED",    {"hipFileDriverNotInitialized",    "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DRIVER_INVALID_PROPS",      {"hipFileDriverInvalidProps",      "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DRIVER_UNSUPPORTED_LIMIT",  {"hipFileDriverUnsupportedLimit",  "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DRIVER_VERSION_MISMATCH",   {"hipFileDriverVersionMismatch",   "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DRIVER_VERSION_READ_ERROR", {"hipFileDriverVersionReadError",  "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DRIVER_CLOSING",            {"hipFileDriverClosing",           "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_PLATFORM_NOT_SUPPORTED",    {"hipFilePlatformNotSupported",    "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_IO_NOT_SUPPORTED",          {"hipFileIONotSupported",          "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DEVICE_NOT_SUPPORTED",      {"hipFileDeviceNotSupported",      "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_NVFS_DRIVER_ERROR",         {"hipFileDriverError",             "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_CUDA_DRIVER_ERROR",         {"hipFileHipDriverError",          "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_CUDA_POINTER_INVALID",      {"hipFileHipPointerInvalid",       "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_CUDA_MEMORY_TYPE_INVALID",  {"hipFileHipMemoryTypeInvalid",    "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_CUDA_POINTER_RANGE_ERROR",  {"hipFileHipPointerRangeError",    "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_CUDA_CONTEXT_MISMATCH",     {"hipFileHipContextMismatch",      "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_INVALID_MAPPING_SIZE",      {"hipFileInvalidMappingSize",      "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_INVALID_MAPPING_RANGE",     {"hipFileInvalidMappingRange",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_INVALID_FILE_TYPE",         {"hipFileInvalidFileType",         "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_INVALID_FILE_OPEN_FLAG",    {"hipFileInvalidFileOpenFlag",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DIO_NOT_SET",               {"hipFileDIONotSet",               "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_INVALID_VALUE",             {"hipFileInvalidValue",            "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_MEMORY_ALREADY_REGISTERED", {"hipFileMemoryAlreadyRegistered", "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_MEMORY_NOT_REGISTERED",     {"hipFileMemoryNotRegistered",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_PERMISSION_DENIED",         {"hipFilePermissionDenied",        "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DRIVER_ALREADY_OPEN",       {"hipFileDriverAlreadyOpen",       "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_HANDLE_NOT_REGISTERED",     {"hipFileHandleNotRegistered",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_HANDLE_ALREADY_REGISTERED", {"hipFileHandleAlreadyRegistered", "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DEVICE_NOT_FOUND",          {"hipFileDeviceNotFound",          "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_INTERNAL_ERROR",            {"hipFileInternalError",           "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_GETNEWFD_FAILED",           {"hipFileGetNewFDFailed",          "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_NVFS_SETUP_ERROR",          {"hipFileDriverSetupError",        "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_IO_DISABLED",               {"hipFileIODisabled",              "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_BATCH_SUBMIT_FAILED",       {"hipFileBatchSubmitFailed",       "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_GPU_MEMORY_PINNING_FAILED", {"hipFileGPUMemoryPinningFailed",  "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_BATCH_FULL",                {"hipFileBatchFull",               "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_ASYNC_NOT_SUPPORTED",       {"hipFileAsyncNotSupported",       "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_IO_MAX_ERROR",              {"hipFileIOMaxError",              "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_LUSTRE_SUPPORTED",          {"hipFileLustreSupported",         "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_WEKAFS_SUPPORTED",          {"hipFileWekaFSSupported",         "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_NFS_SUPPORTED",             {"hipFileNFSSupported",            "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_GPFS_SUPPORTED",            {"hipFileGPFSSupported",           "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_NVME_SUPPORTED",            {"hipFileNVMeSupported",           "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_NVMEOF_SUPPORTED",          {"hipFileNVMeoFSupported",         "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_SCSI_SUPPORTED",            {"hipFileSCSISupported",           "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_SCALEFLUX_CSD_SUPPORTED",   {"hipFileScaleFluxCSDSupported",   "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_NVMESH_SUPPORTED",          {"hipFileNVMeshSupported",         "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_BEEGFS_SUPPORTED",          {"hipFileBEEGFSSupported",         "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_NVME_P2P_SUPPORTED",        {"hipFileNVMeP2PSupported",        "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_SCATEFS_SUPPORTED",         {"hipFileScateFsSupported",        "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CU_FILE_VIRTIOFS_SUPPORTED",        {"hipFileVirtioFsSupported",       "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CU_FILE_MAX_TARGET_TYPES",          {"hipFileMaxTargetTypes",          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CU_FILE_USE_POLL_MODE",             {"hipFileUsePollMode",             "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_ALLOW_COMPAT_MODE",         {"hipFileAllowCompatMode",         "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_DYN_ROUTING_SUPPORTED",     {"hipFileDynRoutingSupported",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_BATCH_IO_SUPPORTED",        {"hipFileBatchIOSupported",        "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_STREAMS_SUPPORTED",         {"hipFileStreamsSupported",        "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_PARALLEL_IO_SUPPORTED",     {"hipFileParallelIOSupported",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_P2P_SUPPORTED",             {"hipFileP2PSupported",            "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CU_FILE_RDMA_REGISTER",             {"HIPFILE_RDMA_REGISTER",          "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_RDMA_RELAXED_ORDERING",     {"HIPFILE_RDMA_RELAXED_ORDERING",  "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_HANDLE_TYPE_OPAQUE_FD",     {"hipFileHandleTypeOpaqueFD",      "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_HANDLE_TYPE_OPAQUE_WIN32",  {"hipFileHandleTypeOpaqueWin32",   "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_HANDLE_TYPE_USERSPACE_FS",  {"hipFileHandleTypeUserspaceFS",   "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_READ",                       {"hipFileBatchRead",               "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_WRITE",                      {"hipFileBatchWrite",              "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_WAITING",                    {"hipFileWaiting",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PENDING",                    {"hipFilePending",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_INVALID",                    {"hipFileInvalid",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_CANCELED",                   {"hipFileCanceled",                "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_COMPLETE",                   {"hipFileComplete",                "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_TIMEOUT",                    {"hipFileTimeout",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_FAILED",                     {"hipFileFailed",                  "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_BATCH",                      {"hipFileBatch",                   "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_STREAM_FIXED_BUF_OFFSET",    {"HIPFILE_STREAM_FIXED_BUF_OFFSET",    "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_STREAM_FIXED_FILE_OFFSET",   {"HIPFILE_STREAM_FIXED_FILE_OFFSET",   "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_STREAM_FIXED_FILE_SIZE",     {"HIPFILE_STREAM_FIXED_FILE_SIZE",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CU_FILE_STREAM_PAGE_ALIGNED_INPUTS", {"HIPFILE_STREAM_PAGE_ALIGNED_INPUTS", "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROFILE_STATS",                            {"hipFileParamProfileStats",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_EXECUTION_MAX_IO_QUEUE_DEPTH",             {"hipFileParamExecutionMaxIOQueueDepth",           "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_EXECUTION_MAX_IO_THREADS",                 {"hipFileParamExecutionMaxIOThreads",              "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_EXECUTION_MIN_IO_THRESHOLD_SIZE_KB",       {"hipFileParamExecutionMinIOThresholdSizeKB",      "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_EXECUTION_MAX_REQUEST_PARALLELISM",        {"hipFileParamExecutionMaxRequestParallelism",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_MAX_DIRECT_IO_SIZE_KB",         {"hipFileParamPropertiesMaxDirectIOSizeKB",        "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_MAX_DEVICE_CACHE_SIZE_KB",      {"hipFileParamPropertiesMaxDeviceCacheSizeKB",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_PER_BUFFER_CACHE_SIZE_KB",      {"hipFileParamPropertiesPerBufferCacheSizeKB",     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_MAX_DEVICE_PINNED_MEM_SIZE_KB", {"hipFileParamPropertiesMaxDevicePinnedMemSizeKB", "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_IO_BATCHSIZE",                  {"hipFileParamPropertiesIOBatchsize",              "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_POLLTHRESHOLD_SIZE_KB",                    {"hipFileParamPollthresholdSizeKB",                "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_BATCH_IO_TIMEOUT_MS",           {"hipFileParamPropertiesBatchIOTimeoutMs",         "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_USE_POLL_MODE",                 {"hipFileParamPropertiesUsePollMode",              "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_ALLOW_COMPAT_MODE",             {"hipFileParamPropertiesAllowCompatMode",          "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_FORCE_COMPAT_MODE",                        {"hipFileParamForceCompatMode",                    "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_FS_MISC_API_CHECK_AGGRESSIVE",             {"hipFileParamFsMiscApiCheckAggressive",           "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_EXECUTION_PARALLEL_IO",                    {"hipFileParamExecutionParallelIO",                "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROFILE_NVTX",                             {"hipFileParamProfileNvtx",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PROPERTIES_ALLOW_SYSTEM_MEMORY",           {"hipFileParamPropertiesAllowSystemMemory",        "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_USE_PCIP2PDMA",                            {"hipFileParamUsePcip2pdma",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_PREFER_IO_URING",                          {"hipFileParamPreferIOUring",                      "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_FORCE_ODIRECT_MODE",                       {"hipFileParamForceOdirectMode",                   "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_SKIP_TOPOLOGY_DETECTION",                  {"hipFileParamSkipTopologyDetection",              "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_STREAM_MEMOPS_BYPASS",                     {"hipFileParamStreamMemopsBypass",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_LOGGING_LEVEL",                            {"hipFileParamLoggingLevel",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_ENV_LOGFILE_PATH",                         {"hipFileParamEnvLogfilePath",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"CUFILE_PARAM_LOG_DIR",                                  {"hipFileParamLogDir",                             "", CONV_NUMERIC_LITERAL, API_FILE, 1}},
-  {"IS_CUFILE_ERR", {"IS_HIPFILE_ERR", "", CONV_DEFINE, API_FILE, 1}},
-  {"CUFILE_ERRSTR", {"HIPFILE_ERRSTR", "", CONV_DEFINE, API_FILE, 1}},
-  {"CU_FILE_CUDA_ERR",  {"HIP_DRV_ERR", "", CONV_DEFINE, API_FILE, 1}},
-  {"IS_CUDA_ERR",   {"IS_HIP_DRV_ERR", "", CONV_DEFINE, API_FILE, 1}},
-  {"CUfileP2PFlags",                                        {"hipFileP2PFlags_t",                              "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileP2PFlags_t",                                      {"hipFileP2PFlags_t",                              "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUFILE_P2PDMA",                                         {"HIPFILE_P2PDMA",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CUFILE_NVFS",                                           {"HIPFILE_NVFS",                                   "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CUFILE_DMABUF",                                         {"HIPFILE_DMABUF",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CUFILE_C2C",                                            {"HIPFILE_C2C",                                    "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CUFILE_NVIDIA_PEERMEM",                                 {"HIPFILE_NVIDIA_PEERMEM",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CU_FILE_P2P_FLAG_PCI_P2PDMA",                           {"HIP_FILE_P2P_FLAG_PCI_P2PDMA",                   "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED}},
-  {"CU_FILE_P2P_FLAG_NVFS",                                 {"HIP_FILE_P2P_FLAG_NVFS",                         "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED}},
-  {"CU_FILE_P2P_FLAG_DMABUF",                               {"HIP_FILE_P2P_FLAG_DMABUF",                       "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED}},
-  {"CU_FILE_P2P_FLAG_C2C",                                  {"HIP_FILE_P2P_FLAG_C2C",                          "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED}},
-  {"CUFILE_GPU_UUID_LEN",                                   {"HIPFILE_GPU_UUID_LEN",                           "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED}},
-  {"sockaddr_t",                                            {"sockaddr",                                       "", CONV_TYPE, API_FILE, 1}},
-  {"CUFileArrayConfigParameter_t",                          {"hipFileArrayConfigParameter_t",                  "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB",                  {"HIPFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB",          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CUFILE_PARAM_POSIX_POOL_SLAB_COUNT",                    {"HIPFILE_PARAM_POSIX_POOL_SLAB_COUNT",            "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileOpCounter_t",                                     {"hipFileOpCounter_t",                             "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileOpCounter",                                       {"hipFileOpCounter_t",                             "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileStatsLevel1_t",                                   {"hipFileStatsLevel1_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileStatsLevel1",                                     {"hipFileStatsLevel1_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileStatsLevel2_t",                                   {"hipFileStatsLevel2_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileStatsLevel2",                                     {"hipFileStatsLevel2_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileStatsLevel3_t",                                   {"hipFileStatsLevel3_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfileStatsLevel3",                                     {"hipFileStatsLevel3_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfilePerGpuStats_t",                                   {"hipFilePerGpuStats_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-  {"CUfilePerGpuStats",                                     {"hipFilePerGpuStats_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED}},
-};
+const std::map<llvm::StringRef, hipCounter> CUDA_FILE_TYPE_NAME_MAP = []() {
+  std::map<llvm::StringRef, hipCounter> m;
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_TYPE_NAME_VER_MAP {
-  {"CUfileOpError",                      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileError_t",                      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileDriverStatusFlags_t",          {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileDriverControlFlags_t",         {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileFeatureFlags_t",               {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileFileHandleType",               {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileDrvProps_t",                   {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"cufileRDMAInfo_t",                   {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileFSOps_t",                      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileDescr_t",                      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileHandle_t",                     {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileIOParams_t",                   {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUfileIOEvents_t",                   {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUfileOpcode_t",                     {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUfileStatus_t",                     {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUfileBatchHandle_t",                {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUfileBatchMode_t",                  {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFileSizeTConfigParameter_t",       {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFileBoolConfigParameter_t",        {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFileStringConfigParameter_t",      {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CU_FILE_SUCCESS",                    {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DRIVER_NOT_INITIALIZED",     {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DRIVER_INVALID_PROPS",       {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DRIVER_UNSUPPORTED_LIMIT",   {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DRIVER_VERSION_MISMATCH",    {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DRIVER_VERSION_READ_ERROR",  {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DRIVER_CLOSING",             {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_PLATFORM_NOT_SUPPORTED",     {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_IO_NOT_SUPPORTED",           {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DEVICE_NOT_SUPPORTED",       {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_NVFS_DRIVER_ERROR",          {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_CUDA_DRIVER_ERROR",          {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_CUDA_POINTER_INVALID",       {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_CUDA_MEMORY_TYPE_INVALID",   {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_CUDA_POINTER_RANGE_ERROR",   {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_CUDA_CONTEXT_MISMATCH",      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_INVALID_MAPPING_SIZE",       {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_INVALID_MAPPING_RANGE",      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_INVALID_FILE_TYPE",          {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_INVALID_FILE_OPEN_FLAG",     {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DIO_NOT_SET",                {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_INVALID_VALUE",              {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_MEMORY_ALREADY_REGISTERED",  {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_MEMORY_NOT_REGISTERED",      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_PERMISSION_DENIED",          {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DRIVER_ALREADY_OPEN",        {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_HANDLE_NOT_REGISTERED",      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_HANDLE_ALREADY_REGISTERED",  {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DEVICE_NOT_FOUND",           {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_INTERNAL_ERROR",             {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_GETNEWFD_FAILED",            {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_NVFS_SETUP_ERROR",           {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_IO_DISABLED",                {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_BATCH_SUBMIT_FAILED",        {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CU_FILE_GPU_MEMORY_PINNING_FAILED",  {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CU_FILE_BATCH_FULL",                 {CUFILE_1051, CUDA_0, CUDA_0}},
-  {"CU_FILE_ASYNC_NOT_SUPPORTED",        {CUFILE_1070, CUDA_0, CUDA_0}},
-  {"CU_FILE_IO_MAX_ERROR",               {CUFILE_1010, CUDA_0, CUDA_0}},
-  {"CU_FILE_LUSTRE_SUPPORTED",           {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_WEKAFS_SUPPORTED",           {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_NFS_SUPPORTED",              {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_GPFS_SUPPORTED",             {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_NVME_SUPPORTED",             {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_NVMEOF_SUPPORTED",           {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_SCSI_SUPPORTED",             {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_SCALEFLUX_CSD_SUPPORTED",    {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_NVMESH_SUPPORTED",           {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_BEEGFS_SUPPORTED",           {CUFILE_1011, CUDA_0, CUDA_0}},
-  {"CU_FILE_NVME_P2P_SUPPORTED",         {CUFILE_1130, CUDA_0, CUDA_0}},
-  {"CU_FILE_USE_POLL_MODE",              {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_ALLOW_COMPAT_MODE",          {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_DYN_ROUTING_SUPPORTED",      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_BATCH_IO_SUPPORTED",         {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_STREAMS_SUPPORTED",          {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_PARALLEL_IO_SUPPORTED",      {CUFILE_1080, CUDA_0, CUDA_0}},
-  {"CU_FILE_RDMA_REGISTER",              {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_RDMA_RELAXED_ORDERING",      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_HANDLE_TYPE_OPAQUE_FD",      {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_HANDLE_TYPE_OPAQUE_WIN32",   {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_HANDLE_TYPE_USERSPACE_FS",   {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUFILE_READ",                        {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_WRITE",                       {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_WAITING",                     {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_PENDING",                     {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_INVALID",                     {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_CANCELED",                    {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_COMPLETE",                    {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_TIMEOUT",                     {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_FAILED",                      {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFILE_BATCH",                       {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CU_FILE_STREAM_FIXED_BUF_OFFSET",    {CUFILE_1070, CUDA_0, CUDA_0}},
-  {"CU_FILE_STREAM_FIXED_FILE_OFFSET",   {CUFILE_1070, CUDA_0, CUDA_0}},
-  {"CU_FILE_STREAM_FIXED_FILE_SIZE",     {CUFILE_1070, CUDA_0, CUDA_0}},
-  {"CU_FILE_STREAM_PAGE_ALIGNED_INPUTS", {CUFILE_1070, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROFILE_STATS",                            {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_EXECUTION_MAX_IO_QUEUE_DEPTH",             {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_EXECUTION_MAX_IO_THREADS",                 {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_EXECUTION_MIN_IO_THRESHOLD_SIZE_KB",       {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_EXECUTION_MAX_REQUEST_PARALLELISM",        {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_MAX_DIRECT_IO_SIZE_KB",         {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_MAX_DEVICE_CACHE_SIZE_KB",      {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_PER_BUFFER_CACHE_SIZE_KB",      {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_MAX_DEVICE_PINNED_MEM_SIZE_KB", {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_IO_BATCHSIZE",                  {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_POLLTHRESHOLD_SIZE_KB",                    {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_BATCH_IO_TIMEOUT_MS",           {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_USE_POLL_MODE",                 {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_ALLOW_COMPAT_MODE",             {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_FORCE_COMPAT_MODE",                        {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_FS_MISC_API_CHECK_AGGRESSIVE",             {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_EXECUTION_PARALLEL_IO",                    {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROFILE_NVTX",                             {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PROPERTIES_ALLOW_SYSTEM_MEMORY",           {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_USE_PCIP2PDMA",                            {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_PREFER_IO_URING",                          {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_FORCE_ODIRECT_MODE",                       {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_SKIP_TOPOLOGY_DETECTION",                  {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_STREAM_MEMOPS_BYPASS",                     {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_LOGGING_LEVEL",                            {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_ENV_LOGFILE_PATH",                         {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_LOG_DIR",                                  {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"IS_CUFILE_ERR",                     {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUFILE_ERRSTR",                     {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_CUDA_ERR",                  {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"IS_CUDA_ERR",                       {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_SCATEFS_SUPPORTED",                             {CUFILE_1140, CUDA_0, CUDA_0}},
-  {"CU_FILE_VIRTIOFS_SUPPORTED",                            {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CU_FILE_MAX_TARGET_TYPES",                              {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUfileDriverControlFlags",                              {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileFeatureFlags",                                    {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CU_FILE_P2P_SUPPORTED",                                 {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUfileP2PFlags",                                        {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUfileP2PFlags_t",                                      {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUFILE_P2PDMA",                                         {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUFILE_NVFS",                                           {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUFILE_DMABUF",                                         {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUFILE_C2C",                                            {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUFILE_NVIDIA_PEERMEM",                                 {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CU_FILE_P2P_FLAG_PCI_P2PDMA",                           {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CU_FILE_P2P_FLAG_NVFS",                                 {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CU_FILE_P2P_FLAG_DMABUF",                               {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CU_FILE_P2P_FLAG_C2C",                                  {CUFILE_1160, CUDA_0, CUDA_0}},
-  {"CUfileOpcode",                                          {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileDrvProps",                                        {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"sockaddr_t",                                            {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"cufileRDMAInfo",                                        {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUfileFSOps",                                           {CUFILE_1000, CUDA_0, CUDA_0}},
-  {"CUFILEStatus_enum",                                     {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"cufileBatchMode",                                       {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUfileIOParams",                                        {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUfileIOEvents",                                        {CUFILE_1020, CUDA_0, CUDA_0}},
-  {"CUFileArrayConfigParameter_t",                          {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB",                  {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUFILE_PARAM_POSIX_POOL_SLAB_COUNT",                    {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUFILE_GPU_UUID_LEN",                                   {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfileOpCounter_t",                                     {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfileOpCounter",                                       {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfileStatsLevel1_t",                                   {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfileStatsLevel1",                                     {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfileStatsLevel2_t",                                   {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfileStatsLevel2",                                     {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfileStatsLevel3_t",                                   {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfileStatsLevel3",                                     {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfilePerGpuStats_t",                                   {CUFILE_1150, CUDA_0, CUDA_0}},
-  {"CUfilePerGpuStats",                                     {CUFILE_1150, CUDA_0, CUDA_0}},
-};
+  m["CUfileOpError"]                                         = {"hipFileOpError_t",                               "", CONV_TYPE, API_FILE, 1};
+  m["CUfileError_t"]                                         = {"hipFileError_t",                                 "", CONV_TYPE, API_FILE, 1};
+  m["CUfileDriverStatusFlags_t"]                             = {"hipFileDriverStatusFlags_t",                     "", CONV_TYPE, API_FILE, 1};
+  m["CUfileDriverControlFlags"]                              = {"hipFileDriverControlFlags_t",                    "", CONV_TYPE, API_FILE, 1};
+  m["CUfileDriverControlFlags_t"]                            = {"hipFileDriverControlFlags_t",                    "", CONV_TYPE, API_FILE, 1};
+  m["CUfileFeatureFlags_t"]                                  = {"hipFileFeatureFlags_t",                          "", CONV_TYPE, API_FILE, 1};
+  m["CUfileFeatureFlags"]                                    = {"hipFileFeatureFlags_t",                          "", CONV_TYPE, API_FILE, 1};
+  m["CUfileFileHandleType"]                                  = {"hipFileFileHandleType",                          "", CONV_TYPE, API_FILE, 1};
+  m["CUfileDrvProps_t"]                                      = {"hipFileDriverProps_t",                           "", CONV_TYPE, API_FILE, 1};
+  m["CUfileDrvProps"]                                        = {"hipFileDriverProps_t",                           "", CONV_TYPE, API_FILE, 1};
+  m["CUfileOpcode"]                                          = {"hipFileDriverProps_t",                           "", CONV_TYPE, API_FILE, 1};
+  m["cufileRDMAInfo_t"]                                      = {"hipFileRDMAInfo_t",                              "", CONV_TYPE, API_FILE, 1};
+  m["cufileRDMAInfo"]                                        = {"hipFileRDMAInfo_t",                              "", CONV_TYPE, API_FILE, 1};
+  m["CUfileFSOps_t"]                                         = {"hipFileFSOps_t",                                 "", CONV_TYPE, API_FILE, 1};
+  m["CUfileFSOps"]                                           = {"hipFileFSOps_t",                                 "", CONV_TYPE, API_FILE, 1};
+  m["CUfileDescr_t"]                                         = {"hipFileDescr_t",                                 "", CONV_TYPE, API_FILE, 1};
+  m["CUfileHandle_t"]                                        = {"hipFileHandle_t",                                "", CONV_TYPE, API_FILE, 1};
+  m["CUfileIOParams_t"]                                      = {"hipFileIOParams_t",                              "", CONV_TYPE, API_FILE, 1};
+  m["CUfileIOParams"]                                        = {"hipFileIOParams_t",                              "", CONV_TYPE, API_FILE, 1};
+  m["CUfileIOEvents_t"]                                      = {"hipFileIOEvents_t",                              "", CONV_TYPE, API_FILE, 1};
+  m["CUfileIOEvents"]                                        = {"hipFileIOEvents_t",                              "", CONV_TYPE, API_FILE, 1};
+  m["CUfileOpcode_t"]                                        = {"hipFileOpcode_t",                                "", CONV_TYPE, API_FILE, 1};
+  m["CUfileStatus_t"]                                        = {"hipFileStatus_t",                                "", CONV_TYPE, API_FILE, 1};
+  m["CUFILEStatus_enum"]                                     = {"hipFileStatus_t",                                "", CONV_TYPE, API_FILE, 1};
+  m["CUfileBatchHandle_t"]                                   = {"hipFileBatchHandle_t",                           "", CONV_TYPE, API_FILE, 1};
+  m["CUfileBatchMode_t"]                                     = {"hipFileBatchMode_t",                             "", CONV_TYPE, API_FILE, 1};
+  m["cufileBatchMode"]                                       = {"hipFileBatchMode_t",                             "", CONV_TYPE, API_FILE, 1};
+  m["CUFileSizeTConfigParameter_t"]                          = {"hipFileSizeTConfigParameter_t",                  "", CONV_TYPE, API_FILE, 1};
+  m["CUFileBoolConfigParameter_t"]                           = {"hipFileBoolConfigParameter_t",                   "", CONV_TYPE, API_FILE, 1};
+  m["CUFileStringConfigParameter_t"]                         = {"hipFileStringConfigParameter_t",                 "", CONV_TYPE, API_FILE, 1};
+  m["CU_FILE_SUCCESS"]                                       = {"hipFileSuccess",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DRIVER_NOT_INITIALIZED"]                        = {"hipFileDriverNotInitialized",                    "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DRIVER_INVALID_PROPS"]                          = {"hipFileDriverInvalidProps",                      "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DRIVER_UNSUPPORTED_LIMIT"]                      = {"hipFileDriverUnsupportedLimit",                  "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DRIVER_VERSION_MISMATCH"]                       = {"hipFileDriverVersionMismatch",                   "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DRIVER_VERSION_READ_ERROR"]                     = {"hipFileDriverVersionReadError",                  "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DRIVER_CLOSING"]                                = {"hipFileDriverClosing",                           "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_PLATFORM_NOT_SUPPORTED"]                        = {"hipFilePlatformNotSupported",                    "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_IO_NOT_SUPPORTED"]                              = {"hipFileIONotSupported",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DEVICE_NOT_SUPPORTED"]                          = {"hipFileDeviceNotSupported",                      "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_NVFS_DRIVER_ERROR"]                             = {"hipFileDriverError",                             "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_CUDA_DRIVER_ERROR"]                             = {"hipFileHipDriverError",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_CUDA_POINTER_INVALID"]                          = {"hipFileHipPointerInvalid",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_CUDA_MEMORY_TYPE_INVALID"]                      = {"hipFileHipMemoryTypeInvalid",                    "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_CUDA_POINTER_RANGE_ERROR"]                      = {"hipFileHipPointerRangeError",                    "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_CUDA_CONTEXT_MISMATCH"]                         = {"hipFileHipContextMismatch",                      "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_INVALID_MAPPING_SIZE"]                          = {"hipFileInvalidMappingSize",                      "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_INVALID_MAPPING_RANGE"]                         = {"hipFileInvalidMappingRange",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_INVALID_FILE_TYPE"]                             = {"hipFileInvalidFileType",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_INVALID_FILE_OPEN_FLAG"]                        = {"hipFileInvalidFileOpenFlag",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DIO_NOT_SET"]                                   = {"hipFileDIONotSet",                               "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_INVALID_VALUE"]                                 = {"hipFileInvalidValue",                            "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_MEMORY_ALREADY_REGISTERED"]                     = {"hipFileMemoryAlreadyRegistered",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_MEMORY_NOT_REGISTERED"]                         = {"hipFileMemoryNotRegistered",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_PERMISSION_DENIED"]                             = {"hipFilePermissionDenied",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DRIVER_ALREADY_OPEN"]                           = {"hipFileDriverAlreadyOpen",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_HANDLE_NOT_REGISTERED"]                         = {"hipFileHandleNotRegistered",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_HANDLE_ALREADY_REGISTERED"]                     = {"hipFileHandleAlreadyRegistered",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DEVICE_NOT_FOUND"]                              = {"hipFileDeviceNotFound",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_INTERNAL_ERROR"]                                = {"hipFileInternalError",                           "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_GETNEWFD_FAILED"]                               = {"hipFileGetNewFDFailed",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_NVFS_SETUP_ERROR"]                              = {"hipFileDriverSetupError",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_IO_DISABLED"]                                   = {"hipFileIODisabled",                              "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_BATCH_SUBMIT_FAILED"]                           = {"hipFileBatchSubmitFailed",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_GPU_MEMORY_PINNING_FAILED"]                     = {"hipFileGPUMemoryPinningFailed",                  "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_BATCH_FULL"]                                    = {"hipFileBatchFull",                               "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_ASYNC_NOT_SUPPORTED"]                           = {"hipFileAsyncNotSupported",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_IO_MAX_ERROR"]                                  = {"hipFileIOMaxError",                              "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_LUSTRE_SUPPORTED"]                              = {"hipFileLustreSupported",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_WEKAFS_SUPPORTED"]                              = {"hipFileWekaFSSupported",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_NFS_SUPPORTED"]                                 = {"hipFileNFSSupported",                            "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_GPFS_SUPPORTED"]                                = {"hipFileGPFSSupported",                           "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_NVME_SUPPORTED"]                                = {"hipFileNVMeSupported",                           "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_NVMEOF_SUPPORTED"]                              = {"hipFileNVMeoFSupported",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_SCSI_SUPPORTED"]                                = {"hipFileSCSISupported",                           "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_SCALEFLUX_CSD_SUPPORTED"]                       = {"hipFileScaleFluxCSDSupported",                   "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_NVMESH_SUPPORTED"]                              = {"hipFileNVMeshSupported",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_BEEGFS_SUPPORTED"]                              = {"hipFileBEEGFSSupported",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_NVME_P2P_SUPPORTED"]                            = {"hipFileNVMeP2PSupported",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_SCATEFS_SUPPORTED"]                             = {"hipFileScateFsSupported",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_VIRTIOFS_SUPPORTED"]                            = {"hipFileVirtioFsSupported",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_MAX_TARGET_TYPES"]                              = {"hipFileMaxTargetTypes",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_USE_POLL_MODE"]                                 = {"hipFileUsePollMode",                             "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_ALLOW_COMPAT_MODE"]                             = {"hipFileAllowCompatMode",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_DYN_ROUTING_SUPPORTED"]                         = {"hipFileDynRoutingSupported",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_BATCH_IO_SUPPORTED"]                            = {"hipFileBatchIOSupported",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_STREAMS_SUPPORTED"]                             = {"hipFileStreamsSupported",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_PARALLEL_IO_SUPPORTED"]                         = {"hipFileParallelIOSupported",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_P2P_SUPPORTED"]                                 = {"hipFileP2PSupported",                            "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_RDMA_REGISTER"]                                 = {"HIPFILE_RDMA_REGISTER",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_RDMA_RELAXED_ORDERING"]                         = {"HIPFILE_RDMA_RELAXED_ORDERING",                  "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_HANDLE_TYPE_OPAQUE_FD"]                         = {"hipFileHandleTypeOpaqueFD",                      "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_HANDLE_TYPE_OPAQUE_WIN32"]                      = {"hipFileHandleTypeOpaqueWin32",                   "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_HANDLE_TYPE_USERSPACE_FS"]                      = {"hipFileHandleTypeUserspaceFS",                   "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_READ"]                                           = {"hipFileBatchRead",                               "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_WRITE"]                                          = {"hipFileBatchWrite",                              "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_WAITING"]                                        = {"hipFileWaiting",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PENDING"]                                        = {"hipFilePending",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_INVALID"]                                        = {"hipFileInvalid",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_CANCELED"]                                       = {"hipFileCanceled",                                "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_COMPLETE"]                                       = {"hipFileComplete",                                "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_TIMEOUT"]                                        = {"hipFileTimeout",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_FAILED"]                                         = {"hipFileFailed",                                  "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_BATCH"]                                          = {"hipFileBatch",                                   "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_STREAM_FIXED_BUF_OFFSET"]                       = {"HIPFILE_STREAM_FIXED_BUF_OFFSET",                "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_STREAM_FIXED_FILE_OFFSET"]                      = {"HIPFILE_STREAM_FIXED_FILE_OFFSET",               "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_STREAM_FIXED_FILE_SIZE"]                        = {"HIPFILE_STREAM_FIXED_FILE_SIZE",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_STREAM_PAGE_ALIGNED_INPUTS"]                    = {"HIPFILE_STREAM_PAGE_ALIGNED_INPUTS",             "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROFILE_STATS"]                            = {"hipFileParamProfileStats",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_EXECUTION_MAX_IO_QUEUE_DEPTH"]             = {"hipFileParamExecutionMaxIOQueueDepth",           "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_EXECUTION_MAX_IO_THREADS"]                 = {"hipFileParamExecutionMaxIOThreads",              "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_EXECUTION_MIN_IO_THRESHOLD_SIZE_KB"]       = {"hipFileParamExecutionMinIOThresholdSizeKB",      "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_EXECUTION_MAX_REQUEST_PARALLELISM"]        = {"hipFileParamExecutionMaxRequestParallelism",     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_MAX_DIRECT_IO_SIZE_KB"]         = {"hipFileParamPropertiesMaxDirectIOSizeKB",        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_MAX_DEVICE_CACHE_SIZE_KB"]      = {"hipFileParamPropertiesMaxDeviceCacheSizeKB",     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_PER_BUFFER_CACHE_SIZE_KB"]      = {"hipFileParamPropertiesPerBufferCacheSizeKB",     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_MAX_DEVICE_PINNED_MEM_SIZE_KB"] = {"hipFileParamPropertiesMaxDevicePinnedMemSizeKB", "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_IO_BATCHSIZE"]                  = {"hipFileParamPropertiesIOBatchsize",              "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_POLLTHRESHOLD_SIZE_KB"]                    = {"hipFileParamPollthresholdSizeKB",                "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_BATCH_IO_TIMEOUT_MS"]           = {"hipFileParamPropertiesBatchIOTimeoutMs",         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_USE_POLL_MODE"]                 = {"hipFileParamPropertiesUsePollMode",              "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_ALLOW_COMPAT_MODE"]             = {"hipFileParamPropertiesAllowCompatMode",          "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_FORCE_COMPAT_MODE"]                        = {"hipFileParamForceCompatMode",                    "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_FS_MISC_API_CHECK_AGGRESSIVE"]             = {"hipFileParamFsMiscApiCheckAggressive",           "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_EXECUTION_PARALLEL_IO"]                    = {"hipFileParamExecutionParallelIO",                "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROFILE_NVTX"]                             = {"hipFileParamProfileNvtx",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PROPERTIES_ALLOW_SYSTEM_MEMORY"]           = {"hipFileParamPropertiesAllowSystemMemory",        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_USE_PCIP2PDMA"]                            = {"hipFileParamUsePcip2pdma",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_PREFER_IO_URING"]                          = {"hipFileParamPreferIOUring",                      "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_FORCE_ODIRECT_MODE"]                       = {"hipFileParamForceOdirectMode",                   "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_SKIP_TOPOLOGY_DETECTION"]                  = {"hipFileParamSkipTopologyDetection",              "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_STREAM_MEMOPS_BYPASS"]                     = {"hipFileParamStreamMemopsBypass",                 "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_LOGGING_LEVEL"]                            = {"hipFileParamLoggingLevel",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_ENV_LOGFILE_PATH"]                         = {"hipFileParamEnvLogfilePath",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CUFILE_PARAM_LOG_DIR"]                                  = {"hipFileParamLogDir",                             "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["IS_CUFILE_ERR"]                                         = {"IS_HIPFILE_ERR",                                 "", CONV_DEFINE, API_FILE, 1};
+  m["CUFILE_ERRSTR"]                                         = {"HIPFILE_ERRSTR",                                 "", CONV_DEFINE, API_FILE, 1};
+  m["CU_FILE_CUDA_ERR"]                                      = {"HIP_DRV_ERR",                                    "", CONV_DEFINE, API_FILE, 1};
+  m["IS_CUDA_ERR"]                                           = {"IS_HIP_DRV_ERR",                                 "", CONV_DEFINE, API_FILE, 1};
+  m["CUfileP2PFlags"]                                        = {"hipFileP2PFlags_t",                              "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfileP2PFlags_t"]                                      = {"hipFileP2PFlags_t",                              "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_P2PDMA"]                                         = {"HIPFILE_P2PDMA",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_NVFS"]                                           = {"HIPFILE_NVFS",                                   "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_DMABUF"]                                         = {"HIPFILE_DMABUF",                                 "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_C2C"]                                            = {"HIPFILE_C2C",                                    "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_NVIDIA_PEERMEM"]                                 = {"HIPFILE_NVIDIA_PEERMEM",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_P2P_FLAG_PCI_P2PDMA"]                           = {"HIP_FILE_P2P_FLAG_PCI_P2PDMA",                   "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_P2P_FLAG_NVFS"]                                 = {"HIP_FILE_P2P_FLAG_NVFS",                         "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_P2P_FLAG_DMABUF"]                               = {"HIP_FILE_P2P_FLAG_DMABUF",                       "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_P2P_FLAG_C2C"]                                  = {"HIP_FILE_P2P_FLAG_C2C",                          "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_GPU_UUID_LEN"]                                   = {"HIPFILE_GPU_UUID_LEN",                           "", CONV_DEFINE, API_FILE, 1, UNSUPPORTED};
+  m["sockaddr_t"]                                            = {"sockaddr",                                       "", CONV_TYPE, API_FILE, 1};
+  m["CUFileArrayConfigParameter_t"]                          = {"hipFileArrayConfigParameter_t",                  "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB"]                  = {"HIPFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB",          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_PARAM_POSIX_POOL_SLAB_COUNT"]                    = {"HIPFILE_PARAM_POSIX_POOL_SLAB_COUNT",            "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CUfileOpCounter_t"]                                     = {"hipFileOpCounter_t",                             "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfileOpCounter"]                                       = {"hipFileOpCounter_t",                             "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfileStatsLevel1_t"]                                   = {"hipFileStatsLevel1_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfileStatsLevel1"]                                     = {"hipFileStatsLevel1_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfileStatsLevel2_t"]                                   = {"hipFileStatsLevel2_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfileStatsLevel2"]                                     = {"hipFileStatsLevel2_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfileStatsLevel3_t"]                                   = {"hipFileStatsLevel3_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfileStatsLevel3"]                                     = {"hipFileStatsLevel3_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfilePerGpuStats_t"]                                   = {"hipFilePerGpuStats_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
+  m["CUfilePerGpuStats"]                                     = {"hipFilePerGpuStats_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_TYPE_NAME_VER_MAP {
-  {"hipFileOpError_t",               {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileError_t",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverStatusFlags_t",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverControlFlags_t",    {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileFeatureFlags_t",          {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileFileHandleType",          {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverProps_t",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileRDMAInfo_t",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileFSOps_t",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDescr_t",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHandle_t",                {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileIOParams_t",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileIOEvents_t",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileOpcode_t",                {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileStatus_t",                {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBatchHandle_t",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBatchMode_t",             {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileSizeTConfigParameter_t",  {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBoolConfigParameter_t",   {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileStringConfigParameter_t", {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileSuccess",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverNotInitialized",    {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverInvalidProps",      {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverUnsupportedLimit",  {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverVersionMismatch",   {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverVersionReadError",  {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverClosing",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFilePlatformNotSupported",    {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileIONotSupported",          {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDeviceNotSupported",      {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverError",             {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHipDriverError",          {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHipPointerInvalid",       {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHipMemoryTypeInvalid",    {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHipPointerRangeError",    {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHipContextMismatch",      {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileInvalidMappingSize",      {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileInvalidMappingRange",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileInvalidFileType",         {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileInvalidFileOpenFlag",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDIONotSet",               {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileInvalidValue",            {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileMemoryAlreadyRegistered", {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileMemoryNotRegistered",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFilePermissionDenied",        {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverAlreadyOpen",       {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHandleNotRegistered",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHandleAlreadyRegistered", {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDeviceNotFound",          {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileInternalError",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileGetNewFDFailed",          {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDriverSetupError",        {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileIODisabled",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBatchSubmitFailed",       {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileGPUMemoryPinningFailed",  {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBatchFull",               {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileAsyncNotSupported",       {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileIOMaxError",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileLustreSupported",         {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileWekaFSSupported",         {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileNFSSupported",            {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileGPFSSupported",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileNVMeSupported",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileNVMeoFSupported",         {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileSCSISupported",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileScaleFluxCSDSupported",   {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileNVMeshSupported",         {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBEEGFSSupported",         {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileNVMeP2PSupported",        {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileUsePollMode",             {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileAllowCompatMode",         {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileDynRoutingSupported",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBatchIOSupported",        {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileStreamsSupported",        {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParallelIOSupported",     {HIP_7020, HIP_0, HIP_0}},
-  {"HIPFILE_RDMA_REGISTER",          {HIP_7020, HIP_0, HIP_0}},
-  {"HIPFILE_RDMA_RELAXED_ORDERING",  {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHandleTypeOpaqueFD",      {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHandleTypeOpaqueWin32",   {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileHandleTypeUserspaceFS",   {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBatchRead",               {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBatchWrite",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileWaiting",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFilePending",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileInvalid",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileCanceled",                {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileComplete",                {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileTimeout",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileFailed",                  {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileBatch",                   {HIP_7020, HIP_0, HIP_0}},
-  {"HIPFILE_STREAM_FIXED_BUF_OFFSET",    {HIP_7020, HIP_0, HIP_0}},
-  {"HIPFILE_STREAM_FIXED_FILE_OFFSET",   {HIP_7020, HIP_0, HIP_0}},
-  {"HIPFILE_STREAM_FIXED_FILE_SIZE",     {HIP_7020, HIP_0, HIP_0}},
-  {"HIPFILE_STREAM_PAGE_ALIGNED_INPUTS", {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamProfileStats",                       {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamExecutionMaxIOQueueDepth",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamExecutionMaxIOThreads",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamExecutionMinIOThresholdSizeKB",      {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamExecutionMaxRequestParallelism",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesMaxDirectIOSizeKB",        {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesMaxDeviceCacheSizeKB",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesPerBufferCacheSizeKB",     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesMaxDevicePinnedMemSizeKB", {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesIOBatchsize",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPollthresholdSizeKB",                {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesBatchIOTimeoutMs",         {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesUsePollMode",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesAllowCompatMode",          {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamForceCompatMode",                    {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamFsMiscApiCheckAggressive",           {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamExecutionParallelIO",                {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamProfileNvtx",                        {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPropertiesAllowSystemMemory",        {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamUsePcip2pdma",                       {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamPreferIOUring",                      {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamForceOdirectMode",                   {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamSkipTopologyDetection",              {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamStreamMemopsBypass",                 {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamLoggingLevel",                       {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamEnvLogfilePath",                     {HIP_7020, HIP_0, HIP_0}},
-  {"hipFileParamLogDir",                             {HIP_7020, HIP_0, HIP_0}},
-  {"IS_HIPFILE_ERR",                 {HIP_7020, HIP_0, HIP_0}},
-  {"HIPFILE_ERRSTR",                 {HIP_7020, HIP_0, HIP_0}},
-  {"HIP_DRV_ERR",                    {HIP_7020, HIP_0, HIP_0}},
-  {"IS_HIP_DRV_ERR",                 {HIP_7020, HIP_0, HIP_0}},
-};
+  return m;
+}();
+
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_TYPE_NAME_VER_MAP = []() {
+  std::map<llvm::StringRef, cudaAPIversions> m;
+
+  m["CUfileOpError"]                                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileError_t"]                                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileDriverStatusFlags_t"]                             = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileDriverControlFlags_t"]                            = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileFeatureFlags_t"]                                  = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileFileHandleType"]                                  = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileDrvProps_t"]                                      = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["cufileRDMAInfo_t"]                                      = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileFSOps_t"]                                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileDescr_t"]                                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileHandle_t"]                                        = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileIOParams_t"]                                      = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUfileIOEvents_t"]                                      = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUfileOpcode_t"]                                        = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUfileStatus_t"]                                        = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUfileBatchHandle_t"]                                   = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUfileBatchMode_t"]                                     = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFileSizeTConfigParameter_t"]                          = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFileBoolConfigParameter_t"]                           = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFileStringConfigParameter_t"]                         = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CU_FILE_SUCCESS"]                                       = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DRIVER_NOT_INITIALIZED"]                        = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DRIVER_INVALID_PROPS"]                          = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DRIVER_UNSUPPORTED_LIMIT"]                      = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DRIVER_VERSION_MISMATCH"]                       = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DRIVER_VERSION_READ_ERROR"]                     = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DRIVER_CLOSING"]                                = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_PLATFORM_NOT_SUPPORTED"]                        = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_IO_NOT_SUPPORTED"]                              = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DEVICE_NOT_SUPPORTED"]                          = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_NVFS_DRIVER_ERROR"]                             = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_CUDA_DRIVER_ERROR"]                             = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_CUDA_POINTER_INVALID"]                          = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_CUDA_MEMORY_TYPE_INVALID"]                      = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_CUDA_POINTER_RANGE_ERROR"]                      = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_CUDA_CONTEXT_MISMATCH"]                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_INVALID_MAPPING_SIZE"]                          = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_INVALID_MAPPING_RANGE"]                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_INVALID_FILE_TYPE"]                             = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_INVALID_FILE_OPEN_FLAG"]                        = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DIO_NOT_SET"]                                   = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_INVALID_VALUE"]                                 = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_MEMORY_ALREADY_REGISTERED"]                     = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_MEMORY_NOT_REGISTERED"]                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_PERMISSION_DENIED"]                             = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DRIVER_ALREADY_OPEN"]                           = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_HANDLE_NOT_REGISTERED"]                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_HANDLE_ALREADY_REGISTERED"]                     = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DEVICE_NOT_FOUND"]                              = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_INTERNAL_ERROR"]                                = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_GETNEWFD_FAILED"]                               = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_NVFS_SETUP_ERROR"]                              = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_IO_DISABLED"]                                   = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_BATCH_SUBMIT_FAILED"]                           = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CU_FILE_GPU_MEMORY_PINNING_FAILED"]                     = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CU_FILE_BATCH_FULL"]                                    = {CUFILE_1051, CUDA_0, CUDA_0};
+  m["CU_FILE_ASYNC_NOT_SUPPORTED"]                           = {CUFILE_1070, CUDA_0, CUDA_0};
+  m["CU_FILE_IO_MAX_ERROR"]                                  = {CUFILE_1010, CUDA_0, CUDA_0};
+  m["CU_FILE_LUSTRE_SUPPORTED"]                              = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_WEKAFS_SUPPORTED"]                              = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_NFS_SUPPORTED"]                                 = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_GPFS_SUPPORTED"]                                = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_NVME_SUPPORTED"]                                = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_NVMEOF_SUPPORTED"]                              = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_SCSI_SUPPORTED"]                                = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_SCALEFLUX_CSD_SUPPORTED"]                       = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_NVMESH_SUPPORTED"]                              = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_BEEGFS_SUPPORTED"]                              = {CUFILE_1011, CUDA_0, CUDA_0};
+  m["CU_FILE_NVME_P2P_SUPPORTED"]                            = {CUFILE_1130, CUDA_0, CUDA_0};
+  m["CU_FILE_USE_POLL_MODE"]                                 = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_ALLOW_COMPAT_MODE"]                             = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_DYN_ROUTING_SUPPORTED"]                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_BATCH_IO_SUPPORTED"]                            = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_STREAMS_SUPPORTED"]                             = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_PARALLEL_IO_SUPPORTED"]                         = {CUFILE_1080, CUDA_0, CUDA_0};
+  m["CU_FILE_RDMA_REGISTER"]                                 = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_RDMA_RELAXED_ORDERING"]                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_HANDLE_TYPE_OPAQUE_FD"]                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_HANDLE_TYPE_OPAQUE_WIN32"]                      = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_HANDLE_TYPE_USERSPACE_FS"]                      = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUFILE_READ"]                                           = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_WRITE"]                                          = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_WAITING"]                                        = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_PENDING"]                                        = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_INVALID"]                                        = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_CANCELED"]                                       = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_COMPLETE"]                                       = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_TIMEOUT"]                                        = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_FAILED"]                                         = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFILE_BATCH"]                                          = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CU_FILE_STREAM_FIXED_BUF_OFFSET"]                       = {CUFILE_1070, CUDA_0, CUDA_0};
+  m["CU_FILE_STREAM_FIXED_FILE_OFFSET"]                      = {CUFILE_1070, CUDA_0, CUDA_0};
+  m["CU_FILE_STREAM_FIXED_FILE_SIZE"]                        = {CUFILE_1070, CUDA_0, CUDA_0};
+  m["CU_FILE_STREAM_PAGE_ALIGNED_INPUTS"]                    = {CUFILE_1070, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROFILE_STATS"]                            = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_EXECUTION_MAX_IO_QUEUE_DEPTH"]             = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_EXECUTION_MAX_IO_THREADS"]                 = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_EXECUTION_MIN_IO_THRESHOLD_SIZE_KB"]       = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_EXECUTION_MAX_REQUEST_PARALLELISM"]        = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_MAX_DIRECT_IO_SIZE_KB"]         = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_MAX_DEVICE_CACHE_SIZE_KB"]      = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_PER_BUFFER_CACHE_SIZE_KB"]      = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_MAX_DEVICE_PINNED_MEM_SIZE_KB"] = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_IO_BATCHSIZE"]                  = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_POLLTHRESHOLD_SIZE_KB"]                    = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_BATCH_IO_TIMEOUT_MS"]           = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_USE_POLL_MODE"]                 = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_ALLOW_COMPAT_MODE"]             = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_FORCE_COMPAT_MODE"]                        = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_FS_MISC_API_CHECK_AGGRESSIVE"]             = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_EXECUTION_PARALLEL_IO"]                    = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROFILE_NVTX"]                             = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PROPERTIES_ALLOW_SYSTEM_MEMORY"]           = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_USE_PCIP2PDMA"]                            = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_PREFER_IO_URING"]                          = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_FORCE_ODIRECT_MODE"]                       = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_SKIP_TOPOLOGY_DETECTION"]                  = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_STREAM_MEMOPS_BYPASS"]                     = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_LOGGING_LEVEL"]                            = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_ENV_LOGFILE_PATH"]                         = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_LOG_DIR"]                                  = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["IS_CUFILE_ERR"]                                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUFILE_ERRSTR"]                                         = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_CUDA_ERR"]                                      = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["IS_CUDA_ERR"]                                           = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_SCATEFS_SUPPORTED"]                             = {CUFILE_1140, CUDA_0, CUDA_0};
+  m["CU_FILE_VIRTIOFS_SUPPORTED"]                            = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CU_FILE_MAX_TARGET_TYPES"]                              = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUfileDriverControlFlags"]                              = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileFeatureFlags"]                                    = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CU_FILE_P2P_SUPPORTED"]                                 = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUfileP2PFlags"]                                        = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUfileP2PFlags_t"]                                      = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUFILE_P2PDMA"]                                         = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUFILE_NVFS"]                                           = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUFILE_DMABUF"]                                         = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUFILE_C2C"]                                            = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUFILE_NVIDIA_PEERMEM"]                                 = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CU_FILE_P2P_FLAG_PCI_P2PDMA"]                           = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CU_FILE_P2P_FLAG_NVFS"]                                 = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CU_FILE_P2P_FLAG_DMABUF"]                               = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CU_FILE_P2P_FLAG_C2C"]                                  = {CUFILE_1160, CUDA_0, CUDA_0};
+  m["CUfileOpcode"]                                          = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileDrvProps"]                                        = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["sockaddr_t"]                                            = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["cufileRDMAInfo"]                                        = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUfileFSOps"]                                           = {CUFILE_1000, CUDA_0, CUDA_0};
+  m["CUFILEStatus_enum"]                                     = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["cufileBatchMode"]                                       = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUfileIOParams"]                                        = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUfileIOEvents"]                                        = {CUFILE_1020, CUDA_0, CUDA_0};
+  m["CUFileArrayConfigParameter_t"]                          = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB"]                  = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_POSIX_POOL_SLAB_COUNT"]                    = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUFILE_GPU_UUID_LEN"]                                   = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfileOpCounter_t"]                                     = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfileOpCounter"]                                       = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfileStatsLevel1_t"]                                   = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfileStatsLevel1"]                                     = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfileStatsLevel2_t"]                                   = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfileStatsLevel2"]                                     = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfileStatsLevel3_t"]                                   = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfileStatsLevel3"]                                     = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfilePerGpuStats_t"]                                   = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CUfilePerGpuStats"]                                     = {CUFILE_1150, CUDA_0, CUDA_0};
+
+  return m;
+}();
+
+const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_TYPE_NAME_VER_MAP = []() {
+  std::map<llvm::StringRef, hipAPIversions> m;
+
+  m["hipFileOpError_t"]                                      = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileError_t"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverStatusFlags_t"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverControlFlags_t"]                           = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileFeatureFlags_t"]                                 = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileFileHandleType"]                                 = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverProps_t"]                                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileRDMAInfo_t"]                                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileFSOps_t"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDescr_t"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHandle_t"]                                       = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileIOParams_t"]                                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileIOEvents_t"]                                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileOpcode_t"]                                       = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileStatus_t"]                                       = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBatchHandle_t"]                                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBatchMode_t"]                                    = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileSizeTConfigParameter_t"]                         = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBoolConfigParameter_t"]                          = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileStringConfigParameter_t"]                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileSuccess"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverNotInitialized"]                           = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverInvalidProps"]                             = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverUnsupportedLimit"]                         = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverVersionMismatch"]                          = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverVersionReadError"]                         = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverClosing"]                                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFilePlatformNotSupported"]                           = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileIONotSupported"]                                 = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDeviceNotSupported"]                             = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverError"]                                    = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHipDriverError"]                                 = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHipPointerInvalid"]                              = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHipMemoryTypeInvalid"]                           = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHipPointerRangeError"]                           = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHipContextMismatch"]                             = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileInvalidMappingSize"]                             = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileInvalidMappingRange"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileInvalidFileType"]                                = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileInvalidFileOpenFlag"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDIONotSet"]                                      = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileInvalidValue"]                                   = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileMemoryAlreadyRegistered"]                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileMemoryNotRegistered"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFilePermissionDenied"]                               = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverAlreadyOpen"]                              = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHandleNotRegistered"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHandleAlreadyRegistered"]                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDeviceNotFound"]                                 = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileInternalError"]                                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileGetNewFDFailed"]                                 = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDriverSetupError"]                               = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileIODisabled"]                                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBatchSubmitFailed"]                              = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileGPUMemoryPinningFailed"]                         = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBatchFull"]                                      = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileAsyncNotSupported"]                              = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileIOMaxError"]                                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileLustreSupported"]                                = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileWekaFSSupported"]                                = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileNFSSupported"]                                   = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileGPFSSupported"]                                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileNVMeSupported"]                                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileNVMeoFSupported"]                                = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileSCSISupported"]                                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileScaleFluxCSDSupported"]                          = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileNVMeshSupported"]                                = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBEEGFSSupported"]                                = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileNVMeP2PSupported"]                               = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileUsePollMode"]                                    = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileAllowCompatMode"]                                = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileDynRoutingSupported"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBatchIOSupported"]                               = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileStreamsSupported"]                               = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParallelIOSupported"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["HIPFILE_RDMA_REGISTER"]                                 = {HIP_7020, HIP_0, HIP_0};
+  m["HIPFILE_RDMA_RELAXED_ORDERING"]                         = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHandleTypeOpaqueFD"]                             = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHandleTypeOpaqueWin32"]                          = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileHandleTypeUserspaceFS"]                          = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBatchRead"]                                      = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBatchWrite"]                                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileWaiting"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFilePending"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileInvalid"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileCanceled"]                                       = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileComplete"]                                       = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileTimeout"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileFailed"]                                         = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileBatch"]                                          = {HIP_7020, HIP_0, HIP_0};
+  m["HIPFILE_STREAM_FIXED_BUF_OFFSET"]                       = {HIP_7020, HIP_0, HIP_0};
+  m["HIPFILE_STREAM_FIXED_FILE_OFFSET"]                      = {HIP_7020, HIP_0, HIP_0};
+  m["HIPFILE_STREAM_FIXED_FILE_SIZE"]                        = {HIP_7020, HIP_0, HIP_0};
+  m["HIPFILE_STREAM_PAGE_ALIGNED_INPUTS"]                    = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamProfileStats"]                              = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamExecutionMaxIOQueueDepth"]                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamExecutionMaxIOThreads"]                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamExecutionMinIOThresholdSizeKB"]             = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamExecutionMaxRequestParallelism"]            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesMaxDirectIOSizeKB"]               = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesMaxDeviceCacheSizeKB"]            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesPerBufferCacheSizeKB"]            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesMaxDevicePinnedMemSizeKB"]        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesIOBatchsize"]                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPollthresholdSizeKB"]                       = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesBatchIOTimeoutMs"]                = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesUsePollMode"]                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesAllowCompatMode"]                 = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamForceCompatMode"]                           = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamFsMiscApiCheckAggressive"]                  = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamExecutionParallelIO"]                       = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamProfileNvtx"]                               = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPropertiesAllowSystemMemory"]               = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamUsePcip2pdma"]                              = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamPreferIOUring"]                             = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamForceOdirectMode"]                          = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamSkipTopologyDetection"]                     = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamStreamMemopsBypass"]                        = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamLoggingLevel"]                              = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamEnvLogfilePath"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileParamLogDir"]                                    = {HIP_7020, HIP_0, HIP_0};
+  m["IS_HIPFILE_ERR"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["HIPFILE_ERRSTR"]                                        = {HIP_7020, HIP_0, HIP_0};
+  m["HIP_DRV_ERR"]                                           = {HIP_7020, HIP_0, HIP_0};
+  m["IS_HIP_DRV_ERR"]                                        = {HIP_7020, HIP_0, HIP_0};
+
+  return m;
+}();
