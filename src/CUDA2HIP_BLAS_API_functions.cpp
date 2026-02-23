@@ -27,6 +27,7 @@ using SEC = blas::BLAS_API_SECTIONS;
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
+
   // Blas management functions
   m["cublasInit"]                                                   = {"hipblasInit",                                               "rocblas_initialize",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, HIP_UNSUPPORTED};
   m["cublasShutdown"]                                               = {"hipblasShutdown",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
@@ -1160,6 +1161,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
+
   m["cublasGetMathMode"]                                            = {CUDA_90,  CUDA_0,   CUDA_0   };
   m["cublasSetMathMode"]                                            = {CUDA_90,  CUDA_0,   CUDA_0   };
   m["cublasMigrateComputeType"]                                     = {CUDA_110, CUDA_0,   CUDA_0   };
@@ -1672,11 +1674,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP = []
   m["cublasSetFixedPointEmulationMantissaBitOffset"]                = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   m["cublasGetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   m["cublasSetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+
   return m;
 }();
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
+
   m["hipblasGetAtomicsMode"]                                        = {HIP_3100, HIP_0,    HIP_0   };
   m["hipblasSetAtomicsMode"]                                        = {HIP_3100, HIP_0,    HIP_0   };
   m["hipblasCreate"]                                                = {HIP_1082, HIP_0,    HIP_0   };
@@ -2581,6 +2585,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
 
 const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIChangedVersions> m;
+
   m["hipblasStrmm"]                                                 = {HIP_6000};
   m["hipblasDtrmm"]                                                 = {HIP_6000};
   m["hipblasGemmEx"]                                                = {HIP_7000};
@@ -2828,6 +2833,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_BLAS_FUNCTION_CHANGED
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_BLAS_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+
   m["cublasLtMatmulDescCreate"]                                     = {CUDA_110};
   m["cublasGemmEx"]                                                 = {CUDA_110};
   m["cublasGemmBatchedEx"]                                          = {CUDA_110};
@@ -2838,6 +2844,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_BLAS_FUNCTION_CHANG
 
 const std::map<unsigned int, llvm::StringRef> CUDA_BLAS_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
+
   m[SEC::BLAS_DATA_TYPES]                                           = "CUBLAS Data types";
   m[SEC::CUDA_DATA_TYPES]                                           = "CUDA Library Data types";
   m[SEC::BLAS_LT_DATA_TYPES]                                        = "CUBLASLt Data types";

@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA Device/Host types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   // float16 Precision Device types
@@ -156,7 +156,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["__nv_bfloat16"]                       = {CUDA_110, CUDA_0,   CUDA_0  };
@@ -229,7 +229,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_TYPE_NAME_VER_MAP =
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["__half"]                              = {HIP_1060, HIP_0,    HIP_0   };

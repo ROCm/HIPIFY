@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA RTC API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_RTC_TYPE_NAME_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_RTC_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   m["nvrtcResult"]                                               = {"hiprtcResult",                                        "", CONV_TYPE, API_RTC, 1};
@@ -52,7 +52,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RTC_TYPE_NAME_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["NVRTC_ERROR_NO_NAME_EXPRESSIONS_AFTER_COMPILATION"]         = {CUDA_80,  CUDA_0,   CUDA_0  };
@@ -69,7 +69,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_TYPE_NAME_VER_MAP = []
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hiprtcResult"]                                              = {HIP_2060, HIP_0,    HIP_0   };
