@@ -466,7 +466,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuMulticastBindMem"]                                                = {"hipMulticastBindMem",                                         "", CONV_MULTICAST, API_DRIVER, SEC::MULTICAST, HIP_UNSUPPORTED};
   //
+  m["cuMulticastBindMem_v2"]                                             = {"hipMulticastBindMem_v2",                                      "", CONV_MULTICAST, API_DRIVER, SEC::MULTICAST, HIP_UNSUPPORTED};
+  //
   m["cuMulticastBindAddr"]                                               = {"hipMulticastBindAddr",                                        "", CONV_MULTICAST, API_DRIVER, SEC::MULTICAST, HIP_UNSUPPORTED};
+  //
+  m["cuMulticastBindAddr_v2"]                                            = {"hipMulticastBindAddr_v2",                                     "", CONV_MULTICAST, API_DRIVER, SEC::MULTICAST, HIP_UNSUPPORTED};
   //
   m["cuMulticastUnbind"]                                                 = {"hipMulticastUnbind",                                          "", CONV_MULTICAST, API_DRIVER, SEC::MULTICAST, HIP_UNSUPPORTED};
   //
@@ -871,6 +875,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuGraphExecNodeSetParams"]                                          = {"hipGraphExecNodeSetParams",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH};
   // cudaGraphConditionalHandleCreate
   m["cuGraphConditionalHandleCreate"]                                    = {"hipGraphConditionalHandleCreate",                             "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
+  //
+  m["cuGraphExecGetId"]                                                  = {"hipGraphExecGetId",                                           "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
+  //
+  m["cuGraphGetId"]                                                      = {"hipGraphGetId",                                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
+  //
+  m["cuGraphNodeGetToolsId"]                                             = {"hipGraphNodeGetToolsId",                                      "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
+  //
+  m["cuGraphNodeGetLocalId"]                                             = {"hipGraphNodeGetLocalId",                                      "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
+  //
+  m["cuGraphNodeGetContainingGraph"]                                     = {"hipGraphNodeGetContainingGraph",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
 
   // 25. Occupancy
   // cudaOccupancyAvailableDynamicSMemPerBlock
@@ -1038,6 +1052,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuGreenCtxStreamCreate"]                                            = {"hipGreenCtxStreamCreate",                                     "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
   //
   m["cuGreenCtxGetId"]                                                   = {"hipGreenCtxGetId",                                            "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  //
+  m["cuDevSmResourceSplit"]                                              = {"hipDevSmResourceSplit",                                       "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  //
+  m["cuStreamGetDevResource"]                                            = {"hipStreamGetDevResource",                                     "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
 
   // 36. Error Log Management Functions
   // cudaLogsRegisterCallback
@@ -1608,6 +1626,15 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP = 
   m["cuMemDiscardAndPrefetchBatchAsync"]                                 = {CUDA_130, CUDA_0,   CUDA_0  };
   m["cuGreenCtxGetId"]                                                   = {CUDA_130, CUDA_0,   CUDA_0  };
   m["cuDeviceGetP2PAtomicCapabilities"]                                  = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["cuDevSmResourceSplit"]                                              = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cuStreamGetDevResource"]                                            = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cuGraphExecGetId"]                                                  = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cuGraphGetId"]                                                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cuGraphNodeGetToolsId"]                                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cuGraphNodeGetLocalId"]                                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cuGraphNodeGetContainingGraph"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cuMulticastBindAddr_v2"]                                            = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cuMulticastBindMem_v2"]                                             = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
