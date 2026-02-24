@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps CUDA header names to HIP header names
-const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   // math functions
@@ -990,7 +990,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_FUNCTION_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["__shfl"]                           = {CUDA_75,  CUDA_90,  CUDA_0  };
@@ -1233,7 +1233,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DEVICE_FUNCTION_VER_MAP = 
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["abs"]                              = {HIP_1060, HIP_0,    HIP_0   };
@@ -1866,7 +1866,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_FUNCTION_VER_MAP = []
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DEVICE_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
   m["__hmax2"]                          = {CUDA_122};
@@ -1887,7 +1887,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DEVICE_FUNCTION_CHA
   return m;
 }();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP = []() {
+const std::map<unsigned int, llvm::StringRef> CUDA_DEVICE_FUNCTION_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
 
   m[1]                                  = "Device Functions";

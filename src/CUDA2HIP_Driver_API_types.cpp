@@ -25,7 +25,7 @@ THE SOFTWARE.
 using SEC = driver::CUDA_DRIVER_API_SECTIONS;
 
 // Maps the names of CUDA DRIVER API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   // 1. Structs
@@ -3352,7 +3352,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["CU_CTX_BLOCKING_SYNC"]                                              = {CUDA_0,   CUDA_40,  CUDA_0  };
@@ -4519,7 +4519,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP =
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["HIP_LAUNCH_PARAM_BUFFER_POINTER"]                                   = {HIP_1060, HIP_0,    HIP_0   };
@@ -5010,7 +5010,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_TYPE_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_TYPE_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
   m["CUdevSmResource_st"]                                                = {CUDA_131};
@@ -5020,7 +5020,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_TYPE_CHANGED
   return m;
   }();
 
-const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_TYPE_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_TYPE_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIChangedVersions> m;
 
   m["hipLaunchAttributeValue"]                                           = {HIP_7010};

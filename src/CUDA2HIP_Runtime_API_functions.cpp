@@ -25,7 +25,7 @@ THE SOFTWARE.
 using SEC = runtime::CUDA_RUNTIME_API_SECTIONS;
 
 // Map of all CUDA Runtime API functions
-const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   std::map<llvm::StringRef,  hipCounter> m;
 
   // 1. Device Management
@@ -997,7 +997,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef,  cudaAPIversions> m;
 
   m["cudaDeviceGetNvSciSyncAttributes"]                        = {CUDA_102, CUDA_0,   CUDA_0  };
@@ -1269,7 +1269,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP =
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef,  hipAPIversions> m;
 
   m["hipHostAlloc"]                                            = {HIP_1060, HIP_0,    HIP_0   };
@@ -1552,7 +1552,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef,  cudaAPIChangedVersions> m;
 
   m["cudaGetDriverEntryPoint"]                                 = {CUDA_120};
@@ -1574,7 +1574,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_FUNCTION_CH
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_FUNCTION_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef,  hipAPIChangedVersions> m;
 
   m["hipDeviceGetTexture1DLinearMaxWidth"]                     = {HIP_7000};
@@ -1582,7 +1582,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_FUNCTION_CHAN
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTION_UNSUPPORTED_VER_MAP = [] {
   std::map<llvm::StringRef,  cudaAPIUnsupportedVersions> m;
 
   m["cudaStreamGetCaptureInfo"]                                = {CUDA_130};
@@ -1602,7 +1602,7 @@ const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTIO
   return m;
 }();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP = []() {
+const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP = [] {
   std::map<unsigned int,  llvm::StringRef> m;
 
   m[SEC::DEVICE]                                               = "Device Management";
