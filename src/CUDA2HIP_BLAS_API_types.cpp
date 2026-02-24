@@ -27,6 +27,7 @@ using SEC = blas::BLAS_API_SECTIONS;
 // Map of all functions
 const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
+
   // Blas operations
   m["cublasOperation_t"]                                              = {"hipblasOperation_t",                                                "rocblas_operation",                                        CONV_TYPE, API_BLAS, SEC::BLAS_DATA_TYPES};
   m["CUBLAS_OP_N"]                                                    = {"HIPBLAS_OP_N",                                                      "rocblas_operation_none",                                   CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_DATA_TYPES};
@@ -1145,11 +1146,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP = [] {
   m["CUBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT"]      = {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT",        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET"]         = {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET",           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER"]  = {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER",    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+
   return m;
 }();
 
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
+
   m["CUBLAS_OP_CONJG"]                                                = {CUDA_101, CUDA_0,   CUDA_0  };
   m["CUBLAS_OP_HERMITAN"]                                             = {CUDA_101, CUDA_0,   CUDA_0  };
   m["CUBLAS_FILL_MODE_FULL"]                                          = {CUDA_101, CUDA_0,   CUDA_0  };
@@ -2199,11 +2202,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP = [
   m["CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER"]  = {CUDA_130, CUDA_0,   CUDA_0  }; // CUBLAS_VERSION 130100 CUDA 13.0.2
   m["CUBLAS_FP64_EMULATED_FIXEDPOINT_MATH"]                           = {CUDA_130, CUDA_0,   CUDA_0  }; // CUBLAS_VERSION 130100 CUDA 13.0.2
   m["CUBLAS_COMPUTE_64F_EMULATED_FIXEDPOINT"]                         = {CUDA_130, CUDA_0,   CUDA_0  }; // CUBLAS_VERSION 130100 CUDA 13.0.2
+
   return m;
 }();
 
 const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
+
   m["hipblasOperation_t"]                                             = {HIP_1082, HIP_0,    HIP_0   };
   m["HIPBLAS_OP_N"]                                                   = {HIP_1082, HIP_0,    HIP_0   };
   m["HIPBLAS_OP_T"]                                                   = {HIP_1082, HIP_0,    HIP_0   };

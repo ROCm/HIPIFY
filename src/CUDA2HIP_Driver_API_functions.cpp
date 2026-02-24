@@ -25,7 +25,7 @@ THE SOFTWARE.
 using SEC = driver::CUDA_DRIVER_API_SECTIONS;
 
 // Map of all CUDA Driver API functions
-const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   // 2. Error Handling
@@ -1234,7 +1234,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["cuDeviceGetLuid"]                                                   = {CUDA_100, CUDA_0,   CUDA_0  };
@@ -1612,7 +1612,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP = 
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hipInit"]                                                           = {HIP_1060, HIP_0,    HIP_0   };
@@ -1795,7 +1795,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP = []
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
   m["cuGetProcAddress"]                                                  = {CUDA_120};
@@ -1816,7 +1816,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_FUNCTION_CHA
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIChangedVersions> m;
 
   m["hipCtxGetApiVersion"]                                               = {HIP_7000};
@@ -1828,7 +1828,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_DRIVER_FUNCTION_CHANG
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION_UNSUPPORTED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIUnsupportedVersions> m;
 
   m["cuCtxCreate"]                                                       = {CUDA_130};
@@ -1850,7 +1850,7 @@ const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_DRIVER_FUNCTION
   return m;
 }();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP = []() {
+const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
 
   m[SEC::DATA_TYPES]                                                     = "CUDA Driver Data Types";

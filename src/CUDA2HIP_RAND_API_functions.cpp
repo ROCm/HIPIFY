@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   // RAND Host functions
@@ -90,7 +90,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_FUNCTION_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["curandGetProperty"]                             = {CUDA_80,  CUDA_0,   CUDA_0   };
@@ -101,7 +101,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_FUNCTION_VER_MAP = []
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hiprandCreateGenerator"]                        = {HIP_1050, HIP_0,    HIP_0    };
@@ -209,7 +209,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_FUNCTION_VER_MAP = []()
   return m;
 }();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP = []() {
+const std::map<unsigned int, llvm::StringRef> CUDA_RAND_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
 
   m[1]                                               = "CURAND Data types";

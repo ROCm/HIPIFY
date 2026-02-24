@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA RTC API functions to the corresponding HIP functions
-const std::map<llvm::StringRef, hipCounter> CUDA_RTC_FUNCTION_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_RTC_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   m["nvrtcGetErrorString"]                        = {"hiprtcGetErrorString",                         "", CONV_LIB_FUNC, API_RTC, 2};
@@ -56,7 +56,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RTC_FUNCTION_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["nvrtcGetNumSupportedArchs"]                  = {CUDA_112, CUDA_0,   CUDA_0  };
@@ -80,7 +80,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP = [](
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hiprtcGetErrorString"]                       = {HIP_2060, HIP_0,    HIP_0   };
@@ -100,7 +100,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RTC_FUNCTION_VER_MAP = []() 
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RTC_FUNCTION_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RTC_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
   m["nvrtcCreateProgram"]                         = {CUDA_80};
@@ -109,7 +109,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RTC_FUNCTION_CHANGE
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RTC_FUNCTION_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RTC_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIChangedVersions> m;
 
   m["hiprtcCreateProgram"]                        = {HIP_7000};
@@ -118,7 +118,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RTC_FUNCTION_CHANGED_
   return m;
 }();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_RTC_API_SECTION_MAP = []() {
+const std::map<unsigned int, llvm::StringRef> CUDA_RTC_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
 
   m[1]                                            = "RTC Data types";

@@ -23,22 +23,22 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA Complex API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_TYPE_NAME_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   m["cuFloatComplex"]  = {"hipFloatComplex",  "rocblas_float_complex",  CONV_TYPE, API_COMPLEX, 1};
   m["cuDoubleComplex"] = {"hipDoubleComplex", "rocblas_double_complex", CONV_TYPE, API_COMPLEX, 1};
-  m["cuComplex"]       = {"hipComplex",       "rocblas_float_complex",  CONV_TYPE, API_COMPLEX, 1};\
+  m["cuComplex"]       = {"hipComplex",       "rocblas_float_complex",  CONV_TYPE, API_COMPLEX, 1};
 
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hipFloatComplex"]  = {HIP_1060, HIP_0,    HIP_0   };

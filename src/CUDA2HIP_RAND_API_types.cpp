@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   // RAND Host types
@@ -142,7 +142,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RAND_TYPE_NAME_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["CURAND_ORDERING_PSEUDO_LEGACY"]                   = {CUDA_110, CUDA_0,   CUDA_0  };
@@ -151,7 +151,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RAND_TYPE_NAME_VER_MAP = [
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_RAND_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hiprandStatus"]                                   = {HIP_1050, HIP_0,    HIP_0   };
