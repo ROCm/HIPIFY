@@ -1975,7 +1975,9 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cuMulticastAddDevice`|12.1| | | | | | | | | | |
 |`cuMulticastBindAddr`|12.1| | | | | | | | | | |
+|`cuMulticastBindAddr_v2`|13.1| | | | | | | | | | |
 |`cuMulticastBindMem`|12.1| | | | | | | | | | |
+|`cuMulticastBindMem_v2`|13.1| | | | | | | | | | |
 |`cuMulticastCreate`|12.1| | | | | | | | | | |
 |`cuMulticastGetGranularity`|12.1| | | | | | | | | | |
 |`cuMulticastUnbind`|12.1| | | | | | | | | | |
@@ -2153,6 +2155,7 @@
 |`cuGraphExecExternalSemaphoresSignalNodeSetParams`|11.2| | | |`hipGraphExecExternalSemaphoresSignalNodeSetParams`|5.7.0| | | | | |
 |`cuGraphExecExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExecExternalSemaphoresWaitNodeSetParams`|5.7.0| | | | | |
 |`cuGraphExecGetFlags`|12.0| | | |`hipGraphExecGetFlags`|6.3.0| | | | | |
+|`cuGraphExecGetId`|13.1| | | | | | | | | | |
 |`cuGraphExecHostNodeSetParams`|10.2| | | |`hipGraphExecHostNodeSetParams`|5.0.0| | | | | |
 |`cuGraphExecKernelNodeSetParams`|10.1| | | |`hipGraphExecKernelNodeSetParams`|4.5.0| | | | | |
 |`cuGraphExecMemcpyNodeSetParams`|10.2| | | |`hipDrvGraphExecMemcpyNodeSetParams`|6.3.0| | | | | |
@@ -2165,6 +2168,7 @@
 |`cuGraphExternalSemaphoresWaitNodeSetParams`|11.2| | | |`hipGraphExternalSemaphoresWaitNodeSetParams`|5.7.0| | | | | |
 |`cuGraphGetEdges`|10.0| |13.0| |`hipGraphGetEdges`|5.0.0| | | |13.0| |
 |`cuGraphGetEdges_v2`|12.3| | | | | | | | | | |
+|`cuGraphGetId`|13.1| | | | | | | | | | |
 |`cuGraphGetNodes`|10.0| | | |`hipGraphGetNodes`|4.5.0| | | | | |
 |`cuGraphGetRootNodes`|10.0| | | |`hipGraphGetRootNodes`|4.5.0| | | | | |
 |`cuGraphHostNodeGetParams`|10.0| | | |`hipGraphHostNodeGetParams`|5.0.0| | | | | |
@@ -2186,11 +2190,14 @@
 |`cuGraphMemsetNodeGetParams`|10.0| | | |`hipGraphMemsetNodeGetParams`|4.5.0| | | | | |
 |`cuGraphMemsetNodeSetParams`|10.0| | | |`hipGraphMemsetNodeSetParams`|4.5.0| | | | | |
 |`cuGraphNodeFindInClone`|10.0| | | |`hipGraphNodeFindInClone`|5.0.0| | | | | |
+|`cuGraphNodeGetContainingGraph`|13.1| | | | | | | | | | |
 |`cuGraphNodeGetDependencies`|10.0| |13.0| |`hipGraphNodeGetDependencies`|5.0.0| | | |13.0| |
 |`cuGraphNodeGetDependencies_v2`|12.3| | | | | | | | | | |
 |`cuGraphNodeGetDependentNodes`|10.0| |13.0| |`hipGraphNodeGetDependentNodes`|5.0.0| | | |13.0| |
 |`cuGraphNodeGetDependentNodes_v2`|12.3| | | | | | | | | | |
 |`cuGraphNodeGetEnabled`|11.6| | | |`hipGraphNodeGetEnabled`|5.5.0| | | | | |
+|`cuGraphNodeGetLocalId`|13.1| | | | | | | | | | |
+|`cuGraphNodeGetToolsId`|13.1| | | | | | | | | | |
 |`cuGraphNodeGetType`|10.0| | | |`hipGraphNodeGetType`|5.0.0| | | | | |
 |`cuGraphNodeSetEnabled`|11.6| | | |`hipGraphNodeSetEnabled`|5.5.0| | | | | |
 |`cuGraphNodeSetParams`|12.2| | | |`hipGraphNodeSetParams`|6.3.0| | | | | |
@@ -2331,6 +2338,7 @@
 |`cuCtxFromGreenCtx`|12.4| | | | | | | | | | |
 |`cuCtxGetDevResource`|12.4| | | | | | | | | | |
 |`cuDevResourceGenerateDesc`|12.4| | | | | | | | | | |
+|`cuDevSmResourceSplit`|13.1| | | | | | | | | | |
 |`cuDevSmResourceSplitByCount`|12.4| | | | | | | | | | |
 |`cuDeviceGetDevResource`|12.4| | | | | | | | | | |
 |`cuGreenCtxCreate`|12.4| | | | | | | | | | |
@@ -2340,6 +2348,7 @@
 |`cuGreenCtxRecordEvent`|12.4| | | | | | | | | | |
 |`cuGreenCtxStreamCreate`|12.5| | | | | | | | | | |
 |`cuGreenCtxWaitEvent`|12.4| | | | | | | | | | |
+|`cuStreamGetDevResource`|13.1| | | | | | | | | | |
 |`cuStreamGetGreenCtx`|12.4| | | | | | | | | | |
 
 ## **36. Error Log Management**

@@ -23,17 +23,17 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA CUB API functions to the corresponding HIP functions
-const std::map<llvm::StringRef, hipCounter> CUDA_CUB_FUNCTION_MAP = [] () {
+const std::map<llvm::StringRef, hipCounter> CUDA_CUB_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
   return m;
 }();

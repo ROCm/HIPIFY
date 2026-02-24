@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Maps the names of CUDA Complex API functions to the corresponding HIP functions
-const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   m["cuCrealf"]                = {"hipCrealf",               "", CONV_COMPLEX, API_COMPLEX, 2};
@@ -53,12 +53,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_COMPLEX_FUNCTION_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_COMPLEX_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hipCrealf"]               = {HIP_1060, HIP_0,    HIP_0   };
@@ -88,7 +88,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_COMPLEX_FUNCTION_VER_MAP = [
   return m;
 }();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_COMPLEX_API_SECTION_MAP = []() {
+const std::map<unsigned int, llvm::StringRef> CUDA_COMPLEX_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
 
   m[1]                         = "cuComplex Data types";

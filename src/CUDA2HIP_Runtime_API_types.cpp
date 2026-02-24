@@ -25,7 +25,7 @@ THE SOFTWARE.
 using SEC = runtime::CUDA_RUNTIME_API_SECTIONS;
 
 // Maps the names of CUDA RUNTIME API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
 
   std::map<llvm::StringRef, hipCounter> m;
 
@@ -2606,7 +2606,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["cudaEglFrame"]                                             = {CUDA_91,  CUDA_0,   CUDA_0  };
@@ -3351,7 +3351,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
   m["cudaExternalSemaphoreSignalParams"]                        = {CUDA_130};
@@ -3361,7 +3361,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGE
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_TYPE_CHANGED_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_TYPE_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIChangedVersions> m;
 
   m["hipLaunchAttributeValue"]                                  = {HIP_7010};
@@ -3369,7 +3369,7 @@ const std::map<llvm::StringRef, hipAPIChangedVersions> HIP_RUNTIME_TYPE_CHANGED_
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hipHostRegisterDefault"]                                   = {HIP_1060, HIP_0,    HIP_0   };

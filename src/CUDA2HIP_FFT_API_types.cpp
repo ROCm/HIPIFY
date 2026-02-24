@@ -23,7 +23,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 
 // Map of all functions
-const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   // cuFFT defines
@@ -154,8 +154,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
+
   m["CUFFT_NOT_SUPPORTED"]                              = {CUDA_80,  CUDA_0,   CUDA_0  };
   m["cufftXtWorkAreaPolicy_t"]                          = {CUDA_92,  CUDA_0,   CUDA_0  };
   m["cufftXtWorkAreaPolicy"]                            = {CUDA_92,  CUDA_0,   CUDA_0  };
@@ -180,7 +181,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_TYPE_NAME_VER_MAP = []
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["HIPFFT_FORWARD"]                                   = {HIP_1070, HIP_0,    HIP_0   };

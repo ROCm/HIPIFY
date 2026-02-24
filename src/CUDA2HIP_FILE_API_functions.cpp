@@ -22,7 +22,7 @@ THE SOFTWARE.
 
 #include "CUDA2HIP.h"
 
-const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   m["cufileop_status_error"]                                = {"hipFileOpStatusError",                         "", CONV_LIB_FUNC, API_FILE, 2};
@@ -75,7 +75,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["cufileop_status_error"]                                = {CUFILE_1000, CUDA_0, CUDA_0};
@@ -128,7 +128,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_FUNCTION_VER_MAP = []
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_FUNCTION_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hipFileOpStatusError"]                                 = {HIP_7020, HIP_0, HIP_0};
@@ -165,7 +165,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_FUNCTION_VER_MAP = []()
   return m;
 }();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_FILE_API_SECTION_MAP = []() {
+const std::map<unsigned int, llvm::StringRef> CUDA_FILE_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
 
   m[1]                                                      = "cuFile Types";

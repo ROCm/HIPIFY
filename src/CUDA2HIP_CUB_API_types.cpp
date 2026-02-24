@@ -25,7 +25,7 @@ THE SOFTWARE.
 using SEC = cub::CUB_API_SECTIONS;
 
 // Maps the names of CUDA CUB API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_CUB_NAMESPACE_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_CUB_NAMESPACE_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   m["cub"]                                      = {"hipcub",                                    "", CONV_TYPE, API_CUB, SEC::DATA_TYPES};
@@ -34,7 +34,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_CUB_NAMESPACE_MAP = []() {
 }();
 
 // Maps the names of CUDA CUB API types to the corresponding HIP types
-const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP = []() {
+const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP = [] {
   std::map<llvm::StringRef, hipCounter> m;
 
   // 1. Structs
@@ -114,12 +114,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_CUB_TYPE_NAME_MAP = []() {
   return m;
 }();
 
-const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, cudaAPIversions> CUDA_CUB_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
   return m;
 }();
 
-const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_TYPE_NAME_VER_MAP = []() {
+const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["HIPCUB_STDERR"]                            = {HIP_2050, HIP_0,    HIP_0   };
@@ -137,7 +137,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_CUB_TYPE_NAME_VER_MAP = []()
   return m;
 }();
 
-const std::map<unsigned int, llvm::StringRef> CUDA_CUB_API_SECTION_MAP = []() {
+const std::map<unsigned int, llvm::StringRef> CUDA_CUB_API_SECTION_MAP = [] {
   std::map<unsigned int, llvm::StringRef> m;
 
   m[SEC::DATA_TYPES]                            = "CUB Data types";

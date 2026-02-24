@@ -2475,11 +2475,13 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP = []
   m["rocsparse_spvv"]                                                 = {HIP_4010, HIP_0,    HIP_0   };
   m["rocsparse_spsv"]                                                 = {HIP_4050, HIP_0,    HIP_0   };
   m["rocsparse_csc_get"]                                              = {HIP_6010, HIP_0,    HIP_0   };
+
   return m;
 }();
 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+
   m["cusparseSpVecGetIndexBase"]                                      = {CUDA_120};
   m["cusparseDestroySpVec"]                                           = {CUDA_120};
   m["cusparseDestroyDnVec"]                                           = {CUDA_120};
