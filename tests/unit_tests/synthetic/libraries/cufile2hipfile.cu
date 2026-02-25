@@ -22,8 +22,14 @@ int main() {
   // CHECK: hipFileDriverControlFlags_t driverControlFlags;
   CUfileDriverControlFlags_t driverControlFlags;
 
+  // CHECK: hipFileDriverControlFlags_t driverControlFlags2;
+  CUfileDriverControlFlags driverControlFlags2;
+
   // CHECK: hipFileFeatureFlags_t featureFlags;
   CUfileFeatureFlags_t featureFlags;
+
+  // CHECK: hipFileFeatureFlags_t featureFlags2;
+  CUfileFeatureFlags featureFlags2;
 
   // CHECK: hipFileFileHandleType fileHandleType;
   CUfileFileHandleType fileHandleType;
@@ -31,11 +37,23 @@ int main() {
   // CHECK: hipFileDriverProps_t driverProps;
   CUfileDrvProps_t driverProps;
 
+  // CHECK: hipFileDriverProps_t driverProps2;
+  CUfileDrvProps driverProps2;
+
   // CHECK: hipFileRDMAInfo_t rdmaInfo;
   cufileRDMAInfo_t rdmaInfo;
 
+  // CHECK: hipFileRDMAInfo_t rdmaInfo2;
+  cufileRDMAInfo rdmaInfo2;
+
   // CHECK: hipFileFSOps_t fsOps;
   CUfileFSOps_t fsOps;
+
+  // CHECK: hipFileFSOps_t fsOps2;
+  CUfileFSOps fsOps2;
+
+  // CHECK: sockaddr sockAddr;
+  sockaddr_t sockAddr;
 
   // CHECK: hipFileDescr_t fileDescr;
   CUfileDescr_t fileDescr;
@@ -50,11 +68,23 @@ int main() {
   // CHECK: hipFileStatus_t fileStatus;
   CUfileStatus_t fileStatus;
 
+  // CHECK: hipFileStatus_t fileStatus2;
+  CUFILEStatus_enum fileStatus2;
+
   // CHECK: hipFileBatchHandle_t batchHandle;
   CUfileBatchHandle_t batchHandle;
 
   // CHECK: hipFileBatchMode_t batchMode;
   CUfileBatchMode_t batchMode;
+
+  // CHECK: hipFileBatchMode_t batchMode2;
+  cufileBatchMode batchMode2;
+
+  // CHECK: hipFileIOParams_t ioParams;
+  CUfileIOParams ioParams;
+
+  // CHECK: hipFileIOEvents_t ioEvents;
+  CUfileIOEvents ioEvents;
 #endif
 
   // CHECK: hipFileOpError_t FILE_SUCCESS = hipFileSuccess;
