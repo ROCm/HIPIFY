@@ -1786,7 +1786,7 @@ sub printStats {
 sub addStats {
     my $dest_ref  = shift();
     my %adder     = %{shift()};
-    foreach $key (keys %adder) {
+    foreach my $key (keys %adder) {
         $dest_ref->{$key} += $adder{$key};
     }
 }
@@ -1794,7 +1794,7 @@ sub addStats {
 sub clearStats {
     my $dest_ref  = shift();
     my @statNames = @{shift()};
-    foreach $stat(@statNames) {
+    foreach my $stat(@statNames) {
         $dest_ref->{$stat} = 0;
     }
 }
@@ -1807,7 +1807,7 @@ sub subst {
     if ($t eq "include" or $t eq "include_cuda_main_header") {
         $i = "(?<![\\!~`@#\\$%\\^&\\*\\-+=\\[\\]\\(\\)\\{\\}\\.\\,\\?'\\>])";
     }
-    if (my $c += s/$i\b$a\b/$b/g) {
+    if (my $c = s/$i\b$a\b/$b/g) {
         $ft{$t} += $c;
         $tags{$a} +=$c;
         $tagsTotal{$a} +=$c;
@@ -18288,7 +18288,7 @@ while (@ARGV) {
         addStats(\%tt, \%ft);
         $Twarnings += $warnings;
         $TlineCount += $lineCount;
-        foreach $key (keys %warningTags) {
+        foreach my $key (keys %warningTags) {
             $TwarningTags{$key} += $warningTags{$key};
         }
     }   # Unless filtered directory or file
