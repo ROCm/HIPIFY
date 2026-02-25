@@ -745,10 +745,12 @@ int main() {
   // CHECK: status = miopenGetDropoutDescriptor(DropoutDescriptor, handle, &dropout, &states, &seed);
   status = cudnnGetDropoutDescriptor(DropoutDescriptor, handle, &dropout, &states, &seed);
 
-  // TODO [#837]: Insert bool use_mask, bool state_evo, miopenRNGType_t rng_mode in the hipified miopenGetDropoutDescriptor: will need variable declaration
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc, cudnnHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc, miopenHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed, bool use_mask, bool state_evo, miopenRNGType_t rng_mode);
-  // CHECK: status = miopenSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
+  // CHECK: bool use_mask;
+  // CHECK-NEXT: bool state_evo;
+  // CHECK-NEXT: miopenRNGType_t rng_mode;
+  // CHECK-NEXT: status = miopenSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed, use_mask, state_evo, rng_mode);
   status = cudnnSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
 
   // TODO [#837]: Insert bool use_mask, bool state_evo, miopenRNGType_t rng_mode in the hipified miopenRestoreDropoutDescriptor: will need variable declaration

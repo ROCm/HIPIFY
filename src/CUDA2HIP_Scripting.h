@@ -41,6 +41,7 @@ namespace hipify {
     e_add_var_argument,
     e_move_argument,
     e_replace_argument_with_const,
+    e_insert_new_argument,
   };
 
   enum OverloadTypes {
@@ -50,6 +51,7 @@ namespace hipify {
   enum CastWarning {
     cw_None,
     cw_DataLoss,
+    cw_NeedsNewArgDecl,
   };
 
   enum OverloadWarning {
@@ -62,6 +64,8 @@ namespace hipify {
     std::string constValToAddOrReplace = "";
     unsigned moveOrCopyTo = 0;
     unsigned numberToMoveOrCopy = 1;
+    std::string newArgTypeName = "";
+    bool isPointerArg = false;
   };
 
   typedef std::map<unsigned, CastInfo> ArgCastMap;
