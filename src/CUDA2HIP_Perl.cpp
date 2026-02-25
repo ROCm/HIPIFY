@@ -329,7 +329,7 @@ namespace perl {
       *streamPtr.get() << endl << sub << (i ? "clearStats" : "addStats") << " {" << endl;
       *streamPtr.get() << tab << my << "$dest_ref  = shift();" << endl;
       *streamPtr.get() << tab << my << (i ? "@statNames = @{shift()};" : "%adder     = %{shift()};") << endl;
-      *streamPtr.get() << tab << foreach << (i ? "$stat(@statNames)" : "$key (keys %adder)") << " {" << endl;
+      *streamPtr.get() << tab << foreach << "my " << (i ? "$stat(@statNames)" : "$key (keys %adder)") << " {" << endl;
       *streamPtr.get() << tab_2 << "$dest_ref->" << (i ? "{$stat} = 0;" : "{$key} += $adder{$key};") << endl_tab << "}" << endl << "}" << endl;
     }
   }
@@ -343,7 +343,7 @@ namespace perl {
     *streamPtr.get() << tab << "if ($t eq \"include\" or $t eq \"include_cuda_main_header\")" << " {" << endl;
     *streamPtr.get() << tab_2 << "$i = \"(?<![\\\\!~`@#\\\\$%\\\\^&\\\\*\\\\-+=\\\\[\\\\]\\\\(\\\\)\\\\{\\\\}\\\\.\\\\,\\\\?'\\\\>])\";" << endl;
     *streamPtr.get() << tab << "}" << endl;
-    *streamPtr.get() << tab << "if (my $c += s/$i\\b$a\\b/$b/g) {" << endl;
+    *streamPtr.get() << tab << "if (my $c = s/$i\\b$a\\b/$b/g) {" << endl;
     *streamPtr.get() << tab_2 << "$ft{$t} += $c;" << endl;
     *streamPtr.get() << tab_2 << "$tags{$a} +=$c;" << endl;
     *streamPtr.get() << tab_2 << "$tagsTotal{$a} +=$c;" << endl;
@@ -972,7 +972,7 @@ namespace perl {
     *streamPtr.get() << tab_2 << "addStats(\\%tt, \\%ft);" << endl;
     *streamPtr.get() << tab_2 << "$Twarnings += $warnings;" << endl;
     *streamPtr.get() << tab_2 << "$TlineCount += $lineCount;" << endl;
-    *streamPtr.get() << tab_2 << foreach << "$key (keys %warningTags) {" << endl;
+    *streamPtr.get() << tab_2 << foreach << "my $key (keys %warningTags) {" << endl;
     *streamPtr.get() << tab_3 << "$TwarningTags{$key} += $warningTags{$key};" << endl_tab_2 << "}";
     *streamPtr.get() << endl_tab << "}   # Unless filtered directory or file" << endl;
     *streamPtr.get() << "}" << endl;
