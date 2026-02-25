@@ -22,8 +22,14 @@ int main() {
   // CHECK: hipFileDriverControlFlags_t driverControlFlags;
   CUfileDriverControlFlags_t driverControlFlags;
 
+  // CHECK: hipFileDriverControlFlags_t driverControlFlags2;
+  CUfileDriverControlFlags driverControlFlags2;
+
   // CHECK: hipFileFeatureFlags_t featureFlags;
   CUfileFeatureFlags_t featureFlags;
+
+  // CHECK: hipFileFeatureFlags_t featureFlags2;
+  CUfileFeatureFlags featureFlags2;
 
   // CHECK: hipFileFileHandleType fileHandleType;
   CUfileFileHandleType fileHandleType;
@@ -31,11 +37,23 @@ int main() {
   // CHECK: hipFileDriverProps_t driverProps;
   CUfileDrvProps_t driverProps;
 
+  // CHECK: hipFileDriverProps_t driverProps2;
+  CUfileDrvProps driverProps2;
+
   // CHECK: hipFileRDMAInfo_t rdmaInfo;
   cufileRDMAInfo_t rdmaInfo;
 
+  // CHECK: hipFileRDMAInfo_t rdmaInfo2;
+  cufileRDMAInfo rdmaInfo2;
+
   // CHECK: hipFileFSOps_t fsOps;
   CUfileFSOps_t fsOps;
+
+  // CHECK: hipFileFSOps_t fsOps2;
+  CUfileFSOps fsOps2;
+
+  // CHECK: sockaddr sockAddr;
+  sockaddr_t sockAddr;
 
   // CHECK: hipFileDescr_t fileDescr;
   CUfileDescr_t fileDescr;
@@ -46,6 +64,27 @@ int main() {
 #if CUDA_VERSION >= 11060
   // CHECK: hipFileOpcode_t opcode;
   CUfileOpcode_t opcode;
+
+  // CHECK: hipFileStatus_t fileStatus;
+  CUfileStatus_t fileStatus;
+
+  // CHECK: hipFileStatus_t fileStatus2;
+  CUFILEStatus_enum fileStatus2;
+
+  // CHECK: hipFileBatchHandle_t batchHandle;
+  CUfileBatchHandle_t batchHandle;
+
+  // CHECK: hipFileBatchMode_t batchMode;
+  CUfileBatchMode_t batchMode;
+
+  // CHECK: hipFileBatchMode_t batchMode2;
+  cufileBatchMode batchMode2;
+
+  // CHECK: hipFileIOParams_t ioParams;
+  CUfileIOParams ioParams;
+
+  // CHECK: hipFileIOEvents_t ioEvents;
+  CUfileIOEvents ioEvents;
 #endif
 
   // CHECK: hipFileOpError_t FILE_SUCCESS = hipFileSuccess;
@@ -206,6 +245,94 @@ int main() {
   // CHECK-NEXT: hipFileOpcode_t FILE_OPCODE_WRITE = hipFileBatchWrite;
   CUfileOpcode_t FILE_OPCODE_READ = CUFILE_READ;
   CUfileOpcode_t FILE_OPCODE_WRITE = CUFILE_WRITE;
+
+  // CHECK: hipFileStatus_t STATUS_WAITING = hipFileWaiting;
+  // CHECK-NEXT: hipFileStatus_t STATUS_PENDING = hipFilePending;
+  // CHECK-NEXT: hipFileStatus_t STATUS_INVALID = hipFileInvalid;
+  // CHECK-NEXT: hipFileStatus_t STATUS_CANCELED = hipFileCanceled;
+  // CHECK-NEXT: hipFileStatus_t STATUS_COMPLETE = hipFileComplete;
+  // CHECK-NEXT: hipFileStatus_t STATUS_TIMEOUT = hipFileTimeout;
+  // CHECK-NEXT: hipFileStatus_t STATUS_FAILED = hipFileFailed;
+  CUfileStatus_t STATUS_WAITING = CUFILE_WAITING;
+  CUfileStatus_t STATUS_PENDING = CUFILE_PENDING;
+  CUfileStatus_t STATUS_INVALID = CUFILE_INVALID;
+  CUfileStatus_t STATUS_CANCELED = CUFILE_CANCELED;
+  CUfileStatus_t STATUS_COMPLETE = CUFILE_COMPLETE;
+  CUfileStatus_t STATUS_TIMEOUT = CUFILE_TIMEOUT;
+  CUfileStatus_t STATUS_FAILED = CUFILE_FAILED;
+
+  // CHECK: hipFileBatchMode_t BATCH_MODE = hipFileBatch;
+  CUfileBatchMode_t BATCH_MODE = CUFILE_BATCH;
+#endif
+
+#if CUDA_VERSION >= 12020
+  // CHECK: int STREAM_FIXED_BUF_OFFSET = HIPFILE_STREAM_FIXED_BUF_OFFSET;
+  // CHECK-NEXT: int STREAM_FIXED_FILE_OFFSET = HIPFILE_STREAM_FIXED_FILE_OFFSET;
+  // CHECK-NEXT: int STREAM_FIXED_FILE_SIZE = HIPFILE_STREAM_FIXED_FILE_SIZE;
+  // CHECK-NEXT: int STREAM_PAGE_ALIGNED_INPUTS = HIPFILE_STREAM_PAGE_ALIGNED_INPUTS;
+  int STREAM_FIXED_BUF_OFFSET = CU_FILE_STREAM_FIXED_BUF_OFFSET;
+  int STREAM_FIXED_FILE_OFFSET = CU_FILE_STREAM_FIXED_FILE_OFFSET;
+  int STREAM_FIXED_FILE_SIZE = CU_FILE_STREAM_FIXED_FILE_SIZE;
+  int STREAM_PAGE_ALIGNED_INPUTS = CU_FILE_STREAM_PAGE_ALIGNED_INPUTS;
+#endif
+
+#if CUDA_VERSION >= 12050
+  // CHECK: hipFileSizeTConfigParameter_t PARAM_PROFILE_STATS = hipFileParamProfileStats;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MAX_IO_QUEUE_DEPTH = hipFileParamExecutionMaxIOQueueDepth;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MAX_IO_THREADS = hipFileParamExecutionMaxIOThreads;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MIN_IO_THRESHOLD = hipFileParamExecutionMinIOThresholdSizeKB;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MAX_REQ_PARALLELISM = hipFileParamExecutionMaxRequestParallelism;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MAX_DIRECT_IO_SIZE = hipFileParamPropertiesMaxDirectIOSizeKB;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MAX_CACHE_SIZE = hipFileParamPropertiesMaxDeviceCacheSizeKB;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_PER_BUF_CACHE_SIZE = hipFileParamPropertiesPerBufferCacheSizeKB;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MAX_PINNED_MEM_SIZE = hipFileParamPropertiesMaxDevicePinnedMemSizeKB;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_IO_BATCHSIZE = hipFileParamPropertiesIOBatchsize;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_POLLTHRESHOLD_SIZE = hipFileParamPollthresholdSizeKB;
+  // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_BATCH_IO_TIMEOUT = hipFileParamPropertiesBatchIOTimeoutMs;
+  CUFileSizeTConfigParameter_t PARAM_PROFILE_STATS = CUFILE_PARAM_PROFILE_STATS;
+  CUFileSizeTConfigParameter_t PARAM_MAX_IO_QUEUE_DEPTH = CUFILE_PARAM_EXECUTION_MAX_IO_QUEUE_DEPTH;
+  CUFileSizeTConfigParameter_t PARAM_MAX_IO_THREADS = CUFILE_PARAM_EXECUTION_MAX_IO_THREADS;
+  CUFileSizeTConfigParameter_t PARAM_MIN_IO_THRESHOLD = CUFILE_PARAM_EXECUTION_MIN_IO_THRESHOLD_SIZE_KB;
+  CUFileSizeTConfigParameter_t PARAM_MAX_REQ_PARALLELISM = CUFILE_PARAM_EXECUTION_MAX_REQUEST_PARALLELISM;
+  CUFileSizeTConfigParameter_t PARAM_MAX_DIRECT_IO_SIZE = CUFILE_PARAM_PROPERTIES_MAX_DIRECT_IO_SIZE_KB;
+  CUFileSizeTConfigParameter_t PARAM_MAX_CACHE_SIZE = CUFILE_PARAM_PROPERTIES_MAX_DEVICE_CACHE_SIZE_KB;
+  CUFileSizeTConfigParameter_t PARAM_PER_BUF_CACHE_SIZE = CUFILE_PARAM_PROPERTIES_PER_BUFFER_CACHE_SIZE_KB;
+  CUFileSizeTConfigParameter_t PARAM_MAX_PINNED_MEM_SIZE = CUFILE_PARAM_PROPERTIES_MAX_DEVICE_PINNED_MEM_SIZE_KB;
+  CUFileSizeTConfigParameter_t PARAM_IO_BATCHSIZE = CUFILE_PARAM_PROPERTIES_IO_BATCHSIZE;
+  CUFileSizeTConfigParameter_t PARAM_POLLTHRESHOLD_SIZE = CUFILE_PARAM_POLLTHRESHOLD_SIZE_KB;
+  CUFileSizeTConfigParameter_t PARAM_BATCH_IO_TIMEOUT = CUFILE_PARAM_PROPERTIES_BATCH_IO_TIMEOUT_MS;
+
+  // CHECK: hipFileBoolConfigParameter_t PARAM_USE_POLL_MODE = hipFileParamPropertiesUsePollMode;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_ALLOW_COMPAT_MODE = hipFileParamPropertiesAllowCompatMode;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_FORCE_COMPAT = hipFileParamForceCompatMode;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_FS_API_CHECK = hipFileParamFsMiscApiCheckAggressive;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_PARALLEL_IO = hipFileParamExecutionParallelIO;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_PROFILE_NVTX = hipFileParamProfileNvtx;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_ALLOW_SYS_MEM = hipFileParamPropertiesAllowSystemMemory;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_USE_PCIP2PDMA = hipFileParamUsePcip2pdma;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_PREFER_IO_URING = hipFileParamPreferIOUring;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_FORCE_ODIRECT = hipFileParamForceOdirectMode;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_SKIP_TOPOLOGY = hipFileParamSkipTopologyDetection;
+  // CHECK-NEXT: hipFileBoolConfigParameter_t PARAM_STREAM_MEMOPS_BYPASS = hipFileParamStreamMemopsBypass;
+  CUFileBoolConfigParameter_t PARAM_USE_POLL_MODE = CUFILE_PARAM_PROPERTIES_USE_POLL_MODE;
+  CUFileBoolConfigParameter_t PARAM_ALLOW_COMPAT_MODE = CUFILE_PARAM_PROPERTIES_ALLOW_COMPAT_MODE;
+  CUFileBoolConfigParameter_t PARAM_FORCE_COMPAT = CUFILE_PARAM_FORCE_COMPAT_MODE;
+  CUFileBoolConfigParameter_t PARAM_FS_API_CHECK = CUFILE_PARAM_FS_MISC_API_CHECK_AGGRESSIVE;
+  CUFileBoolConfigParameter_t PARAM_PARALLEL_IO = CUFILE_PARAM_EXECUTION_PARALLEL_IO;
+  CUFileBoolConfigParameter_t PARAM_PROFILE_NVTX = CUFILE_PARAM_PROFILE_NVTX;
+  CUFileBoolConfigParameter_t PARAM_ALLOW_SYS_MEM = CUFILE_PARAM_PROPERTIES_ALLOW_SYSTEM_MEMORY;
+  CUFileBoolConfigParameter_t PARAM_USE_PCIP2PDMA = CUFILE_PARAM_USE_PCIP2PDMA;
+  CUFileBoolConfigParameter_t PARAM_PREFER_IO_URING = CUFILE_PARAM_PREFER_IO_URING;
+  CUFileBoolConfigParameter_t PARAM_FORCE_ODIRECT = CUFILE_PARAM_FORCE_ODIRECT_MODE;
+  CUFileBoolConfigParameter_t PARAM_SKIP_TOPOLOGY = CUFILE_PARAM_SKIP_TOPOLOGY_DETECTION;
+  CUFileBoolConfigParameter_t PARAM_STREAM_MEMOPS_BYPASS = CUFILE_PARAM_STREAM_MEMOPS_BYPASS;
+
+  // CHECK: hipFileStringConfigParameter_t PARAM_LOGGING_LEVEL = hipFileParamLoggingLevel;
+  // CHECK-NEXT: hipFileStringConfigParameter_t PARAM_ENV_LOGFILE_PATH = hipFileParamEnvLogfilePath;
+  // CHECK-NEXT: hipFileStringConfigParameter_t PARAM_LOG_DIR = hipFileParamLogDir;
+  CUFileStringConfigParameter_t PARAM_LOGGING_LEVEL = CUFILE_PARAM_LOGGING_LEVEL;
+  CUFileStringConfigParameter_t PARAM_ENV_LOGFILE_PATH = CUFILE_PARAM_ENV_LOGFILE_PATH;
+  CUFileStringConfigParameter_t PARAM_LOG_DIR = CUFILE_PARAM_LOG_DIR;
 #endif
 
   // Test error checking macros

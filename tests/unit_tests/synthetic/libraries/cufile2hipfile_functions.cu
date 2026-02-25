@@ -201,7 +201,7 @@ int main() {
 
   size_t sizeTValue = 0;
   bool boolValue = false;
-  const char stringValLen = 256;
+  const int stringValLen = 256;
   char stringValue[stringValLen];
 
   // CUDA: CUfileError_t cuFileGetParameterSizeT(CUFileSizeTConfigParameter_t param, size_t *value);
@@ -214,11 +214,9 @@ int main() {
   // CHECK: fileError = hipFileGetParameterBool(boolParam, &boolValue);
   fileError = cuFileGetParameterBool(boolParam, &boolValue);
 
-  // CUDA: CUfileError_t cuFileGetParameterString(CUFileStringConfigParameter_t
-  // param, char *desc_str, int len); HIP: hipFileError_t
-  // hipFileGetParameterString(hipFileStringConfigParameter_t param, char
-  // *desc_str, int len); CHECK: fileError =
-  // hipFileGetParameterString(stringParam, stringValue, stringValLen);
+  // CUDA: CUfileError_t cuFileGetParameterString(CUFileStringConfigParameter_t param, char *desc_str, int len);
+  // HIP: hipFileError_t hipFileGetParameterString(hipFileStringConfigParameter_t param, char *desc_str, int len);
+  // CHECK: fileError = hipFileGetParameterString(stringParam, stringValue, stringValLen);
   fileError = cuFileGetParameterString(stringParam, stringValue, stringValLen);
 
   // CUDA: CUfileError_t cuFileSetParameterSizeT(CUFileSizeTConfigParameter_t param, size_t value);
