@@ -65,6 +65,8 @@ namespace perl {
   const string tab_5 = tab_4 + tab;
   const string tab_6 = tab_5 + tab;
   const string tab_7 = tab_6 + tab;
+  const string tab_8 = tab_7 + tab;
+  const string tab_9 = tab_8 + tab;
 
   const string endl_2 = "\n\n";
   const string endl_tab = "\n" + tab;
@@ -77,33 +79,21 @@ namespace perl {
   const string sub = "sub ";
   const string my = "my ";
   const string my_k = my + "$k = 0;";
-  const string return_0 = "return 0;\n";
-  const string return_k = "return $k;\n";
   const string while_ = "while ";
   const string unless_ = "unless ";
   const string foreach = "foreach ";
   const string foreach_func = foreach + "$func (";
   const string print = "print STDERR ";
   const string printf = "printf STDERR ";
-  const string warn = "warn";
   const string no_warns = "no warnings qw/uninitialized/;";
   const string hipify_perl = "hipify-perl";
   const string warning = "$fileName:$line_num: warning: ";
-  const string sWarnExperimentalFunctions = "warnExperimentalFunctions";
-  const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
-  const string sWarnRemovedFunctions = "warnRemovedFunctions";
   const string sRocOnlyUnsupportedFunctions = "RocOnlyUnsupportedFunctions";
-  const string sWarnRocOnlyUnsupportedFunctions = warn + sRocOnlyUnsupportedFunctions;
   const string sMIOpenOnlyUnsupportedFunctions = "MIOpenOnlyUnsupportedFunctions";
-  const string sWarnMIOpenOnlyUnsupportedFunctions = warn + sMIOpenOnlyUnsupportedFunctions;
   const string sHipOnlyUnsupportedFunctions = "HipOnlyUnsupportedFunctions";
-  const string sWarnHipOnlyUnsupportedFunctions = warn + sHipOnlyUnsupportedFunctions;
   const string sHipDNNOnlyUnsupportedFunctions = "HipDNNOnlyUnsupportedFunctions";
-  const string sWarnHipDNNOnlyUnsupportedFunctions = warn + sHipDNNOnlyUnsupportedFunctions;
   const string sUnsupportedDeviceFunctions = "UnsupportedDeviceFunctions";
   const string sUnsupportedDeviceDataTypes = "UnsupportedDeviceDataTypes";
-  const string sWarnUnsupportedDeviceFunctions = warn + sUnsupportedDeviceFunctions;
-  const string sWarnUnsupportedDeviceDataTypes = warn + sUnsupportedDeviceDataTypes;
   const string sSimpleMappings = "simpleMappings";
   const string sSimpleIncludes = "simpleIncludes";
   const string sRocMappings = "rocMappings";
@@ -115,13 +105,8 @@ namespace perl {
   const string sExperimentalIncludes = "experimentalIncludes";
   const string sTransformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
-  const string count = "count";
   const string sSupportedDeviceFunctions = "SupportedDeviceFunctions";
   const string sSupportedDeviceDataTypes = "SupportedDeviceDataTypes";
-  const string sCountSupportedDeviceFunctions = count + sSupportedDeviceFunctions;
-  const string sCountSupportedDeviceDataTypes = count + sSupportedDeviceDataTypes;
-  const string sMap_1 = " = map { $_ => 1 } @";
-  const string sMyHash = "my %hash_";
 
   const string sCudaDevice = "cudaDevice";
   const string sCudaDeviceId = "cudaDeviceId";
@@ -218,9 +203,6 @@ namespace perl {
     *streamPtr.get() << my << "$fileName = \"\";" << endl;
     *streamPtr.get() << my << "$hipFileName = \"\";" << endl;
     *streamPtr.get() << my << "%ft;" << endl;
-    *streamPtr.get() << my << "%Tkernels;" << endl;
-    *streamPtr.get() << my << "%tags = ();" << endl;
-    *streamPtr.get() << my << "%tagsTotal = ();" << endl;
     *streamPtr.get() << my << "%tagsToConvertedTags = ();" << endl;
     *streamPtr.get() << my << "%tagsToConvertedTagsTotal = ();" << endl;
     *streamPtr.get() << my << "%convertedTags = ();" << endl;
@@ -275,7 +257,7 @@ namespace perl {
         }
       }
     }
-    common << endl << ");" << endl << endl;
+    common << endl << ");" << endl_2;
     deprecated << common.str();
     removed << common.str();
     experimental << common.str();
@@ -349,8 +331,6 @@ namespace perl {
     *streamPtr.get() << tab << "}" << endl;
     *streamPtr.get() << tab << "if (my $c = s/$i\\b$a\\b/$b/g) {" << endl;
     *streamPtr.get() << tab_2 << "$ft{$t} += $c;" << endl;
-    *streamPtr.get() << tab_2 << "$tags{$a} +=$c;" << endl;
-    *streamPtr.get() << tab_2 << "$tagsTotal{$a} +=$c;" << endl;
     *streamPtr.get() << tab_2 << "$convertedTags{$b} +=$c;" << endl;
     *streamPtr.get() << tab_2 << "$convertedTagsTotal{$b} +=$c;" << endl;
     *streamPtr.get() << tab_2 << "$tagsToConvertedTags{$a} = $b;" << endl;
@@ -501,18 +481,18 @@ namespace perl {
 
     *streamPtr.get() << tab << "if ($k) {" << endl;
     *streamPtr.get() << tab_2 << "$ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} += $k;" << endl;
-    *streamPtr.get() << tab_2 << "$Tkernels{$1}++;" << endl_tab << "}" << endl << "}" << endl;
+    *streamPtr.get() << tab << "}" << endl << "}" << endl;
   }
 
   void generateCubNamespace(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << sTransformCubNamespace << " {" << endl_tab << my_k << endl;
-    *streamPtr.get() << tab << "$k += s/using\\s*namespace\\s*cub/using namespace hipcub/g;" << endl;
-    *streamPtr.get() << tab << "$k += s/\\bcub::\\b/hipcub::/g;" << endl << tab << return_k << "}" << endl;
+    *streamPtr.get() << endl << sub << sTransformCubNamespace << " {" << endl;
+    *streamPtr.get() << tab << "s/using\\s*namespace\\s*cub/using namespace hipcub/g;" << endl;
+    *streamPtr.get() << tab << "s/\\bcub::\\b/hipcub::/g;" << endl << "}" << endl;
   }
 
   void generateHostFunctions(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << "transformHostFunctions" << " {" << endl_tab << my_k << endl;
-    const string s = "$k += s/(?<!\\/\\/ CHECK: )($func)\\s*";
+    *streamPtr.get() << endl << sub << "transformHostFunctions" << " {" << endl;
+    const string s = "s/(?<!\\/\\/ CHECK: )($func)\\s*";
     const string s0 = s + "\\(([^,\\)]+),/$func\\(";
     const string s1 = s + "\\(([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3";
     const string s2 = s + "\\(([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4";
@@ -619,93 +599,71 @@ namespace perl {
       }
       *streamPtr.get() << tab << "}" << endl;
     }
-    *streamPtr.get() << tab << return_k << "}" << endl;
+    *streamPtr.get() << "}" << endl_2;
   }
 
   void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream roc_unsupported, hip_unsupported, miopen_unsupported, hipdnn_unsupported;
-    unsigned countRocOnlyUnsupported = 0, countHipOnlyUnsupported = 0, countMIOpenOnlyUnsupported = 0, countHipDNNOnlyUnsupported = 0;
     bool bTranslateToRoc = TranslateToRoc;
     bool bTranslateToMIOpen = TranslateToMIOpen;
-    for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
-      TranslateToRoc = false;
-      if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.type != CONV_DEVICE_FUNC && ma->second.type != CONV_DEVICE_TYPE && ma->second.apiType != API_DNN) {
-          hip_unsupported << (countHipOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-          countHipOnlyUnsupported++;
-        }
-      }
-      TranslateToRoc = true;
-      if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.apiType == API_BLAS || ma->second.apiType == API_SPARSE || ma->second.apiType == API_RAND || ma->second.apiType == API_TENSOR) {
-          roc_unsupported << (countRocOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-          countRocOnlyUnsupported++;
-        }
-      }
-      TranslateToRoc = false;
-      TranslateToMIOpen = true;
-      if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.apiType == API_DNN) {
-          miopen_unsupported << (countMIOpenOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-          countMIOpenOnlyUnsupported++;
-        }
-      }
-      TranslateToMIOpen = false;
-      if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.apiType == API_DNN) {
-          hipdnn_unsupported << (countHipDNNOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-          countHipDNNOnlyUnsupported++;
-        }
+    TranslateToRoc = false;
+    *streamPtr.get() << "my %hash_" << sHipOnlyUnsupportedFunctions << " = (" << endl;
+    for (auto ma = CUDA_RENAMES_MAP().begin(); ma != CUDA_RENAMES_MAP().end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second) && ma->second.type != CONV_DEVICE_FUNC && ma->second.type != CONV_DEVICE_TYPE && ma->second.apiType != API_DNN) {
+        *streamPtr.get() << tab << "'" << ma->first.str() << "' => 1," << endl;
       }
     }
+    *streamPtr.get() << ");" << endl_2;
+    TranslateToRoc = true;
+    *streamPtr.get() << "my %hash_" << sRocOnlyUnsupportedFunctions << " = (" << endl;
+    for (auto ma = CUDA_RENAMES_MAP().begin(); ma != CUDA_RENAMES_MAP().end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second) && (ma->second.apiType == API_BLAS || ma->second.apiType == API_SPARSE || ma->second.apiType == API_RAND || ma->second.apiType == API_TENSOR)) {
+        *streamPtr.get() << tab << "'" << ma->first.str() << "' => 1," << endl;
+      }
+    }
+    *streamPtr.get() << ");" << endl_2;
+    TranslateToRoc = false;
+    TranslateToMIOpen = true;
+    *streamPtr.get() << "my %hash_" << sMIOpenOnlyUnsupportedFunctions << " = (" << endl;
+    for (auto ma = CUDA_RENAMES_MAP().begin(); ma != CUDA_RENAMES_MAP().end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second) && ma->second.apiType == API_DNN) {
+        *streamPtr.get() << tab << "'" << ma->first.str() << "' => 1," << endl;
+      }
+    }
+    *streamPtr.get() << ");" << endl_2;
+    TranslateToMIOpen = false;
+    *streamPtr.get() << "my %hash_" << sHipDNNOnlyUnsupportedFunctions << " = (" << endl;
+    for (auto ma = CUDA_RENAMES_MAP().begin(); ma != CUDA_RENAMES_MAP().end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second) && ma->second.apiType == API_DNN) {
+        *streamPtr.get() << tab << "'" << ma->first.str() << "' => 1," << endl;
+      }
+    }
+    *streamPtr.get() << ");" << endl_2;
     TranslateToRoc = bTranslateToRoc;
     TranslateToMIOpen = bTranslateToMIOpen;
-
-    hip_unsupported << endl << ");" << endl;
-    roc_unsupported << endl << ");" << endl;
-    miopen_unsupported << endl << ");" << endl;
-    hipdnn_unsupported << endl << ");" << endl;
-
-    *streamPtr.get() << "\n@" << sHipOnlyUnsupportedFunctions << " = (\n" << hip_unsupported.str();
-    *streamPtr.get() << "\n@" << sRocOnlyUnsupportedFunctions << " = (\n" << roc_unsupported.str();
-    *streamPtr.get() << "\n@" << sMIOpenOnlyUnsupportedFunctions << " = (\n" << miopen_unsupported.str();
-    *streamPtr.get() << "\n@" << sHipDNNOnlyUnsupportedFunctions << " = (\n" << hipdnn_unsupported.str();
   }
 
-void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
-    unsigned int countUnsupported = 0;
-    unsigned int countUnsupportedDataTypes = 0;
-    unsigned int countSupported = 0;
-    unsigned int countSupportedDataTypes = 0;
-    stringstream sSupported;
-    stringstream sSupportedDataTypes;
-    stringstream sUnsupported;
-    stringstream sUnsupportedDataTypes;
-    for (auto ma = CUDA_DEVICE_FUNCTION_MAP.rbegin(); ma != CUDA_DEVICE_FUNCTION_MAP.rend(); ++ma) {
-      bool isUnsupported = Statistics::isUnsupported(ma->second);
-      (isUnsupported ? sUnsupported : sSupported) << ((isUnsupported && countUnsupported) || (!isUnsupported && countSupported) ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-      if (isUnsupported) countUnsupported++;
-      else countSupported++;
+  void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
+    *streamPtr.get() << "my %hash_" << sSupportedDeviceFunctions << " = (" << endl;
+    for (auto ma = CUDA_DEVICE_FUNCTION_MAP.begin(); ma != CUDA_DEVICE_FUNCTION_MAP.end(); ++ma) {
+      if (!Statistics::isUnsupported(ma->second)) *streamPtr.get() << tab << "'" << ma->first.str() << "' => 1," << endl;
     }
-    for (auto ma = CUDA_DEVICE_TYPE_NAME_MAP.rbegin(); ma != CUDA_DEVICE_TYPE_NAME_MAP.rend(); ++ma) {
-      bool isUnsupported = Statistics::isUnsupported(ma->second);
-      (isUnsupported ? sUnsupportedDataTypes : sSupportedDataTypes) << ((isUnsupported && countUnsupportedDataTypes) || (!isUnsupported && countSupportedDataTypes) ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-      if (isUnsupported) countUnsupportedDataTypes++;
-      else countSupportedDataTypes++;
+    *streamPtr.get() << ");" << endl_2;
+    *streamPtr.get() << "my %hash_" << sUnsupportedDeviceFunctions << " = (" << endl;
+    for (auto ma = CUDA_DEVICE_FUNCTION_MAP.begin(); ma != CUDA_DEVICE_FUNCTION_MAP.end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second)) *streamPtr.get() << tab << "'" << ma->first.str() << "' => 1," << endl;
     }
-    stringstream supported;
-    stringstream supportedDataTypes;
-    stringstream unsupported;
-    stringstream unsupportedDataTypes;
-    if (countSupported) supported << sSupported.str() << endl << ");" << endl;
-    if (countSupportedDataTypes) supportedDataTypes << sSupportedDataTypes.str() << endl << ");" << endl;
-    if (countUnsupported) unsupported << sUnsupported.str() << endl << ");" << endl;
-    if (countUnsupportedDataTypes) unsupportedDataTypes << sUnsupportedDataTypes.str() << endl << ");" << endl;
-    *streamPtr.get() << "\n@" << sSupportedDeviceFunctions << " = (\n" << supported.str();
-    *streamPtr.get() << "\n@" << sUnsupportedDeviceFunctions << " = (\n" << unsupported.str();
-    *streamPtr.get() << "\n@" << sSupportedDeviceDataTypes << " = (\n" << supportedDataTypes.str();
-    *streamPtr.get() << "\n@" << sUnsupportedDeviceDataTypes << " = (\n" << unsupportedDataTypes.str();
-  }
+    *streamPtr.get() << ");" << endl_2;
+    *streamPtr.get() << "my %hash_" << sSupportedDeviceDataTypes << " = (" << endl;
+    for (auto ma = CUDA_DEVICE_TYPE_NAME_MAP.begin(); ma != CUDA_DEVICE_TYPE_NAME_MAP.end(); ++ma) {
+      if (!Statistics::isUnsupported(ma->second)) *streamPtr.get() << tab << "'" << ma->first.str() << "' => 1," << endl;
+    }
+    *streamPtr.get() << ");" << endl_2;
+    *streamPtr.get() << "my %hash_" << sUnsupportedDeviceDataTypes << " = (" << endl;
+    for (auto ma = CUDA_DEVICE_TYPE_NAME_MAP.begin(); ma != CUDA_DEVICE_TYPE_NAME_MAP.end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second)) *streamPtr.get() << tab << "'" << ma->first.str() << "' => 1," << endl;
+    }
+    *streamPtr.get() << ");" << endl_2;
+}
 
   bool generate(bool Generate) {
     if (!Generate) return true;
@@ -750,7 +708,6 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << "clearStats(\\%tt, \\@statNames);" << endl;
     *streamPtr.get() << "$Twarnings = 0;" << endl;
     *streamPtr.get() << "$TlineCount = 0;" << endl;
-    *streamPtr.get() << my << "%TwarningTags;" << endl;
     *streamPtr.get() << my << "$fileCount = @ARGV;" << endl;
     *streamPtr.get() << "if ($help) {" << endl;
     *streamPtr.get() << tab << "print STDERR \"$USAGE\\n\";" << endl;
@@ -774,15 +731,6 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
 
     // Use a generic C-identifier matcher to bypass Regex Compilation time
     *streamPtr.get() << "my $master_regex = qr/\\b([a-zA-Z_]\\w*)\\b/;" << endl;
-
-    *streamPtr.get() << sMyHash << sHipOnlyUnsupportedFunctions << sMap_1 << sHipOnlyUnsupportedFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sRocOnlyUnsupportedFunctions << sMap_1 << sRocOnlyUnsupportedFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sMIOpenOnlyUnsupportedFunctions << sMap_1 << sMIOpenOnlyUnsupportedFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sHipDNNOnlyUnsupportedFunctions << sMap_1 << sHipDNNOnlyUnsupportedFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sSupportedDeviceFunctions << sMap_1 << sSupportedDeviceFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sSupportedDeviceDataTypes << sMap_1 << sSupportedDeviceDataTypes << ";" << endl;
-    *streamPtr.get() << sMyHash << sUnsupportedDeviceFunctions << sMap_1 << sUnsupportedDeviceFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sUnsupportedDeviceDataTypes << sMap_1 << sUnsupportedDeviceDataTypes << ";" << endl;
 
     *streamPtr.get() << while_ << "(@ARGV) {" << endl;
     *streamPtr.get() << tab << "$fileName=shift (@ARGV);" << endl;
@@ -819,12 +767,9 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << tab_4 << "$OUTFILE = STDOUT;" << endl_tab_3 << "}" << endl_tab_2 << "}" << endl;
     *streamPtr.get() << tab_2 << "# Count of transforms in this file" << endl;
     *streamPtr.get() << tab_2 << "clearStats(\\%ft, \\@statNames);" << endl;
-    *streamPtr.get() << tab_2 << my << "$countIncludes = 0;" << endl;
     *streamPtr.get() << tab_2 << my << "$countKeywords = 0;" << endl;
     *streamPtr.get() << tab_2 << my << "$warnings = 0;" << endl;
-    *streamPtr.get() << tab_2 << my << "%warningTags;" << endl;
     *streamPtr.get() << tab_2 << my << "$lineCount = 0;" << endl;
-    *streamPtr.get() << tab_2 << "%tags = ();" << endl;
     *streamPtr.get() << tab_2 << "%convertedTags = ();" << endl;
     *streamPtr.get() << tab_2 << "%tagsToConvertedTags = ();" << endl;
     *streamPtr.get() << tab_2 << "undef $/;" << endl;
@@ -834,8 +779,6 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << tab_3 << "$countKeywords += m/__shared__/;" << endl;
     *streamPtr.get() << tab_3 << unless_ << "($quiet_warnings) {" << endl;
     *streamPtr.get() << tab_4 << my << "@lines = split /\\n/, $_;" << endl;
-    *streamPtr.get() << tab_4 << "# Copy the whole file" << endl;
-    *streamPtr.get() << tab_4 << my << "$tmp = $_;" << endl;
     *streamPtr.get() << tab_4 << my << "$line_num = 0;" << endl;
     *streamPtr.get() << tab_4 << foreach << "(@lines) {" << endl;
     *streamPtr.get() << tab_5 << "$line_num++;" << endl;
@@ -843,56 +786,56 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << tab_5 << "my %unique_words = map { $_ => 1 } m/\\b([a-zA-Z_]\\w*)\\b/g;" << endl;
     *streamPtr.get() << tab_5 << "foreach my $func (keys %unique_words) {" << endl;
     *streamPtr.get() << tab_6 << "if (!$experimental && exists $experimental_funcs{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "print STDERR \"  $fileName:$line_num: warning: experimental ROCm HIP identifier: $func $experimental_funcs{$func}\\n\";" << endl;
+    *streamPtr.get() << tab_7 << "print STDERR \"  " << warning << "experimental ROCm HIP identifier: $func $experimental_funcs{$func}\\n\";" << endl;
     *streamPtr.get() << tab_7 << "$warnings++;" << endl;
     *streamPtr.get() << tab_6 << "}" << endl;
     *streamPtr.get() << tab_6 << "if (exists $removed_funcs{$func}) {" << endl;
     *streamPtr.get() << tab_7 << "my $cuda = (index(lc($func), \"cudnn\") == 0) ? \"CUDNN\" : \"CUDA\";" << endl;
-    *streamPtr.get() << tab_7 << "print STDERR \"  $fileName:$line_num: warning: removed CUDA identifier: $func since $cuda $removed_funcs{$func}\\n\";" << endl;
+    *streamPtr.get() << tab_7 << "print STDERR \"  " << warning << "removed CUDA identifier: $func since $cuda $removed_funcs{$func}\\n\";" << endl;
     *streamPtr.get() << tab_7 << "$warnings++;" << endl;
     *streamPtr.get() << tab_6 << "}" << endl;
     *streamPtr.get() << tab_6 << "if (exists $deprecated_funcs{$func}) {" << endl;
     *streamPtr.get() << tab_7 << "my $cuda = (index(lc($func), \"cudnn\") == 0) ? \"CUDNN\" : \"CUDA\";" << endl;
-    *streamPtr.get() << tab_7 << "print STDERR \"  $fileName:$line_num: warning: deprecated CUDA identifier: $func since $cuda $deprecated_funcs{$func}\\n\";" << endl;
+    *streamPtr.get() << tab_7 << "print STDERR \"  " << warning << "deprecated CUDA identifier: $func since $cuda $deprecated_funcs{$func}\\n\";" << endl;
     *streamPtr.get() << tab_7 << "$warnings++;" << endl;
     *streamPtr.get() << tab_6 << "}" << endl;
 
     *streamPtr.get() << tab_6 << "if ($roc) {" << endl;
     *streamPtr.get() << tab_7 << "if (exists $hash_RocOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported ROC identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab << "$warnings++;" << endl;
+    *streamPtr.get() << tab_8 << "print STDERR \"  " << warning << "unsupported ROC identifier: $func\\n\";" << endl;
+    *streamPtr.get() << tab_8 << "$warnings++;" << endl;
     *streamPtr.get() << tab_7 << "}" << endl;
     *streamPtr.get() << tab_7 << "if (exists $hash_MIOpenOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported MIOpen identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab << "$warnings++;" << endl;
+    *streamPtr.get() << tab_8 << "print STDERR \"  " << warning << "unsupported MIOpen identifier: $func\\n\";" << endl;
+    *streamPtr.get() << tab_8 << "$warnings++;" << endl;
     *streamPtr.get() << tab_7 << "}" << endl;
     *streamPtr.get() << tab_6 << "} else {" << endl;
     *streamPtr.get() << tab_7 << "if (exists $hash_HipOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported HIP identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab << "$warnings++;" << endl;
+    *streamPtr.get() << tab_8 << "print STDERR \"  " << warning << "unsupported HIP identifier: $func\\n\";" << endl;
+    *streamPtr.get() << tab_8 << "$warnings++;" << endl;
     *streamPtr.get() << tab_7 << "}" << endl;
     *streamPtr.get() << tab_7 << "if ($miopen) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "if (exists $hash_MIOpenOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported MIOpen identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab + tab << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 + tab << "}" << endl;
+    *streamPtr.get() << tab_8 << "if (exists $hash_MIOpenOnlyUnsupportedFunctions{$func}) {" << endl;
+    *streamPtr.get() << tab_9 << "print STDERR \"  " << warning << "unsupported MIOpen identifier: $func\\n\";" << endl;
+    *streamPtr.get() << tab_9 << "$warnings++;" << endl;
+    *streamPtr.get() << tab_8 << "}" << endl;
     *streamPtr.get() << tab_7 << "} else {" << endl;
-    *streamPtr.get() << tab_7 + tab << "if (exists $hash_HipDNNOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported hipDNN identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab + tab << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 + tab << "}" << endl;
+    *streamPtr.get() << tab_8 << "if (exists $hash_HipDNNOnlyUnsupportedFunctions{$func}) {" << endl;
+    *streamPtr.get() << tab_9 << "print STDERR \"  " << warning << "unsupported hipDNN identifier: $func\\n\";" << endl;
+    *streamPtr.get() << tab_9 << "$warnings++;" << endl;
+    *streamPtr.get() << tab_8 << "}" << endl;
     *streamPtr.get() << tab_7 << "}" << endl;
     *streamPtr.get() << tab_6 << "}" << endl;
 
     *streamPtr.get() << tab_6 << "if (exists $hash_UnsupportedDeviceDataTypes{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "print STDERR \"  $fileName:$line_num: warning: unsupported device data type identifier: $func\\n\";" << endl;
+    *streamPtr.get() << tab_7 << "print STDERR \"  " << warning << "unsupported device data type identifier: $func\\n\";" << endl;
     *streamPtr.get() << tab_7 << "$warnings++;" << endl;
     *streamPtr.get() << tab_6 << "}" << endl;
 
     *streamPtr.get() << tab_6 << "if (exists $hash_UnsupportedDeviceFunctions{$func}) {" << endl;
     *streamPtr.get() << tab_7 << "if ($_ =~ m/\\b$func\\b\\s*\\(/ && $_ !~ m/\\w+::$func\\b\\s*\\(/) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported device function \\\"$func\\\": $_\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab << "$warnings++;" << endl;
+    *streamPtr.get() << tab_8 << "print STDERR \"  " << warning << "unsupported device function \\\"$func\\\": $_\\n\";" << endl;
+    *streamPtr.get() << tab_8 << "$warnings++;" << endl;
     *streamPtr.get() << tab_7 << "}" << endl;
     *streamPtr.get() << tab_6 << "}" << endl;
 
@@ -907,8 +850,8 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << tab_6 << "}" << endl;
     *streamPtr.get() << tab_5 << "}" << endl;
     *streamPtr.get() << tab_4 << "}" << endl;
+    *streamPtr.get() << tab_3 << "}" << endl;
 
-    *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
     *streamPtr.get() << tab_3 << "if ($roc) {" << endl;
     *streamPtr.get() << tab_4 << sRocIncludes << "(); " << endl;
     *streamPtr.get() << tab_4 << sMIOpenIncludes << "();" << endl;
@@ -929,8 +872,6 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << tab_6 << "my $b = $mappings{$match}->{rep};" << endl;
     *streamPtr.get() << tab_6 << "my $t = $mappings{$match}->{type};" << endl;
     *streamPtr.get() << tab_6 << "$ft{$t}++;" << endl;
-    *streamPtr.get() << tab_6 << "$tags{$match}++;" << endl;
-    *streamPtr.get() << tab_6 << "$tagsTotal{$match}++;" << endl;
     *streamPtr.get() << tab_6 << "$convertedTags{$b}++;" << endl;
     *streamPtr.get() << tab_6 << "$convertedTagsTotal{$b}++;" << endl;
     *streamPtr.get() << tab_6 << "$tagsToConvertedTags{$match} = $b;" << endl;
@@ -951,31 +892,25 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << tab_4 << "# Copy into array of lines, process line-by-line to show warnings" << endl;
     *streamPtr.get() << tab_4 << "if ($hasDeviceCode or (/\\bcu|CU/) or (/<<<.*>>>/)) {" << endl;
     *streamPtr.get() << tab_5 << my << "@lines = split /\\n/, $_;" << endl;
-    *streamPtr.get() << tab_5 << "# Copy the whole file" << endl;
-    *streamPtr.get() << tab_5 << my << "$tmp = $_;" << endl;
     *streamPtr.get() << tab_5 << my << "$line_num = 0;" << endl;
     *streamPtr.get() << tab_5 << foreach << "(@lines) {" << endl;
     *streamPtr.get() << tab_6 << "$line_num++;" << endl;
     *streamPtr.get() << tab_6 << "# Remove any whitelisted words" << endl;
     *streamPtr.get() << tab_6 << foreach << "$w (@whitelist) {" << endl;
     *streamPtr.get() << tab_7 << "redo if s/\\b$w\\b/ZAP/" << endl_tab_6 << "}" << endl;
-    *streamPtr.get() << tab_6 << my << "$tag;" << endl;
     *streamPtr.get() << tab_6 << "if ((/(\\bcuda[A-Z]\\w+)/) or ((/<<<.*>>>/) and ($hip_kernel_execution_syntax))) {" << endl;
     *streamPtr.get() << tab_7 << "# Flag any remaining code that look like cuda API calls: may want to add these to hipify" << endl;
-    *streamPtr.get() << tab_7 << "$tag = (defined $1) ? $1 : \"Launch\";" << endl_tab_6 << "}" << endl;
-    *streamPtr.get() << tab_6 << "if (defined $tag) {" << endl;
     *streamPtr.get() << tab_7 << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 << "$warningTags{$tag}++;" << endl;
     *streamPtr.get() << tab_7 << print << "\"  warning: $fileName:#$line_num : $_\\n\";" << endl_tab_6 << "}" << endl_tab_5 << "}" << endl;
-    *streamPtr.get() << tab_5 << "$_ = $tmp;" << endl_tab_4 << "}" << endl_tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "transformHostFunctions();" << endl;
+    *streamPtr.get() << tab_4 << "}" << endl_tab_3 << "}" << endl;
+    *streamPtr.get() << tab_3 << "transformHostFunctions();" << endl_2;
     *streamPtr.get() << tab_3 << "# TODO: would like to move this code outside loop but it uses $_ which contains the whole file" << endl;
     *streamPtr.get() << tab_3 << unless_ << "($no_output) {" << endl;
     *streamPtr.get() << tab_4 << sConv << endl;
     *streamPtr.get() << tab_4 << my << "$kernStuff  = $hasDeviceCode + $ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} + $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} + $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'};" << endl;
     *streamPtr.get() << tab_4 << my << "$totalCalls = $apiCalls + $kernStuff;" << endl;
     *streamPtr.get() << tab_4 << "$is_dos = m/\\r\\n$/;" << endl;
-    *streamPtr.get() << tab_4 << "if ($totalCalls and ($countIncludes == 0) and ($kernStuff != 0)) {" << endl;
+    *streamPtr.get() << tab_4 << "if ($totalCalls and ($kernStuff != 0)) {" << endl;
     *streamPtr.get() << tab_5 << "# TODO: implement hipify-clang's logic with header files AMAP" << endl;
     *streamPtr.get() << tab_5 << "print $OUTFILE '#include \"hip/hip_runtime.h\"' . ($is_dos ? \"\\r\\n\" : \"\\n\");" << endl_tab_4 << "}" << endl;
     *streamPtr.get() << tab_4 << "print $OUTFILE  \"$_\";" << endl_tab_3 << "}" << endl;
@@ -987,8 +922,6 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
     *streamPtr.get() << tab_2 << "addStats(\\%tt, \\%ft);" << endl;
     *streamPtr.get() << tab_2 << "$Twarnings += $warnings;" << endl;
     *streamPtr.get() << tab_2 << "$TlineCount += $lineCount;" << endl;
-    *streamPtr.get() << tab_2 << foreach << "my $key (keys %warningTags) {" << endl;
-    *streamPtr.get() << tab_3 << "$TwarningTags{$key} += $warningTags{$key};" << endl_tab_2 << "}";
     *streamPtr.get() << endl_tab << "}   # Unless filtered directory or file" << endl;
     *streamPtr.get() << "}" << endl;
     *streamPtr.get() << "# Print total stats for all files processed" << endl;
