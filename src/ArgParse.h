@@ -70,5 +70,4 @@ extern cl::opt<bool> NoUndocumented;
 extern cl::opt<bool> NoWarningsUndocumented;
 extern cl::opt<bool> HipifyAMAP;
 extern cl::opt<bool> HipDnnSupport;
-extern cl::opt<bool> OptLocalHeaders;
-extern cl::opt<bool> OptLocalHeadersRecursive;
+extern cl::opt<bool> SkipLocalHeaders;

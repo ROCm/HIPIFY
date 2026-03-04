@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args --local-headers %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
 #ifndef MIXED_H
 #define MIXED_H
 // CHECK: #include <hip/hip_runtime.h>
