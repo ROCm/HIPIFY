@@ -186,13 +186,16 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
            << ": " << sys::path::filename(initial[i]) << "\n";
   }
 
-  std::vector<std::string> work(initial.begin(), initial.end());
+  std::vector<std::pair<std::string, std::string>> work;
+  for (const auto &h : initial) {
+    work.push_back({h, mainSourceAbsPath});
+  }
   std::set<std::string> processed;
   size_t total = initial.size();
   size_t current = 0;
 
   while (!work.empty()) {
-    std::string hdr = work.back();
+    auto [hdr, parentPath] = work.back();
     work.pop_back();
     if (processed.count(hdr)) {
       outs() << sHipify << sWarning
@@ -212,13 +215,13 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
 
     std::string hipOut = hdr + ".hip";
     std::vector<std::string> precedingIncludes;
-    collectPrecedingIncludes(mainSourceAbsPath, hdr, precedingIncludes);
+    collectPrecedingIncludes(parentPath, hdr, precedingIncludes);
 
     outs() << "\n" << sHipify << "Hipifying local header [" << current
            << "/" << total << "]: " << sys::path::filename(hdr) << "\n";
 
     bool ok = hipifySingleSource(hdr, hipOut, compDB, OptionsParserPtr,
-                                  hipify_exe, mainSourceAbsPath, false,
+                                  hipify_exe, parentPath, false,
                                   precedingIncludes);
 
     if (!ok) {
@@ -240,7 +243,7 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
           std::string abs;
           if (resolveLocalIncludeInternal(hdr, rel, abs) &&
               !processed.count(abs)) {
-            work.push_back(abs);
+            work.push_back({abs, hdr});
             newHeaders.push_back(abs);
           }
         }

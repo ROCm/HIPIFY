@@ -527,16 +527,12 @@ int main(int argc, const char **argv) {
     }
     // Initialise the statistics counters for this file.
     Statistics::setActive(src);
-    if (OptLocalHeaders || OptLocalHeadersRecursive) {
-      llvm::outs() << "\n" << sHipify
-                   << "Local header hipification enabled ("
-                   << (OptLocalHeadersRecursive ? "recursive" : "non-recursive")
-                   << ") for: " << sys::path::filename(sSourceAbsPath) << "\n";
+    if (!SkipLocalHeaders) {
       if (!hipifyLocalHeaders(sSourceAbsPath,
                               compilationDatabase.get(),
                               &OptionsParser,
                               argv[0],
-                              OptLocalHeadersRecursive)) {
+                              true)) {
         llvm::errs() << "\n" << sHipify << sError
                      << "Local header hipification failed for: "
                      << sys::path::filename(sSourceAbsPath) << "\n";
