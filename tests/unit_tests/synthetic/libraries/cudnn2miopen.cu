@@ -747,9 +747,9 @@ int main() {
 
   // CUDA: cudnnStatus_t CUDNNWINAPI cudnnSetDropoutDescriptor(cudnnDropoutDescriptor_t dropoutDesc, cudnnHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed);
   // MIOPEN: MIOPEN_EXPORT miopenStatus_t miopenSetDropoutDescriptor(miopenDropoutDescriptor_t dropoutDesc, miopenHandle_t handle, float dropout, void* states, size_t stateSizeInBytes, unsigned long long seed, bool use_mask, bool state_evo, miopenRNGType_t rng_mode);
-  // CHECK: bool use_mask;
-  // CHECK-NEXT: bool state_evo;
-  // CHECK-NEXT: miopenRNGType_t rng_mode;
+  // CHECK: bool use_mask = {};
+  // CHECK-NEXT: bool state_evo = {};
+  // CHECK-NEXT: miopenRNGType_t rng_mode = {};
   // CHECK-NEXT: status = miopenSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed, use_mask, state_evo, rng_mode);
   status = cudnnSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
 

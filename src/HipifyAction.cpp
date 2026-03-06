@@ -599,7 +599,7 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
       {
         {
           {0, {e_remove_argument, cw_None}},
-          {7, {e_insert_new_argument, cw_NeedsNewArgDecl, "biasMode", 7, 1, "miopenRNNBiasMode_t", true}}
+          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "biasMode", 0, 1, "miopenRNNBiasMode_t", true}}
         },
         true,
         true
@@ -611,7 +611,7 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
       {
         {
           {0, {e_remove_argument, cw_None}},
-          {7, {e_insert_new_argument, cw_NeedsNewArgDecl, "biasMode", 7, 1, "miopenRNNBiasMode_t", false}}
+          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "biasMode", 0, 1, "miopenRNNBiasMode_t", false}}
         },
         true,
         true
@@ -2733,43 +2733,47 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       std::string combinedArgText;
       bool hasInsertions = false;
       std::vector<hipify::CastInfo> insertionWarnings;
+      clang::SourceLocation callBeginLoc = call->getBeginLoc();
+      unsigned callCol = SM.getSpellingColumnNumber(callBeginLoc);
+      clang::SourceLocation stmtInsertLoc = callBeginLoc.getLocWithOffset(-static_cast<int>(callCol - 1));
       std::string indent;
-      {
-        clang::SourceLocation loc = call->getBeginLoc();
-        unsigned col = SM.getSpellingColumnNumber(loc);
-        clang::SourceLocation lineStart = loc.getLocWithOffset(-static_cast<int>(col - 1));
-        const char *p = SM.getCharacterData(lineStart);
-        while (*p == ' ' || *p == '\t')
-          indent += *p++;
-      }
+      const char *indentPtr = SM.getCharacterData(stmtInsertLoc);
+      while (*indentPtr == ' ' || *indentPtr == '\t')
+        indent += *indentPtr++;
       for (auto c : cc.castMap) {
         if (c.second.castType == e_insert_new_argument) {
           hasInsertions = true;
-          combinedDeclText += indent + c.second.newArgTypeName + " " + c.second.constValToAddOrReplace + ";\n";
+          std::string initExpr = c.second.defaultInitValue.empty() ? "{}" : c.second.defaultInitValue;
+          combinedDeclText += indent + c.second.newArgTypeName + " " + c.second.constValToAddOrReplace + " = " + initExpr + ";\n";
           std::string argText;
           if (c.second.isPointerArg)
             argText = "&" + c.second.constValToAddOrReplace;
           else
             argText = c.second.constValToAddOrReplace;
-          if (!combinedArgText.empty())
-            combinedArgText += ", ";
-          combinedArgText += argText;
+          if (c.first < call->getNumArgs()) {
+            clang::SourceLocation argLoc = call->getArg(c.first)->getBeginLoc();
+            ct::Replacement middleRep(SM, argLoc, 0, argText + ", ");
+            clang::FullSourceLoc middleFullSL(argLoc, SM);
+            insertReplacement(middleRep, middleFullSL);
+          } else {
+            if (!combinedArgText.empty())
+              combinedArgText += ", ";
+            combinedArgText += argText;
+          }
           insertionWarnings.push_back(c.second);
         }
       }
       if (hasInsertions) {
-        clang::SourceLocation callBeginLoc = call->getBeginLoc();
-        unsigned col = SM.getSpellingColumnNumber(callBeginLoc);
-        clang::SourceLocation stmtInsertLoc = callBeginLoc.getLocWithOffset(-static_cast<int>(col - 1));
         ct::Replacement declRep(SM, stmtInsertLoc, 0, combinedDeclText);
         clang::FullSourceLoc declFullSL(stmtInsertLoc, SM);
         insertReplacement(declRep, declFullSL);
-
-        clang::SourceLocation insertLoc = call->getEndLoc();
-        std::string fullArgText = ", " + combinedArgText;
-        ct::Replacement argRep(SM, insertLoc, 0, fullArgText);
-        clang::FullSourceLoc argFullSL(insertLoc, SM);
-        insertReplacement(argRep, argFullSL);
+        if (!combinedArgText.empty()) {
+          clang::SourceLocation insertLoc = call->getEndLoc();
+          std::string fullArgText = ", " + combinedArgText;
+          ct::Replacement argRep(SM, insertLoc, 0, fullArgText);
+          clang::FullSourceLoc argFullSL(insertLoc, SM);
+          insertReplacement(argRep, argFullSL);
+        }
 
         for (auto &info : insertionWarnings) {
           clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
