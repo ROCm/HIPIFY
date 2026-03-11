@@ -45,7 +45,7 @@
 |`CUSPARSE_FORMAT_COO_AOS`|10.2| | |12.0|`rocsparse_format_coo_aos`|4.1.0| | | | | |
 |`CUSPARSE_FORMAT_CSC`|10.1| | | |`rocsparse_format_csc`|4.1.0| | | | | |
 |`CUSPARSE_FORMAT_CSR`|10.1| | | |`rocsparse_format_csr`|4.1.0| | | | | |
-|`CUSPARSE_FORMAT_SLICED_ELLPACK`|12.1| | | |`rocsparse_format_ell`|4.1.0| | | | | |
+|`CUSPARSE_FORMAT_SLICED_ELLPACK`|12.1| | | |`rocsparse_format_sell`|7.2.0| | | | | |
 |`CUSPARSE_HYB_PARTITION_AUTO`| |10.2| |11.0|`rocsparse_hyb_partition_auto`|1.9.0| | | | | |
 |`CUSPARSE_HYB_PARTITION_MAX`| |10.2| |11.0|`rocsparse_hyb_partition_max`|1.9.0| | | | | |
 |`CUSPARSE_HYB_PARTITION_USER`| |10.2| |11.0|`rocsparse_hyb_partition_user`|1.9.0| | | | | |

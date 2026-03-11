@@ -177,7 +177,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP = [] {
   m["CUSPARSE_FORMAT_COO_AOS"]                                        = {"HIPSPARSE_FORMAT_COO_AOS",                   "rocsparse_format_coo_aos",                           CONV_NUMERIC_LITERAL, API_SPARSE, 4, CUDA_REMOVED};
   m["CUSPARSE_FORMAT_BLOCKED_ELL"]                                    = {"HIPSPARSE_FORMAT_BLOCKED_ELL",               "rocsparse_format_bell",                              CONV_NUMERIC_LITERAL, API_SPARSE, 4};
   m["CUSPARSE_FORMAT_BSR"]                                            = {"HIPSPARSE_FORMAT_BSR",                       "rocsparse_format_bsr",                               CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED};
-  m["CUSPARSE_FORMAT_SLICED_ELLPACK"]                                 = {"HIPSPARSE_FORMAT_SLICED_ELLPACK",            "rocsparse_format_ell",                               CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED};
+  m["CUSPARSE_FORMAT_SLICED_ELLPACK"]                                 = {"HIPSPARSE_FORMAT_SLICED_ELLPACK",            "rocsparse_format_sell",                              CONV_NUMERIC_LITERAL, API_SPARSE, 4, HIP_UNSUPPORTED};
 
   m["cusparseOrder_t"]                                                = {"hipsparseOrder_t",                           "rocsparse_order",                                    CONV_TYPE, API_SPARSE, 4};
   m["CUSPARSE_ORDER_COL"]                                             = {"HIPSPARSE_ORDER_COL",                        "rocsparse_order_row",                                CONV_NUMERIC_LITERAL, API_SPARSE, 4};
@@ -697,6 +697,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_TYPE_NAME_VER_MAP = [
   m["rocsparse_const_spmat_descr"]                                    = {HIP_6000, HIP_0,    HIP_0   };
   m["rocsparse_const_dnvec_descr"]                                    = {HIP_6000, HIP_0,    HIP_0   };
   m["rocsparse_const_dnmat_descr"]                                    = {HIP_6000, HIP_0,    HIP_0   };
+  m["rocsparse_format_sell"]                                          = {HIP_7020, HIP_0,    HIP_0   };
 
   return m;
 }();
