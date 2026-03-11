@@ -3333,7 +3333,7 @@ sub rocMappings {
     $mappings{"CUSPARSE_FORMAT_COO_AOS"} = { rep => "rocsparse_format_coo_aos", type => "numeric_literal" };
     $mappings{"CUSPARSE_FORMAT_CSC"} = { rep => "rocsparse_format_csc", type => "numeric_literal" };
     $mappings{"CUSPARSE_FORMAT_CSR"} = { rep => "rocsparse_format_csr", type => "numeric_literal" };
-    $mappings{"CUSPARSE_FORMAT_SLICED_ELLPACK"} = { rep => "rocsparse_format_ell", type => "numeric_literal" };
+    $mappings{"CUSPARSE_FORMAT_SLICED_ELLPACK"} = { rep => "rocsparse_format_sell", type => "numeric_literal" };
     $mappings{"CUSPARSE_HYB_PARTITION_AUTO"} = { rep => "rocsparse_hyb_partition_auto", type => "numeric_literal" };
     $mappings{"CUSPARSE_HYB_PARTITION_MAX"} = { rep => "rocsparse_hyb_partition_max", type => "numeric_literal" };
     $mappings{"CUSPARSE_HYB_PARTITION_USER"} = { rep => "rocsparse_hyb_partition_user", type => "numeric_literal" };
