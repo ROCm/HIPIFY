@@ -71,6 +71,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP = [] {
   m["cuFileGetParameterPosixPoolSlabArray"]                 = {"hipFileGetParameterPosixPoolSlabArray",        "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
   m["cuFileDriverGetP2PFlags"]                              = {"hipFileDriverGetP2PFlags",                     "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
   m["cuFileDriverSetP2PFlags"]                              = {"hipFileDriverSetP2PFlags",                     "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
+  m["cuFileExportPCIeTopology"]                             = {"hipFileExportPCIeTopology",                    "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
+  m["cuFileSetParameterGpuBounceBufferSlabArray"]           = {"hipFileSetParameterGpuBounceBufferSlabArray",  "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
+  m["cuFileGetParameterGpuBounceBufferSlabArray"]           = {"hipFileGetParameterGpuBounceBufferSlabArray",  "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
 
   return m;
 }();
@@ -124,6 +127,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_FUNCTION_VER_MAP = []
   m["cuFileGetParameterPosixPoolSlabArray"]                 = {CUFILE_1150, CUDA_0, CUDA_0};
   m["cuFileDriverGetP2PFlags"]                              = {CUFILE_1150, CUDA_0, CUDA_0};
   m["cuFileDriverSetP2PFlags"]                              = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["cuFileExportPCIeTopology"]                             = {CUFILE_1170, CUDA_0, CUDA_0};
+  m["cuFileSetParameterGpuBounceBufferSlabArray"]           = {CUFILE_1170, CUDA_0, CUDA_0};
+  m["cuFileGetParameterGpuBounceBufferSlabArray"]           = {CUFILE_1170, CUDA_0, CUDA_0};
 
   return m;
 }();

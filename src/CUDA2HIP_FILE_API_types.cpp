@@ -109,6 +109,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_TYPE_NAME_MAP = [] {
   m["CU_FILE_MAX_TARGET_TYPES"]                              = {"hipFileMaxTargetTypes",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
   m["CU_FILE_USE_POLL_MODE"]                                 = {"hipFileUsePollMode",                             "", CONV_NUMERIC_LITERAL, API_FILE, 1};
   m["CU_FILE_ALLOW_COMPAT_MODE"]                             = {"hipFileAllowCompatMode",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
+  m["CU_FILE_POSIX_IO_MODE"]                                 = {"hipFilePosixIoMode",                             "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_FALLBACK_IO_MODE"]                              = {"hipFileFallbackIoMode",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
   m["CU_FILE_DYN_ROUTING_SUPPORTED"]                         = {"hipFileDynRoutingSupported",                     "", CONV_NUMERIC_LITERAL, API_FILE, 1};
   m["CU_FILE_BATCH_IO_SUPPORTED"]                            = {"hipFileBatchIOSupported",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
   m["CU_FILE_STREAMS_SUPPORTED"]                             = {"hipFileStreamsSupported",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
@@ -180,6 +182,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_TYPE_NAME_MAP = [] {
   m["CUFileArrayConfigParameter_t"]                          = {"hipFileArrayConfigParameter_t",                  "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
   m["CUFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB"]                  = {"HIPFILE_PARAM_POSIX_POOL_SLAB_SIZE_KB",          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
   m["CUFILE_PARAM_POSIX_POOL_SLAB_COUNT"]                    = {"HIPFILE_PARAM_POSIX_POOL_SLAB_COUNT",            "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_SIZE_KB"]           = {"HIPFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_SIZE_KB",   "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CUFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_COUNT"]             = {"HIPFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_COUNT",     "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
   m["CUfileOpCounter_t"]                                     = {"hipFileOpCounter_t",                             "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
   m["CUfileOpCounter"]                                       = {"hipFileOpCounter_t",                             "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
   m["CUfileStatsLevel1_t"]                                   = {"hipFileStatsLevel1_t",                           "", CONV_TYPE, API_FILE, 1, UNSUPPORTED};
@@ -362,6 +366,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_TYPE_NAME_VER_MAP = [
   m["CUfileStatsLevel3"]                                     = {CUFILE_1150, CUDA_0, CUDA_0};
   m["CUfilePerGpuStats_t"]                                   = {CUFILE_1150, CUDA_0, CUDA_0};
   m["CUfilePerGpuStats"]                                     = {CUFILE_1150, CUDA_0, CUDA_0};
+  m["CU_FILE_POSIX_IO_MODE"]                                 = {CUFILE_1170, CUDA_0, CUDA_0};
+  m["CU_FILE_FALLBACK_IO_MODE"]                              = {CUFILE_1170, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_SIZE_KB"]           = {CUFILE_1170, CUDA_0, CUDA_0};
+  m["CUFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_COUNT"]             = {CUFILE_1170, CUDA_0, CUDA_0};
 
   return m;
 }();
