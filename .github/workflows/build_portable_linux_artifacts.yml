@@ -204,7 +204,7 @@ jobs:
         run: |
           python3 build_tools/analyze_build_times.py --build-dir build
 
-      - name: Configure AWS Credentials for non-forked repos
+      - name: Configure AWS Credentials
         if: ${{ github.repository == 'ROCm/TheRock' }}
         uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
         with:
