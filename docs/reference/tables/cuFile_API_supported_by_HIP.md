@@ -36,6 +36,8 @@
 |`CUFILE_PARAM_FORCE_COMPAT_MODE`|1.14.0| | | |`hipFileParamForceCompatMode`|7.2.0| | | | | |
 |`CUFILE_PARAM_FORCE_ODIRECT_MODE`|1.14.0| | | |`hipFileParamForceOdirectMode`|7.2.0| | | | | |
 |`CUFILE_PARAM_FS_MISC_API_CHECK_AGGRESSIVE`|1.14.0| | | |`hipFileParamFsMiscApiCheckAggressive`|7.2.0| | | | | |
+|`CUFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_COUNT`|1.17.0| | | | | | | | | | |
+|`CUFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_SIZE_KB`|1.17.0| | | | | | | | | | |
 |`CUFILE_PARAM_LOGGING_LEVEL`|1.14.0| | | |`hipFileParamLoggingLevel`|7.2.0| | | | | |
 |`CUFILE_PARAM_LOG_DIR`|1.14.0| | | |`hipFileParamLogDir`|7.2.0| | | | | |
 |`CUFILE_PARAM_POLLTHRESHOLD_SIZE_KB`|1.14.0| | | |`hipFileParamPollthresholdSizeKB`|7.2.0| | | | | |
@@ -88,6 +90,7 @@
 |`CU_FILE_DRIVER_VERSION_MISMATCH`|1.0.0| | | |`hipFileDriverVersionMismatch`|7.2.0| | | | | |
 |`CU_FILE_DRIVER_VERSION_READ_ERROR`|1.0.0| | | |`hipFileDriverVersionReadError`|7.2.0| | | | | |
 |`CU_FILE_DYN_ROUTING_SUPPORTED`|1.0.0| | | |`hipFileDynRoutingSupported`|7.2.0| | | | | |
+|`CU_FILE_FALLBACK_IO_MODE`|1.17.0| | | | | | | | | | |
 |`CU_FILE_GETNEWFD_FAILED`|1.0.0| | | |`hipFileGetNewFDFailed`|7.2.0| | | | | |
 |`CU_FILE_GPFS_SUPPORTED`|1.0.0| | | |`hipFileGPFSSupported`|7.2.0| | | | | |
 |`CU_FILE_GPU_MEMORY_PINNING_FAILED`|1.2.0| | | |`hipFileGPUMemoryPinningFailed`|7.2.0| | | | | |
@@ -124,6 +127,7 @@
 |`CU_FILE_PARALLEL_IO_SUPPORTED`|1.8.0| | | |`hipFileParallelIOSupported`|7.2.0| | | | | |
 |`CU_FILE_PERMISSION_DENIED`|1.0.0| | | |`hipFilePermissionDenied`|7.2.0| | | | | |
 |`CU_FILE_PLATFORM_NOT_SUPPORTED`|1.0.0| | | |`hipFilePlatformNotSupported`|7.2.0| | | | | |
+|`CU_FILE_POSIX_IO_MODE`|1.17.0| | | | | | | | | | |
 |`CU_FILE_RDMA_REGISTER`|1.0.0| | | |`HIPFILE_RDMA_REGISTER`|7.2.0| | | | | |
 |`CU_FILE_RDMA_RELAXED_ORDERING`|1.0.0| | | |`HIPFILE_RDMA_RELAXED_ORDERING`|7.2.0| | | | | |
 |`CU_FILE_SCALEFLUX_CSD_SUPPORTED`|1.0.0| | | |`hipFileScaleFluxCSDSupported`|7.2.0| | | | | |
@@ -201,8 +205,10 @@
 |`cuFileDriverSetMaxPinnedMemSize`|1.0.0| | | |`hipFileDriverSetMaxPinnedMemSize`|7.2.0| | | | | |
 |`cuFileDriverSetP2PFlags`|1.15.0| | | | | | | | | | |
 |`cuFileDriverSetPollMode`|1.0.0| | | |`hipFileDriverSetPollMode`|7.2.0| | | | | |
+|`cuFileExportPCIeTopology`|1.17.0| | | | | | | | | | |
 |`cuFileGetBARSizeInKB`|1.15.0| | | | | | | | | | |
 |`cuFileGetParameterBool`|1.14.0| | | |`hipFileGetParameterBool`|7.2.0| | | | | |
+|`cuFileGetParameterGpuBounceBufferSlabArray`|1.17.0| | | | | | | | | | |
 |`cuFileGetParameterMinMaxValue`|1.15.0| | | | | | | | | | |
 |`cuFileGetParameterPosixPoolSlabArray`|1.15.0| | | | | | | | | | |
 |`cuFileGetParameterSizeT`|1.14.0| | | |`hipFileGetParameterSizeT`|7.2.0| | | | | |
@@ -217,6 +223,7 @@
 |`cuFileRead`|1.0.0| | | |`hipFileRead`|7.2.0| | | | | |
 |`cuFileReadAsync`|1.7.0| | | |`hipFileReadAsync`|7.2.0| | | | | |
 |`cuFileSetParameterBool`|1.14.0| | | |`hipFileSetParameterBool`|7.2.0| | | | | |
+|`cuFileSetParameterGpuBounceBufferSlabArray`|1.17.0| | | | | | | | | | |
 |`cuFileSetParameterPosixPoolSlabArray`|1.15.0| | | | | | | | | | |
 |`cuFileSetParameterSizeT`|1.14.0| | | |`hipFileSetParameterSizeT`|7.2.0| | | | | |
 |`cuFileSetParameterString`|1.14.0| | | |`hipFileSetParameterString`|7.2.0| | | | | |
