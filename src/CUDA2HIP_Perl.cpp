@@ -838,16 +838,6 @@ namespace perl {
     out << tab_8 << "$warnings++;" << endl;
     out << tab_7 << "}" << endl;
     out << tab_6 << "}" << endl;
-
-    out << tab_6 << "if (exists $hash_SupportedDeviceDataTypes{$func}) {" << endl;
-    out << tab_7 << "my $c = () = $_ =~ m/\\b$func\\b/g;" << endl;
-    out << tab_7 << "$ft{'" << counterNames[CONV_DEVICE_TYPE] << "'} += $c;" << endl;
-    out << tab_6 << "}" << endl;
-
-    out << tab_6 << "if (exists $hash_SupportedDeviceFunctions{$func}) {" << endl;
-    out << tab_7 << "my $c = () = $_ =~ m/\\b$func\\b\\s*\\((?!\\s*void)/g;" << endl;
-    out << tab_7 << "$ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} += $c;" << endl;
-    out << tab_6 << "}" << endl;
     out << tab_5 << "}" << endl;
     out << tab_4 << "}" << endl;
     out << tab_3 << "}" << endl;
@@ -888,7 +878,19 @@ namespace perl {
     out << tab_3 << "}" << endl;
     out << tab_3 << sTransformCubNamespace << "();" << endl;
     out << tab_3 << my << "$hasDeviceCode = $countKeywords + $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} + $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'};" << endl;
+
+    out << tab_3 << "foreach my $func (keys %hash_SupportedDeviceDataTypes) {" << endl;
+    out << tab_4 << "my $c = () = $_ =~ m/\\b$func\\b/g;" << endl;
+    out << tab_4 << "if ($c) { $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'} += $c; }" << endl;
+    out << tab_3 << "}" << endl;
+
+    out << tab_3 << "foreach my $func (keys %hash_SupportedDeviceFunctions) {" << endl;
+    out << tab_4 << "my $c = () = $_ =~ m/\\b$func\\b\\s*\\((?!\\s*void)/g;" << endl;
+    out << tab_4 << "if ($c) { $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} += $c; }" << endl;
+    out << tab_3 << "}" << endl;
+
     out << tab_3 << unless_ << "($quiet_warnings) {" << endl;
+
     out << tab_4 << "# Copy into array of lines, process line-by-line to show warnings" << endl;
     out << tab_4 << "if ($hasDeviceCode or (/\\bcu|CU/) or (/<<<.*>>>/)) {" << endl;
     out << tab_5 << my << "@lines = split /\\n/, $_;" << endl;
