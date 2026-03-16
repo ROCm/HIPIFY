@@ -18126,14 +18126,6 @@ while (@ARGV) {
                                 $warnings++;
                             }
                         }
-                        if (exists $hash_SupportedDeviceDataTypes{$func}) {
-                            my $c = () = $_ =~ m/\b$func\b/g;
-                            $ft{'device_type'} += $c;
-                        }
-                        if (exists $hash_SupportedDeviceFunctions{$func}) {
-                            my $c = () = $_ =~ m/\b$func\b\s*\((?!\s*void)/g;
-                            $ft{'device_function'} += $c;
-                        }
                     }
                 }
             }
@@ -18170,6 +18162,14 @@ while (@ARGV) {
             }
             transformCubNamespace();
             my $hasDeviceCode = $countKeywords + $ft{'device_function'} + $ft{'device_type'};
+            foreach my $func (keys %hash_SupportedDeviceDataTypes) {
+                my $c = () = $_ =~ m/\b$func\b/g;
+                if ($c) { $ft{'device_type'} += $c; }
+            }
+            foreach my $func (keys %hash_SupportedDeviceFunctions) {
+                my $c = () = $_ =~ m/\b$func\b\s*\((?!\s*void)/g;
+                if ($c) { $ft{'device_function'} += $c; }
+            }
             unless ($quiet_warnings) {
                 # Copy into array of lines, process line-by-line to show warnings
                 if ($hasDeviceCode or (/\bcu|CU/) or (/<<<.*>>>/)) {
