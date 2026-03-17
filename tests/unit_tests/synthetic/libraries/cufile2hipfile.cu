@@ -247,18 +247,18 @@ int main() {
   CUfileOpcode_t FILE_OPCODE_WRITE = CUFILE_WRITE;
 
   // CHECK: hipFileStatus_t STATUS_WAITING = hipFileWaiting;
-  // CHECK-NEXT: hipFileStatus_t STATUS_PENDING = hipFilePending;
+  // CHECK-NEXT: hipFileStatus_t STATUS_PENDING_ = hipFilePending;
   // CHECK-NEXT: hipFileStatus_t STATUS_INVALID = hipFileInvalid;
   // CHECK-NEXT: hipFileStatus_t STATUS_CANCELED = hipFileCanceled;
   // CHECK-NEXT: hipFileStatus_t STATUS_COMPLETE = hipFileComplete;
-  // CHECK-NEXT: hipFileStatus_t STATUS_TIMEOUT = hipFileTimeout;
+  // CHECK-NEXT: hipFileStatus_t STATUS_TIMEOUT_ = hipFileTimeout;
   // CHECK-NEXT: hipFileStatus_t STATUS_FAILED = hipFileFailed;
   CUfileStatus_t STATUS_WAITING = CUFILE_WAITING;
-  CUfileStatus_t STATUS_PENDING = CUFILE_PENDING;
+  CUfileStatus_t STATUS_PENDING_ = CUFILE_PENDING;
   CUfileStatus_t STATUS_INVALID = CUFILE_INVALID;
   CUfileStatus_t STATUS_CANCELED = CUFILE_CANCELED;
   CUfileStatus_t STATUS_COMPLETE = CUFILE_COMPLETE;
-  CUfileStatus_t STATUS_TIMEOUT = CUFILE_TIMEOUT;
+  CUfileStatus_t STATUS_TIMEOUT_ = CUFILE_TIMEOUT;
   CUfileStatus_t STATUS_FAILED = CUFILE_FAILED;
 
   // CHECK: hipFileBatchMode_t BATCH_MODE = hipFileBatch;
