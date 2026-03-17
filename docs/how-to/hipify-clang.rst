@@ -42,7 +42,7 @@ Release Dependencies
 
 * `LLVM+Clang <http://releases.llvm.org>`_ version is determined at least partially by
   the CUDA version you are using, as shown in the table below. The recommended Clang release
-  is the latest stable release `22.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.0>`_,
+  is the latest stable release `22.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.1>`_,
   or at least version `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`_.
 
 .. list-table::
@@ -61,7 +61,8 @@ Release Dependencies
       `21.1.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.6>`_,
       `21.1.7 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.7>`_,
       `21.1.8 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.8>`_,
-      `22.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.0>`_:sup:`1`
+      `22.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.0>`_,
+      `22.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.1>`_:sup:`1`
     - ✅
     - ✅
   * - `12.8.1 <https://developer.nvidia.com/cuda-12-8-1-download-archive>`_
@@ -261,7 +262,7 @@ Release Dependencies
 In most cases, you can get a suitable version of ``LLVM+Clang`` with your package manager. However, you can also
 `download a release archive <http://releases.llvm.org/>`_ and build or install it. In case of multiple versions of ``LLVM`` installed, set
 `CMAKE_PREFIX_PATH <https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html>`_ so that
-``CMake`` can find the desired version of ``LLVM``. For example, ``-DCMAKE_PREFIX_PATH=D:\LLVM\22.1.0\dist``.
+``CMake`` can find the desired version of ``LLVM``. For example, ``-DCMAKE_PREFIX_PATH=D:\LLVM\22.1.1\dist``.
 
 Usage
 =====
@@ -297,7 +298,7 @@ header files used during the hipification process:
 
 .. code:: shell
 
-  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.9 --clang-resource-directory=/usr/llvm/22.1.0/dist/lib/clang/22
+  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.9 --clang-resource-directory=/usr/llvm/22.1.1/dist/lib/clang/22
 
 For more information, refer to the `Clang manual for compiling CUDA <https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code>`_.
 
