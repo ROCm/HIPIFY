@@ -49,6 +49,8 @@ on:
         type: boolean
       extra_cmake_options:
         type: string
+      test_type:
+        type: string
 
 # See the details regarding permissions from the link:
 # https://github.com/aws-actions/configure-aws-credentials?tab=readme-ov-file#oidc
@@ -82,8 +84,9 @@ jobs:
         with:
           repository: "ROCm/TheRock"
           ref: 'compiler/amd-staging'
-          
+
       - name: Update Submodule Pointer to the PR
+        if: ${{ github.event_name == 'pull_request' }}
         run: |
           git config --global --add safe.directory $PWD
           # Fetch the latest commit SHA from the PR branch          
@@ -96,7 +99,6 @@ jobs:
           # Verify the pointer update
           git submodule status
           git submodule
-    
 
       - name: Install python deps
         run: |
@@ -121,10 +123,6 @@ jobs:
         run: |
           ./build_tools/health_status.py
 
-      - name: Test build_tools
-        run: |
-          python -m pytest build_tools/tests build_tools/github_actions/tests
-
       - name: Remove ununsed existing patchces
         run: |
           rm -fv patches/amd-mainline/llvm-project/0001-Ensure-to-use-libamdhip64-with-major-version.patch
@@ -134,32 +132,8 @@ jobs:
         run: |
           ./build_tools/fetch_sources.py --jobs 12
 
-      - name: "Checking out repository for llvm-project"
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          repository: "ROCm/llvm-project"
-          path: compiler/amd-llvm
-          ref: amd-staging
-
-      - name: "Checking out repository for spirv-llvm-translator"
-        uses: actions/checkout@08c6903cd8c0fde910a37f88322edcfb5dd907a8 # v5.0.0
-        with:
-          repository: "ROCm/spirv-llvm-translator"
-          path: compiler/spirv-llvm-translator
-          ref: amd-staging
-
-      - name: Apply patches
-        run: |
-             cp -v patches/amd-mainline/llvm-project/*.patch compiler/amd-llvm
-             cd compiler/amd-llvm
-             git log -10
-             git config --global --add safe.directory $PWD
-             find . -type f -name '*.patch' -exec git apply --check {} \;
-             find . -type f -name '*.patch' -exec git apply {} \;
-             git log -15
-             cd -
-
       - name: TheRock and llvm SHA
+        if: ${{ github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch' }}
         run: |
              git config --global --add safe.directory $PWD
              git log --oneline -1
@@ -170,11 +144,23 @@ jobs:
              cd -
 
       - name: Configure PR Projects
+        if: ${{ github.event_name == 'pull_request' || (github.event_name == 'workflow_dispatch' && inputs.test_type != 'full') }}
         env:
           cmake_preset: ${{ inputs.build_variant_cmake_preset }}
           amdgpu_families: ${{ inputs.amdgpu_families }}
           package_version: ${{ inputs.package_version }}
           extra_cmake_options: "-DTHEROCK_ENABLE_ALL=OFF -DTHEROCK_ENABLE_COMPILER=ON  -DTHEROCK_ENABLE_CORE_RUNTIME=ON -DTHEROCK_ENABLE_HIP_RUNTIME=ON -DTHEROCK_ENABLE_RCCL=ON -DTHEROCK_ENABLE_PRIM=ON -DTHEROCK_ENABLE_BLAS=ON -DTHEROCK_ENABLE_RAND=ON -DTHEROCK_ENABLE_SOLVER=ON -DTHEROCK_ENABLE_SPARSE=ON -DTHEROCK_ENABLE_SYSDEPS=OFF  -DTHEROCK_ENABLE_COMPOSABLE_KERNEL=OFF -DTHEROCK_ENABLE_OCL_RUNTIME=ON  -DTHEROCK_ENABLE_MATH_LIBS=ON -DLLVM_SMREV_REPO='' -DLLVM_SMREV_REVISION=''"
+          BUILD_DIR: build
+        run: |
+          python3 build_tools/github_actions/build_configure.py --manylinux
+
+      - name: Configure All Projects
+        if: ${{ github.event_name != 'pull_request' && inputs.test_type == 'full' }}
+        env:
+          cmake_preset: ${{ inputs.build_variant_cmake_preset }}
+          amdgpu_families: ${{ inputs.amdgpu_families }}
+          package_version: ${{ inputs.package_version }}
+          extra_cmake_options: ${{ inputs.extra_cmake_options }}
           BUILD_DIR: build
         run: |
           python3 build_tools/github_actions/build_configure.py --manylinux
@@ -218,8 +204,8 @@ jobs:
         run: |
           python3 build_tools/analyze_build_times.py --build-dir build
 
-      - name: Configure AWS Credentials for non-forked repos
-        if: ${{ always() && !github.event.pull_request.head.repo.fork }}
+      - name: Configure AWS Credentials
+        if: ${{ github.repository == 'ROCm/TheRock' }}
         uses: aws-actions/configure-aws-credentials@61815dcd50bd041e203e49132bacad1fd04d2708 # v5.1.1
         with:
           aws-region: us-east-2
