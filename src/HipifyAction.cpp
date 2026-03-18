@@ -599,7 +599,7 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
       {
         {
           {0, {e_remove_argument, cw_None}},
-          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "biasMode", 0, 1, "miopenRNNBiasMode_t", true}}
+          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_biasMode", 0, 1, "miopenRNNBiasMode_t", true}}
         },
         true,
         true
@@ -611,7 +611,7 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
       {
         {
           {0, {e_remove_argument, cw_None}},
-          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "biasMode", 0, 1, "miopenRNNBiasMode_t", false}}
+          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_biasMode", 0, 1, "miopenRNNBiasMode_t", false}}
         },
         true,
         true
@@ -622,9 +622,9 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
     {
       {
         {
-          {6, {e_insert_new_argument, cw_NeedsNewArgDecl, "use_mask", 6, 1, "bool", false}},
-          {7, {e_insert_new_argument, cw_NeedsNewArgDecl, "state_evo", 7, 1, "bool", false}},
-          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "rng_mode", 8, 1, "miopenRNGType_t", false}}
+          {6, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_use_mask", 6, 1, "bool", false}},
+          {7, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_state_evo", 7, 1, "bool", false}},
+          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_rng_mode", 8, 1, "miopenRNGType_t", false}}
         },
         true,
         true
