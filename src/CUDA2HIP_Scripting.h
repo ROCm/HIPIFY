@@ -41,6 +41,7 @@ namespace hipify {
     e_add_var_argument,
     e_move_argument,
     e_replace_argument_with_const,
+    e_insert_new_argument,
   };
 
   enum OverloadTypes {
@@ -50,6 +51,7 @@ namespace hipify {
   enum CastWarning {
     cw_None,
     cw_DataLoss,
+    cw_NeedsNewArgDecl,
   };
 
   enum OverloadWarning {
@@ -59,9 +61,14 @@ namespace hipify {
   struct CastInfo {
     CastTypes castType = e_HIP_SYMBOL;
     CastWarning castWarn = cw_None;
+    // For e_add_const_argument / e_replace_argument_with_const: the literal value to insert or replace.
+    // For e_insert_new_argument: the variable name to declare and pass as an argument.
     std::string constValToAddOrReplace = "";
     unsigned moveOrCopyTo = 0;
     unsigned numberToMoveOrCopy = 1;
+    std::string newArgTypeName = "";
+    bool isPointerArg = false;
+    std::string defaultInitValue = "";
   };
 
   typedef std::map<unsigned, CastInfo> ArgCastMap;
