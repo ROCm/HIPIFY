@@ -18023,10 +18023,12 @@ while (@ARGV) {
     $fileName=shift (@ARGV);
     my $direxclude = 0;
     my $fileDir = dirname(Cwd::realpath($fileName));
-    if ($exclude_dirhash{$fileDir}) {
-        print STDERR "Skipping the file: $fileName in the excluded directory: $fileDir \n";
-        $direxclude = 1;
-    } else {
+    while ($fileDir ne dirname($fileDir)) {
+        if ($exclude_dirhash{$fileDir}) {
+            print STDERR "Skipping the file: $fileName in the excluded directory: $fileDir \n";
+            $direxclude = 1;
+            last;
+        }
         $fileDir = dirname($fileDir);
     }
     if ($exclude_filehash{$fileName}) {
