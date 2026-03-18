@@ -333,6 +333,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CUlibrary
   m["cudaLibrary_t"]                                            = {"hipLibrary_t",                                             "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
+  // CUdevResourceDesc_st
+  m["CUdevResourceDesc_st"]                                     = {"hipDevResourceDesc",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CUdevResourceDesc
+  m["cudaDevResourceDesc_t"]                                    = {"hipDevResourceDesc_t",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  //
+  m["cudaExecutionContext_st"]                                  = {"hipExecutionContext",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionContext_t"]                                   = {"hipExecutionContext_t",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 3. Enums
 
   // no analogue
@@ -1259,6 +1269,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaErrorInvalidResourceType"]                             = {"hipErrorInvalidResourceType",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 914
   // CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION
   m["cudaErrorInvalidResourceConfiguration"]                    = {"hipErrorInvalidResourceConfiguration",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 915
+  // CUDA_ERROR_STREAM_DETACHED
+  m["cudaErrorStreamDetached"]                                  = {"hipErrorStreamDetached",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 917
   // CUDA_ERROR_UNKNOWN
   m["cudaErrorUnknown"]                                         = {"hipErrorUnknown",                                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 999
   // Deprecated since CUDA 4.1
@@ -2293,6 +2305,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY"]           = {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   m["CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN"]                = {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_NAN",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
+  // CUdevSmResourceGroup_flags
+  m["cudaDevSmResourceGroup_flags"]                             = {"hipDevSmResourceGroup_flags",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceGroupDefault enum values
+  // CU_DEV_SM_RESOURCE_GROUP_DEFAULT
+  m["cudaDevSmResourceGroupDefault"]                            = {"hipDevSmResourceGroupDefault",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_DEV_SM_RESOURCE_GROUP_BACKFILL
+  m["cudaDevSmResourceGroupBackfill"]                           = {"hipDevSmResourceGroupBackfill",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 4. Typedefs
 
   // CUhostFn
@@ -2602,6 +2622,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["CUDART_DBL2INT_CVT"]                                       = {"HIP_DBL2INT_CVT",                                          "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES};
   // CU_MEM_POOL_CREATE_USAGE_HW_DECOMPRESS
   m["cudaMemPoolCreateUsageHwDecompress"]                       = {"HIP_MEM_POOL_CREATE_USAGE_HW_DECOMPRESS",                  "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x2
+
+  m["RESOURCE_ABI_BYTES"]                                       = {"RESOURCE_ABI_BYTES",                                       "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 40
 
   return m;
 }();
@@ -3347,6 +3369,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   m["CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NONE"]               = {CUDA_130, CUDA_0,   CUDA_0  }; // [#2143] CUDA 13.0.2
   m["CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_INFINITY"]           = {CUDA_130, CUDA_0,   CUDA_0  }; // [#2143] CUDA 13.0.2
   m["CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN"]                = {CUDA_130, CUDA_0,   CUDA_0  }; // [#2143] CUDA 13.0.2
+  m["cudaErrorStreamDetached"]                                  = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResourceDesc_t"]                                    = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionContext_st"]                                  = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionContext_t"]                                   = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["RESOURCE_ABI_BYTES"]                                       = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceGroup_flags"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceGroupDefault"]                            = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceGroupBackfill"]                           = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -3357,6 +3387,10 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGE
   m["cudaExternalSemaphoreSignalParams"]                        = {CUDA_130};
   m["cudaExternalSemaphoreWaitParams"]                          = {CUDA_130};
   m["cudaLaunchAttributeValue"]                                 = {CUDA_130};
+  m["cudaMemcpyNodeParams"]                                     = {CUDA_131};
+  m["cudaConditionalNodeParams"]                                = {CUDA_131};
+  m["cudaKernelNodeParamsV2"]                                   = {CUDA_131};
+  m["cudaMemsetParamsV2"]                                       = {CUDA_131};
 
   return m;
 }();
