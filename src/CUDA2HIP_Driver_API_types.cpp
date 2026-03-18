@@ -449,10 +449,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CUgreenCtx"]                                                        = {"hipGreenCtx",                                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // CUdevResourceDesc_st
   m["CUdevResourceDesc_st"]                                              = {"hipDevResourceDesc",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CUdevResourceDesc"]                                                 = {"hipDevResourceDesc",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevResourceDesc_t
+  m["CUdevResourceDesc"]                                                 = {"hipDevResourceDesc_t",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   //
   m["CUdevSmResource_st"]                                                = {"hipDevSmResource",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -2083,7 +2083,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION"]                         = {"hipErrorInvalidResourceConfiguration",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 915
   //
   m["CUDA_ERROR_KEY_ROTATION"]                                           = {"hipErrorKeyRotation",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 916
-  //
+  // cudaErrorStreamDetached
   m["CUDA_ERROR_STREAM_DETACHED"]                                        = {"hipErrorStreamDetached",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 917
   // cudaErrorUnknown
   m["CUDA_ERROR_UNKNOWN"]                                                = {"hipErrorUnknown",                                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 999
@@ -3170,13 +3170,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_64"]                            = {"hipStreamAtomicReductionUnsigned64",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaDevSmResourceGroup_flags
   m["CUdevSmResourceGroup_flags"]                                        = {"hipDevSmResourceGroup_flags",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUdevSmResourceGroup_flags enum values
-  //
-  m["CU_DEV_SM_RESOURCE_GROUP_DEFAULT"]                                  = {"HIP_DEV_SM_RESOURCE_GROUP_DEFAULT",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_SM_RESOURCE_GROUP_BACKFILL"]                                 = {"HIP_DEV_SM_RESOURCE_GROUP_BACKFILL",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceGroupDefault
+  m["CU_DEV_SM_RESOURCE_GROUP_DEFAULT"]                                  = {"hipDevSmResourceGroupDefault",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceGroupBackfill
+  m["CU_DEV_SM_RESOURCE_GROUP_BACKFILL"]                                 = {"hipDevSmResourceGroupBackfill",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   //
   m["CUdevWorkqueueConfigScope"]                                         = {"hipDevWorkqueueConfigScope",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
