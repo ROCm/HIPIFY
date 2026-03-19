@@ -416,30 +416,22 @@ namespace perl {
 
   void generateSimpleSubstitutions(ostream &out) {
     out << endl << sub << sSimpleMappings << " {" << endl;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i != CONV_INCLUDE_CUDA_MAIN_H && i != CONV_INCLUDE_CUDA_MAIN_V2_H && i != CONV_INCLUDE) {
-        for (auto &ma : CUDA_RENAMES_MAP()) {
-          if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
-          if (i == ma.second.type) {
-            out << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.hipName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
-          }
-        }
+    for (auto &ma : CUDA_RENAMES_MAP()) {
+      if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
+      if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
+        out << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.hipName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
       }
     }
     out << "}" << endl;
     out << endl << sub << sSimpleIncludes << " {" << endl;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H || i == CONV_INCLUDE) {
-        for (auto &ma : CUDA_INCLUDE_MAP) {
-          if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
-          if (i == ma.second.type) {
-            string sCUDA = ma.first.str();
-            string sHIP = ma.second.hipName.str();
-            sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
-            sHIP = regex_replace(sHIP, regex("/"), "\\/");
-            out << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
-          }
-        }
+    for (auto &ma : CUDA_INCLUDE_MAP) {
+      if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
+      if (ma.second.type == CONV_INCLUDE_CUDA_MAIN_H || ma.second.type == CONV_INCLUDE_CUDA_MAIN_V2_H || ma.second.type == CONV_INCLUDE) {
+        string sCUDA = ma.first.str();
+        string sHIP = ma.second.hipName.str();
+        sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
+        sHIP = regex_replace(sHIP, regex("/"), "\\/");
+        out << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
     out << "}" << endl;
