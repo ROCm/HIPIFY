@@ -2313,6 +2313,26 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_DEV_SM_RESOURCE_GROUP_BACKFILL
   m["cudaDevSmResourceGroupBackfill"]                           = {"hipDevSmResourceGroupBackfill",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
+  // CUdevSmResourceSplitByCount_flags
+  m["cudaDevSmResourceSplitByCount_flags"]                      = {"hipDevSmResourceSplitByCount_flags",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceSplitByCount_flags enum values
+  // CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING
+  m["cudaDevSmResourceSplitIgnoreSmCoscheduling"]               = {"hipDevSmResourceSplitIgnoreSmCoscheduling",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE
+  m["cudaDevSmResourceSplitMaxPotentialClusterSize"]            = {"hipDevSmResourceSplitMaxPotentialClusterSize",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  // CUdevResourceType
+  m["cudaDevResourceType"]                                      = {"hipDevResourceType",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevResourceType enum values
+  // CU_DEV_RESOURCE_TYPE_INVALID
+  m["cudaDevResourceTypeInvalid"]                               = {"hipDevResourceTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_DEV_RESOURCE_TYPE_SM
+  m["cudaDevResourceTypeSm"]                                    = {"hipDevResourceTypeSm",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG
+  m["cudaDevResourceTypeWorkqueueConfig"]                       = {"hipDevResourceTypeWorkqueueConfig",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_DEV_RESOURCE_TYPE_WORKQUEUE
+  m["cudaDevResourceTypeWorkqueue"]                             = {"hipDevResourceTypeWorkqueue",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 4. Typedefs
 
   // CUhostFn
@@ -3377,6 +3397,14 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   m["cudaDevSmResourceGroup_flags"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cudaDevSmResourceGroupDefault"]                            = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cudaDevSmResourceGroupBackfill"]                           = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceSplitByCount_flags"]                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceSplitIgnoreSmCoscheduling"]               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceSplitMaxPotentialClusterSize"]            = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResourceType"]                                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResourceTypeInvalid"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResourceTypeSm"]                                    = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResourceTypeWorkqueueConfig"]                       = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResourceTypeWorkqueue"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
