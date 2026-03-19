@@ -376,37 +376,29 @@ namespace perl {
     bool bTranslateToMIOpen = TranslateToMIOpen;
     if (bMIOpenOnly) TranslateToMIOpen = true;
     else TranslateToRoc = true;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i != CONV_INCLUDE_CUDA_MAIN_H && i != CONV_INCLUDE_CUDA_MAIN_V2_H && i != CONV_INCLUDE) {
-        for (auto &ma : CUDA_RENAMES_MAP()) {
-          if ((bMIOpenOnly && !Statistics::isToMIOpen(ma.second)) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
-          if ((!bMIOpenOnly && Statistics::isToRoc(ma.second) && ma.second.apiType == API_DNN) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
-          if (i == ma.second.type) {
-            out << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.rocName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
-          }
-        }
+    for (auto &ma : CUDA_RENAMES_MAP()) {
+      if ((bMIOpenOnly && !Statistics::isToMIOpen(ma.second)) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
+      if ((!bMIOpenOnly && Statistics::isToRoc(ma.second) && ma.second.apiType == API_DNN) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
+      if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
+        out << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.rocName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
       }
     }
     out << "}" << endl;
     out << endl << sub << (bMIOpenOnly ? sMIOpenIncludes : sRocIncludes) << " {" << endl;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H || i == CONV_INCLUDE) {
-        for (auto &ma : CUDA_INCLUDE_MAP) {
-          if (i == ma.second.type) {
-            if (bMIOpenOnly) {
-              if (!Statistics::isToMIOpen(ma.second)) continue;
-            }
-            else {
-              if (!Statistics::isToRoc(ma.second)) continue;
-            }
-            string sROC = ma.second.rocName.str();
-            if (sROC.empty()) continue;
-            string sCUDA = ma.first.str();
-            sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
-            sROC = regex_replace(sROC, regex("/"), "\\/");
-            out << tab << "subst(\"" << sCUDA << "\", \"" << sROC << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
-          }
+    for (auto &ma : CUDA_INCLUDE_MAP) {
+      if (ma.second.type == CONV_INCLUDE_CUDA_MAIN_H || ma.second.type == CONV_INCLUDE_CUDA_MAIN_V2_H || ma.second.type == CONV_INCLUDE) {
+        if (bMIOpenOnly) {
+          if (!Statistics::isToMIOpen(ma.second)) continue;
         }
+        else {
+          if (!Statistics::isToRoc(ma.second)) continue;
+        }
+        string sROC = ma.second.rocName.str();
+        if (sROC.empty()) continue;
+        string sCUDA = ma.first.str();
+        sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
+        sROC = regex_replace(sROC, regex("/"), "\\/");
+        out << tab << "subst(\"" << sCUDA << "\", \"" << sROC << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
     TranslateToRoc = bTranslateToRoc;
