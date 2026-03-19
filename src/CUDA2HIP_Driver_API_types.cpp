@@ -2903,12 +2903,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
 
   //
   m["CUdevSmResourceSplit_flags"]                                        = {"hipDevSmResourceSplit_flags",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED};
+  // cudaDevSmResourceSplitByCount_flags
   m["CUdevSmResourceSplitByCount_flags"]                                 = {"hipDevSmResourceSplitByCount_flags",                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  // CUdevSmResourceSplit_flags enum values
-  //
-  m["CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING"]                   = {"HIP_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING",           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE"]               = {"HIP_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE",       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CUdevSmResourceSplitByCount_flags enum values
+  // cudaDevSmResourceSplitIgnoreSmCoscheduling
+  m["CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING"]                   = {"hipDevSmResourceSplitIgnoreSmCoscheduling",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceSplitMaxPotentialClusterSize
+  m["CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE"]               = {"hipDevSmResourceSplitMaxPotentialClusterSize",               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // cudaDeviceNumaConfig
   m["CUdeviceNumaConfig"]                                                = {"hipDeviceNumaConfig",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -2966,19 +2967,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_GREEN_CTX_DEFAULT_STREAM"]                                       = {"HIP_GREEN_CTX_DEFAULT_STREAM",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaDevResourceType
   m["CUdevResourceType"]                                                 = {"hipDevResourceType",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUdevResourceType enum values
-  //
+  // cudaDevResourceTypeInvalid
   m["CU_DEV_RESOURCE_TYPE_INVALID"]                                      = {"HIP_DEV_RESOURCE_TYPE_INVALID",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_RESOURCE_TYPE_SM"]                                           = {"HIP_DEV_RESOURCE_TYPE_SM",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG"]                             = {"HIP_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_RESOURCE_TYPE_WORKQUEUE"]                                    = {"HIP_DEV_RESOURCE_TYPE_WORKQUEUE",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_RESOURCE_TYPE_MAX"]                                          = {"HIP_DEV_RESOURCE_TYPE_MAX",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED};
+  // cudaDevResourceTypeSm
+  m["CU_DEV_RESOURCE_TYPE_SM"]                                           = {"hipDevResourceTypeInvalid",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevResourceTypeWorkqueueConfig
+  m["CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG"]                             = {"hipDevResourceTypeSm",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevResourceTypeWorkqueue
+  m["CU_DEV_RESOURCE_TYPE_WORKQUEUE"]                                    = {"hipDevResourceTypeWorkqueueConfig",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // no analogue
+  m["CU_DEV_RESOURCE_TYPE_MAX"]                                          = {"hipDevResourceTypeWorkqueue",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED};
 
   //
   m["CUcigDataType"]                                                     = {"hipCigDataType",                                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
