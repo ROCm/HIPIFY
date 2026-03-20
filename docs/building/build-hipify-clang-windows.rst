@@ -203,7 +203,7 @@ Tested configurations:
   * - ``14.0.0 - 14.0.6``
     - ``7.0 - 11.7.1``
     - ``8.0.5  - 8.4.1``
-    - ``2017.15.9.57,`` :sup:`5` ``2019.16.11.17, 2022.17.2.6``
+    - ``2017.15.9.78,`` :sup:`5` ``2019.16.11.17, 2022.17.2.6``
     - ``3.24.0``
     - ``3.10.6``
   * - ``15.0.0 - 15.0.7``
@@ -233,9 +233,9 @@ Tested configurations:
   * - ``21.1.0 - 22.1.1``
     - ``7.0 - 12.9.1``
     - ``8.0.5  - 9.20.0``
-    - ``2019.16.11.51, 2022.17.14.14, 2026.18.0.2``
-    - ``4.2.0``
-    - ``3.14.0``
+    - ``2019.16.11.54, 2022.17.14.29, 2026.18.4.1``
+    - ``4.3.0``
+    - ``3.14.3``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 
@@ -272,8 +272,9 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/22.1.1`
 
 .. code-block:: shell
 
-  -- The C compiler identification is MSVC 19.44.35216.0
-  -- The CXX compiler identification is MSVC 19.44.35216.0
+  -- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26200.
+  -- The C compiler identification is MSVC 19.44.35225.0
+  -- The CXX compiler identification is MSVC 19.44.35225.0
   -- Detecting C compiler ABI info
   -- Detecting C compiler ABI info - done
   -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
@@ -295,7 +296,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/22.1.1`
   --    - LLVM Include path     : D:/LLVM/22.1.1/dist/include
   --    - Binary path           : D:/LLVM/22.1.1/dist/bin
   -- ---- The below configuring for hipify-clang testing only ----
-  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python314/python.exe (found suitable version "3.14.0", required range is "3.0...3.15") found components: Interpreter
+  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python314/python.exe (found suitable version "3.14.3", required range is "3.0...3.15") found components: Interpreter
   -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python314/Scripts/lit.exe
   -- Found FileCheck: D:/LLVM/22.1.1/dist/bin/FileCheck.exe
   -- Initial CUDA to configure:
@@ -304,13 +305,15 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/22.1.1`
   --    - cuDNN path            : D:/CUDA/cuDNN/9.20.0
   --    - cuTENSOR path         : D:/CUDA/cuTensor/2.5.0.0
   --    - CUB path              :
+  --    - cuFile path           : D:/CUDA/cuFile/1.17.0
   -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include (found version "12.9.86")
   -- Found CUDA config:
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9
   --    - CUDA Samples path     : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9
   --    - cuDNN path            : D:/CUDA/cuDNN/9.20.0/include
   --    - cuTENSOR path         : D:/CUDA/cuTensor/2.5.0.0/include
-  --    - CUB path              : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/cub
-  -- Configuring done (4.4s)
-  -- Generating done (0.1s)
+  --    - CUB path              : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include
+  --    - cuFile path           : D:/CUDA/cuFile/1.17.0/include
+  -- Configuring done (4.9s)
+  -- Generating done (0.2s)
   -- Build files have been written to: D:/HIPIFY/build
