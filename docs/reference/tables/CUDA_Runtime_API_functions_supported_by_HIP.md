@@ -983,18 +983,28 @@
 |`cudaDevP2PAttrNativeAtomicSupported`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | | |
 |`cudaDevP2PAttrOnlyPartialNativeAtomicSupported`|13.0| | | | | | | | | | |
 |`cudaDevP2PAttrPerformanceRank`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | | |
+|`cudaDevResource`|13.1| | | | | | | | | | |
 |`cudaDevResourceDesc_t`|13.1| | | | | | | | | | |
 |`cudaDevResourceType`|13.1| | | | | | | | | | |
 |`cudaDevResourceTypeInvalid`|13.1| | | | | | | | | | |
 |`cudaDevResourceTypeSm`|13.1| | | | | | | | | | |
 |`cudaDevResourceTypeWorkqueue`|13.1| | | | | | | | | | |
 |`cudaDevResourceTypeWorkqueueConfig`|13.1| | | | | | | | | | |
+|`cudaDevResource_st`|13.1| | | | | | | | | | |
+|`cudaDevSmResource`|13.1| | | | | | | | | | |
 |`cudaDevSmResourceGroupBackfill`|13.1| | | | | | | | | | |
 |`cudaDevSmResourceGroupDefault`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceGroupParams`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceGroupParams_st`|13.1| | | | | | | | | | |
 |`cudaDevSmResourceGroup_flags`|13.1| | | | | | | | | | |
 |`cudaDevSmResourceSplitByCount_flags`|13.1| | | | | | | | | | |
 |`cudaDevSmResourceSplitIgnoreSmCoscheduling`|13.1| | | | | | | | | | |
 |`cudaDevSmResourceSplitMaxPotentialClusterSize`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigResource`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigScope`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigScopeDeviceCtx`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigScopeGreenCtxBalanced`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueResource`|13.1| | | | | | | | | | |
 |`cudaDeviceAttr`| | | | |`hipDeviceAttribute_t`|1.6.0| | | | | |
 |`cudaDeviceBlockingSync`| | | | |`hipDeviceScheduleBlockingSync`|1.6.0| | | | | |
 |`cudaDeviceLmemResizeToMax`| | | | |`hipDeviceLmemResizeToMax`|1.6.0| | | | | |

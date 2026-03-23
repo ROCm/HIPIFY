@@ -274,6 +274,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CUmemcpyAttributes
   m["cudaMemcpyAttributes"]                                     = {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
+  // CUdevSmResource_st
+  m["cudaDevSmResource"]                                        = {"hipDevSmResource",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  // CUdevWorkqueueConfigResource_st
+  m["cudaDevWorkqueueConfigResource"]                           = {"hipDevWorkqueueConfigResource",                            "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  // CUdevWorkqueueResource_st
+  m["cudaDevWorkqueueResource"]                                 = {"hipDevWorkqueueResource",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 2. Unions
 
   // CUstreamAttrValue
@@ -2333,6 +2342,24 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_DEV_RESOURCE_TYPE_WORKQUEUE
   m["cudaDevResourceTypeWorkqueue"]                             = {"hipDevResourceTypeWorkqueue",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
+  // CUdevWorkqueueConfigScope
+  m["cudaDevWorkqueueConfigScope"]                              = {"hipDevWorkqueueConfigScope",                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevWorkqueueConfigScope enum values
+  // CU_WORKQUEUE_SCOPE_DEVICE_CTX
+  m["cudaDevWorkqueueConfigScopeDeviceCtx"]                     = {"HIP_WORKQUEUE_SCOPE_DEVICE_CTX",                           "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED
+  m["cudaDevWorkqueueConfigScopeGreenCtxBalanced"]              = {"HIP_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  // CU_DEV_SM_RESOURCE_GROUP_PARAMS_st
+  m["cudaDevSmResourceGroupParams_st"]                          = {"hipDevSmResourceGroupParams",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_DEV_SM_RESOURCE_GROUP_PARAMS
+  m["cudaDevSmResourceGroupParams"]                             = {"hipDevSmResourceGroupParams",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  // CUdevResource_st
+  m["cudaDevResource_st"]                                       = {"hipDevResource",                                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CUdevResource
+  m["cudaDevResource"]                                          = {"hipDevResource",                                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 4. Typedefs
 
   // CUhostFn
@@ -3405,6 +3432,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   m["cudaDevResourceTypeSm"]                                    = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cudaDevResourceTypeWorkqueueConfig"]                       = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cudaDevResourceTypeWorkqueue"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResource"]                                        = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevWorkqueueConfigScope"]                              = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevWorkqueueConfigScopeDeviceCtx"]                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevWorkqueueConfigScopeGreenCtxBalanced"]              = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevWorkqueueConfigResource"]                           = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevWorkqueueResource"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceGroupParams_st"]                          = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceGroupParams"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResource_st"]                                       = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResource"]                                          = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
