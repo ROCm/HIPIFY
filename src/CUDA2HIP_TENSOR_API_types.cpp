@@ -163,6 +163,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP = [] {
   m["CUTENSOR_PLAN_PREFERENCE_ALGO"]                                  = {"HIPTENSOR_PLAN_PREFERENCE_ALGO",                           "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
   m["CUTENSOR_PLAN_PREFERENCE_KERNEL_RANK"]                           = {"HIPTENSOR_PLAN_PREFERENCE_KERNEL_RANK",                    "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
   m["CUTENSOR_PLAN_PREFERENCE_JIT"]                                   = {"HIPTENSOR_PLAN_PREFERENCE_JIT",                            "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_PLAN_PREFERENCE_GPU_ARCH"]                              = {"HIPTENSOR_PLAN_PREFERENCE_GPU_ARCH",                       "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
 
   m[ "cutensorAutotuneMode_t"]                                        = {"hiptensorAutotuneMode_t",                                  "", CONV_TYPE, API_TENSOR, 1};
   m["CUTENSOR_AUTOTUNE_MODE_NONE"]                                    = {"HIPTENSOR_AUTOTUNE_MODE_NONE",                             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
@@ -443,6 +444,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP =
   m["cutensorBlockSparseTensorDescriptor"]                            = {CUTENSOR_2300, CUDA_0,        CUDA_0        };
   m["CUTENSOR_COMPUTE_DESC_8XINT8"]                                   = {CUTENSOR_2400, CUDA_0,        CUDA_0        };
   m["CUTENSOR_COMPUTE_DESC_4X16F"]                                    = {CUTENSOR_2500, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_PLAN_PREFERENCE_GPU_ARCH"]                              = {CUTENSOR_2600, CUDA_0,        CUDA_0        };
 
   return m;
 }();
