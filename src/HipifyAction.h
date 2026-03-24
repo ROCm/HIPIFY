@@ -42,6 +42,7 @@ class HipifyAction : public clang::ASTFrontendAction,
 private:
   ct::Replacements *replacements = nullptr;
   std::map<std::string, clang::SourceLocation> Ifndefs;
+  std::map<std::string, unsigned> InsertedVarCounter;
   std::vector<clang::SourceRange> SkippedSourceRanges;
   std::unique_ptr<mat::MatchFinder> Finder;
   // CUDA implicitly adds its runtime header. We rewrite explicitly-provided CUDA includes with equivalent

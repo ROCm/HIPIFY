@@ -2733,6 +2733,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       std::string combinedArgText;
       bool hasInsertions = false;
       std::vector<hipify::CastInfo> insertionWarnings;
+      std::vector<std::string> insertionVarNames;
       clang::SourceLocation callBeginLoc = call->getBeginLoc();
       unsigned callCol = SM.getSpellingColumnNumber(callBeginLoc);
       clang::SourceLocation stmtInsertLoc = callBeginLoc.getLocWithOffset(-static_cast<int>(callCol - 1));
@@ -2742,14 +2743,17 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         indent += *indentPtr++;
       for (auto c : cc.castMap) {
         if (c.second.castType == e_insert_new_argument) {
+          const std::string &baseName = c.second.constValToAddOrReplace;
+          unsigned counter = InsertedVarCounter[baseName]++;
+          std::string uniqueName = (counter == 0) ? baseName : baseName + "_" + std::to_string(counter);
           hasInsertions = true;
           std::string initExpr = c.second.defaultInitValue.empty() ? "{}" : c.second.defaultInitValue;
-          combinedDeclText += indent + c.second.newArgTypeName + " " + c.second.constValToAddOrReplace + " = " + initExpr + ";\n";
+          combinedDeclText += indent + c.second.newArgTypeName + " " + uniqueName + " = " + initExpr + ";\n";
           std::string argText;
           if (c.second.isPointerArg)
-            argText = "&" + c.second.constValToAddOrReplace;
+            argText = "&" + uniqueName;
           else
-            argText = c.second.constValToAddOrReplace;
+            argText = uniqueName;
           if (c.first < call->getNumArgs()) {
             clang::SourceLocation argLoc = call->getArg(c.first)->getBeginLoc();
             ct::Replacement middleRep(SM, argLoc, 0, argText + ", ");
@@ -2761,6 +2765,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
             combinedArgText += argText;
           }
           insertionWarnings.push_back(c.second);
+          insertionVarNames.push_back(uniqueName);
         }
       }
       if (hasInsertions) {
@@ -2775,14 +2780,14 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
           insertReplacement(argRep, argFullSL);
         }
 
-        for (auto &info : insertionWarnings) {
+        for (size_t i = 0; i < insertionWarnings.size(); ++i) {
           clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
           const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning,
             "HIP API '%0' requires additional argument '%1' of type '%2'. "
             "A variable declaration has been inserted before the call. "
             "Please initialize it appropriately.");
           clang::FullSourceLoc warnFullSL(call->getBeginLoc(), SM);
-          DE.Report(warnFullSL, ID) << sName << info.constValToAddOrReplace << info.newArgTypeName;
+          DE.Report(warnFullSL, ID) << sName << insertionVarNames[i] << insertionWarnings[i].newArgTypeName;
         }
       }
       for (auto c : cc.castMap) {
