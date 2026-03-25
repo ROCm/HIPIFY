@@ -2732,8 +2732,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       std::string combinedDeclText;
       std::string combinedArgText;
       bool hasInsertions = false;
-      std::vector<hipify::CastInfo> insertionWarnings;
-      std::vector<std::string> insertionVarNames;
+      std::vector<std::pair<hipify::CastInfo, std::string>> insertions;
       clang::SourceLocation callBeginLoc = call->getBeginLoc();
       unsigned callCol = SM.getSpellingColumnNumber(callBeginLoc);
       clang::SourceLocation stmtInsertLoc = callBeginLoc.getLocWithOffset(-static_cast<int>(callCol - 1));
@@ -2744,7 +2743,8 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       for (auto c : cc.castMap) {
         if (c.second.castType == e_insert_new_argument) {
           const std::string &baseName = c.second.constValToAddOrReplace;
-          unsigned counter = InsertedVarCounter[baseName]++;
+          clang::FileID fileID = SM.getFileID(call->getBeginLoc());
+          unsigned counter = InsertedVarCounter[{fileID, baseName}]++;
           std::string uniqueName = (counter == 0) ? baseName : baseName + "_" + std::to_string(counter);
           hasInsertions = true;
           std::string initExpr = c.second.defaultInitValue.empty() ? "{}" : c.second.defaultInitValue;
@@ -2764,8 +2764,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
               combinedArgText += ", ";
             combinedArgText += argText;
           }
-          insertionWarnings.push_back(c.second);
-          insertionVarNames.push_back(uniqueName);
+          insertions.push_back({c.second, uniqueName});
         }
       }
       if (hasInsertions) {
@@ -2779,15 +2778,15 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
           clang::FullSourceLoc argFullSL(insertLoc, SM);
           insertReplacement(argRep, argFullSL);
         }
-
-        for (size_t i = 0; i < insertionWarnings.size(); ++i) {
+        for (auto &ins : insertions) {
           clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
           const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning,
             "HIP API '%0' requires additional argument '%1' of type '%2'. "
             "A variable declaration has been inserted before the call. "
             "Please initialize it appropriately.");
           clang::FullSourceLoc warnFullSL(call->getBeginLoc(), SM);
-          DE.Report(warnFullSL, ID) << sName << insertionVarNames[i] << insertionWarnings[i].newArgTypeName;
+          DE.Report(warnFullSL, ID)
+              << sName << ins.second << ins.first.newArgTypeName;
         }
       }
       for (auto c : cc.castMap) {

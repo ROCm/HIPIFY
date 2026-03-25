@@ -42,7 +42,12 @@ class HipifyAction : public clang::ASTFrontendAction,
 private:
   ct::Replacements *replacements = nullptr;
   std::map<std::string, clang::SourceLocation> Ifndefs;
-  std::map<std::string, unsigned> InsertedVarCounter;
+  // Tracks how many times each inserted variable name (e.g., hipify_var)
+  // has been used in the current file, to avoid redefinition when the same
+  // API is called multiple times. The key is a pair of FileID and name, so
+  // the headers in the same translation unit would otherwise pollute the
+  // counter for the main file.
+  std::map<std::pair<clang::FileID, std::string>, unsigned> InsertedVarCounter;
   std::vector<clang::SourceRange> SkippedSourceRanges;
   std::unique_ptr<mat::MatchFinder> Finder;
   // CUDA implicitly adds its runtime header. We rewrite explicitly-provided CUDA includes with equivalent
