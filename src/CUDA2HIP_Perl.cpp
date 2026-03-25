@@ -344,7 +344,7 @@ namespace perl {
     for (auto &ma : CUDA_RENAMES_MAP()) {
       if (!Statistics::isHipExperimental(ma.second)) continue;
       if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
-        out << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.hipName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
+        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.hipName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
     out << "}" << endl;
@@ -372,7 +372,7 @@ namespace perl {
       if ((bMIOpenOnly && !Statistics::isToMIOpen(ma.second)) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
       if ((!bMIOpenOnly && Statistics::isToRoc(ma.second) && ma.second.apiType == API_DNN) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
       if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
-        out << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.rocName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
+        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.rocName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
     out << "}" << endl;
@@ -381,8 +381,7 @@ namespace perl {
       if (ma.second.type == CONV_INCLUDE_CUDA_MAIN_H || ma.second.type == CONV_INCLUDE_CUDA_MAIN_V2_H || ma.second.type == CONV_INCLUDE) {
         if (bMIOpenOnly) {
           if (!Statistics::isToMIOpen(ma.second)) continue;
-        }
-        else {
+        } else {
           if (!Statistics::isToRoc(ma.second)) continue;
         }
         string sROC = ma.second.rocName.str();
@@ -399,11 +398,12 @@ namespace perl {
   }
 
   void generateSimpleSubstitutions(ostream &out) {
+    out << endl << "sub k { $mappings{$_[0]} = { rep => $_[1], type => $_[2] }; }" << endl;
     out << endl << sub << sSimpleMappings << " {" << endl;
     for (auto &ma : CUDA_RENAMES_MAP()) {
       if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
       if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
-        out << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.hipName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
+        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.hipName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
     out << "}" << endl;
