@@ -91,6 +91,7 @@ const std::string sCudnnGetPoolingNdDescriptor = "cudnnGetPoolingNdDescriptor";
 const std::string sCudnnSetLRNDescriptor = "cudnnSetLRNDescriptor";
 const std::string sCudnnGetRNNDescriptor_v6 = "cudnnGetRNNDescriptor_v6";
 const std::string sCudnnSetRNNDescriptor_v6 = "cudnnSetRNNDescriptor_v6";
+const std::string sCudnnSetDropoutDescriptor = "cudnnSetDropoutDescriptor";
 const std::string sCudnnSoftmaxForward = "cudnnSoftmaxForward";
 const std::string sCudnnSoftmaxBackward = "cudnnSoftmaxBackward";
 const std::string sCudnnConvolutionForward = "cudnnConvolutionForward";
@@ -263,6 +264,7 @@ std::string getCastType(hipify::CastTypes c) {
     case e_add_var_argument: return "";
     case e_move_argument: return "";
     case e_replace_argument_with_const: return "";
+    case e_insert_new_argument: return "";
     default: return "";
   }
 }
@@ -596,7 +598,8 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
     {
       {
         {
-          {0, {e_remove_argument, cw_None}}
+          {0, {e_remove_argument, cw_None}},
+          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_biasMode", 0, 1, "miopenRNNBiasMode_t", true}}
         },
         true,
         true
@@ -607,7 +610,21 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
     {
       {
         {
-          {0, {e_remove_argument, cw_None}}
+          {0, {e_remove_argument, cw_None}},
+          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_biasMode", 0, 1, "miopenRNNBiasMode_t", false}}
+        },
+        true,
+        true
+      }
+    }
+  },
+  {sCudnnSetDropoutDescriptor,
+    {
+      {
+        {
+          {6, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_use_mask", 6, 1, "bool", false}},
+          {7, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_state_evo", 7, 1, "bool", false}},
+          {8, {e_insert_new_argument, cw_NeedsNewArgDecl, "hipify_rng_mode", 8, 1, "miopenRNGType_t", false}}
         },
         true,
         true
@@ -2712,7 +2729,65 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       if (TranslateToRoc == true && cc.isToRoc == false) continue;
       if (TranslateToRoc == false && cc.isToRoc == true && TranslateToMIOpen == false) continue;
       clang::LangOptions DefaultLangOptions;
+      std::string combinedDeclText;
+      std::string combinedArgText;
+      bool hasInsertions = false;
+      std::vector<hipify::CastInfo> insertionWarnings;
+      clang::SourceLocation callBeginLoc = call->getBeginLoc();
+      unsigned callCol = SM.getSpellingColumnNumber(callBeginLoc);
+      clang::SourceLocation stmtInsertLoc = callBeginLoc.getLocWithOffset(-static_cast<int>(callCol - 1));
+      std::string indent;
+      const char *indentPtr = SM.getCharacterData(stmtInsertLoc);
+      while (*indentPtr == ' ' || *indentPtr == '\t')
+        indent += *indentPtr++;
       for (auto c : cc.castMap) {
+        if (c.second.castType == e_insert_new_argument) {
+          hasInsertions = true;
+          std::string initExpr = c.second.defaultInitValue.empty() ? "{}" : c.second.defaultInitValue;
+          combinedDeclText += indent + c.second.newArgTypeName + " " + c.second.constValToAddOrReplace + " = " + initExpr + ";\n";
+          std::string argText;
+          if (c.second.isPointerArg)
+            argText = "&" + c.second.constValToAddOrReplace;
+          else
+            argText = c.second.constValToAddOrReplace;
+          if (c.first < call->getNumArgs()) {
+            clang::SourceLocation argLoc = call->getArg(c.first)->getBeginLoc();
+            ct::Replacement middleRep(SM, argLoc, 0, argText + ", ");
+            clang::FullSourceLoc middleFullSL(argLoc, SM);
+            insertReplacement(middleRep, middleFullSL);
+          } else {
+            if (!combinedArgText.empty())
+              combinedArgText += ", ";
+            combinedArgText += argText;
+          }
+          insertionWarnings.push_back(c.second);
+        }
+      }
+      if (hasInsertions) {
+        ct::Replacement declRep(SM, stmtInsertLoc, 0, combinedDeclText);
+        clang::FullSourceLoc declFullSL(stmtInsertLoc, SM);
+        insertReplacement(declRep, declFullSL);
+        if (!combinedArgText.empty()) {
+          clang::SourceLocation insertLoc = call->getEndLoc();
+          std::string fullArgText = ", " + combinedArgText;
+          ct::Replacement argRep(SM, insertLoc, 0, fullArgText);
+          clang::FullSourceLoc argFullSL(insertLoc, SM);
+          insertReplacement(argRep, argFullSL);
+        }
+
+        for (auto &info : insertionWarnings) {
+          clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
+          const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning,
+            "HIP API '%0' requires additional argument '%1' of type '%2'. "
+            "A variable declaration has been inserted before the call. "
+            "Please initialize it appropriately.");
+          clang::FullSourceLoc warnFullSL(call->getBeginLoc(), SM);
+          DE.Report(warnFullSL, ID) << sName << info.constValToAddOrReplace << info.newArgTypeName;
+        }
+      }
+      for (auto c : cc.castMap) {
+        if (c.second.castType == e_insert_new_argument)
+          continue;
         size_t length = 0;
         unsigned int argNum = c.first;
         clang::SmallString<40> XStr;
@@ -2991,6 +3066,7 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCudnnSetLRNDescriptor,
             sCudnnGetRNNDescriptor_v6,
             sCudnnSetRNNDescriptor_v6,
+            sCudnnSetDropoutDescriptor,
             sCudnnSoftmaxForward,
             sCudnnSoftmaxBackward,
             sCudnnConvolutionForward,
