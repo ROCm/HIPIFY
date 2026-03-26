@@ -92,7 +92,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
   .. code-block:: bash
 
-   -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.5.0.0
+   -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.6.0.0
 
 - [Optional] Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`_ belonging to the version corresponding to the CUDA version:
 
@@ -100,7 +100,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
   .. code-block:: bash
 
-   -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.19.1
+   -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.20.0
 
 - [Optional] Install `CUB 1.9.8 <https://github.com/NVIDIA/cub/releases/tag/1.9.8>`_ for ``CUDA < 11.0`` only; for ``CUDA >= 11.0``, the CUB shipped with CUDA will be used for testing.
 
@@ -203,7 +203,7 @@ Tested configurations:
   * - ``14.0.0 - 14.0.6``
     - ``7.0 - 11.7.1``
     - ``8.0.5  - 8.4.1``
-    - ``2017.15.9.57,`` :sup:`5` ``2019.16.11.17, 2022.17.2.6``
+    - ``2017.15.9.78,`` :sup:`5` ``2019.16.11.17, 2022.17.2.6``
     - ``3.24.0``
     - ``3.10.6``
   * - ``15.0.0 - 15.0.7``
@@ -226,16 +226,16 @@ Tested configurations:
     - ``3.13.6``
   * - ``19.1.0 - 20.1.8``
     - ``7.0 - 12.8.1``
-    - ``8.0.5  - 9.19.1``
+    - ``8.0.5  - 9.20.0``
     - ``2019.16.11.51, 2022.17.14.14``
     - ``4.1.1``
     - ``3.13.7``
-  * - ``21.1.0 - 21.1.8``
+  * - ``21.1.0 - 22.1.1``
     - ``7.0 - 12.9.1``
-    - ``8.0.5  - 9.19.1``
-    - ``2019.16.11.51, 2022.17.14.14, 2026.18.0.2``
-    - ``4.2.0``
-    - ``3.14.0``
+    - ``8.0.5  - 9.20.0``
+    - ``2019.16.11.54, 2022.17.14.29, 2026.18.4.1``
+    - ``4.3.0``
+    - ``3.14.3``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
 
@@ -263,17 +263,18 @@ Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
   -DCMAKE_PREFIX_PATH=%ROOT_DIR%/dist \
   -DCUDA_TOOLKIT_ROOT_DIR="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9" \
   -DCUDA_SDK_ROOT_DIR="C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9" \
-  -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.19.1 \
-  -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.5.0.0 \
+  -DCUDA_DNN_ROOT_DIR=D:/CUDA/cuDNN/9.20.0 \
+  -DCUDA_TENSOR_ROOT_DIR=D:/CUDA/cuTensor/2.6.0.0 \
   -DLLVM_EXTERNAL_LIT=%ROOT_DIR%/build/Release/bin/llvm-lit.py \
   ../hipify
 
-The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/21.1.8``):
+The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/22.1.1``):
 
 .. code-block:: shell
 
-  -- The C compiler identification is MSVC 19.44.35216.0
-  -- The CXX compiler identification is MSVC 19.44.35216.0
+  -- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26200.
+  -- The C compiler identification is MSVC 19.44.35225.0
+  -- The CXX compiler identification is MSVC 19.44.35225.0
   -- Detecting C compiler ABI info
   -- Detecting C compiler ABI info - done
   -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
@@ -289,28 +290,30 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/21.1.8`
   --    - Test hipify-clang     : ON
   --    - Is part of HIP SDK    : OFF
   --    - Install clang headers : ON
-  -- Found LLVM 21.1.8:
-  --    - CMake module path     : D:/LLVM/21.1.8/dist/lib/cmake/llvm
-  --    - Clang include path    : D:/LLVM/21.1.8/dist/include
-  --    - LLVM Include path     : D:/LLVM/21.1.8/dist/include
-  --    - Binary path           : D:/LLVM/21.1.8/dist/bin
+  -- Found LLVM 22.1.1:
+  --    - CMake module path     : D:/LLVM/22.1.1/dist/lib/cmake/llvm
+  --    - Clang include path    : D:/LLVM/22.1.1/dist/include
+  --    - LLVM Include path     : D:/LLVM/22.1.1/dist/include
+  --    - Binary path           : D:/LLVM/22.1.1/dist/bin
   -- ---- The below configuring for hipify-clang testing only ----
-  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python314/python.exe (found suitable version "3.14.0", required range is "3.0...3.15") found components: Interpreter
+  -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python314/python.exe (found suitable version "3.14.3", required range is "3.0...3.15") found components: Interpreter
   -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python314/Scripts/lit.exe
-  -- Found FileCheck: D:/LLVM/21.1.8/dist/bin/FileCheck.exe
+  -- Found FileCheck: D:/LLVM/22.1.1/dist/bin/FileCheck.exe
   -- Initial CUDA to configure:
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9
   --    - CUDA Samples path     : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9
-  --    - cuDNN path            : D:/CUDA/cuDNN/9.19.1
-  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.5.0.0
+  --    - cuDNN path            : D:/CUDA/cuDNN/9.20.0
+  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.6.0.0
   --    - CUB path              :
+  --    - cuFile path           : D:/CUDA/cuFile/1.17.0
   -- Found CUDAToolkit: C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include (found version "12.9.86")
   -- Found CUDA config:
   --    - CUDA Toolkit path     : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9
   --    - CUDA Samples path     : C:/ProgramData/NVIDIA Corporation/CUDA Samples/v12.9
-  --    - cuDNN path            : D:/CUDA/cuDNN/9.19.1/include
-  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.5.0.0/include
-  --    - CUB path              : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include/cub
-  -- Configuring done (4.4s)
-  -- Generating done (0.1s)
+  --    - cuDNN path            : D:/CUDA/cuDNN/9.20.0/include
+  --    - cuTENSOR path         : D:/CUDA/cuTensor/2.6.0.0/include
+  --    - CUB path              : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include
+  --    - cuFile path           : D:/CUDA/cuFile/1.17.0/include
+  -- Configuring done (4.9s)
+  -- Generating done (0.2s)
   -- Build files have been written to: D:/HIPIFY/build

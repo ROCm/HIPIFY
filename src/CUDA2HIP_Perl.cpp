@@ -65,6 +65,8 @@ namespace perl {
   const string tab_5 = tab_4 + tab;
   const string tab_6 = tab_5 + tab;
   const string tab_7 = tab_6 + tab;
+  const string tab_8 = tab_7 + tab;
+  const string tab_9 = tab_8 + tab;
 
   const string endl_2 = "\n\n";
   const string endl_tab = "\n" + tab;
@@ -77,33 +79,21 @@ namespace perl {
   const string sub = "sub ";
   const string my = "my ";
   const string my_k = my + "$k = 0;";
-  const string return_0 = "return 0;\n";
-  const string return_k = "return $k;\n";
   const string while_ = "while ";
   const string unless_ = "unless ";
   const string foreach = "foreach ";
   const string foreach_func = foreach + "$func (";
   const string print = "print STDERR ";
   const string printf = "printf STDERR ";
-  const string warn = "warn";
   const string no_warns = "no warnings qw/uninitialized/;";
   const string hipify_perl = "hipify-perl";
   const string warning = "$fileName:$line_num: warning: ";
-  const string sWarnExperimentalFunctions = "warnExperimentalFunctions";
-  const string sWarnDeprecatedFunctions = "warnDeprecatedFunctions";
-  const string sWarnRemovedFunctions = "warnRemovedFunctions";
   const string sRocOnlyUnsupportedFunctions = "RocOnlyUnsupportedFunctions";
-  const string sWarnRocOnlyUnsupportedFunctions = warn + sRocOnlyUnsupportedFunctions;
   const string sMIOpenOnlyUnsupportedFunctions = "MIOpenOnlyUnsupportedFunctions";
-  const string sWarnMIOpenOnlyUnsupportedFunctions = warn + sMIOpenOnlyUnsupportedFunctions;
   const string sHipOnlyUnsupportedFunctions = "HipOnlyUnsupportedFunctions";
-  const string sWarnHipOnlyUnsupportedFunctions = warn + sHipOnlyUnsupportedFunctions;
   const string sHipDNNOnlyUnsupportedFunctions = "HipDNNOnlyUnsupportedFunctions";
-  const string sWarnHipDNNOnlyUnsupportedFunctions = warn + sHipDNNOnlyUnsupportedFunctions;
   const string sUnsupportedDeviceFunctions = "UnsupportedDeviceFunctions";
   const string sUnsupportedDeviceDataTypes = "UnsupportedDeviceDataTypes";
-  const string sWarnUnsupportedDeviceFunctions = warn + sUnsupportedDeviceFunctions;
-  const string sWarnUnsupportedDeviceDataTypes = warn + sUnsupportedDeviceDataTypes;
   const string sSimpleMappings = "simpleMappings";
   const string sSimpleIncludes = "simpleIncludes";
   const string sRocMappings = "rocMappings";
@@ -115,13 +105,8 @@ namespace perl {
   const string sExperimentalIncludes = "experimentalIncludes";
   const string sTransformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
-  const string count = "count";
   const string sSupportedDeviceFunctions = "SupportedDeviceFunctions";
   const string sSupportedDeviceDataTypes = "SupportedDeviceDataTypes";
-  const string sCountSupportedDeviceFunctions = count + sSupportedDeviceFunctions;
-  const string sCountSupportedDeviceDataTypes = count + sSupportedDeviceDataTypes;
-  const string sMap_1 = " = map { $_ => 1 } @";
-  const string sMyHash = "my %hash_";
 
   const string sCudaDevice = "cudaDevice";
   const string sCudaDeviceId = "cudaDeviceId";
@@ -180,70 +165,67 @@ namespace perl {
     {sCudaInGauge}, {sCudaSpinorOut}, {sCudaSpinor}, {sCudaColorSpinorField}, {sCudaSiteLink}, {sCudaFatLink}, {sCudaStaple}, {sCudaCloverField}, {sCudaParam}, {sCudaOutForce}, {sCudaGaugeTemp}, {sCudaResult}, {sCudaForce}, {sCudaInForce}, {sCudaForce_ex}, {sCudaOprod_ex}, {sCudaOutGauge}, {sCudaULink}, {sCudaOprod}, {sCudaGauge_ex}, {sCudaQuark}, {sCudaLongLinkOprod_ex}, {sCudaInGaugeEx}, {sCudaLongLink}, {sCudaUnitarizedLink}, {sCudaQdpGauge}, {sCudaCpsGauge}, {sCudaInLink}, {sCudaInLinkEx}, {sCudaGaugeField}, {sCudaMemcpys}, {sCudaRitzVectors}, {sCudaEigValueSet}, {sCudaLongLinkOprod}, {sCudaEigVecSet}
   };
 
-  void generateHeader(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << "#!/usr/bin/env perl" << endl_2;
-    *streamPtr.get() << sCopyright << endl;
-    *streamPtr.get() << sImportant << endl_2;
-    *streamPtr.get() << "# USAGE" << endl;
-    *streamPtr.get() << "#" << endl;
-    *streamPtr.get() << "my $USAGE =<<USAGE;" << endl_2;
-    *streamPtr.get() << "    hipify-perl is a tool to translate CUDA source code into portable HIP C++" << endl_2;
-    *streamPtr.get() << "    USAGE: hipify-perl [OPTIONS] INPUT_FILE" << endl_2;
-    *streamPtr.get() << "    OPTIONS:" << endl_2;
-    *streamPtr.get() << "      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax (default)" << endl;
-    *streamPtr.get() << "      -examine                      - Combines -no-output and -print-stats options" << endl;
-    *streamPtr.get() << "      -exclude-dirs=s               - Exclude directories" << endl;
-    *streamPtr.get() << "      -exclude-files=s              - Exclude files" << endl;
-    *streamPtr.get() << "      -experimental                 - HIPIFY experimentally supported APIs" << endl;
-    *streamPtr.get() << "      -help                         - Display available options" << endl;
-    *streamPtr.get() << "      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")" << endl;
-    *streamPtr.get() << "      -inplace                      - Backup the input file in .prehip file, modify the input file inplace" << endl;
-    *streamPtr.get() << "      -miopen                       - Translate cuDNN to MIOpen instead of hipDNN where it is possible" << endl;
-    *streamPtr.get() << "      -no-output                    - Don't write any translated output to stdout" << endl;
-    *streamPtr.get() << "      -o=s                          - Output filename" << endl;
-    *streamPtr.get() << "      -print-stats                  - Print translation statistics" << endl;
-    *streamPtr.get() << "      -quiet-warnings               - Don't print warnings on unknown CUDA identifiers" << endl;
-    *streamPtr.get() << "      -roc                          - Translate to roc instead of hip where it is possible" << endl;
-    *streamPtr.get() << "      -version                      - The supported HIP version" << endl;
-    *streamPtr.get() << "      -whitelist=s                  - Whitelist of identifiers" << endl;
-    *streamPtr.get() << "USAGE" << endl;
-    *streamPtr.get() << "#" << endl;
-    *streamPtr.get() << "use warnings;" << endl;
-    *streamPtr.get() << "use Cwd;" << endl;
-    *streamPtr.get() << "use Getopt::Long;" << endl;
-    *streamPtr.get() << "use File::Basename;" << endl;
-    *streamPtr.get() << my << "$whitelist = \"\";" << endl;
-    *streamPtr.get() << my << "$exclude_dirs =  \"\";" << endl;
-    *streamPtr.get() << my << "$exclude_files = \"\";" << endl;
-    *streamPtr.get() << my << "$fileName = \"\";" << endl;
-    *streamPtr.get() << my << "$hipFileName = \"\";" << endl;
-    *streamPtr.get() << my << "%ft;" << endl;
-    *streamPtr.get() << my << "%Tkernels;" << endl;
-    *streamPtr.get() << my << "%tags = ();" << endl;
-    *streamPtr.get() << my << "%tagsTotal = ();" << endl;
-    *streamPtr.get() << my << "%tagsToConvertedTags = ();" << endl;
-    *streamPtr.get() << my << "%tagsToConvertedTagsTotal = ();" << endl;
-    *streamPtr.get() << my << "%convertedTags = ();" << endl;
-    *streamPtr.get() << my << "%convertedTagsTotal = ();" << endl_2;
-    *streamPtr.get() << "GetOptions(" << endl;
-    *streamPtr.get() << tab << "  \"cuda-kernel-execution-syntax\" => \\$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax (default)" << endl;
-    *streamPtr.get() << tab << ", \"examine\" => \\$examine                                            # Combines -no-output and -print-stats options" << endl;
-    *streamPtr.get() << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs                                # Exclude directories" << endl;
-    *streamPtr.get() << tab << ", \"exclude-files=s\" => \\$exclude_files                              # Exclude files" << endl;
-    *streamPtr.get() << tab << ", \"experimental\" => \\$experimental                                  # HIPIFY experimentally supported APIs" << endl;
-    *streamPtr.get() << tab << ", \"help\" => \\$help                                                  # Display available options" << endl;
-    *streamPtr.get() << tab << ", \"hip-kernel-execution-syntax\" => \\$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")" << endl;
-    *streamPtr.get() << tab << ", \"inplace\" => \\$inplace                                            # Backup the input file in .prehip file, modify the input file inplace" << endl;
-    *streamPtr.get() << tab << ", \"no-output\" => \\$no_output                                        # Don't write any translated output to stdout" << endl;
-    *streamPtr.get() << tab << ", \"miopen\" => \\$miopen                                              # Translate cuDNN to MIOpen instead of hipDNN where it is possible" << endl;
-    *streamPtr.get() << tab << ", \"o=s\" => \\$hipFileName                                            # Output filename" << endl;
-    *streamPtr.get() << tab << ", \"print-stats\" => \\$print_stats                                    # Print translation statistics" << endl;
-    *streamPtr.get() << tab << ", \"quiet-warnings\" => \\$quiet_warnings                              # Don't print warnings on unknown CUDA identifiers" << endl;
-    *streamPtr.get() << tab << ", \"roc\" => \\$roc                                                    # Translate to roc instead of hip where it is possible" << endl;
-    *streamPtr.get() << tab << ", \"version\" => \\$version                                            # The supported HIP version" << endl;
-    *streamPtr.get() << tab << ", \"whitelist=s\" => \\$whitelist                                      # Whitelist of identifiers" << endl;
-    *streamPtr.get() << ");" << endl_2;
-    *streamPtr.get() << "$cuda_kernel_execution_syntax = 1;" << endl_2;
+  void generateHeader(ostream &out) {
+    out << "#!/usr/bin/env perl" << endl_2;
+    out << sCopyright << endl;
+    out << sImportant << endl_2;
+    out << "# USAGE" << endl;
+    out << "#" << endl;
+    out << "my $USAGE =<<USAGE;" << endl_2;
+    out << "    hipify-perl is a tool to translate CUDA source code into portable HIP C++" << endl_2;
+    out << "    USAGE: hipify-perl [OPTIONS] INPUT_FILE" << endl_2;
+    out << "    OPTIONS:" << endl_2;
+    out << "      -cuda-kernel-execution-syntax - Keep CUDA kernel launch syntax (default)" << endl;
+    out << "      -examine                      - Combines -no-output and -print-stats options" << endl;
+    out << "      -exclude-dirs=s               - Exclude directories" << endl;
+    out << "      -exclude-files=s              - Exclude files" << endl;
+    out << "      -experimental                 - HIPIFY experimentally supported APIs" << endl;
+    out << "      -help                         - Display available options" << endl;
+    out << "      -hip-kernel-execution-syntax  - Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")" << endl;
+    out << "      -inplace                      - Backup the input file in .prehip file, modify the input file inplace" << endl;
+    out << "      -miopen                       - Translate cuDNN to MIOpen instead of hipDNN where it is possible" << endl;
+    out << "      -no-output                    - Don't write any translated output to stdout" << endl;
+    out << "      -o=s                          - Output filename" << endl;
+    out << "      -print-stats                  - Print translation statistics" << endl;
+    out << "      -quiet-warnings               - Don't print warnings on unknown CUDA identifiers" << endl;
+    out << "      -roc                          - Translate to roc instead of hip where it is possible" << endl;
+    out << "      -version                      - The supported HIP version" << endl;
+    out << "      -whitelist=s                  - Whitelist of identifiers" << endl;
+    out << "USAGE" << endl;
+    out << "#" << endl;
+    out << "use warnings;" << endl;
+    out << "use Cwd;" << endl;
+    out << "use Getopt::Long;" << endl;
+    out << "use File::Basename;" << endl;
+    out << my << "$whitelist = \"\";" << endl;
+    out << my << "$exclude_dirs =  \"\";" << endl;
+    out << my << "$exclude_files = \"\";" << endl;
+    out << my << "$fileName = \"\";" << endl;
+    out << my << "$hipFileName = \"\";" << endl;
+    out << my << "%ft;" << endl;
+    out << my << "%tagsToConvertedTags = ();" << endl;
+    out << my << "%tagsToConvertedTagsTotal = ();" << endl;
+    out << my << "%convertedTags = ();" << endl;
+    out << my << "%convertedTagsTotal = ();" << endl_2;
+    out << "GetOptions(" << endl;
+    out << tab << "  \"cuda-kernel-execution-syntax\" => \\$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax (default)" << endl;
+    out << tab << ", \"examine\" => \\$examine                                            # Combines -no-output and -print-stats options" << endl;
+    out << tab << ", \"exclude-dirs=s\" => \\$exclude_dirs                                # Exclude directories" << endl;
+    out << tab << ", \"exclude-files=s\" => \\$exclude_files                              # Exclude files" << endl;
+    out << tab << ", \"experimental\" => \\$experimental                                  # HIPIFY experimentally supported APIs" << endl;
+    out << tab << ", \"help\" => \\$help                                                  # Display available options" << endl;
+    out << tab << ", \"hip-kernel-execution-syntax\" => \\$hip_kernel_execution_syntax    # Transform CUDA kernel launch syntax to a regular HIP function call (overrides \"--cuda-kernel-execution-syntax\")" << endl;
+    out << tab << ", \"inplace\" => \\$inplace                                            # Backup the input file in .prehip file, modify the input file inplace" << endl;
+    out << tab << ", \"no-output\" => \\$no_output                                        # Don't write any translated output to stdout" << endl;
+    out << tab << ", \"miopen\" => \\$miopen                                              # Translate cuDNN to MIOpen instead of hipDNN where it is possible" << endl;
+    out << tab << ", \"o=s\" => \\$hipFileName                                            # Output filename" << endl;
+    out << tab << ", \"print-stats\" => \\$print_stats                                    # Print translation statistics" << endl;
+    out << tab << ", \"quiet-warnings\" => \\$quiet_warnings                              # Don't print warnings on unknown CUDA identifiers" << endl;
+    out << tab << ", \"roc\" => \\$roc                                                    # Translate to roc instead of hip where it is possible" << endl;
+    out << tab << ", \"version\" => \\$version                                            # The supported HIP version" << endl;
+    out << tab << ", \"whitelist=s\" => \\$whitelist                                      # Whitelist of identifiers" << endl;
+    out << ");" << endl_2;
+    out << "$cuda_kernel_execution_syntax = 1;" << endl_2;
     stringstream deprecated, removed, experimental, common;
     deprecated << my << "%deprecated_funcs = (" << endl;
     removed << my << "%removed_funcs = (" << endl;
@@ -275,244 +257,218 @@ namespace perl {
         }
       }
     }
-    common << endl << ");" << endl << endl;
+    common << endl << ");" << endl_2;
     deprecated << common.str();
     removed << common.str();
     experimental << common.str();
-    *streamPtr.get() << deprecated.str();
-    *streamPtr.get() << removed.str();
-    *streamPtr.get() << experimental.str();
-    *streamPtr.get() << "$print_stats = 1 if $examine;" << endl;
-    *streamPtr.get() << "$no_output = 1 if $examine;" << endl_2;
-    *streamPtr.get() << "# Whitelist of cuda[A-Z] identifiers, which are commonly used in CUDA sources but don't map to any CUDA API:" << endl;
-    *streamPtr.get() << "@whitelist = (";
+    out << deprecated.str();
+    out << removed.str();
+    out << experimental.str();
+    out << "$print_stats = 1 if $examine;" << endl;
+    out << "$no_output = 1 if $examine;" << endl_2;
+    out << "# Whitelist of cuda[A-Z] identifiers, which are commonly used in CUDA sources but don't map to any CUDA API:" << endl;
+    out << "@whitelist = (";
     unsigned int num = 0;
     for (const string &m : Whitelist) {
-      *streamPtr.get() << endl_tab << (num ? ", " : "  ") << "\"" << m << "\"";
+      out << endl_tab << (num ? ", " : "  ") << "\"" << m << "\"";
       ++num;
     }
-    *streamPtr.get() << endl << ");" << endl_2;
-    *streamPtr.get() << "push(@whitelist, split(',', $whitelist));" << endl;
-    *streamPtr.get() << "push(@exclude_dirlist, split(',', $exclude_dirs));" << endl;
-    *streamPtr.get() << "push(@exclude_filelist, split(',', $exclude_files));" << endl_2;
-    *streamPtr.get() << "# Turn exclude dirlist and exclude_filelist into hash maps" << endl;
-    *streamPtr.get() << "%exclude_dirhash = map { $_ => 1 } @exclude_dirlist;" << endl;
-    *streamPtr.get() << "%exclude_filehash = map { $_ => 1 } @exclude_filelist;" << endl_2;
+    out << endl << ");" << endl_2;
+    out << "push(@whitelist, split(',', $whitelist));" << endl;
+    out << "push(@exclude_dirlist, split(',', $exclude_dirs));" << endl;
+    out << "push(@exclude_filelist, split(',', $exclude_files));" << endl_2;
+    out << "# Turn exclude dirlist and exclude_filelist into hash maps" << endl;
+    out << "%exclude_dirhash = map { $_ => 1 } @exclude_dirlist;" << endl;
+    out << "%exclude_filehash = map { $_ => 1 } @exclude_filelist;" << endl_2;
   }
 
-  void generateStatFunctions(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << "totalStats" << " {" << endl;
-    *streamPtr.get() << tab << my << "%count = %{shift()};" << endl;
-    *streamPtr.get() << tab << my << "$total = 0;" << endl;
-    *streamPtr.get() << tab << foreach << "$key (keys %count) {" << endl;
-    *streamPtr.get() << tab_2 << "$total += $count{$key};" << endl_tab << "}" << endl;
-    *streamPtr.get() << tab << "return $total;" << endl << "}" << endl;
-    *streamPtr.get() << endl << sub << "printStats" << " {" << endl;
-    *streamPtr.get() << tab << my << "%counts    = %{shift()};" << endl;
-    *streamPtr.get() << tab << my << "$warnings  = shift();" << endl;
-    *streamPtr.get() << tab << my << "$loc       = shift();" << endl;
-    *streamPtr.get() << tab << my << "$fileName  = shift();" << endl;
-    *streamPtr.get() << tab << my << "$global    = shift();" << endl;
-    *streamPtr.get() << tab << my << "$total     = totalStats(\\%counts);" << endl;
-    *streamPtr.get() << tab << printf << "\"\\n[HIPIFY] info: file '$fileName' statistics:\\n\";" << endl;
-    *streamPtr.get() << tab << printf << "\"  CONVERTED refs count: $total\\n\";" << endl;
-    *streamPtr.get() << tab << printf << "\"  TOTAL lines of code: $loc\\n\";" << endl;
-    *streamPtr.get() << tab << printf << "\"  WARNINGS: $warnings\\n\";" << endl;
-    *streamPtr.get() << tab << printf << "\"[HIPIFY] info: CONVERTED refs by names:\\n\";" << endl;
-    *streamPtr.get() << tab << "if ($global) {" << endl;
-    *streamPtr.get() << tab_2 << foreach << my << "$key (sort keys %tagsToConvertedTagsTotal) {" << endl;
-    *streamPtr.get() << tab_3 << printf << "\"  %s => %s: %d\\n\", $key, $tagsToConvertedTagsTotal{$key}, $convertedTagsTotal{$tagsToConvertedTagsTotal{$key}};" << endl;
-    *streamPtr.get() << tab_2 << "}" << endl;
-    *streamPtr.get() << tab << "} else {" << endl;
-    *streamPtr.get() << tab_2 << foreach << my << "$key (sort keys %tagsToConvertedTags) {" << endl;
-    *streamPtr.get() << tab_3 << printf << "\"  %s => %s: %d\\n\", $key, $tagsToConvertedTags{$key}, $convertedTags{$tagsToConvertedTags{$key}};" << endl;
-    *streamPtr.get() << tab_2 << "}" << endl;
-    *streamPtr.get() << tab << "}" << endl;
-    *streamPtr.get() << "}" << endl;
+  void generateStatFunctions(ostream &out) {
+    out << endl << sub << "totalStats" << " {" << endl;
+    out << tab << my << "%count = %{shift()};" << endl;
+    out << tab << my << "$total = 0;" << endl;
+    out << tab << foreach << "$key (keys %count) {" << endl;
+    out << tab_2 << "$total += $count{$key};" << endl_tab << "}" << endl;
+    out << tab << "return $total;" << endl << "}" << endl;
+    out << endl << sub << "printStats" << " {" << endl;
+    out << tab << my << "%counts    = %{shift()};" << endl;
+    out << tab << my << "$warnings  = shift();" << endl;
+    out << tab << my << "$loc       = shift();" << endl;
+    out << tab << my << "$fileName  = shift();" << endl;
+    out << tab << my << "$global    = shift();" << endl;
+    out << tab << my << "$total     = totalStats(\\%counts);" << endl;
+    out << tab << printf << "\"\\n[HIPIFY] info: file '$fileName' statistics:\\n\";" << endl;
+    out << tab << printf << "\"  CONVERTED refs count: $total\\n\";" << endl;
+    out << tab << printf << "\"  TOTAL lines of code: $loc\\n\";" << endl;
+    out << tab << printf << "\"  WARNINGS: $warnings\\n\";" << endl;
+    out << tab << printf << "\"[HIPIFY] info: CONVERTED refs by names:\\n\";" << endl;
+    out << tab << "if ($global) {" << endl;
+    out << tab_2 << foreach << my << "$key (sort keys %tagsToConvertedTagsTotal) {" << endl;
+    out << tab_3 << printf << "\"  %s => %s: %d\\n\", $key, $tagsToConvertedTagsTotal{$key}, $convertedTagsTotal{$tagsToConvertedTagsTotal{$key}};" << endl;
+    out << tab_2 << "}" << endl;
+    out << tab << "} else {" << endl;
+    out << tab_2 << foreach << my << "$key (sort keys %tagsToConvertedTags) {" << endl;
+    out << tab_3 << printf << "\"  %s => %s: %d\\n\", $key, $tagsToConvertedTags{$key}, $convertedTags{$tagsToConvertedTags{$key}};" << endl;
+    out << tab_2 << "}" << endl;
+    out << tab << "}" << endl;
+    out << "}" << endl;
     for (int i = 0; i < 2; ++i) {
-      *streamPtr.get() << endl << sub << (i ? "clearStats" : "addStats") << " {" << endl;
-      *streamPtr.get() << tab << my << "$dest_ref  = shift();" << endl;
-      *streamPtr.get() << tab << my << (i ? "@statNames = @{shift()};" : "%adder     = %{shift()};") << endl;
-      *streamPtr.get() << tab << foreach << "my " << (i ? "$stat(@statNames)" : "$key (keys %adder)") << " {" << endl;
-      *streamPtr.get() << tab_2 << "$dest_ref->" << (i ? "{$stat} = 0;" : "{$key} += $adder{$key};") << endl_tab << "}" << endl << "}" << endl;
+      out << endl << sub << (i ? "clearStats" : "addStats") << " {" << endl;
+      out << tab << my << "$dest_ref  = shift();" << endl;
+      out << tab << my << (i ? "@statNames = @{shift()};" : "%adder     = %{shift()};") << endl;
+      out << tab << foreach << "my " << (i ? "$stat(@statNames)" : "$key (keys %adder)") << " {" << endl;
+      out << tab_2 << "$dest_ref->" << (i ? "{$stat} = 0;" : "{$key} += $adder{$key};") << endl_tab << "}" << endl << "}" << endl;
     }
   }
 
-  void generateSubstFunction(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << sSubst << " {" << endl;
-    *streamPtr.get() << tab << my << "$a = shift();" << endl;
-    *streamPtr.get() << tab << my << "$b = shift();" << endl;
-    *streamPtr.get() << tab << my << "$t = shift();" << endl;
-    *streamPtr.get() << tab << my << "$i = \"\";" << endl;
-    *streamPtr.get() << tab << "if ($t eq \"include\" or $t eq \"include_cuda_main_header\")" << " {" << endl;
-    *streamPtr.get() << tab_2 << "$i = \"(?<![\\\\!~`@#\\\\$%\\\\^&\\\\*\\\\-+=\\\\[\\\\]\\\\(\\\\)\\\\{\\\\}\\\\.\\\\,\\\\?'\\\\>])\";" << endl;
-    *streamPtr.get() << tab << "}" << endl;
-    *streamPtr.get() << tab << "if (my $c = s/$i\\b$a\\b/$b/g) {" << endl;
-    *streamPtr.get() << tab_2 << "$ft{$t} += $c;" << endl;
-    *streamPtr.get() << tab_2 << "$tags{$a} +=$c;" << endl;
-    *streamPtr.get() << tab_2 << "$tagsTotal{$a} +=$c;" << endl;
-    *streamPtr.get() << tab_2 << "$convertedTags{$b} +=$c;" << endl;
-    *streamPtr.get() << tab_2 << "$convertedTagsTotal{$b} +=$c;" << endl;
-    *streamPtr.get() << tab_2 << "$tagsToConvertedTags{$a} = $b;" << endl;
-    *streamPtr.get() << tab_2 << "$tagsToConvertedTagsTotal{$a} = $b;" << endl;
-    *streamPtr.get() << tab << "}" << endl;
-    *streamPtr.get() << "}" << endl;
+  void generateSubstFunction(ostream &out) {
+    out << endl << sub << sSubst << " {" << endl;
+    out << tab << my << "$a = shift();" << endl;
+    out << tab << my << "$b = shift();" << endl;
+    out << tab << my << "$t = shift();" << endl;
+    out << tab << my << "$i = \"\";" << endl;
+    out << tab << "if ($t eq \"include\" or $t eq \"include_cuda_main_header\")" << " {" << endl;
+    out << tab_2 << "$i = \"(?<![\\\\!~`@#\\\\$%\\\\^&\\\\*\\\\-+=\\\\[\\\\]\\\\(\\\\)\\\\{\\\\}\\\\.\\\\,\\\\?'\\\\>])\";" << endl;
+    out << tab << "}" << endl;
+    out << tab << "if (my $c = s/$i\\b$a\\b/$b/g) {" << endl;
+    out << tab_2 << "$ft{$t} += $c;" << endl;
+    out << tab_2 << "$convertedTags{$b} +=$c;" << endl;
+    out << tab_2 << "$convertedTagsTotal{$b} +=$c;" << endl;
+    out << tab_2 << "$tagsToConvertedTags{$a} = $b;" << endl;
+    out << tab_2 << "$tagsToConvertedTagsTotal{$a} = $b;" << endl;
+    out << tab << "}" << endl;
+    out << "}" << endl;
   }
 
-  void generateExperimentalSubstitutions(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << sExperimentalMappings << " {" << endl;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i != CONV_INCLUDE_CUDA_MAIN_H && i != CONV_INCLUDE_CUDA_MAIN_V2_H && i != CONV_INCLUDE) {
-        for (auto &ma : CUDA_RENAMES_MAP()) {
-          if (!Statistics::isHipExperimental(ma.second)) continue;
-          if (i == ma.second.type) {
-            *streamPtr.get() << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.hipName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
-          }
-        }
+  void generateExperimentalSubstitutions(ostream &out) {
+    out << endl << sub << sExperimentalMappings << " {" << endl;
+    for (auto &ma : CUDA_RENAMES_MAP()) {
+      if (!Statistics::isHipExperimental(ma.second)) continue;
+      if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
+        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.hipName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
-    *streamPtr.get() << "}" << endl;
-    *streamPtr.get() << endl << sub << sExperimentalIncludes << " {" << endl;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H || i == CONV_INCLUDE) {
-        for (auto &ma : CUDA_INCLUDE_MAP) {
-          if (!Statistics::isHipExperimental(ma.second)) continue;
-          if (i == ma.second.type) {
-            string sCUDA = ma.first.str();
-            string sHIP = ma.second.hipName.str();
-            sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
-            sHIP = regex_replace(sHIP, regex("/"), "\\/");
-            *streamPtr.get() << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
-          }
-        }
+    out << "}" << endl;
+    out << endl << sub << sExperimentalIncludes << " {" << endl;
+    for (auto &ma : CUDA_INCLUDE_MAP) {
+      if (!Statistics::isHipExperimental(ma.second)) continue;
+      if (ma.second.type == CONV_INCLUDE_CUDA_MAIN_H || ma.second.type == CONV_INCLUDE_CUDA_MAIN_V2_H || ma.second.type == CONV_INCLUDE) {
+        string sCUDA = ma.first.str();
+        string sHIP = ma.second.hipName.str();
+        sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
+        sHIP = regex_replace(sHIP, regex("/"), "\\/");
+        out << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
-    *streamPtr.get() << "}" << endl;
+    out << "}" << endl;
   }
 
-  void generateRocSubstitutions(unique_ptr<ostream> &streamPtr, bool bMIOpenOnly = false) {
-    *streamPtr.get() << endl << sub << (bMIOpenOnly ? sMIOpenMappings : sRocMappings) << " {" << endl;
+  void generateRocSubstitutions(ostream &out, bool bMIOpenOnly = false) {
+    out << endl << sub << (bMIOpenOnly ? sMIOpenMappings : sRocMappings) << " {" << endl;
     bool bTranslateToRoc = TranslateToRoc;
     bool bTranslateToMIOpen = TranslateToMIOpen;
     if (bMIOpenOnly) TranslateToMIOpen = true;
     else TranslateToRoc = true;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i != CONV_INCLUDE_CUDA_MAIN_H && i != CONV_INCLUDE_CUDA_MAIN_V2_H && i != CONV_INCLUDE) {
-        for (auto &ma : CUDA_RENAMES_MAP()) {
-          if ((bMIOpenOnly && !Statistics::isToMIOpen(ma.second)) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
-          if ((!bMIOpenOnly && Statistics::isToRoc(ma.second) && ma.second.apiType == API_DNN) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
-          if (i == ma.second.type) {
-            *streamPtr.get() << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.rocName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
-          }
-        }
+    for (auto &ma : CUDA_RENAMES_MAP()) {
+      if ((bMIOpenOnly && !Statistics::isToMIOpen(ma.second)) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
+      if ((!bMIOpenOnly && Statistics::isToRoc(ma.second) && ma.second.apiType == API_DNN) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
+      if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
+        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.rocName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
-    *streamPtr.get() << "}" << endl;
-    *streamPtr.get() << endl << sub << (bMIOpenOnly ? sMIOpenIncludes : sRocIncludes) << " {" << endl;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H || i == CONV_INCLUDE) {
-        for (auto &ma : CUDA_INCLUDE_MAP) {
-          if (i == ma.second.type) {
-            if (bMIOpenOnly) {
-              if (!Statistics::isToMIOpen(ma.second)) continue;
-            }
-            else {
-              if (!Statistics::isToRoc(ma.second)) continue;
-            }
-            string sROC = ma.second.rocName.str();
-            if (sROC.empty()) continue;
-            string sCUDA = ma.first.str();
-            sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
-            sROC = regex_replace(sROC, regex("/"), "\\/");
-            *streamPtr.get() << tab << "subst(\"" << sCUDA << "\", \"" << sROC << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
-          }
+    out << "}" << endl;
+    out << endl << sub << (bMIOpenOnly ? sMIOpenIncludes : sRocIncludes) << " {" << endl;
+    for (auto &ma : CUDA_INCLUDE_MAP) {
+      if (ma.second.type == CONV_INCLUDE_CUDA_MAIN_H || ma.second.type == CONV_INCLUDE_CUDA_MAIN_V2_H || ma.second.type == CONV_INCLUDE) {
+        if (bMIOpenOnly) {
+          if (!Statistics::isToMIOpen(ma.second)) continue;
+        } else {
+          if (!Statistics::isToRoc(ma.second)) continue;
         }
+        string sROC = ma.second.rocName.str();
+        if (sROC.empty()) continue;
+        string sCUDA = ma.first.str();
+        sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
+        sROC = regex_replace(sROC, regex("/"), "\\/");
+        out << tab << "subst(\"" << sCUDA << "\", \"" << sROC << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
     TranslateToRoc = bTranslateToRoc;
     TranslateToMIOpen = bTranslateToMIOpen;
-    *streamPtr.get() << "}" << endl;
+    out << "}" << endl;
   }
 
-  void generateSimpleSubstitutions(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << sSimpleMappings << " {" << endl;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i != CONV_INCLUDE_CUDA_MAIN_H && i != CONV_INCLUDE_CUDA_MAIN_V2_H && i != CONV_INCLUDE) {
-        for (auto &ma : CUDA_RENAMES_MAP()) {
-          if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
-          if (i == ma.second.type) {
-            *streamPtr.get() << tab << "$mappings{\"" << ma.first.str() << "\"} = { rep => \"" << ma.second.hipName.str() << "\", type => \"" << counterNames[ma.second.type] << "\" };" << endl;
-          }
-        }
+  void generateSimpleSubstitutions(ostream &out) {
+    out << endl << "sub k { $mappings{$_[0]} = { rep => $_[1], type => $_[2] }; }" << endl;
+    out << endl << sub << sSimpleMappings << " {" << endl;
+    for (auto &ma : CUDA_RENAMES_MAP()) {
+      if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
+      if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
+        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.hipName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
-    *streamPtr.get() << "}" << endl;
-    *streamPtr.get() << endl << sub << sSimpleIncludes << " {" << endl;
-    for (int i = 0; i < NUM_CONV_TYPES; ++i) {
-      if (i == CONV_INCLUDE_CUDA_MAIN_H || i == CONV_INCLUDE_CUDA_MAIN_V2_H || i == CONV_INCLUDE) {
-        for (auto &ma : CUDA_INCLUDE_MAP) {
-          if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
-          if (i == ma.second.type) {
-            string sCUDA = ma.first.str();
-            string sHIP = ma.second.hipName.str();
-            sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
-            sHIP = regex_replace(sHIP, regex("/"), "\\/");
-            *streamPtr.get() << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
-          }
-        }
+    out << "}" << endl;
+    out << endl << sub << sSimpleIncludes << " {" << endl;
+    for (auto &ma : CUDA_INCLUDE_MAP) {
+      if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
+      if (ma.second.type == CONV_INCLUDE_CUDA_MAIN_H || ma.second.type == CONV_INCLUDE_CUDA_MAIN_V2_H || ma.second.type == CONV_INCLUDE) {
+        string sCUDA = ma.first.str();
+        string sHIP = ma.second.hipName.str();
+        sCUDA = regex_replace(sCUDA, regex("/"), "\\/");
+        sHIP = regex_replace(sHIP, regex("/"), "\\/");
+        out << tab << "subst(\"" << sCUDA << "\", \"" << sHIP << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
       }
     }
-    *streamPtr.get() << "}" << endl;
+    out << "}" << endl;
   }
 
-  void generateKernelLaunch(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << "# CUDA Kernel Launch Syntax" << endl << sub << sTransformKernelLaunch << " {" << endl;
-    *streamPtr.get() << tab << no_warns << endl;
-    *streamPtr.get() << tab << my_k << endl_2;
+  void generateKernelLaunch(ostream &out) {
+    out << endl << "# CUDA Kernel Launch Syntax" << endl << sub << sTransformKernelLaunch << " {" << endl;
+    out << tab << no_warns << endl;
+    out << tab << my_k << endl_2;
 
     string s_k = "$k += s/([:|\\w]+)\\s*";
 
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns, S>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, $4, $5)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns, S>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, $4, $5, /g;" << endl_2;
+    out << tab << "# kern<...><<<Dg, Db, Ns, S>>>() syntax" << endl;
+    out << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6)/g;" << endl;
+    out << tab << "# kern<...><<<Dg, Db, Ns, S>>>(...) syntax" << endl;
+    out << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, $6, /g;" << endl;
+    out << tab << "# kern<<<Dg, Db, Ns, S>>>() syntax" << endl;
+    out << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, $4, $5)/g;" << endl;
+    out << tab << "# kern<<<Dg, Db, Ns, S>>>(...) syntax" << endl;
+    out << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, $4, $5, /g;" << endl_2;
 
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db, Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, $4, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db, Ns>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, $4, 0, /g;" << endl_2;
+    out << tab << "# kern<...><<<Dg, Db, Ns>>>() syntax" << endl;
+    out << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, 0)/g;" << endl;
+    out << tab << "# kern<...><<<Dg, Db, Ns>>>(...) syntax" << endl;
+    out << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, $5, 0, /g;" << endl;
+    out << tab << "# kern<<<Dg, Db, Ns>>>() syntax" << endl;
+    out << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, $4, 0)/g;" << endl;
+    out << tab << "# kern<<<Dg, Db, Ns>>>(...) syntax" << endl;
+    out << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, $4, 0, /g;" << endl_2;
 
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, 0, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<...><<<Dg, Db>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, 0, 0, /g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db>>>() syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, 0, 0)/g;" << endl;
-    *streamPtr.get() << tab << "# kern<<<Dg, Db>>>(...) syntax" << endl;
-    *streamPtr.get() << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, 0, 0, /g;" << endl_2;
+    out << tab << "# kern<...><<<Dg, Db>>>() syntax" << endl;
+    out << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, 0, 0)/g;" << endl;
+    out << tab << "# kern<...><<<Dg, Db>>>(...) syntax" << endl;
+    out << tab << s_k << "<(.+)>\\s*<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL(HIP_KERNEL_NAME($1<$2>), $3, $4, 0, 0, /g;" << endl;
+    out << tab << "# kern<<<Dg, Db>>>() syntax" << endl;
+    out << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(\\s*\\)/hipLaunchKernelGGL($1, $2, $3, 0, 0)/g;" << endl;
+    out << tab << "# kern<<<Dg, Db>>>(...) syntax" << endl;
+    out << tab << s_k << "<<<\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*,\\s*([^,\\(\\)]+|[\\w\\s:]*\\([\\w|\\s|,|:|\\+|\\*|\\-|\\/|(?R)]+\\))\\s*>>>\\s*\\(/hipLaunchKernelGGL($1, $2, $3, 0, 0, /g;" << endl_2;
 
-    *streamPtr.get() << tab << "if ($k) {" << endl;
-    *streamPtr.get() << tab_2 << "$ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} += $k;" << endl;
-    *streamPtr.get() << tab_2 << "$Tkernels{$1}++;" << endl_tab << "}" << endl << "}" << endl;
+    out << tab << "if ($k) {" << endl;
+    out << tab_2 << "$ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} += $k;" << endl;
+    out << tab << "}" << endl << "}" << endl;
   }
 
-  void generateCubNamespace(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << sTransformCubNamespace << " {" << endl_tab << my_k << endl;
-    *streamPtr.get() << tab << "$k += s/using\\s*namespace\\s*cub/using namespace hipcub/g;" << endl;
-    *streamPtr.get() << tab << "$k += s/\\bcub::\\b/hipcub::/g;" << endl << tab << return_k << "}" << endl;
+  void generateCubNamespace(ostream &out) {
+    out << endl << sub << sTransformCubNamespace << " {" << endl;
+    out << tab << "s/using\\s*namespace\\s*cub/using namespace hipcub/g;" << endl;
+    out << tab << "s/\\bcub::\\b/hipcub::/g;" << endl << "}" << endl;
   }
 
-  void generateHostFunctions(unique_ptr<ostream> &streamPtr) {
-    *streamPtr.get() << endl << sub << "transformHostFunctions" << " {" << endl_tab << my_k << endl;
-    const string s = "$k += s/(?<!\\/\\/ CHECK: )($func)\\s*";
+  void generateHostFunctions(ostream &out) {
+    out << endl << sub << "transformHostFunctions" << " {" << endl;
+    const string s = "s/(?<!\\/\\/ CHECK: )($func)\\s*";
     const string s0 = s + "\\(([^,\\)]+),/$func\\(";
     const string s1 = s + "\\(([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3";
     const string s2 = s + "\\(([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4";
@@ -591,7 +547,7 @@ namespace perl {
         case 8:  funcSet = DeviceSymbolFunctions5; break;
       }
       if (funcSet.empty()) continue;
-      *streamPtr.get() << tab + foreach_func  << endl;
+      out << tab + foreach_func  << endl;
       unsigned int count = 0;
       string sHIPName;
       for (auto &f : funcSet) {
@@ -601,111 +557,89 @@ namespace perl {
           const auto found2 = CUDA_DRIVER_FUNCTION_MAP.find(f);
           if (found2 != CUDA_DRIVER_FUNCTION_MAP.end()) sHIPName = found2->second.hipName.str();
         }
-        *streamPtr.get() << (count ? ",\n" : "") << tab_2 << "\"" << sHIPName << "\"";
+        out << (count ? ",\n" : "") << tab_2 << "\"" << sHIPName << "\"";
         count++;
       }
-      *streamPtr.get() << endl_tab << ")" << endl_tab << "{" << endl_tab_2;
+      out << endl_tab << ")" << endl_tab << "{" << endl_tab_2;
       switch (i) {
         case 0:
-        default: *streamPtr.get() << s0 << getCastType(e_HIP_SYMBOL) << "\\($2\\),/g;" << endl; break;
-        case 1:  *streamPtr.get() << s1 << getCastType(e_HIP_SYMBOL) << "\\($4\\)$5/g;" << endl; break;
-        case 2:  *streamPtr.get() << s0 << getCastType(e_reinterpret_cast) << "\\($2\\),/g;" << endl; break;
-        case 3:  *streamPtr.get() << s1 << getCastType(e_reinterpret_cast) << "\\($4\\)$5/g;" << endl; break;
-        case 4:  *streamPtr.get() << s2 << getCastType(e_HIP_SYMBOL) << "\\($5\\)$6/g;" << endl; break;
-        case 5:  *streamPtr.get() << s3 << "$7/g;" << endl; break;
-        case 6:  *streamPtr.get() << s3 << ",$5" << getCastType(e_HIP_SYMBOL) << "\\($6\\)$7/g;" << endl; break;
-        case 7:  *streamPtr.get() << s4 << getCastType(e_HIP_SYMBOL) << "\\($7\\)$8/g;" << endl; break;
-        case 8:  *streamPtr.get() << s5 << getCastType(e_HIP_SYMBOL) << "\\($8\\)$9/g;" << endl; break;
+        default: out << s0 << getCastType(e_HIP_SYMBOL) << "\\($2\\),/g;" << endl; break;
+        case 1:  out << s1 << getCastType(e_HIP_SYMBOL) << "\\($4\\)$5/g;" << endl; break;
+        case 2:  out << s0 << getCastType(e_reinterpret_cast) << "\\($2\\),/g;" << endl; break;
+        case 3:  out << s1 << getCastType(e_reinterpret_cast) << "\\($4\\)$5/g;" << endl; break;
+        case 4:  out << s2 << getCastType(e_HIP_SYMBOL) << "\\($5\\)$6/g;" << endl; break;
+        case 5:  out << s3 << "$7/g;" << endl; break;
+        case 6:  out << s3 << ",$5" << getCastType(e_HIP_SYMBOL) << "\\($6\\)$7/g;" << endl; break;
+        case 7:  out << s4 << getCastType(e_HIP_SYMBOL) << "\\($7\\)$8/g;" << endl; break;
+        case 8:  out << s5 << getCastType(e_HIP_SYMBOL) << "\\($8\\)$9/g;" << endl; break;
       }
-      *streamPtr.get() << tab << "}" << endl;
+      out << tab << "}" << endl;
     }
-    *streamPtr.get() << tab << return_k << "}" << endl;
+    out << "}" << endl_2;
   }
 
-  void generateDeprecatedAndUnsupportedFunctions(unique_ptr<ostream> &streamPtr) {
-    stringstream roc_unsupported, hip_unsupported, miopen_unsupported, hipdnn_unsupported;
-    unsigned countRocOnlyUnsupported = 0, countHipOnlyUnsupported = 0, countMIOpenOnlyUnsupported = 0, countHipDNNOnlyUnsupported = 0;
+  void generateDeprecatedAndUnsupportedFunctions(ostream &out) {
     bool bTranslateToRoc = TranslateToRoc;
     bool bTranslateToMIOpen = TranslateToMIOpen;
-    for (auto ma = CUDA_RENAMES_MAP().rbegin(); ma != CUDA_RENAMES_MAP().rend(); ++ma) {
-      TranslateToRoc = false;
-      if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.type != CONV_DEVICE_FUNC && ma->second.type != CONV_DEVICE_TYPE && ma->second.apiType != API_DNN) {
-          hip_unsupported << (countHipOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-          countHipOnlyUnsupported++;
-        }
-      }
-      TranslateToRoc = true;
-      if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.apiType == API_BLAS || ma->second.apiType == API_SPARSE || ma->second.apiType == API_RAND || ma->second.apiType == API_TENSOR) {
-          roc_unsupported << (countRocOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-          countRocOnlyUnsupported++;
-        }
-      }
-      TranslateToRoc = false;
-      TranslateToMIOpen = true;
-      if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.apiType == API_DNN) {
-          miopen_unsupported << (countMIOpenOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-          countMIOpenOnlyUnsupported++;
-        }
-      }
-      TranslateToMIOpen = false;
-      if (Statistics::isUnsupported(ma->second)) {
-        if (ma->second.apiType == API_DNN) {
-          hipdnn_unsupported << (countHipDNNOnlyUnsupported ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-          countHipDNNOnlyUnsupported++;
-        }
+    TranslateToRoc = false;
+    out << "my %hash_" << sHipOnlyUnsupportedFunctions << " = (" << endl;
+    for (auto ma = CUDA_RENAMES_MAP().begin(); ma != CUDA_RENAMES_MAP().end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second) && ma->second.type != CONV_DEVICE_FUNC && ma->second.type != CONV_DEVICE_TYPE && ma->second.apiType != API_DNN) {
+        out << tab << "'" << ma->first.str() << "' => 1," << endl;
       }
     }
+    out << ");" << endl_2;
+    TranslateToRoc = true;
+    out << "my %hash_" << sRocOnlyUnsupportedFunctions << " = (" << endl;
+    for (auto ma = CUDA_RENAMES_MAP().begin(); ma != CUDA_RENAMES_MAP().end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second) && (ma->second.apiType == API_BLAS || ma->second.apiType == API_SPARSE || ma->second.apiType == API_RAND || ma->second.apiType == API_TENSOR)) {
+        out << tab << "'" << ma->first.str() << "' => 1," << endl;
+      }
+    }
+    out << ");" << endl_2;
+    TranslateToRoc = false;
+    TranslateToMIOpen = true;
+    out << "my %hash_" << sMIOpenOnlyUnsupportedFunctions << " = (" << endl;
+    for (auto ma = CUDA_RENAMES_MAP().begin(); ma != CUDA_RENAMES_MAP().end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second) && ma->second.apiType == API_DNN) {
+        out << tab << "'" << ma->first.str() << "' => 1," << endl;
+      }
+    }
+    out << ");" << endl_2;
+    TranslateToMIOpen = false;
+    out << "my %hash_" << sHipDNNOnlyUnsupportedFunctions << " = (" << endl;
+    for (auto ma = CUDA_RENAMES_MAP().begin(); ma != CUDA_RENAMES_MAP().end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second) && ma->second.apiType == API_DNN) {
+        out << tab << "'" << ma->first.str() << "' => 1," << endl;
+      }
+    }
+    out << ");" << endl_2;
     TranslateToRoc = bTranslateToRoc;
     TranslateToMIOpen = bTranslateToMIOpen;
-
-    hip_unsupported << endl << ");" << endl;
-    roc_unsupported << endl << ");" << endl;
-    miopen_unsupported << endl << ");" << endl;
-    hipdnn_unsupported << endl << ");" << endl;
-
-    *streamPtr.get() << "\n@" << sHipOnlyUnsupportedFunctions << " = (\n" << hip_unsupported.str();
-    *streamPtr.get() << "\n@" << sRocOnlyUnsupportedFunctions << " = (\n" << roc_unsupported.str();
-    *streamPtr.get() << "\n@" << sMIOpenOnlyUnsupportedFunctions << " = (\n" << miopen_unsupported.str();
-    *streamPtr.get() << "\n@" << sHipDNNOnlyUnsupportedFunctions << " = (\n" << hipdnn_unsupported.str();
   }
 
-void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
-    unsigned int countUnsupported = 0;
-    unsigned int countUnsupportedDataTypes = 0;
-    unsigned int countSupported = 0;
-    unsigned int countSupportedDataTypes = 0;
-    stringstream sSupported;
-    stringstream sSupportedDataTypes;
-    stringstream sUnsupported;
-    stringstream sUnsupportedDataTypes;
-    for (auto ma = CUDA_DEVICE_FUNCTION_MAP.rbegin(); ma != CUDA_DEVICE_FUNCTION_MAP.rend(); ++ma) {
-      bool isUnsupported = Statistics::isUnsupported(ma->second);
-      (isUnsupported ? sUnsupported : sSupported) << ((isUnsupported && countUnsupported) || (!isUnsupported && countSupported) ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-      if (isUnsupported) countUnsupported++;
-      else countSupported++;
+  void generateDeviceFunctions(ostream &out) {
+    out << "my %hash_" << sSupportedDeviceFunctions << " = (" << endl;
+    for (auto ma = CUDA_DEVICE_FUNCTION_MAP.begin(); ma != CUDA_DEVICE_FUNCTION_MAP.end(); ++ma) {
+      if (!Statistics::isUnsupported(ma->second)) out << tab << "'" << ma->first.str() << "' => 1," << endl;
     }
-    for (auto ma = CUDA_DEVICE_TYPE_NAME_MAP.rbegin(); ma != CUDA_DEVICE_TYPE_NAME_MAP.rend(); ++ma) {
-      bool isUnsupported = Statistics::isUnsupported(ma->second);
-      (isUnsupported ? sUnsupportedDataTypes : sSupportedDataTypes) << ((isUnsupported && countUnsupportedDataTypes) || (!isUnsupported && countSupportedDataTypes) ? ",\n" : "") << tab << "\"" << ma->first.str() << "\"";
-      if (isUnsupported) countUnsupportedDataTypes++;
-      else countSupportedDataTypes++;
+    out << ");" << endl_2;
+    out << "my %hash_" << sUnsupportedDeviceFunctions << " = (" << endl;
+    for (auto ma = CUDA_DEVICE_FUNCTION_MAP.begin(); ma != CUDA_DEVICE_FUNCTION_MAP.end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second)) out << tab << "'" << ma->first.str() << "' => 1," << endl;
     }
-    stringstream supported;
-    stringstream supportedDataTypes;
-    stringstream unsupported;
-    stringstream unsupportedDataTypes;
-    if (countSupported) supported << sSupported.str() << endl << ");" << endl;
-    if (countSupportedDataTypes) supportedDataTypes << sSupportedDataTypes.str() << endl << ");" << endl;
-    if (countUnsupported) unsupported << sUnsupported.str() << endl << ");" << endl;
-    if (countUnsupportedDataTypes) unsupportedDataTypes << sUnsupportedDataTypes.str() << endl << ");" << endl;
-    *streamPtr.get() << "\n@" << sSupportedDeviceFunctions << " = (\n" << supported.str();
-    *streamPtr.get() << "\n@" << sUnsupportedDeviceFunctions << " = (\n" << unsupported.str();
-    *streamPtr.get() << "\n@" << sSupportedDeviceDataTypes << " = (\n" << supportedDataTypes.str();
-    *streamPtr.get() << "\n@" << sUnsupportedDeviceDataTypes << " = (\n" << unsupportedDataTypes.str();
-  }
+    out << ");" << endl_2;
+    out << "my %hash_" << sSupportedDeviceDataTypes << " = (" << endl;
+    for (auto ma = CUDA_DEVICE_TYPE_NAME_MAP.begin(); ma != CUDA_DEVICE_TYPE_NAME_MAP.end(); ++ma) {
+      if (!Statistics::isUnsupported(ma->second)) out << tab << "'" << ma->first.str() << "' => 1," << endl;
+    }
+    out << ");" << endl_2;
+    out << "my %hash_" << sUnsupportedDeviceDataTypes << " = (" << endl;
+    for (auto ma = CUDA_DEVICE_TYPE_NAME_MAP.begin(); ma != CUDA_DEVICE_TYPE_NAME_MAP.end(); ++ma) {
+      if (Statistics::isUnsupported(ma->second)) out << tab << "'" << ma->first.str() << "' => 1," << endl;
+    }
+    out << ");" << endl_2;
+}
 
   bool generate(bool Generate) {
     if (!Generate) return true;
@@ -722,281 +656,261 @@ void generateDeviceFunctions(unique_ptr<ostream> &streamPtr) {
       llvm::errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
       return false;
     }
-    unique_ptr<ostream> streamPtr = unique_ptr<ostream>(new ofstream(tmpFile.c_str(), ios_base::trunc));
-    generateHeader(streamPtr);
+    ofstream out(tmpFile.c_str(), ios_base::trunc);
+    generateHeader(out);
     string sConv = my + "$apiCalls   = ";
     unsigned int exclude[3] = { CONV_DEVICE_FUNC, CONV_EXTERN_SHARED, CONV_KERNEL_LAUNCH };
-    *streamPtr.get() << "@statNames = (";
+    out << "@statNames = (";
     for (unsigned int i = 0; i < NUM_CONV_TYPES - 1; ++i) {
-      *streamPtr.get() << "\"" << counterNames[i] << "\", ";
+      out << "\"" << counterNames[i] << "\", ";
       if (any_of(exclude, exclude + 3, [&i](unsigned int x) { return x == i; })) continue;
       sConv += "$ft{'" + string(counterNames[i]) + "'}" + (i < NUM_CONV_TYPES - 2 ? " + " : ";");
     }
     if (sConv.back() == ' ') sConv = sConv.substr(0, sConv.size() - 3) + ";";
-    *streamPtr.get() << "\"" << counterNames[NUM_CONV_TYPES - 1] << "\");" << endl;
-    generateStatFunctions(streamPtr);
-    generateSubstFunction(streamPtr);
-    generateExperimentalSubstitutions(streamPtr);
-    generateRocSubstitutions(streamPtr);
-    generateRocSubstitutions(streamPtr, true);
-    generateSimpleSubstitutions(streamPtr);
-    generateKernelLaunch(streamPtr);
-    generateCubNamespace(streamPtr);
-    generateHostFunctions(streamPtr);
-    generateDeviceFunctions(streamPtr);
-    generateDeprecatedAndUnsupportedFunctions(streamPtr);
-    *streamPtr.get() << endl << "# Count of transforms in all files" << endl;
-    *streamPtr.get() << my << "%tt;" << endl;
-    *streamPtr.get() << "clearStats(\\%tt, \\@statNames);" << endl;
-    *streamPtr.get() << "$Twarnings = 0;" << endl;
-    *streamPtr.get() << "$TlineCount = 0;" << endl;
-    *streamPtr.get() << my << "%TwarningTags;" << endl;
-    *streamPtr.get() << my << "$fileCount = @ARGV;" << endl;
-    *streamPtr.get() << "if ($help) {" << endl;
-    *streamPtr.get() << tab << "print STDERR \"$USAGE\\n\";" << endl;
-    *streamPtr.get() << "}" << endl;
-    *streamPtr.get() << "if ($version) {" << endl;
-    *streamPtr.get() << tab << "print STDERR \"HIP version " + sHIP_version + "\\n\";" << endl;
-    *streamPtr.get() << "}" << endl;
+    out << "\"" << counterNames[NUM_CONV_TYPES - 1] << "\");" << endl;
+    generateStatFunctions(out);
+    generateSubstFunction(out);
+    generateExperimentalSubstitutions(out);
+    generateRocSubstitutions(out);
+    generateRocSubstitutions(out, true);
+    generateSimpleSubstitutions(out);
+    generateKernelLaunch(out);
+    generateCubNamespace(out);
+    generateHostFunctions(out);
+    generateDeviceFunctions(out);
+    generateDeprecatedAndUnsupportedFunctions(out);
+    out << endl << "# Count of transforms in all files" << endl;
+    out << my << "%tt;" << endl;
+    out << "clearStats(\\%tt, \\@statNames);" << endl;
+    out << "$Twarnings = 0;" << endl;
+    out << "$TlineCount = 0;" << endl;
+    out << my << "$fileCount = @ARGV;" << endl;
+    out << "if ($help) {" << endl;
+    out << tab << "print STDERR \"$USAGE\\n\";" << endl;
+    out << "}" << endl;
+    out << "if ($version) {" << endl;
+    out << tab << "print STDERR \"HIP version " + sHIP_version + "\\n\";" << endl;
+    out << "}" << endl;
 
     // Build Dictionary and Regex Once Globally
-    *streamPtr.get() << sSimpleMappings << "(); " << endl;
-    *streamPtr.get() << "if ($experimental) {" << endl;
-    *streamPtr.get() << tab << sExperimentalMappings << "();" << endl;
-    *streamPtr.get() << "}" << endl;
-    *streamPtr.get() << "if ($roc) {" << endl;
-    *streamPtr.get() << tab << sRocMappings << "();" << endl;
-    *streamPtr.get() << tab << sMIOpenMappings << "(); " << endl;
-    *streamPtr.get() << "}" << endl;
-    *streamPtr.get() << "if ($miopen) {" << endl;
-    *streamPtr.get() << tab << sMIOpenMappings << "(); " << endl;
-    *streamPtr.get() << "}" << endl;
+    out << sSimpleMappings << "(); " << endl;
+    out << "if ($experimental) {" << endl;
+    out << tab << sExperimentalMappings << "();" << endl;
+    out << "}" << endl;
+    out << "if ($roc) {" << endl;
+    out << tab << sRocMappings << "();" << endl;
+    out << tab << sMIOpenMappings << "(); " << endl;
+    out << "}" << endl;
+    out << "if ($miopen) {" << endl;
+    out << tab << sMIOpenMappings << "(); " << endl;
+    out << "}" << endl;
 
     // Use a generic C-identifier matcher to bypass Regex Compilation time
-    *streamPtr.get() << "my $master_regex = qr/\\b([a-zA-Z_]\\w*)\\b/;" << endl;
+    out << "my $master_regex = qr/\\b([a-zA-Z_]\\w*)\\b/;" << endl;
 
-    *streamPtr.get() << sMyHash << sHipOnlyUnsupportedFunctions << sMap_1 << sHipOnlyUnsupportedFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sRocOnlyUnsupportedFunctions << sMap_1 << sRocOnlyUnsupportedFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sMIOpenOnlyUnsupportedFunctions << sMap_1 << sMIOpenOnlyUnsupportedFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sHipDNNOnlyUnsupportedFunctions << sMap_1 << sHipDNNOnlyUnsupportedFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sSupportedDeviceFunctions << sMap_1 << sSupportedDeviceFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sSupportedDeviceDataTypes << sMap_1 << sSupportedDeviceDataTypes << ";" << endl;
-    *streamPtr.get() << sMyHash << sUnsupportedDeviceFunctions << sMap_1 << sUnsupportedDeviceFunctions << ";" << endl;
-    *streamPtr.get() << sMyHash << sUnsupportedDeviceDataTypes << sMap_1 << sUnsupportedDeviceDataTypes << ";" << endl;
+    out << while_ << "(@ARGV) {" << endl;
+    out << tab << "$fileName=shift (@ARGV);" << endl;
+    out << tab << "my $direxclude = 0;" << endl;
+    out << tab << "my $fileDir = dirname(Cwd::realpath($fileName));" << endl;
+    out << tab << "while ($fileDir ne dirname($fileDir)) {" << endl;
+    out << tab_2 << "if ($exclude_dirhash{$fileDir}) {" << endl;
+    out << tab_3 << print << "\"Skipping the file: $fileName in the excluded directory: $fileDir \\n\";" << endl;
+    out << tab_3 << "$direxclude = 1;" << endl;
+    out << tab_3 << "last;" << endl;
+    out << tab_2 << "}" << endl;
+    out << tab_2 << "$fileDir = dirname($fileDir);" << endl;
+    out << tab << "}" << endl;
+    out << tab << "if ($exclude_filehash{$fileName}) {" << endl;
+    out << tab_2 <<  print << "\"Skipping the excluded file: $fileName \\n\";" << endl_tab << "}" << endl;
+    out << tab << unless_ << "($direxclude or $exclude_filehash{$fileName}) {" << endl;
+    out << tab_2 << "if ($inplace) {" << endl;
+    out << tab_3 << my << "$file_prehip = \"$fileName\" . \".prehip\";" << endl;
+    out << tab_3 << my << "$infile;" << endl;
+    out << tab_3 << my << "$outfile;" << endl;
+    out << tab_3 << "if (-e $file_prehip) {" << endl;
+    out << tab_4 << "$infile  = $file_prehip;" << endl;
+    out << tab_4 << "$outfile = $fileName;" << endl;
+    out << tab_3 << "} else {" << endl;
+    out << tab_4 << "system (\"cp $fileName $file_prehip\");" << endl;
+    out << tab_4 << "$infile = $file_prehip;" << endl;
+    out << tab_4 << "$outfile = $fileName;" << endl_tab_3 << "}" << endl;
+    out << tab_3 << "open(INFILE,\"<\", $infile) or die \"error: could not open $infile\";" << endl;
+    out << tab_3 << "open(OUTFILE,\">\", $outfile) or die \"error: could not open $outfile\";" << endl;
+    out << tab_3 << "$OUTFILE = OUTFILE;" << endl;
+    out << tab_2 << "} else {" << endl;
+    out << tab_3 << "open(INFILE,\"<\", $fileName) or die \"error: could not open $fileName\";" << endl;
+    out << tab_3 << "if ($hipFileName ne \"\") {" << endl;
+    out << tab_4 << "open(OUTFILE,\">\", $hipFileName) or die \"error: could not open $hipFileName\";" << endl;
+    out << tab_4 << "$OUTFILE = OUTFILE;" << endl;
+    out << tab_3 << "} else {" << endl;
+    out << tab_4 << "$OUTFILE = STDOUT;" << endl_tab_3 << "}" << endl_tab_2 << "}" << endl;
+    out << tab_2 << "# Count of transforms in this file" << endl;
+    out << tab_2 << "clearStats(\\%ft, \\@statNames);" << endl;
+    out << tab_2 << my << "$countKeywords = 0;" << endl;
+    out << tab_2 << my << "$warnings = 0;" << endl;
+    out << tab_2 << my << "$lineCount = 0;" << endl;
+    out << tab_2 << "%convertedTags = ();" << endl;
+    out << tab_2 << "%tagsToConvertedTags = ();" << endl;
+    out << tab_2 << "undef $/;" << endl;
+    out << tab_2 << "# Read whole file at once, so we can match newlines" << endl;
+    out << tab_2 << while_ << "(<INFILE>) {" << endl;
+    out << tab_3 << "$countKeywords += m/__global__/;" << endl;
+    out << tab_3 << "$countKeywords += m/__shared__/;" << endl;
+    out << tab_3 << unless_ << "($quiet_warnings) {" << endl;
+    out << tab_4 << my << "@lines = split /\\n/, $_;" << endl;
+    out << tab_4 << my << "$line_num = 0;" << endl;
+    out << tab_4 << foreach << "(@lines) {" << endl;
+    out << tab_5 << "$line_num++;" << endl;
 
-    *streamPtr.get() << while_ << "(@ARGV) {" << endl;
-    *streamPtr.get() << tab << "$fileName=shift (@ARGV);" << endl;
-    *streamPtr.get() << tab << "my $direxclude = 0;" << endl;
-    *streamPtr.get() << tab << "my $fileDir = dirname(Cwd::realpath($fileName));" << endl;
-    *streamPtr.get() << tab << "if ($exclude_dirhash{$fileDir}) {" << endl;
-    *streamPtr.get() << tab_2 << print << "\"Skipping the file: $fileName in the excluded directory: $fileDir \\n\";" << endl;
-    *streamPtr.get() << tab_2 << "$direxclude = 1;" << endl;
-    *streamPtr.get() << tab << "} else {" << endl;
-    *streamPtr.get() << tab_2 << "$fileDir = dirname($fileDir);" << endl_tab << "}" << endl;
-    *streamPtr.get() << tab << "if ($exclude_filehash{$fileName}) {" << endl;
-    *streamPtr.get() << tab_2 <<  print << "\"Skipping the excluded file: $fileName \\n\";" << endl_tab << "}" << endl;
-    *streamPtr.get() << tab << unless_ << "($direxclude or $exclude_filehash{$fileName}) {" << endl;
-    *streamPtr.get() << tab_2 << "if ($inplace) {" << endl;
-    *streamPtr.get() << tab_3 << my << "$file_prehip = \"$fileName\" . \".prehip\";" << endl;
-    *streamPtr.get() << tab_3 << my << "$infile;" << endl;
-    *streamPtr.get() << tab_3 << my << "$outfile;" << endl;
-    *streamPtr.get() << tab_3 << "if (-e $file_prehip) {" << endl;
-    *streamPtr.get() << tab_4 << "$infile  = $file_prehip;" << endl;
-    *streamPtr.get() << tab_4 << "$outfile = $fileName;" << endl;
-    *streamPtr.get() << tab_3 << "} else {" << endl;
-    *streamPtr.get() << tab_4 << "system (\"cp $fileName $file_prehip\");" << endl;
-    *streamPtr.get() << tab_4 << "$infile = $file_prehip;" << endl;
-    *streamPtr.get() << tab_4 << "$outfile = $fileName;" << endl_tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "open(INFILE,\"<\", $infile) or die \"error: could not open $infile\";" << endl;
-    *streamPtr.get() << tab_3 << "open(OUTFILE,\">\", $outfile) or die \"error: could not open $outfile\";" << endl;
-    *streamPtr.get() << tab_3 << "$OUTFILE = OUTFILE;" << endl;
-    *streamPtr.get() << tab_2 << "} else {" << endl;
-    *streamPtr.get() << tab_3 << "open(INFILE,\"<\", $fileName) or die \"error: could not open $fileName\";" << endl;
-    *streamPtr.get() << tab_3 << "if ($hipFileName ne \"\") {" << endl;
-    *streamPtr.get() << tab_4 << "open(OUTFILE,\">\", $hipFileName) or die \"error: could not open $hipFileName\";" << endl;
-    *streamPtr.get() << tab_4 << "$OUTFILE = OUTFILE;" << endl;
-    *streamPtr.get() << tab_3 << "} else {" << endl;
-    *streamPtr.get() << tab_4 << "$OUTFILE = STDOUT;" << endl_tab_3 << "}" << endl_tab_2 << "}" << endl;
-    *streamPtr.get() << tab_2 << "# Count of transforms in this file" << endl;
-    *streamPtr.get() << tab_2 << "clearStats(\\%ft, \\@statNames);" << endl;
-    *streamPtr.get() << tab_2 << my << "$countIncludes = 0;" << endl;
-    *streamPtr.get() << tab_2 << my << "$countKeywords = 0;" << endl;
-    *streamPtr.get() << tab_2 << my << "$warnings = 0;" << endl;
-    *streamPtr.get() << tab_2 << my << "%warningTags;" << endl;
-    *streamPtr.get() << tab_2 << my << "$lineCount = 0;" << endl;
-    *streamPtr.get() << tab_2 << "%tags = ();" << endl;
-    *streamPtr.get() << tab_2 << "%convertedTags = ();" << endl;
-    *streamPtr.get() << tab_2 << "%tagsToConvertedTags = ();" << endl;
-    *streamPtr.get() << tab_2 << "undef $/;" << endl;
-    *streamPtr.get() << tab_2 << "# Read whole file at once, so we can match newlines" << endl;
-    *streamPtr.get() << tab_2 << while_ << "(<INFILE>) {" << endl;
-    *streamPtr.get() << tab_3 << "$countKeywords += m/__global__/;" << endl;
-    *streamPtr.get() << tab_3 << "$countKeywords += m/__shared__/;" << endl;
-    *streamPtr.get() << tab_3 << unless_ << "($quiet_warnings) {" << endl;
-    *streamPtr.get() << tab_4 << my << "@lines = split /\\n/, $_;" << endl;
-    *streamPtr.get() << tab_4 << "# Copy the whole file" << endl;
-    *streamPtr.get() << tab_4 << my << "$tmp = $_;" << endl;
-    *streamPtr.get() << tab_4 << my << "$line_num = 0;" << endl;
-    *streamPtr.get() << tab_4 << foreach << "(@lines) {" << endl;
-    *streamPtr.get() << tab_5 << "$line_num++;" << endl;
+    out << tab_5 << "my %unique_words = map { $_ => 1 } m/\\b([a-zA-Z_]\\w*)\\b/g;" << endl;
+    out << tab_5 << "foreach my $func (keys %unique_words) {" << endl;
+    out << tab_6 << "if (!$experimental && exists $experimental_funcs{$func}) {" << endl;
+    out << tab_7 << "print STDERR \"  " << warning << "experimental ROCm HIP identifier: $func $experimental_funcs{$func}\\n\";" << endl;
+    out << tab_7 << "$warnings++;" << endl;
+    out << tab_6 << "}" << endl;
+    out << tab_6 << "if (exists $removed_funcs{$func}) {" << endl;
+    out << tab_7 << "my $cuda = (index(lc($func), \"cudnn\") == 0) ? \"CUDNN\" : \"CUDA\";" << endl;
+    out << tab_7 << "print STDERR \"  " << warning << "removed CUDA identifier: $func since $cuda $removed_funcs{$func}\\n\";" << endl;
+    out << tab_7 << "$warnings++;" << endl;
+    out << tab_6 << "}" << endl;
+    out << tab_6 << "if (exists $deprecated_funcs{$func}) {" << endl;
+    out << tab_7 << "my $cuda = (index(lc($func), \"cudnn\") == 0) ? \"CUDNN\" : \"CUDA\";" << endl;
+    out << tab_7 << "print STDERR \"  " << warning << "deprecated CUDA identifier: $func since $cuda $deprecated_funcs{$func}\\n\";" << endl;
+    out << tab_7 << "$warnings++;" << endl;
+    out << tab_6 << "}" << endl;
 
-    *streamPtr.get() << tab_5 << "my %unique_words = map { $_ => 1 } m/\\b([a-zA-Z_]\\w*)\\b/g;" << endl;
-    *streamPtr.get() << tab_5 << "foreach my $func (keys %unique_words) {" << endl;
-    *streamPtr.get() << tab_6 << "if (!$experimental && exists $experimental_funcs{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "print STDERR \"  $fileName:$line_num: warning: experimental ROCm HIP identifier: $func $experimental_funcs{$func}\\n\";" << endl;
-    *streamPtr.get() << tab_7 << "$warnings++;" << endl;
-    *streamPtr.get() << tab_6 << "}" << endl;
-    *streamPtr.get() << tab_6 << "if (exists $removed_funcs{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "my $cuda = (index(lc($func), \"cudnn\") == 0) ? \"CUDNN\" : \"CUDA\";" << endl;
-    *streamPtr.get() << tab_7 << "print STDERR \"  $fileName:$line_num: warning: removed CUDA identifier: $func since $cuda $removed_funcs{$func}\\n\";" << endl;
-    *streamPtr.get() << tab_7 << "$warnings++;" << endl;
-    *streamPtr.get() << tab_6 << "}" << endl;
-    *streamPtr.get() << tab_6 << "if (exists $deprecated_funcs{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "my $cuda = (index(lc($func), \"cudnn\") == 0) ? \"CUDNN\" : \"CUDA\";" << endl;
-    *streamPtr.get() << tab_7 << "print STDERR \"  $fileName:$line_num: warning: deprecated CUDA identifier: $func since $cuda $deprecated_funcs{$func}\\n\";" << endl;
-    *streamPtr.get() << tab_7 << "$warnings++;" << endl;
-    *streamPtr.get() << tab_6 << "}" << endl;
+    out << tab_6 << "if ($roc) {" << endl;
+    out << tab_7 << "if (exists $hash_RocOnlyUnsupportedFunctions{$func}) {" << endl;
+    out << tab_8 << "print STDERR \"  " << warning << "unsupported ROC identifier: $func\\n\";" << endl;
+    out << tab_8 << "$warnings++;" << endl;
+    out << tab_7 << "}" << endl;
+    out << tab_7 << "if (exists $hash_MIOpenOnlyUnsupportedFunctions{$func}) {" << endl;
+    out << tab_8 << "print STDERR \"  " << warning << "unsupported MIOpen identifier: $func\\n\";" << endl;
+    out << tab_8 << "$warnings++;" << endl;
+    out << tab_7 << "}" << endl;
+    out << tab_6 << "} else {" << endl;
+    out << tab_7 << "if (exists $hash_HipOnlyUnsupportedFunctions{$func}) {" << endl;
+    out << tab_8 << "print STDERR \"  " << warning << "unsupported HIP identifier: $func\\n\";" << endl;
+    out << tab_8 << "$warnings++;" << endl;
+    out << tab_7 << "}" << endl;
+    out << tab_7 << "if ($miopen) {" << endl;
+    out << tab_8 << "if (exists $hash_MIOpenOnlyUnsupportedFunctions{$func}) {" << endl;
+    out << tab_9 << "print STDERR \"  " << warning << "unsupported MIOpen identifier: $func\\n\";" << endl;
+    out << tab_9 << "$warnings++;" << endl;
+    out << tab_8 << "}" << endl;
+    out << tab_7 << "} else {" << endl;
+    out << tab_8 << "if (exists $hash_HipDNNOnlyUnsupportedFunctions{$func}) {" << endl;
+    out << tab_9 << "print STDERR \"  " << warning << "unsupported hipDNN identifier: $func\\n\";" << endl;
+    out << tab_9 << "$warnings++;" << endl;
+    out << tab_8 << "}" << endl;
+    out << tab_7 << "}" << endl;
+    out << tab_6 << "}" << endl;
 
-    *streamPtr.get() << tab_6 << "if ($roc) {" << endl;
-    *streamPtr.get() << tab_7 << "if (exists $hash_RocOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported ROC identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 << "}" << endl;
-    *streamPtr.get() << tab_7 << "if (exists $hash_MIOpenOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported MIOpen identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 << "}" << endl;
-    *streamPtr.get() << tab_6 << "} else {" << endl;
-    *streamPtr.get() << tab_7 << "if (exists $hash_HipOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported HIP identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 << "}" << endl;
-    *streamPtr.get() << tab_7 << "if ($miopen) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "if (exists $hash_MIOpenOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported MIOpen identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab + tab << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 + tab << "}" << endl;
-    *streamPtr.get() << tab_7 << "} else {" << endl;
-    *streamPtr.get() << tab_7 + tab << "if (exists $hash_HipDNNOnlyUnsupportedFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 + tab + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported hipDNN identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab + tab << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 + tab << "}" << endl;
-    *streamPtr.get() << tab_7 << "}" << endl;
-    *streamPtr.get() << tab_6 << "}" << endl;
+    out << tab_6 << "if (exists $hash_UnsupportedDeviceDataTypes{$func}) {" << endl;
+    out << tab_7 << "print STDERR \"  " << warning << "unsupported device data type identifier: $func\\n\";" << endl;
+    out << tab_7 << "$warnings++;" << endl;
+    out << tab_6 << "}" << endl;
 
-    *streamPtr.get() << tab_6 << "if (exists $hash_UnsupportedDeviceDataTypes{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "print STDERR \"  $fileName:$line_num: warning: unsupported device data type identifier: $func\\n\";" << endl;
-    *streamPtr.get() << tab_7 << "$warnings++;" << endl;
-    *streamPtr.get() << tab_6 << "}" << endl;
+    out << tab_6 << "if (exists $hash_UnsupportedDeviceFunctions{$func}) {" << endl;
+    out << tab_7 << "if ($_ =~ m/\\b$func\\b\\s*\\(/ && $_ !~ m/\\w+::$func\\b\\s*\\(/) {" << endl;
+    out << tab_8 << "print STDERR \"  " << warning << "unsupported device function \\\"$func\\\": $_\\n\";" << endl;
+    out << tab_8 << "$warnings++;" << endl;
+    out << tab_7 << "}" << endl;
+    out << tab_6 << "}" << endl;
+    out << tab_5 << "}" << endl;
+    out << tab_4 << "}" << endl;
+    out << tab_3 << "}" << endl;
 
-    *streamPtr.get() << tab_6 << "if (exists $hash_UnsupportedDeviceFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "if ($_ =~ m/\\b$func\\b\\s*\\(/ && $_ !~ m/\\w+::$func\\b\\s*\\(/) {" << endl;
-    *streamPtr.get() << tab_7 + tab << "print STDERR \"  $fileName:$line_num: warning: unsupported device function \\\"$func\\\": $_\\n\";" << endl;
-    *streamPtr.get() << tab_7 + tab << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 << "}" << endl;
-    *streamPtr.get() << tab_6 << "}" << endl;
-
-    *streamPtr.get() << tab_6 << "if (exists $hash_SupportedDeviceDataTypes{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "my $c = () = $_ =~ m/\\b$func\\b/g;" << endl;
-    *streamPtr.get() << tab_7 << "$ft{'" << counterNames[CONV_DEVICE_TYPE] << "'} += $c;" << endl;
-    *streamPtr.get() << tab_6 << "}" << endl;
-
-    *streamPtr.get() << tab_6 << "if (exists $hash_SupportedDeviceFunctions{$func}) {" << endl;
-    *streamPtr.get() << tab_7 << "my $c = () = $_ =~ m/\\b$func\\b\\s*\\((?!\\s*void)/g;" << endl;
-    *streamPtr.get() << tab_7 << "$ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} += $c;" << endl;
-    *streamPtr.get() << tab_6 << "}" << endl;
-    *streamPtr.get() << tab_5 << "}" << endl;
-    *streamPtr.get() << tab_4 << "}" << endl;
-
-    *streamPtr.get() << tab_4 << "$_ = $tmp;" << endl_tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "if ($roc) {" << endl;
-    *streamPtr.get() << tab_4 << sRocIncludes << "(); " << endl;
-    *streamPtr.get() << tab_4 << sMIOpenIncludes << "();" << endl;
-    *streamPtr.get() << tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "if ($miopen) {" << endl;
-    *streamPtr.get() << tab_4 << sMIOpenIncludes << "();" << endl;
-    *streamPtr.get() << tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "if ($experimental) {" << endl;
-    *streamPtr.get() << tab_4 << "experimentalIncludes();" << endl;
-    *streamPtr.get() << tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "simpleIncludes();" << endl;
+    out << tab_3 << "if ($roc) {" << endl;
+    out << tab_4 << sRocIncludes << "(); " << endl;
+    out << tab_4 << sMIOpenIncludes << "();" << endl;
+    out << tab_3 << "}" << endl;
+    out << tab_3 << "if ($miopen) {" << endl;
+    out << tab_4 << sMIOpenIncludes << "();" << endl;
+    out << tab_3 << "}" << endl;
+    out << tab_3 << "if ($experimental) {" << endl;
+    out << tab_4 << "experimentalIncludes();" << endl;
+    out << tab_3 << "}" << endl;
+    out << tab_3 << "simpleIncludes();" << endl;
 
     // Execute the globally compiled master regex
-    *streamPtr.get() << tab_3 << "if (defined $master_regex) {" << endl;
-    *streamPtr.get() << tab_4 << "$_ =~ s/$master_regex/do {" << endl;
-    *streamPtr.get() << tab_5 << "my $match = $1;" << endl;
-    *streamPtr.get() << tab_5 << "if (exists $mappings{$match}) {" << endl;
-    *streamPtr.get() << tab_6 << "my $b = $mappings{$match}->{rep};" << endl;
-    *streamPtr.get() << tab_6 << "my $t = $mappings{$match}->{type};" << endl;
-    *streamPtr.get() << tab_6 << "$ft{$t}++;" << endl;
-    *streamPtr.get() << tab_6 << "$tags{$match}++;" << endl;
-    *streamPtr.get() << tab_6 << "$tagsTotal{$match}++;" << endl;
-    *streamPtr.get() << tab_6 << "$convertedTags{$b}++;" << endl;
-    *streamPtr.get() << tab_6 << "$convertedTagsTotal{$b}++;" << endl;
-    *streamPtr.get() << tab_6 << "$tagsToConvertedTags{$match} = $b;" << endl;
-    *streamPtr.get() << tab_6 << "$tagsToConvertedTagsTotal{$match} = $b;" << endl;
-    *streamPtr.get() << tab_6 << "$b;" << endl; // Return the replacement
-    *streamPtr.get() << tab_5 << "} else {" << endl;
-    *streamPtr.get() << tab_6 << "$match;" << endl; // Return the original word untouched
-    *streamPtr.get() << tab_5 << "}" << endl;
-    *streamPtr.get() << tab_4 << "}/ge;" << endl;
-    *streamPtr.get() << tab_3 << "}" << endl;
+    out << tab_3 << "if (defined $master_regex) {" << endl;
+    out << tab_4 << "$_ =~ s/$master_regex/do {" << endl;
+    out << tab_5 << "my $match = $1;" << endl;
+    out << tab_5 << "if (exists $mappings{$match}) {" << endl;
+    out << tab_6 << "my $b = $mappings{$match}->{rep};" << endl;
+    out << tab_6 << "my $t = $mappings{$match}->{type};" << endl;
+    out << tab_6 << "$ft{$t}++;" << endl;
+    out << tab_6 << "$convertedTags{$b}++;" << endl;
+    out << tab_6 << "$convertedTagsTotal{$b}++;" << endl;
+    out << tab_6 << "$tagsToConvertedTags{$match} = $b;" << endl;
+    out << tab_6 << "$tagsToConvertedTagsTotal{$match} = $b;" << endl;
+    out << tab_6 << "$b;" << endl; // Return the replacement
+    out << tab_5 << "} else {" << endl;
+    out << tab_6 << "$match;" << endl; // Return the original word untouched
+    out << tab_5 << "}" << endl;
+    out << tab_4 << "}/ge;" << endl;
+    out << tab_3 << "}" << endl;
 
-    *streamPtr.get() << tab_3 << "if (!$cuda_kernel_execution_syntax || $hip_kernel_execution_syntax) {" << endl;
-    *streamPtr.get() << tab_4 << sTransformKernelLaunch << "();" << endl;
-    *streamPtr.get() << tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << sTransformCubNamespace << "();" << endl;
-    *streamPtr.get() << tab_3 << my << "$hasDeviceCode = $countKeywords + $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} + $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'};" << endl;
-    *streamPtr.get() << tab_3 << unless_ << "($quiet_warnings) {" << endl;
-    *streamPtr.get() << tab_4 << "# Copy into array of lines, process line-by-line to show warnings" << endl;
-    *streamPtr.get() << tab_4 << "if ($hasDeviceCode or (/\\bcu|CU/) or (/<<<.*>>>/)) {" << endl;
-    *streamPtr.get() << tab_5 << my << "@lines = split /\\n/, $_;" << endl;
-    *streamPtr.get() << tab_5 << "# Copy the whole file" << endl;
-    *streamPtr.get() << tab_5 << my << "$tmp = $_;" << endl;
-    *streamPtr.get() << tab_5 << my << "$line_num = 0;" << endl;
-    *streamPtr.get() << tab_5 << foreach << "(@lines) {" << endl;
-    *streamPtr.get() << tab_6 << "$line_num++;" << endl;
-    *streamPtr.get() << tab_6 << "# Remove any whitelisted words" << endl;
-    *streamPtr.get() << tab_6 << foreach << "$w (@whitelist) {" << endl;
-    *streamPtr.get() << tab_7 << "redo if s/\\b$w\\b/ZAP/" << endl_tab_6 << "}" << endl;
-    *streamPtr.get() << tab_6 << my << "$tag;" << endl;
-    *streamPtr.get() << tab_6 << "if ((/(\\bcuda[A-Z]\\w+)/) or ((/<<<.*>>>/) and ($hip_kernel_execution_syntax))) {" << endl;
-    *streamPtr.get() << tab_7 << "# Flag any remaining code that look like cuda API calls: may want to add these to hipify" << endl;
-    *streamPtr.get() << tab_7 << "$tag = (defined $1) ? $1 : \"Launch\";" << endl_tab_6 << "}" << endl;
-    *streamPtr.get() << tab_6 << "if (defined $tag) {" << endl;
-    *streamPtr.get() << tab_7 << "$warnings++;" << endl;
-    *streamPtr.get() << tab_7 << "$warningTags{$tag}++;" << endl;
-    *streamPtr.get() << tab_7 << print << "\"  warning: $fileName:#$line_num : $_\\n\";" << endl_tab_6 << "}" << endl_tab_5 << "}" << endl;
-    *streamPtr.get() << tab_5 << "$_ = $tmp;" << endl_tab_4 << "}" << endl_tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "transformHostFunctions();" << endl;
-    *streamPtr.get() << tab_3 << "# TODO: would like to move this code outside loop but it uses $_ which contains the whole file" << endl;
-    *streamPtr.get() << tab_3 << unless_ << "($no_output) {" << endl;
-    *streamPtr.get() << tab_4 << sConv << endl;
-    *streamPtr.get() << tab_4 << my << "$kernStuff  = $hasDeviceCode + $ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} + $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} + $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'};" << endl;
-    *streamPtr.get() << tab_4 << my << "$totalCalls = $apiCalls + $kernStuff;" << endl;
-    *streamPtr.get() << tab_4 << "$is_dos = m/\\r\\n$/;" << endl;
-    *streamPtr.get() << tab_4 << "if ($totalCalls and ($countIncludes == 0) and ($kernStuff != 0)) {" << endl;
-    *streamPtr.get() << tab_5 << "# TODO: implement hipify-clang's logic with header files AMAP" << endl;
-    *streamPtr.get() << tab_5 << "print $OUTFILE '#include \"hip/hip_runtime.h\"' . ($is_dos ? \"\\r\\n\" : \"\\n\");" << endl_tab_4 << "}" << endl;
-    *streamPtr.get() << tab_4 << "print $OUTFILE  \"$_\";" << endl_tab_3 << "}" << endl;
-    *streamPtr.get() << tab_3 << "$lineCount = $_ =~ tr/\\n//;" << endl_tab_2 << "}" << endl;
-    *streamPtr.get() << tab_2 << my << "$totalConverted = totalStats(\\%ft);" << endl;
-    *streamPtr.get() << tab_2 << "if (($totalConverted+$warnings) and $print_stats) {" << endl;
-    *streamPtr.get() << tab_3 << "printStats(\\%ft, $warnings, $lineCount, $fileName, 0);" << endl_tab_2 << "}" << endl;
-    *streamPtr.get() << tab_2 << "# Update totals for all files" << endl;
-    *streamPtr.get() << tab_2 << "addStats(\\%tt, \\%ft);" << endl;
-    *streamPtr.get() << tab_2 << "$Twarnings += $warnings;" << endl;
-    *streamPtr.get() << tab_2 << "$TlineCount += $lineCount;" << endl;
-    *streamPtr.get() << tab_2 << foreach << "my $key (keys %warningTags) {" << endl;
-    *streamPtr.get() << tab_3 << "$TwarningTags{$key} += $warningTags{$key};" << endl_tab_2 << "}";
-    *streamPtr.get() << endl_tab << "}   # Unless filtered directory or file" << endl;
-    *streamPtr.get() << "}" << endl;
-    *streamPtr.get() << "# Print total stats for all files processed" << endl;
-    *streamPtr.get() << "if ($print_stats and ($fileCount > 1)) {" << endl;
-    *streamPtr.get() << tab << "printStats(\\%tt, $Twarnings, $TlineCount, \"GLOBAL\", 1);" << endl;
-    *streamPtr.get() << tab << print << "\"\\n\";" << endl;
-    *streamPtr.get() << "}" << endl;
-    streamPtr.get()->flush();
+    out << tab_3 << "if (!$cuda_kernel_execution_syntax || $hip_kernel_execution_syntax) {" << endl;
+    out << tab_4 << sTransformKernelLaunch << "();" << endl;
+    out << tab_3 << "}" << endl;
+    out << tab_3 << sTransformCubNamespace << "();" << endl;
+    out << tab_3 << my << "$hasDeviceCode = $countKeywords + $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} + $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'};" << endl;
+
+    out << tab_3 << "foreach my $func (keys %hash_SupportedDeviceDataTypes) {" << endl;
+    out << tab_4 << "my $c = () = $_ =~ m/\\b$func\\b/g;" << endl;
+    out << tab_4 << "if ($c) { $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'} += $c; }" << endl;
+    out << tab_3 << "}" << endl;
+
+    out << tab_3 << "foreach my $func (keys %hash_SupportedDeviceFunctions) {" << endl;
+    out << tab_4 << "my $c = () = $_ =~ m/\\b$func\\b\\s*\\((?!\\s*void)/g;" << endl;
+    out << tab_4 << "if ($c) { $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} += $c; }" << endl;
+    out << tab_3 << "}" << endl;
+
+    out << tab_3 << unless_ << "($quiet_warnings) {" << endl;
+
+    out << tab_4 << "# Copy into array of lines, process line-by-line to show warnings" << endl;
+    out << tab_4 << "if ($hasDeviceCode or (/\\bcu|CU/) or (/<<<.*>>>/)) {" << endl;
+    out << tab_5 << my << "@lines = split /\\n/, $_;" << endl;
+    out << tab_5 << my << "$line_num = 0;" << endl;
+    out << tab_5 << foreach << "(@lines) {" << endl;
+    out << tab_6 << "$line_num++;" << endl;
+    out << tab_6 << "# Remove any whitelisted words" << endl;
+    out << tab_6 << foreach << "$w (@whitelist) {" << endl;
+    out << tab_7 << "redo if s/\\b$w\\b/ZAP/" << endl_tab_6 << "}" << endl;
+    out << tab_6 << "if ((/(\\bcuda[A-Z]\\w+)/) or ((/<<<.*>>>/) and ($hip_kernel_execution_syntax))) {" << endl;
+    out << tab_7 << "# Flag any remaining code that look like cuda API calls: may want to add these to hipify" << endl;
+    out << tab_7 << "$warnings++;" << endl;
+    out << tab_7 << print << "\"  warning: $fileName:#$line_num : $_\\n\";" << endl_tab_6 << "}" << endl_tab_5 << "}" << endl;
+    out << tab_4 << "}" << endl_tab_3 << "}" << endl;
+    out << tab_3 << "transformHostFunctions();" << endl_2;
+    out << tab_3 << "# TODO: would like to move this code outside loop but it uses $_ which contains the whole file" << endl;
+    out << tab_3 << unless_ << "($no_output) {" << endl;
+    out << tab_4 << sConv << endl;
+    out << tab_4 << my << "$kernStuff  = $hasDeviceCode + $ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} + $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} + $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'};" << endl;
+    out << tab_4 << my << "$totalCalls = $apiCalls + $kernStuff;" << endl;
+    out << tab_4 << "$is_dos = m/\\r\\n$/;" << endl;
+    out << tab_4 << "if ($totalCalls and ($kernStuff != 0)) {" << endl;
+    out << tab_5 << "# TODO: implement hipify-clang's logic with header files AMAP" << endl;
+    out << tab_5 << "print $OUTFILE '#include \"hip/hip_runtime.h\"' . ($is_dos ? \"\\r\\n\" : \"\\n\");" << endl_tab_4 << "}" << endl;
+    out << tab_4 << "print $OUTFILE  \"$_\";" << endl_tab_3 << "}" << endl;
+    out << tab_3 << "$lineCount = $_ =~ tr/\\n//;" << endl_tab_2 << "}" << endl;
+    out << tab_2 << my << "$totalConverted = totalStats(\\%ft);" << endl;
+    out << tab_2 << "if (($totalConverted+$warnings) and $print_stats) {" << endl;
+    out << tab_3 << "printStats(\\%ft, $warnings, $lineCount, $fileName, 0);" << endl_tab_2 << "}" << endl;
+    out << tab_2 << "# Update totals for all files" << endl;
+    out << tab_2 << "addStats(\\%tt, \\%ft);" << endl;
+    out << tab_2 << "$Twarnings += $warnings;" << endl;
+    out << tab_2 << "$TlineCount += $lineCount;" << endl;
+    out << endl_tab << "}   # Unless filtered directory or file" << endl;
+    out << "}" << endl;
+    out << "# Print total stats for all files processed" << endl;
+    out << "if ($print_stats and ($fileCount > 1)) {" << endl;
+    out << tab << "printStats(\\%tt, $Twarnings, $TlineCount, \"GLOBAL\", 1);" << endl;
+    out << tab << print << "\"\\n\";" << endl;
+    out << "}" << endl;
+    out.flush();
     bool ret = true;
     EC = sys::fs::copy_file(tmpFile, dstHipifyPerl);
     if (EC) {

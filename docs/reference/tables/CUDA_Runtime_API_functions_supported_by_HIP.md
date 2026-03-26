@@ -694,6 +694,7 @@
 |`CUDA_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | | |
 |`CUDAlogLevel`|13.0| | | | | | | | | | |
 |`CUDAlogLevel_enum`|13.0| | | | | | | | | | |
+|`CUdevResourceDesc_st`| | | | | | | | | | | |
 |`CUeglStreamConnection_st`|9.1| | | | | | | | | | |
 |`CUevent_st`| | | | |`ihipEvent_t`|1.6.0| | | | | |
 |`CUexternalMemory_st`|10.0| | | | | | | | | | |
@@ -704,6 +705,7 @@
 |`CUlogsCallbackEntry_st`|13.0| | | | | | | | | | |
 |`CUstream_st`| | | | |`ihipStream_t`|1.5.0| | | | | |
 |`CUuuid_st`| | | | |`hipUUID_t`|5.2.0| | | | | |
+|`RESOURCE_ABI_BYTES`|13.1| | | | | | | | | | |
 |`cudaAccessPolicyWindow`|11.0| | | |`hipAccessPolicyWindow`|5.2.0| | | | | |
 |`cudaAccessProperty`|11.0| | | |`hipAccessProperty`|5.2.0| | | | | |
 |`cudaAccessPropertyNormal`|11.0| | | |`hipAccessPropertyNormal`|5.2.0| | | | | |
@@ -806,7 +808,7 @@
 |`cudaComputeModeExclusive`| | | | |`hipComputeModeExclusive`|1.9.0| | | | | |
 |`cudaComputeModeExclusiveProcess`| | | | |`hipComputeModeExclusiveProcess`|2.0.0| | | | | |
 |`cudaComputeModeProhibited`| | | | |`hipComputeModeProhibited`|1.9.0| | | | | |
-|`cudaConditionalNodeParams`|12.3| | | | | | | | | | |
+|`cudaConditionalNodeParams`|12.3| |13.1| | | | | | | | |
 |`cudaCooperativeLaunchMultiDeviceNoPostSync`|9.0| | |13.0|`hipCooperativeLaunchMultiDeviceNoPostSync`|3.2.0| | | | | |
 |`cudaCooperativeLaunchMultiDeviceNoPreSync`|9.0| | |13.0|`hipCooperativeLaunchMultiDeviceNoPreSync`|3.2.0| | | | | |
 |`cudaCpuDeviceId`|8.0| | | |`hipCpuDeviceId`|3.7.0| | | | | |
@@ -981,6 +983,28 @@
 |`cudaDevP2PAttrNativeAtomicSupported`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | | |
 |`cudaDevP2PAttrOnlyPartialNativeAtomicSupported`|13.0| | | | | | | | | | |
 |`cudaDevP2PAttrPerformanceRank`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | | |
+|`cudaDevResource`|13.1| | | | | | | | | | |
+|`cudaDevResourceDesc_t`|13.1| | | | | | | | | | |
+|`cudaDevResourceType`|13.1| | | | | | | | | | |
+|`cudaDevResourceTypeInvalid`|13.1| | | | | | | | | | |
+|`cudaDevResourceTypeSm`|13.1| | | | | | | | | | |
+|`cudaDevResourceTypeWorkqueue`|13.1| | | | | | | | | | |
+|`cudaDevResourceTypeWorkqueueConfig`|13.1| | | | | | | | | | |
+|`cudaDevResource_st`|13.1| | | | | | | | | | |
+|`cudaDevSmResource`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceGroupBackfill`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceGroupDefault`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceGroupParams`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceGroupParams_st`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceGroup_flags`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceSplitByCount_flags`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceSplitIgnoreSmCoscheduling`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceSplitMaxPotentialClusterSize`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigResource`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigScope`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigScopeDeviceCtx`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigScopeGreenCtxBalanced`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueResource`|13.1| | | | | | | | | | |
 |`cudaDeviceAttr`| | | | |`hipDeviceAttribute_t`|1.6.0| | | | | |
 |`cudaDeviceBlockingSync`| | | | |`hipDeviceScheduleBlockingSync`|1.6.0| | | | | |
 |`cudaDeviceLmemResizeToMax`| | | | |`hipDeviceLmemResizeToMax`|1.6.0| | | | | |
@@ -1256,6 +1280,7 @@
 |`cudaErrorStreamCaptureUnmatched`|10.0| | | |`hipErrorStreamCaptureUnmatched`|4.3.0| | | | | |
 |`cudaErrorStreamCaptureUnsupported`|10.0| | | |`hipErrorStreamCaptureUnsupported`|4.3.0| | | | | |
 |`cudaErrorStreamCaptureWrongThread`|10.1| | | |`hipErrorStreamCaptureWrongThread`|4.3.0| | | | | |
+|`cudaErrorStreamDetached`|13.1| | | | | | | | | | |
 |`cudaErrorStubLibrary`|11.1| | | | | | | | | | |
 |`cudaErrorSymbolNotFound`|10.1| | | |`hipErrorNotFound`|1.6.0| | | | | |
 |`cudaErrorSyncDepthExceeded`| | | | | | | | | | | |
@@ -1285,6 +1310,8 @@
 |`cudaEventWaitExternal`| | | | | | | | | | | |
 |`cudaEventWaitNodeParams`|12.2| | | |`hipEventWaitNodeParams`|6.1.0| | | | | |
 |`cudaEvent_t`| | | | |`hipEvent_t`|1.6.0| | | | | |
+|`cudaExecutionContext_st`|13.1| | | | | | | | | | |
+|`cudaExecutionContext_t`|13.1| | | | | | | | | | |
 |`cudaExtent`| | | | |`hipExtent`|1.7.0| | | | | |
 |`cudaExternalMemoryBufferDesc`|10.0| | | |`hipExternalMemoryBufferDesc`|4.3.0| | | | | |
 |`cudaExternalMemoryDedicated`|10.0| | | |`hipExternalMemoryDedicated`|5.5.0| | | | | |
@@ -1528,7 +1555,7 @@
 |`cudaKernelNodeAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | | | |
 |`cudaKernelNodeParams`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | | |
-|`cudaKernelNodeParamsV2`|12.2| | | | | | | | | | |
+|`cudaKernelNodeParamsV2`|12.2| |13.1| | | | | | | | |
 |`cudaKernel_t`|12.1| | | |`hipKernel_t`|7.1.0| | | | | |
 |`cudaKeyValuePair`| | | |12.0| | | | | | | |
 |`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | | |
@@ -1651,7 +1678,7 @@
 |`cudaMemcpyHostToDevice`| | | | |`hipMemcpyHostToDevice`|1.5.0| | | | | |
 |`cudaMemcpyHostToHost`| | | | |`hipMemcpyHostToHost`|1.5.0| | | | | |
 |`cudaMemcpyKind`| | | | |`hipMemcpyKind`|1.5.0| | | | | |
-|`cudaMemcpyNodeParams`|12.2| | | |`hipMemcpyNodeParams`|6.1.0| | | | | |
+|`cudaMemcpyNodeParams`|12.2| |13.1| |`hipMemcpyNodeParams`|6.1.0| | | | | |
 |`cudaMemcpyOperandTypeArray`|12.8| | | |`hipMemcpyOperandTypeArray`|7.1.0| | | | | |
 |`cudaMemcpyOperandTypeMax`|12.8| | | |`hipMemcpyOperandTypeMax`|7.1.0| | | | | |
 |`cudaMemcpyOperandTypePointer`|12.8| | | |`hipMemcpyOperandTypePointer`|7.1.0| | | | | |
@@ -1668,7 +1695,7 @@
 |`cudaMemoryTypeManaged`|10.0| | | |`hipMemoryTypeManaged`|5.3.0| | | | | |
 |`cudaMemoryTypeUnregistered`|10.0| | | |`hipMemoryTypeUnregistered`|6.0.0| | | | | |
 |`cudaMemsetParams`|10.0| | | |`hipMemsetParams`|4.3.0| | | | | |
-|`cudaMemsetParamsV2`|12.2| | | | | | | | | | |
+|`cudaMemsetParamsV2`|12.2| |13.1| | | | | | | | |
 |`cudaMipmappedArray`| | | | |`hipMipmappedArray`|1.7.0| | | | | |
 |`cudaMipmappedArray_const_t`| | | | |`hipMipmappedArray_const_t`|1.6.0| | | | | |
 |`cudaMipmappedArray_t`| | | | |`hipMipmappedArray_t`|1.7.0| | | | | |

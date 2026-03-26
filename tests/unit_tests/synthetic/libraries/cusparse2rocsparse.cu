@@ -2570,7 +2570,7 @@ int main() {
   cusparseSpMVAlg_t SPMV_SELL_ALG1 = CUSPARSE_SPMV_SELL_ALG1;
 
   // CHECK: rocsparse_format FORMAT_BSR = rocsparse_format_bsr;
-  // CHECK-NEXT: rocsparse_format FORMAT_SLICED_ELLPACK = rocsparse_format_ell;
+  // CHECK-NEXT: rocsparse_format FORMAT_SLICED_ELLPACK = rocsparse_format_sell;
   cusparseFormat_t FORMAT_BSR = CUSPARSE_FORMAT_BSR;
   cusparseFormat_t FORMAT_SLICED_ELLPACK = CUSPARSE_FORMAT_SLICED_ELLPACK;
 #endif

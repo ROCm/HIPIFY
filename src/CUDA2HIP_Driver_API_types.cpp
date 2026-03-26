@@ -449,19 +449,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CUgreenCtx"]                                                        = {"hipGreenCtx",                                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // CUdevResourceDesc_st
   m["CUdevResourceDesc_st"]                                              = {"hipDevResourceDesc",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CUdevResourceDesc"]                                                 = {"hipDevResourceDesc",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevResourceDesc_t
+  m["CUdevResourceDesc"]                                                 = {"hipDevResourceDesc_t",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaDevSmResource
   m["CUdevSmResource_st"]                                                = {"hipDevSmResource",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaDevSmResource
   m["CUdevSmResource"]                                                   = {"hipDevSmResource",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaDevResource_st
   m["CUdevResource_st"]                                                  = {"hipDevResource",                                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaDevResource
   m["CUdevResource"]                                                     = {"hipDevResource",                                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   //
@@ -545,20 +545,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CUstreamMemOpAtomicReductionParams_st"]                             = {"hipStreamMemOpAtomicReductionParams_st",                     "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
-  m["CUdevWorkqueueConfigResource_st"]                                   = {"hipDevWorkqueueConfigResource_st",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaDevWorkqueueConfigResource
+  m["CUdevWorkqueueConfigResource_st"]                                   = {"hipDevWorkqueueConfigResource",                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevWorkqueueConfigResource
   m["CUdevWorkqueueConfigResource"]                                      = {"hipDevWorkqueueConfigResource",                              "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
-  m["CUdevWorkqueueResource_st"]                                         = {"hipDevWorkqueueResource_st",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaDevWorkqueueResource
+  m["CUdevWorkqueueResource_st"]                                         = {"hipDevWorkqueueResource",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevWorkqueueResource
   m["CUdevWorkqueueResource"]                                            = {"hipDevWorkqueueResource",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
-  m["CU_DEV_SM_RESOURCE_GROUP_PARAMS_st"]                                = {"HIP_DEV_SM_RESOURCE_GROUP_PARAMS_st",                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_SM_RESOURCE_GROUP_PARAMS"]                                   = {"HIP_DEV_SM_RESOURCE_GROUP_PARAMS",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceGroupParams_st
+  m["CU_DEV_SM_RESOURCE_GROUP_PARAMS_st"]                                = {"hipDevSmResourceGroupParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceGroupParams
+  m["CU_DEV_SM_RESOURCE_GROUP_PARAMS"]                                   = {"hipDevSmResourceGroupParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // 2. Unions
 
@@ -1040,7 +1040,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaDevAttrReserved123
   m["CU_DEVICE_ATTRIBUTE_CAN_USE_STREAM_WAIT_VALUE_NOR_V2"]              = {"hipDeviceAttributeCanUseStreamWaitValueNorV2",               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED}; // 123
   // cudaDevAttrReserved124
-  m["CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED"]                             = {"hipDeviceAttributeDmaBufSupported",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 124
+  m["CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED"]                             = {"hipDeviceAttributeDmaBufSupported",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 124
   // cudaDevAttrIpcEventSupport
   m["CU_DEVICE_ATTRIBUTE_IPC_EVENT_SUPPORTED"]                           = {"hipDeviceAttributeIpcEventSupported",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 125
   // cudaDevAttrMemSyncDomainCount
@@ -2083,7 +2083,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION"]                         = {"hipErrorInvalidResourceConfiguration",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 915
   //
   m["CUDA_ERROR_KEY_ROTATION"]                                           = {"hipErrorKeyRotation",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 916
-  //
+  // cudaErrorStreamDetached
   m["CUDA_ERROR_STREAM_DETACHED"]                                        = {"hipErrorStreamDetached",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 917
   // cudaErrorUnknown
   m["CUDA_ERROR_UNKNOWN"]                                                = {"hipErrorUnknown",                                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 999
@@ -2903,12 +2903,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
 
   //
   m["CUdevSmResourceSplit_flags"]                                        = {"hipDevSmResourceSplit_flags",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED};
+  // cudaDevSmResourceSplitByCount_flags
   m["CUdevSmResourceSplitByCount_flags"]                                 = {"hipDevSmResourceSplitByCount_flags",                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  // CUdevSmResourceSplit_flags enum values
-  //
-  m["CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING"]                   = {"HIP_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING",           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE"]               = {"HIP_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE",       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CUdevSmResourceSplitByCount_flags enum values
+  // cudaDevSmResourceSplitIgnoreSmCoscheduling
+  m["CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING"]                   = {"hipDevSmResourceSplitIgnoreSmCoscheduling",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceSplitMaxPotentialClusterSize
+  m["CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE"]               = {"hipDevSmResourceSplitMaxPotentialClusterSize",               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // cudaDeviceNumaConfig
   m["CUdeviceNumaConfig"]                                                = {"hipDeviceNumaConfig",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -2966,19 +2967,19 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_GREEN_CTX_DEFAULT_STREAM"]                                       = {"HIP_GREEN_CTX_DEFAULT_STREAM",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaDevResourceType
   m["CUdevResourceType"]                                                 = {"hipDevResourceType",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUdevResourceType enum values
-  //
+  // cudaDevResourceTypeInvalid
   m["CU_DEV_RESOURCE_TYPE_INVALID"]                                      = {"HIP_DEV_RESOURCE_TYPE_INVALID",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_RESOURCE_TYPE_SM"]                                           = {"HIP_DEV_RESOURCE_TYPE_SM",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG"]                             = {"HIP_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_RESOURCE_TYPE_WORKQUEUE"]                                    = {"HIP_DEV_RESOURCE_TYPE_WORKQUEUE",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_RESOURCE_TYPE_MAX"]                                          = {"HIP_DEV_RESOURCE_TYPE_MAX",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED};
+  // cudaDevResourceTypeSm
+  m["CU_DEV_RESOURCE_TYPE_SM"]                                           = {"hipDevResourceTypeInvalid",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevResourceTypeWorkqueueConfig
+  m["CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG"]                             = {"hipDevResourceTypeSm",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevResourceTypeWorkqueue
+  m["CU_DEV_RESOURCE_TYPE_WORKQUEUE"]                                    = {"hipDevResourceTypeWorkqueueConfig",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // no analogue
+  m["CU_DEV_RESOURCE_TYPE_MAX"]                                          = {"hipDevResourceTypeWorkqueue",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED | CUDA_REMOVED};
 
   //
   m["CUcigDataType"]                                                     = {"hipCigDataType",                                             "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -3170,20 +3171,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_STREAM_ATOMIC_REDUCTION_UNSIGNED_64"]                            = {"hipStreamAtomicReductionUnsigned64",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaDevSmResourceGroup_flags
   m["CUdevSmResourceGroup_flags"]                                        = {"hipDevSmResourceGroup_flags",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUdevSmResourceGroup_flags enum values
-  //
-  m["CU_DEV_SM_RESOURCE_GROUP_DEFAULT"]                                  = {"HIP_DEV_SM_RESOURCE_GROUP_DEFAULT",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
-  m["CU_DEV_SM_RESOURCE_GROUP_BACKFILL"]                                 = {"HIP_DEV_SM_RESOURCE_GROUP_BACKFILL",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceGroupDefault
+  m["CU_DEV_SM_RESOURCE_GROUP_DEFAULT"]                                  = {"hipDevSmResourceGroupDefault",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaDevSmResourceGroupBackfill
+  m["CU_DEV_SM_RESOURCE_GROUP_BACKFILL"]                                 = {"hipDevSmResourceGroupBackfill",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaDevWorkqueueConfigScope
   m["CUdevWorkqueueConfigScope"]                                         = {"hipDevWorkqueueConfigScope",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUdevWorkqueueConfigScope enum values
-  //
+  // cudaDevWorkqueueConfigScopeDeviceCtx
   m["CU_WORKQUEUE_SCOPE_DEVICE_CTX"]                                     = {"HIP_WORKQUEUE_SCOPE_DEVICE_CTX",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaDevWorkqueueConfigScopeGreenCtxBalanced
   m["CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED"]                             = {"HIP_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // 4. Typedefs
@@ -5004,6 +5005,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [
   m["hipKernel_t"]                                                       = {HIP_7010, HIP_0,    HIP_0   };
   m["hipLibraryOption_e"]                                                = {HIP_7010, HIP_0,    HIP_0   };
   m["hipDeviceAttributeHostNumaId"]                                      = {HIP_7020, HIP_0,    HIP_0   };
+  m["hipDeviceAttributeDmaBufSupported"]                                 = {HIP_7120, HIP_0,    HIP_0   };
   m["hipDeviceAttributeHandleTypeFabricSupported"]                       = {HIP_8000, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipMemHandleTypeFabric"]                                            = {HIP_8000, HIP_0,    HIP_0,  HIP_LATEST};
 
