@@ -875,15 +875,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuGraphExecNodeSetParams"]                                          = {"hipGraphExecNodeSetParams",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH};
   // cudaGraphConditionalHandleCreate
   m["cuGraphConditionalHandleCreate"]                                    = {"hipGraphConditionalHandleCreate",                             "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
-  //
+  // cudaGraphExecGetId
   m["cuGraphExecGetId"]                                                  = {"hipGraphExecGetId",                                           "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
-  //
+  // cudaGraphGetId
   m["cuGraphGetId"]                                                      = {"hipGraphGetId",                                               "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
-  //
+  // cudaGraphNodeGetToolsId
   m["cuGraphNodeGetToolsId"]                                             = {"hipGraphNodeGetToolsId",                                      "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
-  //
+  // cudaGraphNodeGetLocalId
   m["cuGraphNodeGetLocalId"]                                             = {"hipGraphNodeGetLocalId",                                      "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
-  //
+  // cudaGraphNodeGetContainingGraph
   m["cuGraphNodeGetContainingGraph"]                                     = {"hipGraphNodeGetContainingGraph",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
 
   // 25. Occupancy
