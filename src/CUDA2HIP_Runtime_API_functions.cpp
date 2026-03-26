@@ -898,6 +898,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   m["cudaGraphExecNodeSetParams"]                              = {"hipGraphExecNodeSetParams",                              "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH};
   // cuGraphConditionalHandleCreate
   m["cudaGraphConditionalHandleCreate"]                        = {"hipGraphConditionalHandleCreate",                        "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED};
+  // cuGraphNodeGetContainingGraph
+  m["cudaGraphNodeGetContainingGraph"]                         = {"hipGraphNodeGetContainingGraph",                         "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED};
+  // cuGraphNodeGetLocalId
+  m["cudaGraphNodeGetLocalId"]                                 = {"hipGraphNodeGetLocalId",                                 "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED};
+  // cuGraphNodeGetToolsId
+  m["cudaGraphNodeGetToolsId"]                                 = {"hipGraphNodeGetToolsId",                                 "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED};
+  // cuGraphGetId
+  m["cudaGraphGetId"]                                           = {"hipGraphGetId",                                          "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED};
+  // cuGraphExecGetId
+  m["cudaGraphExecGetId"]                                      = {"hipGraphExecGetId",                                      "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED};
+  // no analogue
+  m["cudaGraphConditionalHandleCreate_v2"]                     = {"hipGraphConditionalHandleCreate_v2",                     "", CONV_GRAPH, API_RUNTIME, SEC::GRAPH, HIP_UNSUPPORTED};
 
   // 31. Driver Entry Point Access
   // cuGetProcAddress
@@ -1265,6 +1277,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP =
   m["cudaLogsCurrent"]                                         = {CUDA_130, CUDA_0,   CUDA_0  };
   m["cudaLogsDumpToFile"]                                      = {CUDA_130, CUDA_0,   CUDA_0  };
   m["cudaLogsDumpToMemory"]                                    = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["cudaGraphNodeGetContainingGraph"]                         = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaGraphNodeGetLocalId"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaGraphNodeGetToolsId"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaGraphGetId"]                                          = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaGraphExecGetId"]                                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaGraphConditionalHandleCreate_v2"]                     = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
