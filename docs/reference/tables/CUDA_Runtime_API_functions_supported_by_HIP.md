@@ -569,26 +569,46 @@
 |`cudaLibraryLoadFromFile`|12.8| | | |`hipLibraryLoadFromFile`|7.1.0| | | | | |
 |`cudaLibraryUnload`|12.8| | | |`hipLibraryUnload`|7.1.0| | | | | |
 
-## **33. C++ API Routines**
+## **33. Execution Context Management**
+
+|**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
+|:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
+|`cudaDevResourceGenerateDesc`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceSplit`|13.1| | | | | | | | | | |
+|`cudaDevSmResourceSplitByCount`|13.1| | | | | | | | | | |
+|`cudaDeviceGetDevResource`|13.1| | | | | | | | | | |
+|`cudaDeviceGetExecutionCtx`|13.1| | | | | | | | | | |
+|`cudaExecutionCtxDestroy`|13.1| | | | | | | | | | |
+|`cudaExecutionCtxGetDevResource`|13.1| | | | | | | | | | |
+|`cudaExecutionCtxGetDevice`|13.1| | | | | | | | | | |
+|`cudaExecutionCtxGetId`|13.1| | | | | | | | | | |
+|`cudaExecutionCtxRecordEvent`|13.1| | | | | | | | | | |
+|`cudaExecutionCtxStreamCreate`|13.1| | | | | | | | | | |
+|`cudaExecutionCtxSynchronize`|13.1| | | | | | | | | | |
+|`cudaExecutionCtxWaitEvent`|13.1| | | | | | | | | | |
+|`cudaGreenCtxCreate`|13.1| | | | | | | | | | |
+|`cudaStreamGetDevResource`|13.1| | | | | | | | | | |
+
+## **34. C++ API Routines**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaGetKernel`|12.1| | | | | | | | | | |
 
-## **34. Interactions with the CUDA Driver API**
+## **35. Interactions with the CUDA Driver API**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaGetFuncBySymbol`|11.0| | | |`hipGetFuncBySymbol`|6.2.0| | | | | |
 
-## **35. Profiler Control**
+## **36. Profiler Control**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaProfilerStart`| | | | |`hipProfilerStart`|1.6.0|3.0.0| | | | |
 |`cudaProfilerStop`| | | | |`hipProfilerStop`|1.6.0|3.0.0| | | | |
 
-## **36. Data types used by CUDA Runtime**
+## **37. Data types used by CUDA Runtime**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -1827,7 +1847,7 @@
 |`texture`| | | |12.0|`texture`| | | | | | |
 |`textureReference`| | | | |`textureReference`|1.6.0| | | | | |
 
-## **37. Execution Control [REMOVED]**
+## **38. Execution Control [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -1835,7 +1855,7 @@
 |`cudaLaunch`| | | |10.1|`hipLaunchByPtr`|1.9.0| | | | | |
 |`cudaSetupArgument`| | | |10.1|`hipSetupArgument`|1.9.0| | | | | |
 
-## **38. Texture Reference Management [REMOVED]**
+## **39. Texture Reference Management [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
@@ -1847,20 +1867,20 @@
 |`cudaGetTextureReference`| |11.0| |12.0|`hipGetTextureReference`|1.7.0|5.3.0| | | | |
 |`cudaUnbindTexture`| |11.0| |12.0|`hipUnbindTexture`|1.6.0|3.8.0| | | | |
 
-## **39. Surface Reference Management [REMOVED]**
+## **40. Surface Reference Management [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaBindSurfaceToArray`| |11.0| |12.0| | | | | | | |
 |`cudaGetSurfaceReference`| |11.0| |12.0| | | | | | | |
 
-## **40. Profiler Control [REMOVED]**
+## **41. Profiler Control [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaProfilerInitialize`| |11.0| |12.0| | | | | | | |
 
-## **41. Thread Management [REMOVED]**
+## **42. Thread Management [REMOVED]**
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
