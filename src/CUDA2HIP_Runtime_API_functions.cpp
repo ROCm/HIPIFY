@@ -939,22 +939,54 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuLibraryEnumerateKernels
   m["cudaLibraryEnumerateKernels"]                             = {"hipLibraryEnumerateKernels",                             "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY};
 
-  // 33. C++ API Routines
+  // 33. Execution Context Management
+  //
+  m["cudaDeviceGetDevResource"]                                = {"hipDeviceGetDevResource",                                "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaDevSmResourceSplitByCount"]                           = {"hipDevSmResourceSplitByCount",                           "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaDevSmResourceSplit"]                                  = {"hipDevSmResourceSplit",                                  "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaDevResourceGenerateDesc"]                             = {"hipDevResourceGenerateDesc",                             "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaGreenCtxCreate"]                                      = {"hipGreenCtxCreate",                                      "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionCtxDestroy"]                                 = {"hipExecutionCtxDestroy",                                 "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionCtxGetDevResource"]                          = {"hipExecutionCtxGetDevResource",                          "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionCtxGetDevice"]                               = {"hipExecutionCtxGetDevice",                               "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionCtxGetId"]                                   = {"hipExecutionCtxGetId",                                   "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionCtxStreamCreate"]                            = {"hipExecutionCtxStreamCreate",                            "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionCtxSynchronize"]                             = {"hipExecutionCtxSynchronize",                             "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaStreamGetDevResource"]                                = {"hipStreamGetDevResource",                                "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionCtxRecordEvent"]                             = {"hipExecutionCtxRecordEvent",                             "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaExecutionCtxWaitEvent"]                               = {"hipExecutionCtxWaitEvent",                               "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+  //
+  m["cudaDeviceGetExecutionCtx"]                               = {"hipDeviceGetExecutionCtx",                               "", CONV_LIBRARY, API_RUNTIME, SEC::EXECUTION_CONTEXT_MANGEMENT, HIP_UNSUPPORTED};
+
+  // 34. C++ API Routines
   m["cudaGetKernel"]                                           = {"hipGetKernel",                                           "", CONV_CPP, API_RUNTIME, SEC::CPP, HIP_UNSUPPORTED};
 
-  // 34. Interactions with the CUDA Driver API
+  // 35. Interactions with the CUDA Driver API
   m["cudaGetFuncBySymbol"]                                     = {"hipGetFuncBySymbol",                                     "", CONV_DRIVER_INTERACT, API_RUNTIME, SEC::DRIVER_INTERACT};
 
-  // 35. Profiler Control
+  // 36. Profiler Control
   // cuProfilerStart
   m["cudaProfilerStart"]                                       = {"hipProfilerStart",                                       "", CONV_PROFILER, API_RUNTIME, SEC::PROFILER, HIP_DEPRECATED};
   // cuProfilerStop
   m["cudaProfilerStop"]                                        = {"hipProfilerStop",                                        "", CONV_PROFILER, API_RUNTIME, SEC::PROFILER, HIP_DEPRECATED};
 
-  // 36. Data types used by CUDA Runtime
+  // 37. Data types used by CUDA Runtime
   // NOTE: in a separate file
 
-  // 37. Execution Control [REMOVED]
+  // 38. Execution Control [REMOVED]
   // NOTE: Removed in CUDA 10.1
   // no analogue
   m["cudaConfigureCall"]                                       = {"hipConfigureCall",                                       "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION_REMOVED, CUDA_REMOVED};
@@ -964,7 +996,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // no analogue
   m["cudaSetupArgument"]                                       = {"hipSetupArgument",                                       "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION_REMOVED, CUDA_REMOVED};
 
-  // 38. Texture Reference Management [REMOVED]
+  // 39. Texture Reference Management [REMOVED]
   // NOTE: Removed in CUDA 12.0
   // no analogue
   m["cudaBindTexture"]                                         = {"hipBindTexture",                                         "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED};
@@ -981,18 +1013,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // no analogue
   m["cudaUnbindTexture"]                                       = {"hipUnbindTexture",                                       "", CONV_TEXTURE, API_RUNTIME, SEC::TEXTURE_REMOVED, HIP_DEPRECATED | CUDA_REMOVED};
 
-  // 39. Surface Reference Management [REMOVED]
+  // 40. Surface Reference Management [REMOVED]
   // NOTE: Removed in CUDA 12.0
   // no analogue
   m["cudaBindSurfaceToArray"]                                  = {"hipBindSurfaceToArray",                                  "", CONV_SURFACE, API_RUNTIME, SEC::SURFACE_REMOVED, HIP_UNSUPPORTED | CUDA_REMOVED};
   // no analogue
   m["cudaGetSurfaceReference"]                                 = {"hipGetSurfaceReference",                                 "", CONV_SURFACE, API_RUNTIME, SEC::SURFACE_REMOVED, HIP_UNSUPPORTED | CUDA_REMOVED};
 
-  // 40. Profiler Control [REMOVED]
+  // 41. Profiler Control [REMOVED]
   // cuProfilerInitialize
   m["cudaProfilerInitialize"]                                  = {"hipProfilerInitialize",                                  "", CONV_PROFILER, API_RUNTIME, SEC::PROFILER_REMOVED, HIP_UNSUPPORTED | CUDA_REMOVED};
 
-  // 41. Thread Management [REMOVED]
+  // 42. Thread Management [REMOVED]
   // no analogue
   m["cudaThreadExit"]                                          = {"hipDeviceReset",                                         "", CONV_THREAD, API_RUNTIME, SEC::THREAD_REMOVED, CUDA_DEPRECATED | CUDA_REMOVED};
   // no analogue
@@ -1283,6 +1315,21 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP =
   m["cudaGraphGetId"]                                          = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cudaGraphExecGetId"]                                      = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cudaGraphConditionalHandleCreate_v2"]                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDeviceGetDevResource"]                                = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceSplitByCount"]                           = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevSmResourceSplit"]                                  = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDevResourceGenerateDesc"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaGreenCtxCreate"]                                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionCtxDestroy"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionCtxGetDevResource"]                          = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionCtxGetDevice"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionCtxGetId"]                                   = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionCtxSynchronize"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaStreamGetDevResource"]                                = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionCtxRecordEvent"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionCtxWaitEvent"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaDeviceGetExecutionCtx"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaExecutionCtxStreamCreate"]                            = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -1655,6 +1702,7 @@ const std::map<unsigned int, llvm::StringRef> CUDA_RUNTIME_API_SECTION_MAP = [] 
   m[SEC::GRAPH]                                                = "Graph Management";
   m[SEC::DRIVER_ENTRY_POINT]                                   = "Driver Entry Point Access";
   m[SEC::LIBRARY]                                              = "Library Management";
+  m[SEC::EXECUTION_CONTEXT_MANGEMENT]                          = "Execution Context Management";
   m[SEC::CPP]                                                  = "C++ API Routines";
   m[SEC::DRIVER_INTERACT]                                      = "Interactions with the CUDA Driver API";
   m[SEC::PROFILER]                                             = "Profiler Control";
