@@ -35,6 +35,7 @@ THE SOFTWARE.
 #include "CUDA2HIP.h"
 #include "ArgParse.h"
 
+using namespace llvm;
 using namespace hipify;
 
 const std::string sHIP = "HIP";
