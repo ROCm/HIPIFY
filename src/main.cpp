@@ -55,6 +55,8 @@ THE SOFTWARE.
 
 constexpr auto DEBUG_TYPE = "cuda2hip";
 
+using namespace llvm;
+
 namespace ct = clang::tooling;
 
 void cleanupHipifyOptions(std::vector<const char*> &args) {
