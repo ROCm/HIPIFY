@@ -110,6 +110,22 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
    -DCUDA_CUB_ROOT_DIR=D:/CUDA/CUB
 
+- [Optional] Download `cuFile <https://developer.download.nvidia.com/compute/cuda/redist/libcufile/linux-x86_64/libcufile-linux-x86_64-1.17.0.44-archive.tar.xz>`_ for ``CUDA >= 11.4`` only.
+
+  Then, extract the downloaded archive, extract it with ``tar``:
+
+  .. code-block:: bash
+
+   tar -xf libcufile-linux-x86_64-1.17.0.44-archive.tar.xz
+
+  Copy the extracted folder to a desired location, for example, ``D:/CUDA/cuFile/1.17.0``.
+
+  To specify the path to cuFile, use the ``CUDA_FILE_ROOT_DIR`` option:
+
+  .. code-block:: bash
+
+   -DCUDA_FILE_ROOT_DIR=D:/CUDA/cuFile/1.17.0
+
 - Install `Python <https://www.python.org/downloads>`_ version 3.0 or greater.
 
 - Install ``lit`` and ``FileCheck``; these are distributed with LLVM.

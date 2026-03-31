@@ -47,6 +47,8 @@ subtrees:
         title: cuTENSOR API
       - file: reference/tables/CUB_API_supported_by_HIP
         title: CUB API
+      - file: reference/tables/cuFile_API_supported_by_HIP
+        title: cuFile API
   - file: reference/roc_supported_apis
     subtrees:
     - entries:
