@@ -1005,6 +1005,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP = [] {
   m["CUBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET"]                    = {"HIPBLASLT_MATRIX_LAYOUT_STRIDED_BATCH_OFFSET",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
   m["CUBLASLT_MATRIX_LAYOUT_PLANE_OFFSET"]                            = {"HIPBLASLT_MATRIX_LAYOUT_PLANE_OFFSET",                              "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_MATRIX_LAYOUT_BATCH_MODE"]                              = {"HIPBLASLT_MATRIX_LAYOUT_BATCH_MODE",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_ROWS_ARRAY"]                      = {"HIPBLASLT_GROUPED_MATRIX_LAYOUT_ROWS_ARRAY",                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_COLS_ARRAY"]                      = {"HIPBLASLT_GROUPED_MATRIX_LAYOUT_COLS_ARRAY",                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_LD_ARRAY"]                        = {"HIPBLASLT_GROUPED_MATRIX_LAYOUT_LD_ARRAY",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_ROWS_COLS_ARRAY_INTEGER_WIDTH"]   = {"HIPBLASLT_GROUPED_MATRIX_LAYOUT_ROWS_COLS_ARRAY_INTEGER_WIDTH",     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_LD_ARRAY_INTEGER_WIDTH"]          = {"HIPBLASLT_GROUPED_MATRIX_LAYOUT_LD_ARRAY_INTEGER_WIDTH",            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["cublasLtMatmulDescAttributes_t"]                                 = {"hipblasLtMatmulDescAttributes_t",                                   "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
   m["CUBLASLT_MATMUL_DESC_COMPUTE_TYPE"]                              = {"HIPBLASLT_MATMUL_DESC_COMPUTE_TYPE",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_MATMUL_DESC_SCALE_TYPE"]                                = {"HIPBLASLT_MATMUL_DESC_SCALE_TYPE",                                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
@@ -1043,6 +1048,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP = [] {
   m["CUBLASLT_MATMUL_DESC_D_OUT_SCALE_POINTER"]                       = {"HIPBLASLT_MATMUL_DESC_D_OUT_SCALE_POINTER",                         "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_MATMUL_DESC_D_OUT_SCALE_MODE"]                          = {"HIPBLASLT_MATMUL_DESC_D_OUT_SCALE_MODE",                            "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_MATMUL_DESC_EMULATION_DESCRIPTOR"]                      = {"HIPBLASLT_MATMUL_DESC_EMULATION_DESCRIPTOR",                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_MATMUL_DESC_ALPHA_BATCH_STRIDE"]                        = {"HIPBLASLT_MATMUL_DESC_ALPHA_BATCH_STRIDE",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_MATMUL_DESC_BETA_BATCH_STRIDE"]                         = {"HIPBLASLT_MATMUL_DESC_BETA_BATCH_STRIDE",                           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["cublasLtMatrixTransformDescAttributes_t"]                        = {"hipblasLtMatrixTransformDescAttributes_t",                          "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
   m["CUBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE"]                      = {"HIPBLASLT_MATRIX_TRANSFORM_DESC_SCALE_TYPE",                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
   m["CUBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE"]                    = {"HIPBLASLT_MATRIX_TRANSFORM_DESC_POINTER_MODE",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
@@ -1092,6 +1099,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP = [] {
   m["CUBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES"]                     = {"HIPBLASLT_MATMUL_PREF_MIN_ALIGNMENT_D_BYTES",                       "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_MATMUL_PREF_MAX_WAVES_COUNT"]                           = {"HIPBLASLT_MATMUL_PREF_MAX_WAVES_COUNT",                             "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_MATMUL_PREF_IMPL_MASK"]                                 = {"HIPBLASLT_MATMUL_PREF_IMPL_MASK",                                   "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_MATMUL_PREF_GROUPED_AVERAGE_REDUCTION_DIM"]             = {"HIPBLASLT_MATMUL_PREF_GROUPED_AVERAGE_REDUCTION_DIM",               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_MATMUL_PREF_GROUPED_DESC_D_AVERAGE_ROWS"]               = {"HIPBLASLT_MATMUL_PREF_GROUPED_DESC_D_AVERAGE_ROWS",                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_MATMUL_PREF_GROUPED_DESC_D_AVERAGE_COLS"]               = {"HIPBLASLT_MATMUL_PREF_GROUPED_DESC_D_AVERAGE_COLS",                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["cublasLtMatmulHeuristicResult_t"]                                = {"hipblasLtMatmulHeuristicResult_t",                                  "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
   m["cublasLtMatmulAlgoCapAttributes_t"]                              = {"hipblasLtMatmulAlgoCapAttributes_t",                                "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_ALGO_CAP_SPLITK_SUPPORT"]                               = {"HIPBLASLT_ALGO_CAP_SPLITK_SUPPORT",                                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
@@ -1115,6 +1125,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP = [] {
   m["CUBLASLT_ALGO_CAP_ATOMIC_SYNC"]                                  = {"HIPBLASLT_ALGO_CAP_ATOMIC_SYNC",                                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED | CUDA_REMOVED};
   m["CUBLASLT_ALGO_CAP_POINTER_ARRAY_BATCH_SUPPORT"]                  = {"HIPBLASLT_ALGO_CAP_POINTER_ARRAY_BATCH_SUPPORT",                    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_ALGO_CAP_FLOATING_POINT_EMULATION_SUPPORT"]             = {"HIPBLASLT_ALGO_CAP_FLOATING_POINT_EMULATION_SUPPORT",               "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_ALGO_CAP_POINTER_ARRAY_GROUPED_SUPPORT"]                = {"HIPBLASLT_ALGO_CAP_POINTER_ARRAY_GROUPED_SUPPORT",                  "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["cublasLtMatmulAlgoConfigAttributes_t"]                           = {"hipblasLtMatmulAlgoConfigAttributes_t",                             "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_ALGO_CONFIG_ID"]                                        = {"HIPBLASLT_ALGO_CONFIG_ID",                                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_ALGO_CONFIG_TILE_ID"]                                   = {"HIPBLASLT_ALGO_CONFIG_TILE_ID",                                     "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
@@ -1133,10 +1144,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP = [] {
   m["CUBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F"]                     = {"HIPBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F",                       "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
   m["CUBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F"]                        = {"HIPBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F",                          "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
   m["CUBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F"]                    = {"HIPBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F",                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
+  m["CUBLASLT_MATMUL_MATRIX_SCALE_PER_BATCH_SCALAR_32F"]              = {"HIPBLASLT_MATMUL_MATRIX_SCALE_PER_BATCH_SCALAR_32F",                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_MATMUL_MATRIX_SCALE_END"]                               = {"HIPBLASLT_MATMUL_MATRIX_SCALE_END",                                 "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, ROC_UNSUPPORTED};
   m["cublasLtBatchMode_t"]                                            = {"hipblasLtBatchMode_t",                                              "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_BATCH_MODE_STRIDED"]                                    = {"HIPBLASLT_BATCH_MODE_STRIDED",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_BATCH_MODE_POINTER_ARRAY"]                              = {"HIPBLASLT_BATCH_MODE_POINTER_ARRAY",                                "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_BATCH_MODE_GROUPED"]                                    = {"HIPBLASLT_BATCH_MODE_GROUPED",                                      "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["cublasLtEmulationDesc_t"]                                        = {"hipblasLtEmulationDesc_t",                                          "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["cublasLtEmulationDescOpaque_t"]                                  = {"hipblasLtEmulationDescOpaque_t",                                    "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["cublasLtEmulationDescAttributes_t"]                              = {"hipblasLtEmulationDescAttributes_t",                                "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
@@ -1146,6 +1159,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_TYPE_NAME_MAP = [] {
   m["CUBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT"]      = {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MAX_MANTISSA_BIT_COUNT",        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET"]         = {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_OFFSET",           "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
   m["CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER"]  = {"HIPBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER",    "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["cublasLtIntegerWidth_t"]                                         = {"hipblasLtIntegerWidth_t",                                           "",                                                         CONV_TYPE, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_INTEGER_WIDTH_32"]                                      = {"HIPBLASLT_INTEGER_WIDTH_32",                                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
+  m["CUBLASLT_INTEGER_WIDTH_64"]                                      = {"HIPBLASLT_INTEGER_WIDTH_64",                                        "",                                                         CONV_NUMERIC_LITERAL, API_BLAS, SEC::BLAS_LT_DATA_TYPES, UNSUPPORTED};
 
   return m;
 }();
@@ -2202,6 +2218,22 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_TYPE_NAME_VER_MAP = [
   m["CUBLASLT_EMULATION_DESC_FIXEDPOINT_MANTISSA_BIT_COUNT_POINTER"]  = {CUDA_130, CUDA_0,   CUDA_0  }; // CUBLAS_VERSION 130100 CUDA 13.0.2
   m["CUBLAS_FP64_EMULATED_FIXEDPOINT_MATH"]                           = {CUDA_130, CUDA_0,   CUDA_0  }; // CUBLAS_VERSION 130100 CUDA 13.0.2
   m["CUBLAS_COMPUTE_64F_EMULATED_FIXEDPOINT"]                         = {CUDA_130, CUDA_0,   CUDA_0  }; // CUBLAS_VERSION 130100 CUDA 13.0.2
+  m["CUBLASLT_MATMUL_MATRIX_SCALE_PER_BATCH_SCALAR_32F"]              = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_BATCH_MODE_GROUPED"]                                    = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cublasLtIntegerWidth_t"]                                         = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_INTEGER_WIDTH_32"]                                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_INTEGER_WIDTH_64"]                                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_ROWS_ARRAY"]                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_COLS_ARRAY"]                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_LD_ARRAY"]                        = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_ROWS_COLS_ARRAY_INTEGER_WIDTH"]   = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_GROUPED_MATRIX_LAYOUT_LD_ARRAY_INTEGER_WIDTH"]          = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_MATMUL_DESC_ALPHA_BATCH_STRIDE"]                        = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_MATMUL_DESC_BETA_BATCH_STRIDE"]                         = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_MATMUL_PREF_GROUPED_AVERAGE_REDUCTION_DIM"]             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_MATMUL_PREF_GROUPED_DESC_D_AVERAGE_ROWS"]               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_MATMUL_PREF_GROUPED_DESC_D_AVERAGE_COLS"]               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUBLASLT_ALGO_CAP_POINTER_ARRAY_GROUPED_SUPPORT"]                = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -2429,5 +2461,15 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_TYPE_NAME_VER_MAP = [] 
   m["rocblas_xf32_xdl_math_op"]                                       = {HIP_5070, HIP_0,    HIP_0   };
   m["rocblas_computetype"]                                            = {HIP_5070, HIP_0,    HIP_0   };
   m["rocblas_compute_type_f32"]                                       = {HIP_5070, HIP_0,    HIP_0   };
+
+  return m;
+}();
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_BLAS_TYPE_CHANGED_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+
+  m["cublasLtMatrixLayoutOpaque_t"]                                   = {CUDA_131};
+  m["cublasLtMatmulPreferenceOpaque_t"]                               = {CUDA_131};
+
   return m;
 }();
