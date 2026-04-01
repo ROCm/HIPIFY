@@ -184,6 +184,7 @@
 |`CUBLASLT_ALGO_CAP_NUMERICAL_IMPL_FLAGS`|11.0| | | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_OUT_OF_PLACE_RESULT_SUPPORT`|10.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_POINTER_ARRAY_BATCH_SUPPORT`|12.9| | | | | | | | | | | | | | | | |
+|`CUBLASLT_ALGO_CAP_POINTER_ARRAY_GROUPED_SUPPORT`|13.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_POINTER_MODE_MASK`|10.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_REDUCTION_SCHEME_MASK`|10.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CAP_SPLITK_SUPPORT`|10.1| | | | | | | | | | | | | | | | |
@@ -200,6 +201,7 @@
 |`CUBLASLT_ALGO_CONFIG_SPLITK_NUM`|10.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CONFIG_STAGES_ID`|11.0| | | | | | | | | | | | | | | | |
 |`CUBLASLT_ALGO_CONFIG_TILE_ID`|10.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_BATCH_MODE_GROUPED`|13.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_BATCH_MODE_POINTER_ARRAY`|12.9| | | | | | | | | | | | | | | | |
 |`CUBLASLT_BATCH_MODE_STRIDED`|12.9| | | | | | | | | | | | | | | | |
 |`CUBLASLT_CLUSTER_SHAPE_10x1x1`|11.8| | | | | | | | | | | | | | | | |
@@ -276,6 +278,14 @@
 |`CUBLASLT_EPILOGUE_RELU_AUX`|11.3| | | |`HIPBLASLT_EPILOGUE_RELU_AUX`|7.1.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_RELU_AUX_BIAS`|11.3| | | |`HIPBLASLT_EPILOGUE_RELU_AUX_BIAS`|7.1.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_RELU_BIAS`|10.1| | | |`HIPBLASLT_EPILOGUE_RELU_BIAS`|5.5.0| | | | | | | | | | | |
+|`CUBLASLT_GROUPED_MATRIX_LAYOUT_COLS_ARRAY`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_GROUPED_MATRIX_LAYOUT_LD_ARRAY`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_GROUPED_MATRIX_LAYOUT_LD_ARRAY_INTEGER_WIDTH`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_GROUPED_MATRIX_LAYOUT_ROWS_ARRAY`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_GROUPED_MATRIX_LAYOUT_ROWS_COLS_ARRAY_INTEGER_WIDTH`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_INTEGER_WIDTH_32`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_INTEGER_WIDTH_64`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_ALPHA_BATCH_STRIDE`|13.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_ALPHA_VECTOR_BATCH_STRIDE`|11.4| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_AMAX_D_POINTER`|11.8| | | |`HIPBLASLT_MATMUL_DESC_AMAX_D_POINTER`|6.2.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_IN_COUNTERS_POINTER`|12.2| | |13.0| | | | | | | | | | | | | |
@@ -284,6 +294,7 @@
 |`CUBLASLT_MATMUL_DESC_ATOMIC_SYNC_OUT_COUNTERS_POINTER`|12.2| | |13.0| | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_A_SCALE_MODE`|12.8| | | |`HIPBLASLT_MATMUL_DESC_A_SCALE_MODE`|7.0.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_A_SCALE_POINTER`|11.8| | | |`HIPBLASLT_MATMUL_DESC_A_SCALE_POINTER`|6.0.0| | | | | | | | | | | |
+|`CUBLASLT_MATMUL_DESC_BETA_BATCH_STRIDE`|13.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_BIAS_BATCH_STRIDE`|11.3| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_BIAS_DATA_TYPE`|11.8| | | |`HIPBLASLT_MATMUL_DESC_BIAS_DATA_TYPE`|5.5.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_DESC_BIAS_POINTER`|10.1| | | |`HIPBLASLT_MATMUL_DESC_BIAS_POINTER`|5.5.0| | | | | | | | | | | |
@@ -322,10 +333,14 @@
 |`CUBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F`|12.9| | | |`HIPBLASLT_MATMUL_MATRIX_SCALE_BLK128x128_32F`|7.0.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_MATRIX_SCALE_END`|12.8| | | |`HIPBLASLT_MATMUL_MATRIX_SCALE_END`|7.0.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F`|12.9| | | |`HIPBLASLT_MATMUL_MATRIX_SCALE_OUTER_VEC_32F`|7.0.0| | | | | | | | | | | |
+|`CUBLASLT_MATMUL_MATRIX_SCALE_PER_BATCH_SCALAR_32F`|13.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F`|12.8| | | |`HIPBLASLT_MATMUL_MATRIX_SCALE_SCALAR_32F`|7.0.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F`|12.9| | | |`HIPBLASLT_MATMUL_MATRIX_SCALE_VEC128_32F`|7.0.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3`|12.8| | | |`HIPBLASLT_MATMUL_MATRIX_SCALE_VEC16_UE4M3`|7.0.0| | | | | | | | | | | |
 |`CUBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0`|12.8| | | |`HIPBLASLT_MATMUL_MATRIX_SCALE_VEC32_UE8M0`|7.0.0| | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_GROUPED_AVERAGE_REDUCTION_DIM`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_GROUPED_DESC_D_AVERAGE_COLS`|13.1| | | | | | | | | | | | | | | | |
+|`CUBLASLT_MATMUL_PREF_GROUPED_DESC_D_AVERAGE_ROWS`|13.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_PREF_IMPL_MASK`|11.0| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_PREF_MAX_WAVES_COUNT`|10.1| | | | | | | | | | | | | | | | |
 |`CUBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES`|10.1| | | |`HIPBLASLT_MATMUL_PREF_MAX_WORKSPACE_BYTES`|5.5.0| | | | | | | | | | | |
@@ -1080,6 +1095,7 @@
 |`cublasLtEmulationDesc_t`|13.0| | | | | | | | | | | | | | | | |
 |`cublasLtEpilogue_t`|10.1| | | |`hipblasLtEpilogue_t`|5.5.0| | | | | | | | | | | |
 |`cublasLtHandle_t`|10.1| | | |`hipblasLtHandle_t`|5.5.0| | | | | | | | | | | |
+|`cublasLtIntegerWidth_t`|13.1| | | | | | | | | | | | | | | | |
 |`cublasLtLoggerCallback_t`|11.0| | | | | | | | | | | | | | | | |
 |`cublasLtMatmulAlgoCapAttributes_t`|10.1| | | | | | | | | | | | | | | | |
 |`cublasLtMatmulAlgoConfigAttributes_t`|10.1| | | | | | | | | | | | | | | | |
@@ -1091,13 +1107,13 @@
 |`cublasLtMatmulInnerShape_t`|11.8| | | | | | | | | | | | | | | | |
 |`cublasLtMatmulMatrixScale_t`|12.8| | | |`hipblasLtMatmulMatrixScale_t`|7.0.0| | | | | | | | | | | |
 |`cublasLtMatmulPreferenceAttributes_t`|10.1| | | |`hipblasLtMatmulPreferenceAttributes_t`|5.5.0| | | | | | | | | | | |
-|`cublasLtMatmulPreferenceOpaque_t`|11.0| | | |`hipblasLtMatmulPreferenceOpaque_t`|5.5.0| | | | | | | | | | | |
+|`cublasLtMatmulPreferenceOpaque_t`|11.0| |13.1| |`hipblasLtMatmulPreferenceOpaque_t`|5.5.0| | | | | | | | | | | |
 |`cublasLtMatmulPreference_t`|10.1| | | |`hipblasLtMatmulPreference_t`|5.5.0| | | | | | | | | | | |
 |`cublasLtMatmulSearch_t`|10.1| | | | | | | | | | | | | | | | |
 |`cublasLtMatmulStages_t`|11.0| | | | | | | | | | | | | | | | |
 |`cublasLtMatmulTile_t`|10.1| | | | | | | | | | | | | | | | |
 |`cublasLtMatrixLayoutAttribute_t`|10.1| | | |`hipblasLtMatrixLayoutAttribute_t`|5.5.0| | | | | | | | | | | |
-|`cublasLtMatrixLayoutOpaque_t`|11.0| | | |`hipblasLtMatrixLayoutOpaque_t`| | | | | | | | | | | | |
+|`cublasLtMatrixLayoutOpaque_t`|11.0| |13.1| |`hipblasLtMatrixLayoutOpaque_t`| | | | | | | | | | | | |
 |`cublasLtMatrixLayoutStruct`|10.1| | |10.2|`hipblasLtMatrixLayoutOpaque_t`| | | | | | | | | | | | |
 |`cublasLtMatrixLayout_t`|10.1| | | |`hipblasLtMatrixLayout_t`| | | | | | | | | | | | |
 |`cublasLtMatrixTransformDescAttributes_t`|10.1| | | |`hipblasLtMatrixTransformDescAttributes_t`|6.0.0| | | | | | | | | | | |
