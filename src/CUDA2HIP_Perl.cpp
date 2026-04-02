@@ -450,89 +450,83 @@ namespace perl {
 
   void generateHostFunctions(ostream &out) {
     out << endl << sub << "transformHostFunctions" << " {" << endl;
-    const string s = "s/(?<!\\/\\/ CHECK: )($func)\\s*";
-    const string s0 = s + "\\(([^,\\)]+),/$func\\(";
-    const string s1 = s + "\\(([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3";
-    const string s2 = s + "\\(([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4";
-    const string s3 = s + "\\(([^,\\)]+),([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4";
-    const string s4 = s + "\\(([^,\\)]+),([^,\\)]+),([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4,$5,$6";
-    const string s5 = s + "\\(([^,\\)]+),([^,\\)]+),([^,\\)]+),([^,\\)]+),([^,\\)]+),([\\s]*)([^,\\)]+)(,\\s*|\\))/$func\\($2,$3,$4,$5,$6,$7";
-    set<string> DeviceSymbolFunctions0;
-    set<string> DeviceSymbolFunctions1;
-    set<string> DeviceSymbolFunctions2;
-    set<string> DeviceSymbolFunctions3;
-    set<string> DeviceSymbolFunctions4;
-    set<string> DeviceSymbolFunctions5;
-    set<string> ReinterpretFunctions0;
-    set<string> ReinterpretFunctions1;
-    set<string> RemoveArgFunctions3;
+    out << tab << "my $process_args = sub {" << endl;
+    out << tab_2 << "my ($f, $args_str, $argIdx, $actionType, $cast) = @_;" << endl;
+    out << tab_2 << "my $args_inner = substr($args_str, 1, -1);" << endl;
+    out << tab_2 << "my (@a, $d, $cur);" << endl;
+    out << tab_2 << "foreach my $s (split //, $args_inner) {" << endl;
+    out << tab_3 << "if ($s =~ /[\\(\\[\\<\\{]/) { $d++ } elsif ($s =~ /[\\)\\]\\>\\}]/) { $d-- }" << endl;
+    out << tab_3 << "if ($s eq ',' && $d == 0) { push @a, $cur; $cur = '' } else { $cur .= $s }" << endl;
+    out << tab_2 << "} push @a, $cur;" << endl;
+    out << tab_2 << "if (defined $a[$argIdx]) {" << endl;
+    out << tab_3 << "my $v = $a[$argIdx]; $v =~ s/^\\s+|\\s+$//g;" << endl;
+    out << tab_3 << "if ($actionType == 0 || $actionType == 1) {" << endl;
+    out << tab_4 << "$a[$argIdx] = \"$cast($v)\" unless index($v, $cast) == 0;" << endl;
+    out << tab_3 << "} elsif ($actionType == 2) {" << endl;
+    out << tab_4 << "splice(@a, $argIdx, 1);" << endl;
+    out << tab_3 << "}" << endl;
+    out << tab_2 << "}" << endl;
+    out << tab_2 << "return \"$f(\" . join(',', @a) . \")\";" << endl;
+    out << tab << "};" << endl_2;
+    set<string> DeviceSymbolFunctions0, DeviceSymbolFunctions1, DeviceSymbolFunctions2;
+    set<string> DeviceSymbolFunctions3, DeviceSymbolFunctions4, DeviceSymbolFunctions5;
+    set<string> ReinterpretFunctions0, ReinterpretFunctions1, RemoveArgFunctions3;
     for (auto f : FuncArgCasts) {
       auto castStructs = f.second;
       for (auto cc : castStructs) {
         for (auto c : cc.castMap) {
-        switch (c.first) {
-          case 0:
-            switch (c.second.castType) {
-              case e_HIP_SYMBOL: DeviceSymbolFunctions0.insert(f.first); break;
-              case e_reinterpret_cast: ReinterpretFunctions0.insert(f.first); break;
-              default: break;
-            }
-            break;
-          case 1:
-            switch (c.second.castType) {
-              case e_HIP_SYMBOL: DeviceSymbolFunctions1.insert(f.first); break;
-              case e_reinterpret_cast: ReinterpretFunctions1.insert(f.first); break;
-              default: break;
-            }
-            break;
-          case 2:
-            switch (c.second.castType) {
-              case e_HIP_SYMBOL: DeviceSymbolFunctions2.insert(f.first); break;
-              default: break;
-            }
-            break;
-          case 3:
-            switch (c.second.castType) {
-              case e_HIP_SYMBOL: DeviceSymbolFunctions3.insert(f.first); break;
-              case e_remove_argument: RemoveArgFunctions3.insert(f.first); break;
-              default: break;
-            }
-            break;
-          case 4:
-            switch (c.second.castType) {
-            case e_HIP_SYMBOL: DeviceSymbolFunctions4.insert(f.first); break;
+          switch (c.first) {
+            case 0:
+              switch (c.second.castType) {
+                case e_HIP_SYMBOL: DeviceSymbolFunctions0.insert(f.first); break;
+                case e_reinterpret_cast: ReinterpretFunctions0.insert(f.first); break;
+                default: break;
+              } break;
+            case 1:
+              switch (c.second.castType) {
+                case e_HIP_SYMBOL: DeviceSymbolFunctions1.insert(f.first); break;
+                case e_reinterpret_cast: ReinterpretFunctions1.insert(f.first); break;
+                default: break;
+              } break;
+            case 2:
+              if (c.second.castType == e_HIP_SYMBOL) DeviceSymbolFunctions2.insert(f.first); break;
+            case 3:
+              switch (c.second.castType) {
+                case e_HIP_SYMBOL: DeviceSymbolFunctions3.insert(f.first); break;
+                case e_remove_argument: RemoveArgFunctions3.insert(f.first); break;
+                default: break;
+              } break;
+            case 4:
+              if (c.second.castType == e_HIP_SYMBOL) DeviceSymbolFunctions4.insert(f.first); break;
+            case 5:
+              if (c.second.castType == e_HIP_SYMBOL) DeviceSymbolFunctions5.insert(f.first); break;
             default: break;
-            }
-            break;
-          case 5:
-            switch (c.second.castType) {
-            case e_HIP_SYMBOL: DeviceSymbolFunctions5.insert(f.first); break;
-            default: break;
-            }
-            break;
-          default: break;
+          }
         }
       }
-      }
     }
-    set<string> &funcSet = DeviceSymbolFunctions0;
+    set<string> *funcSet = &DeviceSymbolFunctions0;
     for (int i = 0; i < 9; ++i) {
+      int argIdx = 0;
+      int actionType = 0;
+      string castStr = "";
       switch (i) {
-        default: funcSet = DeviceSymbolFunctions0; break;
-        case 1:  funcSet = DeviceSymbolFunctions1; break;
-        case 2:  funcSet = ReinterpretFunctions0; break;
-        case 3:  funcSet = ReinterpretFunctions1; break;
-        case 4:  funcSet = DeviceSymbolFunctions2; break;
-        case 5:  funcSet = RemoveArgFunctions3; break;
-        case 6:  funcSet = DeviceSymbolFunctions3; break;
-        case 7:  funcSet = DeviceSymbolFunctions4; break;
-        case 8:  funcSet = DeviceSymbolFunctions5; break;
+        default:
+        case 0:  funcSet = &DeviceSymbolFunctions0; argIdx = 0; actionType = 0; castStr = getCastType(e_HIP_SYMBOL); break;
+        case 1:  funcSet = &DeviceSymbolFunctions1; argIdx = 1; actionType = 0; castStr = getCastType(e_HIP_SYMBOL); break;
+        case 2:  funcSet = &ReinterpretFunctions0;  argIdx = 0; actionType = 1; castStr = getCastType(e_reinterpret_cast); break;
+        case 3:  funcSet = &ReinterpretFunctions1;  argIdx = 1; actionType = 1; castStr = getCastType(e_reinterpret_cast); break;
+        case 4:  funcSet = &DeviceSymbolFunctions2; argIdx = 2; actionType = 0; castStr = getCastType(e_HIP_SYMBOL); break;
+        case 5:  funcSet = &RemoveArgFunctions3;    argIdx = 3; actionType = 2; break; // No cast needed
+        case 6:  funcSet = &DeviceSymbolFunctions3; argIdx = 3; actionType = 0; castStr = getCastType(e_HIP_SYMBOL); break;
+        case 7:  funcSet = &DeviceSymbolFunctions4; argIdx = 4; actionType = 0; castStr = getCastType(e_HIP_SYMBOL); break;
+        case 8:  funcSet = &DeviceSymbolFunctions5; argIdx = 5; actionType = 0; castStr = getCastType(e_HIP_SYMBOL); break;
       }
-      if (funcSet.empty()) continue;
+      if (funcSet->empty()) continue;
       out << tab + foreach_func  << endl;
       unsigned int count = 0;
       string sHIPName;
-      for (auto &f : funcSet) {
+      for (auto &f : *funcSet) {
         const auto found = CUDA_RUNTIME_FUNCTION_MAP.find(f);
         if (found != CUDA_RUNTIME_FUNCTION_MAP.end()) sHIPName = found->second.hipName.str();
         else {
@@ -542,19 +536,9 @@ namespace perl {
         out << (count ? ",\n" : "") << tab_2 << "\"" << sHIPName << "\"";
         count++;
       }
-      out << endl_tab << ")" << endl_tab << "{" << endl_tab_2;
-      switch (i) {
-        case 0:
-        default: out << s0 << getCastType(e_HIP_SYMBOL) << "\\($2\\),/g;" << endl; break;
-        case 1:  out << s1 << getCastType(e_HIP_SYMBOL) << "\\($4\\)$5/g;" << endl; break;
-        case 2:  out << s0 << getCastType(e_reinterpret_cast) << "\\($2\\),/g;" << endl; break;
-        case 3:  out << s1 << getCastType(e_reinterpret_cast) << "\\($4\\)$5/g;" << endl; break;
-        case 4:  out << s2 << getCastType(e_HIP_SYMBOL) << "\\($5\\)$6/g;" << endl; break;
-        case 5:  out << s3 << "$7/g;" << endl; break;
-        case 6:  out << s3 << ",$5" << getCastType(e_HIP_SYMBOL) << "\\($6\\)$7/g;" << endl; break;
-        case 7:  out << s4 << getCastType(e_HIP_SYMBOL) << "\\($7\\)$8/g;" << endl; break;
-        case 8:  out << s5 << getCastType(e_HIP_SYMBOL) << "\\($8\\)$9/g;" << endl; break;
-      }
+      out << endl_tab << ")" << endl_tab << "{" << endl;
+      out << tab_2 << "s{\\b($func)\\s*(\\((?:[^()]+|(?2))*\\))}{ $process_args->($1, $2, " 
+          << argIdx << ", " << actionType << ", \"" << castStr << "\") }ges;" << endl;
       out << tab << "}" << endl;
     }
     out << "}" << endl_2;
