@@ -1120,6 +1120,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
   m["cublasLtMatrixLayoutSetAttribute"]                             = {"hipblasLtMatrixLayoutSetAttribute",                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
   m["cublasLtMatrixLayoutGetAttribute"]                             = {"hipblasLtMatrixLayoutGetAttribute",                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, ROC_UNSUPPORTED};
   m["cublasLtMatmulDescInit"]                                       = {"hipblasLtMatmulDescInit",                                   "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtGroupedMatrixLayoutInit_internal"]                     = {"hipblasLtGroupedMatrixLayoutInit_internal",                 "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtGroupedMatrixLayoutInit"]                              = {"hipblasLtGroupedMatrixLayoutInit",                          "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
+  m["cublasLtGroupedMatrixLayoutCreate"]                            = {"hipblasLtGroupedMatrixLayoutCreate",                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LT, UNSUPPORTED};
 
   // [hipBLASLt] TODO: Use hipblasComputeType_t instead of incompatible hipblasLtComputeType_t
   // [HIPIFY] TODO: For CUDA < 11.0 throw an error cublasLtMatmulDescCreate is not supported by HIP, please use the newer version of cublasLtMatmulDescCreate (>=11.0)
@@ -1674,6 +1677,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_BLAS_FUNCTION_VER_MAP = []
   m["cublasSetFixedPointEmulationMantissaBitOffset"]                = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   m["cublasGetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
   m["cublasSetFixedPointEmulationMantissaBitCountPointer"]          = {CUDA_130, CUDA_0,   CUDA_0   }; // A: CUDA 13.0.2, CUBLAS_VERSION 130100
+  m["cublasLtGroupedMatrixLayoutInit_internal"]                     = {CUDA_131, CUDA_0,   CUDA_0   };
+  m["cublasLtGroupedMatrixLayoutInit"]                              = {CUDA_131, CUDA_0,   CUDA_0   };
+  m["cublasLtGroupedMatrixLayoutCreate"]                            = {CUDA_131, CUDA_0,   CUDA_0   };
 
   return m;
 }();
