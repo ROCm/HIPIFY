@@ -2027,6 +2027,9 @@
 |`cublasLtGetStatusName`|11.4| | | | | | | | | | | | | | | | |
 |`cublasLtGetStatusString`|11.4| | | | | | | | | | | | | | | | |
 |`cublasLtGetVersion`|10.1| | | | | | | | | | | | | | | | |
+|`cublasLtGroupedMatrixLayoutCreate`|13.1| | | | | | | | | | | | | | | | |
+|`cublasLtGroupedMatrixLayoutInit`|13.1| | | | | | | | | | | | | | | | |
+|`cublasLtGroupedMatrixLayoutInit_internal`|13.1| | | | | | | | | | | | | | | | |
 |`cublasLtHeuristicsCacheGetCapacity`|11.8| | | | | | | | | | | | | | | | |
 |`cublasLtHeuristicsCacheSetCapacity`|11.8| | | | | | | | | | | | | | | | |
 |`cublasLtLoggerForceDisable`|11.0| | | | | | | | | | | | | | | | |
