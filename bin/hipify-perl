@@ -10010,12 +10010,31 @@ sub transformCubNamespace {
 }
 
 sub transformHostFunctions {
+    my $process_args = sub {
+        my ($f, $args_str, $argIdx, $actionType, $cast) = @_;
+        my $args_inner = substr($args_str, 1, -1);
+        my (@a, $d, $cur);
+        foreach my $s (split //, $args_inner) {
+            if ($s =~ /[\(\[\<\{]/) { $d++ } elsif ($s =~ /[\)\]\>\}]/) { $d-- }
+            if ($s eq ',' && $d == 0) { push @a, $cur; $cur = '' } else { $cur .= $s }
+        } push @a, $cur;
+        if (defined $a[$argIdx]) {
+            my $v = $a[$argIdx]; $v =~ s/^\s+|\s+$//g;
+            if ($actionType == 0 || $actionType == 1) {
+                $a[$argIdx] = "$cast($v)" unless index($v, $cast) == 0;
+            } elsif ($actionType == 2) {
+                splice(@a, $argIdx, 1);
+            }
+        }
+        return "$f(" . join(',', @a) . ")";
+    };
+
     foreach $func (
         "hipMemcpyToSymbol",
         "hipMemcpyToSymbolAsync"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),/$func\(HIP_SYMBOL\($2\),/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 0, 0, "HIP_SYMBOL") }ges;
     }
     foreach $func (
         "hipGetSymbolAddress",
@@ -10026,7 +10045,7 @@ sub transformHostFunctions {
         "hipMemcpyFromSymbolAsync"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3HIP_SYMBOL\($4\)$5/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 1, 0, "HIP_SYMBOL") }ges;
     }
     foreach $func (
         "hipFuncSetAttribute",
@@ -10036,20 +10055,20 @@ sub transformHostFunctions {
         "hipLaunchKernel"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),/$func\(reinterpret_cast<const void*>\($2\),/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 0, 1, "reinterpret_cast<const void*>") }ges;
     }
     foreach $func (
         "hipFuncGetAttributes"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3reinterpret_cast<const void*>\($4\)$5/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 1, 1, "reinterpret_cast<const void*>") }ges;
     }
     foreach $func (
         "hipGraphExecMemcpyNodeSetParamsToSymbol",
         "hipGraphMemcpyNodeSetParamsFromSymbol"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4HIP_SYMBOL\($5\)$6/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 2, 0, "HIP_SYMBOL") }ges;
     }
     foreach $func (
         "hipModuleOccupancyMaxPotentialBlockSize",
@@ -10057,25 +10076,25 @@ sub transformHostFunctions {
         "hipModuleOccupancyMaxPotentialBlockSizeWithFlags"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4$7/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 3, 2, "") }ges;
     }
     foreach $func (
         "hipGraphExecMemcpyNodeSetParamsFromSymbol"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4,$5HIP_SYMBOL\($6\)$7/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 3, 0, "HIP_SYMBOL") }ges;
     }
     foreach $func (
         "hipGraphAddMemcpyNodeToSymbol"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4,$5,$6HIP_SYMBOL\($7\)$8/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 4, 0, "HIP_SYMBOL") }ges;
     }
     foreach $func (
         "hipGraphAddMemcpyNodeFromSymbol"
     )
     {
-        s/(?<!\/\/ CHECK: )($func)\s*\(([^,\)]+),([^,\)]+),([^,\)]+),([^,\)]+),([^,\)]+),([\s]*)([^,\)]+)(,\s*|\))/$func\($2,$3,$4,$5,$6,$7HIP_SYMBOL\($8\)$9/g;
+        s{\b($func)\s*(\((?:[^()]+|(?2))*\))}{ $process_args->($1, $2, 5, 0, "HIP_SYMBOL") }ges;
     }
 }
 
