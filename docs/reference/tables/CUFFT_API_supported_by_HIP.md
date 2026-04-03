@@ -33,6 +33,28 @@
 |`CUFFT_COPY_HOST_TO_DEVICE`| | | | |`HIPFFT_COPY_HOST_TO_DEVICE`|6.0.0| | | | | |
 |`CUFFT_COPY_UNDEFINED`| | | | |`HIPFFT_COPY_UNDEFINED`|6.0.0| | | | | |
 |`CUFFT_D2Z`| | | | |`HIPFFT_D2Z`|1.7.0| | | | | |
+|`CUFFT_DESC_C2C`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_C2R`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_DOUBLE`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_FORWARD`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_HALF`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_INVERSE`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_R2C`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_SINGLE`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_TRAIT_DIRECTION`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_TRAIT_ELEMENTS_PER_THREAD`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_TRAIT_PRECISION`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_TRAIT_SIZE`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_TRAIT_SM`|13.1| | | | | | | | | | |
+|`CUFFT_DESC_TRAIT_TYPE`|13.1| | | | | | | | | | |
+|`CUFFT_DEVICE_FATBIN`|13.1| | | | | | | | | | |
+|`CUFFT_DEVICE_FUNC_TRAIT_ELEMENTS_PER_THREAD`|13.1| | | | | | | | | | |
+|`CUFFT_DEVICE_FUNC_TRAIT_SHARED_MEMORY_PER_FFT`|13.1| | | | | | | | | | |
+|`CUFFT_DEVICE_FUNC_TRAIT_STORAGE_SIZE`|13.1| | | | | | | | | | |
+|`CUFFT_DEVICE_FUNC_TRAIT_SUGGESTED_FFTS_PER_BLOCK`|13.1| | | | | | | | | | |
+|`CUFFT_DEVICE_FUNC_TRAIT_THREADS_PER_FFT`|13.1| | | | | | | | | | |
+|`CUFFT_DEVICE_LTOIR`|13.1| | | | | | | | | | |
+|`CUFFT_ENABLE_EXPERIMENTAL_API`|13.1| | | | | | | | | | |
 |`CUFFT_EXEC_FAILED`| | | | |`HIPFFT_EXEC_FAILED`|1.7.0| | | | | |
 |`CUFFT_FORMAT_UNDEFINED`| | | | |`HIPFFT_FORMAT_UNDEFINED`|6.0.0| | | | | |
 |`CUFFT_FORWARD`| | | | |`HIPFFT_FORWARD`|1.7.0| | | | | |
@@ -92,6 +114,21 @@
 |`cufftCompatibility`| | | | | | | | | | | |
 |`cufftCompatibility_t`| | | | | | | | | | | |
 |`cufftComplex`| | | | |`hipfftComplex`|1.7.0| | | | | |
+|`cufftDescriptionDirection`|13.1| | | | | | | | | | |
+|`cufftDescriptionDirection_t`|13.1| | | | | | | | | | |
+|`cufftDescriptionHandle`|13.1| | | | | | | | | | |
+|`cufftDescriptionPrecision`|13.1| | | | | | | | | | |
+|`cufftDescriptionPrecision_t`|13.1| | | | | | | | | | |
+|`cufftDescriptionTrait`|13.1| | | | | | | | | | |
+|`cufftDescriptionTrait_t`|13.1| | | | | | | | | | |
+|`cufftDescriptionType`|13.1| | | | | | | | | | |
+|`cufftDescriptionType_t`|13.1| | | | | | | | | | |
+|`cufftDeviceCodeContainer`|13.1| | | | | | | | | | |
+|`cufftDeviceCodeContainer_t`|13.1| | | | | | | | | | |
+|`cufftDeviceFunctionHandle`|13.1| | | | | | | | | | |
+|`cufftDeviceFunctionTrait`|13.1| | | | | | | | | | |
+|`cufftDeviceFunctionTrait_t`|13.1| | | | | | | | | | |
+|`cufftDeviceHandle`|13.1| | | | | | | | | | |
 |`cufftDoubleComplex`| | | | |`hipfftDoubleComplex`|1.7.0| | | | | |
 |`cufftDoubleReal`| | | | |`hipfftDoubleReal`|1.7.0| | | | | |
 |`cufftHandle`| | | | |`hipfftHandle`|1.7.0| | | | | |
