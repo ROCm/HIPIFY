@@ -157,6 +157,22 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP = [] {
   m["fftw_import_wisdom_from_file"]                     = {"fftw_import_wisdom_from_file",                         "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["fftwf_import_wisdom_from_file"]                    = {"fftwf_import_wisdom_from_file",                        "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
 
+  m["cufftDeviceGetVersion"]                            = {"hipfftDeviceGetVersion",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDescriptionCreate"]                           = {"hipfftDescriptionCreate",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDescriptionSetTraitInt64"]                    = {"hipfftDescriptionSetTraitInt64",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDescriptionGetTraitInt64"]                    = {"hipfftDescriptionGetTraitInt64",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceCreate"]                                = {"hipfftDeviceCreate",                                   "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceIsSupported"]                           = {"hipfftDeviceIsSupported",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetNumDeviceFunctions"]                 = {"hipfftDeviceGetNumDeviceFunctions",                    "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetDeviceFunctions"]                    = {"hipfftDeviceGetDeviceFunctions",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetDeviceFunctionTraitInt64"]           = {"hipfftDeviceGetDeviceFunctionTraitInt64",              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetDatabaseStrSize"]                    = {"hipfftDeviceGetDatabaseStrSize",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetDatabaseStr"]                        = {"hipfftDeviceGetDatabaseStr",                           "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetNumLTOIRs"]                          = {"hipfftDeviceGetNumLTOIRs",                             "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetLTOIRSizes"]                         = {"hipfftDeviceGetLTOIRSizes",                            "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetLTOIRs"]                             = {"hipfftDeviceGetLTOIRs",                                "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceDestroy"]                               = {"hipfftDeviceDestroy",                                  "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+
   return m;
 }();
 
@@ -181,6 +197,21 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP = [] 
   m["fftwf_plan_guru64_dft"]                              = {CUDA_100, CUDA_0,   CUDA_0  };
   m["fftwf_plan_guru64_dft_r2c"]                          = {CUDA_100, CUDA_0,   CUDA_0  };
   m["fftwf_plan_guru64_dft_c2r"]                          = {CUDA_100, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetVersion"]                              = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDescriptionCreate"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDescriptionSetTraitInt64"]                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDescriptionGetTraitInt64"]                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceCreate"]                                  = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceIsSupported"]                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetNumDeviceFunctions"]                   = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetDeviceFunctions"]                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetDeviceFunctionTraitInt64"]             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetDatabaseStrSize"]                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetDatabaseStr"]                          = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetNumLTOIRs"]                            = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetLTOIRSizes"]                           = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetLTOIRs"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceDestroy"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
