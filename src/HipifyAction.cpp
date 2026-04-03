@@ -2743,8 +2743,16 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       for (auto c : cc.castMap) {
         if (c.second.castType == e_insert_new_argument) {
           const std::string &baseName = c.second.constValToAddOrReplace;
-          clang::FileID fileID = SM.getFileID(call->getBeginLoc());
-          unsigned counter = InsertedVarCounter[{fileID, baseName}]++;
+          unsigned scopeKey = 0;
+          auto parents = Result.Context->getParents(*call);
+          while (!parents.empty()) {
+            if (const auto *cs = parents[0].get<clang::CompoundStmt>()) {
+              scopeKey = cs->getLBracLoc().getRawEncoding();
+              break;
+            }
+            parents = Result.Context->getParents(parents[0]);
+          }
+          unsigned counter = InsertedVarCounter[{scopeKey, baseName}]++;
           std::string uniqueName = (counter == 0) ? baseName : baseName + "_" + std::to_string(counter);
           hasInsertions = true;
           std::string initExpr = c.second.defaultInitValue.empty() ? "{}" : c.second.defaultInitValue;

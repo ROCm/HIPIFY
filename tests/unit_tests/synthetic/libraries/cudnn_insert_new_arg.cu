@@ -5,6 +5,7 @@
 #include <stdio.h>
 // CHECK: #include "miopen/miopen.h"
 #include "cudnn.h"
+#include "dummy_cudnn_call_header.h"
 
 int main() {
   printf("e_insert_new_argument: duplicate variable name guard test\n");
@@ -49,4 +50,15 @@ int main() {
 
   // CHECK: return 0;
   return 0;
+}
+
+// CHECK: bool hipify_use_mask = {};
+// CHECK-NEXT: bool hipify_state_evo = {};
+// CHECK-NEXT: miopenRNGType_t hipify_rng_mode = {};
+// CHECK-NEXT: miopenSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed, hipify_use_mask, hipify_state_evo, hipify_rng_mode);
+void secondSetup(cudnnDropoutDescriptor_t DropoutDescriptor, cudnnHandle_t handle,
+                 float dropout, void* states, size_t reserveSpaceNumBytes,
+                 unsigned long long seed) {
+  cudnnStatus_t status;
+  status = cudnnSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
 }
