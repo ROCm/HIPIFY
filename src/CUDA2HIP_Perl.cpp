@@ -605,7 +605,28 @@ namespace perl {
       if (Statistics::isUnsupported(ma->second)) out << tab << "'" << ma->first.str() << "' => 1," << endl;
     }
     out << ");" << endl_2;
-}
+  }
+
+  void generateCommentMasking(ostream& out) {
+    out << endl << "# Global Comment Masking to protect lit tests and documentation" << endl;
+    out << "my @masked_comments;" << endl;
+    out << sub << "maskComments {" << endl;
+    out << tab << "my ($text_ref) = @_;" << endl;
+    out << tab << "undef @masked_comments;" << endl;
+    out << tab << "$$text_ref =~ s{(\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*')|(\\/\\/[^\\n]*|\\/\\*[\\s\\S]*?\\*\\/)}{" << endl;
+    out << tab_2 << "if (defined $4) {" << endl;
+    out << tab_3 << "push @masked_comments, $4;" << endl;
+    out << tab_3 << "\"__HIPIFY_COMMENT_\" . $#masked_comments . \"__\";" << endl;
+    out << tab_2 << "} else {" << endl;
+    out << tab_3 << "$1;" << endl;
+    out << tab_2 << "}" << endl;
+    out << tab << "}ge;" << endl;
+    out << "}" << endl_2;
+    out << sub << "unmaskComments {" << endl;
+    out << tab << "my ($text_ref) = @_;" << endl;
+    out << tab << "$$text_ref =~ s/__HIPIFY_COMMENT_(\\d+)__/$masked_comments[$1]/ge;" << endl;
+    out << "}" << endl_2;
+  }
 
   bool generate(bool Generate) {
     if (!Generate) return true;
@@ -645,6 +666,7 @@ namespace perl {
     generateHostFunctions(out);
     generateDeviceFunctions(out);
     generateDeprecatedAndUnsupportedFunctions(out);
+    generateCommentMasking(out);
     out << endl << "# Count of transforms in all files" << endl;
     out << my << "%tt;" << endl;
     out << "clearStats(\\%tt, \\@statNames);" << endl;
@@ -720,6 +742,8 @@ namespace perl {
     out << tab_2 << "undef $/;" << endl;
     out << tab_2 << "# Read whole file at once, so we can match newlines" << endl;
     out << tab_2 << while_ << "(<INFILE>) {" << endl;
+    // Mask all C/C++ comments immediately after reading the file into $_
+    out << tab_3 << "maskComments(\\$_);" << endl;
     out << tab_3 << "$countKeywords += m/__global__/;" << endl;
     out << tab_3 << "$countKeywords += m/__shared__/;" << endl;
     out << tab_3 << unless_ << "($quiet_warnings) {" << endl;
@@ -851,6 +875,8 @@ namespace perl {
     out << tab_7 << print << "\"  warning: $fileName:#$line_num : $_\\n\";" << endl_tab_6 << "}" << endl_tab_5 << "}" << endl;
     out << tab_4 << "}" << endl_tab_3 << "}" << endl;
     out << tab_3 << "transformHostFunctions();" << endl_2;
+    // Restore all C/C++ comments before writing the output
+    out << tab_3 << "unmaskComments(\\$_);" << endl_2;
     out << tab_3 << "# TODO: would like to move this code outside loop but it uses $_ which contains the whole file" << endl;
     out << tab_3 << unless_ << "($no_output) {" << endl;
     out << tab_4 << sConv << endl;

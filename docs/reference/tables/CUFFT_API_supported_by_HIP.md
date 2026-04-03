@@ -173,7 +173,22 @@
 |`cufftCallbackStoreR`| | | | |`hipfftCallbackStoreR`|4.3.0| | | | | |
 |`cufftCallbackStoreZ`| | | | |`hipfftCallbackStoreZ`|4.3.0| | | | | |
 |`cufftCreate`| | | | |`hipfftCreate`|1.7.0| | | | | |
+|`cufftDescriptionCreate`|13.1| | | | | | | | | | |
+|`cufftDescriptionGetTraitInt64`|13.1| | | | | | | | | | |
+|`cufftDescriptionSetTraitInt64`|13.1| | | | | | | | | | |
 |`cufftDestroy`| | | | |`hipfftDestroy`|1.7.0| | | | | |
+|`cufftDeviceCreate`|13.1| | | | | | | | | | |
+|`cufftDeviceDestroy`|13.1| | | | | | | | | | |
+|`cufftDeviceGetDatabaseStr`|13.1| | | | | | | | | | |
+|`cufftDeviceGetDatabaseStrSize`|13.1| | | | | | | | | | |
+|`cufftDeviceGetDeviceFunctionTraitInt64`|13.1| | | | | | | | | | |
+|`cufftDeviceGetDeviceFunctions`|13.1| | | | | | | | | | |
+|`cufftDeviceGetLTOIRSizes`|13.1| | | | | | | | | | |
+|`cufftDeviceGetLTOIRs`|13.1| | | | | | | | | | |
+|`cufftDeviceGetNumDeviceFunctions`|13.1| | | | | | | | | | |
+|`cufftDeviceGetNumLTOIRs`|13.1| | | | | | | | | | |
+|`cufftDeviceGetVersion`|13.1| | | | | | | | | | |
+|`cufftDeviceIsSupported`|13.1| | | | | | | | | | |
 |`cufftEstimate1d`| | | | |`hipfftEstimate1d`|1.7.0| | | | | |
 |`cufftEstimate2d`| | | | |`hipfftEstimate2d`|1.7.0| | | | | |
 |`cufftEstimate3d`| | | | |`hipfftEstimate3d`|1.7.0| | | | | |
