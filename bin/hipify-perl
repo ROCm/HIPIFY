@@ -18126,6 +18126,27 @@ my %hash_HipDNNOnlyUnsupportedFunctions = (
 );
 
 
+# Global Comment Masking to protect lit tests and documentation
+my @masked_comments;
+sub maskComments {
+    my ($text_ref) = @_;
+    undef @masked_comments;
+    $$text_ref =~ s{("([^"\\]|\\.)*"|'([^'\\]|\\.)*')|(\/\/[^\n]*|\/\*[\s\S]*?\*\/)}{
+        if (defined $4) {
+            push @masked_comments, $4;
+            "__HIPIFY_COMMENT_" . $#masked_comments . "__";
+        } else {
+            $1;
+        }
+    }ge;
+}
+
+sub unmaskComments {
+    my ($text_ref) = @_;
+    $$text_ref =~ s/__HIPIFY_COMMENT_(\d+)__/$masked_comments[$1]/ge;
+}
+
+
 # Count of transforms in all files
 my %tt;
 clearStats(\%tt, \@statNames);
@@ -18200,6 +18221,7 @@ while (@ARGV) {
         undef $/;
         # Read whole file at once, so we can match newlines
         while (<INFILE>) {
+            maskComments(\$_);
             $countKeywords += m/__global__/;
             $countKeywords += m/__shared__/;
             unless ($quiet_warnings) {
@@ -18323,6 +18345,8 @@ while (@ARGV) {
                 }
             }
             transformHostFunctions();
+
+            unmaskComments(\$_);
 
             # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
             unless ($no_output) {
