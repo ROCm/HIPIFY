@@ -37,6 +37,7 @@
 |`CUSPARSE_DIAG_TYPE_UNIT`| | | | |`HIPSPARSE_DIAG_TYPE_UNIT`|1.9.2| | | | | |`rocsparse_diag_type_unit`|1.9.0| | | | |
 |`CUSPARSE_DIRECTION_COLUMN`| | | | |`HIPSPARSE_DIRECTION_COLUMN`|3.2.0| | | | | |`rocsparse_direction_column`|3.1.0| | | | |
 |`CUSPARSE_DIRECTION_ROW`| | | | |`HIPSPARSE_DIRECTION_ROW`|3.2.0| | | | | |`rocsparse_direction_row`|3.1.0| | | | |
+|`CUSPARSE_ENABLE_EXPERIMENTAL_API`|13.1| | | | | | | | | | | | | | | | |
 |`CUSPARSE_FILL_MODE_LOWER`| | | | |`HIPSPARSE_FILL_MODE_LOWER`|1.9.2| | | | | |`rocsparse_fill_mode_lower`|1.9.0| | | | |
 |`CUSPARSE_FILL_MODE_UPPER`| | | | |`HIPSPARSE_FILL_MODE_UPPER`|1.9.2| | | | | |`rocsparse_fill_mode_upper`|1.9.0| | | | |
 |`CUSPARSE_FORMAT_BLOCKED_ELL`|11.2| | | |`HIPSPARSE_FORMAT_BLOCKED_ELL`|4.5.0| | | | | |`rocsparse_format_bell`|4.5.0| | | | |
@@ -188,6 +189,10 @@
 |`cusparseSpMMOpPlan`|11.5| | | | | | | | | | | | | | | | |
 |`cusparseSpMMOpPlan_t`|11.5| | | | | | | | | | | | | | | | |
 |`cusparseSpMVAlg_t`|10.2| | | |`hipsparseSpMVAlg_t`|4.1.0| | | | | |`rocsparse_spmv_alg`|4.1.0| | | | |
+|`cusparseSpMVOpDescr`|13.1| | | | | | | | | | | | | | | | |
+|`cusparseSpMVOpDescr_t`|13.1| | | | | | | | | | | | | | | | |
+|`cusparseSpMVOpPlan`|13.1| | | | | | | | | | | | | | | | |
+|`cusparseSpMVOpPlan_t`|13.1| | | | | | | | | | | | | | | | |
 |`cusparseSpMatAttribute_t`|11.3| | | |`hipsparseSpMatAttribute_t`|4.5.0| | | | | |`rocsparse_spmat_attribute`|4.5.0| | | | |
 |`cusparseSpMatDescr`|10.1| | | | | | | | | | |`_rocsparse_spmat_descr`|4.1.0| | | | |
 |`cusparseSpMatDescr_t`|10.1| | | |`hipsparseSpMatDescr_t`|4.1.0| | | | | |`rocsparse_spmat_descr`|4.1.0| | | | |
@@ -307,7 +312,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|**ROC**|**A**|**D**|**C**|**R**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|
-|`cusparseCbsrmv`| | | | |`hipsparseCbsrmv`|3.5.0| | | | | |`rocsparse_cbsrmv`|3.5.0|5.4.0| | | |
+|`cusparseCbsrmv`| |13.1| | |`hipsparseCbsrmv`|3.5.0| | | | | |`rocsparse_cbsrmv`|3.5.0|5.4.0| | | |
 |`cusparseCbsrsv2_analysis`| |12.2| | |`hipsparseCbsrsv2_analysis`|3.6.0|6.2.0| | | | |`rocsparse_cbsrsv_analysis`|3.6.0| | | | |
 |`cusparseCbsrsv2_bufferSize`| |12.2| | |`hipsparseCbsrsv2_bufferSize`|3.6.0|6.2.0| | | | |`rocsparse_cbsrsv_buffer_size`|3.6.0| | | | |
 |`cusparseCbsrsv2_bufferSizeExt`| |12.2| | |`hipsparseCbsrsv2_bufferSizeExt`|3.6.0| | | | | |`rocsparse_cbsrsv_buffer_size`|3.6.0| | | | |
@@ -330,7 +335,7 @@
 |`cusparseCsrmvEx_bufferSize`|8.0|11.2| |12.0| | | | | | | | | | | | | |
 |`cusparseCsrsv_analysisEx`|8.0|10.2| |11.0| | | | | | | | | | | | | |
 |`cusparseCsrsv_solveEx`|8.0|10.2| |11.0| | | | | | | | | | | | | |
-|`cusparseDbsrmv`| | | | |`hipsparseDbsrmv`|3.5.0| | | | | |`rocsparse_dbsrmv`|3.5.0|5.4.0| | | |
+|`cusparseDbsrmv`| |13.1| | |`hipsparseDbsrmv`|3.5.0| | | | | |`rocsparse_dbsrmv`|3.5.0|5.4.0| | | |
 |`cusparseDbsrsv2_analysis`| |12.2| | |`hipsparseDbsrsv2_analysis`|3.6.0|6.2.0| | | | |`rocsparse_dbsrsv_analysis`|3.6.0| | | | |
 |`cusparseDbsrsv2_bufferSize`| |12.2| | |`hipsparseDbsrsv2_bufferSize`|3.6.0|6.2.0| | | | |`rocsparse_dbsrsv_buffer_size`|3.6.0| | | | |
 |`cusparseDbsrsv2_bufferSizeExt`| |12.2| | |`hipsparseDbsrsv2_bufferSizeExt`|3.6.0| | | | | |`rocsparse_dbsrsv_buffer_size`|3.6.0| | | | |
@@ -349,7 +354,7 @@
 |`cusparseDhybmv`| |10.2| |11.0|`hipsparseDhybmv`|1.9.2|3.9.0| | | | |`rocsparse_dhybmv`|1.9.0| | | | |
 |`cusparseDhybsv_analysis`| |10.2| |11.0| | | | | | | | | | | | | |
 |`cusparseDhybsv_solve`| |10.2| |11.0| | | | | | | | | | | | | |
-|`cusparseSbsrmv`| | | | |`hipsparseSbsrmv`|3.5.0| | | | | |`rocsparse_sbsrmv`|3.5.0|5.4.0| | | |
+|`cusparseSbsrmv`| |13.1| | |`hipsparseSbsrmv`|3.5.0| | | | | |`rocsparse_sbsrmv`|3.5.0|5.4.0| | | |
 |`cusparseSbsrsv2_analysis`| |12.2| | |`hipsparseSbsrsv2_analysis`|3.6.0|6.2.0| | | | |`rocsparse_sbsrsv_analysis`|3.6.0| | | | |
 |`cusparseSbsrsv2_bufferSize`| |12.2| | |`hipsparseSbsrsv2_bufferSize`|3.6.0|6.2.0| | | | |`rocsparse_sbsrsv_buffer_size`|3.6.0| | | | |
 |`cusparseSbsrsv2_bufferSizeExt`| |12.2| | |`hipsparseSbsrsv2_bufferSizeExt`|3.6.0| | | | | |`rocsparse_sbsrsv_buffer_size`|3.6.0| | | | |
@@ -370,7 +375,7 @@
 |`cusparseShybsv_solve`| |10.2| |11.0| | | | | | | | | | | | | |
 |`cusparseXbsrsv2_zeroPivot`| |12.2| | |`hipsparseXbsrsv2_zeroPivot`|3.6.0|6.2.0| | | | |`rocsparse_bsrsv_zero_pivot`|3.6.0| | | | |
 |`cusparseXcsrsv2_zeroPivot`| |11.3| |12.0|`hipsparseXcsrsv2_zeroPivot`|1.9.2|5.6.0| | | | |`rocsparse_csrsv_zero_pivot`|1.9.0| | | | |
-|`cusparseZbsrmv`| | | | |`hipsparseZbsrmv`|3.5.0| | | | | |`rocsparse_zbsrmv`|3.5.0|5.4.0| | | |
+|`cusparseZbsrmv`| |13.1| | |`hipsparseZbsrmv`|3.5.0| | | | | |`rocsparse_zbsrmv`|3.5.0|5.4.0| | | |
 |`cusparseZbsrsv2_analysis`| |12.2| | |`hipsparseZbsrsv2_analysis`|3.6.0|6.2.0| | | | |`rocsparse_zbsrsv_analysis`|3.6.0| | | | |
 |`cusparseZbsrsv2_bufferSize`| |12.2| | |`hipsparseZbsrsv2_bufferSize`|3.6.0|6.2.0| | | | |`rocsparse_zbsrsv_buffer_size`|3.6.0| | | | |
 |`cusparseZbsrsv2_bufferSizeExt`| |12.2| | |`hipsparseZbsrsv2_bufferSizeExt`|3.6.0| | | | | |`rocsparse_zbsrsv_buffer_size`|3.6.0| | | | |
@@ -896,6 +901,12 @@
 |`cusparseSpMM_bufferSize`|10.1| |12.0| |`hipsparseSpMM_bufferSize`|4.2.0| |6.0.0| | | |`rocsparse_spmm`|4.2.0| |6.0.0| | |
 |`cusparseSpMM_preprocess`|11.2| |12.0| |`hipsparseSpMM_preprocess`|4.5.0| |6.0.0| | | |`rocsparse_spmm`|4.2.0| |6.0.0| | |
 |`cusparseSpMV`|10.1| |12.0| |`hipsparseSpMV`|4.1.0| |6.0.0| | | |`rocsparse_spmv`|4.1.0| |6.0.0| | |
+|`cusparseSpMVOp`|13.1| | | | | | | | | | | | | | | | |
+|`cusparseSpMVOp_createDescr`|13.1| | | | | | | | | | | | | | | | |
+|`cusparseSpMVOp_createPlan`|13.1| | | | | | | | | | | | | | | | |
+|`cusparseSpMVOp_destroyDescr`|13.1| | | | | | | | | | | | | | | | |
+|`cusparseSpMVOp_destroyPlan`|13.1| | | | | | | | | | | | | | | | |
+|`cusparseSpMVOp_setGlobalUserData`|13.1| | | | | | | | | | | | | | | | |
 |`cusparseSpMV_bufferSize`|10.1| |12.0| |`hipsparseSpMV_bufferSize`|4.1.0| |6.0.0| | | |`rocsparse_spmv`|4.1.0| |6.0.0| | |
 |`cusparseSpMV_preprocess`|12.4| | | |`hipsparseSpMV_preprocess`|5.2.0| |6.0.0| | | | | | | | | |
 |`cusparseSpMatGetAttribute`|11.3| |12.0| |`hipsparseSpMatGetAttribute`|4.5.0| |6.0.0| | | |`rocsparse_spmat_get_attribute`|4.5.0| |6.0.0| | |
