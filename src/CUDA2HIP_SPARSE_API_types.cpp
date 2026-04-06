@@ -99,6 +99,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP = [] {
   m["cusparseSpMMOpPlan"]                                             = {"hipsparseSpMMOpPlan",                        "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED};
   m["cusparseSpMMOpPlan_t"]                                           = {"hipsparseSpMMOpPlan_t",                      "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED};
 
+  m["cusparseSpMVOpDescr"]                                            = {"hipsparseSpMVOpDescr",                       "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED};
+  m["cusparseSpMVOpDescr_t"]                                          = {"hipsparseSpMVOpDescr_t",                     "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED};
+
+  m["cusparseSpMVOpPlan"]                                             = {"hipsparseSpMVOpPlan",                        "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED};
+  m["cusparseSpMVOpPlan_t"]                                           = {"hipsparseSpMVOpPlan_t",                      "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED};
+
   // 2. Enums
   m["cusparseAction_t"]                                               = {"hipsparseAction_t",                          "rocsparse_action",                                   CONV_TYPE, API_SPARSE, 4};
   m["CUSPARSE_ACTION_SYMBOLIC"]                                       = {"HIPSPARSE_ACTION_SYMBOLIC",                  "rocsparse_action_symbolic",                          CONV_NUMERIC_LITERAL, API_SPARSE, 4};
@@ -270,6 +276,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_TYPE_NAME_MAP = [] {
   m["CUSPARSE_COLOR_ALG1"]                                            = {"HIPSPARSE_COLOR_ALG1",                       "",                                                   CONV_NUMERIC_LITERAL, API_SPARSE, 4, UNSUPPORTED | CUDA_DEPRECATED};
 
   // 3. Defines
+  m["CUSPARSE_ENABLE_EXPERIMENTAL_API"]                               = {"HIPSPARSE_ENABLE_EXPERIMENTAL_API",          "",                                                   CONV_DEFINE, API_SPARSE, 4, UNSUPPORTED};
 
   // 4. Typedefs
   m["cusparseLoggerCallback_t"]                                       = {"hipsparseLoggerCallback_t",                  "",                                                   CONV_TYPE, API_SPARSE, 4, UNSUPPORTED};
@@ -431,6 +438,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_TYPE_NAME_VER_MAP =
   m["CUSPARSE_SPSM_UPDATE_DIAGONAL"]                                  = {CUDA_124, CUDA_0,   CUDA_0  };
   m["CUSPARSE_SPMM_BSR_ALG1"]                                         = {CUDA_125, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 12501
   m["CUSPARSE_SPMV_BSR_ALG1"]                                         = {CUDA_130, CUDA_0,   CUDA_0  }; // CUSPARSE_VERSION 12603 CUDA 13.0.1
+  m["CUSPARSE_ENABLE_EXPERIMENTAL_API"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOpDescr"]                                            = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOpDescr_t"]                                          = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOpPlan"]                                             = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOpPlan_t"]                                           = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();

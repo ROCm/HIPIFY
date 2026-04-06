@@ -120,10 +120,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP = [] {
   m["cusparseZsctr"]                                                  = {"hipsparseZsctr",                                     "rocsparse_zsctr",                                                  CONV_LIB_FUNC, API_SPARSE, 8, CUDA_DEPRECATED | CUDA_REMOVED | HIP_DEPRECATED};
 
   // 9. cuSPARSE Level 2 Function Reference
-  m["cusparseSbsrmv"]                                                 = {"hipsparseSbsrmv",                                    "rocsparse_sbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED};
-  m["cusparseDbsrmv"]                                                 = {"hipsparseDbsrmv",                                    "rocsparse_dbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED};
-  m["cusparseCbsrmv"]                                                 = {"hipsparseCbsrmv",                                    "rocsparse_cbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED};
-  m["cusparseZbsrmv"]                                                 = {"hipsparseZbsrmv",                                    "rocsparse_zbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, ROC_DEPRECATED};
+  m["cusparseSbsrmv"]                                                 = {"hipsparseSbsrmv",                                    "rocsparse_sbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | ROC_DEPRECATED};
+  m["cusparseDbsrmv"]                                                 = {"hipsparseDbsrmv",                                    "rocsparse_dbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | ROC_DEPRECATED};
+  m["cusparseCbsrmv"]                                                 = {"hipsparseCbsrmv",                                    "rocsparse_cbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | ROC_DEPRECATED};
+  m["cusparseZbsrmv"]                                                 = {"hipsparseZbsrmv",                                    "rocsparse_zbsrmv",                                                 CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | ROC_DEPRECATED};
 
   m["cusparseSbsrxmv"]                                                = {"hipsparseSbsrxmv",                                   "rocsparse_sbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
   m["cusparseDbsrxmv"]                                                = {"hipsparseDbsrxmv",                                   "rocsparse_dbsrxmv",                                                CONV_LIB_FUNC, API_SPARSE, 9, CUDA_DEPRECATED | HIP_DEPRECATED};
@@ -867,6 +867,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP = [] {
   m["cusparseSpMV"]                                                   = {"hipsparseSpMV",                                      "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseSpMV_bufferSize"]                                        = {"hipsparseSpMV_bufferSize",                           "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseSpMV_preprocess"]                                        = {"hipsparseSpMV_preprocess",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpMVOp_createDescr"]                                     = {"hipsparseSpMVOp_createDescr",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMVOp_destroyDescr"]                                    = {"hipsparseSpMVOp_destroyDescr",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMVOp_createPlan"]                                      = {"hipsparseSpMVOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMVOp_destroyPlan"]                                     = {"hipsparseSpMVOp_destroyPlan",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMVOp_setGlobalUserData"]                               = {"hipsparseSpMVOp_setGlobalUserData",                  "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMVOp"]                                                 = {"hipsparseSpMVOp",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
 
   m["cusparseSparseToDense"]                                          = {"hipsparseSparseToDense",                             "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseSparseToDense_bufferSize"]                               = {"hipsparseSparseToDense_bufferSize",                  "rocsparse_sparse_to_dense",                                        CONV_LIB_FUNC, API_SPARSE, 15};
@@ -1497,6 +1503,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP = 
   m["cusparseDgebsr2gebsr"]                                           = {CUDA_0,   CUDA_128, CUDA_0  };
   m["cusparseCgebsr2gebsr"]                                           = {CUDA_0,   CUDA_128, CUDA_0  };
   m["cusparseZgebsr2gebsr"]                                           = {CUDA_0,   CUDA_128, CUDA_0  };
+  m["cusparseSbsrmv"]                                                 = {CUDA_0,   CUDA_131, CUDA_0  };
+  m["cusparseDbsrmv"]                                                 = {CUDA_0,   CUDA_131, CUDA_0  };
+  m["cusparseCbsrmv"]                                                 = {CUDA_0,   CUDA_131, CUDA_0  };
+  m["cusparseZbsrmv"]                                                 = {CUDA_0,   CUDA_131, CUDA_0  };
+  m["cusparseSpMVOp_createDescr"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOp_destroyDescr"]                                    = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOp_createPlan"]                                      = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOp_destroyPlan"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOp_setGlobalUserData"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOp"]                                                 = {CUDA_131, CUDA_0,   CUDA_0  };
 
   return m;
 }();
