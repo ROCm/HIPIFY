@@ -868,6 +868,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP = [] {
   m["cusparseSpMV_bufferSize"]                                        = {"hipsparseSpMV_bufferSize",                           "rocsparse_spmv",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseSpMV_preprocess"]                                        = {"hipsparseSpMV_preprocess",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
   m["cusparseSpMVOp_createDescr"]                                     = {"hipsparseSpMVOp_createDescr",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMVOp_bufferSize"]                                      = {"hipsparseSpMVOp_bufferSize",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
   m["cusparseSpMVOp_destroyDescr"]                                    = {"hipsparseSpMVOp_destroyDescr",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
   m["cusparseSpMVOp_createPlan"]                                      = {"hipsparseSpMVOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
   m["cusparseSpMVOp_destroyPlan"]                                     = {"hipsparseSpMVOp_destroyPlan",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
@@ -1513,6 +1514,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP = 
   m["cusparseSpMVOp_destroyPlan"]                                     = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cusparseSpMVOp_setGlobalUserData"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cusparseSpMVOp"]                                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cusparseSpMVOp_bufferSize"]                                      = {CUDA_131, CUDA_0,   CUDA_0  }; // A: CUDA_VERSION 13100, C: CUDA_VERSION 13101, CUSPARSE_VERSION 12703
 
   return m;
 }();
@@ -2540,6 +2542,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSE_FUNCTION_CHA
   m["cusparseDenseToSparse_analysis"]                                 = {CUDA_120};
   m["cusparseDenseToSparse_bufferSize"]                               = {CUDA_120};
   m["cusparseDenseToSparse_convert"]                                  = {CUDA_120};
+  m["cusparseSpMVOp_createDescr"]                                     = {CUDA_131};  // A: CUDA_VERSION 13100, C: CUDA_VERSION 13101, CUSPARSE_VERSION 12703
 
   return m;
 }();
