@@ -902,7 +902,8 @@
 |`cusparseSpMM_preprocess`|11.2| |12.0| |`rocsparse_spmm`|4.2.0| |6.0.0| | | |
 |`cusparseSpMV`|10.1| |12.0| |`rocsparse_spmv`|4.1.0| |6.0.0| | | |
 |`cusparseSpMVOp`|13.1| | | | | | | | | | |
-|`cusparseSpMVOp_createDescr`|13.1| | | | | | | | | | |
+|`cusparseSpMVOp_bufferSize`|13.1| | | | | | | | | | |
+|`cusparseSpMVOp_createDescr`|13.1| |13.1| | | | | | | | |
 |`cusparseSpMVOp_createPlan`|13.1| | | | | | | | | | |
 |`cusparseSpMVOp_destroyDescr`|13.1| | | | | | | | | | |
 |`cusparseSpMVOp_destroyPlan`|13.1| | | | | | | | | | |
