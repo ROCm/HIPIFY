@@ -65,7 +65,7 @@ static bool pathExists(const std::string &p) {
 
 namespace {
   static const std::regex LocalIncludeRe(
-      R"(^\s*#\s*include\s*\"([^\"\n]+)\"\s*(?://.*)?$)", std::regex::ECMAScript);
+      R"(^\s*#\s*include\s*\"([^\"\n]+)\"\s*(?://.*)?)", std::regex::ECMAScript);
 
   static const std::regex SystemIncludeRe(
       R"(^\s*#\s*include\s*<([^>\n]+)>)", std::regex::ECMAScript);
@@ -110,12 +110,12 @@ namespace {
     while (std::getline(iss, line)) {
       if (std::regex_match(line, m, LocalIncludeRe)) {
         std::string quotedName = m[1].str();
-        std::string quotedFileName = std::string(sys::path::filename(quotedName));
-        if (quotedFileName == targetFileName)
-          break;
         std::string absPath;
-        if (resolveLocalIncludeInternal(mainSourceAbspath, quotedName, absPath))
+        if (resolveLocalIncludeInternal(mainSourceAbspath, quotedName, absPath)) {
+          if (absPath == targetHeaderAbspath)
+            break;
           outIncludes.push_back(absPath);
+        }
       }
 
       if (std::regex_search(line, m, SystemIncludeRe)) {
@@ -191,8 +191,13 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
     work.push_back({h, mainSourceAbsPath});
   }
   std::set<std::string> processed;
+  std::set<std::string> queued;
   size_t total = initial.size();
   size_t current = 0;
+
+  for (const auto &h: initial) {
+    queued.insert(h);
+  }
 
   while (!work.empty()) {
     auto [hdr, parentPath] = work.back();
@@ -242,7 +247,8 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
           std::string rel = m[1].str();
           std::string abs;
           if (resolveLocalIncludeInternal(hdr, rel, abs) &&
-              !processed.count(abs)) {
+              !processed.count(abs) && !queued.count(abs)) {
+            queued.insert(abs);
             work.push_back({abs, hdr});
             newHeaders.push_back(abs);
           }
