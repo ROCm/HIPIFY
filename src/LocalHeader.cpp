@@ -102,7 +102,6 @@ namespace {
       return false;
     }
 
-    std::string targetFileName = std::string(sys::path::filename(targetHeaderAbspath));
     std::istringstream iss(mainSourceContent);
     std::string line;
     std::smatch m;
@@ -125,6 +124,19 @@ namespace {
 
     return true;
   }
+}
+
+static std::string
+resolveCompileContext(const std::string &parentPath,
+                      const std::string &mainSourceAbsPath,
+                      const clang::tooling::CompilationDatabase *compDB) {
+  if (!compDB)
+    return mainSourceAbsPath;
+
+  if (!compDB->getCompileCommands(parentPath).empty())
+    return parentPath;
+
+  return mainSourceAbsPath;
 }
 
 bool resolveLocalInclude(const std::string &mainSourceAbsPath,
@@ -225,9 +237,10 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
     outs() << "\n" << sHipify << "Hipifying local header [" << current
            << "/" << total << "]: " << sys::path::filename(hdr) << "\n";
 
-    bool ok = hipifySingleSource(hdr, hipOut, compDB, OptionsParserPtr,
-                                  hipify_exe, parentPath, false,
-                                  precedingIncludes);
+    bool ok = hipifySingleSource(
+        hdr, hipOut, compDB, OptionsParserPtr, hipify_exe,
+        resolveCompileContext(parentPath, mainSourceAbsPath, compDB), false,
+        precedingIncludes);
 
     if (!ok) {
       errs() << "\n" << sHipify << sError
