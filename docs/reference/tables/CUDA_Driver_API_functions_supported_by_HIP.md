@@ -204,8 +204,8 @@
 |`CUDA_HOST_NODE_PARAMS`|10.0| | | |`hipHostNodeParams`|4.3.0| | | | | |
 |`CUDA_HOST_NODE_PARAMS_st`|10.0| | | |`hipHostNodeParams`|4.3.0| | | | | |
 |`CUDA_HOST_NODE_PARAMS_v1`|11.3| | | |`hipHostNodeParams`|4.3.0| | | | | |
-|`CUDA_HOST_NODE_PARAMS_v2`|12.2| | | | | | | | | | |
-|`CUDA_HOST_NODE_PARAMS_v2_st`|12.2| | | | | | | | | | |
+|`CUDA_HOST_NODE_PARAMS_v2`|12.2| |13.2| | | | | | | | |
+|`CUDA_HOST_NODE_PARAMS_v2_st`|12.2| |13.2| | | | | | | | |
 |`CUDA_KERNEL_NODE_PARAMS`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | | |
 |`CUDA_KERNEL_NODE_PARAMS_st`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | | |
 |`CUDA_KERNEL_NODE_PARAMS_v1`|11.3| | | |`hipKernelNodeParams`|4.3.0| | | | | |
@@ -826,6 +826,8 @@
 |`CU_GRAPH_NODE_TYPE_WAIT_EVENT`|11.1| | | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | | | |
 |`CU_GRAPH_USER_OBJECT_MOVE`|11.3| | | |`hipGraphUserObjectMove`|5.3.0| | | | | |
 |`CU_GREEN_CTX_DEFAULT_STREAM`|12.4| | | | | | | | | | |
+|`CU_HOST_TASK_BLOCKING`|13.2| | | | | | | | | | |
+|`CU_HOST_TASK_SPINWAIT`|13.2| | | | | | | | | | |
 |`CU_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | | |
 |`CU_IPC_MEM_LAZY_ENABLE_PEER_ACCESS`| | | | |`hipIpcMemLazyEnablePeerAccess`|1.6.0| | | | | |
 |`CU_JIT_BINARY_LOADER_THREAD_COUNT`|13.1| | | | | | | | | | |
@@ -911,6 +913,9 @@
 |`CU_LAUNCH_PARAM_BUFFER_SIZE_AS_INT`|11.7| | | | | | | | | | |
 |`CU_LAUNCH_PARAM_END`| | | | |`HIP_LAUNCH_PARAM_END`|1.6.0| | | | | |
 |`CU_LAUNCH_PARAM_END_AS_INT`|11.7| | | | | | | | | | |
+|`CU_LAUNCH_PORTABLE_CLUSTER_MODE_ALLOW_NON_PORTABLE`|13.2| | | | | | | | | | |
+|`CU_LAUNCH_PORTABLE_CLUSTER_MODE_DEFAULT`|13.2| | | | | | | | | | |
+|`CU_LAUNCH_PORTABLE_CLUSTER_MODE_REQUIRE_PORTABLE`|13.2| | | | | | | | | | |
 |`CU_LIBRARY_BINARY_IS_PRESERVED`|12.0| | | |`hipLibraryBinaryIsPreserved`|7.1.0| | | | | |
 |`CU_LIBRARY_HOST_UNIVERSAL_FUNCTION_AND_DATA_TABLE`|12.0| | | |`hipLibraryHostUniversalFunctionAndDataTable`|7.1.0| | | | | |
 |`CU_LIBRARY_NUM_OPTIONS`|12.0| | | | | | | | | | |
@@ -1088,6 +1093,9 @@
 |`CU_SHAREDMEM_CARVEOUT_DEFAULT`|9.0| | | | | | | | | | |
 |`CU_SHAREDMEM_CARVEOUT_MAX_L1`|9.0| | | | | | | | | | |
 |`CU_SHAREDMEM_CARVEOUT_MAX_SHARED`|9.0| | | | | | | | | | |
+|`CU_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE`|13.2| | | | | | | | | | |
+|`CU_SHARED_MEMORY_MODE_DEFAULT`|13.2| | | | | | | | | | |
+|`CU_SHARED_MEMORY_MODE_REQUIRE_PORTABLE`|13.2| | | | | | | | | | |
 |`CU_SHARED_MEM_CONFIG_DEFAULT_BANK_SIZE`| | | | |`hipSharedMemBankSizeDefault`|1.6.0| | | | | |
 |`CU_SHARED_MEM_CONFIG_EIGHT_BYTE_BANK_SIZE`| | | | |`hipSharedMemBankSizeEightByte`|1.6.0| | | | | |
 |`CU_SHARED_MEM_CONFIG_FOUR_BYTE_BANK_SIZE`| | | | |`hipSharedMemBankSizeFourByte`|1.6.0| | | | | |
@@ -1425,6 +1433,8 @@
 |`CUgreenCtxCreate_flags`|12.4| | | | | | | | | | |
 |`CUgreenCtx_st`|12.4| | | | | | | | | | |
 |`CUhostFn`|10.0| | | |`hipHostFn_t`|4.3.0| | | | | |
+|`CUhostTaskSyncMode`|13.2| | | | | | | | | | |
+|`CUhostTaskSyncMode_enum`|13.2| | | | | | | | | | |
 |`CUipcEventHandle`| | | | |`hipIpcEventHandle_t`|1.6.0| | | | | |
 |`CUipcEventHandle_st`| | | | |`hipIpcEventHandle_st`|3.5.0| | | | | |
 |`CUipcEventHandle_v1`|11.3| | | |`hipIpcEventHandle_t`|1.6.0| | | | | |
@@ -1453,6 +1463,8 @@
 |`CUlaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | | |
 |`CUlaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
 |`CUlaunchAttributeID_enum`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
+|`CUlaunchAttributePortableClusterMode`|13.2| | | | | | | | | | |
+|`CUlaunchAttributePortableClusterMode_enum`|13.2| | | | | | | | | | |
 |`CUlaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`CUlaunchAttributeValue_union`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`CUlaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | | | |
@@ -1570,6 +1582,8 @@
 |`CUresourcetype`| | | | |`HIPresourcetype`|3.5.0| | | | | |
 |`CUresourcetype_enum`| | | | |`HIPresourcetype_enum`|3.5.0| | | | | |
 |`CUresult`| | | | |`hipError_t`|1.5.0| | | | | |
+|`CUsharedMemoryMode`|13.2| | | | | | | | | | |
+|`CUsharedMemoryMode_enum`|13.2| | | | | | | | | | |
 |`CUshared_carveout`|9.0| | | | | | | | | | |
 |`CUshared_carveout_enum`|9.0| | | | | | | | | | |
 |`CUsharedconfig`| | | | |`hipSharedMemConfig`|1.6.0| | | | | |
