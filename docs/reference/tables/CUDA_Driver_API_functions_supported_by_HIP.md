@@ -898,11 +898,13 @@
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN_MAP`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING`|13.0| | | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_PORTABLE_CLUSTER_SIZE_MODE`|13.2| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PREFERRED_CLUSTER_DIMENSION`|12.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PRIORITY`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT`|11.8| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION`|11.8| | | | | | | | | | |
+|`CU_LAUNCH_ATTRIBUTE_SHARED_MEMORY_MODE`|13.2| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY`|11.8| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | | |
 |`CU_LAUNCH_KERNEL_REQUIRED_BLOCK_DIM`|12.9| | | | | | | | | | |
 |`CU_LAUNCH_MEM_SYNC_DOMAIN_DEFAULT`|12.0| | | |`hipLaunchMemSyncDomainDefault`|7.1.0| | | | | |
@@ -953,6 +955,12 @@
 |`CU_MEMORYTYPE_DEVICE`| | | | |`hipMemoryTypeDevice`|1.6.0| | | | | |
 |`CU_MEMORYTYPE_HOST`| | | | |`hipMemoryTypeHost`|1.6.0| | | | | |
 |`CU_MEMORYTYPE_UNIFIED`| | | | |`hipMemoryTypeUnified`|1.6.0| | | | | |
+|`CU_MEMPOOL_ATTR_ALLOCATION_TYPE`|13.2| | | | | | | | | | |
+|`CU_MEMPOOL_ATTR_EXPORT_HANDLE_TYPES`|13.2| | | | | | | | | | |
+|`CU_MEMPOOL_ATTR_HW_DECOMPRESS_ENABLED`|13.2| | | | | | | | | | |
+|`CU_MEMPOOL_ATTR_LOCATION_ID`|13.2| | | | | | | | | | |
+|`CU_MEMPOOL_ATTR_LOCATION_TYPE`|13.2| | | | | | | | | | |
+|`CU_MEMPOOL_ATTR_MAX_POOL_SIZE`|13.2| | | | | | | | | | |
 |`CU_MEMPOOL_ATTR_RELEASE_THRESHOLD`|11.2| | | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | | | | |
 |`CU_MEMPOOL_ATTR_RESERVED_MEM_CURRENT`|11.3| | | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | | | | |
 |`CU_MEMPOOL_ATTR_RESERVED_MEM_HIGH`|11.3| | | |`hipMemPoolAttrReservedMemHigh`|5.2.0| | | | | |
@@ -998,6 +1006,7 @@
 |`CU_MEM_LOCATION_TYPE_HOST_NUMA`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | | |
 |`CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT`|12.2| | | |`hipMemLocationTypeHostNumaCurrent`|7.1.0| | | | | |
 |`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
+|`CU_MEM_LOCATION_TYPE_INVISIBLE`|13.2| | | | | | | | | | |
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | | | | |
 |`CU_MEM_LOCATION_TYPE_NONE`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | | |
 |`CU_MEM_OPERATION_TYPE_MAP`|11.1| | | |`hipMemOperationTypeMap`|5.2.0| | | | | |
@@ -1465,8 +1474,8 @@
 |`CUlaunchAttributeID_enum`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
 |`CUlaunchAttributePortableClusterMode`|13.2| | | | | | | | | | |
 |`CUlaunchAttributePortableClusterMode_enum`|13.2| | | | | | | | | | |
-|`CUlaunchAttributeValue`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
-|`CUlaunchAttributeValue_union`|11.8| | | |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
+|`CUlaunchAttributeValue`|11.8| |13.2| |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
+|`CUlaunchAttributeValue_union`|11.8| |13.2| |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`CUlaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | | | |
 |`CUlaunchConfig`|11.8| | | |`HIP_LAUNCH_CONFIG`|7.0.0| | | | | |
 |`CUlaunchConfig_st`|11.8| | | |`HIP_LAUNCH_CONFIG_st`|7.0.0| | | | | |
@@ -1517,11 +1526,11 @@
 |`CUmemGenericAllocationHandle_v1`|11.3| | | |`hipMemGenericAllocationHandle_t`|5.2.0| | | | | |
 |`CUmemHandleType`|11.1| | | |`hipMemHandleType`|5.2.0| | | | | |
 |`CUmemHandleType_enum`|11.1| | | |`hipMemHandleType`|5.2.0| | | | | |
-|`CUmemLocation`|10.2| | | |`hipMemLocation`|5.2.0| | | | | |
+|`CUmemLocation`|10.2| |13.2| |`hipMemLocation`|5.2.0| | | | | |
 |`CUmemLocationType`|10.2| | | |`hipMemLocationType`|5.2.0| | | | | |
 |`CUmemLocationType_enum`|10.2| | | |`hipMemLocationType`|5.2.0| | | | | |
-|`CUmemLocation_st`|10.2| | | |`hipMemLocation`|5.2.0| | | | | |
-|`CUmemLocation_v1`|11.3| | | |`hipMemLocation`|5.2.0| | | | | |
+|`CUmemLocation_st`|10.2| |13.2| |`hipMemLocation`|5.2.0| | | | | |
+|`CUmemLocation_v1`|11.3| |13.2| |`hipMemLocation`|5.2.0| | | | | |
 |`CUmemOperationType`|11.1| | | |`hipMemOperationType`|5.2.0| | | | | |
 |`CUmemOperationType_enum`|11.1| | | |`hipMemOperationType`|5.2.0| | | | | |
 |`CUmemPoolHandle_st`|11.2| | | |`ihipMemPoolHandle_t`|5.2.0| | | | | |
@@ -1608,6 +1617,12 @@
 |`CUstreamCaptureMode_enum`|10.1| | | |`hipStreamCaptureMode`|4.3.0| | | | | |
 |`CUstreamCaptureStatus`|10.0| | | |`hipStreamCaptureStatus`|4.3.0| | | | | |
 |`CUstreamCaptureStatus_enum`|10.0| | | |`hipStreamCaptureStatus`|4.3.0| | | | | |
+|`CUstreamCigCaptureParams`|13.2| | | | | | | | | | |
+|`CUstreamCigCaptureParams_st`|13.2| | | | | | | | | | |
+|`CUstreamCigDataType`|13.2| | | | | | | | | | |
+|`CUstreamCigDataType_enum`|13.2| | | | | | | | | | |
+|`CUstreamCigParam`|13.2| | | | | | | | | | |
+|`CUstreamCigParam_st`|13.2| | | | | | | | | | |
 |`CUstreamMemOpAtomicReductionParams_st`|13.1| | | | | | | | | | |
 |`CUstreamMemOpMemoryBarrierParams_st`|11.7| | | | | | | | | | |
 |`CUstreamMemoryBarrier_flags`|11.7| | | | | | | | | | |
@@ -1663,6 +1678,7 @@
 |`NVCL_EVENT_SCHED_BLOCKING_SYNC`|11.8| | | | | | | | | | |
 |`NVCL_EVENT_SCHED_SPIN`|11.8| | | | | | | | | | |
 |`NVCL_EVENT_SCHED_YIELD`|11.8| | | | | | | | | | |
+|`STREAM_CIG_DATA_TYPE_D3D12_COMMAND_LIST`|13.2| | | | | | | | | | |
 |`__CUDACC__`| | | | |`__HIPCC__`|1.6.0| | | | | |
 |`cl_context_flags`|11.8| | | | | | | | | | |
 |`cl_context_flags_enum`|11.8| | | | | | | | | | |
