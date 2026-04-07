@@ -3187,6 +3187,40 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaDevWorkqueueConfigScopeGreenCtxBalanced
   m["CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED"]                             = {"HIP_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
+  //
+  m["CUhostTaskSyncMode"]                                                = {"hipHostTaskSyncMode",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CUhostTaskSyncMode_enum"]                                           = {"hipHostTaskSyncMode",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CUhostTaskSyncMode enum values
+  //
+  m["CU_HOST_TASK_BLOCKING"]                                             = {"HIP_HOST_TASK_BLOCKING",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_HOST_TASK_SPINWAIT"]                                             = {"HIP_HOST_TASK_SPINWAIT",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  //
+  m["CUlaunchAttributePortableClusterMode"]                              = {"hipLaunchAttributePortableClusterMode",                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CUlaunchAttributePortableClusterMode_enum"]                         = {"hipLaunchAttributePortableClusterMode",                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CUlaunchAttributePortableClusterMode enum values
+  //
+  m["CU_LAUNCH_PORTABLE_CLUSTER_MODE_DEFAULT"]                           = {"HIP_LAUNCH_PORTABLE_CLUSTER_MODE_DEFAULT",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_LAUNCH_PORTABLE_CLUSTER_MODE_REQUIRE_PORTABLE"]                  = {"HIP_LAUNCH_PORTABLE_CLUSTER_MODE_REQUIRE_PORTABLE",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_LAUNCH_PORTABLE_CLUSTER_MODE_ALLOW_NON_PORTABLE"]                = {"HIP_LAUNCH_PORTABLE_CLUSTER_MODE_ALLOW_NON_PORTABLE",        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  //
+  m["CUsharedMemoryMode"]                                                = {"hipSharedMemoryMode",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CUsharedMemoryMode_enum"]                                           = {"hipSharedMemoryMode",                                        "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CUsharedMemoryMode enum values
+  //
+  m["CU_SHARED_MEMORY_MODE_DEFAULT"]                                     = {"HIP_SHARED_MEMORY_MODE_DEFAULT",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_SHARED_MEMORY_MODE_REQUIRE_PORTABLE"]                            = {"HIP_SHARED_MEMORY_MODE_REQUIRE_PORTABLE",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE"]                          = {"HIP_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 4. Typedefs
 
   // no analogue
@@ -4516,6 +4550,20 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP =
   m["CUdevWorkqueueResource"]                                            = {CUDA_131, CUDA_0,   CUDA_0  };
   m["CU_DEV_SM_RESOURCE_GROUP_PARAMS_st"]                                = {CUDA_131, CUDA_0,   CUDA_0  };
   m["CU_DEV_SM_RESOURCE_GROUP_PARAMS"]                                   = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["CUhostTaskSyncMode"]                                                = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUhostTaskSyncMode_enum"]                                           = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_HOST_TASK_BLOCKING"]                                             = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_HOST_TASK_SPINWAIT"]                                             = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUlaunchAttributePortableClusterMode"]                              = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUlaunchAttributePortableClusterMode_enum"]                         = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_LAUNCH_PORTABLE_CLUSTER_MODE_DEFAULT"]                           = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_LAUNCH_PORTABLE_CLUSTER_MODE_REQUIRE_PORTABLE"]                  = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_LAUNCH_PORTABLE_CLUSTER_MODE_ALLOW_NON_PORTABLE"]                = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUsharedMemoryMode"]                                                = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUsharedMemoryMode_enum"]                                           = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_SHARED_MEMORY_MODE_DEFAULT"]                                     = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_SHARED_MEMORY_MODE_REQUIRE_PORTABLE"]                            = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE"]                          = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -5018,6 +5066,8 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_TYPE_CHANGED
   m["CUdevSmResource_st"]                                                = {CUDA_131};
   m["CUdevResource_st"]                                                  = {CUDA_131};
   m["CUstreamBatchMemOpParams_union"]                                    = {CUDA_131};
+  m["CUDA_HOST_NODE_PARAMS_v2_st"]                                       = {CUDA_132};
+  m["CUDA_HOST_NODE_PARAMS_v2"]                                          = {CUDA_132};
 
   return m;
   }();
