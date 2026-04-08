@@ -560,6 +560,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaDevSmResourceGroupParams
   m["CU_DEV_SM_RESOURCE_GROUP_PARAMS"]                                   = {"hipDevSmResourceGroupParams",                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
+  //
+  m["CUstreamCigParam_st"]                                               = {"hipStreamCigParam",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CUstreamCigParam"]                                                  = {"hipStreamCigParam",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  //
+  m["CUstreamCigCaptureParams_st"]                                       = {"hipStreamCigCaptureParams",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CUstreamCigCaptureParams"]                                          = {"hipStreamCigCaptureParams",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 2. Unions
 
   m["CUstreamBatchMemOpParams"]                                          = {"hipStreamBatchMemOpParams",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
@@ -579,7 +589,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUstreamAttrValue_v1"]                                              = {"hipLaunchAttributeValue",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
   m["CUstreamAttrValue_union"]                                           = {"hipLaunchAttributeValue",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
 
-    // no analogue
+  // no analogue
   m["CUlinkState_st"]                                                    = {"ihiprtcLinkState",                                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
   m["CUlinkState"]                                                       = {"hiprtcLinkState",                                            "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
 
@@ -2312,6 +2322,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_MEM_LOCATION_TYPE_HOST_NUMA"]                                    = {"hipMemLocationTypeHostNuma",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 0x3
   // cudaMemLocationTypeHostNumaCurrent
   m["CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT"]                            = {"hipMemLocationTypeHostNumaCurrent",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 0x4
+  //
+  m["CU_MEM_LOCATION_TYPE_INVISIBLE"]                                    = {"hipMemLocationTypeInvisible",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x5
   // no analogue
   m["CU_MEM_LOCATION_TYPE_MAX"]                                          = {"hipMemLocationTypeMax",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x7FFFFFFF
 
@@ -2461,6 +2473,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_MEMPOOL_ATTR_USED_MEM_CURRENT"]                                  = {"hipMemPoolAttrUsedMemCurrent",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES};
   // cudaMemPoolAttrUsedMemHigh
   m["CU_MEMPOOL_ATTR_USED_MEM_HIGH"]                                     = {"hipMemPoolAttrUsedMemHigh",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES};
+  //
+  m["CU_MEMPOOL_ATTR_ALLOCATION_TYPE"]                                   = {"hipMemPoolAttrAllocationType",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_MEMPOOL_ATTR_EXPORT_HANDLE_TYPES"]                               = {"hipMemPoolAttrExportHandleTypes",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_MEMPOOL_ATTR_LOCATION_ID"]                                       = {"hipMemPoolAttrLocationId",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_MEMPOOL_ATTR_LOCATION_TYPE"]                                     = {"hipMemPoolAttrLocationType",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_MEMPOOL_ATTR_MAX_POOL_SIZE"]                                     = {"hipMemPoolAttrMaxPoolSize",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_MEMPOOL_ATTR_HW_DECOMPRESS_ENABLED"]                             = {"hipMemPoolAttrHwDecompressEnabled",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // cudaStreamUpdateCaptureDependenciesFlags
   m["CUstreamUpdateCaptureDependencies_flags"]                           = {"hipStreamUpdateCaptureDependenciesFlags",                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
@@ -2709,6 +2733,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_LAUNCH_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT"]              = {"hipLaunchAttributePreferredSharedMemoryCarveout",            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // cudaKernelNodeAttributeNvlinkUtilCentricScheduling
   m["CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING"]                = {"hipLaunchAttributeNvlinkUtilCentricScheduling",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_LAUNCH_ATTRIBUTE_PORTABLE_CLUSTER_SIZE_MODE"]                    = {"hipLaunchAttributePortableClusterSizeMode",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_LAUNCH_ATTRIBUTE_SHARED_MEMORY_MODE"]                            = {"hipLaunchAttributeSharedMemoryMode",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // no analogue
   m["CU_LAUNCH_ATTRIBUTE_MAX"]                                           = {"hipLaunchAttributeMax",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES};
 
@@ -3220,6 +3248,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_SHARED_MEMORY_MODE_REQUIRE_PORTABLE"]                            = {"HIP_SHARED_MEMORY_MODE_REQUIRE_PORTABLE",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   //
   m["CU_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE"]                          = {"HIP_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  //
+  m["CUstreamCigDataType"]                                               = {"hipStreamCigDataType",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CUstreamCigDataType_enum"]                                          = {"hipStreamCigDataType",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CUsharedMemoryMode enum values
+  //
+  m["STREAM_CIG_DATA_TYPE_D3D12_COMMAND_LIST"]                           = {"HIP_STREAM_CIG_DATA_TYPE_D3D12_COMMAND_LIST",                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // 4. Typedefs
 
@@ -4564,6 +4600,22 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP =
   m["CU_SHARED_MEMORY_MODE_DEFAULT"]                                     = {CUDA_132, CUDA_0,   CUDA_0  };
   m["CU_SHARED_MEMORY_MODE_REQUIRE_PORTABLE"]                            = {CUDA_132, CUDA_0,   CUDA_0  };
   m["CU_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE"]                          = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_LAUNCH_ATTRIBUTE_PORTABLE_CLUSTER_SIZE_MODE"]                    = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_LAUNCH_ATTRIBUTE_SHARED_MEMORY_MODE"]                            = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUstreamCigDataType"]                                               = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUstreamCigDataType_enum"]                                          = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["STREAM_CIG_DATA_TYPE_D3D12_COMMAND_LIST"]                           = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUstreamCigParam_st"]                                               = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUstreamCigParam"]                                                  = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUstreamCigCaptureParams_st"]                                       = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUstreamCigCaptureParams"]                                          = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_MEM_LOCATION_TYPE_INVISIBLE"]                                    = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_MEMPOOL_ATTR_ALLOCATION_TYPE"]                                   = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_MEMPOOL_ATTR_EXPORT_HANDLE_TYPES"]                               = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_MEMPOOL_ATTR_LOCATION_ID"]                                       = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_MEMPOOL_ATTR_LOCATION_TYPE"]                                     = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_MEMPOOL_ATTR_MAX_POOL_SIZE"]                                     = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_MEMPOOL_ATTR_HW_DECOMPRESS_ENABLED"]                             = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -5068,6 +5120,11 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_TYPE_CHANGED
   m["CUstreamBatchMemOpParams_union"]                                    = {CUDA_131};
   m["CUDA_HOST_NODE_PARAMS_v2_st"]                                       = {CUDA_132};
   m["CUDA_HOST_NODE_PARAMS_v2"]                                          = {CUDA_132};
+  m["CUlaunchAttributeValue"]                                            = {CUDA_132};
+  m["CUlaunchAttributeValue_union"]                                      = {CUDA_132};
+  m["CUmemLocation_st"]                                                  = {CUDA_132};
+  m["CUmemLocation"]                                                     = {CUDA_132};
+  m["CUmemLocation_v1"]                                                  = {CUDA_132};
 
   return m;
   }();
