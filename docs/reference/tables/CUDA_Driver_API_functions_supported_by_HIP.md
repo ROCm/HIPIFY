@@ -770,6 +770,7 @@
 |`CU_GRAPHICS_REGISTER_FLAGS_TEXTURE_GATHER`| | | | |`hipGraphicsRegisterFlagsTextureGather`|4.4.0| | | | | |
 |`CU_GRAPHICS_REGISTER_FLAGS_WRITE_DISCARD`| | | | |`hipGraphicsRegisterFlagsWriteDiscard`|4.4.0| | | | | |
 |`CU_GRAPH_CHILD_GRAPH_OWNERSHIP_CLONE`|12.9| | | | | | | | | | |
+|`CU_GRAPH_CHILD_GRAPH_OWNERSHIP_INVALID`|13.2| | | | | | | | | | |
 |`CU_GRAPH_CHILD_GRAPH_OWNERSHIP_MOVE`|12.9| | | | | | | | | | |
 |`CU_GRAPH_COND_ASSIGN_DEFAULT`|12.3| | | | | | | | | | |
 |`CU_GRAPH_COND_TYPE_IF`|12.3| | | | | | | | | | |
@@ -1289,6 +1290,8 @@
 |`CUcomputemode`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`CUcomputemode_enum`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`CUcontext`| | | | |`hipCtx_t`|1.6.0| | | | | |
+|`CUcoredumpCallbackEntry_st`|13.2| | | | | | | | | | |
+|`CUcoredumpCallbackHandle`|13.2| | | | | | | | | | |
 |`CUcoredumpSettings`|12.1| | | | | | | | | | |
 |`CUcoredumpSettings_enum`|12.1| | | | | | | | | | |
 |`CUctxCigParam`|12.5| | | | | | | | | | |
