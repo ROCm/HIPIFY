@@ -570,6 +570,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CUstreamCigCaptureParams"]                                          = {"hipStreamCigCaptureParams",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
+  //
+  m["CUcoredumpCallbackEntry_st"]                                        = {"hipCoredumpCallbackHandle",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CUcoredumpCallbackHandle"]                                          = {"hipCoredumpCallbackHandle",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 2. Unions
 
   m["CUstreamBatchMemOpParams"]                                          = {"hipStreamBatchMemOpParams",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
@@ -3098,6 +3103,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_GRAPH_CHILD_GRAPH_OWNERSHIP_CLONE"]                              = {"hipGraphChildGraphOwnershipClone",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // cudaGraphChildGraphOwnershipMove
   m["CU_GRAPH_CHILD_GRAPH_OWNERSHIP_MOVE"]                               = {"hipGraphChildGraphOwnershipMove",                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["CU_GRAPH_CHILD_GRAPH_OWNERSHIP_INVALID"]                            = {"hipGraphChildGraphOwnershipInvalid",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   //
   m["CUmemDecompressAlgorithm"]                                          = {"hipMemDecompressAlgorithm",                                  "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -4616,6 +4623,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP =
   m["CU_MEMPOOL_ATTR_LOCATION_TYPE"]                                     = {CUDA_132, CUDA_0,   CUDA_0  };
   m["CU_MEMPOOL_ATTR_MAX_POOL_SIZE"]                                     = {CUDA_132, CUDA_0,   CUDA_0  };
   m["CU_MEMPOOL_ATTR_HW_DECOMPRESS_ENABLED"]                             = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_GRAPH_CHILD_GRAPH_OWNERSHIP_INVALID"]                            = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUcoredumpCallbackEntry_st"]                                        = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUcoredumpCallbackHandle"]                                          = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();
