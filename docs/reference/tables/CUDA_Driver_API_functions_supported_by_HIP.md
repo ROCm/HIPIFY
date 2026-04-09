@@ -1832,6 +1832,7 @@
 |`cuKernelGetFunction`|12.0| | | | | | | | | | |
 |`cuKernelGetLibrary`|12.5| | | |`hipKernelGetLibrary`|7.2.0| | | | | |
 |`cuKernelGetName`|12.3| | | |`hipKernelGetName`|7.2.0| | | | | |
+|`cuKernelGetParamCount`|13.2| | | | | | | | | | |
 |`cuKernelGetParamInfo`|12.4| | | | | | | | | | |
 |`cuKernelSetAttribute`|12.0| | | | | | | | | | |
 |`cuKernelSetCacheConfig`|12.0| | | | | | | | | | |
@@ -1907,6 +1908,7 @@
 |`cuMemcpy3DBatchAsync`|12.8| |13.0| |`hipMemcpy3DBatchAsync`|7.1.0| | | |13.0| |
 |`cuMemcpy3DPeer`| | | | | | | | | | | |
 |`cuMemcpy3DPeerAsync`| | | | | | | | | | | |
+|`cuMemcpy3DWithAttributesAsync`|13.2| | | | | | | | | | |
 |`cuMemcpy3D_v2`| | | | |`hipDrvMemcpy3D`|3.5.0| | | | | |
 |`cuMemcpyAsync`| | | | | | | | | | | |
 |`cuMemcpyAtoA`| | | | |`hipMemcpyAtoA`|6.2.0| | | | | |
@@ -1938,6 +1940,7 @@
 |`cuMemcpyHtoD_v2`| | | | |`hipMemcpyHtoD`|1.6.0| |7.0.0| | | |
 |`cuMemcpyPeer`| | | | | | | | | | | |
 |`cuMemcpyPeerAsync`| | | | | | | | | | | |
+|`cuMemcpyWithAttributesAsync`|13.2| | | | | | | | | | |
 |`cuMemsetD16`| | | | |`hipMemsetD16`|3.0.0| | | | | |
 |`cuMemsetD16Async`| | | | |`hipMemsetD16Async`|3.0.0| | | | | |
 |`cuMemsetD16_v2`| | | | |`hipMemsetD16`|3.0.0| | | | | |
@@ -2039,6 +2042,7 @@
 |`cuStreamAddCallback`| | | | |`hipStreamAddCallback`|1.6.0| | | | | |
 |`cuStreamAttachMemAsync`| | | | |`hipStreamAttachMemAsync`|3.7.0| | | | | |
 |`cuStreamBeginCapture`|10.0| | | |`hipStreamBeginCapture`|4.3.0| | | | | |
+|`cuStreamBeginCaptureToCig`|13.2| | | | | | | | | | |
 |`cuStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | | | |
 |`cuStreamBeginCapture_ptsz`|10.1| | | | | | | | | | |
 |`cuStreamBeginCapture_v2`|10.1| | | |`hipStreamBeginCapture`|4.3.0| | | | | |
@@ -2048,6 +2052,7 @@
 |`cuStreamDestroy`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
 |`cuStreamDestroy_v2`| | | | |`hipStreamDestroy`|1.6.0| | | | | |
 |`cuStreamEndCapture`|10.0| | | |`hipStreamEndCapture`|4.3.0| | | | | |
+|`cuStreamEndCaptureToCig`|13.2| | | | | | | | | | |
 |`cuStreamGetAttribute`|11.0| | | |`hipStreamGetAttribute`|7.1.0| | | | | |
 |`cuStreamGetCaptureInfo`|10.1| |13.0| |`hipStreamGetCaptureInfo`|5.0.0| | | |13.0| |
 |`cuStreamGetCaptureInfo_v2`|11.3| | | |`hipStreamGetCaptureInfo_v2`|5.0.0| | | | | |
@@ -2116,6 +2121,7 @@
 |`cuFuncGetAttribute`| | | | |`hipFuncGetAttribute`|2.8.0| | | | | |
 |`cuFuncGetModule`|11.0| | | | | | | | | | |
 |`cuFuncGetName`|12.3| | | | | | | | | | |
+|`cuFuncGetParamCount`|13.2| | | | | | | | | | |
 |`cuFuncGetParamInfo`|12.4| | | | | | | | | | |
 |`cuFuncIsLoaded`|12.4| | | | | | | | | | |
 |`cuFuncLoad`|12.4| | | | | | | | | | |
@@ -2125,6 +2131,7 @@
 |`cuLaunchCooperativeKernel`|9.0| | | |`hipModuleLaunchCooperativeKernel`|5.5.0| | | | | |
 |`cuLaunchCooperativeKernelMultiDevice`|9.0|11.3| | |`hipModuleLaunchCooperativeKernelMultiDevice`|5.5.0| | | | | |
 |`cuLaunchHostFunc`|10.0| | | |`hipLaunchHostFunc`|5.2.0| | | | | |
+|`cuLaunchHostFunc_v2`|13.2| | | | | | | | | | |
 |`cuLaunchKernel`| | | | |`hipModuleLaunchKernel`|1.6.0| | | | | |
 |`cuLaunchKernelEx`|11.8| | | |`hipDrvLaunchKernelEx`|7.0.0| | | | | |
 
@@ -2247,6 +2254,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
+|`cuGraphNodeGetParams`|13.2| | | | | | | | | | |
 |`cuOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | | |
 |`cuOccupancyMaxActiveBlocksPerMultiprocessor`| | | | |`hipModuleOccupancyMaxActiveBlocksPerMultiprocessor`|3.5.0| | | | | |
 |`cuOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | | |`hipModuleOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|3.5.0| | | | | |
@@ -2359,8 +2367,13 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
+|`CUcoredumpStatusCallback`|13.2| | | | | | | | | | |
+|`cuCoredumpDeregisterCompleteCallback`|13.2| | | | | | | | | | |
+|`cuCoredumpDeregisterStartCallback`|13.2| | | | | | | | | | |
 |`cuCoredumpGetAttribute`|12.1| | | | | | | | | | |
 |`cuCoredumpGetAttributeGlobal`|12.1| | | | | | | | | | |
+|`cuCoredumpRegisterCompleteCallback`|13.2| | | | | | | | | | |
+|`cuCoredumpRegisterStartCallback`|13.2| | | | | | | | | | |
 |`cuCoredumpSetAttribute`|12.1| | | | | | | | | | |
 |`cuCoredumpSetAttributeGlobal`|12.1| | | | | | | | | | |
 
