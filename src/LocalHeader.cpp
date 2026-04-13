@@ -64,8 +64,8 @@ static bool pathExists(const std::string &p) {
 }
 
 namespace {
-  static const std::regex LocalIncludeRe(
-      R"(^\s*#\s*include\s*\"([^\"\n]+)\"\s*(?://.*)?)", std::regex::ECMAScript);
+  static const std::regex LocalIncludeRe
+      (R"re(^\s*#\s*include\s*"([^"\n]+)")re", std::regex::ECMAScript);
 
   static const std::regex SystemIncludeRe(
       R"(^\s*#\s*include\s*<([^>\n]+)>)", std::regex::ECMAScript);
@@ -107,7 +107,7 @@ namespace {
     std::smatch m;
 
     while (std::getline(iss, line)) {
-      if (std::regex_match(line, m, LocalIncludeRe)) {
+      if (std::regex_search(line, m, LocalIncludeRe)) {
         std::string quotedName = m[1].str();
         std::string absPath;
         if (resolveLocalIncludeInternal(mainSourceAbspath, quotedName, absPath)) {
@@ -158,7 +158,7 @@ bool collectLocalQuotedIncludes(const std::string &mainSourceAbsPath,
   std::istringstream iss(content);
   std::string line;
   while (std::getline(iss, line)) {
-    if (std::regex_match(line, m, LocalIncludeRe)) {
+    if (std::regex_search(line, m, LocalIncludeRe)) {
       std::string rel = m[1].str();
       std::string abs;
       if (resolveLocalIncludeInternal(mainSourceAbsPath, rel, abs)){
@@ -212,7 +212,8 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
   }
 
   while (!work.empty()) {
-    auto [hdr, parentPath] = work.back();
+    std::string hdr = work.back().first;
+    std::string parentPath = work.back().second;
     work.pop_back();
     if (processed.count(hdr)) {
       outs() << sHipify << sWarning
@@ -256,7 +257,7 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
       std::string line;
       std::vector<std::string> newHeaders;
       while (std::getline(iss, line)) {
-        if (std::regex_match(line, m, LocalIncludeRe)) {
+        if (std::regex_search(line, m, LocalIncludeRe)) {
           std::string rel = m[1].str();
           std::string abs;
           if (resolveLocalIncludeInternal(hdr, rel, abs) &&
