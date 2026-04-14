@@ -94,20 +94,15 @@ namespace perl {
   const string sHipDNNOnlyUnsupportedFunctions = "HipDNNOnlyUnsupportedFunctions";
   const string sUnsupportedDeviceFunctions = "UnsupportedDeviceFunctions";
   const string sUnsupportedDeviceDataTypes = "UnsupportedDeviceDataTypes";
-  const string sSimpleMappings = "simpleMappings";
   const string sSimpleIncludes = "simpleIncludes";
-  const string sRocMappings = "rocMappings";
   const string sRocIncludes = "rocIncludes";
-  const string sMIOpenMappings = "MIOpenMappings";
   const string sMIOpenIncludes = "MIOpenIncludes";
   const string sSubst = "subst";
-  const string sExperimentalMappings = "experimentalMappings";
   const string sExperimentalIncludes = "experimentalIncludes";
   const string sTransformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
   const string sSupportedDeviceFunctions = "SupportedDeviceFunctions";
   const string sSupportedDeviceDataTypes = "SupportedDeviceDataTypes";
-
   const string sCudaDevice = "cudaDevice";
   const string sCudaDeviceId = "cudaDeviceId";
   const string sCudaDevices = "cudaDevices";
