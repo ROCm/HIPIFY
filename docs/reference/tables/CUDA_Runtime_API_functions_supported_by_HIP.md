@@ -1324,6 +1324,7 @@
 |`cudaErrorUnsupportedExecAffinity`|11.4| | | | | | | | | | |
 |`cudaErrorUnsupportedLimit`| | | | |`hipErrorUnsupportedLimit`|1.6.0| | | | | |
 |`cudaErrorUnsupportedPtxVersion`|11.1| | | | | | | | | | |
+|`cudaErrorVersionTranslation`|13.2| | | | | | | | | | |
 |`cudaError_t`| | | | |`hipError_t`|1.5.0| | | | | |
 |`cudaEventBlockingSync`| | | | |`hipEventBlockingSync`|1.6.0| | | | | |
 |`cudaEventDefault`| | | | |`hipEventDefault`|1.6.0| | | | | |
@@ -1532,12 +1533,15 @@
 |`cudaHostAllocWriteCombined`| | | | |`hipHostMallocWriteCombined`|1.6.0| | | | | |
 |`cudaHostFn_t`|10.0| | | |`hipHostFn_t`|4.3.0| | | | | |
 |`cudaHostNodeParams`|10.0| | | |`hipHostNodeParams`|4.3.0| | | | | |
-|`cudaHostNodeParamsV2`|12.2| | | | | | | | | | |
+|`cudaHostNodeParamsV2`|12.2| |13.2| | | | | | | | |
 |`cudaHostRegisterDefault`| | | | |`hipHostRegisterDefault`|1.6.0| | | | | |
 |`cudaHostRegisterIoMemory`|7.5| | | |`hipHostRegisterIoMemory`|1.6.0| | | | | |
 |`cudaHostRegisterMapped`| | | | |`hipHostRegisterMapped`|1.6.0| | | | | |
 |`cudaHostRegisterPortable`| | | | |`hipHostRegisterPortable`|1.6.0| | | | | |
 |`cudaHostRegisterReadOnly`|11.1| | | |`hipHostRegisterReadOnly`|5.6.0| | | | | |
+|`cudaHostTaskBlocking`|13.2| | | | | | | | | | |
+|`cudaHostTaskSpinWait`|13.2| | | | | | | | | | |
+|`cudaHostTaskSyncMode`|13.2| | | | | | | | | | |
 |`cudaInitDeviceFlagsAreValid`|12.0| | | | | | | | | | |
 |`cudaInvalidDeviceId`|8.0| | | |`hipInvalidDeviceId`|3.7.0| | | | | |
 |`cudaIpcEventHandle_st`| | | | |`hipIpcEventHandle_st`|3.5.0| | | | | |
@@ -1668,6 +1672,12 @@
 |`cudaMemLocationTypeInvalid`|11.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
 |`cudaMemLocationTypeNone`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | | |
 |`cudaMemPoolAttr`|11.2| | | |`hipMemPoolAttr`|5.2.0| | | | | |
+|`cudaMemPoolAttrAllocationType`|13.2| | | |`hipMemPoolAttrAllocationType`| | | | | | |
+|`cudaMemPoolAttrExportHandleTypes`|13.2| | | |`hipMemPoolAttrExportHandleTypes`| | | | | | |
+|`cudaMemPoolAttrHwDecompressEnabled`|13.2| | | |`hipMemPoolAttrHwDecompressEnabled`| | | | | | |
+|`cudaMemPoolAttrLocationId`|13.2| | | |`hipMemPoolAttrLocationId`| | | | | | |
+|`cudaMemPoolAttrLocationType`|13.2| | | |`hipMemPoolAttrLocationType`| | | | | | |
+|`cudaMemPoolAttrMaxPoolSize`|13.2| | | |`hipMemPoolAttrMaxPoolSize`| | | | | | |
 |`cudaMemPoolAttrReleaseThreshold`|11.2| | | |`hipMemPoolAttrReleaseThreshold`|5.2.0| | | | | |
 |`cudaMemPoolAttrReservedMemCurrent`|11.3| | | |`hipMemPoolAttrReservedMemCurrent`|5.2.0| | | | | |
 |`cudaMemPoolAttrReservedMemHigh`|11.3| | | |`hipMemPoolAttrReservedMemHigh`|5.2.0| | | | | |
@@ -1733,7 +1743,7 @@
 |`cudaOutputMode`| | | |12.0| | | | | | | |
 |`cudaOutputMode_t`| | | |12.0| | | | | | | |
 |`cudaPitchedPtr`| | | | |`hipPitchedPtr`|1.7.0| | | | | |
-|`cudaPointerAttributes`| | | | |`hipPointerAttribute_t`|1.6.0| | | | | |
+|`cudaPointerAttributes`| | |13.2| |`hipPointerAttribute_t`|1.6.0| | | | | |
 |`cudaPos`| | | | |`hipPos`|1.7.0| | | | | |
 |`cudaPreferBinary`|12.8| | | | | | | | | | |
 |`cudaPreferPtx`|12.8| | | | | | | | | | |
