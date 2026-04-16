@@ -1421,6 +1421,7 @@
 |`cudaGetDriverEntryPointFlags`|11.3| | | | | | | | | | |
 |`cudaGraphChildGraphNodeOwnership`|12.9| | | | | | | | | | |
 |`cudaGraphChildGraphOwnershipClone`|12.9| | | | | | | | | | |
+|`cudaGraphChildGraphOwnershipInvalid`|13.2| | | | | | | | | | |
 |`cudaGraphChildGraphOwnershipMove`|12.9| | | | | | | | | | |
 |`cudaGraphCondAssignDefault`|12.3| | | | | | | | | | |
 |`cudaGraphCondTypeIf`|12.3| | | | | | | | | | |
@@ -1572,6 +1573,11 @@
 |`cudaJitWallTime`|12.8| | | |`hipJitOptionWallTime`|6.4.0| | | | | |
 |`cudaJit_CacheMode`|12.8| | | | | | | | | | |
 |`cudaJit_Fallback`|12.8| | | | | | | | | | |
+|`cudaKernelFunctionType`|13.2| | | | | | | | | | |
+|`cudaKernelFunctionTypeDeviceEntry`|13.2| | | | | | | | | | |
+|`cudaKernelFunctionTypeFunction`|13.2| | | | | | | | | | |
+|`cudaKernelFunctionTypeKernel`|13.2| | | | | | | | | | |
+|`cudaKernelFunctionTypeUnspecified`|13.2| | | | | | | | | | |
 |`cudaKernelNodeAttrID`|11.0| | | |`hipKernelNodeAttrID`|5.2.0| | | | | |
 |`cudaKernelNodeAttrValue`|11.0| | | |`hipKernelNodeAttrValue`|5.2.0| | | | | |
 |`cudaKernelNodeAttributeAccessPolicyWindow`|11.0| | | |`hipKernelNodeAttributeAccessPolicyWindow`|5.2.0| | | | | |
@@ -1585,7 +1591,7 @@
 |`cudaKernelNodeAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | | |
 |`cudaKernelNodeAttributePriority`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | | | |
 |`cudaKernelNodeParams`|10.0| | | |`hipKernelNodeParams`|4.3.0| | | | | |
-|`cudaKernelNodeParamsV2`|12.2| |13.1| | | | | | | | |
+|`cudaKernelNodeParamsV2`|12.2| |13.1, 13.2| | | | | | | | |
 |`cudaKernel_t`|12.1| | | |`hipKernel_t`|7.1.0| | | | | |
 |`cudaKeyValuePair`| | | |12.0| | | | | | | |
 |`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | | |
@@ -1600,13 +1606,16 @@
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | | |
 |`cudaLaunchAttributeNvlinkUtilCentricScheduling`|13.0| | | | | | | | | | |
+|`cudaLaunchAttributePortableClusterMode`|13.2| | | | | | | | | | |
+|`cudaLaunchAttributePortableClusterSizeMode`|13.2| | | | | | | | | | |
 |`cudaLaunchAttributePreferredClusterDimension`|12.8| | | | | | | | | | |
 |`cudaLaunchAttributePreferredSharedMemoryCarveout`|12.5| | | | | | | | | | |
 |`cudaLaunchAttributePriority`|11.8| | | |`hipLaunchAttributePriority`|6.2.0| | | | | |
 |`cudaLaunchAttributeProgrammaticEvent`|11.8| | | | | | | | | | |
 |`cudaLaunchAttributeProgrammaticStreamSerialization`|11.8| | | | | | | | | | |
+|`cudaLaunchAttributeSharedMemoryMode`|13.2| | | | | | | | | | |
 |`cudaLaunchAttributeSynchronizationPolicy`|11.8| | | |`hipLaunchAttributeSynchronizationPolicy`|7.1.0| | | | | |
-|`cudaLaunchAttributeValue`|11.8| |13.0| |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
+|`cudaLaunchAttributeValue`|11.8| |13.0, 13.2| |`hipLaunchAttributeValue`|6.2.0| |7.1.0| | | |
 |`cudaLaunchAttribute_st`|11.8| | | |`hipLaunchAttribute_st`|7.0.0| | | | | |
 |`cudaLaunchConfig_st`|11.8| | | |`hipLaunchConfig_st`|7.0.0| | | | | |
 |`cudaLaunchConfig_t`|11.8| | | |`hipLaunchConfig_t`|7.0.0| | | | | |
@@ -1616,6 +1625,9 @@
 |`cudaLaunchMemSyncDomainMap_st`|12.0| | | |`hipLaunchMemSyncDomainMap`|7.1.0| | | | | |
 |`cudaLaunchMemSyncDomainRemote`|12.0| | | |`hipLaunchMemSyncDomainRemote`|7.1.0| | | | | |
 |`cudaLaunchParams`|9.0| | |13.0|`hipLaunchParams`|2.6.0| | | | | |
+|`cudaLaunchPortableClusterModeAllowNonPortable`|13.2| | | | | | | | | | |
+|`cudaLaunchPortableClusterModeDefault`|13.2| | | | | | | | | | |
+|`cudaLaunchPortableClusterModeRequirePortable`|13.2| | | | | | | | | | |
 |`cudaLibraryBinaryIsPreserved`|12.8| | | |`hipLibraryBinaryIsPreserved`|7.1.0| | | | | |
 |`cudaLibraryHostUniversalFunctionAndDataTable`|12.8| | | |`hipLibraryHostUniversalFunctionAndDataTable`|7.1.0| | | | | |
 |`cudaLibraryOption`|12.8| | | |`hipLibraryOption`|7.1.0| | | | | |
@@ -1670,6 +1682,7 @@
 |`cudaMemLocationTypeHostNuma`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | | |
 |`cudaMemLocationTypeHostNumaCurrent`|12.2| | | |`hipMemLocationTypeHostNumaCurrent`|7.1.0| | | | | |
 |`cudaMemLocationTypeInvalid`|11.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | | |
+|`cudaMemLocationTypeInvisible`|13.2| | | | | | | | | | |
 |`cudaMemLocationTypeNone`|13.0| | | |`hipMemLocationTypeNone`|7.1.0| | | | | |
 |`cudaMemPoolAttr`|11.2| | | |`hipMemPoolAttr`|5.2.0| | | | | |
 |`cudaMemPoolAttrAllocationType`|13.2| | | |`hipMemPoolAttrAllocationType`| | | | | | |
@@ -1797,6 +1810,10 @@
 |`cudaSharedMemBankSizeEightByte`| | | | |`hipSharedMemBankSizeEightByte`|1.6.0| | | | | |
 |`cudaSharedMemBankSizeFourByte`| | | | |`hipSharedMemBankSizeFourByte`|1.6.0| | | | | |
 |`cudaSharedMemConfig`| |12.4| | |`hipSharedMemConfig`|1.6.0| | | | | |
+|`cudaSharedMemoryMode`|13.2| | | | | | | | | | |
+|`cudaSharedMemoryModeAllowNonPortable`|13.2| | | | | | | | | | |
+|`cudaSharedMemoryModeDefault`|13.2| | | | | | | | | | |
+|`cudaSharedMemoryModeRequirePortable`|13.2| | | | | | | | | | |
 |`cudaSharedmemCarveoutDefault`|9.0| | | | | | | | | | |
 |`cudaSharedmemCarveoutMaxL1`|9.0| | | | | | | | | | |
 |`cudaSharedmemCarveoutMaxShared`|9.0| | | | | | | | | | |

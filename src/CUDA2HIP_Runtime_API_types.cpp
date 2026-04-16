@@ -1880,6 +1880,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaMemLocationTypeHostNuma"]                              = {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 3
   // CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT
   m["cudaMemLocationTypeHostNumaCurrent"]                       = {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 4
+  // CU_MEM_LOCATION_TYPE_INVISIBLE
+  m["cudaMemLocationTypeInvisible"]                             = {"hipMemLocationTypeInvisible",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 5
 
   // CUmemAllocationType
   m["cudaMemAllocationType"]                                    = {"hipMemAllocationType",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
@@ -2074,6 +2076,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaLaunchAttributePreferredSharedMemoryCarveout"]         = {"hipLaunchAttributePreferredSharedMemoryCarveout",          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CU_LAUNCH_ATTRIBUTE_NVLINK_UTIL_CENTRIC_SCHEDULING
   m["cudaLaunchAttributeNvlinkUtilCentricScheduling"]           = {"hipLaunchAttributeNvlinkUtilCentricScheduling",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_LAUNCH_ATTRIBUTE_PORTABLE_CLUSTER_SIZE_MODE
+  m["cudaLaunchAttributePortableClusterSizeMode"]               = {"hipLaunchAttributePortableClusterSizeMode",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_LAUNCH_ATTRIBUTE_PORTABLE_CLUSTER_SIZE_MODE
+  m["cudaLaunchAttributeSharedMemoryMode"]                      = {"hipLaunchAttributeSharedMemoryMode",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // CUgraphInstantiateResult
   m["cudaGraphInstantiateResult"]                               = {"hipGraphInstantiateResult",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
@@ -2265,6 +2271,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaGraphChildGraphOwnershipClone"]                        = {"hipGraphChildGraphOwnershipClone",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CU_GRAPH_CHILD_GRAPH_OWNERSHIP_MOVE
   m["cudaGraphChildGraphOwnershipMove"]                         = {"hipGraphChildGraphOwnershipMove",                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_GRAPH_CHILD_GRAPH_OWNERSHIP_INVALID
+  m["cudaGraphChildGraphOwnershipInvalid"]                      = {"hipGraphChildGraphOwnershipInvalid",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // CUatomicOperation
   m["cudaAtomicOperation"]                                      = {"hipAtomicOperation",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -2381,6 +2389,38 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaHostTaskBlocking"]                                     = {"hipHostTaskBlocking",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CU_HOST_TASK_SPINWAIT
   m["cudaHostTaskSpinWait"]                                     = {"hipHostTaskSpinWait",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  // no analogue
+  m["cudaKernelFunctionType"]                                   = {"hipKernelFunctionType",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaKernelFunctionType enum values
+  // no analogue
+  m["cudaKernelFunctionTypeUnspecified"]                        = {"hipKernelFunctionTypeUnspecified",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // no analogue
+  m["cudaKernelFunctionTypeDeviceEntry"]                        = {"hipKernelFunctionTypeDeviceEntry",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // no analogue
+  m["cudaKernelFunctionTypeKernel"]                             = {"hipKernelFunctionTypeKernel",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // no analogue
+  m["cudaKernelFunctionTypeFunction"]                           = {"hipKernelFunctionTypeFunction",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  // CUlaunchAttributePortableClusterMode
+  m["cudaLaunchAttributePortableClusterMode"]                   = {"hipLaunchAttributePortableClusterMode",                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaLaunchAttributePortableClusterMode enum values
+  // CU_LAUNCH_PORTABLE_CLUSTER_MODE_DEFAULT
+  m["cudaLaunchPortableClusterModeDefault"]                     = {"hipLaunchPortableClusterModeDefault",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_LAUNCH_PORTABLE_CLUSTER_MODE_REQUIRE_PORTABLE
+  m["cudaLaunchPortableClusterModeRequirePortable"]             = {"hipLaunchPortableClusterModeRequirePortable",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_LAUNCH_PORTABLE_CLUSTER_MODE_ALLOW_NON_PORTABLE
+  m["cudaLaunchPortableClusterModeAllowNonPortable"]            = {"hipLaunchPortableClusterModeAllowNonPortable",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  // CUsharedMemoryMode
+  m["cudaSharedMemoryMode"]                                     = {"hipSharedMemoryMode",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaSharedMemoryMode enum values
+  // CU_SHARED_MEMORY_MODE_DEFAULT
+  m["cudaSharedMemoryModeDefault"]                              = {"hipSharedMemoryModeDefault",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_SHARED_MEMORY_MODE_REQUIRE_PORTABLE
+  m["cudaSharedMemoryModeRequirePortable"]                      = {"hipSharedMemoryModeRequirePortable",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE
+  m["cudaSharedMemoryModeAllowNonPortable"]                     = {"hipSharedMemoryModeAllowNonPortable",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // 4. Typedefs
 
@@ -3474,6 +3514,23 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   m["cudaMemPoolAttrLocationType"]                              = {CUDA_132, CUDA_0,   CUDA_0  };
   m["cudaMemPoolAttrMaxPoolSize"]                               = {CUDA_132, CUDA_0,   CUDA_0  };
   m["cudaMemPoolAttrHwDecompressEnabled"]                       = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaMemLocationTypeInvisible"]                             = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaKernelFunctionType"]                                   = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaKernelFunctionTypeUnspecified"]                        = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaKernelFunctionTypeDeviceEntry"]                        = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaKernelFunctionTypeKernel"]                             = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaKernelFunctionTypeFunction"]                           = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaGraphChildGraphOwnershipInvalid"]                      = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaLaunchAttributePortableClusterMode"]                   = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaLaunchPortableClusterModeDefault"]                     = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaLaunchPortableClusterModeRequirePortable"]             = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaLaunchPortableClusterModeAllowNonPortable"]            = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaSharedMemoryMode"]                                     = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaSharedMemoryModeDefault"]                              = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaSharedMemoryModeRequirePortable"]                      = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaSharedMemoryModeAllowNonPortable"]                     = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaLaunchAttributePortableClusterSizeMode"]               = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaLaunchAttributeSharedMemoryMode"]                      = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -3483,10 +3540,10 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGE
 
   m["cudaExternalSemaphoreSignalParams"]                        = {CUDA_130};
   m["cudaExternalSemaphoreWaitParams"]                          = {CUDA_130};
-  m["cudaLaunchAttributeValue"]                                 = {CUDA_130};
+  m["cudaLaunchAttributeValue"]                                 = {CUDA_130, CUDA_132};
   m["cudaMemcpyNodeParams"]                                     = {CUDA_131};
   m["cudaConditionalNodeParams"]                                = {CUDA_131};
-  m["cudaKernelNodeParamsV2"]                                   = {CUDA_131};
+  m["cudaKernelNodeParamsV2"]                                   = {CUDA_131, CUDA_132};
   m["cudaMemsetParamsV2"]                                       = {CUDA_131};
   m["cudaHostNodeParamsV2"]                                     = {CUDA_132};
   m["cudaPointerAttributes"]                                    = {CUDA_132};
