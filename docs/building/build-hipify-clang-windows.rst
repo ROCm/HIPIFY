@@ -13,7 +13,7 @@ Building LLVM >= 10.0.0 (Recommended)
 
 .. code-block:: bash
 
-  # Assuming commands are being run in Windows CMD. 
+  # Assuming commands are being run in Windows CMD.
   # Use "$env:ROOT_DIR = (Get-Location).Path" to set the environment variable for PowerShell and use $env:ROOT_DIR to access it.
   set ROOT_DIR=%cd%
 
@@ -22,13 +22,29 @@ Building LLVM >= 10.0.0 (Recommended)
   mkdir build dist
   cd build
 
-  cmake -G "Visual Studio 17 2022" -A x64 -Thost=x64 -DCMAKE_INSTALL_PREFIX=../dist -DLLVM_TARGETS_TO_BUILD="" -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_INCLUDE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release ../llvm-project/llvm
+  LLVM < 17.0.0:
+
+.. code-block:: bash
+
+   cmake -G "Visual Studio 17 2022" -A x64 -Thost=x64 -DCMAKE_INSTALL_PREFIX=../dist -DLLVM_TARGETS_TO_BUILD="" -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_INCLUDE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release ../llvm-project/llvm
 
   # Run Visual Studio 17 2022, open the generated LLVM.sln, build all, and build project "INSTALL".
   # Alternatively, you can build using "msbuild INSTALL.vcxproj /m" using the developer command prompt.
 
+  LLVM >= 17.0.0:
+
+.. code-block:: bash
+
+   cmake -G "Visual Studio 18 2026" -A x64 -Thost=x64 -DCMAKE_INSTALL_PREFIX=../dist -DLLVM_TARGETS_TO_BUILD="" -DLLVM_ENABLE_PROJECTS="clang" -DLLVM_INCLUDE_TESTS=OFF -DCMAKE_BUILD_TYPE=Release ../llvm-project/llvm
+
+  # Run Visual Studio 18 2026, open the generated LLVM.slnx, build all, and build project "INSTALL".
+  # Alternatively, you can build using "msbuild INSTALL.vcxproj /m" using the developer command prompt.
+
 .. note::
-  If LLVM and Clang are built in ``Debug`` mode (with ``-DCMAKE_BUILD_TYPE=Debug``), please build ``HIPIFY`` in ``Debug`` mode as well.
+    The minimal CMake version, that supports Visual Studio 18 2026, is 4.2.0
+
+.. note::
+    If LLVM and Clang are built in ``Debug`` mode (with ``-DCMAKE_BUILD_TYPE=Debug``), please build ``HIPIFY`` in ``Debug`` mode as well.
 
   We support 64-bit build mode (``-Thost=x64``). Please build LLVM and Clang in 64-bit mode.
 
@@ -61,9 +77,9 @@ Building HIPIFY
 
   # To ensure LLVM is found, or in the case of multiple LLVM instances, 
   # specify the path to the root folder containing the LLVM distribution.
-  cmake -G "Visual Studio 17 2022" -A x64 -Thost=x64 -DCMAKE_PREFIX_PATH="../dist" -DCMAKE_INSTALL_PREFIX="../dist" -DCMAKE_BUILD_TYPE=Release ../hipify
+  cmake -G "Visual Studio 18 2026 " -A x64 -Thost=x64 -DCMAKE_PREFIX_PATH="../dist" -DCMAKE_INSTALL_PREFIX="../dist" -DCMAKE_BUILD_TYPE=Release ../hipify
 
-  # Run Visual Studio 17 2022, open the generated LLVM.sln, build all, and build project "INSTALL".
+  # Run Visual Studio 18 2026, open the generated LLVM.sln, build all, and build project "INSTALL".
   # Alternatively, you can build using "msbuild INSTALL.vcxproj /m" using the developer command prompt.
 
 You can find the binary at ``./dist/bin/hipify-clang`` or at the folder specified by the ``-DCMAKE_INSTALL_PREFIX`` option.
@@ -152,7 +168,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
 - Set the ``HIPIFY_CLANG_TESTS`` option to ``ON``: ``-DHIPIFY_CLANG_TESTS=ON``.
 
-- Build and run tests. Run ``Visual Studio 17 2022``, open the generated ``hipify-clang.sln``, to build the project ``test-hipify``.
+- Build and run tests. Run ``Visual Studio 18 2026``, open the generated ``hipify-clang.slnx``, to build the project ``test-hipify``.
 
 Windows testing
 ===============
@@ -237,40 +253,40 @@ Tested configurations:
   * - ``17.0.1`` :sup:`6` - ``18.1.8`` :sup:`7`
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 9.13.1``
-    - ``2019.16.11.50, 2022.17.14.12``
+    - ``2019.16.11.50, 2022.17.14.12, 2026.18.5.0``
     - ``4.1.1``
     - ``3.13.6``
   * - ``19.1.0 - 20.1.8``
     - ``7.0 - 12.8.1``
     - ``8.0.5  - 9.20.0``
-    - ``2019.16.11.51, 2022.17.14.14``
+    - ``2019.16.11.51, 2022.17.14.14, 2026.18.5.0``
     - ``4.1.1``
     - ``3.13.7``
   * - ``21.1.0 - 22.1.3``
     - ``7.0 - 12.9.1``
     - ``8.0.5  - 9.20.0``
-    - ``2019.16.11.54, 2022.17.14.29, 2026.18.4.1``
+    - ``2019.16.11.54, 2022.17.14.29, 2026.18.5.0``
     - ``4.3.0``
     - ``3.14.3``
 
-:sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 2017.
+:sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 15 2017.
 
-To build LLVM 14.x.x correctly using Visual Studio 2017, add ``-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON``
+To build LLVM 14.x.x correctly using Visual Studio 15 2017, add ``-DLLVM_FORCE_USE_OLD_TOOLCHAIN=ON``
 to corresponding CMake command line.
 
-You can also build LLVM \< 14.x.x correctly using Visual Studio 2017 without the
+You can also build LLVM \< 14.x.x correctly using Visual Studio 15 2017 without the
 ``LLVM_FORCE_USE_OLD_TOOLCHAIN`` option.
 
 :sup:`6` Note that LLVM 17.0.0 was withdrawn due to an issue; use 17.0.1 or newer instead.
 
 :sup:`7` Note that LLVM 18.0.0 has never been released; use 18.1.0 or newer instead.
 
-Building with testing support using ``Visual Studio 17 2022`` on ``Windows 11``:
+Building with testing support using ``Visual Studio 18 2026`` on ``Windows 11``:
 
 .. code-block:: shell
 
   cmake \
-  -G "Visual Studio 17 2022" \
+  -G "Visual Studio 18 2026" \
   -A x64 \
   -Thost=x64 \
   -DHIPIFY_CLANG_TESTS=ON \
@@ -289,16 +305,16 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/22.1.3`
 .. code-block:: shell
 
   -- Selecting Windows SDK version 10.0.26100.0 to target Windows 10.0.26200.
-  -- The C compiler identification is MSVC 19.44.35225.0
-  -- The CXX compiler identification is MSVC 19.44.35225.0
+  -- The C compiler identification is MSVC 19.50.35729.0
+  -- The CXX compiler identification is MSVC 19.50.35729.0
   -- Detecting C compiler ABI info
   -- Detecting C compiler ABI info - done
-  -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+  -- Check for working C compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe - skipped
   -- Detecting C compile features
   -- Detecting C compile features - done
   -- Detecting CXX compiler ABI info
   -- Detecting CXX compiler ABI info - done
-  -- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/2022/Community/VC/Tools/MSVC/14.44.35207/bin/Hostx64/x64/cl.exe - skipped
+  -- Check for working CXX compiler: C:/Program Files/Microsoft Visual Studio/18/Community/VC/Tools/MSVC/14.50.35717/bin/Hostx64/x64/cl.exe - skipped
   -- Detecting CXX compile features
   -- Detecting CXX compile features - done
   -- HIPIFY config:
@@ -311,6 +327,8 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/22.1.3`
   --    - Clang include path    : D:/LLVM/22.1.3/dist/include
   --    - LLVM Include path     : D:/LLVM/22.1.3/dist/include
   --    - Binary path           : D:/LLVM/22.1.3/dist/bin
+  -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS
+  -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS - Failed
   -- ---- The below configuring for hipify-clang testing only ----
   -- Found Python: C:/Users/TT/AppData/Local/Programs/Python/Python314/python.exe (found suitable version "3.14.3", required range is "3.0...3.15") found components: Interpreter
   -- Found lit: C:/Users/TT/AppData/Local/Programs/Python/Python314/Scripts/lit.exe
@@ -330,6 +348,6 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:/LLVM/22.1.3`
   --    - cuTENSOR path         : D:/CUDA/cuTensor/2.6.0.0/include
   --    - CUB path              : C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9/include
   --    - cuFile path           : D:/CUDA/cuFile/1.17.0/include
-  -- Configuring done (4.9s)
-  -- Generating done (0.2s)
+  -- Configuring done (4.2s)
+  -- Generating done (0.1s)
   -- Build files have been written to: D:/HIPIFY/build
