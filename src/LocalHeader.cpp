@@ -91,38 +91,62 @@ namespace {
     }
     return false;
   }
-
-  bool collectPrecedingIncludes(const std::string &mainSourceAbspath,
-                                const std::string &targetHeaderAbspath,
-                                std::vector<std::string> &outIncludes) {
-    std::string mainSourceContent;
-    if (!readFile(mainSourceAbspath, mainSourceContent)) {
-      errs() << sHipify << sError << "Cannot read source files: "
-            << mainSourceAbspath << "\n";
+  
+  static bool collectIncludesBefore(const std::string &filePath,
+                                    const std::string &stopAtAbsPath,
+                                    bool collectLocal,
+                                    std::set<std::string> &seen,
+                                    std::vector<std::string> &outIncludes) {
+    std::string content;
+    if (!readFile(filePath, content))
       return false;
-    }
-
-    std::istringstream iss(mainSourceContent);
+    
+    std::istringstream iss(content);
     std::string line;
     std::smatch m;
 
     while (std::getline(iss, line)) {
       if (std::regex_search(line, m, LocalIncludeRe)) {
-        std::string quotedName = m[1].str();
-        std::string absPath;
-        if (resolveLocalIncludeInternal(mainSourceAbspath, quotedName, absPath)) {
-          if (absPath == targetHeaderAbspath)
+        std::string abspath;
+        if (resolveLocalIncludeInternal(filePath, m[1].str(), abspath)) {
+          if (abspath == stopAtAbsPath)
             break;
-          outIncludes.push_back(absPath);
+          if (collectLocal && seen.insert(abspath).second)
+            outIncludes.push_back(abspath);
         }
       }
-
       if (std::regex_search(line, m, SystemIncludeRe)) {
-        outIncludes.push_back(m[1].str());
+        std::string sysInclude = m[1].str();
+        if (seen.insert(sysInclude).second)
+          outIncludes.push_back(sysInclude);
       }
     }
-
     return true;
+  }
+
+  bool collectPrecedingIncludes(const std::string &mainSourceAbspath,
+                                const std::string &targetHeaderAbspath,
+                                std::vector<std::string> &outIncludes) {
+
+    std::set<std::string> seen;
+
+    if (!collectIncludesBefore(mainSourceAbspath, targetHeaderAbspath, true, seen, outIncludes)) {
+      errs() << sHipify << sError << "Cannot read source files: "
+             << mainSourceAbspath << "\n";
+      return false;
+    }
+    return true;
+  }
+
+  void collectAncestorSystemIncludes(
+      const std::vector<std::string> &ancestorChain,
+      std::vector<std::string> &outIncludes) {
+
+    std::set<std::string> seen(outIncludes.begin(), outIncludes.end());
+
+    for (size_t i = 1; i < ancestorChain.size(); ++i) {
+      collectIncludesBefore(ancestorChain[i], ancestorChain[i - 1], false, seen, outIncludes);
+    }
   }
 }
 
@@ -198,9 +222,9 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
            << ": " << sys::path::filename(initial[i]) << "\n";
   }
 
-  std::vector<std::pair<std::string, std::string>> work;
+  std::vector<std::pair<std::string, std::vector<std::string>>> work;
   for (const auto &h : initial) {
-    work.push_back({h, mainSourceAbsPath});
+    work.push_back({h, std::vector<std::string>{mainSourceAbsPath}});
   }
   std::set<std::string> processed;
   std::set<std::string> queued;
@@ -213,8 +237,9 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
 
   while (!work.empty()) {
     std::string hdr = work.back().first;
-    std::string parentPath = work.back().second;
+    std::vector<std::string> ancestorChain = work.back().second;
     work.pop_back();
+    std::string parentPath = ancestorChain[0];
     if (processed.count(hdr)) {
       outs() << sHipify << sWarning
              << "Duplicate local header reference ignored: "
@@ -234,7 +259,7 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
     std::string hipOut = hdr + ".hip";
     std::vector<std::string> precedingIncludes;
     collectPrecedingIncludes(parentPath, hdr, precedingIncludes);
-
+    collectAncestorSystemIncludes(ancestorChain, precedingIncludes);
     outs() << "\n" << sHipify << "Hipifying local header [" << current
            << "/" << total << "]: " << sys::path::filename(hdr) << "\n";
 
@@ -263,7 +288,10 @@ bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
           if (resolveLocalIncludeInternal(hdr, rel, abs) &&
               !processed.count(abs) && !queued.count(abs)) {
             queued.insert(abs);
-            work.push_back({abs, hdr});
+            std::vector<std::string> childChain;
+            childChain.push_back(hdr);
+            childChain.insert(childChain.end(), ancestorChain.begin(), ancestorChain.end());
+            work.push_back({abs, childChain});
             newHeaders.push_back(abs);
           }
         }
