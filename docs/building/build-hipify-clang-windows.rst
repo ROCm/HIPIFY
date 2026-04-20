@@ -116,7 +116,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
   .. code-block:: shell
 
-      -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.20.0
+      -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.21.0
 
 - [Optional] Install `CUB 1.9.8 <https://github.com/NVIDIA/cub/releases/tag/1.9.8>`_ for 
   ``CUDA < 11.0`` only; for ``CUDA >= 11.0``, the CUB shipped with CUDA will be used for testing.
@@ -254,13 +254,13 @@ Tested configurations:
     - ``3.13.6``
   * - ``19.1.0 - 20.1.8``
     - ``7.0 - 12.8.1``
-    - ``8.0.5  - 9.20.0``
+    - ``8.0.5  - 9.21.0``
     - ``2019.16.11.51, 2022.17.14.14, 2026.18.5.0``
     - ``4.1.1``
     - ``3.13.7``
   * - ``21.1.0 - 22.1.3``
     - ``7.0 - 12.9.1``
-    - ``8.0.5  - 9.20.0``
+    - ``8.0.5  - 9.21.0``
     - ``2019.16.11.54, 2022.17.14.29, 2026.18.5.0``
     - ``4.3.0``
     - ``3.14.3``
@@ -291,7 +291,7 @@ Building with testing support using ``Visual Studio 18 2026`` on ``Windows 11``:
     -DCMAKE_PREFIX_PATH=%ROOT_DIR%\dist \
     -DCUDA_TOOLKIT_ROOT_DIR="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9" \
     -DCUDA_SDK_ROOT_DIR="C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9" \
-    -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.20.0 \
+    -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.21.0 \
     -DCUDA_TENSOR_ROOT_DIR=D:\CUDA\cuTensor\2.6.0.0 \
     -DLLVM_EXTERNAL_LIT=%ROOT_DIR%\build\Release\bin\llvm-lit.py \
     ..\hipify
@@ -332,7 +332,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.3`
     -- Initial CUDA to configure:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
     --    - CUDA Samples path     : C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9
-    --    - cuDNN path            : D:\CUDA\cuDNN\9.20.0
+    --    - cuDNN path            : D:\CUDA\cuDNN\9.21.0
     --    - cuTENSOR path         : D:\CUDA\cuTensor\2.6.0.0
     --    - CUB path              :
     --    - cuFile path           : D:\CUDA\cuFile\1.17.0
@@ -340,7 +340,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.3`
     -- Found CUDA config:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
     --    - CUDA Samples path     : C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9
-    --    - cuDNN path            : D:\CUDA\cuDNN\9.20.0\include
+    --    - cuDNN path            : D:\CUDA\cuDNN\9.21.0\include
     --    - cuTENSOR path         : D:\CUDA\cuTensor\2.6.0.0\include
     --    - CUB path              : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include
     --    - cuFile path           : D:\CUDA\cuFile\1.17.0\include
