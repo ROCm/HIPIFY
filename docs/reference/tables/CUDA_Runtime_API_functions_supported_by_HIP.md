@@ -128,6 +128,7 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaFuncGetAttributes`| | | | |`hipFuncGetAttributes`|1.9.0| | | | | |
 |`cudaFuncGetName`|12.3| | | | | | | | | | |
+|`cudaFuncGetParamCount`|13.2| | | | | | | | | | |
 |`cudaFuncGetParamInfo`|12.4| | | | | | | | | | |
 |`cudaFuncSetAttribute`|9.0| | | |`hipFuncSetAttribute`|3.9.0| | | | | |
 |`cudaFuncSetCacheConfig`| | | | |`hipFuncSetCacheConfig`|1.6.0| | | | | |
@@ -136,6 +137,7 @@
 |`cudaLaunchCooperativeKernel`|9.0| | | |`hipLaunchCooperativeKernel`|2.6.0| | | | | |
 |`cudaLaunchCooperativeKernelMultiDevice`|9.0|11.3| |13.0|`hipLaunchCooperativeKernelMultiDevice`|2.6.0| | | | | |
 |`cudaLaunchHostFunc`|10.0| | | |`hipLaunchHostFunc`|5.2.0| | | | | |
+|`cudaLaunchHostFunc_v2`|13.2| | | | | | | | | | |
 |`cudaLaunchKernel`| | | | |`hipLaunchKernel`|1.6.0| | | | | |
 |`cudaLaunchKernelExC`|11.8| | | |`hipLaunchKernelExC`|7.0.0| | | | | |
 |`cudaSetDoubleForDevice`| |10.0| |13.0| | | | | | | |
@@ -151,6 +153,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
+|`cudaGraphNodeGetParams`|13.2| | | | | | | | | | |
 |`cudaOccupancyAvailableDynamicSMemPerBlock`|11.0| | | |`hipOccupancyAvailableDynamicSMemPerBlock`|7.2.0| | | | | |
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessor`| | | | |`hipOccupancyMaxActiveBlocksPerMultiprocessor`|1.6.0| | | | | |
 |`cudaOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`| | | | |`hipOccupancyMaxActiveBlocksPerMultiprocessorWithFlags`|2.6.0| | | | | |
@@ -214,6 +217,7 @@
 |`cudaMemcpy3DBatchAsync`|12.8| |13.0| |`hipMemcpy3DBatchAsync`|7.1.0| | | |13.0| |
 |`cudaMemcpy3DPeer`| | | | |`hipMemcpy3DPeer`|7.1.0| | | | | |
 |`cudaMemcpy3DPeerAsync`| | | | |`hipMemcpy3DPeerAsync`|7.1.0| | | | | |
+|`cudaMemcpy3DWithAttributesAsync`|13.2| | | | | | | | | | |
 |`cudaMemcpyAsync`| | | | |`hipMemcpyAsync`|1.6.0| | | | | |
 |`cudaMemcpyBatchAsync`|12.8| |13.0| |`hipMemcpyBatchAsync`|7.1.0| | | |13.0| |
 |`cudaMemcpyFromSymbol`| | | | |`hipMemcpyFromSymbol`|1.6.0| | | | | |
@@ -222,6 +226,7 @@
 |`cudaMemcpyPeerAsync`| | | | |`hipMemcpyPeerAsync`|1.6.0| | | | | |
 |`cudaMemcpyToSymbol`| | | | |`hipMemcpyToSymbol`|1.6.0| | | | | |
 |`cudaMemcpyToSymbolAsync`| | | | |`hipMemcpyToSymbolAsync`|1.6.0| | | | | |
+|`cudaMemcpyWithAttributesAsync`|13.2| | | | | | | | | | |
 |`cudaMemset`| | | | |`hipMemset`|1.6.0| | | | | |
 |`cudaMemset2D`| | | | |`hipMemset2D`|1.7.0| | | | | |
 |`cudaMemset2DAsync`| | | | |`hipMemset2DAsync`|1.9.0| | | | | |
@@ -472,7 +477,7 @@
 |`cudaGraphClone`|10.0| | | |`hipGraphClone`|5.0.0| | | | | |
 |`cudaGraphConditionalHandleCreate`|12.3| | | | | | | | | | |
 |`cudaGraphConditionalHandleCreate_v2`|13.1| | | | | | | | | | |
-|`cudaGraphCreate`|10.0| | | |`hipGraphCreate`|4.3.0| | | | | |
+|`cudaGraphCreate`|10.0| | | |`hipGraphCreate`|4.3.0| | | |13.2| |
 |`cudaGraphDebugDotPrint`|11.3| | | |`hipGraphDebugDotPrint`|5.5.0| | | | | |
 |`cudaGraphDestroy`|10.0| | | |`hipGraphDestroy`|4.3.0| | | | | |
 |`cudaGraphDestroyNode`|10.0| | | |`hipGraphDestroyNode`|5.0.0| | | | | |

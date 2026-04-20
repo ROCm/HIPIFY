@@ -453,9 +453,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuDeviceRegisterAsyncNotification"]                                 = {"hipDeviceRegisterAsyncNotification",                          "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED};
   // cudaDeviceUnregisterAsyncNotification
   m["cuDeviceUnregisterAsyncNotification"]                               = {"hipDeviceUnregisterAsyncNotification",                        "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED};
-  //
+  // cudaMemcpyWithAttributesAsync
   m["cuMemcpyWithAttributesAsync"]                                       = {"hipMemcpyWithAttributesAsync",                                "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED};
-  //
+  // cudaMemcpy3DWithAttributesAsync
   m["cuMemcpy3DWithAttributesAsync"]                                     = {"hipMemcpy3DWithAttributesAsync",                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED};
 
   // 14. Virtual Memory Management
@@ -708,7 +708,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuLaunchCooperativeKernelMultiDevice"]                              = {"hipModuleLaunchCooperativeKernelMultiDevice",                 "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, CUDA_DEPRECATED};
   // cudaLaunchHostFunc
   m["cuLaunchHostFunc"]                                                  = {"hipLaunchHostFunc",                                           "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION};
-  //
+  // cudaLaunchHostFunc_v2
   m["cuLaunchHostFunc_v2"]                                               = {"hipLaunchHostFunc_v2",                                        "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED};
   // no analogue
   // NOTE: Not equal to cudaLaunchKernel due to different signatures
@@ -724,7 +724,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuFuncIsLoaded"]                                                    = {"hipFuncIsLoaded",                                             "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED};
   //
   m["cuFuncLoad"]                                                        = {"hipFuncLoad",                                                 "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED};
-  //
+  // cudaFuncGetParamCount
   m["cuFuncGetParamCount"]                                               = {"hipFuncGetParamCount",                                        "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED};
 
   // 23. Execution Control [DEPRECATED]
@@ -964,7 +964,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuOccupancyMaxPotentialClusterSize"]                                = {"hipOccupancyMaxPotentialClusterSize",                         "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY, HIP_UNSUPPORTED};
   // cudaOccupancyMaxActiveClusters
   m["cuOccupancyMaxActiveClusters"]                                      = {"hipOccupancyMaxActiveClusters",                               "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY, HIP_UNSUPPORTED};
-  //
+  // cudaGraphNodeGetParams
   m["cuGraphNodeGetParams"]                                              = {"hipGraphNodeGetParams",                                       "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY, HIP_UNSUPPORTED};
 
   // 26. Texture Reference Management [DEPRECATED]
