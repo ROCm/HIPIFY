@@ -258,7 +258,7 @@ Tested configurations:
     - ``2019.16.11.51, 2022.17.14.14, 2026.18.5.0``
     - ``4.1.1``
     - ``3.13.7``
-  * - ``21.1.0 - 22.1.3``
+  * - ``21.1.0 - 22.1.4``
     - ``7.0 - 12.9.1``
     - ``8.0.5  - 9.21.0``
     - ``2019.16.11.54, 2022.17.14.29, 2026.18.5.0``
@@ -296,7 +296,7 @@ Building with testing support using ``Visual Studio 18 2026`` on ``Windows 11``:
     -DLLVM_EXTERNAL_LIT=%ROOT_DIR%\build\Release\bin\llvm-lit.py \
     ..\hipify
 
-The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.3``):
+The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.4``):
 
 .. code-block:: shell
 
@@ -318,17 +318,17 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.3`
     --    - Test hipify-clang     : ON
     --    - Is part of HIP SDK    : OFF
     --    - Install clang headers : ON
-    -- Found LLVM 22.1.3:
-    --    - CMake module path     : D:\LLVM\22.1.3\dist\lib\cmake\llvm
-    --    - Clang include path    : D:\LLVM\22.1.3\dist\include
-    --    - LLVM Include path     : D:\LLVM\22.1.3\dist\include
-    --    - Binary path           : D:\LLVM\22.1.3\dist\bin
+    -- Found LLVM 22.1.4:
+    --    - CMake module path     : D:\LLVM\22.1.4\dist\lib\cmake\llvm
+    --    - Clang include path    : D:\LLVM\22.1.4\dist\include
+    --    - LLVM Include path     : D:\LLVM\22.1.4\dist\include
+    --    - Binary path           : D:\LLVM\22.1.4\dist\bin
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS - Failed
     -- ---- The below configuring for hipify-clang testing only ----
     -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python314\python.exe (found suitable version "3.14.3", required range is "3.0...3.15") found components: Interpreter
     -- Found lit: C:\Users\TT\AppData\Local\Programs\Python\Python314\Scripts\lit.exe
-    -- Found FileCheck: D:\LLVM\22.1.3\dist\bin\FileCheck.exe
+    -- Found FileCheck: D:\LLVM\22.1.4\dist\bin\FileCheck.exe
     -- Initial CUDA to configure:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
     --    - CUDA Samples path     : C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9
