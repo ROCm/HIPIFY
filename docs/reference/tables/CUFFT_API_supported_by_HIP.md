@@ -187,6 +187,7 @@
 |`cufftDeviceGetLTOIRs`|13.1| | | | | | | | | | |
 |`cufftDeviceGetNumDeviceFunctions`|13.1| | | | | | | | | | |
 |`cufftDeviceGetNumLTOIRs`|13.1| | | | | | | | | | |
+|`cufftDeviceGetSemanticVersion`|13.2| | | | | | | | | | |
 |`cufftDeviceGetVersion`|13.1| | | | | | | | | | |
 |`cufftDeviceIsSupported`|13.1| | | | | | | | | | |
 |`cufftEstimate1d`| | | | |`hipfftEstimate1d`|1.7.0| | | | | |
