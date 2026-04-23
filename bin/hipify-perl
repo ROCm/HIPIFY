@@ -6164,6 +6164,7 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cufftDeviceGetLTOIRs' => 1,
     'cufftDeviceGetNumDeviceFunctions' => 1,
     'cufftDeviceGetNumLTOIRs' => 1,
+    'cufftDeviceGetSemanticVersion' => 1,
     'cufftDeviceGetVersion' => 1,
     'cufftDeviceHandle' => 1,
     'cufftDeviceIsSupported' => 1,

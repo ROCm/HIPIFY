@@ -158,6 +158,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP = [] {
   m["fftwf_import_wisdom_from_file"]                    = {"fftwf_import_wisdom_from_file",                        "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
 
   m["cufftDeviceGetVersion"]                            = {"hipfftDeviceGetVersion",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetSemanticVersion"]                    = {"hipfftDeviceGetSemanticVersion",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["cufftDescriptionCreate"]                           = {"hipfftDescriptionCreate",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["cufftDescriptionSetTraitInt64"]                    = {"hipfftDescriptionSetTraitInt64",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["cufftDescriptionGetTraitInt64"]                    = {"hipfftDescriptionGetTraitInt64",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
@@ -212,6 +213,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP = [] 
   m["cufftDeviceGetLTOIRSizes"]                           = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cufftDeviceGetLTOIRs"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cufftDeviceDestroy"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetSemanticVersion"]                      = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();
