@@ -173,6 +173,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP = [] {
   m["cusolverMathMode_t"]                                             = {"hipsolverMathMode_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
   m["CUSOLVER_DEFAULT_MATH"]                                          = {"HIPSOLVER_DEFAULT_MATH",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
   m["CUSOLVER_FP32_EMULATED_BF16X9_MATH"]                             = {"HIPSOLVER_FP32_EMULATED_BF16X9_MATH",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_FP64_EMULATED_FIXEDPOINT_MATH"]                         = {"HIPSOLVER_FP64_EMULATED_FIXEDPOINT_MATH",                   "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_FP32_FP64_EMULATED_MATH"]                               = {"HIPSOLVER_FP32_FP64_EMULATED_MATH",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
 
   return m;
 }();
@@ -284,6 +286,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP =
   m["CUSOLVER_DEFAULT_MATH"]                                          = {CUDA_130, CUDA_0,   CUDA_0  };
   m["CUSOLVER_FP32_EMULATED_BF16X9_MATH"]                             = {CUDA_130, CUDA_0,   CUDA_0  };
   m["CUSOLVERDN_SYEVBATCHED"]                                         = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_FP64_EMULATED_FIXEDPOINT_MATH"]                         = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_FP32_FP64_EMULATED_MATH"]                               = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();

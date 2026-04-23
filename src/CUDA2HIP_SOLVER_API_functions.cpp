@@ -349,6 +349,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP = [] {
   m["cusolverDnDsygvdx_bufferSize"]                                   = {"hipsolverDnDsygvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   m["cusolverDnChegvdx_bufferSize"]                                   = {"hipsolverDnChegvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   m["cusolverDnZhegvdx_bufferSize"]                                   = {"hipsolverDnZhegvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
+  //
+  m["cusolverDnXsygvd"]                                               = {"hipsolverDnXsygvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXsygvdx"]                                              = {"hipsolverDnXsygvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  //
+  m["cusolverDnXsygvd_bufferSize"]                                    = {"hipsolverDnXsygvd_bufferSize",                          "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnXsygvdx_bufferSize"]                                   = {"hipsolverDnXsygvdx_bufferSize",                         "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   // NOTE: rocsolver_(s|d)sygvdx_inplace and rocsolver_(c|z)hegvdx_inplace have a harness of other ROC and HIP API calls
   m["cusolverDnSsygvdx"]                                              = {"hipsolverDnSsygvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
   m["cusolverDnDsygvdx"]                                              = {"hipsolverDnDsygvdx",                                    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, ROC_UNSUPPORTED};
@@ -720,6 +726,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_FUNCTION_MAP = [] {
   m["cusolverDnGetMathMode"]                                          = {"hipsolverDnGetMathMode",                                "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   m["cusolverDnSetEmulationStrategy"]                                 = {"hipsolverDnSetEmulationStrategy",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
   m["cusolverDnGetEmulationStrategy"]                                 = {"hipsolverDnGetEmulationStrategy",                       "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSetFixedPointEmulationMantissaControl"]                = {"hipsolverDnSetFixedPointEmulationMantissaControl",      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnGetFixedPointEmulationMantissaControl"]                = {"hipsolverDnGetFixedPointEmulationMantissaControl",      "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSetFixedPointEmulationMaxMantissaBitCount"]            = {"hipsolverDnSetFixedPointEmulationMaxMantissaBitCount",  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnGetFixedPointEmulationMaxMantissaBitCount"]            = {"hipsolverDnGetFixedPointEmulationMaxMantissaBitCount",  "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSetFixedPointEmulationMantissaBitOffset"]              = {"hipsolverDnSetFixedPointEmulationMantissaBitOffset",    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnGetFixedPointEmulationMantissaBitOffset"]              = {"hipsolverDnGetFixedPointEmulationMantissaBitOffset",    "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnSetEmulationSpecialValuesSupport"]                     = {"hipsolverDnSetEmulationSpecialValuesSupport",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
+  m["cusolverDnGetEmulationSpecialValuesSupport"]                     = {"hipsolverDnGetEmulationSpecialValuesSupport",           "",                                                               CONV_LIB_FUNC, API_SOLVER, 2, UNSUPPORTED};
 
   return m;
 }();
@@ -1265,6 +1279,18 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_FUNCTION_VER_MAP = 
   m["cusolverSpDcsrqrsvBatched"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
   m["cusolverSpCcsrqrsvBatched"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
   m["cusolverSpZcsrqrsvBatched"]                                      = {CUDA_0,   CUDA_130, CUDA_0  };
+  m["cusolverDnSetFixedPointEmulationMantissaControl"]                = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnGetFixedPointEmulationMantissaControl"]                = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnSetFixedPointEmulationMaxMantissaBitCount"]            = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnGetFixedPointEmulationMaxMantissaBitCount"]            = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnSetFixedPointEmulationMantissaBitOffset"]              = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnGetFixedPointEmulationMantissaBitOffset"]              = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnSetEmulationSpecialValuesSupport"]                     = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnGetEmulationSpecialValuesSupport"]                     = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsygvd"]                                               = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsygvd_bufferSize"]                                    = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsygvdx"]                                              = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverDnXsygvdx_bufferSize"]                                   = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();
