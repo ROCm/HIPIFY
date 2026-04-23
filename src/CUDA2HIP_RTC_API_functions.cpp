@@ -52,6 +52,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RTC_FUNCTION_MAP = [] {
   m["nvrtcGetPCHCreateStatus"]                    = {"hiprtcGetPCHCreateStatus",                     "", CONV_LIB_FUNC, API_RTC, 2, UNSUPPORTED};
   m["nvrtcGetPCHHeapSizeRequired"]                = {"hiprtcGetPCHHeapSizeRequired",                 "", CONV_LIB_FUNC, API_RTC, 2, UNSUPPORTED};
   m["nvrtcSetFlowCallback"]                       = {"hiprtcSetFlowCallback",                        "", CONV_LIB_FUNC, API_RTC, 2, UNSUPPORTED};
+  m["nvrtcGetTileIRSize"]                         = {"hiprtcGetTileIRSize",                          "", CONV_LIB_FUNC, API_RTC, 2, UNSUPPORTED};
+  m["nvrtcGetTileIR"]                             = {"hiprtcGetTileIR",                              "", CONV_LIB_FUNC, API_RTC, 2, UNSUPPORTED};
 
   return m;
 }();
@@ -76,6 +78,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RTC_FUNCTION_VER_MAP = [] 
   m["nvrtcGetPCHCreateStatus"]                    = {CUDA_128, CUDA_0,   CUDA_0  };
   m["nvrtcGetPCHHeapSizeRequired"]                = {CUDA_128, CUDA_0,   CUDA_0  };
   m["nvrtcSetFlowCallback"]                       = {CUDA_128, CUDA_0,   CUDA_0  };
+  m["nvrtcGetTileIRSize"]                         = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["nvrtcGetTileIR"]                             = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();
