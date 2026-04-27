@@ -415,7 +415,7 @@
 |`CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED`|12.5| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DEFERRED_MAPPING_CUDA_ARRAY_SUPPORTED`|11.6| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST`|9.2| | | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | | |
-|`CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED`|11.7| | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED`|11.7| | | |`hipDeviceAttributeDmaBufSupported`|7.0.2| | | | | |
 |`CU_DEVICE_ATTRIBUTE_ECC_ENABLED`| | | | |`hipDeviceAttributeEccEnabled`|2.10.0| | | | |
 |`CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED`|11.0| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED`| | | | |`hipDeviceAttributeGlobalL1CacheSupported`|4.3.0| | | | |

@@ -8506,6 +8506,7 @@ sub simpleSubstitutions {
     subst("CU_DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH", "hipDeviceAttributeCooperativeLaunch", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_COOPERATIVE_MULTI_DEVICE_LAUNCH", "hipDeviceAttributeCooperativeMultiDeviceLaunch", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST", "hipDeviceAttributeDirectManagedMemAccessFromHost", "numeric_literal");
+    subst("CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED", "hipDeviceAttributeDmaBufSupported", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_ECC_ENABLED", "hipDeviceAttributeEccEnabled", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED", "hipDeviceAttributeGlobalL1CacheSupported", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH", "hipDeviceAttributeMemoryBusWidth", "numeric_literal");

@@ -1198,6 +1198,9 @@ int main() {
   CUmemRangeHandleType_enum MemRangeHandleType_enum;
   CUmemRangeHandleType MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD = CU_MEM_RANGE_HANDLE_TYPE_DMA_BUF_FD;
   CUmemRangeHandleType MEM_RANGE_HANDLE_TYPE_MAX = CU_MEM_RANGE_HANDLE_TYPE_MAX;
+
+  // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED = hipDeviceAttributeDmaBufSupported;
+  CUdevice_attribute DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED = CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED;
 #endif
 
 #if CUDA_VERSION >= 11080
