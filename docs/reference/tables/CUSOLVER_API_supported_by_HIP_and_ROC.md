@@ -20,6 +20,7 @@
 |`CUBLAS_STOREV_ROWWISE`|11.0| | | | | | | | | | | | | | | | |
 |`CUDALIBMG_GRID_MAPPING_COL_MAJOR`|10.1| | | | | | | | | | | | | | | | |
 |`CUDALIBMG_GRID_MAPPING_ROW_MAJOR`|10.1| | | | | | | | | | | | | | | | |
+|`CUSOLVERDN_GEQRF`|13.2| | | | | | | | | | | | | | | | |
 |`CUSOLVERDN_GETRF`|11.0| | | |`HIPSOLVERDN_GETRF`|6.2.0| | | | | | | | | | | |
 |`CUSOLVERDN_POTRF`|11.5| | | | | | | | | | | | | | | | |
 |`CUSOLVERDN_SYEVBATCHED`|13.0| | | | | | | | | | | | | | | | |
@@ -53,6 +54,9 @@
 |`CUSOLVER_C_TF32`|11.0| | | | | | | | | | | | | | | | |
 |`CUSOLVER_DEFAULT_MATH`|13.0| | | | | | | | | | | | | | | | |
 |`CUSOLVER_DETERMINISTIC_RESULTS`|12.2| | | |`HIPSOLVER_DETERMINISTIC_RESULTS`|6.3.0| | | | | | | | | | | |
+|`CUSOLVER_EIG_COMP_I`|13.2| | | | | | | | | | | | | | | | |
+|`CUSOLVER_EIG_COMP_N`|13.2| | | | | | | | | | | | | | | | |
+|`CUSOLVER_EIG_COMP_V`|13.2| | | | | | | | | | | | | | | | |
 |`CUSOLVER_EIG_MODE_NOVECTOR`|8.0| | | |`HIPSOLVER_EIG_MODE_NOVECTOR`|4.5.0| | | | | |`rocblas_evect_none`|4.1.0| | | | |
 |`CUSOLVER_EIG_MODE_VECTOR`|8.0| | | |`HIPSOLVER_EIG_MODE_VECTOR`|4.5.0| | | | | |`rocblas_evect_original`|4.1.0| | | | |
 |`CUSOLVER_EIG_RANGE_ALL`|10.1| | | |`HIPSOLVER_EIG_RANGE_ALL`|5.3.0| | | | | |`rocblas_erange_all`|5.2.0| | | | |
@@ -136,6 +140,7 @@
 |`cusolverDnLoggerCallback_t`|11.7| | | | | | | | | | | | | | | | |
 |`cusolverDnParams`|11.0| | | | | | | | | | | | | | | | |
 |`cusolverDnParams_t`|11.0| | | |`hipsolverDnParams_t`|6.2.0| | | | | | | | | | | |
+|`cusolverEigComp_t`|13.2| | | | | | | | | | | | | | | | |
 |`cusolverEigMode_t`|8.0| | | |`hipsolverEigMode_t`|4.5.0| | | | | |`rocblas_evect`|4.1.0| | | | |
 |`cusolverEigRange_t`|10.1| | | |`hipsolverEigRange_t`|5.3.0| | | | | |`rocblas_erange`|5.2.0| | | | |
 |`cusolverEigType_t`|8.0| | | |`hipsolverEigType_t`|4.5.0| | | | | |`rocblas_eform`|4.2.0| | | | |
@@ -474,9 +479,13 @@
 |`cusolverDnXgetrs`|11.1| | | |`hipsolverDnXgetrs`|6.2.0| | | | | | | | | | | |
 |`cusolverDnXlarft`|12.4| | | | | | | | | | | | | | | | |
 |`cusolverDnXlarft_bufferSize`|12.4| | | | | | | | | | | | | | | | |
+|`cusolverDnXpolar`|13.2| | | | | | | | | | | | | | | | |
+|`cusolverDnXpolar_bufferSize`|13.2| | | | | | | | | | | | | | | | |
 |`cusolverDnXpotrf`|11.1| | | |`hipsolverDnXpotrf`|6.3.0| | | | | | | | | | | |
 |`cusolverDnXpotrf_bufferSize`|11.1| | | |`hipsolverDnXpotrf_bufferSize`|6.3.0| | | | | | | | | | | |
 |`cusolverDnXpotrs`|11.1| | | |`hipsolverDnXpotrs`|6.3.0| | | | | | | | | | | |
+|`cusolverDnXstedc`|13.2| | | | | | | | | | | | | | | | |
+|`cusolverDnXstedc_bufferSize`|13.2| | | | | | | | | | | | | | | | |
 |`cusolverDnXsyevBatched`|12.6| | | | | | | | | | | | | | | | |
 |`cusolverDnXsyevBatched_bufferSize`|12.6| | | | | | | | | | | | | | | | |
 |`cusolverDnXsyevd`|11.1| | | | | | | | | | | | | | | | |
