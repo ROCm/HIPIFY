@@ -18105,6 +18105,9 @@ while (@ARGV) {
                     # Skip initial whitespaces and comments (both // and /*...*/) to insert after the copyright header
                     $_ =~ s/^((?:[ \t\r\n]+|\/\/[^\r\n]*\r?\n?|\/\*[\s\S]*?\*\/)*)/$1$inc_str/;
                 }
+                # Deduplicate generated hip, roc, and miopen headers
+                my %seen_api_headers;
+                $_ =~ s/^([ \t]*#[ \t]*include[ \t]+[\"<]([^>\" \t]+)[\">].*\r?\n?)/(index($2, "hip") == 0 || index($2, "roc") == 0 || index($2, "miopen") == 0) ? ($seen_api_headers{$2}++ == 0 ? $1 : "") : $1/gme;
                 print $OUTFILE  "$_";
             }
             $lineCount = $_ =~ tr/\n//;
