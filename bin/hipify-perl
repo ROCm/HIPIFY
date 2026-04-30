@@ -66,6 +66,7 @@ my %tagsToConvertedTags = ();
 my %tagsToConvertedTagsTotal = ();
 my %convertedTags = ();
 my %convertedTagsTotal = ();
+my $needs_hip_runtime = 0;
 
 GetOptions(
       "cuda-kernel-execution-syntax" => \$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax (default)
@@ -1821,11 +1822,13 @@ sub subst {
         $i = "(?<![\\!~`@#\\$%\\^&\\*\\-+=\\[\\]\\(\\)\\{\\}\\.\\,\\?'\\>])";
     }
     if (my $c = s/$i\b$a\b/$b/g) {
-        $ft{$t} += $c;
-        $convertedTags{$b} +=$c;
-        $convertedTagsTotal{$b} +=$c;
-        $tagsToConvertedTags{$a} = $b;
-        $tagsToConvertedTagsTotal{$a} = $b;
+        if ($print_stats) {
+            $ft{$t} += $c;
+            $convertedTags{$b} +=$c;
+            $convertedTagsTotal{$b} +=$c;
+            $tagsToConvertedTags{$a} = $b;
+            $tagsToConvertedTagsTotal{$a} = $b;
+        }
     }
 }
 
@@ -1950,7 +1953,10 @@ sub transformKernelLaunch {
         $res;
     }}gexs;
 
-    if ($k) { $ft{'kernel_launch'} += $k; }
+    if ($k) {
+        $needs_hip_runtime = 1;
+        $ft{'kernel_launch'} += $k if $print_stats;
+    }
 }
 
 sub transformCubNamespace {
@@ -17946,6 +17952,7 @@ while (@ARGV) {
         }
         # Count of transforms in this file
         clearStats(\%ft, \@statNames);
+        $needs_hip_runtime = 0;
         my $countKeywords = 0;
         my $warnings = 0;
         my $lineCount = 0;
@@ -18034,11 +18041,14 @@ while (@ARGV) {
                     my $mapping = $mappings{$match};
                     my $b = $mapping->[0];
                     my $t = $mapping->[1];
-                    $ft{$t}++;
-                    $convertedTags{$b}++;
-                    $convertedTagsTotal{$b}++;
-                    $tagsToConvertedTags{$match} = $b;
-                    $tagsToConvertedTagsTotal{$match} = $b;
+                    $needs_hip_runtime = 1;
+                    if ($print_stats) {
+                        $ft{$t}++;
+                        $convertedTags{$b}++;
+                        $convertedTagsTotal{$b}++;
+                        $tagsToConvertedTags{$match} = $b;
+                        $tagsToConvertedTagsTotal{$match} = $b;
+                    }
                     $b;
                 } else {
                     $match;
@@ -18051,11 +18061,17 @@ while (@ARGV) {
             my $hasDeviceCode = $countKeywords + $ft{'device_function'} + $ft{'device_type'};
             foreach my $func (keys %hash_SupportedDeviceDataTypes) {
                 my $c = () = $_ =~ m/\b$func\b/g;
-                if ($c) { $ft{'device_type'} += $c; }
+                if ($c) {
+                    $needs_hip_runtime = 1;
+                    $ft{'device_type'} += $c if $print_stats;
+                }
             }
             foreach my $func (keys %hash_SupportedDeviceFunctions) {
                 my $c = () = $_ =~ m/\b$func\b\s*\((?!\s*void)/g;
-                if ($c) { $ft{'device_function'} += $c; }
+                if ($c) {
+                    $needs_hip_runtime = 1;
+                    $ft{'device_function'} += $c if $print_stats;
+                }
             }
             unless ($quiet_warnings) {
                 # Copy into array of lines, process line-by-line to show warnings
@@ -18082,13 +18098,12 @@ while (@ARGV) {
 
             # TODO: would like to move this code outside loop but it uses $_ which contains the whole file
             unless ($no_output) {
-                my $apiCalls   = $ft{'error'} + $ft{'init'} + $ft{'version'} + $ft{'device'} + $ft{'context'} + $ft{'module'} + $ft{'library'} + $ft{'memory'} + $ft{'virtual_memory'} + $ft{'ordered_memory'} + $ft{'multicast'} + $ft{'unified'} + $ft{'stream'} + $ft{'event'} + $ft{'external_resource'} + $ft{'stream_memory'} + $ft{'execution'} + $ft{'graph'} + $ft{'occupancy'} + $ft{'texture'} + $ft{'surface'} + $ft{'tensor'} + $ft{'peer'} + $ft{'graphics'} + $ft{'driver_entry_point'} + $ft{'cpp'} + $ft{'coredump'} + $ft{'green_context'} + $ft{'error_log'} + $ft{'driver_interact'} + $ft{'profiler'} + $ft{'openGL'} + $ft{'D3D9'} + $ft{'D3D10'} + $ft{'D3D11'} + $ft{'VDPAU'} + $ft{'EGL'} + $ft{'thread'} + $ft{'complex'} + $ft{'library'} + $ft{'device_library'} + $ft{'device_type'} + $ft{'include'} + $ft{'include_cuda_main_header'} + $ft{'include_cuda_main_header_v2'} + $ft{'type'} + $ft{'literal'} + $ft{'numeric_literal'} + $ft{'define'};
-                my $kernStuff  = $hasDeviceCode + $ft{'kernel_launch'} + $ft{'device_function'} + $ft{'device_type'};
-                my $totalCalls = $apiCalls + $kernStuff;
                 $is_dos = m/\r\n$/;
-                if ($totalCalls and ($kernStuff != 0)) {
-                    # TODO: implement hipify-clang's logic with header files AMAP
-                    print $OUTFILE '#include "hip/hip_runtime.h"' . ($is_dos ? "\r\n" : "\n");
+                # Implicitly include hip_runtime.h if ANY CUDA API or device code exists but the header is missing
+                if (($needs_hip_runtime || $hasDeviceCode > 0) && $_ !~ m/^\s*#\s*include\s+[\"<]hip\/hip_runtime\.h[\">]/m) {
+                    my $inc_str = '#include "hip/hip_runtime.h"' . ($is_dos ? "\r\n" : "\n");
+                    # Skip initial whitespaces and comments (both // and /*...*/) to insert after the copyright header
+                    $_ =~ s/^((?:[ \t\r\n]+|\/\/[^\r\n]*\r?\n?|\/\*[\s\S]*?\*\/)*)/$1$inc_str/;
                 }
                 print $OUTFILE  "$_";
             }
