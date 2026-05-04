@@ -188,6 +188,11 @@ int main() {
   cudaMemAllocNodeParams MemAllocNodeParams;
 #endif
 
+#if CUDA_VERSION >= 11060
+  // CHECK: hipArrayMemoryRequirements ArrayMemoryRequirements;
+  cudaArrayMemoryRequirements ArrayMemoryRequirements;
+#endif
+
 #if CUDA_VERSION >= 11080
   // CHECK: hipLaunchConfig_st LaunchConfig_st;
   // CHECK-NEXT: hipLaunchConfig_t launchConfig;

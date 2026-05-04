@@ -247,7 +247,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaGraphNodeParams"]                                      = {"hipGraphNodeParams",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUDA_ARRAY_MEMORY_REQUIREMENTS_st
-  m["cudaArrayMemoryRequirements"]                              = {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaArrayMemoryRequirements"]                              = {"hipArrayMemoryRequirements",                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUlaunchMemSyncDomainMap_st
   m["cudaLaunchMemSyncDomainMap_st"]                            = {"hipLaunchMemSyncDomainMap",                                "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
@@ -1891,7 +1891,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_MEM_ALLOCATION_TYPE_PINNED
   m["cudaMemAllocationTypePinned"]                              = {"hipMemAllocationTypePinned",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 0x1
   // CU_MEM_ALLOCATION_TYPE_MANAGED
-  m["cudaMemAllocationTypeManaged"]                             = {"hipMemAllocationTypeManaged",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x2
+  m["cudaMemAllocationTypeManaged"]                             = {"hipMemAllocationTypeManaged",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 0x2
   // CU_MEM_ALLOCATION_TYPE_MAX
   m["cudaMemAllocationTypeMax"]                                 = {"hipMemAllocationTypeMax",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 0x7FFFFFFF
 
@@ -3978,6 +3978,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = 
   m["hipLibraryOption"]                                         = {HIP_7010, HIP_0,    HIP_0   };
   m["hipLibraryHostUniversalFunctionAndDataTable"]              = {HIP_7010, HIP_0,    HIP_0   };
   m["hipLibraryBinaryIsPreserved"]                              = {HIP_7010, HIP_0,    HIP_0   };
+  m["hipMemAllocationTypeManaged"]                              = {HIP_7120, HIP_0,    HIP_0   };
   m["hipDeviceAttributeHostNumaId"]                             = {HIP_7020, HIP_0,    HIP_0   };
 
   return m;
