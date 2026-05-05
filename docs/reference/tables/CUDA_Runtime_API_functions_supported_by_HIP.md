@@ -752,7 +752,7 @@
 |`cudaArrayDefault`| | | | |`hipArrayDefault`|1.7.0| | | | | |
 |`cudaArrayDeferredMapping`|11.6| | | | | | | | | | |
 |`cudaArrayLayered`| | | | |`hipArrayLayered`|1.7.0| | | | | |
-|`cudaArrayMemoryRequirements`|11.6| | | | | | | | | | |
+|`cudaArrayMemoryRequirements`|11.6| | | |`hipArrayMemoryRequirements`|7.12.0| | | | | |
 |`cudaArraySparse`|11.1| | | | | | | | | | |
 |`cudaArraySparseProperties`|11.1| | | | | | | | | | |
 |`cudaArraySparsePropertiesSingleMipTail`|11.1| | | | | | | | | | |
@@ -1666,7 +1666,7 @@
 |`cudaMemAllocationHandleType`|11.2| | | |`hipMemAllocationHandleType`|5.2.0| | | | | |
 |`cudaMemAllocationType`|11.2| | | |`hipMemAllocationType`|5.2.0| | | | | |
 |`cudaMemAllocationTypeInvalid`|11.2| | | |`hipMemAllocationTypeInvalid`|5.2.0| | | | | |
-|`cudaMemAllocationTypeManaged`|13.0| | | | | | | | | | |
+|`cudaMemAllocationTypeManaged`|13.0| | | |`hipMemAllocationTypeManaged`|7.12.0| | | | | |
 |`cudaMemAllocationTypeMax`|11.2| | | |`hipMemAllocationTypeMax`|5.2.0| | | | | |
 |`cudaMemAllocationTypePinned`|11.2| | | |`hipMemAllocationTypePinned`|5.2.0| | | | | |
 |`cudaMemAttachGlobal`| | | | |`hipMemAttachGlobal`|2.5.0| | | | | |

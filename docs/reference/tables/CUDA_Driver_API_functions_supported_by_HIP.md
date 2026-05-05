@@ -35,9 +35,9 @@
 |`CUDA_ARRAY_DESCRIPTOR_v1`| | | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | | |
 |`CUDA_ARRAY_DESCRIPTOR_v1_st`| | | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | | |
 |`CUDA_ARRAY_DESCRIPTOR_v2`|11.3| | | |`HIP_ARRAY_DESCRIPTOR`|1.7.0| | | | | |
-|`CUDA_ARRAY_MEMORY_REQUIREMENTS`|11.6| | | | | | | | | | |
-|`CUDA_ARRAY_MEMORY_REQUIREMENTS_st`|11.6| | | | | | | | | | |
-|`CUDA_ARRAY_MEMORY_REQUIREMENTS_v1`|11.6| | | | | | | | | | |
+|`CUDA_ARRAY_MEMORY_REQUIREMENTS`|11.6| | | |`hipArrayMemoryRequirements`|7.12.0| | | | | |
+|`CUDA_ARRAY_MEMORY_REQUIREMENTS_st`|11.6| | | |`hipArrayMemoryRequirements`|7.12.0| | | | | |
+|`CUDA_ARRAY_MEMORY_REQUIREMENTS_v1`|11.6| | | |`hipArrayMemoryRequirements`|7.12.0| | | | | |
 |`CUDA_ARRAY_SPARSE_PROPERTIES`|11.1| | | | | | | | | | |
 |`CUDA_ARRAY_SPARSE_PROPERTIES_st`|11.1| | | | | | | | | | |
 |`CUDA_ARRAY_SPARSE_PROPERTIES_v1`|11.3| | | | | | | | | | |
@@ -981,7 +981,7 @@
 |`CU_MEM_ADVISE_UNSET_PREFERRED_LOCATION`|8.0| | | |`hipMemAdviseUnsetPreferredLocation`|3.7.0| | | | | |
 |`CU_MEM_ADVISE_UNSET_READ_MOSTLY`|8.0| | | |`hipMemAdviseUnsetReadMostly`|3.7.0| | | | | |
 |`CU_MEM_ALLOCATION_TYPE_INVALID`|10.2| | | |`hipMemAllocationTypeInvalid`|5.2.0| | | | | |
-|`CU_MEM_ALLOCATION_TYPE_MANAGED`|13.0| | | | | | | | | | |
+|`CU_MEM_ALLOCATION_TYPE_MANAGED`|13.0| | | |`hipMemAllocationTypeManaged`|7.12.0| | | | | |
 |`CU_MEM_ALLOCATION_TYPE_MAX`|10.2| | | |`hipMemAllocationTypeMax`|5.2.0| | | | | |
 |`CU_MEM_ALLOCATION_TYPE_PINNED`|10.2| | | |`hipMemAllocationTypePinned`|5.2.0| | | | | |
 |`CU_MEM_ALLOC_GRANULARITY_MINIMUM`|10.2| | | |`hipMemAllocationGranularityMinimum`|5.2.0| | | | | |

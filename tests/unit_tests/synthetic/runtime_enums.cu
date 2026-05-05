@@ -1099,6 +1099,9 @@ int main() {
 #if CUDA_VERSION >= 13000
   // CHECK: hipMemLocationType MemLocationTypeNone = hipMemLocationTypeNone;
   cudaMemLocationType MemLocationTypeNone = cudaMemLocationTypeNone;
+
+  // CHECK: hipMemAllocationType MemAllocationTypeManaged = hipMemAllocationTypeManaged;
+  cudaMemAllocationType MemAllocationTypeManaged = cudaMemAllocationTypeManaged;
 #endif
 
   return 0;
