@@ -48,9 +48,11 @@ int main() {
   // CHECK-NEXT: status = miopenSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed, hipify_use_mask_2, hipify_state_evo_2, hipify_rng_mode_2);
   status = cudnnSetDropoutDescriptor(DropoutDescriptor, handle, dropout, states, reserveSpaceNumBytes, seed);
 
-  // CHECK: return 0;
   return 0;
 }
+
+// TODO: Braceless control flow is not yet handled. Detect non-CompoundStmt
+// enclosing parent and wrap with { }.
 
 // CHECK: bool hipify_use_mask = {};
 // CHECK-NEXT: bool hipify_state_evo = {};

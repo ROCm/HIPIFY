@@ -2740,19 +2740,28 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
       const char *indentPtr = SM.getCharacterData(stmtInsertLoc);
       while (*indentPtr == ' ' || *indentPtr == '\t')
         indent += *indentPtr++;
+      unsigned scopeKey = 0;
+      clang::FileID fileId;
+      {
+        bool foundScope = false;
+        auto parents = Result.Context->getParents(*call);
+        while (!parents.empty() && !foundScope) {
+          for (const auto &parent : parents) {
+            if (const auto *cs = parent.get<clang::CompoundStmt>()) {
+              fileId = SM.getFileID(cs->getLBracLoc());
+              scopeKey = cs->getLBracLoc().getRawEncoding();
+              foundScope = true;
+              break;
+            }
+          }
+          if (!foundScope)
+            parents = Result.Context->getParents(parents[0]);
+        }
+      }
       for (auto c : cc.castMap) {
         if (c.second.castType == e_insert_new_argument) {
           const std::string &baseName = c.second.constValToAddOrReplace;
-          unsigned scopeKey = 0;
-          auto parents = Result.Context->getParents(*call);
-          while (!parents.empty()) {
-            if (const auto *cs = parents[0].get<clang::CompoundStmt>()) {
-              scopeKey = cs->getLBracLoc().getRawEncoding();
-              break;
-            }
-            parents = Result.Context->getParents(parents[0]);
-          }
-          unsigned counter = InsertedVarCounter[{scopeKey, baseName}]++;
+          unsigned counter = InsertedVarCounter[{fileId, scopeKey, baseName}]++;
           std::string uniqueName = (counter == 0) ? baseName : baseName + "_" + std::to_string(counter);
           hasInsertions = true;
           std::string initExpr = c.second.defaultInitValue.empty() ? "{}" : c.second.defaultInitValue;
@@ -2776,6 +2785,8 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         }
       }
       if (hasInsertions) {
+        // TODO: Braceless control flow is not yet handled. Detect non-CompoundStmt
+        // enclosing parent and wrap with { }.
         ct::Replacement declRep(SM, stmtInsertLoc, 0, combinedDeclText);
         clang::FullSourceLoc declFullSL(stmtInsertLoc, SM);
         insertReplacement(declRep, declFullSL);
