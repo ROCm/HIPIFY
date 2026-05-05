@@ -90,10 +90,10 @@ int main() {
   // CHECK: hipChannelFormatDesc ChannelFormatDesc;
   cudaChannelFormatDesc ChannelFormatDesc;
 
-  // CHECK: hipMipmappedArray *MipmappedArray;
+  // CHECK: hipMipmappedArray *MipmappedArray = nullptr;
   // CHECK-NEXT: hipMipmappedArray_t MipmappedArray_t;
   // CHECK-NEXT: hipMipmappedArray_const_t MipmappedArray_const_t;
-  cudaMipmappedArray *MipmappedArray;
+  cudaMipmappedArray *MipmappedArray = nullptr;
   cudaMipmappedArray_t MipmappedArray_t;
   cudaMipmappedArray_const_t MipmappedArray_const_t;
 
@@ -1578,6 +1578,14 @@ int main() {
   // HIP: hipError_t hipGraphNodeGetEnabled(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, unsigned int* isEnabled);
   // CHECK: result = hipGraphNodeGetEnabled(GraphExec_t, graphNode, &flags);
   result = cudaGraphNodeGetEnabled(GraphExec_t, graphNode, &flags);
+
+  // CHECK: hipArrayMemoryRequirements ArrayMemoryRequirements;
+  cudaArrayMemoryRequirements ArrayMemoryRequirements;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMipmappedArrayGetMemoryRequirements(struct cudaArrayMemoryRequirements *memoryRequirements, cudaMipmappedArray_t mipmap, int device);
+  // HIP: hipError_t hipMipmappedArrayGetMemoryRequirements(hipArrayMemoryRequirements* memoryRequirements, hipMipmappedArray_t mipmap, hipDevice_t device);
+  // CHECK: result = hipMipmappedArrayGetMemoryRequirements(&ArrayMemoryRequirements, MipmappedArray_t, device);
+  result = cudaMipmappedArrayGetMemoryRequirements(&ArrayMemoryRequirements, MipmappedArray_t, device);
 #endif
 
 #if CUDA_VERSION >= 11080
@@ -1669,7 +1677,6 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 12080
-
   // CHECK: hipLibrary_t library;
   cudaLibrary_t library;
   // CHECK: hipKernel_t *kernelArray = nullptr;
@@ -1711,6 +1718,21 @@ int main() {
   // HIP: hipError_t hipLibraryGetKernelCount(unsigned int *count, hipLibrary_t library);
   // CHECK: result = hipLibraryGetKernelCount(&count, library);
   result = cudaLibraryGetKernelCount(&count, library);
+#endif
+
+#if CUDA_VERSION >= 13000
+  // CHECK: hipMemAllocationType memAllocationType;
+  cudaMemAllocationType memAllocationType;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemSetMemPool(struct cudaMemLocation *location, enum cudaMemAllocationType type, cudaMemPool_t memPool);
+  // HIP: hipError_t hipMemSetMemPool(hipMemLocation* location, hipMemAllocationType type, hipMemPool_t pool);
+  // CHECK: result = hipMemSetMemPool(&memLocation, memAllocationType, memPool_t);
+  result = cudaMemSetMemPool(&memLocation, memAllocationType, memPool_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemGetMemPool(cudaMemPool_t *memPool, struct cudaMemLocation *location, enum cudaMemAllocationType type);
+  // HIP: hipError_t hipMemGetMemPool(hipMemPool_t* pool, hipMemLocation* location, hipMemAllocationType type);
+  // CHECK: result = hipMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
+  result = cudaMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
 #endif
 
   return 0;

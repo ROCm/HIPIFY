@@ -233,6 +233,7 @@
 |`cudaMemset3D`| | | | |`hipMemset3D`|1.9.0| | | | | |
 |`cudaMemset3DAsync`| | | | |`hipMemset3DAsync`|1.9.0| | | | | |
 |`cudaMemsetAsync`| | | | |`hipMemsetAsync`|1.6.0| | | | | |
+|`cudaMipmappedArrayGetMemoryRequirements`|11.6| | | |`hipMipmappedArrayGetMemoryRequirements`|7.12.0| | | | | |
 |`make_cudaExtent`| | | | |`make_hipExtent`|1.7.0| | | | | |
 |`make_cudaPitchedPtr`| | | | |`make_hipPitchedPtr`|1.7.0| | | | | |
 |`make_cudaPos`| | | | |`make_hipPos`|1.7.0| | | | | |
@@ -255,7 +256,7 @@
 |`cudaMallocAsync`|11.2| | | |`hipMallocAsync`|5.2.0| | | | | |
 |`cudaMallocFromPoolAsync`|11.2| | | |`hipMallocFromPoolAsync`|5.2.0| | | | | |
 |`cudaMemGetDefaultMemPool`|13.0| | | | | | | | | | |
-|`cudaMemGetMemPool`|13.0| | | | | | | | | | |
+|`cudaMemGetMemPool`|13.0| | | |`hipMemGetMemPool`|7.12.0| | | | | |
 |`cudaMemPoolCreate`|11.2| | | |`hipMemPoolCreate`|5.2.0| | | | | |
 |`cudaMemPoolDestroy`|11.2| | | |`hipMemPoolDestroy`|5.2.0| | | | | |
 |`cudaMemPoolExportPointer`|11.2| | | |`hipMemPoolExportPointer`|5.2.0| | | | | |
@@ -267,7 +268,7 @@
 |`cudaMemPoolSetAccess`|11.2| | | |`hipMemPoolSetAccess`|5.2.0| | | | | |
 |`cudaMemPoolSetAttribute`|11.2| | | |`hipMemPoolSetAttribute`|5.2.0| | | | | |
 |`cudaMemPoolTrimTo`|11.2| | | |`hipMemPoolTrimTo`|5.2.0| | | | | |
-|`cudaMemSetMemPool`|13.0| | | | | | | | | | |
+|`cudaMemSetMemPool`|13.0| | | |`hipMemSetMemPool`|7.12.0| | | | | |
 
 ## **13. Unified Addressing**
 

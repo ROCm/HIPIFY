@@ -428,6 +428,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   m["cudaMemcpyWithAttributesAsync"]                           = {"hipMemcpyWithAttributesAsync",                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
   // cuMemcpy3DWithAttributesAsync
   m["cudaMemcpy3DWithAttributesAsync"]                         = {"hipMemcpy3DWithAttributesAsync",                         "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
+  // cuMipmappedArrayGetMemoryRequirements
+  m["cudaMipmappedArrayGetMemoryRequirements"]                 = {"hipMipmappedArrayGetMemoryRequirements",                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY};
 
   // 11. Memory Management [DEPRECATED]
   // no analogue
@@ -475,9 +477,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuMemGetDefaultMemPool
   m["cudaMemGetDefaultMemPool"]                                = {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
   // cuMemGetMemPool
-  m["cudaMemGetMemPool"]                                       = {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemGetMemPool"]                                       = {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
   // cuMemSetMemPool
-  m["cudaMemSetMemPool"]                                       = {"hipMemSetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemSetMemPool"]                                       = {"hipMemSetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
 
   // 13. Unified Addressing
   // no analogue
@@ -942,7 +944,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   m["cudaLibraryGetManaged"]                                   = {"hipLibraryGetManaged",                                   "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED};
   // cuLibraryGetUnifiedFunction
   m["cudaLibraryGetUnifiedFunction"]                           = {"hipLibraryGetUnifiedFunction",                           "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED};
-  // cuKernelSetAttribute
+  // Not equal to cuKernelSetAttribute due to incompatible signatures
   m["cudaKernelSetAttributeForDevice"]                         = {"hipKernelSetAttribute",                                  "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED};
   // cuLibraryGetKernelCount
   m["cudaLibraryGetKernelCount"]                               = {"hipLibraryGetKernelCount",                               "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY};
@@ -1345,6 +1347,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP =
   m["cudaMemcpyWithAttributesAsync"]                           = {CUDA_132, CUDA_0,   CUDA_0  };
   m["cudaMemcpy3DWithAttributesAsync"]                         = {CUDA_132, CUDA_0,   CUDA_0  };
   m["cudaGraphNodeGetParams"]                                  = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaMipmappedArrayGetMemoryRequirements"]                 = {CUDA_116, CUDA_0,   CUDA_0  };
 
   return m;
 }();

@@ -191,17 +191,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuLibraryGetModule"]                                                = {"hipLibraryGetModule",                                         "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
   //
-  m["cuKernelGetFunction"]                                               = {"hipKernelGetFunction",                                        "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
+  m["cuKernelGetFunction"]                                               = {"hipKernelGetFunction",                                        "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY};
   // cudaLibraryGetGlobal
   m["cuLibraryGetGlobal"]                                                = {"hipLibraryGetGlobal",                                         "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
   // cudaLibraryGetManaged
   m["cuLibraryGetManaged"]                                               = {"hipLibraryGetManaged",                                        "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
   // cudaLibraryGetUnifiedFunction
   m["cuLibraryGetUnifiedFunction"]                                       = {"hipLibraryGetUnifiedFunction",                                "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
-  //
-  m["cuKernelGetAttribute"]                                              = {"hipKernelGetAttribute",                                       "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
-  // cudaKernelSetAttributeForDevice
-  m["cuKernelSetAttribute"]                                              = {"hipKernelSetAttribute",                                       "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
+  // no analogue
+  m["cuKernelGetAttribute"]                                              = {"hipKernelGetAttribute",                                       "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY};
+  // Not equal to cudaKernelSetAttributeForDevice due to incompatible signatures
+  m["cuKernelSetAttribute"]                                              = {"hipKernelSetAttribute",                                       "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY};
   //
   m["cuKernelSetCacheConfig"]                                            = {"hipKernelSetCacheConfig",                                     "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
   //
@@ -236,8 +236,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuArrayGetDescriptor"]                                              = {"hipArrayGetDescriptor",                                       "", CONV_MEMORY, API_DRIVER, SEC::MEMORY};
   //
   m["cuArrayGetDescriptor_v2"]                                           = {"hipArrayGetDescriptor",                                       "", CONV_MEMORY, API_DRIVER, SEC::MEMORY};
-  //
-  m["cuMipmappedArrayGetMemoryRequirements"]                             = {"hipMipmappedArrayGetMemoryRequirements",                      "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED};
+  // cudaMipmappedArrayGetMemoryRequirements
+  m["cuMipmappedArrayGetMemoryRequirements"]                             = {"hipMipmappedArrayGetMemoryRequirements",                      "", CONV_MEMORY, API_DRIVER, SEC::MEMORY};
   // cudaArrayGetMemoryRequirements
   m["cuArrayGetMemoryRequirements"]                                      = {"hipArrayGetMemoryRequirements",                               "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED};
   // cudaDeviceGetByPCIBusId
@@ -507,9 +507,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaMemGetDefaultMemPool
   m["cuMemGetDefaultMemPool"]                                            = {"hipMemGetDefaultMemPool",                                     "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
   // cudaMemGetMemPool
-  m["cuMemGetMemPool"]                                                   = {"hipMemGetMemPool",                                            "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cuMemGetMemPool"]                                                   = {"hipMemGetMemPool",                                            "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY};
   // cudaMemSetMemPool
-  m["cuMemSetMemPool"]                                                   = {"hipMemSetMemPool",                                            "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cuMemSetMemPool"]                                                   = {"hipMemSetMemPool",                                            "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY};
 
   // 16. Multicast Object Management
   //
@@ -1906,6 +1906,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP = []
   m["hipModuleGetFunctionCount"]                                         = {HIP_7010, HIP_0,    HIP_0   };
   m["hipKernelGetName"]                                                  = {HIP_7020, HIP_0,    HIP_0   };
   m["hipKernelGetLibrary"]                                               = {HIP_7020, HIP_0,    HIP_0   };
+  m["hipKernelSetAttribute"]                                             = {HIP_7120, HIP_0,    HIP_0   };
+  m["hipKernelGetFunction"]                                              = {HIP_7120, HIP_0,    HIP_0   };
+  m["hipMemSetMemPool"]                                                  = {HIP_7120, HIP_0,    HIP_0   };
+  m["hipMemGetMemPool"]                                                  = {HIP_7120, HIP_0,    HIP_0   };
+  m["hipMipmappedArrayGetMemoryRequirements"]                            = {HIP_7120, HIP_0,    HIP_0   };
+  m["hipKernelGetAttribute"]                                             = {HIP_7120, HIP_0,    HIP_0   };
 
   return m;
 }();
