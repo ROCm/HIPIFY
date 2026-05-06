@@ -1828,13 +1828,13 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cuKernelGetAttribute`|12.0| | | | | | | | | | |
-|`cuKernelGetFunction`|12.0| | | | | | | | | | |
+|`cuKernelGetAttribute`|12.0| | | |`hipKernelGetAttribute`|7.12.0| | | | | |
+|`cuKernelGetFunction`|12.0| | | |`hipKernelGetFunction`|7.12.0| | | | | |
 |`cuKernelGetLibrary`|12.5| | | |`hipKernelGetLibrary`|7.2.0| | | | | |
 |`cuKernelGetName`|12.3| | | |`hipKernelGetName`|7.2.0| | | | | |
 |`cuKernelGetParamCount`|13.2| | | | | | | | | | |
 |`cuKernelGetParamInfo`|12.4| | | | | | | | | | |
-|`cuKernelSetAttribute`|12.0| | | | | | | | | | |
+|`cuKernelSetAttribute`|12.0| | | |`hipKernelSetAttribute`|7.12.0| | | | | |
 |`cuKernelSetCacheConfig`|12.0| | | | | | | | | | |
 |`cuLibraryEnumerateKernels`|12.4| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | | |
 |`cuLibraryGetGlobal`|12.0| | | | | | | | | | |
@@ -1962,7 +1962,7 @@
 |`cuMipmappedArrayCreate`| | | | |`hipMipmappedArrayCreate`|3.5.0|5.7.0| | | | |
 |`cuMipmappedArrayDestroy`| | | | |`hipMipmappedArrayDestroy`|3.5.0|5.7.0| | | | |
 |`cuMipmappedArrayGetLevel`| | | | |`hipMipmappedArrayGetLevel`|3.5.0|5.7.0| | | | |
-|`cuMipmappedArrayGetMemoryRequirements`|11.6| | | | | | | | | | |
+|`cuMipmappedArrayGetMemoryRequirements`|11.6| | | |`hipMipmappedArrayGetMemoryRequirements`|7.12.0| | | | | |
 
 ## **14. Virtual Memory Management**
 
@@ -1991,7 +1991,7 @@
 |`cuMemAllocFromPoolAsync`|11.2| | | |`hipMallocFromPoolAsync`|5.2.0| | | | | |
 |`cuMemFreeAsync`|11.2| | | |`hipFreeAsync`|5.2.0| | | | | |
 |`cuMemGetDefaultMemPool`|13.0| | | | | | | | | | |
-|`cuMemGetMemPool`|13.0| | | | | | | | | | |
+|`cuMemGetMemPool`|13.0| | | |`hipMemGetMemPool`|7.12.0| | | | | |
 |`cuMemPoolCreate`|11.2| | | |`hipMemPoolCreate`|5.2.0| | | | | |
 |`cuMemPoolDestroy`|11.2| | | |`hipMemPoolDestroy`|5.2.0| | | | | |
 |`cuMemPoolExportPointer`|11.2| | | |`hipMemPoolExportPointer`|5.2.0| | | | | |
@@ -2003,7 +2003,7 @@
 |`cuMemPoolSetAccess`|11.2| | | |`hipMemPoolSetAccess`|5.2.0| | | | | |
 |`cuMemPoolSetAttribute`|11.2| | | |`hipMemPoolSetAttribute`|5.2.0| | | | | |
 |`cuMemPoolTrimTo`|11.2| | | |`hipMemPoolTrimTo`|5.2.0| | | | | |
-|`cuMemSetMemPool`|13.0| | | | | | | | | | |
+|`cuMemSetMemPool`|13.0| | | |`hipMemSetMemPool`|7.12.0| | | | | |
 
 ## **16. Multicast Object Management**
 
