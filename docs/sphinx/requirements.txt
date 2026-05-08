@@ -61,7 +61,7 @@ fastjsonschema==2.19.1
     #   rocm-docs-core
 gitdb==4.0.11
     # via gitpython
-gitpython==3.1.47
+gitpython==3.1.49
     # via rocm-docs-core
 greenlet==3.1.1
     # via sqlalchemy
