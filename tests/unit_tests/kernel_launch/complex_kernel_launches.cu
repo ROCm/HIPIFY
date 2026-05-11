@@ -27,8 +27,8 @@ void test_launches() {
     my_kernel<<<config.x == 1 ? 2 : 1, 256>>>(0);
 
     // 4. Address-of operator
-    // CHECK: hipLaunchKernelGGL(my_kernel, dim3(1), dim3(256), shared_mem, &stream, 0);
-    my_kernel<<<1, 256, shared_mem, &stream>>>(0);
+    // CHECK: hipLaunchKernelGGL(my_kernel, dim3(1), dim3(256), shared_mem, stream, 0);
+    my_kernel<<<1, 256, shared_mem, stream>>>(0);
 
     // 5. Std calls
     // CHECK: hipLaunchKernelGGL(my_kernel, dim3(1), dim3(std::max(config.x, config.y)), shared_mem, 0, std::min(config.x, config.y));
