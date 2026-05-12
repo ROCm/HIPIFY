@@ -527,12 +527,10 @@ int main(int argc, const char **argv) {
     }
     // Initialise the statistics counters for this file.
     Statistics::setActive(src);
-    if (!SkipLocalHeaders) {
-      if (!hipifyLocalHeaders(sSourceAbsPath,
-                              compilationDatabase.get(),
-                              &OptionsParser,
-                              argv[0],
-                              true)) {
+    if (OptLocalHeaders || OptLocalHeadersRecursive) {
+      if (!hipifyLocalHeaders(sSourceAbsPath, compilationDatabase.get(),
+                              &OptionsParser, argv[0],
+                              OptLocalHeadersRecursive)) {
         llvm::errs() << "\n" << sHipify << sError
                      << "Local header hipification failed for: "
                      << sys::path::filename(sSourceAbsPath) << "\n";
@@ -540,7 +538,7 @@ int main(int argc, const char **argv) {
         Result = 1;
       }
     }
-   
+
     std::string outputPath = NoOutput ? "" : dst;
     if (!hipifySingleSource(src, outputPath,
                             compilationDatabase.get(),
