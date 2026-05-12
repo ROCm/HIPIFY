@@ -22,11 +22,24 @@ THE SOFTWARE.
 
 #pragma once
 
+#include "clang/Frontend/FrontendActions.h"
+#include "clang/Lex/PPCallbacks.h"
+#include "clang/Tooling/CommonOptionsParser.h"
+#include "clang/Tooling/Refactoring.h"
 #include <string>
 #include <vector>
-#include "clang/Tooling/CommonOptionsParser.h"
 
 namespace ct = clang::tooling;
+
+extern bool appendArgumentsAdjusters(ct::RefactoringTool &Tool,
+                                     const std::string &sSourceAbsPath,
+                                     const char *hipify_exe);
+
+struct IncludeEntry {
+  std::string fileName;
+  std::string resolvedPath;
+  bool isAngled;
+};
 
 extern bool hipifySingleSource(const std::string &srcPath,
                                const std::string &dstPath,
@@ -43,9 +56,15 @@ bool hipifyLocalHeaders(const std::string &srcPath,
                         const char *hipify_exe,
                         bool recursive = false);
 
-bool resolveLocalInclude(const std::string &mainSourceAbsPath,
-                         const std::string &includeToken,
-                         std::string &outAbsPath);
+bool collectIncludeTree(const std::string &srcPath,
+                        const ct::CompilationDatabase *compDB,
+                        ct::CommonOptionsParser *OptionsParserPtr,
+                        const char *hipify_exe,
+                        const std::string &mainContextPath,
+                        std::vector<IncludeEntry> &outEntries);
 
 bool collectLocalQuotedIncludes(const std::string &mainSourceAbsPath,
+                                const ct::CompilationDatabase *compDB,
+                                ct::CommonOptionsParser *OptionsParserPtr,
+                                const char *hipify_exe,
                                 std::vector<std::string> &outHeaders);
