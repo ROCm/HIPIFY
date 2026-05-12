@@ -171,8 +171,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["cudnnDirectionMode_t"]                                            = {"hipdnnDirectionMode_t",                                           "miopenRNNDirectionMode_t",                                        CONV_TYPE, API_DNN, 1};
   m["CUDNN_UNIDIRECTIONAL"]                                            = {"HIPDNN_UNIDIRECTIONAL",                                           "miopenRNNunidirection",                                           CONV_NUMERIC_LITERAL, API_DNN, 1};    // 0
   m["CUDNN_BIDIRECTIONAL"]                                             = {"HIPDNN_BIDIRECTIONAL",                                            "miopenRNNbidirection",                                            CONV_NUMERIC_LITERAL, API_DNN, 1};    // 1
-  m["cudnnMathType_t"]                                                 = {"hipdnnMathType_t",                                                "",                                                                CONV_TYPE, API_DNN, 1, ROC_UNSUPPORTED};
-  m["CUDNN_DEFAULT_MATH"]                                              = {"HIPDNN_DEFAULT_MATH",                                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED};    // 0
+  m["cudnnMathType_t"]                                                 = {"hipdnnMathType_t",                                                "miopenMathType_t",                                                CONV_TYPE, API_DNN, 1};
+  m["CUDNN_DEFAULT_MATH"]                                              = {"HIPDNN_DEFAULT_MATH",                                             "miopenMathDefault",                                               CONV_NUMERIC_LITERAL, API_DNN, 1};    // 0
   m["CUDNN_TENSOR_OP_MATH"]                                            = {"HIPDNN_TENSOR_OP_MATH",                                           "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, ROC_UNSUPPORTED};    // 1
   m["CUDNN_TENSOR_OP_MATH_ALLOW_CONVERSION"]                           = {"HIPDNN_TENSOR_OP_MATH_ALLOW_CONVERSION",                          "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};    // 2
   m["CUDNN_FMA_MATH"]                                                  = {"HIPDNN_FMA_MATH",                                                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};    // 3
@@ -2549,6 +2549,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DNN_TYPE_NAME_VER_MAP = [] {
   m["miopenPaddingSame"]                                               = {HIP_2010,  HIP_0,     HIP_0    };
   m["miopenPaddingValid"]                                              = {HIP_2010,  HIP_0,     HIP_0    };
   m["MIOPEN_BACKEND_OPERATION_RESHAPE_DESCRIPTOR"]                     = {HIP_6030,  HIP_0,     HIP_0    };
+  m["miopenMathType_t"]                                                = {HIP_7120,  HIP_0,     HIP_0    };
+  m["miopenMathDefault"]                                               = {HIP_7120,  HIP_0,     HIP_0    };
 
   return m;
 }();

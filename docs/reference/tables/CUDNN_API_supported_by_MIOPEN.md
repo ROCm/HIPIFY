@@ -480,7 +480,7 @@
 |`CUDNN_DATA_UINT4`|9.11.0| | | | | | | | | | |
 |`CUDNN_DATA_UINT8`|7.1.3| | | | | | | | | | |
 |`CUDNN_DATA_UINT8x4`|7.1.3|9.0.0| | | | | | | | | |
-|`CUDNN_DEFAULT_MATH`|7.0.5| | | | | | | | | | |
+|`CUDNN_DEFAULT_MATH`|7.0.5| | | |`miopenMathDefault`|7.12.0| | | | | |
 |`CUDNN_DEFAULT_REORDER`|7.6.0|9.0.0| | | | | | | | | |
 |`CUDNN_DETERMINISTIC`|6.0.0| | | | | | | | | | |
 |`CUDNN_DIM_MAX`|4.0.0| | | | | | | | | | |
@@ -978,7 +978,7 @@
 |`cudnnLRNMode_t`|3.0.0| | | |`miopenLRNMode_t`|2.1.0| | | | | |
 |`cudnnLRNStruct`|3.0.0| | | | | | | | | | |
 |`cudnnLossNormalizationMode_t`|7.6.0| | | | | | | | | | |
-|`cudnnMathType_t`|7.0.5| | | | | | | | | | |
+|`cudnnMathType_t`|7.0.5| | | |`miopenMathType_t`|7.12.0| | | | | |
 |`cudnnMoeGroupedMatmulMode_t`|9.15.0| | | | | | | | | | |
 |`cudnnMultiHeadAttnWeightKind_t`|7.5.0| | | | | | | | | | |
 |`cudnnNanPropagation_t`|4.0.0| | | |`miopenNanPropagation_t`|3.9.0| | | | | |
