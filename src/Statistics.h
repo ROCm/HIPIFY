@@ -466,6 +466,7 @@ enum hipVersions {
   HIP_7000 = 7000,
   HIP_7010 = 7010,
   HIP_7020 = 7020,
+  HIP_7110 = 7110,
   HIP_7120 = 7120,
   HIP_8000 = 8000,
   HIP_LATEST = HIP_8000,
