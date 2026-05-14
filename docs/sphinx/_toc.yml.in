@@ -6,7 +6,8 @@ root: index
 subtrees:
 - caption: Install
   entries:
-  - file: Install HIPIFY
+  - file: install
+    title: Install HIPIFY
 - caption: Building
   entries:
   - file: building/build-hipify-clang-linux
