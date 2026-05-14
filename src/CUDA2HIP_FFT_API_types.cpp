@@ -144,10 +144,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_TYPE_NAME_MAP = [] {
   m["FFTW_UNALIGNED"]                                   = {"FFTW_UNALIGNED",                                   "", CONV_DEFINE, API_FFT, 1};
   m["fftw_complex"]                                     = {"fftw_complex",                                     "", CONV_TYPE, API_FFT, 1};
   m["fftwf_complex"]                                    = {"fftwf_complex",                                    "", CONV_TYPE, API_FFT, 1};
-  m["fftw_iodim"]                                       = {"fftw_iodim",                                       "", CONV_TYPE, API_FFT, 1, UNSUPPORTED};
-  m["fftwf_iodim"]                                      = {"fftwf_iodim",                                      "", CONV_TYPE, API_FFT, 1, UNSUPPORTED};
-  m["fftw_iodim64"]                                     = {"fftw_iodim64",                                     "", CONV_TYPE, API_FFT, 1, UNSUPPORTED};
-  m["fftwf_iodim64"]                                    = {"fftwf_iodim64",                                    "", CONV_TYPE, API_FFT, 1, UNSUPPORTED};
+  m["fftw_iodim"]                                       = {"fftw_iodim",                                       "", CONV_TYPE, API_FFT, 1};
+  m["fftwf_iodim"]                                      = {"fftwf_iodim",                                      "", CONV_TYPE, API_FFT, 1};
+  m["fftw_iodim64"]                                     = {"fftw_iodim64",                                     "", CONV_TYPE, API_FFT, 1};
+  m["fftwf_iodim64"]                                    = {"fftwf_iodim64",                                    "", CONV_TYPE, API_FFT, 1};
   m["fftw_plan"]                                        = {"fftw_plan",                                        "", CONV_TYPE, API_FFT, 1};
   m["fftwf_plan"]                                       = {"fftwf_plan",                                       "", CONV_TYPE, API_FFT, 1};
 
@@ -334,6 +334,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_TYPE_NAME_VER_MAP = [] {
   m["fftwf_complex"]                                    = {HIP_7010, HIP_0,    HIP_0   };
   m["fftw_plan"]                                        = {HIP_7010, HIP_0,    HIP_0   };
   m["fftwf_plan"]                                       = {HIP_7010, HIP_0,    HIP_0   };
+  m["fftw_iodim"]                                       = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftwf_iodim"]                                      = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftw_iodim64"]                                     = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftwf_iodim64"]                                    = {HIP_7110, HIP_0,    HIP_0   };
 
   return m;
 }();
