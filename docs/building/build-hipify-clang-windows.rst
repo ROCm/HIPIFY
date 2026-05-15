@@ -248,22 +248,22 @@ Tested configurations:
     - ``3.11.4``
   * - ``17.0.1`` :sup:`6` - ``18.1.8`` :sup:`7`
     - ``7.0 - 12.3.2``
-    - ``8.0.5  - 9.13.1``
-    - ``2019.16.11.50, 2022.17.14.12, 2026.18.5.0``
-    - ``4.1.1``
-    - ``3.13.6``
+    - ``8.0.5  - 9.21.1``
+    - ``2019.16.11.56, 2022.17.14.32, 2026.18.6.0``
+    - ``4.3.2``
+    - ``3.14.5``
   * - ``19.1.0 - 20.1.8``
     - ``7.0 - 12.8.1``
     - ``8.0.5  - 9.21.1``
-    - ``2019.16.11.51, 2022.17.14.14, 2026.18.5.0``
-    - ``4.1.1``
-    - ``3.13.7``
+    - ``2019.16.11.56, 2022.17.14.32, 2026.18.6.0``
+    - ``4.3.2``
+    - ``3.14.5``
   * - ``21.1.0 - 22.1.5``
     - ``7.0 - 12.9.1``
     - ``8.0.5  - 9.21.1``
-    - ``2019.16.11.54, 2022.17.14.29, 2026.18.5.0``
-    - ``4.3.0``
-    - ``3.14.3``
+    - ``2019.16.11.56, 2022.17.14.32, 2026.18.6.0``
+    - ``4.3.2``
+    - ``3.14.5``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 15 2017.
 
@@ -326,7 +326,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.5`
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS - Failed
     -- ---- The below configuring for hipify-clang testing only ----
-    -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python314\python.exe (found suitable version "3.14.3", required range is "3.0...3.15") found components: Interpreter
+    -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python314\python.exe (found suitable version "3.14.5", required range is "3.0...3.15") found components: Interpreter
     -- Found lit: C:\Users\TT\AppData\Local\Programs\Python\Python314\Scripts\lit.exe
     -- Found FileCheck: D:\LLVM\22.1.5\dist\bin\FileCheck.exe
     -- Initial CUDA to configure:
