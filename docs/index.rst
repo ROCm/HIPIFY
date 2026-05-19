@@ -28,6 +28,10 @@ The documentation is structured as follows:
 .. grid:: 2
   :gutter: 3
 
+  .. grid-item-card:: Install
+
+    * :doc:`Install HIPIFY <./install>`
+
   .. grid-item-card:: Building
 
     * :doc:`Building hipify-clang on Linux <./building/build-hipify-clang-linux>`

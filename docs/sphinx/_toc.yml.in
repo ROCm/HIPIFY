@@ -4,6 +4,10 @@ defaults:
   numbered: False
 root: index
 subtrees:
+- caption: Install
+  entries:
+  - file: install
+    title: Install HIPIFY
 - caption: Building
   entries:
   - file: building/build-hipify-clang-linux
