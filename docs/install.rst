@@ -76,6 +76,6 @@ Install a nightly build
 =======================
 
 The `TheRock <https://github.com/ROCm/TheRock>`__ build system also publishes
-nightly builds for the ROCm Core SDK and its components, including ROCm Systems
-Profiler. See `Nightly release status
+nightly builds for the ROCm Core SDK and its components, including HIPIFY
+tools. See `Nightly release status
 <https://github.com/ROCm/TheRock#nightly-release-status>`__ for details.
