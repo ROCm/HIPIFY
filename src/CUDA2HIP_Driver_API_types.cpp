@@ -966,7 +966,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrMaxAccessPolicyWindowSize
   {"CU_DEVICE_ATTRIBUTE_MAX_ACCESS_POLICY_WINDOW_SIZE",                {"hipDeviceAttributeMaxAccessPolicyWindowSize",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 109
   // no analogue
-  {"CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED",      {"hipDeviceAttributeGpuDirectRdmaWithCudaVmmSupported",      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 110
+  {"CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED",      {"hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported",       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 110
   // cudaDevAttrReservedSharedMemoryPerBlock
   {"CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK",             {"hipDeviceAttributeReservedSharedMemoryPerBlock",           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 111
   // cudaDevAttrSparseCudaArraySupported
@@ -2005,7 +2005,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaErrorExternalDevice
   {"CUDA_ERROR_EXTERNAL_DEVICE",                                       {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 911
   // cudaErrorInvalidClusterSize
-  {"CUDA_ERROR_INVALID_CLUSTER_SIZE",                                  {"hipErrorInvalidClusterSize",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 912
+  {"CUDA_ERROR_INVALID_CLUSTER_SIZE",                                  {"hipErrorInvalidClusterSize",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 912
   // cudaErrorFunctionNotLoaded
   {"CUDA_ERROR_FUNCTION_NOT_LOADED",                                   {"hipErrorFunctionNotLoaded",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 913
   // cudaErrorInvalidResourceType
@@ -2095,7 +2095,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   {"CUstreamWriteValue_flags",                                         {"hipStreamWriteValueFlags",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   {"CUstreamWriteValue_flags_enum",                                    {"hipStreamWriteValueFlags",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}},
   // CUstreamWriteValue_flags enum values
-  {"CU_STREAM_WRITE_VALUE_DEFAULT",                                    {"hipStreamWriteValueDefault",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x0
+  {"CU_STREAM_WRITE_VALUE_DEFAULT",                                    {"hipStreamWriteValueDefault",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x0
   {"CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER",                          {"hipStreamWriteValueNoMemoryBarrier",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x1
 
   // cudaGLDeviceList
@@ -4747,4 +4747,6 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipMemRangeFlags",                                                 {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemRangeFlagDmaBufMappingTypePcie",                             {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipDeviceAttributeDmaBufSupported",                                {HIP_7120, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported",               {HIP_7130, HIP_0,    HIP_0   }},
+  {"hipStreamWriteValueDefault",                                       {HIP_7130, HIP_0,    HIP_0   }},
 };

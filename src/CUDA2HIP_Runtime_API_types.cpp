@@ -1240,7 +1240,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CUDA_ERROR_EXTERNAL_DEVICE
   {"cudaErrorExternalDevice",                                          {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 911
   // CUDA_ERROR_INVALID_CLUSTER_SIZE
-  {"cudaErrorInvalidClusterSize",                                      {"hipErrorInvalidClusterSize",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 912
+  {"cudaErrorInvalidClusterSize",                                      {"hipErrorInvalidClusterSize",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 912
   // CUDA_ERROR_FUNCTION_NOT_LOADED
   {"cudaErrorFunctionNotLoaded",                                       {"hipErrorFunctionNotLoaded",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 913
   // CUDA_ERROR_INVALID_RESOURCE_TYPE
@@ -3552,4 +3552,5 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipLaunchAttribute",                                               {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLaunchConfig_st",                                               {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLaunchConfig_t",                                                {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipErrorInvalidClusterSize",                                       {HIP_7130, HIP_0,    HIP_0   }},
 };
