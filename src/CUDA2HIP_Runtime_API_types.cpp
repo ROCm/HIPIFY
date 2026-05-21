@@ -1283,7 +1283,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CUDA_ERROR_EXTERNAL_DEVICE
   m["cudaErrorExternalDevice"]                                  = {"hipErrorExternalDevice",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 911
   // CUDA_ERROR_INVALID_CLUSTER_SIZE
-  m["cudaErrorInvalidClusterSize"]                              = {"hipErrorInvalidClusterSize",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 912
+  m["cudaErrorInvalidClusterSize"]                              = {"hipErrorInvalidClusterSize",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 912
   // CUDA_ERROR_FUNCTION_NOT_LOADED
   m["cudaErrorFunctionNotLoaded"]                               = {"hipErrorFunctionNotLoaded",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 913
   // CUDA_ERROR_INVALID_RESOURCE_TYPE
@@ -3980,6 +3980,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = 
   m["hipLibraryBinaryIsPreserved"]                              = {HIP_7010, HIP_0,    HIP_0   };
   m["hipMemAllocationTypeManaged"]                              = {HIP_7120, HIP_0,    HIP_0   };
   m["hipDeviceAttributeHostNumaId"]                             = {HIP_7020, HIP_0,    HIP_0   };
+  m["hipErrorInvalidClusterSize"]                               = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
 
   return m;
 }();

@@ -940,6 +940,9 @@ int main() {
 #if CUDA_VERSION >= 11080
   // CHECK: hipLaunchAttributeID LaunchAttributeSynchronizationPolicy = hipLaunchAttributeSynchronizationPolicy;
   cudaLaunchAttributeID LaunchAttributeSynchronizationPolicy = cudaLaunchAttributeSynchronizationPolicy;
+
+  // CHECK: hipError_t ErrorInvalidClusterSize = hipErrorInvalidClusterSize;
+  cudaError_t ErrorInvalidClusterSize = cudaErrorInvalidClusterSize;
 #endif
 
 #if CUDA_VERSION >= 12000
