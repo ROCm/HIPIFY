@@ -63,8 +63,10 @@ int main() {
 #if CUDA_VERSION >= 8000
   // CHECK: int DEVICE_CPU = hipCpuDeviceId;
   // CHECK-NEXT: int DEVICE_INVALID = hipInvalidDeviceId;
+  // CHECK-NEXT: int STREAM_WRITE_VALUE_DEFAULT = hipStreamWriteValueDefault;
   int DEVICE_CPU = CU_DEVICE_CPU;
   int DEVICE_INVALID = CU_DEVICE_INVALID;
+  int STREAM_WRITE_VALUE_DEFAULT = CU_STREAM_WRITE_VALUE_DEFAULT;
 #endif
 
 #if CUDA_VERSION >= 9000

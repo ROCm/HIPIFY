@@ -1027,7 +1027,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaDevAttrMaxAccessPolicyWindowSize
   m["CU_DEVICE_ATTRIBUTE_MAX_ACCESS_POLICY_WINDOW_SIZE"]                 = {"hipDeviceAttributeMaxAccessPolicyWindowSize",                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 109
   // no analogue
-  m["CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED"]       = {"hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported",         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 110
+  m["CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED"]       = {"hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported",         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 110
   // cudaDevAttrReservedSharedMemoryPerBlock
   m["CU_DEVICE_ATTRIBUTE_RESERVED_SHARED_MEMORY_PER_BLOCK"]              = {"hipDeviceAttributeReservedSharedMemoryPerBlock",             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 111
   // cudaDevAttrSparseCudaArraySupported
@@ -1063,7 +1063,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaDevAttrReserved127
   m["CU_DEVICE_ATTRIBUTE_TENSOR_MAP_ACCESS_SUPPORTED"]                   = {"hipDeviceAttributeTensorMapAccessSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 127
   //
-  m["CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED"]                  = {"hipDeviceAttributeHandleTypeFabricSupported",                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 128
+  m["CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED"]                  = {"hipDeviceAttributeHandleTypeFabricSupported",                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 128
   // cudaDevAttrReserved129
   m["CU_DEVICE_ATTRIBUTE_UNIFIED_FUNCTION_POINTERS"]                     = {"hipDeviceAttributeUnifiedFunctionPointers",                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 129
   // cudaDevAttrNumaConfig
@@ -2089,7 +2089,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaErrorExternalDevice
   m["CUDA_ERROR_EXTERNAL_DEVICE"]                                        = {"hipErrorExternalDevice",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 911
   // cudaErrorInvalidClusterSize
-  m["CUDA_ERROR_INVALID_CLUSTER_SIZE"]                                   = {"hipErrorInvalidClusterSize",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 912
+  m["CUDA_ERROR_INVALID_CLUSTER_SIZE"]                                   = {"hipErrorInvalidClusterSize",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 912
   // cudaErrorFunctionNotLoaded
   m["CUDA_ERROR_FUNCTION_NOT_LOADED"]                                    = {"hipErrorFunctionNotLoaded",                                  "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 913
   // cudaErrorInvalidResourceType
@@ -2182,7 +2182,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUstreamWriteValue_flags"]                                          = {"hipStreamWriteValueFlags",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   m["CUstreamWriteValue_flags_enum"]                                     = {"hipStreamWriteValueFlags",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUstreamWriteValue_flags enum values
-  m["CU_STREAM_WRITE_VALUE_DEFAULT"]                                     = {"hipStreamWriteValueDefault",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x0
+  m["CU_STREAM_WRITE_VALUE_DEFAULT"]                                     = {"hipStreamWriteValueDefault",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 0x0
   m["CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER"]                           = {"hipStreamWriteValueNoMemoryBarrier",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x1
 
   // cudaGLDeviceList
@@ -2294,7 +2294,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaMemHandleTypeWin32Kmt
   m["CU_MEM_HANDLE_TYPE_WIN32_KMT"]                                      = {"hipMemHandleTypeWin32Kmt",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 0x4
   // cudaMemHandleTypeFabric
-  m["CU_MEM_HANDLE_TYPE_FABRIC"]                                         = {"hipMemHandleTypeFabric",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 0x8
+  m["CU_MEM_HANDLE_TYPE_FABRIC"]                                         = {"hipMemHandleTypeFabric",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 0x8
   // no analogue
   m["CU_MEM_HANDLE_TYPE_MAX"]                                            = {"hipMemHandleTypeMax",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x7FFFFFFF
 
@@ -5117,8 +5117,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [
   m["hipDeviceAttributeHostNumaId"]                                      = {HIP_7020, HIP_0,    HIP_0   };
   m["hipDeviceAttributeDmaBufSupported"]                                 = {HIP_7120, HIP_0,    HIP_0   };
   m["hipArrayMemoryRequirements"]                                        = {HIP_7120, HIP_0,    HIP_0   };
-  m["hipDeviceAttributeHandleTypeFabricSupported"]                       = {HIP_8000, HIP_0,    HIP_0,  HIP_LATEST};
-  m["hipMemHandleTypeFabric"]                                            = {HIP_8000, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported"]                = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipStreamWriteValueDefault"]                                        = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipDeviceAttributeHandleTypeFabricSupported"]                       = {HIP_8000, HIP_0,    HIP_0,  };
+  m["hipMemHandleTypeFabric"]                                            = {HIP_8000, HIP_0,    HIP_0,  };
 
   return m;
 }();
