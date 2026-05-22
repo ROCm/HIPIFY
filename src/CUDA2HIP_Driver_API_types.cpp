@@ -1382,6 +1382,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_FUNC_CACHE_PREFER_EQUAL"]                                        = {"hipFuncCachePreferEqual",                                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 0x03
 
   // cudaFuncAttribute
+  // TODO: HIP: Merge hipFuncAttribute with hipFunction_attribute
   m["CUfunction_attribute"]                                              = {"hipFunction_attribute",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
   m["CUfunction_attribute_enum"]                                         = {"hipFunction_attribute",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
   // CUfunction_attribute enum values

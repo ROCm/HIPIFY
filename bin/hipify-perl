@@ -1694,6 +1694,12 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cudaFuncAttributeRequiredClusterWidth" => "7.13.0",
+    "cudaFuncAttributeRequiredClusterHeight" => "7.13.0",
+    "cudaFuncAttributeRequiredClusterDepth" => "7.13.0",
+    "cudaFuncAttributeNonPortableClusterSizeAllowed" => "7.13.0",
+    "cudaFuncAttributeClusterSchedulingPolicyPreference" => "7.13.0",
+    "cudaFuncAttributeClusterDimMustBeSet" => "7.13.0",
     "cudaErrorInvalidClusterSize" => "7.13.0",
     "CU_STREAM_WRITE_VALUE_DEFAULT" => "7.13.0",
     "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED" => "7.13.0",
@@ -5935,12 +5941,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cudaFlushGPUDirectRDMAWritesToOwner' => 1,
     'cudaFormatModeAuto' => 1,
     'cudaFormatModeForced' => 1,
-    'cudaFuncAttributeClusterDimMustBeSet' => 1,
-    'cudaFuncAttributeClusterSchedulingPolicyPreference' => 1,
-    'cudaFuncAttributeNonPortableClusterSizeAllowed' => 1,
-    'cudaFuncAttributeRequiredClusterDepth' => 1,
-    'cudaFuncAttributeRequiredClusterHeight' => 1,
-    'cudaFuncAttributeRequiredClusterWidth' => 1,
     'cudaFuncGetName' => 1,
     'cudaFuncGetParamCount' => 1,
     'cudaFuncGetParamInfo' => 1,
@@ -16156,6 +16156,12 @@ my %map_experimental = (
     'CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED' => ['hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported', 'numeric_literal'],
     'CU_STREAM_WRITE_VALUE_DEFAULT' => ['hipStreamWriteValueDefault', 'numeric_literal'],
     'cudaErrorInvalidClusterSize' => ['hipErrorInvalidClusterSize', 'numeric_literal'],
+    'cudaFuncAttributeClusterDimMustBeSet' => ['hipFuncAttributeClusterDimMustBeSet', 'numeric_literal'],
+    'cudaFuncAttributeClusterSchedulingPolicyPreference' => ['hipFuncAttributeClusterSchedulingPolicyPreference', 'numeric_literal'],
+    'cudaFuncAttributeNonPortableClusterSizeAllowed' => ['hipFuncAttributeNonPortableClusterSizeAllowed', 'numeric_literal'],
+    'cudaFuncAttributeRequiredClusterDepth' => ['hipFuncAttributeRequiredClusterDepth', 'numeric_literal'],
+    'cudaFuncAttributeRequiredClusterHeight' => ['hipFuncAttributeRequiredClusterHeight', 'numeric_literal'],
+    'cudaFuncAttributeRequiredClusterWidth' => ['hipFuncAttributeRequiredClusterWidth', 'numeric_literal'],
 );
 
 my %map_roc = (
