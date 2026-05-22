@@ -1343,6 +1343,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
 
   // CUfunction_attribute
   // NOTE: only last, starting from 8, values are presented and are equal to Driver's ones
+  // TODO: HIP: Merge hipFuncAttribute with hipFunction_attribute
   m["cudaFuncAttribute"]                                        = {"hipFuncAttribute",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // cudaFuncAttribute enum values
   // CU_FUNC_ATTRIBUTE_MAX_DYNAMIC_SHARED_SIZE_BYTES
@@ -1350,17 +1351,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_FUNC_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT
   m["cudaFuncAttributePreferredSharedMemoryCarveout"]           = {"hipFuncAttributePreferredSharedMemoryCarveout",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; //  9
   // CU_FUNC_ATTRIBUTE_CLUSTER_SIZE_MUST_BE_SET
-  m["cudaFuncAttributeClusterDimMustBeSet"]                     = {"hipFuncAttributeClusterDimMustBeSet",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 10
+  m["cudaFuncAttributeClusterDimMustBeSet"]                     = {"hipFuncAttributeClusterDimMustBeSet",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 10
   // CU_FUNC_ATTRIBUTE_REQUIRED_CLUSTER_WIDTH
-  m["cudaFuncAttributeRequiredClusterWidth"]                    = {"hipFuncAttributeRequiredClusterWidth",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 11
+  m["cudaFuncAttributeRequiredClusterWidth"]                    = {"hipFuncAttributeRequiredClusterWidth",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 11
   // CU_FUNC_ATTRIBUTE_REQUIRED_CLUSTER_HEIGHT
-  m["cudaFuncAttributeRequiredClusterHeight"]                   = {"hipFuncAttributeRequiredClusterHeight",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 12
+  m["cudaFuncAttributeRequiredClusterHeight"]                   = {"hipFuncAttributeRequiredClusterHeight",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 12
   // CU_FUNC_ATTRIBUTE_REQUIRED_CLUSTER_DEPTH
-  m["cudaFuncAttributeRequiredClusterDepth"]                    = {"hipFuncAttributeRequiredClusterDepth",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 13
+  m["cudaFuncAttributeRequiredClusterDepth"]                    = {"hipFuncAttributeRequiredClusterDepth",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 13
   // CU_FUNC_ATTRIBUTE_NON_PORTABLE_CLUSTER_SIZE_ALLOWED
-  m["cudaFuncAttributeNonPortableClusterSizeAllowed"]           = {"hipFuncAttributeNonPortableClusterSizeAllowed",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 14
+  m["cudaFuncAttributeNonPortableClusterSizeAllowed"]           = {"hipFuncAttributeNonPortableClusterSizeAllowed",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 14
   // CU_FUNC_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE
-  m["cudaFuncAttributeClusterSchedulingPolicyPreference"]       = {"hipFuncAttributeClusterSchedulingPolicyPreference",        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 15
+  m["cudaFuncAttributeClusterSchedulingPolicyPreference"]       = {"hipFuncAttributeClusterSchedulingPolicyPreference",        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 15
   // CU_FUNC_ATTRIBUTE_MAX
   m["cudaFuncAttributeMax"]                                     = {"hipFuncAttributeMax",                                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 16
 
@@ -3981,6 +3982,12 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = 
   m["hipMemAllocationTypeManaged"]                              = {HIP_7120, HIP_0,    HIP_0   };
   m["hipDeviceAttributeHostNumaId"]                             = {HIP_7020, HIP_0,    HIP_0   };
   m["hipErrorInvalidClusterSize"]                               = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipFuncAttributeClusterDimMustBeSet"]                      = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipFuncAttributeRequiredClusterWidth"]                     = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipFuncAttributeRequiredClusterHeight"]                    = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipFuncAttributeRequiredClusterDepth"]                     = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipFuncAttributeNonPortableClusterSizeAllowed"]            = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipFuncAttributeClusterSchedulingPolicyPreference"]        = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
 
   return m;
 }();

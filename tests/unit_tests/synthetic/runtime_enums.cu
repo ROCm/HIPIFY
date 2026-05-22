@@ -943,6 +943,19 @@ int main() {
 
   // CHECK: hipError_t ErrorInvalidClusterSize = hipErrorInvalidClusterSize;
   cudaError_t ErrorInvalidClusterSize = cudaErrorInvalidClusterSize;
+
+  // CHECK: hipFuncAttribute FuncAttributeClusterDimMustBeSet = hipFuncAttributeClusterDimMustBeSet;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeRequiredClusterWidth = hipFuncAttributeRequiredClusterWidth;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeRequiredClusterHeight = hipFuncAttributeRequiredClusterHeight;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeRequiredClusterDepth = hipFuncAttributeRequiredClusterDepth;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeNonPortableClusterSizeAllowed = hipFuncAttributeNonPortableClusterSizeAllowed;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeClusterSchedulingPolicyPreference = hipFuncAttributeClusterSchedulingPolicyPreference;
+  cudaFuncAttribute FuncAttributeClusterDimMustBeSet = cudaFuncAttributeClusterDimMustBeSet;
+  cudaFuncAttribute FuncAttributeRequiredClusterWidth = cudaFuncAttributeRequiredClusterWidth;
+  cudaFuncAttribute FuncAttributeRequiredClusterHeight = cudaFuncAttributeRequiredClusterHeight;
+  cudaFuncAttribute FuncAttributeRequiredClusterDepth = cudaFuncAttributeRequiredClusterDepth;
+  cudaFuncAttribute FuncAttributeNonPortableClusterSizeAllowed = cudaFuncAttributeNonPortableClusterSizeAllowed;
+  cudaFuncAttribute FuncAttributeClusterSchedulingPolicyPreference = cudaFuncAttributeClusterSchedulingPolicyPreference;
 #endif
 
 #if CUDA_VERSION >= 12000

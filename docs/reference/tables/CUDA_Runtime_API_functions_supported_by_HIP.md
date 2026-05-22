@@ -1396,15 +1396,15 @@
 |`cudaFormatModeAuto`| | | | | | | | | | | |
 |`cudaFormatModeForced`| | | | | | | | | | | |
 |`cudaFuncAttribute`|9.0| | | |`hipFuncAttribute`|3.9.0| | | | | |
-|`cudaFuncAttributeClusterDimMustBeSet`|11.8| | | | | | | | | | |
-|`cudaFuncAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | | | | |
+|`cudaFuncAttributeClusterDimMustBeSet`|11.8| | | |`hipFuncAttributeClusterDimMustBeSet`|7.13.0| | | | |7.13.0|
+|`cudaFuncAttributeClusterSchedulingPolicyPreference`|11.8| | | |`hipFuncAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.13.0|
 |`cudaFuncAttributeMax`|9.0| | | |`hipFuncAttributeMax`|3.9.0| | | | | |
 |`cudaFuncAttributeMaxDynamicSharedMemorySize`|9.0| | | |`hipFuncAttributeMaxDynamicSharedMemorySize`|3.9.0| | | | | |
-|`cudaFuncAttributeNonPortableClusterSizeAllowed`|11.8| | | | | | | | | | |
+|`cudaFuncAttributeNonPortableClusterSizeAllowed`|11.8| | | |`hipFuncAttributeNonPortableClusterSizeAllowed`|7.13.0| | | | |7.13.0|
 |`cudaFuncAttributePreferredSharedMemoryCarveout`|9.0| | | |`hipFuncAttributePreferredSharedMemoryCarveout`|3.9.0| | | | | |
-|`cudaFuncAttributeRequiredClusterDepth`|11.8| | | | | | | | | | |
-|`cudaFuncAttributeRequiredClusterHeight`|11.8| | | | | | | | | | |
-|`cudaFuncAttributeRequiredClusterWidth`|11.8| | | | | | | | | | |
+|`cudaFuncAttributeRequiredClusterDepth`|11.8| | | |`hipFuncAttributeRequiredClusterDepth`|7.13.0| | | | |7.13.0|
+|`cudaFuncAttributeRequiredClusterHeight`|11.8| | | |`hipFuncAttributeRequiredClusterHeight`|7.13.0| | | | |7.13.0|
+|`cudaFuncAttributeRequiredClusterWidth`|11.8| | | |`hipFuncAttributeRequiredClusterWidth`|7.13.0| | | | |7.13.0|
 |`cudaFuncAttributes`| | | | |`hipFuncAttributes`|1.9.0| | | | | |
 |`cudaFuncCache`| | | | |`hipFuncCache_t`|1.6.0| | | | | |
 |`cudaFuncCachePreferEqual`| | | | |`hipFuncCachePreferEqual`|1.6.0| | | | | |
