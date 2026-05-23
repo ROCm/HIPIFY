@@ -872,7 +872,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
   m["cublasZsyrk_v2_64"]                                            = {"hipblasZsyrk_64",                                           "rocblas_zsyrk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // IO in Int8 complex/cuComplex, computation in cuComplex
-  m["cublasCsyrkEx"]                                                = {"hipblasCsyrkEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCsyrkEx"]                                                = {"hipblasSyrkEx",                                             "rocblas_syrk_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
   m["cublasCsyrkEx_64"]                                             = {"hipblasCsyrkEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
 
   // IO in Int8 complex/cuComplex, computation in cuComplex, Gaussian math
@@ -884,7 +884,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
   m["cublasCherk_v2_64"]                                            = {"hipblasCherk_64",                                           "rocblas_cherk_64",                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // IO in Int8 complex/cuComplex, computation in cuComplex
-  m["cublasCherkEx"]                                                = {"hipblasCherkEx",                                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
+  m["cublasCherkEx"]                                                = {"hipblasHerkEx",                                             "rocblas_herk_ex",                                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT};
   m["cublasCherkEx_64"]                                             = {"hipblasCherkEx_64",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_EXT, UNSUPPORTED};
 
   // IO in Int8 complex/cuComplex, computation in cuComplex, Gaussian math
@@ -2339,6 +2339,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
   m["rocblas_nrm2_ex"]                                              = {HIP_4010, HIP_0,    HIP_0   };
   m["rocblas_rot_ex"]                                               = {HIP_4010, HIP_0,    HIP_0   };
   m["rocblas_scal_ex"]                                              = {HIP_4000, HIP_0,    HIP_0   };
+  m["rocblas_syrk_ex"]                                              = {HIP_7110, HIP_0,    HIP_0   };
+  m["rocblas_herk_ex"]                                              = {HIP_7110, HIP_0,    HIP_0   };
   m["rocblas_initialize"]                                           = {HIP_3050, HIP_0,    HIP_0   };
   m["rocblas_create_handle"]                                        = {HIP_1050, HIP_0,    HIP_0   };
   m["rocblas_destroy_handle"]                                       = {HIP_1050, HIP_0,    HIP_0   };
@@ -2585,6 +2587,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
   m["rocblas_gemm_batched_ex_64"]                                   = {HIP_6030, HIP_0,    HIP_0   };
   m["rocblas_gemm_strided_batched_ex_64"]                           = {HIP_6030, HIP_0,    HIP_0   };
   m["hipblasSetWorkspace"]                                          = {HIP_7000, HIP_0,    HIP_0   };
+  m["hipblasSyrkEx"]                                                = {HIP_7110, HIP_0,    HIP_0   };
+  m["hipblasHerkEx"]                                                = {HIP_7110, HIP_0,    HIP_0   };
 
   return m;
 }();
