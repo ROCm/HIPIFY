@@ -956,6 +956,15 @@ int main() {
   cudaFuncAttribute FuncAttributeRequiredClusterDepth = cudaFuncAttributeRequiredClusterDepth;
   cudaFuncAttribute FuncAttributeNonPortableClusterSizeAllowed = cudaFuncAttributeNonPortableClusterSizeAllowed;
   cudaFuncAttribute FuncAttributeClusterSchedulingPolicyPreference = cudaFuncAttributeClusterSchedulingPolicyPreference;
+
+  // CHECK: hipClusterSchedulingPolicy clusterSchedulingPolicy;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = hipClusterSchedulingPolicyDefault;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = hipClusterSchedulingPolicySpread;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = hipClusterSchedulingPolicyLoadBalancing;
+  cudaClusterSchedulingPolicy clusterSchedulingPolicy;
+  cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = cudaClusterSchedulingPolicyDefault;
+  cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = cudaClusterSchedulingPolicySpread;
+  cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = cudaClusterSchedulingPolicyLoadBalancing;
 #endif
 
 #if CUDA_VERSION >= 12000

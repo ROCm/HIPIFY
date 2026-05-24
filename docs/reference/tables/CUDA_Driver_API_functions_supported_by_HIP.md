@@ -364,9 +364,9 @@
 |`CU_ATOMIC_OPERATION_MAX`|13.0| | | | | | | | | | |
 |`CU_ATOMIC_OPERATION_OR`|13.0| | | | | | | | | | |
 |`CU_ATOMIC_OPERATION_XOR`|13.0| | | | | | | | | | |
-|`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | | | | | | | | |
-|`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | | | | | | | | |
-|`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | | | | | | | | |
+|`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | |`hipClusterSchedulingPolicyDefault`|7.13.0| | | | |7.13.0|
+|`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | |`hipClusterSchedulingPolicyLoadBalancing`|7.13.0| | | | |7.13.0|
+|`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | |`hipClusterSchedulingPolicySpread`|7.13.0| | | | |7.13.0|
 |`CU_COMPUTEMODE_DEFAULT`| | | | |`hipComputeModeDefault`|1.9.0| | | | | |
 |`CU_COMPUTEMODE_EXCLUSIVE`| | | |8.0|`hipComputeModeExclusive`|1.9.0| | | | | |
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | | |`hipComputeModeExclusiveProcess`|2.0.0| | | | | |
@@ -1285,8 +1285,8 @@
 |`CUcheckpointUnlockArgs_st`|12.8| | | | | | | | | | |
 |`CUcigDataType`|12.5| | | | | | | | | | |
 |`CUcigDataType_enum`|12.5| | | | | | | | | | |
-|`CUclusterSchedulingPolicy`|11.8| | | | | | | | | | |
-|`CUclusterSchedulingPolicy_enum`|11.8| | | | | | | | | | |
+|`CUclusterSchedulingPolicy`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.13.0|
+|`CUclusterSchedulingPolicy_enum`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.13.0|
 |`CUcomputemode`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`CUcomputemode_enum`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`CUcontext`| | | | |`hipCtx_t`|1.6.0| | | | | |
