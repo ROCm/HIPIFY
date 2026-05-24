@@ -2033,14 +2033,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaGraphInstantiateFlagUseNodePriority"]                  = {"hipGraphInstantiateFlagUseNodePriority",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUclusterSchedulingPolicy
-  m["cudaClusterSchedulingPolicy"]                              = {"hipClusterSchedulingPolicy",                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaClusterSchedulingPolicy"]                              = {"hipClusterSchedulingPolicy",                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // cudaClusterSchedulingPolicy enum values
   // CU_CLUSTER_SCHEDULING_POLICY_DEFAULT
-  m["cudaClusterSchedulingPolicyDefault"]                       = {"hipClusterSchedulingPolicyDefault",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaClusterSchedulingPolicyDefault"]                       = {"hipClusterSchedulingPolicyDefault",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // CU_CLUSTER_SCHEDULING_POLICY_SPREAD
-  m["cudaClusterSchedulingPolicySpread"]                        = {"hipClusterSchedulingPolicySpread",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaClusterSchedulingPolicySpread"]                        = {"hipClusterSchedulingPolicySpread",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING
-  m["cudaClusterSchedulingPolicyLoadBalancing"]                 = {"hipClusterSchedulingPolicyLoadBalancing",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaClusterSchedulingPolicyLoadBalancing"]                 = {"hipClusterSchedulingPolicyLoadBalancing",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
 
   // CUlaunchAttributeID
   m["cudaLaunchAttributeID"]                                    = {"hipLaunchAttributeID",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};

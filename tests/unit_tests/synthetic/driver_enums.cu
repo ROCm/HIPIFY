@@ -1253,6 +1253,17 @@ int main() {
 
   // CHECK: hipError_t ERROR_INVALID_CLUSTER_SIZE = hipErrorInvalidClusterSize;
   CUresult ERROR_INVALID_CLUSTER_SIZE = CUDA_ERROR_INVALID_CLUSTER_SIZE;
+
+  // CHECK: hipClusterSchedulingPolicy clusterSchedulingPolicy_enum;
+  // CHECK-NEXT: hipClusterSchedulingPolicy clusterSchedulingPolicy;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = hipClusterSchedulingPolicyDefault;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = hipClusterSchedulingPolicySpread;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = hipClusterSchedulingPolicyLoadBalancing;
+  CUclusterSchedulingPolicy_enum clusterSchedulingPolicy_enum;
+  CUclusterSchedulingPolicy clusterSchedulingPolicy;
+  CUclusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = CU_CLUSTER_SCHEDULING_POLICY_DEFAULT;
+  CUclusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = CU_CLUSTER_SCHEDULING_POLICY_SPREAD;
+  CUclusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING;
 #endif
 
 #if CUDA_VERSION >= 12000

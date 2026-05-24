@@ -831,10 +831,10 @@
 |`cudaChannelFormatKindUnsignedNormalized8X2`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized8X4`|11.5| | | | | | | | | | |
 |`cudaChildGraphNodeParams`|12.2| | | |`hipChildGraphNodeParams`|6.1.0| | | | | |
-|`cudaClusterSchedulingPolicy`|11.8| | | | | | | | | | |
-|`cudaClusterSchedulingPolicyDefault`|11.8| | | | | | | | | | |
-|`cudaClusterSchedulingPolicyLoadBalancing`|11.8| | | | | | | | | | |
-|`cudaClusterSchedulingPolicySpread`|11.8| | | | | | | | | | |
+|`cudaClusterSchedulingPolicy`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.13.0|
+|`cudaClusterSchedulingPolicyDefault`|11.8| | | |`hipClusterSchedulingPolicyDefault`|7.13.0| | | | |7.13.0|
+|`cudaClusterSchedulingPolicyLoadBalancing`|11.8| | | |`hipClusterSchedulingPolicyLoadBalancing`|7.13.0| | | | |7.13.0|
+|`cudaClusterSchedulingPolicySpread`|11.8| | | |`hipClusterSchedulingPolicySpread`|7.13.0| | | | |7.13.0|
 |`cudaComputeMode`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`cudaComputeModeDefault`| | | | |`hipComputeModeDefault`|1.9.0| | | | | |
 |`cudaComputeModeExclusive`| | | | |`hipComputeModeExclusive`|1.9.0| | | | | |

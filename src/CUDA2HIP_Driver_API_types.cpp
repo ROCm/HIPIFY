@@ -2693,15 +2693,15 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["NVCL_CTX_SCHED_BLOCKING_SYNC"]                                      = {"HIP_CL_CTX_SCHED_BLOCKING_SYNC",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // cudaClusterSchedulingPolicy
-  m["CUclusterSchedulingPolicy"]                                         = {"hipClusterSchedulingPolicy",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  m["CUclusterSchedulingPolicy_enum"]                                    = {"hipClusterSchedulingPolicy",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CUclusterSchedulingPolicy"]                                         = {"hipClusterSchedulingPolicy",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
+  m["CUclusterSchedulingPolicy_enum"]                                    = {"hipClusterSchedulingPolicy",                                 "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // CUclusterSchedulingPolicy enum values
   // cudaClusterSchedulingPolicyDefault
-  m["CU_CLUSTER_SCHEDULING_POLICY_DEFAULT"]                              = {"hipClusterSchedulingPolicyDefault",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CU_CLUSTER_SCHEDULING_POLICY_DEFAULT"]                              = {"hipClusterSchedulingPolicyDefault",                          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // cudaClusterSchedulingPolicySpread
-  m["CU_CLUSTER_SCHEDULING_POLICY_SPREAD"]                               = {"hipClusterSchedulingPolicySpread",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CU_CLUSTER_SCHEDULING_POLICY_SPREAD"]                               = {"hipClusterSchedulingPolicySpread",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // cudaClusterSchedulingPolicyLoadBalancing
-  m["CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING"]                       = {"hipClusterSchedulingPolicyLoadBalancing",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING"]                       = {"hipClusterSchedulingPolicyLoadBalancing",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
 
   // cudaLaunchAttributeID
   m["CUlaunchAttributeID"]                                               = {"hipLaunchAttributeID",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
@@ -5120,6 +5120,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [
   m["hipArrayMemoryRequirements"]                                        = {HIP_7120, HIP_0,    HIP_0   };
   m["hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported"]                = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipStreamWriteValueDefault"]                                        = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipClusterSchedulingPolicy"]                                        = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipClusterSchedulingPolicyDefault"]                                 = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipClusterSchedulingPolicySpread"]                                  = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipClusterSchedulingPolicyLoadBalancing"]                           = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipDeviceAttributeHandleTypeFabricSupported"]                       = {HIP_8000, HIP_0,    HIP_0,  };
   m["hipMemHandleTypeFabric"]                                            = {HIP_8000, HIP_0,    HIP_0,  };
 
