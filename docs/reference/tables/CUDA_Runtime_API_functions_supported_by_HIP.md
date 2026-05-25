@@ -1602,12 +1602,12 @@
 |`cudaKeyValuePair`| | | |12.0| | | | | | | |
 |`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | | |
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
-|`cudaLaunchAttributeClusterDimension`|11.8| | | | | | | | | | |
-|`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | | | | | | | | |
+|`cudaLaunchAttributeClusterDimension`|11.8| | | |`hipLaunchAttributeClusterDimension`|7.13.0| | | | |7.13.0|
+|`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | |`hipLaunchAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.13.0|
 |`cudaLaunchAttributeCooperative`|11.8| | | |`hipLaunchAttributeCooperative`|6.2.0| | | | | |
 |`cudaLaunchAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | | |
 |`cudaLaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
-|`cudaLaunchAttributeIgnore`|11.8| | | | | | | | | | |
+|`cudaLaunchAttributeIgnore`|11.8| | | |`hipLaunchAttributeIgnore`|7.13.0| | | | |7.13.0|
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | | |

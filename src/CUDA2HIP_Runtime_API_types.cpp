@@ -2046,7 +2046,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaLaunchAttributeID"]                                    = {"hipLaunchAttributeID",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // cudaLaunchAttributeID enum values
   // CU_LAUNCH_ATTRIBUTE_IGNORE
-  m["cudaLaunchAttributeIgnore"]                                = {"hipLaunchAttributeIgnore",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaLaunchAttributeIgnore"]                                = {"hipLaunchAttributeIgnore",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW
   m["cudaLaunchAttributeAccessPolicyWindow"]                    = {"hipLaunchAttributeAccessPolicyWindow",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
   // CU_LAUNCH_ATTRIBUTE_COOPERATIVE
@@ -2054,9 +2054,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY
   m["cudaLaunchAttributeSynchronizationPolicy"]                 = {"hipLaunchAttributeSynchronizationPolicy",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
   // CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION
-  m["cudaLaunchAttributeClusterDimension"]                      = {"hipLaunchAttributeClusterDimension",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaLaunchAttributeClusterDimension"]                      = {"hipLaunchAttributeClusterDimension",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE
-  m["cudaLaunchAttributeClusterSchedulingPolicyPreference"]     = {"hipLaunchAttributeClusterSchedulingPolicyPreference",      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaLaunchAttributeClusterSchedulingPolicyPreference"]     = {"hipLaunchAttributeClusterSchedulingPolicyPreference",      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_STREAM_SERIALIZATION
   m["cudaLaunchAttributeProgrammaticStreamSerialization"]       = {"hipLaunchAttributeProgrammaticStreamSerialization",        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CU_LAUNCH_ATTRIBUTE_PROGRAMMATIC_EVENT
@@ -3988,6 +3988,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = 
   m["hipFuncAttributeRequiredClusterDepth"]                     = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipFuncAttributeNonPortableClusterSizeAllowed"]            = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipFuncAttributeClusterSchedulingPolicyPreference"]        = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipLaunchAttributeIgnore"]                                 = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipLaunchAttributeClusterDimension"]                       = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipLaunchAttributeClusterSchedulingPolicyPreference"]      = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
 
   return m;
 }();
