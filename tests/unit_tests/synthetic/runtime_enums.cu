@@ -965,6 +965,21 @@ int main() {
   cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = cudaClusterSchedulingPolicyDefault;
   cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = cudaClusterSchedulingPolicySpread;
   cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = cudaClusterSchedulingPolicyLoadBalancing;
+
+  // CHECK: hipLaunchAttributeID launchAttributeID;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_IGNORE = hipLaunchAttributeIgnore;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION = hipLaunchAttributeClusterDimension;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE = hipLaunchAttributeClusterSchedulingPolicyPreference;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
+  cudaLaunchAttributeID launchAttributeID;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_IGNORE = cudaLaunchAttributeIgnore;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = cudaLaunchAttributeAccessPolicyWindow;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION = cudaLaunchAttributeClusterDimension;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE = cudaLaunchAttributeClusterSchedulingPolicyPreference;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
 #endif
 
 #if CUDA_VERSION >= 12000
@@ -985,15 +1000,6 @@ int main() {
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_INVALID_STRUCTURE = cudaGraphInstantiateInvalidStructure;
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED = cudaGraphInstantiateNodeOperationNotSupported;
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED = cudaGraphInstantiateMultipleDevicesNotSupported;
-
-  // CHECK: hipLaunchAttributeID launchAttributeID;
-  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
-  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
-  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
-  cudaLaunchAttributeID launchAttributeID;
-  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = cudaLaunchAttributeAccessPolicyWindow;
-  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
-  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
 
   // CHECK: hipDriverEntryPointQueryResult driverProcAddressQueryResult;
   // CHECK-NEXT:hipDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = hipDriverEntryPointSuccess;
