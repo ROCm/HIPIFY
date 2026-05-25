@@ -57,6 +57,16 @@ constexpr auto DEBUG_TYPE = "cuda2hip";
 
 namespace ct = clang::tooling;
 
+static bool isHeaderFile(llvm::StringRef filePath) {
+  llvm::StringRef extension = llvm::sys::path::extension(filePath);
+  return extension.equals_insensitive(".h") ||
+         extension.equals_insensitive(".hpp") ||
+         extension.equals_insensitive(".hxx") ||
+         extension.equals_insensitive(".cuh") ||
+         extension.equals_insensitive(".inl") ||
+         extension.equals_insensitive(".inc");
+}
+
 void cleanupHipifyOptions(std::vector<const char*> &args) {
   for (const auto &a : hipifyOptions) {
     args.erase(std::remove(args.begin(), args.end(), "--" + a), args.end());
@@ -539,6 +549,20 @@ int main(int argc, const char **argv) {
       Statistics::current().hasErrors = true;
       Result = 1;
       LLVM_DEBUG(llvm::dbgs() << "Hipification failed for: " << src << "\n");
+      if (isHeaderFile(src)) {
+        llvm::errs()
+            << "\n"
+            << sHipify << sWarning << "Header file '"
+            << sys::path::filename(sSourceAbsPath)
+            << "' failed to hipify. This header may not be self-contained.\n";
+        llvm::errs() << sHipify << sNote
+                     << "Headers that depend on symbols from other files "
+                     << "cannot be hipified in isolation.\n";
+        llvm::errs() << sHipify << sNote
+                     << "Consider hipifying the parent source file (.cu/.cpp) "
+                     << "that includes this header to ensure all dependencies "
+                        "are resolved.\n";
+      }
     }
 
     Statistics::current().markCompletion();
