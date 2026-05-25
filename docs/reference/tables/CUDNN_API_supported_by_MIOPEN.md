@@ -568,14 +568,14 @@
 |`CUDNN_LRN_MIN_K`|3.0.0| | | | | | | | | | |
 |`CUDNN_LRN_MIN_N`|3.0.0| | | | | | | | | | |
 |`CUDNN_LSTM`|5.0.0| | | |`miopenLSTM`|2.1.0| | | | | |
-|`CUDNN_MH_ATTN_K_BIASES`|7.6.3| | | | | | | | | | |
-|`CUDNN_MH_ATTN_K_WEIGHTS`|7.5.0| | | | | | | | | | |
-|`CUDNN_MH_ATTN_O_BIASES`|7.6.3| | | | | | | | | | |
-|`CUDNN_MH_ATTN_O_WEIGHTS`|7.5.0| | | | | | | | | | |
-|`CUDNN_MH_ATTN_Q_BIASES`|7.6.3| | | | | | | | | | |
-|`CUDNN_MH_ATTN_Q_WEIGHTS`|7.5.0| | | | | | | | | | |
-|`CUDNN_MH_ATTN_V_BIASES`|7.6.3| | | | | | | | | | |
-|`CUDNN_MH_ATTN_V_WEIGHTS`|7.5.0| | | | | | | | | | |
+|`CUDNN_MH_ATTN_K_BIASES`|7.6.3|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_K_WEIGHTS`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_O_BIASES`|7.6.3|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_O_WEIGHTS`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_Q_BIASES`|7.6.3|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_Q_WEIGHTS`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_V_BIASES`|7.6.3|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_V_WEIGHTS`|7.5.0|9.22.0| | | | | | | | | |
 |`CUDNN_MOE_GROUPED_MATMUL_MODE_GATHER`|9.15.0| | | | | | | | | | |
 |`CUDNN_MOE_GROUPED_MATMUL_MODE_NONE`|9.15.0| | | | | | | | | | |
 |`CUDNN_MOE_GROUPED_MATMUL_MODE_SCATTER`|9.15.0| | | | | | | | | | |
@@ -775,11 +775,11 @@
 |`CUDNN_SCALAR_DOUBLE_BN_EXP_AVG_FACTOR`|7.6.0| | | | | | | | | | |
 |`CUDNN_SCALAR_INT64_T_BN_ACCUMULATION_COUNT`|7.6.0| | | | | | | | | | |
 |`CUDNN_SCALAR_SIZE_T_WORKSPACE_SIZE_IN_BYTES`|7.6.0| | | | | | | | | | |
-|`CUDNN_SEQDATA_BATCH_DIM`|7.5.0| | | | | | | | | | |
-|`CUDNN_SEQDATA_BEAM_DIM`|7.5.0| | | | | | | | | | |
+|`CUDNN_SEQDATA_BATCH_DIM`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_SEQDATA_BEAM_DIM`|7.5.0|9.22.0| | | | | | | | | |
 |`CUDNN_SEQDATA_DIM_COUNT`|7.5.0| | | | | | | | | | |
-|`CUDNN_SEQDATA_TIME_DIM`|7.5.0| | | | | | | | | | |
-|`CUDNN_SEQDATA_VECT_DIM`|7.5.0| | | | | | | | | | |
+|`CUDNN_SEQDATA_TIME_DIM`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_SEQDATA_VECT_DIM`|7.5.0|9.22.0| | | | | | | | | |
 |`CUDNN_SEV_ERROR`|7.1.3| | | | | | | | | | |
 |`CUDNN_SEV_ERROR_EN`|7.1.3| | | | | | | | | | |
 |`CUDNN_SEV_FATAL`|7.1.3| | | | | | | | | | |
@@ -909,7 +909,7 @@
 |`cudnnAlgorithm_t`|7.1.3| | |9.0.0| | | | | | | |
 |`cudnnAttnDescriptor_t`|7.5.0|9.0.0| | | | | | | | | |
 |`cudnnAttnQueryMap_t`|7.5.0| | |9.0.0| | | | | | | |
-|`cudnnAttnStruct`|7.5.0| | | | | | | | | | |
+|`cudnnAttnStruct`|7.5.0|9.22.0| | | | | | | | | |
 |`cudnnBackendAttributeName_t`|8.0.1| | | |`miopenBackendAttributeName_t`|6.2.0| | | | | |
 |`cudnnBackendAttributeType_t`|8.0.1| | | |`miopenBackendAttributeType_t`|6.2.0| | | | | |
 |`cudnnBackendBehaviorNote_t`|8.2.0| | | | | | | | | | |
@@ -980,7 +980,7 @@
 |`cudnnLossNormalizationMode_t`|7.6.0| | | | | | | | | | |
 |`cudnnMathType_t`|7.0.5| | | |`miopenMathType_t`|7.12.0| | | | | |
 |`cudnnMoeGroupedMatmulMode_t`|9.15.0| | | | | | | | | | |
-|`cudnnMultiHeadAttnWeightKind_t`|7.5.0| | | | | | | | | | |
+|`cudnnMultiHeadAttnWeightKind_t`|7.5.0|9.22.0| | | | | | | | | |
 |`cudnnNanPropagation_t`|4.0.0| | | |`miopenNanPropagation_t`|3.9.0| | | | | |
 |`cudnnNormAlgo_t`|8.0.1|9.0.0| | | | | | | | | |
 |`cudnnNormMode_t`|8.0.1|9.0.0| | | | | | | | | |
@@ -1015,9 +1015,9 @@
 |`cudnnRngDistribution_t`|8.7.0| | | |`miopenRngDistribution_t`|6.2.0| | | | | |
 |`cudnnRuntimeTag_t`|7.0.5|9.0.0| | | | | | | | | |
 |`cudnnSamplerType_t`|5.0.0| | | | | | | | | | |
-|`cudnnSeqDataAxis_t`|7.5.0| | | | | | | | | | |
+|`cudnnSeqDataAxis_t`|7.5.0|9.22.0| | | | | | | | | |
 |`cudnnSeqDataDescriptor_t`|7.5.0|9.0.0| | | | | | | | | |
-|`cudnnSeqDataStruct`|7.5.0| | | | | | | | | | |
+|`cudnnSeqDataStruct`|7.5.0|9.22.0| | | | | | | | | |
 |`cudnnSeverity_t`|7.1.3| | | | | | | | | | |
 |`cudnnSignalMode_t`|8.5.0| | | | | | | | | | |
 |`cudnnSoftmaxAlgorithm_t`|1.0.0| | | |`miopenSoftmaxAlgorithm_t`|2.6.0| | | | | |
@@ -1253,10 +1253,10 @@
 |`cudnnRNNForwardTraining`|5.0.0|8.0.1| |9.0.0|`miopenRNNForwardTraining`|2.1.0| | | | | |
 |`cudnnRNNForwardTrainingEx`|7.2.1|8.0.1| |9.0.0| | | | | | | |
 |`cudnnRNNGetClip`|7.2.1|8.0.1| |9.0.0| | | | | | | |
-|`cudnnRNNGetClip_v8`|8.0.1| | | | | | | | | | |
+|`cudnnRNNGetClip_v8`|8.0.1|9.22.0| | | | | | | | | |
 |`cudnnRNNGetClip_v9`|9.0.0| | | | | | | | | | |
 |`cudnnRNNSetClip`|7.2.1|8.0.1| |9.0.0| | | | | | | |
-|`cudnnRNNSetClip_v8`|8.0.1| | | | | | | | | | |
+|`cudnnRNNSetClip_v8`|8.0.1|9.22.0| | | | | | | | | |
 |`cudnnRNNSetClip_v9`|9.0.0| | | | | | | | | | |
 |`cudnnReduceTensor`|6.0.0|9.0.0| | |`miopenReduceTensor`|3.9.0| | | | | |
 |`cudnnReorderFilterAndBias`|7.6.0|9.0.0| | | | | | | | | |
