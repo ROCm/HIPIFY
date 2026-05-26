@@ -226,46 +226,46 @@ cl::opt<bool> HipDnnSupport("hipdnn",
   cl::init(false),
   cl::cat(ToolTemplateCategory));
 
-cl::opt<bool> OptLocalHeaders(
-    "local-headers",
-    cl::desc("Enable hipification of quoted local headers (non-recursive)"),
-    cl::init(false), cl::cat(ToolTemplateCategory));
+cl::opt<bool> OptLocalHeaders("local-headers",
+  cl::desc("Enable hipification of quoted local headers (non-recursive)"),
+  cl::init(false),
+  cl::cat(ToolTemplateCategory));
 
-cl::opt<bool> OptLocalHeadersRecursive(
-    "local-headers-recursive",
-    cl::desc("Enable hipification of quoted local headers recursively"),
-    cl::init(false), cl::cat(ToolTemplateCategory));
+cl::opt<bool> OptLocalHeadersRecursive("local-headers-recursive",
+  cl::desc("Enable hipification of quoted local headers recursively"),
+  cl::init(false),
+  cl::cat(ToolTemplateCategory));
 
 cl::extrahelp CommonHelp(ct::CommonOptionsParser::HelpMessage);
 
-const std::vector<std::string> hipifyOptions{
-    std::string(PrintStatsCSV.ArgStr),
-    std::string(PrintStats.ArgStr),
-    std::string(SkipExcludedPPConditionalBlocks.ArgStr),
-    std::string(DefaultPreprocessor.ArgStr),
-    std::string(HipKernelExecutionSyntax.ArgStr),
-    std::string(CudaKernelExecutionSyntax.ArgStr),
-    std::string(GeneratePerl.ArgStr),
-    std::string(GeneratePython.ArgStr),
-    std::string(TranslateToRoc.ArgStr),
-    std::string(TranslateToMIOpen.ArgStr),
-    std::string(GenerateMarkdown.ArgStr),
-    std::string(GenerateCSV.ArgStr),
-    std::string(NoBackup.ArgStr),
-    std::string(NoOutput.ArgStr),
-    std::string(Inplace.ArgStr),
-    std::string(Examine.ArgStr),
-    std::string(SaveTemps.ArgStr),
-    std::string(DocFormat.ArgStr),
-    std::string(DocRoc.ArgStr),
-    std::string(Experimental.ArgStr),
-    std::string(Versions.ArgStr),
-    std::string(NoUndocumented.ArgStr),
-    std::string(NoWarningsUndocumented.ArgStr),
-    std::string(HipifyAMAP.ArgStr),
-    std::string(HipDnnSupport.ArgStr),
-    std::string(OptLocalHeaders.ArgStr),
-    std::string(OptLocalHeadersRecursive.ArgStr),
+const std::vector<std::string> hipifyOptions {
+  std::string(PrintStatsCSV.ArgStr),
+  std::string(PrintStats.ArgStr),
+  std::string(SkipExcludedPPConditionalBlocks.ArgStr),
+  std::string(DefaultPreprocessor.ArgStr),
+  std::string(HipKernelExecutionSyntax.ArgStr),
+  std::string(CudaKernelExecutionSyntax.ArgStr),
+  std::string(GeneratePerl.ArgStr),
+  std::string(GeneratePython.ArgStr),
+  std::string(TranslateToRoc.ArgStr),
+  std::string(TranslateToMIOpen.ArgStr),
+  std::string(GenerateMarkdown.ArgStr),
+  std::string(GenerateCSV.ArgStr),
+  std::string(NoBackup.ArgStr),
+  std::string(NoOutput.ArgStr),
+  std::string(Inplace.ArgStr),
+  std::string(Examine.ArgStr),
+  std::string(SaveTemps.ArgStr),
+  std::string(DocFormat.ArgStr),
+  std::string(DocRoc.ArgStr),
+  std::string(Experimental.ArgStr),
+  std::string(Versions.ArgStr),
+  std::string(NoUndocumented.ArgStr),
+  std::string(NoWarningsUndocumented.ArgStr),
+  std::string(HipifyAMAP.ArgStr),
+  std::string(HipDnnSupport.ArgStr),
+  std::string(OptLocalHeaders.ArgStr),
+  std::string(OptLocalHeadersRecursive.ArgStr),
 };
 
 const std::vector<std::string> hipifyOptionsWithTwoArgs {

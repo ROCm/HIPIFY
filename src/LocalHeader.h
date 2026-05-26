@@ -31,10 +31,6 @@ THE SOFTWARE.
 
 namespace ct = clang::tooling;
 
-extern bool appendArgumentsAdjusters(ct::RefactoringTool &Tool,
-                                     const std::string &sSourceAbsPath,
-                                     const char *hipify_exe);
-
 struct IncludeEntry {
   std::string fileName;
   std::string resolvedPath;
