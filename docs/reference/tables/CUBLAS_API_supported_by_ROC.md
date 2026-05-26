@@ -1928,14 +1928,14 @@
 |`cublasCgetrsBatched`| | | | | | | | | | | |
 |`cublasCherk3mEx`|8.0| | | | | | | | | | |
 |`cublasCherk3mEx_64`|12.0| | | | | | | | | | |
-|`cublasCherkEx`|8.0| | | | | | | | | | |
+|`cublasCherkEx`|8.0| | | |`rocblas_herk_ex`|7.11.0| | | | | |
 |`cublasCherkEx_64`|12.0| | | | | | | | | | |
 |`cublasCmatinvBatched`| | | | | | | | | | | |
 |`cublasCopyEx`|10.1| | | | | | | | | | |
 |`cublasCopyEx_64`|12.0| | | | | | | | | | |
 |`cublasCsyrk3mEx`|8.0| | | | | | | | | | |
 |`cublasCsyrk3mEx_64`|12.0| | | | | | | | | | |
-|`cublasCsyrkEx`|8.0| | | | | | | | | | |
+|`cublasCsyrkEx`|8.0| | | |`rocblas_syrk_ex`|7.11.0| | | | | |
 |`cublasCsyrkEx_64`|12.0| | | | | | | | | | |
 |`cublasCtpttr`| | | | | | | | | | | |
 |`cublasCtrsmBatched`| | | | |`rocblas_ctrsm_batched`|3.5.0| | | | | |
