@@ -176,7 +176,8 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_SOLVER",
   "API_RTC",
   "API_TENSOR",
-  "API_FILE"
+  "API_FILE",
+  "API_SPARSELT"
 };
 
 const std::vector<cudaVersions> CUDA_114_cuFile_version = { CUFILE_1000, CUFILE_1001, CUFILE_1002 };
@@ -666,6 +667,24 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUFILE_1160: return "1.16.0";
     case CUFILE_1161: return "1.16.1";
     case CUFILE_1170: return "1.17.0";
+    case CUSPARSELT_001: return "0.0.1";
+    case CUSPARSELT_010: return "0.1.0";
+    case CUSPARSELT_020: return "0.2.0";
+    case CUSPARSELT_030: return "0.3.0";
+    case CUSPARSELT_040: return "0.4.0";
+    case CUSPARSELT_050: return "0.5.0";
+    case CUSPARSELT_051: return "0.5.1";
+    case CUSPARSELT_052: return "0.5.2";
+    case CUSPARSELT_060: return "0.6.0";
+    case CUSPARSELT_061: return "0.6.1";
+    case CUSPARSELT_062: return "0.6.2";
+    case CUSPARSELT_063: return "0.6.3";
+    case CUSPARSELT_070: return "0.7.0";
+    case CUSPARSELT_071: return "0.7.1";
+    case CUSPARSELT_080: return "0.8.0";
+    case CUSPARSELT_081: return "0.8.1";
+    case CUSPARSELT_090: return "0.9.0";
+    case CUSPARSELT_091: return "0.9.1";
   }
   return "";
 }
