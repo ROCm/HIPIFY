@@ -119,6 +119,8 @@ const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   ret.insert(CUDA_FFT_FUNCTION_MAP.begin(), CUDA_FFT_FUNCTION_MAP.end());
   ret.insert(CUDA_SPARSE_TYPE_NAME_MAP.begin(), CUDA_SPARSE_TYPE_NAME_MAP.end());
   ret.insert(CUDA_SPARSE_FUNCTION_MAP.begin(), CUDA_SPARSE_FUNCTION_MAP.end());
+  ret.insert(CUDA_SPARSELT_TYPE_NAME_MAP.begin(), CUDA_SPARSELT_TYPE_NAME_MAP.end());
+  ret.insert(CUDA_SPARSELT_FUNCTION_MAP.begin(), CUDA_SPARSELT_FUNCTION_MAP.end());
   ret.insert(CUDA_CUB_TYPE_NAME_MAP.begin(), CUDA_CUB_TYPE_NAME_MAP.end());
   ret.insert(CUDA_CUB_FUNCTION_MAP.begin(), CUDA_CUB_FUNCTION_MAP.end());
   ret.insert(CUDA_RTC_TYPE_NAME_MAP.begin(), CUDA_RTC_TYPE_NAME_MAP.end());
@@ -164,6 +166,8 @@ const std::map<llvm::StringRef, cudaAPIversions> &CUDA_VERSIONS_MAP() {
   ret.insert(CUDA_FFT_FUNCTION_VER_MAP.begin(), CUDA_FFT_FUNCTION_VER_MAP.end());
   ret.insert(CUDA_SPARSE_TYPE_NAME_VER_MAP.begin(), CUDA_SPARSE_TYPE_NAME_VER_MAP.end());
   ret.insert(CUDA_SPARSE_FUNCTION_VER_MAP.begin(), CUDA_SPARSE_FUNCTION_VER_MAP.end());
+  ret.insert(CUDA_SPARSELT_TYPE_NAME_VER_MAP.begin(), CUDA_SPARSELT_TYPE_NAME_VER_MAP.end());
+  ret.insert(CUDA_SPARSELT_FUNCTION_VER_MAP.begin(), CUDA_SPARSELT_FUNCTION_VER_MAP.end());
   ret.insert(CUDA_DEVICE_TYPE_NAME_VER_MAP.begin(), CUDA_DEVICE_TYPE_NAME_VER_MAP.end());
   ret.insert(CUDA_DEVICE_FUNCTION_VER_MAP.begin(), CUDA_DEVICE_FUNCTION_VER_MAP.end());
   ret.insert(CUDA_CUB_TYPE_NAME_VER_MAP.begin(), CUDA_CUB_TYPE_NAME_VER_MAP.end());
@@ -200,6 +204,8 @@ const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP() {
   ret.insert(HIP_FFT_FUNCTION_VER_MAP.begin(), HIP_FFT_FUNCTION_VER_MAP.end());
   ret.insert(HIP_SPARSE_TYPE_NAME_VER_MAP.begin(), HIP_SPARSE_TYPE_NAME_VER_MAP.end());
   ret.insert(HIP_SPARSE_FUNCTION_VER_MAP.begin(), HIP_SPARSE_FUNCTION_VER_MAP.end());
+  ret.insert(HIP_SPARSELT_TYPE_NAME_VER_MAP.begin(), HIP_SPARSELT_TYPE_NAME_VER_MAP.end());
+  ret.insert(HIP_SPARSELT_FUNCTION_VER_MAP.begin(), HIP_SPARSELT_FUNCTION_VER_MAP.end());
   ret.insert(HIP_DEVICE_TYPE_NAME_VER_MAP.begin(), HIP_DEVICE_TYPE_NAME_VER_MAP.end());
   ret.insert(HIP_DEVICE_FUNCTION_VER_MAP.begin(), HIP_DEVICE_FUNCTION_VER_MAP.end());
   ret.insert(HIP_CUB_TYPE_NAME_VER_MAP.begin(), HIP_CUB_TYPE_NAME_VER_MAP.end());
