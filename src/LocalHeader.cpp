@@ -23,6 +23,7 @@ THE SOFTWARE.
 #include "LocalHeader.h"
 #include "LLVMCompat.h"
 
+#include <memory>
 #include <set>
 #include <vector>
 
@@ -138,6 +139,10 @@ public:
 
 } // namespace
 
+bool appendArgumentsAdjusters(ct::RefactoringTool &Tool,
+                              const std::string &sSourceAbsPath,
+                              const char *hipify_exe);
+
 bool collectIncludeTree(const std::string &srcPath,
                         const ct::CompilationDatabase *compDB,
                         ct::CommonOptionsParser *OptionsParserPtr,
@@ -165,22 +170,6 @@ bool collectIncludeTree(const std::string &srcPath,
   if (!appendArgumentsAdjusters(Tool, mainContextPath, hipify_exe)) {
     return false;
   }
-
-  // Strip the implicit CUDA header that appendArgumentsAdjusters adds —
-  // not needed for include scanning and would pollute the results.
-  Tool.appendArgumentsAdjuster(
-      [](const ct::CommandLineArguments &Args, StringRef) {
-        ct::CommandLineArguments filtered;
-        for (size_t i = 0; i < Args.size(); ++i) {
-          if (Args[i] == "-include" && i + 1 < Args.size() &&
-              Args[i + 1] == "cuda_runtime.h") {
-            ++i;
-            continue;
-          }
-          filtered.push_back(Args[i]);
-        }
-        return filtered;
-      });
 
   IncludeCollectorActionFactory factory(outEntries);
   Tool.run(&factory);

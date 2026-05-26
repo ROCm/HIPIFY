@@ -2,7 +2,12 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 // CHECK-NOT: #include <cuda_runtime.h>
-// CHECK: #include "common.h"
+// CHECK: #include "diamond_left.h"
+// CHECK: #include "diamond_right.h"
 #include <cuda_runtime.h>
-#include "common.h"
-int main(){}
+#include "diamond_left.h"
+#include "diamond_right.h"
+
+int main() {
+    return 0;
+}
