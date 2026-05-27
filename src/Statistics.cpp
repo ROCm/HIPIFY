@@ -657,6 +657,7 @@ std::string Statistics::getHipVersion(const hipVersions &ver) {
     case HIP_6040: return "6.4.0";
     case HIP_7000: return "7.0.0";
     case HIP_7120: return "7.12.0";
+    case HIP_7130: return "7.13.0";
   }
   return "";
 }
