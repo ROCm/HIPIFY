@@ -2339,8 +2339,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
   m["rocblas_nrm2_ex"]                                              = {HIP_4010, HIP_0,    HIP_0   };
   m["rocblas_rot_ex"]                                               = {HIP_4010, HIP_0,    HIP_0   };
   m["rocblas_scal_ex"]                                              = {HIP_4000, HIP_0,    HIP_0   };
-  m["rocblas_syrk_ex"]                                              = {HIP_7110, HIP_0,    HIP_0   };
-  m["rocblas_herk_ex"]                                              = {HIP_7110, HIP_0,    HIP_0   };
+  m["rocblas_syrk_ex"]                                              = {HIP_7100, HIP_0,    HIP_0   };
+  m["rocblas_herk_ex"]                                              = {HIP_7100, HIP_0,    HIP_0   };
   m["rocblas_initialize"]                                           = {HIP_3050, HIP_0,    HIP_0   };
   m["rocblas_create_handle"]                                        = {HIP_1050, HIP_0,    HIP_0   };
   m["rocblas_destroy_handle"]                                       = {HIP_1050, HIP_0,    HIP_0   };
@@ -2587,8 +2587,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
   m["rocblas_gemm_batched_ex_64"]                                   = {HIP_6030, HIP_0,    HIP_0   };
   m["rocblas_gemm_strided_batched_ex_64"]                           = {HIP_6030, HIP_0,    HIP_0   };
   m["hipblasSetWorkspace"]                                          = {HIP_7000, HIP_0,    HIP_0   };
-  m["hipblasSyrkEx"]                                                = {HIP_7110, HIP_0,    HIP_0   };
-  m["hipblasHerkEx"]                                                = {HIP_7110, HIP_0,    HIP_0   };
+  m["hipblasSyrkEx"]                                                = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipblasHerkEx"]                                                = {HIP_7100, HIP_0,    HIP_0   };
 
   return m;
 }();
