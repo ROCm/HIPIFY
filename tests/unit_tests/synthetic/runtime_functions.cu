@@ -30,9 +30,14 @@ int main() {
   size_t hOffset_src = 0;
   size_t pitch = 0;
   size_t pitch_2 = 0;
+  size_t sizes = 0;
+  size_t sizeCount = 0;
+  size_t sizePrefetchLocIdxs = 0;
+  size_t sizeNumPrefetchLocs = 0;
   int device = 0;
   int deviceId = 0;
   int intVal = 0;
+  int clusterSize = 0;
   int x = 0;
   int y = 0;
   int z = 0;
@@ -1598,6 +1603,11 @@ int main() {
   // HIP: hipError_t hipLaunchKernelExC(const hipLaunchConfig_t* config, const void* fPtr, void** args);
   // CHECK: result = hipLaunchKernelExC(&launchConfig, func, &flagsprt);
   result = cudaLaunchKernelExC(&launchConfig, func, &flagsprt);
+
+  // CUDA: extern __host__ __cudart_builtin__ cudaError_t CUDARTAPI cudaOccupancyMaxPotentialClusterSize(int *clusterSize, const void *func, const cudaLaunchConfig_t *launchConfig);
+  // HIP: hipError_t  (int* clusterSize, const void* f, const hipLaunchConfig_t* config);
+  // CHECK: result = hipOccupancyMaxPotentialClusterSize(&clusterSize, func, &launchConfig);
+  result = cudaOccupancyMaxPotentialClusterSize(&clusterSize, func, &launchConfig);
 #endif
 
 #if CUDA_VERSION < 12000
@@ -1733,6 +1743,11 @@ int main() {
   // HIP: hipError_t hipMemGetMemPool(hipMemPool_t* pool, hipMemLocation* location, hipMemAllocationType type);
   // CHECK: result = hipMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
   result = cudaMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPrefetchBatchAsync(void **dptrs, size_t *sizes, size_t count, struct cudaMemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, cudaStream_t stream);
+  // HIP: hipError_t hipMemPrefetchBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, hipMemLocation* prefetch_locs, size_t* prefetch_loc_idxs, size_t num_prefetch_locs, unsigned long long flags, hipStream_t stream);
+  // CHECK: result = hipMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+  result = cudaMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
 #endif
 
   return 0;

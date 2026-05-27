@@ -36,7 +36,11 @@ int main() {
   int hipVersion = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
+  size_t sizes = 0;
+  size_t sizeCount = 0;
   size_t dstPitch = 0;
+  size_t sizePrefetchLocIdxs = 0;
+  size_t sizeNumPrefetchLocs = 0;
   void *image = nullptr;
   void *code = nullptr;
   void *pfn = nullptr;
@@ -2142,6 +2146,11 @@ int main() {
   // HIP: hipError_t hipMemGetMemPool(hipMemPool_t* pool, hipMemLocation* location, hipMemAllocationType type);
   // CHECK: result = hipMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
   result = cuMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
+
+  // CUDA: CUresult CUDAAPI cuMemPrefetchBatchAsync(CUdeviceptr* dptrs, size_t* sizes, size_t count, CUmemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, CUstream hStream);
+  // HIP: hipError_t hipMemPrefetchBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, hipMemLocation* prefetch_locs, size_t* prefetch_loc_idxs, size_t num_prefetch_locs, unsigned long long flags, hipStream_t stream);
+    // CHECK: result = hipMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+  result = cuMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
 #endif
 
   return 0;

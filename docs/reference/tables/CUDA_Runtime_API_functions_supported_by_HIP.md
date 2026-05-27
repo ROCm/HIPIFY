@@ -162,7 +162,7 @@
 |`cudaOccupancyMaxPotentialBlockSizeVariableSMem`| | | | |`hipOccupancyMaxPotentialBlockSizeVariableSMem`|5.5.0| | | | | |
 |`cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`| | | | |`hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`|5.5.0| | | | | |
 |`cudaOccupancyMaxPotentialBlockSizeWithFlags`| | | | |`hipOccupancyMaxPotentialBlockSizeWithFlags`|3.5.0| | | | | |
-|`cudaOccupancyMaxPotentialClusterSize`|11.8| | | | | | | | | | |
+|`cudaOccupancyMaxPotentialClusterSize`|11.8| | | |`hipOccupancyMaxPotentialClusterSize`|7.13.0| | | | |7.13.0|
 
 ## **10. Memory Management**
 
@@ -201,7 +201,7 @@
 |`cudaMemGetInfo`| | | | |`hipMemGetInfo`|1.6.0| | | | | |
 |`cudaMemPrefetchAsync`|8.0| |13.0| |`hipMemPrefetchAsync`|3.7.0| | | |13.0| |
 |`cudaMemPrefetchAsync_v2`|12.2| | | | | | | | | | |
-|`cudaMemPrefetchBatchAsync`|13.0| | | | | | | | | | |
+|`cudaMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | |7.13.0|
 |`cudaMemRangeGetAttribute`|8.0| | | |`hipMemRangeGetAttribute`|3.7.0| | | | | |
 |`cudaMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | | |
 |`cudaMemcpy`| | | | |`hipMemcpy`|1.5.0| | | | | |

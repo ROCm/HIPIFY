@@ -550,7 +550,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // no analogue
   m["cuPointerSetAttribute"]                                             = {"hipPointerSetAttribute",                                      "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
   // cudaMemPrefetchBatchAsync
-  m["cuMemPrefetchBatchAsync"]                                           = {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED};
+  m["cuMemPrefetchBatchAsync"]                                           = {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_EXPERIMENTAL};
   // cudaMemDiscardBatchAsync
   m["cuMemDiscardBatchAsync"]                                            = {"hipMemDiscardBatchAsync",                                     "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED};
   // cudaMemDiscardAndPrefetchBatchAsync
@@ -960,7 +960,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuOccupancyMaxPotentialBlockSize"]                                  = {"hipModuleOccupancyMaxPotentialBlockSize",                     "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY};
   // cudaOccupancyMaxPotentialBlockSizeWithFlags
   m["cuOccupancyMaxPotentialBlockSizeWithFlags"]                         = {"hipModuleOccupancyMaxPotentialBlockSizeWithFlags",            "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY};
-  // cudaOccupancyMaxPotentialClusterSize
+  // NOTE: cudaOccupancyMaxPotentialClusterSize has a different type as the first argument (hipLaunchConfig_t vs HIP_LAUNCH_CONFIG)
   m["cuOccupancyMaxPotentialClusterSize"]                                = {"hipOccupancyMaxPotentialClusterSize",                         "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY, HIP_UNSUPPORTED};
   // cudaOccupancyMaxActiveClusters
   m["cuOccupancyMaxActiveClusters"]                                      = {"hipOccupancyMaxActiveClusters",                               "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY, HIP_UNSUPPORTED};
