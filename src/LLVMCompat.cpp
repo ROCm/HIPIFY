@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include "clang/Lex/PreprocessorOptions.h"
 #include "clang/Frontend/CompilerInstance.h"
 
+using namespace llvm;
+
 const std::string sHipify = "[HIPIFY] ", sConflict = "conflict: ", sError = "error: ", sWarning = "warning: ";
 
 namespace llcompat {

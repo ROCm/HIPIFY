@@ -28,14 +28,22 @@ THE SOFTWARE.
 
 namespace doc {
 
-  using namespace std;
-  using namespace llvm;
+  using std::string;
+  using std::map;
+  using std::vector;
+  using std::unique_ptr;
+  using std::ostream;
+  using std::ofstream;
+  using std::stringstream;
+  using std::error_code;
+  using std::make_pair;
+  using std::endl;
 
-  typedef map<unsigned int, StringRef> sectionMap;
-  typedef map<StringRef, hipCounter> functionMap;
+  typedef map<unsigned int, llvm::StringRef> sectionMap;
+  typedef map<llvm::StringRef, hipCounter> functionMap;
   typedef functionMap typeMap;
-  typedef map<StringRef, cudaAPIversions> versionMap;
-  typedef map<StringRef, hipAPIversions> hipVersionMap;
+  typedef map<llvm::StringRef, cudaAPIversions> versionMap;
+  typedef map<llvm::StringRef, hipAPIversions> hipVersionMap;
   typedef map<llvm::StringRef, hipAPIChangedVersions> hipChangedVersionMap;
   typedef map<llvm::StringRef, cudaAPIChangedVersions> cudaChangedVersionMap;
   typedef map<llvm::StringRef, cudaAPIUnsupportedVersions> cudaUnsupportedVersionMap;
@@ -106,7 +114,6 @@ namespace doc {
   const string sMIOPEN_md = sMIOPEN_ + md_ext;
   const string sMIOPEN_csv = sMIOPEN_ + csv_ext;
   const string sCUDNN = "CUDNN";
-
   const string sFFT = "CUFFT_API_supported_by_HIP";
   const string sFFT_md = sFFT + md_ext;
   const string sFFT_csv = sFFT + csv_ext;
@@ -243,15 +250,15 @@ namespace doc {
 
       bool init(docType t) {
         string file = (dir.empty() ? getFileName(t) : dir + "/" + getFileName(t));
-        SmallString<128> tmpFile;
-        EC = sys::fs::createTemporaryFile(file, getExtension(t), tmpFile);
+        llvm::SmallString<128> tmpFile;
+        EC = llvm::sys::fs::createTemporaryFile(file, getExtension(t), tmpFile);
         if (EC) {
-          errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
+          llvm::errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
           return false;
         }
         files.insert({ t, file });
         tmpFiles.insert({ t, tmpFile.str().str() });
-        streams.insert(make_pair(t, unique_ptr<ostream>(new ofstream(tmpFile.c_str(), ios_base::trunc))));
+        streams.insert(make_pair(t, unique_ptr<ostream>(new ofstream(tmpFile.c_str(), std::ios_base::trunc))));
         return true;
       }
 
@@ -464,12 +471,12 @@ namespace doc {
       bool fini(docType format) {
         streams[format].get()->flush();
         bool bRet = true;
-        EC = sys::fs::copy_file(tmpFiles[format], files[format]);
+        EC = llvm::sys::fs::copy_file(tmpFiles[format], files[format]);
         if (EC) {
-          errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << tmpFiles[format] << " to " << files[format] << "\n";
+          llvm::errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << tmpFiles[format] << " to " << files[format] << "\n";
           bRet = false;
         }
-        if (!SaveTemps) sys::fs::remove(tmpFiles[format]);
+        if (!SaveTemps) llvm::sys::fs::remove(tmpFiles[format]);
         return bRet;
       }
 
