@@ -37,7 +37,7 @@ Release Dependencies
 ``hipify-clang`` requires:
 
 * `CUDA <https://developer.nvidia.com/cuda-downloads>`_, the latest supported version is
-  `12.9.1 <https://developer.nvidia.com/cuda-12-9-1-download-archive>`_, but requires at least version
+  `13.2.0 <https://developer.nvidia.com/cuda-13-2-0-download-archive>`_, but requires at least version
   `7.0 <https://developer.nvidia.com/cuda-toolkit-70>`_.
 
 * `LLVM+Clang <http://releases.llvm.org>`_ version is determined at least partially by
@@ -51,6 +51,10 @@ Release Dependencies
     - supported LLVM release versions
     - Windows
     - Linux
+  * - `13.2.0 <https://developer.nvidia.com/cuda-13-2-0-download-archive>`_
+    - `23.0.0git <https://github.com/llvm/llvm-project>`_
+    - ✅
+    - ✅
   * - `12.9.1 <https://developer.nvidia.com/cuda-12-9-1-download-archive>`_:sup:`1`
     - `21.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.0>`_,
       `21.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.1>`_,
