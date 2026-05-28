@@ -1711,6 +1711,16 @@ int main() {
   // ROC: ROCBLAS_EXPORT rocblas_status rocblas_dotc_ex(rocblas_handle handle, rocblas_int n, const void* x, rocblas_datatype x_type, rocblas_int incx, const void* y, rocblas_datatype y_type, rocblas_int incy, void* result, rocblas_datatype result_type, rocblas_datatype execution_type);
   // CHECK: blasStatus = rocblas_dotc_ex(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
   blasStatus = cublasDotcEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCsyrkEx(cublasHandle_t handle, cublasFillMode_t uplo, cublasOperation_t trans, int n, int k, const cuComplex* alpha, const void* A, cudaDataType Atype, int lda, const cuComplex* beta, void* C, cudaDataType Ctype, int ldc);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_syrk_ex(rocblas_handle handle, rocblas_fill uplo, rocblas_operation transA, rocblas_int n, rocblas_int k, const void* alpha, const void* A, rocblas_datatype a_type, rocblas_int lda, const void* beta, void* C, rocblas_datatype c_type, rocblas_int ldc, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_syrk_ex(blasHandle, blasFillMode, blasOperation, n, k, &complexa, Aptr, Atype, lda, &complexb, Cptr, Ctype, ldc, rocblas_datatype_f32_c);
+  blasStatus = cublasCsyrkEx(blasHandle, blasFillMode, blasOperation, n, k, &complexa, Aptr, Atype, lda, &complexb, Cptr, Ctype, ldc);
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCherkEx(cublasHandle_t handle, cublasFillMode_t uplo, cublasOperation_t trans, int n, int k, const float* alpha, const void* A, cudaDataType Atype, int lda, const float* beta, void* C, cudaDataType Ctype, int ldc);
+  // ROC: ROCBLAS_EXPORT rocblas_status rocblas_herk_ex(rocblas_handle handle, rocblas_fill uplo, rocblas_operation transA, rocblas_int n, rocblas_int k, const void* alpha, const void* A, rocblas_datatype a_type, rocblas_int lda, const void* beta, void* C, rocblas_datatype c_type, rocblas_int ldc, rocblas_datatype execution_type);
+  // CHECK: blasStatus = rocblas_herk_ex(blasHandle, blasFillMode, blasOperation, n, k, &fa, Aptr, Atype, lda, &fb, Cptr, Ctype, ldc, rocblas_datatype_f32_c);
+  blasStatus = cublasCherkEx(blasHandle, blasFillMode, blasOperation, n, k, &fa, Aptr, Atype, lda, &fb, Cptr, Ctype, ldc);
 #endif
 
 #if CUDA_VERSION >= 8000 && CUDA_VERSION < 11000

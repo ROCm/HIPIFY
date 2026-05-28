@@ -97,6 +97,8 @@ const std::string sCudnnSoftmaxBackward = "cudnnSoftmaxBackward";
 const std::string sCudnnConvolutionForward = "cudnnConvolutionForward";
 const std::string sCudnnConvolutionBackwardData = "cudnnConvolutionBackwardData";
 const std::string sCudnnRNNBackwardWeights = "cudnnRNNBackwardWeights";
+const std::string sCublasCsyrkEx = "cublasCsyrkEx";
+const std::string sCublasCherkEx = "cublasCherkEx";
 const std::string sCusparseZgpsvInterleavedBatch = "cusparseZgpsvInterleavedBatch";
 const std::string sCusparseCgpsvInterleavedBatch = "cusparseCgpsvInterleavedBatch";
 const std::string sCusparseDgpsvInterleavedBatch = "cusparseDgpsvInterleavedBatch";
@@ -364,6 +366,38 @@ std::map<std::string, std::vector<ArgCastStruct>> FuncArgCasts {
         {
           {3, {e_add_const_argument, cw_None, "hipHostMallocDefault"}}
         }
+      }
+    }
+  },
+  {sCublasCsyrkEx,
+    {
+      {
+        {
+          {14, {e_add_const_argument, cw_None, "HIP_C_32F"}}
+        }
+      },
+      {
+        {
+          {14, {e_add_const_argument, cw_None, "rocblas_datatype_f32_c"}}
+        },
+        true,
+        false
+      }
+    }
+  },
+  {sCublasCherkEx,
+    {
+      {
+        {
+          {14, {e_add_const_argument, cw_None, "HIP_C_32F"}}
+        }
+      },
+      {
+        {
+          {14, {e_add_const_argument, cw_None, "rocblas_datatype_f32_c"}}
+        },
+        true,
+        false
       }
     }
   },
@@ -3203,6 +3237,8 @@ std::unique_ptr<clang::ASTConsumer> HipifyAction::CreateASTConsumer(clang::Compi
             sCusparseSpSM_solve,
             sCusparseXcsrgeam2Nnz,
             sCudaMallocHost,
+            sCublasCsyrkEx,
+            sCublasCherkEx,
             sCusparseSpVV,
             sCusparseSpVV_bufferSize,
             sCusparseSpMV,
