@@ -270,8 +270,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   m["cudaOccupancyMaxPotentialBlockSizeVariableSMem"]          = {"hipOccupancyMaxPotentialBlockSizeVariableSMem",          "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY};
   // no analogue
   m["cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags"] = {"hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY};
-  // cuOccupancyMaxPotentialClusterSize
-  m["cudaOccupancyMaxPotentialClusterSize"]                    = {"hipOccupancyMaxPotentialClusterSize",                    "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED};
+  // NOTE: cuOccupancyMaxPotentialClusterSize has a different type as the first argument (HIP_LAUNCH_CONFIG vs hipLaunchConfig_t)
+  m["cudaOccupancyMaxPotentialClusterSize"]                    = {"hipOccupancyMaxPotentialClusterSize",                    "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_EXPERIMENTAL};
   // cuOccupancyMaxActiveClusters
   m["cudaOccupancyMaxActiveClusters"]                          = {"hipOccupancyMaxActiveClusters",                          "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED};
   // cuGraphNodeGetParams
@@ -423,7 +423,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuMemDiscardAndPrefetchBatchAsync
   m["cudaMemDiscardAndPrefetchBatchAsync"]                     = {"hipMemDiscardAndPrefetchBatchAsync",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
   // cuMemPrefetchBatchAsync
-  m["cudaMemPrefetchBatchAsync"]                               = {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemPrefetchBatchAsync"]                               = {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL};
   // cuMemcpyWithAttributesAsync
   m["cudaMemcpyWithAttributesAsync"]                           = {"hipMemcpyWithAttributesAsync",                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
   // cuMemcpy3DWithAttributesAsync
@@ -1631,6 +1631,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [
   m["hipStreamCopyAttributes"]                                 = {HIP_7020, HIP_0,    HIP_0   };
   m["hipOccupancyAvailableDynamicSMemPerBlock"]                = {HIP_7020, HIP_0,    HIP_0   };
   m["hipLibraryEnumerateKernels"]                              = {HIP_7020, HIP_0,    HIP_0   };
+  m["hipMemPrefetchBatchAsync"]                                = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipOccupancyMaxPotentialClusterSize"]                     = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
 
   return m;
 }();

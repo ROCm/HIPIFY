@@ -2028,7 +2028,7 @@
 |`cuMemDiscardBatchAsync`|13.0| | | | | | | | | | |
 |`cuMemPrefetchAsync`|8.0| |13.0| |`hipMemPrefetchAsync`|3.7.0| | | |13.0| |
 |`cuMemPrefetchAsync_v2`|12.2| | | | | | | | | | |
-|`cuMemPrefetchBatchAsync`|13.0| | | | | | | | | | |
+|`cuMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | |7.13.0|
 |`cuMemRangeGetAttribute`|8.0| | | |`hipMemRangeGetAttribute`|3.7.0| | | | | |
 |`cuMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | | |
 |`cuPointerGetAttribute`| | | | |`hipPointerGetAttribute`|5.0.0| | | | | |
