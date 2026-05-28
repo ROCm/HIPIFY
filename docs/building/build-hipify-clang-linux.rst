@@ -134,7 +134,7 @@ Linux testing
 
 On Linux, the following configurations are tested:
 
-* Ubuntu 22-24: LLVM 13.0.0 - 22.1.6, CUDA 7.0 - 12.9.1, cuDNN 8.0.5 - 9.21.1, cuTensor 1.0.1.0 - 2.6.0.0
+* Ubuntu 22-24: LLVM 13.0.0 - 22.1.6, CUDA 7.0 - 13.2.0, cuDNN 8.0.5 - 9.21.1, cuTensor 1.0.1.0 - 2.6.0.0
 * Ubuntu 20-21: LLVM 9.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 5.1.10 - 9.21.1, cuTensor 1.0.1.0 - 2.6.0.0
 * Ubuntu 16-19: LLVM 8.0.0 - 14.0.6, CUDA 7.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 * Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5

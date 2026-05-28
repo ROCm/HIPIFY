@@ -3433,7 +3433,8 @@ void HipifyAction::ExecuteAction() {
   PP.addPPCallbacks(std::unique_ptr<PPCallbackProxy>(new PPCallbackProxy(*this)));
 #if LLVM_VERSION_MAJOR > 3
   Statistics::cudaVersionUsedByClang = Statistics::convertCudaToolkitVersion(clang::ToCudaVersion(PP.getTargetInfo().getSDKVersion()));
-  llvm::errs() << " !!!!!!! CUDA SDK version detected: " << int(clang::ToCudaVersion(PP.getTargetInfo().getSDKVersion())) << "\n";
+  llvm::errs() << "\n" << sHipify << sInformation << "Actual CUDA SDK version is used by clang as   : " << Statistics::getCudaVersion((cudaVersions)Statistics::getCudaVersion());
+  llvm::errs() << "\n" << sHipify << sInformation << "Actual CUDA SDK version is treated by clang as: " << Statistics::getCudaVersion(Statistics::getCudaVersionUsedByClang()) << "\n\n";
 #endif
   // Now we're done futzing with the lexer, have the subclass proceeed with Sema and AST matching.
   clang::ASTFrontendAction::ExecuteAction();
