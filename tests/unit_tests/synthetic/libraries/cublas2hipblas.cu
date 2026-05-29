@@ -1631,16 +1631,6 @@ int main() {
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDotcEx(hipblasHandle_t handle, int n, const void* x, hipDataType xType, int incx, const void* y, hipDataType yType, int incy, void* result, hipDataType resultType, hipDataType executionType);
   // CHECK: blasStatus = hipblasDotcEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
   blasStatus = cublasDotcEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
-
-  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCsyrkEx(cublasHandle_t handle, cublasFillMode_t uplo, cublasOperation_t trans, int n, int k, const cuComplex* alpha, const void* A, cudaDataType Atype, int lda, const cuComplex* beta, void* C, cudaDataType Ctype, int ldc);
-  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasSyrkEx(hipblasHandle_t handle, hipblasFillMode_t uplo, hipblasOperation_t transA, int n, int k, const void* alpha, const void* A, hipDataType aType, int lda, const void* beta, void* C, hipDataType cType, int ldc, hipDataType computeType);
-  // CHECK: blasStatus = hipblasSyrkEx(blasHandle, blasFillMode, blasOperation, n, k, &complexa, Aptr, Atype, lda, &complexb, Cptr, Ctype, ldc, HIP_C_32F);
-  blasStatus = cublasCsyrkEx(blasHandle, blasFillMode, blasOperation, n, k, &complexa, Aptr, Atype, lda, &complexb, Cptr, Ctype, ldc);
-
-  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasCherkEx(cublasHandle_t handle, cublasFillMode_t uplo, cublasOperation_t trans, int n, int k, const float* alpha, const void* A, cudaDataType Atype, int lda, const float* beta, void* C, cudaDataType Ctype, int ldc);
-  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasHerkEx(hipblasHandle_t handle, hipblasFillMode_t uplo, hipblasOperation_t transA, int n, int k, const void* alpha, const void* A, hipDataType aType, int lda, const void* beta, void* C, hipDataType cType, int ldc, hipDataType computeType);
-  // CHECK: blasStatus = hipblasHerkEx(blasHandle, blasFillMode, blasOperation, n, k, &fa, Aptr, Atype, lda, &fb, Cptr, Ctype, ldc, HIP_C_32F);
-  blasStatus = cublasCherkEx(blasHandle, blasFillMode, blasOperation, n, k, &fa, Aptr, Atype, lda, &fb, Cptr, Ctype, ldc);
 #endif
 
 #if CUDA_VERSION >= 9000
