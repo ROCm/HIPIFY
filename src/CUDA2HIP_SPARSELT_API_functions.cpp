@@ -34,7 +34,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_FUNCTION_MAP = [] {
 const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIversions> m;
 
-  m["cusparseLtInit"]                                                 = {CUDA_0,   CUDA_110, CUDA_120};
+  m["cusparseLtInit"]                                                 = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
 
   return m;
 }();
