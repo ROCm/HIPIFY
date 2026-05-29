@@ -28,6 +28,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
 
   // 1. Structs
   m["cusparseLtHandle_t"]                                                = {"hipsparseLtHandle_t",                           "", CONV_TYPE, API_SPARSELT, 1};
+  m["cusparseLtMatDescriptor_t"]                                         = {"hipsparseLtMatDescriptor_t",                    "", CONV_TYPE, API_SPARSELT, 1};
+  m["cusparseLtMatmulDescriptor_t"]                                      = {"hipsparseLtMatmulDescriptor_t",                 "", CONV_TYPE, API_SPARSELT, 1};
+  m["cusparseLtMatmulAlgSelection_t"]                                    = {"hipsparseLtMatmulAlgSelection_t",               "", CONV_TYPE, API_SPARSELT, 1};
+  m["cusparseLtMatmulPlan_t"]                                            = {"hipsparseLtMatmulPlan_t",                       "", CONV_TYPE, API_SPARSELT, 1};
 
   return m;
 }();
@@ -36,6 +40,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   std::map<llvm::StringRef, cudaAPIversions> m;
 
   m["cusparseLtHandle_t"]                                                = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatDescriptor_t"]                                         = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatmulDescriptor_t"]                                      = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatmulAlgSelection_t"]                                    = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatmulPlan_t"]                                            = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -44,6 +52,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP =
   std::map<llvm::StringRef, hipAPIversions> m;
 
   m["hipsparseLtHandle_t"]                                               = {HIP_7020, HIP_0,    HIP_0    };
+  m["hipsparseLtMatDescriptor_t"]                                        = {HIP_7020, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulDescriptor_t"]                                     = {HIP_7020, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulAlgSelection_t"]                                   = {HIP_7020, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulPlan_t"]                                           = {HIP_7020, HIP_0,    HIP_0    };
 
   return m;
 }();
