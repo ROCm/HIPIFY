@@ -249,10 +249,14 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
   endif()
 
   if(UNIX)
-    # Get rid of any RPATH definations already.
-    set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
-    # Set RPATH for the binary.
-    set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,\\$ORIGIN/../lib" )
+    if(APPLE)
+      set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "@loader_path/../lib/llvm/lib")
+    else()
+      # Get rid of any RPATH definations already.
+      set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
+      # Set RPATH for the binary.
+      set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,\\$ORIGIN/../lib" )
+    endif()
 
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm" CACHE PATH "HIP Package Installation Path")
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
