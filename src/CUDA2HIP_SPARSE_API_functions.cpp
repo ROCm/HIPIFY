@@ -774,8 +774,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP = [] {
   m["cusparseCreateConstBlockedEll"]                                  = {"hipsparseCreateConstBlockedEll",                     "rocsparse_create_const_bell_descr",                                CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseBsrSetStridedBatch"]                                     = {"hipsparseBsrSetStridedBatch",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
   // NOTE: rocsparse_create_bsr_descr has appeared earlier than cusparseCreateBsr and has a different signature
-  m["cusparseCreateBsr"]                                              = {"hipsparseCreateBsr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
-  m["cusparseCreateConstBsr"]                                         = {"hipsparseCreateConstBsr",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseCreateBsr"]                                              = {"hipsparseCreateBsr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstBsr"]                                         = {"hipsparseCreateConstBsr",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseCreateSlicedEll"]                                        = {"hipsparseCreateSlicedEll",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseCreateConstSlicedEll"]                                   = {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15};
   // Sparse Vector descriptor
@@ -1999,7 +1999,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP = []
   m["hipsparseSpSM_destroyDescr"]                                     = {HIP_4050, HIP_0,    HIP_0   };
   m["hipsparseSpSM_bufferSize"]                                       = {HIP_4050, HIP_0,    HIP_0   };
   m["hipsparseSpSM_analysis"]                                         = {HIP_4050, HIP_0,    HIP_0   };
-  m["hipsparseSpSM_solve"]                                            = {HIP_4050, HIP_7110, HIP_0   };
+  m["hipsparseSpSM_solve"]                                            = {HIP_4050, HIP_7100, HIP_0   };
   m["hipsparseSgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
   m["hipsparseDgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
   m["hipsparseCgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
@@ -2059,8 +2059,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP = []
   m["hipsparseCscGet"]                                                = {HIP_6020, HIP_0,    HIP_0   };
   m["hipsparseConstCscGet"]                                           = {HIP_6020, HIP_0,    HIP_0   };
   m["hipsparseSpMV_preprocess"]                                       = {HIP_5020, HIP_0,    HIP_0   };
-  m["hipsparseCreateConstSlicedEll"]                                  = {HIP_7110, HIP_0,    HIP_0   };
-  m["hipsparseCreateSlicedEll"]                                       = {HIP_7110, HIP_0,    HIP_0   };
+  m["hipsparseCreateBsr"]                                             = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstBsr"]                                        = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstSlicedEll"]                                  = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseCreateSlicedEll"]                                       = {HIP_7100, HIP_0,    HIP_0   };
 
   m["rocsparse_create_handle"]                                        = {HIP_1090, HIP_0,    HIP_0   };
   m["rocsparse_destroy_handle"]                                       = {HIP_1090, HIP_0,    HIP_0   };

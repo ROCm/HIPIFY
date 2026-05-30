@@ -231,6 +231,9 @@ int main() {
   void *sellSliceOffset = nullptr;
   void *sellColInd = nullptr;
   void *sellValues = nullptr;
+  void *bsrRowPtr = nullptr;
+  void *bsrColInd = nullptr;
+  void *bsrValues = nullptr;
   int icooColumns = 0;
   void *data = nullptr;
   void *alpha = nullptr;
@@ -2025,6 +2028,9 @@ int main() {
   // CHECK: hipsparseIndexType_t sellSliceOffsetsType, sellColIndType;
   cusparseIndexType_t sellSliceOffsetsType, sellColIndType;
 
+  // CHECK: hipsparseIndexType_t bsrRowPtrType, bsrColIndType;
+  cusparseIndexType_t bsrRowPtrType, bsrColIndType;
+
   // CHECK: hipsparseFormat_t format_t;
   // CHECK-NEXT: hipsparseFormat_t FORMAT_CSR = HIPSPARSE_FORMAT_CSR;
   // CHECK-NEXT: hipsparseFormat_t FORMAT_CSC = HIPSPARSE_FORMAT_CSC;
@@ -3547,6 +3553,27 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateConstSlicedEll(hipsparseConstSpMatDescr_t* spMatDescr, int64_t  rows, int64_t  cols, int64_t  nnz, int64_t  sellValuesSize, int64_t  sliceSize, const void* sellSliceOffsets, const void* sellColInd, const void* sellValues, hipsparseIndexType_t sellSliceOffsetsType, hipsparseIndexType_t sellColIndType, hipsparseIndexBase_t idxBase, hipDataType valueType);
   // CHECK: status_t = hipsparseCreateConstSlicedEll(&constSpMatDescr, rows, cols, nnz, sellValuesSize, sliceSize, sellSliceOffset, sellColInd, sellValues, sellSliceOffsetsType, sellColIndType, indexBase_t, dataType);
   status_t = cusparseCreateConstSlicedEll(&constSpMatDescr, rows, cols, nnz, sellValuesSize, sliceSize, sellSliceOffset, sellColInd, sellValues, sellSliceOffsetsType, sellColIndType, indexBase_t, dataType);
+
+  // CHECK: hipsparseFormat_t FORMAT_BSR = HIPSPARSE_FORMAT_BSR;
+  cusparseFormat_t FORMAT_BSR = CUSPARSE_FORMAT_BSR;
+
+  // CHECK: hipsparseFormat_t FORMAT_SLICED_ELLPACK = HIPSPARSE_FORMAT_SLICED_ELLPACK;
+  cusparseFormat_t FORMAT_SLICED_ELLPACK = CUSPARSE_FORMAT_SLICED_ELLPACK;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateBsr(cusparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, int64_t rowBlockDim, int64_t colBlockDim, void* bsrRowOffsets, void* bsrColInd, void* bsrValues, cusparseIndexType_t bsrRowOffsetsType, cusparseIndexType_t bsrColIndType, cusparseIndexBase_t idxBase, cudaDataType valueType, cusparseOrder_t order);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateBsr(hipsparseSpMatDescr_t* spMatDescr, int64_t mb, int64_t nb, int64_t nnzb, int64_t rowBlockDim, int64_t colBlockDim, void* bsrRowPtr, void* bsrColInd, void* bsrValues, hipsparseIndexType_t bsrRowPtrType, hipsparseIndexType_t bsrColIndType, hipsparseIndexBase_t idxBase, hipDataType valueType, hipsparseOrder_t order);
+  // CHECK: status_t = hipsparseCreateBsr(&spMatDescr_t, rows, cols, nnz, rowBlockDim, colBlockDim, bsrRowPtr, bsrColInd, bsrValues, bsrRowPtrType, bsrColIndType, indexBase_t, dataType, order_t);
+  status_t = cusparseCreateBsr(&spMatDescr_t, rows, cols, nnz, rowBlockDim, colBlockDim, bsrRowPtr, bsrColInd, bsrValues, bsrRowPtrType, bsrColIndType, indexBase_t, dataType, order_t);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateConstBsr(cusparseConstSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, int64_t rowBlockDim, int64_t colBlockDim, const void* bsrRowOffsets, const void* bsrColInd, const void* bsrValues, cusparseIndexType_t bsrRowOffsetsType, cusparseIndexType_t bsrColIndType, cusparseIndexBase_t idxBase, cudaDataType valueType, cusparseOrder_t order);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateConstBsr(hipsparseConstSpMatDescr_t* spMatDescr, int64_t mb, int64_t nb, int64_t nnzb, int64_t rowBlockDim, int64_t colBlockDim, const void* bsrRowPtr, const void* bsrColInd, const void* bsrValues, hipsparseIndexType_t bsrRowPtrType, hipsparseIndexType_t bsrColIndType, hipsparseIndexBase_t idxBase, hipDataType valueType, hipsparseOrder_t order);
+  // CHECK: status_t = hipsparseCreateConstBsr(&constSpMatDescr, rows, cols, nnz, rowBlockDim, colBlockDim, bsrRowPtr, bsrColInd, bsrValues, bsrRowPtrType, bsrColIndType, indexBase_t, dataType, order_t);
+  status_t = cusparseCreateConstBsr(&constSpMatDescr, rows, cols, nnz, rowBlockDim, colBlockDim, bsrRowPtr, bsrColInd, bsrValues, bsrRowPtrType, bsrColIndType, indexBase_t, dataType, order_t);
+#endif
+
+#if CUSPARSE_VERSION >= 12603
+  // CHECK: hipsparseSpMVAlg_t SPARSE_SPMV_BSR_ALG1 = HIPSPARSE_SPMV_BSR_ALG1;
+  cusparseSpMVAlg_t SPARSE_SPMV_BSR_ALG1 = CUSPARSE_SPMV_BSR_ALG1;
 #endif
 
 #if CUDA_VERSION >= 12040
