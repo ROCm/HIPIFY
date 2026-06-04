@@ -58,6 +58,11 @@ int main() {
   double fma = 0.0f;
   float f_in = 0.0f;
   float f_out = 0.0f;
+  int howmany = 0;
+  int istride = 0;
+  int idist = 0;
+  int ostride = 0;
+  int odist = 0;
 
   // CUDA: fftw_plan CUFFTAPI fftw_plan_dft_1d(int n, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
   // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_dft_1d(int n, fftw_complex * in, fftw_complex * out, int sign, unsigned flags);
@@ -278,6 +283,36 @@ int main() {
   // HIP: HIPFFT_EXPORT void fftwf_cleanup();
   // CHECK: fftwf_cleanup();
   fftwf_cleanup();
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_many_dft(int rank, const int* n, int howmany, fftw_complex* in, const int* inembed, int istride, int idist, fftw_complex* out, const int* onembed, int ostride, int odist, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_many_dft(int rank, const int* n, int howmany, fftw_complex* in, const int* inembed, int istride, int idist, fftw_complex* out, const int* onembed, int ostride, int odist, int sign, unsigned flags);
+  // CHECK: w_plan = fftw_plan_many_dft(rank, &n, howmany, &w_complex_in, &n, istride, idist, &w_complex_out, &n, ostride, odist, sign, flags);
+  w_plan = fftw_plan_many_dft(rank, &n, howmany, &w_complex_in, &n, istride, idist, &w_complex_out, &n, ostride, odist, sign, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_many_dft(int rank, const int* n, int howmany, fftwf_complex* in, const int* inembed, int istride, int idist, fftwf_complex* out, const int* onembed, int ostride, int odist, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_many_dft(int rank, const int* n, int howmany, fftwf_complex* in, const int* inembed, int istride, int idist, fftwf_complex* out, const int* onembed, int ostride, int odist, int sign, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_many_dft(rank, &n, howmany, &wf_complex_in, &n, istride, idist, &wf_complex_out, &n, ostride, odist, sign, flags);
+  twf_plan = fftwf_plan_many_dft(rank, &n, howmany, &wf_complex_in, &n, istride, idist, &wf_complex_out, &n, ostride, odist, sign, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_many_dft_r2c(int rank, const int* n, int howmany, double* in, const int* inembed, int istride, int idist, fftw_complex* out, const int* onembed, int ostride, int odist, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_many_dft_r2c(int rank, const int* n, int howmany, double* in, const int* inembed, int istride, int idist, fftw_complex* out, const int* onembed, int ostride, int odist, unsigned flags);
+  // CHECK: w_plan = fftw_plan_many_dft_r2c(rank, &n, howmany, &d_in, &n, istride, idist, &w_complex_out, &n, ostride, odist, flags);
+  w_plan = fftw_plan_many_dft_r2c(rank, &n, howmany, &d_in, &n, istride, idist, &w_complex_out, &n, ostride, odist, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_many_dft_r2c(int rank, const int* n, int howmany, float* in, const int* inembed, int istride, int idist, fftwf_complex* out, const int* onembed, int ostride, int odist, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_many_dft_r2c(int rank, const int* n, int howmany, float* in, const int* inembed, int istride, int idist, fftwf_complex* out, const int* onembed, int ostride, int odist, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_many_dft_r2c(rank, &n, howmany, &f_in, &n, istride, idist, &wf_complex_out, &n, ostride, odist, flags);
+  twf_plan = fftwf_plan_many_dft_r2c(rank, &n, howmany, &f_in, &n, istride, idist, &wf_complex_out, &n, ostride, odist, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_many_dft_c2r(int rank, const int* n, int howmany, fftw_complex* in, const int* inembed, int istride, int idist, double* out, const int* onembed, int ostride, int odist, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_many_dft_c2r(int rank, const int* n, int howmany, fftw_complex* in, const int* inembed, int istride, int idist, double* out, const int* onembed, int ostride, int odist, unsigned flags);
+  // CHECK: w_plan = fftw_plan_many_dft_c2r(rank, &n, howmany, &w_complex_in, &n, istride, idist, &d_out, &n, ostride, odist, flags);
+  w_plan = fftw_plan_many_dft_c2r(rank, &n, howmany, &w_complex_in, &n, istride, idist, &d_out, &n, ostride, odist, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_many_dft_c2r(int rank, const int* n, int howmany, fftwf_complex* in, const int* inembed, int istride, int idist, float* out, const int* onembed, int ostride, int odist, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_many_dft_c2r(int rank, const int* n, int howmany, fftwf_complex* in, const int* inembed, int istride, int idist, float* out, const int* onembed, int ostride, int odist, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_many_dft_c2r(rank, &n, howmany, &wf_complex_in, &n, istride, idist, &f_out, &n, ostride, odist, flags);
+  twf_plan = fftwf_plan_many_dft_c2r(rank, &n, howmany, &wf_complex_in, &n, istride, idist, &f_out, &n, ostride, odist, flags);
 
   // CHECK: fftw_iodim w_iodim, batch_dims;
   // CHECK-NEXT: fftwf_iodim wf_iodim, fbatch_dims;
