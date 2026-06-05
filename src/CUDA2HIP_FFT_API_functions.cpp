@@ -131,24 +131,24 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP = [] {
   m["fftw_plan_many_dft"]                               = {"fftw_plan_many_dft",                                   "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["fftw_plan_many_dft_r2c"]                           = {"fftw_plan_many_dft_r2c",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["fftw_plan_many_dft_c2r"]                           = {"fftw_plan_many_dft_c2r",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftw_plan_guru_dft"]                               = {"fftw_plan_guru_dft",                                   "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftw_plan_guru_dft_r2c"]                           = {"fftw_plan_guru_dft_r2c",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftw_plan_guru_dft_c2r"]                           = {"fftw_plan_guru_dft_c2r",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftw_plan_guru64_dft"]                             = {"fftw_plan_guru64_dft",                                 "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftw_plan_guru64_dft_r2c"]                         = {"fftw_plan_guru64_dft_r2c",                             "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftw_plan_guru64_dft_c2r"]                         = {"fftw_plan_guru64_dft_c2r",                             "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["fftw_plan_guru_dft"]                               = {"fftw_plan_guru_dft",                                   "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftw_plan_guru_dft_r2c"]                           = {"fftw_plan_guru_dft_r2c",                               "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftw_plan_guru_dft_c2r"]                           = {"fftw_plan_guru_dft_c2r",                               "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftw_plan_guru64_dft"]                             = {"fftw_plan_guru64_dft",                                 "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftw_plan_guru64_dft_r2c"]                         = {"fftw_plan_guru64_dft_r2c",                             "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftw_plan_guru64_dft_c2r"]                         = {"fftw_plan_guru64_dft_c2r",                             "", CONV_LIB_FUNC, API_FFT, 2};
   m["fftw_execute_dft"]                                 = {"fftw_execute_dft",                                     "", CONV_LIB_FUNC, API_FFT, 2};
   m["fftw_execute_dft_r2c"]                             = {"fftw_execute_dft_r2c",                                 "", CONV_LIB_FUNC, API_FFT, 2};
   m["fftw_execute_dft_c2r"]                             = {"fftw_execute_dft_c2r",                                 "", CONV_LIB_FUNC, API_FFT, 2};
   m["fftwf_plan_many_dft"]                              = {"fftwf_plan_many_dft",                                  "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["fftwf_plan_many_dft_r2c"]                          = {"fftwf_plan_many_dft_r2c",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["fftwf_plan_many_dft_c2r"]                          = {"fftwf_plan_many_dft_c2r",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftwf_plan_guru_dft"]                              = {"fftwf_plan_guru_dft",                                  "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftwf_plan_guru_dft_r2c"]                          = {"fftwf_plan_guru_dft_r2c",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftwf_plan_guru_dft_c2r"]                          = {"fftwf_plan_guru_dft_c2r",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftwf_plan_guru64_dft"]                            = {"fftwf_plan_guru64_dft",                                "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftwf_plan_guru64_dft_r2c"]                        = {"fftwf_plan_guru64_dft_r2c",                            "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
-  m["fftwf_plan_guru64_dft_c2r"]                        = {"fftwf_plan_guru64_dft_c2r",                            "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["fftwf_plan_guru_dft"]                              = {"fftwf_plan_guru_dft",                                  "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftwf_plan_guru_dft_r2c"]                          = {"fftwf_plan_guru_dft_r2c",                              "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftwf_plan_guru_dft_c2r"]                          = {"fftwf_plan_guru_dft_c2r",                              "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftwf_plan_guru64_dft"]                            = {"fftwf_plan_guru64_dft",                                "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftwf_plan_guru64_dft_r2c"]                        = {"fftwf_plan_guru64_dft_r2c",                            "", CONV_LIB_FUNC, API_FFT, 2};
+  m["fftwf_plan_guru64_dft_c2r"]                        = {"fftwf_plan_guru64_dft_c2r",                            "", CONV_LIB_FUNC, API_FFT, 2};
   m["fftwf_execute_dft"]                                = {"fftwf_execute_dft",                                    "", CONV_LIB_FUNC, API_FFT, 2};
   m["fftwf_execute_dft_r2c"]                            = {"fftwf_execute_dft_r2c",                                "", CONV_LIB_FUNC, API_FFT, 2};
   m["fftwf_execute_dft_c2r"]                            = {"fftwf_execute_dft_c2r",                                "", CONV_LIB_FUNC, API_FFT, 2};
@@ -158,6 +158,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FFT_FUNCTION_MAP = [] {
   m["fftwf_import_wisdom_from_file"]                    = {"fftwf_import_wisdom_from_file",                        "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
 
   m["cufftDeviceGetVersion"]                            = {"hipfftDeviceGetVersion",                               "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
+  m["cufftDeviceGetSemanticVersion"]                    = {"hipfftDeviceGetSemanticVersion",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["cufftDescriptionCreate"]                           = {"hipfftDescriptionCreate",                              "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["cufftDescriptionSetTraitInt64"]                    = {"hipfftDescriptionSetTraitInt64",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
   m["cufftDescriptionGetTraitInt64"]                    = {"hipfftDescriptionGetTraitInt64",                       "", CONV_LIB_FUNC, API_FFT, 2, UNSUPPORTED};
@@ -212,6 +213,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FFT_FUNCTION_VER_MAP = [] 
   m["cufftDeviceGetLTOIRSizes"]                           = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cufftDeviceGetLTOIRs"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cufftDeviceDestroy"]                                 = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cufftDeviceGetSemanticVersion"]                      = {CUDA_132, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -319,6 +321,18 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_FFT_FUNCTION_VER_MAP = [] {
   m["fftwf_execute_dft"]                                  = {HIP_7020, HIP_0,    HIP_0   };
   m["fftwf_execute_dft_r2c"]                              = {HIP_7020, HIP_0,    HIP_0   };
   m["fftwf_execute_dft_c2r"]                              = {HIP_7020, HIP_0,    HIP_0   };
+  m["fftw_plan_guru_dft"]                                 = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftwf_plan_guru_dft"]                                = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftw_plan_guru_dft_r2c"]                             = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftwf_plan_guru_dft_r2c"]                            = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftw_plan_guru_dft_c2r"]                             = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftwf_plan_guru_dft_c2r"]                            = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftw_plan_guru64_dft"]                               = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftwf_plan_guru64_dft"]                              = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftw_plan_guru64_dft_r2c"]                           = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftwf_plan_guru64_dft_r2c"]                          = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftw_plan_guru64_dft_c2r"]                           = {HIP_7110, HIP_0,    HIP_0   };
+  m["fftwf_plan_guru64_dft_c2r"]                          = {HIP_7110, HIP_0,    HIP_0   };
 
   return m;
 }();

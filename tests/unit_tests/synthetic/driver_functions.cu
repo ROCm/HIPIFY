@@ -26,6 +26,7 @@ int main() {
   unsigned int icount = 0;
   uint64_t flags_64 = 0;
   int dim = 0;
+  int val = 0;
   int count = 0;
   unsigned int numLibraryOptions = 0;
   int iBlockSize = 0;
@@ -35,7 +36,11 @@ int main() {
   int hipVersion = 0;
   size_t bytes = 0;
   size_t bytes_2 = 0;
+  size_t sizes = 0;
+  size_t sizeCount = 0;
   size_t dstPitch = 0;
+  size_t sizePrefetchLocIdxs = 0;
+  size_t sizeNumPrefetchLocs = 0;
   void *image = nullptr;
   void *code = nullptr;
   void *pfn = nullptr;
@@ -1900,6 +1905,14 @@ int main() {
   // HIP: hipError_t hipGraphNodeGetEnabled(hipGraphExec_t hGraphExec, hipGraphNode_t hNode, unsigned int* isEnabled);
   // CHECK: result = hipGraphNodeGetEnabled(graphExec, graphNode, &flags);
   result = cuGraphNodeGetEnabled(graphExec, graphNode, &flags);
+
+  // CHECK: hipArrayMemoryRequirements ARRAY_MEMORY_REQUIREMENTS;
+  CUDA_ARRAY_MEMORY_REQUIREMENTS ARRAY_MEMORY_REQUIREMENTS;
+
+  // CUDA: CUresult CUDAAPI cuMipmappedArrayGetMemoryRequirements(CUDA_ARRAY_MEMORY_REQUIREMENTS *memoryRequirements, CUmipmappedArray mipmap, CUdevice device);
+  // HIP: hipError_t hipMipmappedArrayGetMemoryRequirements(hipArrayMemoryRequirements* memoryRequirements, hipMipmappedArray_t mipmap, hipDevice_t device);
+  // CHECK: result = hipMipmappedArrayGetMemoryRequirements(&ARRAY_MEMORY_REQUIREMENTS, mipmappedArray, device);
+  result = cuMipmappedArrayGetMemoryRequirements(&ARRAY_MEMORY_REQUIREMENTS, mipmappedArray, device);
 #endif
 
 #if CUDA_VERSION >= 11070
@@ -2039,6 +2052,21 @@ int main() {
   // HIP: hipError_t hipLibraryGetKernel(hipKernel_t* pKernel, hipLibrary_t library, const char* name);
   // CHECK: result = hipLibraryGetKernel(kernels, library, const_ch);
   result = cuLibraryGetKernel(kernels, library, const_ch);
+
+  // CUDA: CUresult CUDAAPI cuKernelSetAttribute(CUfunction_attribute attrib, int val, CUkernel kernel, CUdevice dev);
+  // HIP: hipError_t hipKernelSetAttribute(hipFunction_attribute attrib, int value, hipKernel_t kernel, hipDevice_t dev);
+  // CHECK: result = hipKernelSetAttribute(function_attribute, val, kernel, device);
+  result = cuKernelSetAttribute(function_attribute, val, kernel, device);
+
+  // CUDA: CUresult CUDAAPI cuKernelGetFunction(CUfunction *pFunc, CUkernel kernel);
+  // HIP: hipError_t hipKernelGetFunction(hipFunction_t* pFunc, hipKernel_t kernel);
+  // CHECK: result = hipKernelGetFunction(&function, kernel);
+  result = cuKernelGetFunction(&function, kernel);
+
+  // CUDA: CUresult CUDAAPI cuKernelGetAttribute(int *pi, CUfunction_attribute attrib, CUkernel kernel, CUdevice dev);
+  // HIP: hipError_t hipKernelGetAttribute(int* pi, hipFunction_attribute attrib, hipKernel_t kernel, hipDevice_t dev);
+  // CHECK: result = hipKernelGetAttribute(&pi, function_attribute, kernel, device);
+  result = cuKernelGetAttribute(&pi, function_attribute, kernel, device);
 #endif
 
 #if CUDA_VERSION >= 12020
@@ -2103,6 +2131,26 @@ int main() {
   // HIP: hipError_t hipKernelGetLibrary(hipLibrary_t* library, hipKernel_t kernel);
   // CHECK: result = hipKernelGetLibrary(&library, kernel);
   result = cuKernelGetLibrary(&library, kernel);
+#endif
+
+#if CUDA_VERSION >= 13000
+  // CHECK: hipMemAllocationType memAllocationType;
+  CUmemAllocationType memAllocationType;
+
+  // CUDA: CUresult CUDAAPI cuMemSetMemPool(CUmemLocation* location, CUmemAllocationType type, CUmemoryPool pool);
+  // HIP: hipError_t hipMemSetMemPool(hipMemLocation* location, hipMemAllocationType type, hipMemPool_t pool);
+  // CHECK: result = hipMemSetMemPool(&memLocation, memAllocationType, memPool_t);
+  result = cuMemSetMemPool(&memLocation, memAllocationType, memPool_t);
+
+  // CUDA: CUresult CUDAAPI cuMemGetMemPool(CUmemoryPool *pool, CUmemLocation *location, CUmemAllocationType type);
+  // HIP: hipError_t hipMemGetMemPool(hipMemPool_t* pool, hipMemLocation* location, hipMemAllocationType type);
+  // CHECK: result = hipMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
+  result = cuMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
+
+  // CUDA: CUresult CUDAAPI cuMemPrefetchBatchAsync(CUdeviceptr* dptrs, size_t* sizes, size_t count, CUmemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, CUstream hStream);
+  // HIP: hipError_t hipMemPrefetchBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, hipMemLocation* prefetch_locs, size_t* prefetch_loc_idxs, size_t num_prefetch_locs, unsigned long long flags, hipStream_t stream);
+    // CHECK: result = hipMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+  result = cuMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
 #endif
 
   return 0;

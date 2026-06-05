@@ -776,8 +776,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP = [] {
   // NOTE: rocsparse_create_bsr_descr has appeared earlier than cusparseCreateBsr and has a different signature
   m["cusparseCreateBsr"]                                              = {"hipsparseCreateBsr",                                 "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
   m["cusparseCreateConstBsr"]                                         = {"hipsparseCreateConstBsr",                            "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
-  m["cusparseCreateSlicedEll"]                                        = {"hipsparseCreateSlicedEll",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
-  m["cusparseCreateConstSlicedEll"]                                   = {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseCreateSlicedEll"]                                        = {"hipsparseCreateSlicedEll",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseCreateConstSlicedEll"]                                   = {"hipsparseCreateConstSlicedEll",                      "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15};
   // Sparse Vector descriptor
   m["cusparseCreateSpVec"]                                            = {"hipsparseCreateSpVec",                               "rocsparse_create_spvec_descr",                                     CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseCreateConstSpVec"]                                       = {"hipsparseCreateConstSpVec",                          "rocsparse_create_const_spvec_descr",                               CONV_LIB_FUNC, API_SPARSE, 15};
@@ -831,9 +831,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP = [] {
   m["cusparseSpMM"]                                                   = {"hipsparseSpMM",                                      "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseSpMM_bufferSize"]                                        = {"hipsparseSpMM_bufferSize",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
   m["cusparseSpMM_preprocess"]                                        = {"hipsparseSpMM_preprocess",                           "rocsparse_spmm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
-  m["cusparseSpMMOp"]                                                 = {"hipsparseSpMMOp",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
-  m["cusparseSpMMOp_createPlan"]                                      = {"hipsparseSpMMOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
-  m["cusparseSpMMOp_destroyPlan"]                                     = {"hipsparseSpMMOp_destroyPlan",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
+  m["cusparseSpMMOp"]                                                 = {"hipsparseSpMMOp",                                    "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpMMOp_createPlan"]                                      = {"hipsparseSpMMOp_createPlan",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpMMOp_destroyPlan"]                                     = {"hipsparseSpMMOp_destroyPlan",                        "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED};
 
   // Sparse Triangular Matrix Solve
   m["cusparseSpSM_createDescr"]                                       = {"hipsparseSpSM_createDescr",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
@@ -841,14 +841,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSE_FUNCTION_MAP = [] {
   // NTOE: Additional calculations are needed after calling rocsparse_spsm
   m["cusparseSpSM_bufferSize"]                                        = {"hipsparseSpSM_bufferSize",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
   m["cusparseSpSM_analysis"]                                          = {"hipsparseSpSM_analysis",                             "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
-  m["cusparseSpSM_solve"]                                             = {"hipsparseSpSM_solve",                                "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15};
+  m["cusparseSpSM_solve"]                                             = {"hipsparseSpSM_solve",                                "rocsparse_spsm",                                                   CONV_LIB_FUNC, API_SPARSE, 15, HIP_DEPRECATED};
   m["cusparseSpSM_updateMatrix"]                                      = {"hipsparseSpSM_updateMatrix",                         "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED};
 
   // Sparse Matrix Multiplication (SpGEMM) Structure Reuse
-  m["cusparseSpGEMMreuse_workEstimation"]                             = {"hipsparseSpGEMMreuse_workEstimation",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
-  m["cusparseSpGEMMreuse_nnz"]                                        = {"hipsparseSpGEMMreuse_nnz",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
-  m["cusparseSpGEMMreuse_copy"]                                       = {"hipsparseSpGEMMreuse_copy",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
-  m["cusparseSpGEMMreuse_compute"]                                    = {"hipsparseSpGEMMreuse_compute",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED};
+  m["cusparseSpGEMMreuse_workEstimation"]                             = {"hipsparseSpGEMMreuse_workEstimation",                "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpGEMMreuse_nnz"]                                        = {"hipsparseSpGEMMreuse_nnz",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpGEMMreuse_copy"]                                       = {"hipsparseSpGEMMreuse_copy",                          "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED | CUDA_DEPRECATED};
+  m["cusparseSpGEMMreuse_compute"]                                    = {"hipsparseSpGEMMreuse_compute",                       "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, ROC_UNSUPPORTED | CUDA_DEPRECATED};
 
   // Sparse Matrix * Matrix Pattern-constrained Multiplication
   m["cusparseConstrainedGeMM"]                                        = {"hipsparseConstrainedGeMM",                           "",                                                                 CONV_LIB_FUNC, API_SPARSE, 15, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
@@ -1275,10 +1275,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP = 
   m["cusparseSpSM_bufferSize"]                                        = {CUDA_113, CUDA_0,   CUDA_0  };
   m["cusparseSpSM_analysis"]                                          = {CUDA_113, CUDA_0,   CUDA_0  };
   m["cusparseSpSM_solve"]                                             = {CUDA_113, CUDA_0,   CUDA_0  };
-  m["cusparseSpGEMMreuse_workEstimation"]                             = {CUDA_113, CUDA_0,   CUDA_0  };
-  m["cusparseSpGEMMreuse_nnz"]                                        = {CUDA_113, CUDA_0,   CUDA_0  };
-  m["cusparseSpGEMMreuse_copy"]                                       = {CUDA_113, CUDA_0,   CUDA_0  };
-  m["cusparseSpGEMMreuse_compute"]                                    = {CUDA_113, CUDA_0,   CUDA_0  };
+  m["cusparseSpGEMMreuse_workEstimation"]                             = {CUDA_113, CUDA_132, CUDA_0  };  // D: CUSPARSE_VERSION 12709
+  m["cusparseSpGEMMreuse_nnz"]                                        = {CUDA_113, CUDA_132, CUDA_0  };  // D: CUSPARSE_VERSION 12709
+  m["cusparseSpGEMMreuse_copy"]                                       = {CUDA_113, CUDA_132, CUDA_0  };  // D: CUSPARSE_VERSION 12709
+  m["cusparseSpGEMMreuse_compute"]                                    = {CUDA_113, CUDA_132, CUDA_0  };  // D: CUSPARSE_VERSION 12709
   m["cusparseSDDMM"]                                                  = {CUDA_112, CUDA_0,   CUDA_0  };
   m["cusparseSDDMM_bufferSize"]                                       = {CUDA_112, CUDA_0,   CUDA_0  };
   m["cusparseSDDMM_preprocess"]                                       = {CUDA_112, CUDA_0,   CUDA_0  };
@@ -1291,9 +1291,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSE_FUNCTION_VER_MAP = 
   m["cusparseLoggerSetLevel"]                                         = {CUDA_115, CUDA_0,   CUDA_0  };
   m["cusparseLoggerSetMask"]                                          = {CUDA_115, CUDA_0,   CUDA_0  };
   m["cusparseLoggerForceDisable"]                                     = {CUDA_115, CUDA_0,   CUDA_0  };
-  m["cusparseSpMMOp"]                                                 = {CUDA_115, CUDA_0,   CUDA_0  };
-  m["cusparseSpMMOp_createPlan"]                                      = {CUDA_115, CUDA_0,   CUDA_0  };
-  m["cusparseSpMMOp_destroyPlan"]                                     = {CUDA_115, CUDA_0,   CUDA_0  };
+  m["cusparseSpMMOp"]                                                 = {CUDA_115, CUDA_132, CUDA_0  };  // D: CUSPARSE_VERSION 12709
+  m["cusparseSpMMOp_createPlan"]                                      = {CUDA_115, CUDA_132, CUDA_0  };  // D: CUSPARSE_VERSION 12709
+  m["cusparseSpMMOp_destroyPlan"]                                     = {CUDA_115, CUDA_132, CUDA_0  };  // D: CUSPARSE_VERSION 12709
   m["cusparseCscGet"]                                                 = {CUDA_117, CUDA_0,   CUDA_0  };
   m["cusparseCopyMatDescr"]                                           = {CUDA_80,  CUDA_0,   CUDA_120};
   m["cusparseCreateConstSpVec"]                                       = {CUDA_120, CUDA_0,   CUDA_0  };
@@ -1999,7 +1999,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP = []
   m["hipsparseSpSM_destroyDescr"]                                     = {HIP_4050, HIP_0,    HIP_0   };
   m["hipsparseSpSM_bufferSize"]                                       = {HIP_4050, HIP_0,    HIP_0   };
   m["hipsparseSpSM_analysis"]                                         = {HIP_4050, HIP_0,    HIP_0   };
-  m["hipsparseSpSM_solve"]                                            = {HIP_4050, HIP_0,    HIP_0   };
+  m["hipsparseSpSM_solve"]                                            = {HIP_4050, HIP_7110, HIP_0   };
   m["hipsparseSgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
   m["hipsparseDgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
   m["hipsparseCgtsv2StridedBatch_bufferSizeExt"]                      = {HIP_4050, HIP_0,    HIP_0   };
@@ -2059,6 +2059,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSE_FUNCTION_VER_MAP = []
   m["hipsparseCscGet"]                                                = {HIP_6020, HIP_0,    HIP_0   };
   m["hipsparseConstCscGet"]                                           = {HIP_6020, HIP_0,    HIP_0   };
   m["hipsparseSpMV_preprocess"]                                       = {HIP_5020, HIP_0,    HIP_0   };
+  m["hipsparseCreateConstSlicedEll"]                                  = {HIP_7110, HIP_0,    HIP_0   };
+  m["hipsparseCreateSlicedEll"]                                       = {HIP_7110, HIP_0,    HIP_0   };
 
   m["rocsparse_create_handle"]                                        = {HIP_1090, HIP_0,    HIP_0   };
   m["rocsparse_destroy_handle"]                                       = {HIP_1090, HIP_0,    HIP_0   };

@@ -94,20 +94,15 @@ namespace perl {
   const string sHipDNNOnlyUnsupportedFunctions = "HipDNNOnlyUnsupportedFunctions";
   const string sUnsupportedDeviceFunctions = "UnsupportedDeviceFunctions";
   const string sUnsupportedDeviceDataTypes = "UnsupportedDeviceDataTypes";
-  const string sSimpleMappings = "simpleMappings";
   const string sSimpleIncludes = "simpleIncludes";
-  const string sRocMappings = "rocMappings";
   const string sRocIncludes = "rocIncludes";
-  const string sMIOpenMappings = "MIOpenMappings";
   const string sMIOpenIncludes = "MIOpenIncludes";
   const string sSubst = "subst";
-  const string sExperimentalMappings = "experimentalMappings";
   const string sExperimentalIncludes = "experimentalIncludes";
   const string sTransformKernelLaunch = "transformKernelLaunch";
   const string sTransformCubNamespace = "transformCubNamespace";
   const string sSupportedDeviceFunctions = "SupportedDeviceFunctions";
   const string sSupportedDeviceDataTypes = "SupportedDeviceDataTypes";
-
   const string sCudaDevice = "cudaDevice";
   const string sCudaDeviceId = "cudaDeviceId";
   const string sCudaDevices = "cudaDevices";
@@ -206,7 +201,8 @@ namespace perl {
     out << my << "%tagsToConvertedTags = ();" << endl;
     out << my << "%tagsToConvertedTagsTotal = ();" << endl;
     out << my << "%convertedTags = ();" << endl;
-    out << my << "%convertedTagsTotal = ();" << endl_2;
+    out << my << "%convertedTagsTotal = ();" << endl;
+    out << my << "$needs_hip_runtime = 0;" << endl_2;
     out << "GetOptions(" << endl;
     out << tab << "  \"cuda-kernel-execution-syntax\" => \\$cuda_kernel_execution_syntax  # Keep CUDA kernel launch syntax (default)" << endl;
     out << tab << ", \"examine\" => \\$examine                                            # Combines -no-output and -print-stats options" << endl;
@@ -330,24 +326,18 @@ namespace perl {
     out << tab_2 << "$i = \"(?<![\\\\!~`@#\\\\$%\\\\^&\\\\*\\\\-+=\\\\[\\\\]\\\\(\\\\)\\\\{\\\\}\\\\.\\\\,\\\\?'\\\\>])\";" << endl;
     out << tab << "}" << endl;
     out << tab << "if (my $c = s/$i\\b$a\\b/$b/g) {" << endl;
-    out << tab_2 << "$ft{$t} += $c;" << endl;
-    out << tab_2 << "$convertedTags{$b} +=$c;" << endl;
-    out << tab_2 << "$convertedTagsTotal{$b} +=$c;" << endl;
-    out << tab_2 << "$tagsToConvertedTags{$a} = $b;" << endl;
-    out << tab_2 << "$tagsToConvertedTagsTotal{$a} = $b;" << endl;
+    out << tab_2 << "if ($print_stats) {" << endl;
+    out << tab_3 << "$ft{$t} += $c;" << endl;
+    out << tab_3 << "$convertedTags{$b} +=$c;" << endl;
+    out << tab_3 << "$convertedTagsTotal{$b} +=$c;" << endl;
+    out << tab_3 << "$tagsToConvertedTags{$a} = $b;" << endl;
+    out << tab_3 << "$tagsToConvertedTagsTotal{$a} = $b;" << endl;
+    out << tab_2 << "}" << endl;
     out << tab << "}" << endl;
     out << "}" << endl;
   }
 
   void generateExperimentalSubstitutions(ostream &out) {
-    out << endl << sub << sExperimentalMappings << " {" << endl;
-    for (auto &ma : CUDA_RENAMES_MAP()) {
-      if (!Statistics::isHipExperimental(ma.second)) continue;
-      if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
-        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.hipName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
-      }
-    }
-    out << "}" << endl;
     out << endl << sub << sExperimentalIncludes << " {" << endl;
     for (auto &ma : CUDA_INCLUDE_MAP) {
       if (!Statistics::isHipExperimental(ma.second)) continue;
@@ -363,20 +353,11 @@ namespace perl {
   }
 
   void generateRocSubstitutions(ostream &out, bool bMIOpenOnly = false) {
-    out << endl << sub << (bMIOpenOnly ? sMIOpenMappings : sRocMappings) << " {" << endl;
+    out << endl << sub << (bMIOpenOnly ? sMIOpenIncludes : sRocIncludes) << " {" << endl;
     bool bTranslateToRoc = TranslateToRoc;
     bool bTranslateToMIOpen = TranslateToMIOpen;
     if (bMIOpenOnly) TranslateToMIOpen = true;
     else TranslateToRoc = true;
-    for (auto &ma : CUDA_RENAMES_MAP()) {
-      if ((bMIOpenOnly && !Statistics::isToMIOpen(ma.second)) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
-      if ((!bMIOpenOnly && Statistics::isToRoc(ma.second) && ma.second.apiType == API_DNN) || Statistics::isUnsupported(ma.second) || ma.second.rocName.empty()) continue;
-      if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
-        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.rocName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
-      }
-    }
-    out << "}" << endl;
-    out << endl << sub << (bMIOpenOnly ? sMIOpenIncludes : sRocIncludes) << " {" << endl;
     for (auto &ma : CUDA_INCLUDE_MAP) {
       if (ma.second.type == CONV_INCLUDE_CUDA_MAIN_H || ma.second.type == CONV_INCLUDE_CUDA_MAIN_V2_H || ma.second.type == CONV_INCLUDE) {
         if (bMIOpenOnly) {
@@ -398,15 +379,6 @@ namespace perl {
   }
 
   void generateSimpleSubstitutions(ostream &out) {
-    out << endl << "sub k { $mappings{$_[0]} = { rep => $_[1], type => $_[2] }; }" << endl;
-    out << endl << sub << sSimpleMappings << " {" << endl;
-    for (auto &ma : CUDA_RENAMES_MAP()) {
-      if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
-      if (ma.second.type != CONV_INCLUDE_CUDA_MAIN_H && ma.second.type != CONV_INCLUDE_CUDA_MAIN_V2_H && ma.second.type != CONV_INCLUDE) {
-        out << tab << "k(\"" << ma.first.str() << "\", \"" << ma.second.hipName.str() << "\", \"" << counterNames[ma.second.type] << "\");" << endl;
-      }
-    }
-    out << "}" << endl;
     out << endl << sub << sSimpleIncludes << " {" << endl;
     for (auto &ma : CUDA_INCLUDE_MAP) {
       if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
@@ -438,7 +410,10 @@ namespace perl {
     out << tab_2 << "my $res = \"hipLaunchKernelGGL($f, $a[0], $a[1], $a[2], $a[3]\" . ($p =~ /\\)/ ? \")\" : \", \");" << endl;
     out << tab_2 << "$res;" << endl;
     out << tab << "}}gexs;" << endl_2;
-    out << tab << "if ($k) { $ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} += $k; }" << endl;
+    out << tab << "if ($k) {" << endl;
+    out << tab_2 << "$needs_hip_runtime = 1;" << endl;
+    out << tab_2 << "$ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} += $k if $print_stats;" << endl;
+    out << tab << "}" << endl;
     out << "}" << endl;
   }
 
@@ -523,23 +498,27 @@ namespace perl {
         case 8:  funcSet = &DeviceSymbolFunctions5; argIdx = 5; actionType = 0; castStr = getCastType(e_HIP_SYMBOL); break;
       }
       if (funcSet->empty()) continue;
-      out << tab + foreach_func  << endl;
-      unsigned int count = 0;
-      string sHIPName;
+      set<string> unique_hip_names;
       for (auto &f : *funcSet) {
+        string sHIPName;
         const auto found = CUDA_RUNTIME_FUNCTION_MAP.find(f);
         if (found != CUDA_RUNTIME_FUNCTION_MAP.end()) sHIPName = found->second.hipName.str();
         else {
           const auto found2 = CUDA_DRIVER_FUNCTION_MAP.find(f);
           if (found2 != CUDA_DRIVER_FUNCTION_MAP.end()) sHIPName = found2->second.hipName.str();
         }
-        out << (count ? ",\n" : "") << tab_2 << "\"" << sHIPName << "\"";
+        if (!sHIPName.empty()) {
+            unique_hip_names.insert(sHIPName);
+        }
+      }
+      if (unique_hip_names.empty()) continue;
+      out << tab << "s{\\b(";
+      unsigned int count = 0;
+      for (auto &name : unique_hip_names) {
+        out << (count ? "|" : "") << name;
         count++;
       }
-      out << endl_tab << ")" << endl_tab << "{" << endl;
-      out << tab_2 << "s{\\b($func)\\s*(\\((?:[^()]+|(?2))*\\))}{ $process_args->($1, $2, " 
-          << argIdx << ", " << actionType << ", \"" << castStr << "\") }ges;" << endl;
-      out << tab << "}" << endl;
+      out << ")\\b\\s*(\\((?:[^()]+|(?2))*\\))}{ $process_args->($1, $2, " << argIdx << ", " << actionType << ", \"" << castStr << "\") }ges;" << endl;
     }
     out << "}" << endl_2;
   }
@@ -607,15 +586,15 @@ namespace perl {
     out << ");" << endl_2;
   }
 
-  void generateCommentMasking(ostream& out) {
+  void generateCommentMasking(ostream &out) {
     out << endl << "# Global Comment Masking to protect lit tests and documentation" << endl;
     out << "my @masked_comments;" << endl;
     out << sub << "maskComments {" << endl;
     out << tab << "my ($text_ref) = @_;" << endl;
-    out << tab << "undef @masked_comments;" << endl;
-    out << tab << "$$text_ref =~ s{(\"([^\"\\\\]|\\\\.)*\"|'([^'\\\\]|\\\\.)*')|(\\/\\/[^\\n]*|\\/\\*[\\s\\S]*?\\*\\/)}{" << endl;
-    out << tab_2 << "if (defined $4) {" << endl;
-    out << tab_3 << "push @masked_comments, $4;" << endl;
+    out << tab << "@masked_comments = ();" << endl;
+    out << tab << "$$text_ref =~ s{(\"[^\"\\\\]*(?:\\\\.[^\"\\\\]*)*\"|'[^'\\\\]*(?:\\\\.[^'\\\\]*)*')|(\\/\\/[^\\n]*|\\/\\*[^*]*\\*+(?:[^\\/*][^*]*\\*+)*\\/)}{" << endl;
+    out << tab_2 << "if (defined $2) {" << endl;
+    out << tab_3 << "push @masked_comments, $2;" << endl;
     out << tab_3 << "\"__HIPIFY_COMMENT_\" . $#masked_comments . \"__\";" << endl;
     out << tab_2 << "} else {" << endl;
     out << tab_3 << "$1;" << endl;
@@ -626,6 +605,51 @@ namespace perl {
     out << tab << "my ($text_ref) = @_;" << endl;
     out << tab << "$$text_ref =~ s/__HIPIFY_COMMENT_(\\d+)__/$masked_comments[$1]/ge;" << endl;
     out << "}" << endl_2;
+  }
+
+  void generateStaticDictionaries(ostream &out) {
+    stringstream map_core, map_experimental, map_roc, map_miopen;
+    map_core << "my %map_core = (" << endl;
+    map_experimental << "my %map_experimental = (" << endl;
+    map_roc << "my %map_roc = (" << endl;
+    map_miopen << "my %map_miopen = (" << endl;
+    for (auto &ma : CUDA_RENAMES_MAP()) {
+      const auto& val = ma.second;
+      if (val.type == CONV_INCLUDE_CUDA_MAIN_H || val.type == CONV_INCLUDE_CUDA_MAIN_V2_H || val.type == CONV_INCLUDE) continue;
+      string cudaName = ma.first.str();
+      string hipName = val.hipName.str();
+      string rocName = val.rocName.str();
+      string typeName = counterNames[val.type];
+      if (!Statistics::isUnsupported(val) && !Statistics::isHipExperimental(val)) {
+        map_core << tab << "'" << cudaName << "' => ['" << hipName << "', '" << typeName << "']," << endl;
+      }
+      if (Statistics::isHipExperimental(val)) {
+        map_experimental << tab << "'" << cudaName << "' => ['" << hipName << "', '" << typeName << "']," << endl;
+      }
+      if (!Statistics::isUnsupported(val) && !rocName.empty() && !(Statistics::isToRoc(val) && val.apiType == API_DNN)) {
+        map_roc << tab << "'" << cudaName << "' => ['" << rocName << "', '" << typeName << "']," << endl;
+      }
+      if (!Statistics::isUnsupported(val) && !rocName.empty() && Statistics::isToMIOpen(val)) {
+        map_miopen << tab << "'" << cudaName << "' => ['" << rocName << "', '" << typeName << "']," << endl;
+      }
+    }
+    out << map_core.str() << ");" << endl_2 << map_experimental.str() << ");" << endl_2 << map_roc.str() << ");" << endl_2 << map_miopen.str() << ");" << endl_2;
+  }
+
+  void generateDictionaryMerge(ostream &out) {
+    out << R"PERL(
+my %mappings = %map_core;
+if ($roc) {
+    %mappings = (%mappings, %map_roc, %map_miopen);
+}
+if ($miopen) {
+    %mappings = (%mappings, %map_miopen);
+}
+if ($experimental) {
+    %mappings = (%mappings, %map_experimental);
+}
+my $master_regex = qr/\b([a-zA-Z_]\w*)\b/;
+)PERL";
   }
 
   bool generate(bool Generate) {
@@ -667,6 +691,7 @@ namespace perl {
     generateDeviceFunctions(out);
     generateDeprecatedAndUnsupportedFunctions(out);
     generateCommentMasking(out);
+    generateStaticDictionaries(out);
     out << endl << "# Count of transforms in all files" << endl;
     out << my << "%tt;" << endl;
     out << "clearStats(\\%tt, \\@statNames);" << endl;
@@ -679,23 +704,7 @@ namespace perl {
     out << "if ($version) {" << endl;
     out << tab << "print STDERR \"HIP version " + sHIP_version + "\\n\";" << endl;
     out << "}" << endl;
-
-    // Build Dictionary and Regex Once Globally
-    out << sSimpleMappings << "(); " << endl;
-    out << "if ($experimental) {" << endl;
-    out << tab << sExperimentalMappings << "();" << endl;
-    out << "}" << endl;
-    out << "if ($roc) {" << endl;
-    out << tab << sRocMappings << "();" << endl;
-    out << tab << sMIOpenMappings << "(); " << endl;
-    out << "}" << endl;
-    out << "if ($miopen) {" << endl;
-    out << tab << sMIOpenMappings << "(); " << endl;
-    out << "}" << endl;
-
-    // Use a generic C-identifier matcher to bypass Regex Compilation time
-    out << "my $master_regex = qr/\\b([a-zA-Z_]\\w*)\\b/;" << endl;
-
+    generateDictionaryMerge(out);
     out << while_ << "(@ARGV) {" << endl;
     out << tab << "$fileName=shift (@ARGV);" << endl;
     out << tab << "my $direxclude = 0;" << endl;
@@ -734,6 +743,7 @@ namespace perl {
     out << tab_4 << "$OUTFILE = STDOUT;" << endl_tab_3 << "}" << endl_tab_2 << "}" << endl;
     out << tab_2 << "# Count of transforms in this file" << endl;
     out << tab_2 << "clearStats(\\%ft, \\@statNames);" << endl;
+    out << tab_2 << "$needs_hip_runtime = 0;" << endl;
     out << tab_2 << my << "$countKeywords = 0;" << endl;
     out << tab_2 << my << "$warnings = 0;" << endl;
     out << tab_2 << my << "$lineCount = 0;" << endl;
@@ -823,24 +833,25 @@ namespace perl {
     out << tab_3 << "}" << endl;
     out << tab_3 << "simpleIncludes();" << endl;
 
-    // Execute the globally compiled master regex
-    out << tab_3 << "if (defined $master_regex) {" << endl;
-    out << tab_4 << "$_ =~ s/$master_regex/do {" << endl;
-    out << tab_5 << "my $match = $1;" << endl;
-    out << tab_5 << "if (exists $mappings{$match}) {" << endl;
-    out << tab_6 << "my $b = $mappings{$match}->{rep};" << endl;
-    out << tab_6 << "my $t = $mappings{$match}->{type};" << endl;
+    out << tab_3 << "$_ =~ s/$master_regex/do {" << endl;
+    out << tab_4 << "my $match = $1;" << endl;
+    out << tab_4 << "if (exists $mappings{$match}) {" << endl;
+    out << tab_5 << "my $mapping = $mappings{$match};" << endl;
+    out << tab_5 << "my $b = $mapping->[0];" << endl;
+    out << tab_5 << "my $t = $mapping->[1];" << endl;
+    out << tab_5 << "$needs_hip_runtime = 1;" << endl;
+    out << tab_5 << "if ($print_stats) {" << endl;
     out << tab_6 << "$ft{$t}++;" << endl;
     out << tab_6 << "$convertedTags{$b}++;" << endl;
     out << tab_6 << "$convertedTagsTotal{$b}++;" << endl;
     out << tab_6 << "$tagsToConvertedTags{$match} = $b;" << endl;
     out << tab_6 << "$tagsToConvertedTagsTotal{$match} = $b;" << endl;
-    out << tab_6 << "$b;" << endl; // Return the replacement
-    out << tab_5 << "} else {" << endl;
-    out << tab_6 << "$match;" << endl; // Return the original word untouched
     out << tab_5 << "}" << endl;
-    out << tab_4 << "}/ge;" << endl;
-    out << tab_3 << "}" << endl;
+    out << tab_5 << "$b;" << endl;
+    out << tab_4 << "} else {" << endl;
+    out << tab_5 << "$match;" << endl;
+    out << tab_4 << "}" << endl;
+    out << tab_3 << "}/ge;" << endl;
 
     out << tab_3 << "if (!$cuda_kernel_execution_syntax || $hip_kernel_execution_syntax) {" << endl;
     out << tab_4 << sTransformKernelLaunch << "();" << endl;
@@ -850,14 +861,18 @@ namespace perl {
 
     out << tab_3 << "foreach my $func (keys %hash_SupportedDeviceDataTypes) {" << endl;
     out << tab_4 << "my $c = () = $_ =~ m/\\b$func\\b/g;" << endl;
-    out << tab_4 << "if ($c) { $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'} += $c; }" << endl;
+    out << tab_4 << "if ($c) {" << endl;
+    out << tab_5 << "$needs_hip_runtime = 1;" << endl;
+    out << tab_5 << "$ft{'" << counterNames[CONV_DEVICE_TYPE] << "'} += $c if $print_stats;" << endl;
+    out << tab_4 << "}" << endl;
     out << tab_3 << "}" << endl;
-
     out << tab_3 << "foreach my $func (keys %hash_SupportedDeviceFunctions) {" << endl;
     out << tab_4 << "my $c = () = $_ =~ m/\\b$func\\b\\s*\\((?!\\s*void)/g;" << endl;
-    out << tab_4 << "if ($c) { $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} += $c; }" << endl;
+    out << tab_4 << "if ($c) {" << endl;
+    out << tab_5 << "$needs_hip_runtime = 1;" << endl;
+    out << tab_5 << "$ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} += $c if $print_stats;" << endl;
+    out << tab_4 << "}" << endl;
     out << tab_3 << "}" << endl;
-
     out << tab_3 << unless_ << "($quiet_warnings) {" << endl;
 
     out << tab_4 << "# Copy into array of lines, process line-by-line to show warnings" << endl;
@@ -879,13 +894,16 @@ namespace perl {
     out << tab_3 << "unmaskComments(\\$_);" << endl_2;
     out << tab_3 << "# TODO: would like to move this code outside loop but it uses $_ which contains the whole file" << endl;
     out << tab_3 << unless_ << "($no_output) {" << endl;
-    out << tab_4 << sConv << endl;
-    out << tab_4 << my << "$kernStuff  = $hasDeviceCode + $ft{'" << counterNames[CONV_KERNEL_LAUNCH] << "'} + $ft{'" << counterNames[CONV_DEVICE_FUNC] << "'} + $ft{'" << counterNames[CONV_DEVICE_TYPE] << "'};" << endl;
-    out << tab_4 << my << "$totalCalls = $apiCalls + $kernStuff;" << endl;
     out << tab_4 << "$is_dos = m/\\r\\n$/;" << endl;
-    out << tab_4 << "if ($totalCalls and ($kernStuff != 0)) {" << endl;
-    out << tab_5 << "# TODO: implement hipify-clang's logic with header files AMAP" << endl;
-    out << tab_5 << "print $OUTFILE '#include \"hip/hip_runtime.h\"' . ($is_dos ? \"\\r\\n\" : \"\\n\");" << endl_tab_4 << "}" << endl;
+    out << tab_4 << "# Implicitly include hip_runtime.h if ANY CUDA API or device code exists but the header is missing" << endl;
+    out << tab_4 << "if (($needs_hip_runtime || $hasDeviceCode > 0) && $_ !~ m/^\\s*#\\s*include\\s+[\\\"<]hip\\/hip_runtime\\.h[\\\">]/m) {" << endl;
+    out << tab_5 << "my $inc_str = '#include \"hip/hip_runtime.h\"' . ($is_dos ? \"\\r\\n\" : \"\\n\");" << endl;
+    out << tab_5 << "# Skip initial whitespaces and comments (both // and /*...*/) to insert after the copyright header" << endl;
+    out << tab_5 << "$_ =~ s/^((?:[ \\t\\r\\n]+|\\/\\/[^\\r\\n]*\\r?\\n?|\\/\\*[\\s\\S]*?\\*\\/)*)/$1$inc_str/;" << endl;
+    out << tab_4 << "}" << endl;
+    out << tab_4 << "# Deduplicate generated hip, roc, and miopen headers" << endl;
+    out << tab_4 << "my %seen_api_headers;" << endl;
+    out << tab_4 << "$_ =~ s/^([ \\t]*#[ \\t]*include[ \\t]+[\\\"<]([^>\\\" \\t]+)[\\\">].*\\r?\\n?)/(index($2, \"hip\") == 0 || index($2, \"roc\") == 0 || index($2, \"miopen\") == 0) ? ($seen_api_headers{$2}++ == 0 ? $1 : \"\") : $1/gme;" << endl;
     out << tab_4 << "print $OUTFILE  \"$_\";" << endl_tab_3 << "}" << endl;
     out << tab_3 << "$lineCount = $_ =~ tr/\\n//;" << endl_tab_2 << "}" << endl;
     out << tab_2 << my << "$totalConverted = totalStats(\\%ft);" << endl;

@@ -30,7 +30,7 @@ THE SOFTWARE.
 
 namespace ct = clang::tooling;
 
-extern const std::string sHipify, sConflict, sError, sWarning;
+extern const std::string sHipify, sConflict, sError, sWarning, sInformation;
 
 // Things for papering over the differences between different LLVM versions.
 

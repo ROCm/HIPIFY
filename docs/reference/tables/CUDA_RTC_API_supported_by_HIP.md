@@ -63,6 +63,8 @@
 |`nvrtcGetProgramLog`| | | | |`hiprtcGetProgramLog`|2.6.0| | | | | |
 |`nvrtcGetProgramLogSize`| | | | |`hiprtcGetProgramLogSize`|2.6.0| | | | | |
 |`nvrtcGetSupportedArchs`|11.2| | | | | | | | | | |
+|`nvrtcGetTileIR`|13.2| | | | | | | | | | |
+|`nvrtcGetTileIRSize`|13.2| | | | | | | | | | |
 |`nvrtcSetFlowCallback`|12.8| | | | | | | | | | |
 |`nvrtcSetPCHHeapSize`|12.8| | | | | | | | | | |
 |`nvrtcVersion`| | | | |`hiprtcVersion`|2.6.0| | | | | |

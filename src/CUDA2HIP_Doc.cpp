@@ -122,6 +122,11 @@ namespace doc {
   const string sROCSPARSE_csv = sROCSPARSE + csv_ext;
   const string sCUSPARSE = "CUSPARSE";
 
+  const string sSPARSELt = "CUSPARSELT_API_supported_by_HIP";
+  const string sSPARSELt_md = sSPARSELt + md_ext;
+  const string sSPARSELt_csv = sSPARSELt + csv_ext;
+  const string sCUSPARSELt = "CUSPARSELT";
+
   /* hipFile */
   const string sHIPFILE             = "cuFile_API_supported_by_HIP";
   const string sHIPFILE_md          = sHIPFILE + md_ext;
@@ -864,6 +869,29 @@ namespace doc {
       }
     }
   };
+  class SPARSELT : public DOC {
+  public:
+    SPARSELT(const string &outDir) : DOC(outDir) {}
+    virtual ~SPARSELT() {}
+  protected:
+    const string sMetaKeywords = "SPARSELt, cuSPARSELt, hipSPARSELt";
+    const string& getAdditionalMetaKeywords() const override { return sMetaKeywords; }
+    const sectionMap &getSections() const override { return CUDA_SPARSELT_API_SECTION_MAP; }
+    const functionMap &getFunctions() const override { return CUDA_SPARSELT_FUNCTION_MAP; }
+    const typeMap &getTypes() const override { return CUDA_SPARSELT_TYPE_NAME_MAP; }
+    const versionMap &getFunctionVersions() const override { return CUDA_SPARSELT_FUNCTION_VER_MAP; }
+    const hipVersionMap &getHipFunctionVersions() const override { return HIP_SPARSELT_FUNCTION_VER_MAP; }
+    const versionMap &getTypeVersions() const override { return CUDA_SPARSELT_TYPE_NAME_VER_MAP; }
+    const hipVersionMap &getHipTypeVersions() const override { return HIP_SPARSELT_TYPE_NAME_VER_MAP; }
+    const string &getName() const override { return sCUSPARSELt; }
+    const string &getFileName(docType format) const override {
+      switch (format) {
+      default: return sEmpty;
+      case md: return sSPARSELt_md;
+      case csv: return sSPARSELt_csv;
+      }
+    }
+  };
 
   class HIPFILE: public DOC {
     public:
@@ -1060,6 +1088,8 @@ namespace doc {
     docs.addDoc(&fft);
     SPARSE sparse(sOut);
     docs.addDoc(&sparse);
+    SPARSELT sparselt(sOut);
+    docs.addDoc(&sparselt);
     HIPFILE hipfile(sOut);
     docs.addDoc(&hipfile);
     DEVICE device(sOut);

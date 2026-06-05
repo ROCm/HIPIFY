@@ -857,6 +857,13 @@ int main() {
   status = cudnnGetReduceTensorDescriptor(ReduceTensorDescriptor, &reduceTensorOp, &dataType, &nanPropagation_t, &reduceTensorIndices, &indicesType);
 #endif
 
+#if CUDNN_VERSION >= 7005
+  // CHECK: miopenMathType_t MathType;
+  // CHECK-NEXT: miopenMathType_t DNN_DEFAULT_MATH = miopenMathDefault;
+  cudnnMathType_t MathType;
+  cudnnMathType_t DNN_DEFAULT_MATH = CUDNN_DEFAULT_MATH;
+#endif
+
 #if CUDNN_VERSION >= 7103
   // CHECK: miopenActivationMode_t ACTIVATION_IDENTITY = miopenActivationPASTHRU;
   cudnnActivationMode_t ACTIVATION_IDENTITY = CUDNN_ACTIVATION_IDENTITY;

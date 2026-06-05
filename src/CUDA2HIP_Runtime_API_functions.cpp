@@ -231,6 +231,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   m["cudaLaunchCooperativeKernelMultiDevice"]                  = {"hipLaunchCooperativeKernelMultiDevice",                  "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, CUDA_DEPRECATED | CUDA_REMOVED};
   // cuLaunchHostFunc
   m["cudaLaunchHostFunc"]                                      = {"hipLaunchHostFunc",                                      "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION};
+  // cuLaunchHostFunc_v2
+  m["cudaLaunchHostFunc_v2"]                                   = {"hipLaunchHostFunc_v2",                                   "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED};
   // no analogue
   // NOTE: Not equal to cuLaunchKernel due to different signatures
   m["cudaLaunchKernel"]                                        = {"hipLaunchKernel",                                        "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION};
@@ -245,6 +247,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   m["cudaFuncGetName"]                                         = {"hipFuncGetName",                                         "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED};
   // cuFuncGetParamInfo
   m["cudaFuncGetParamInfo"]                                    = {"hipFuncGetParamInfo",                                    "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED};
+  // cuFuncGetParamCount
+  m["cudaFuncGetParamCount"]                                   = {"hipFuncGetParamCount",                                   "", CONV_EXECUTION, API_RUNTIME, SEC::EXECUTION, HIP_UNSUPPORTED};
 
   // 8. Execution Control [DEPRECATED]
   // no analogue
@@ -266,10 +270,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   m["cudaOccupancyMaxPotentialBlockSizeVariableSMem"]          = {"hipOccupancyMaxPotentialBlockSizeVariableSMem",          "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY};
   // no analogue
   m["cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags"] = {"hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY};
-  // cuOccupancyMaxPotentialClusterSize
-  m["cudaOccupancyMaxPotentialClusterSize"]                    = {"hipOccupancyMaxPotentialClusterSize",                    "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED};
+  // NOTE: cuOccupancyMaxPotentialClusterSize has a different type as the first argument (HIP_LAUNCH_CONFIG vs hipLaunchConfig_t)
+  m["cudaOccupancyMaxPotentialClusterSize"]                    = {"hipOccupancyMaxPotentialClusterSize",                    "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_EXPERIMENTAL};
   // cuOccupancyMaxActiveClusters
   m["cudaOccupancyMaxActiveClusters"]                          = {"hipOccupancyMaxActiveClusters",                          "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED};
+  // cuGraphNodeGetParams
+  m["cudaGraphNodeGetParams"]                                  = {"hipGraphNodeGetParams",                                  "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED};
 
   // 10. Memory Management
   // no analogue
@@ -417,7 +423,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuMemDiscardAndPrefetchBatchAsync
   m["cudaMemDiscardAndPrefetchBatchAsync"]                     = {"hipMemDiscardAndPrefetchBatchAsync",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
   // cuMemPrefetchBatchAsync
-  m["cudaMemPrefetchBatchAsync"]                               = {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemPrefetchBatchAsync"]                               = {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL};
+  // cuMemcpyWithAttributesAsync
+  m["cudaMemcpyWithAttributesAsync"]                           = {"hipMemcpyWithAttributesAsync",                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
+  // cuMemcpy3DWithAttributesAsync
+  m["cudaMemcpy3DWithAttributesAsync"]                         = {"hipMemcpy3DWithAttributesAsync",                         "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
+  // cuMipmappedArrayGetMemoryRequirements
+  m["cudaMipmappedArrayGetMemoryRequirements"]                 = {"hipMipmappedArrayGetMemoryRequirements",                 "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY};
 
   // 11. Memory Management [DEPRECATED]
   // no analogue
@@ -465,9 +477,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuMemGetDefaultMemPool
   m["cudaMemGetDefaultMemPool"]                                = {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
   // cuMemGetMemPool
-  m["cudaMemGetMemPool"]                                       = {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemGetMemPool"]                                       = {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
   // cuMemSetMemPool
-  m["cudaMemSetMemPool"]                                       = {"hipMemSetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemSetMemPool"]                                       = {"hipMemSetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
 
   // 13. Unified Addressing
   // no analogue
@@ -932,7 +944,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   m["cudaLibraryGetManaged"]                                   = {"hipLibraryGetManaged",                                   "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED};
   // cuLibraryGetUnifiedFunction
   m["cudaLibraryGetUnifiedFunction"]                           = {"hipLibraryGetUnifiedFunction",                           "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED};
-  // cuKernelSetAttribute
+  // Not equal to cuKernelSetAttribute due to incompatible signatures
   m["cudaKernelSetAttributeForDevice"]                         = {"hipKernelSetAttribute",                                  "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY, HIP_UNSUPPORTED};
   // cuLibraryGetKernelCount
   m["cudaLibraryGetKernelCount"]                               = {"hipLibraryGetKernelCount",                               "", CONV_LIBRARY, API_RUNTIME, SEC::LIBRARY};
@@ -1330,6 +1342,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_FUNCTION_VER_MAP =
   m["cudaExecutionCtxWaitEvent"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cudaDeviceGetExecutionCtx"]                               = {CUDA_131, CUDA_0,   CUDA_0  };
   m["cudaExecutionCtxStreamCreate"]                            = {CUDA_131, CUDA_0,   CUDA_0  };
+  m["cudaFuncGetParamCount"]                                   = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaLaunchHostFunc_v2"]                                   = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaMemcpyWithAttributesAsync"]                           = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaMemcpy3DWithAttributesAsync"]                         = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaGraphNodeGetParams"]                                  = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaMipmappedArrayGetMemoryRequirements"]                 = {CUDA_116, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -1613,6 +1631,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [
   m["hipStreamCopyAttributes"]                                 = {HIP_7020, HIP_0,    HIP_0   };
   m["hipOccupancyAvailableDynamicSMemPerBlock"]                = {HIP_7020, HIP_0,    HIP_0   };
   m["hipLibraryEnumerateKernels"]                              = {HIP_7020, HIP_0,    HIP_0   };
+  m["hipMemPrefetchBatchAsync"]                                = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipOccupancyMaxPotentialClusterSize"]                     = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
 
   return m;
 }();
@@ -1663,6 +1683,7 @@ const std::map<llvm::StringRef, cudaAPIUnsupportedVersions> CUDA_RUNTIME_FUNCTIO
   m["cudaGraphRemoveDependencies"]                             = {CUDA_130};
   m["cudaGraphAddNode"]                                        = {CUDA_130};
   m["cudaGetDriverEntryPoint"]                                 = {CUDA_113, CUDA_114, CUDA_115, CUDA_116, CUDA_117, CUDA_118};
+  m["cudaGraphCreate"]                                         = {CUDA_132};
 
   return m;
 }();

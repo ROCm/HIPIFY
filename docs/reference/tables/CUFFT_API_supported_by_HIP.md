@@ -152,12 +152,12 @@
 |`cufftXtWorkAreaPolicy`|9.2| | | | | | | | | | |
 |`cufftXtWorkAreaPolicy_t`|9.2| | | | | | | | | | |
 |`fftw_complex`| | | | |`fftw_complex`|7.1.0| | | | | |
-|`fftw_iodim`| | | | | | | | | | | |
-|`fftw_iodim64`| | | | | | | | | | | |
+|`fftw_iodim`| | | | |`fftw_iodim`|7.11.0| | | | | |
+|`fftw_iodim64`| | | | |`fftw_iodim64`|7.11.0| | | | | |
 |`fftw_plan`| | | | |`fftw_plan`|7.1.0| | | | | |
 |`fftwf_complex`| | | | |`fftwf_complex`|7.1.0| | | | | |
-|`fftwf_iodim`| | | | | | | | | | | |
-|`fftwf_iodim64`| | | | | | | | | | | |
+|`fftwf_iodim`| | | | |`fftwf_iodim`|7.11.0| | | | | |
+|`fftwf_iodim64`| | | | |`fftwf_iodim64`|7.11.0| | | | | |
 |`fftwf_plan`| | | | |`fftwf_plan`|7.1.0| | | | | |
 
 ## **2. CUFFT API functions**
@@ -187,6 +187,7 @@
 |`cufftDeviceGetLTOIRs`|13.1| | | | | | | | | | |
 |`cufftDeviceGetNumDeviceFunctions`|13.1| | | | | | | | | | |
 |`cufftDeviceGetNumLTOIRs`|13.1| | | | | | | | | | |
+|`cufftDeviceGetSemanticVersion`|13.2| | | | | | | | | | |
 |`cufftDeviceGetVersion`|13.1| | | | | | | | | | |
 |`cufftDeviceIsSupported`|13.1| | | | | | | | | | |
 |`cufftEstimate1d`| | | | |`hipfftEstimate1d`|1.7.0| | | | | |
@@ -265,12 +266,12 @@
 |`fftw_plan_dft_r2c_1d`| | | | |`fftw_plan_dft_r2c_1d`|7.1.0| | | | | |
 |`fftw_plan_dft_r2c_2d`| | | | |`fftw_plan_dft_r2c_2d`|7.1.0| | | | | |
 |`fftw_plan_dft_r2c_3d`| | | | |`fftw_plan_dft_r2c_3d`|7.1.0| | | | | |
-|`fftw_plan_guru64_dft`|10.0| | | | | | | | | | |
-|`fftw_plan_guru64_dft_c2r`|10.0| | | | | | | | | | |
-|`fftw_plan_guru64_dft_r2c`|10.0| | | | | | | | | | |
-|`fftw_plan_guru_dft`| | | | | | | | | | | |
-|`fftw_plan_guru_dft_c2r`| | | | | | | | | | | |
-|`fftw_plan_guru_dft_r2c`| | | | | | | | | | | |
+|`fftw_plan_guru64_dft`|10.0| | | |`fftw_plan_guru64_dft`|7.11.0| | | | | |
+|`fftw_plan_guru64_dft_c2r`|10.0| | | |`fftw_plan_guru64_dft_c2r`|7.11.0| | | | | |
+|`fftw_plan_guru64_dft_r2c`|10.0| | | |`fftw_plan_guru64_dft_r2c`|7.11.0| | | | | |
+|`fftw_plan_guru_dft`| | | | |`fftw_plan_guru_dft`|7.11.0| | | | | |
+|`fftw_plan_guru_dft_c2r`| | | | |`fftw_plan_guru_dft_c2r`|7.11.0| | | | | |
+|`fftw_plan_guru_dft_r2c`| | | | |`fftw_plan_guru_dft_r2c`|7.11.0| | | | | |
 |`fftw_plan_many_dft`| | | | | | | | | | | |
 |`fftw_plan_many_dft_c2r`| | | | | | | | | | | |
 |`fftw_plan_many_dft_r2c`| | | | | | | | | | | |
@@ -298,12 +299,12 @@
 |`fftwf_plan_dft_r2c_1d`| | | | |`fftwf_plan_dft_r2c_1d`|7.1.0| | | | | |
 |`fftwf_plan_dft_r2c_2d`| | | | |`fftwf_plan_dft_r2c_2d`|7.1.0| | | | | |
 |`fftwf_plan_dft_r2c_3d`| | | | |`fftwf_plan_dft_r2c_3d`|7.1.0| | | | | |
-|`fftwf_plan_guru64_dft`|10.0| | | | | | | | | | |
-|`fftwf_plan_guru64_dft_c2r`|10.0| | | | | | | | | | |
-|`fftwf_plan_guru64_dft_r2c`|10.0| | | | | | | | | | |
-|`fftwf_plan_guru_dft`| | | | | | | | | | | |
-|`fftwf_plan_guru_dft_c2r`| | | | | | | | | | | |
-|`fftwf_plan_guru_dft_r2c`| | | | | | | | | | | |
+|`fftwf_plan_guru64_dft`|10.0| | | |`fftwf_plan_guru64_dft`|7.11.0| | | | | |
+|`fftwf_plan_guru64_dft_c2r`|10.0| | | |`fftwf_plan_guru64_dft_c2r`|7.11.0| | | | | |
+|`fftwf_plan_guru64_dft_r2c`|10.0| | | |`fftwf_plan_guru64_dft_r2c`|7.11.0| | | | | |
+|`fftwf_plan_guru_dft`| | | | |`fftwf_plan_guru_dft`|7.11.0| | | | | |
+|`fftwf_plan_guru_dft_c2r`| | | | |`fftwf_plan_guru_dft_c2r`|7.11.0| | | | | |
+|`fftwf_plan_guru_dft_r2c`| | | | |`fftwf_plan_guru_dft_r2c`|7.11.0| | | | | |
 |`fftwf_plan_many_dft`| | | | | | | | | | | |
 |`fftwf_plan_many_dft_c2r`| | | | | | | | | | | |
 |`fftwf_plan_many_dft_r2c`| | | | | | | | | | | |

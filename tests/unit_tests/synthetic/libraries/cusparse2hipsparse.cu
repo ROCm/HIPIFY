@@ -190,6 +190,8 @@ int main() {
   int64_t rows = 0;
   int64_t cols = 0;
   int64_t ellCols = 0;
+  int64_t sellValuesSize = 0;
+  int64_t sliceSize = 0;
   int64_t ellBlockSize = 0;
   int64_t batchStride = 0;
   int ibatchStride = 0;
@@ -226,6 +228,9 @@ int main() {
   void *cooRows = nullptr;
   int icooRows = 0;
   void *cooColumns = nullptr;
+  void *sellSliceOffset = nullptr;
+  void *sellColInd = nullptr;
+  void *sellValues = nullptr;
   int icooColumns = 0;
   void *data = nullptr;
   void *alpha = nullptr;
@@ -2008,7 +2013,6 @@ int main() {
   // CHECK-NEXT: hipsparseIndexType_t ellIdxType;
   // CHECK-NEXT: hipsparseIndexType_t INDEX_16U = HIPSPARSE_INDEX_16U;
   // CHECK-NEXT: hipsparseIndexType_t INDEX_32I = HIPSPARSE_INDEX_32I;
-
   cusparseIndexType_t indexType_t;
   cusparseIndexType_t csrRowOffsetsType;
   cusparseIndexType_t cscColOffsetsType;
@@ -2017,6 +2021,9 @@ int main() {
   cusparseIndexType_t ellIdxType;
   cusparseIndexType_t INDEX_16U = CUSPARSE_INDEX_16U;
   cusparseIndexType_t INDEX_32I = CUSPARSE_INDEX_32I;
+
+  // CHECK: hipsparseIndexType_t sellSliceOffsetsType, sellColIndType;
+  cusparseIndexType_t sellSliceOffsetsType, sellColIndType;
 
   // CHECK: hipsparseFormat_t format_t;
   // CHECK-NEXT: hipsparseFormat_t FORMAT_CSR = HIPSPARSE_FORMAT_CSR;
@@ -3525,6 +3532,21 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseConstCscGet(hipsparseConstSpMatDescr_t spMatDescr, int64_t* rows, int64_t* cols, int64_t* nnz, const void** cscColOffsets, const void** cscRowInd, const void** cscValues, hipsparseIndexType_t* cscColOffsetsType, hipsparseIndexType_t* cscRowIndType, hipsparseIndexBase_t* idxBase, hipDataType* valueType);
   // CHECK: status_t = hipsparseConstCscGet(constSpMatDescr, &rows, &cols, &nnz, cscColOffsets_const, cscRowInd_const, cscValues_const, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
   status_t = cusparseConstCscGet(constSpMatDescr, &rows, &cols, &nnz, cscColOffsets_const, cscRowInd_const, cscValues_const, &cscColOffsetsType, &cscRowIndType, &indexBase_t, &dataType);
+#endif
+
+#if CUSPARSE_VERSION >= 12100
+  // CHECK: hipsparseSpMVAlg_t SPARSE_SPMV_SELL_ALG1 = HIPSPARSE_SPMV_SELL_ALG1;
+  cusparseSpMVAlg_t SPARSE_SPMV_SELL_ALG1 = CUSPARSE_SPMV_SELL_ALG1;
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateSlicedEll(cusparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, int64_t sellValuesSize, int64_t sliceSize, void* sellSliceOffsets, void* sellColInd, void* sellValues, cusparseIndexType_t sellSliceOffsetsType, cusparseIndexType_t sellColIndType, cusparseIndexBase_t idxBase, cudaDataType valueType);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateSlicedEll(hipsparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, int64_t sellValuesSize, int64_t sliceSize, void* sellSliceOffsets, void* sellColInd, void* sellValues, hipsparseIndexType_t sellSliceOffsetsType, hipsparseIndexType_t sellColIndType, hipsparseIndexBase_t idxBase, hipDataType valueType);
+  // CHECK: status_t = hipsparseCreateSlicedEll(&spMatDescr_t, rows, cols, nnz, sellValuesSize, sliceSize, sellSliceOffset, sellColInd, sellValues, sellSliceOffsetsType, sellColIndType, indexBase_t, dataType);
+  status_t = cusparseCreateSlicedEll(&spMatDescr_t, rows, cols, nnz, sellValuesSize, sliceSize, sellSliceOffset, sellColInd, sellValues, sellSliceOffsetsType, sellColIndType, indexBase_t, dataType);
+
+  // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateConstSlicedEll(cusparseConstSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, int64_t sellValuesSize, int64_t sliceSize, const void* sellSliceOffsets, const void* sellColInd, const void* sellValues, cusparseIndexType_t sellSliceOffsetsType, cusparseIndexType_t sellColIndType, cusparseIndexBase_t idxBase, cudaDataType valueType);
+  // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateConstSlicedEll(hipsparseConstSpMatDescr_t* spMatDescr, int64_t  rows, int64_t  cols, int64_t  nnz, int64_t  sellValuesSize, int64_t  sliceSize, const void* sellSliceOffsets, const void* sellColInd, const void* sellValues, hipsparseIndexType_t sellSliceOffsetsType, hipsparseIndexType_t sellColIndType, hipsparseIndexBase_t idxBase, hipDataType valueType);
+  // CHECK: status_t = hipsparseCreateConstSlicedEll(&constSpMatDescr, rows, cols, nnz, sellValuesSize, sliceSize, sellSliceOffset, sellColInd, sellValues, sellSliceOffsetsType, sellColIndType, indexBase_t, dataType);
+  status_t = cusparseCreateConstSlicedEll(&constSpMatDescr, rows, cols, nnz, sellValuesSize, sliceSize, sellSliceOffset, sellColInd, sellValues, sellSliceOffsetsType, sellColIndType, indexBase_t, dataType);
 #endif
 
 #if CUDA_VERSION >= 12040

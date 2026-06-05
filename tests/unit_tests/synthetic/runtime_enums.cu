@@ -940,6 +940,46 @@ int main() {
 #if CUDA_VERSION >= 11080
   // CHECK: hipLaunchAttributeID LaunchAttributeSynchronizationPolicy = hipLaunchAttributeSynchronizationPolicy;
   cudaLaunchAttributeID LaunchAttributeSynchronizationPolicy = cudaLaunchAttributeSynchronizationPolicy;
+
+  // CHECK: hipError_t ErrorInvalidClusterSize = hipErrorInvalidClusterSize;
+  cudaError_t ErrorInvalidClusterSize = cudaErrorInvalidClusterSize;
+
+  // CHECK: hipFuncAttribute FuncAttributeClusterDimMustBeSet = hipFuncAttributeClusterDimMustBeSet;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeRequiredClusterWidth = hipFuncAttributeRequiredClusterWidth;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeRequiredClusterHeight = hipFuncAttributeRequiredClusterHeight;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeRequiredClusterDepth = hipFuncAttributeRequiredClusterDepth;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeNonPortableClusterSizeAllowed = hipFuncAttributeNonPortableClusterSizeAllowed;
+  // CHECK-NEXT: hipFuncAttribute FuncAttributeClusterSchedulingPolicyPreference = hipFuncAttributeClusterSchedulingPolicyPreference;
+  cudaFuncAttribute FuncAttributeClusterDimMustBeSet = cudaFuncAttributeClusterDimMustBeSet;
+  cudaFuncAttribute FuncAttributeRequiredClusterWidth = cudaFuncAttributeRequiredClusterWidth;
+  cudaFuncAttribute FuncAttributeRequiredClusterHeight = cudaFuncAttributeRequiredClusterHeight;
+  cudaFuncAttribute FuncAttributeRequiredClusterDepth = cudaFuncAttributeRequiredClusterDepth;
+  cudaFuncAttribute FuncAttributeNonPortableClusterSizeAllowed = cudaFuncAttributeNonPortableClusterSizeAllowed;
+  cudaFuncAttribute FuncAttributeClusterSchedulingPolicyPreference = cudaFuncAttributeClusterSchedulingPolicyPreference;
+
+  // CHECK: hipClusterSchedulingPolicy clusterSchedulingPolicy;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = hipClusterSchedulingPolicyDefault;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = hipClusterSchedulingPolicySpread;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = hipClusterSchedulingPolicyLoadBalancing;
+  cudaClusterSchedulingPolicy clusterSchedulingPolicy;
+  cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = cudaClusterSchedulingPolicyDefault;
+  cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = cudaClusterSchedulingPolicySpread;
+  cudaClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = cudaClusterSchedulingPolicyLoadBalancing;
+
+  // CHECK: hipLaunchAttributeID launchAttributeID;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_IGNORE = hipLaunchAttributeIgnore;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION = hipLaunchAttributeClusterDimension;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE = hipLaunchAttributeClusterSchedulingPolicyPreference;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
+  cudaLaunchAttributeID launchAttributeID;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_IGNORE = cudaLaunchAttributeIgnore;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = cudaLaunchAttributeAccessPolicyWindow;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION = cudaLaunchAttributeClusterDimension;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE = cudaLaunchAttributeClusterSchedulingPolicyPreference;
+  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
 #endif
 
 #if CUDA_VERSION >= 12000
@@ -960,15 +1000,6 @@ int main() {
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_INVALID_STRUCTURE = cudaGraphInstantiateInvalidStructure;
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_NODE_OPERATION_NOT_SUPPORTED = cudaGraphInstantiateNodeOperationNotSupported;
   cudaGraphInstantiateResult GRAPH_INSTANTIATE_MULTIPLE_CTXS_NOT_SUPPORTED = cudaGraphInstantiateMultipleDevicesNotSupported;
-
-  // CHECK: hipLaunchAttributeID launchAttributeID;
-  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
-  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
-  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
-  cudaLaunchAttributeID launchAttributeID;
-  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = cudaLaunchAttributeAccessPolicyWindow;
-  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = cudaLaunchAttributeCooperative;
-  cudaLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = cudaLaunchAttributePriority;
 
   // CHECK: hipDriverEntryPointQueryResult driverProcAddressQueryResult;
   // CHECK-NEXT:hipDriverEntryPointQueryResult GET_PROC_ADDRESS_SUCCESS = hipDriverEntryPointSuccess;
@@ -1099,6 +1130,9 @@ int main() {
 #if CUDA_VERSION >= 13000
   // CHECK: hipMemLocationType MemLocationTypeNone = hipMemLocationTypeNone;
   cudaMemLocationType MemLocationTypeNone = cudaMemLocationTypeNone;
+
+  // CHECK: hipMemAllocationType MemAllocationTypeManaged = hipMemAllocationTypeManaged;
+  cudaMemAllocationType MemAllocationTypeManaged = cudaMemAllocationTypeManaged;
 #endif
 
   return 0;
