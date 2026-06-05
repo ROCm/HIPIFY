@@ -88,6 +88,7 @@
 |`CUDNN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT`|8.0.1| | | |`MIOPEN_ATTR_OPERATIONGRAPH_ENGINE_GLOBAL_COUNT`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_HANDLE`|8.0.1|9.9.0| | |`MIOPEN_ATTR_OPERATIONGRAPH_HANDLE`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_IS_DYNAMIC_SHAPE_ENABLED`|9.4.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATIONGRAPH_IS_OVERRIDE_SHAPE_ENABLED`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_IS_SAME_TOPOLOGY`|9.6.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_OPS`|8.0.1| | | |`MIOPEN_ATTR_OPERATIONGRAPH_OPS`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_BLOCK_SCALE_DEQUANTIZE_BLOCK_SIZE`|9.7.0| | | | | | | | | | |
@@ -262,16 +263,27 @@
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_DKDESC`|9.17.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_DODDESC`|9.17.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_DQDESC`|9.17.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_BWD_DSINK_DESC`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_DVDESC`|9.17.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_KDESC`|9.17.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_BWD_MAX_TOTAL_SEQ_LEN_KV`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_BWD_MAX_TOTAL_SEQ_LEN_Q`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_ODESC`|9.17.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_QDESC`|9.17.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_SCALEDESC`|9.17.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_SEQ_LEN_KVDESC`|9.17.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_SEQ_LEN_QDESC`|9.17.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_BWD_SINK_DESC`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_STATSDESC`|9.17.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_BWD_SUBGRAPH`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_BWD_SUBGRAPH_INPUT_UID`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_BWD_SUBGRAPH_OUTPUT_UID`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_BWD_VDESC`|9.17.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_BLOCK_MASK_DESC`|9.14.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_DROPOUT_OFFSET_DESC`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_DROPOUT_PROBABILITY`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_DROPOUT_RNG_DUMP_DESC`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_DROPOUT_SEED_DESC`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_KDESC`|9.13.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_ODESC`|9.13.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_PAGE_TABLE_KDESC`|9.15.0| | | | | | | | | | |
@@ -280,7 +292,12 @@
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_SCALEDESC`|9.13.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_KVDESC`|9.15.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_SEQ_LEN_QDESC`|9.15.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_SOFTMAX_DESC`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_STATSDESC`|9.13.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_SUBGRAPH`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_SUBGRAPH_INPUT_UID`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_SUBGRAPH_OUTPUT_UID`|9.21.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SDPA_FWD_UNFUSE_FMA`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SDPA_FWD_VDESC`|9.13.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SIGNAL_FLAGDESC`|8.5.0| | | |`MIOPEN_ATTR_OPERATION_SIGNAL_FLAGDESC`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_SIGNAL_MODE`|8.5.0| | | |`MIOPEN_ATTR_OPERATION_SIGNAL_MODE`|6.2.0| | | | | |
@@ -463,7 +480,7 @@
 |`CUDNN_DATA_UINT4`|9.11.0| | | | | | | | | | |
 |`CUDNN_DATA_UINT8`|7.1.3| | | | | | | | | | |
 |`CUDNN_DATA_UINT8x4`|7.1.3|9.0.0| | | | | | | | | |
-|`CUDNN_DEFAULT_MATH`|7.0.5| | | | | | | | | | |
+|`CUDNN_DEFAULT_MATH`|7.0.5| | | |`miopenMathDefault`|7.12.0| | | | | |
 |`CUDNN_DEFAULT_REORDER`|7.6.0|9.0.0| | | | | | | | | |
 |`CUDNN_DETERMINISTIC`|6.0.0| | | | | | | | | | |
 |`CUDNN_DIM_MAX`|4.0.0| | | | | | | | | | |
@@ -551,14 +568,14 @@
 |`CUDNN_LRN_MIN_K`|3.0.0| | | | | | | | | | |
 |`CUDNN_LRN_MIN_N`|3.0.0| | | | | | | | | | |
 |`CUDNN_LSTM`|5.0.0| | | |`miopenLSTM`|2.1.0| | | | | |
-|`CUDNN_MH_ATTN_K_BIASES`|7.6.3| | | | | | | | | | |
-|`CUDNN_MH_ATTN_K_WEIGHTS`|7.5.0| | | | | | | | | | |
-|`CUDNN_MH_ATTN_O_BIASES`|7.6.3| | | | | | | | | | |
-|`CUDNN_MH_ATTN_O_WEIGHTS`|7.5.0| | | | | | | | | | |
-|`CUDNN_MH_ATTN_Q_BIASES`|7.6.3| | | | | | | | | | |
-|`CUDNN_MH_ATTN_Q_WEIGHTS`|7.5.0| | | | | | | | | | |
-|`CUDNN_MH_ATTN_V_BIASES`|7.6.3| | | | | | | | | | |
-|`CUDNN_MH_ATTN_V_WEIGHTS`|7.5.0| | | | | | | | | | |
+|`CUDNN_MH_ATTN_K_BIASES`|7.6.3|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_K_WEIGHTS`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_O_BIASES`|7.6.3|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_O_WEIGHTS`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_Q_BIASES`|7.6.3|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_Q_WEIGHTS`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_V_BIASES`|7.6.3|9.22.0| | | | | | | | | |
+|`CUDNN_MH_ATTN_V_WEIGHTS`|7.5.0|9.22.0| | | | | | | | | |
 |`CUDNN_MOE_GROUPED_MATMUL_MODE_GATHER`|9.15.0| | | | | | | | | | |
 |`CUDNN_MOE_GROUPED_MATMUL_MODE_NONE`|9.15.0| | | | | | | | | | |
 |`CUDNN_MOE_GROUPED_MATMUL_MODE_SCATTER`|9.15.0| | | | | | | | | | |
@@ -758,11 +775,11 @@
 |`CUDNN_SCALAR_DOUBLE_BN_EXP_AVG_FACTOR`|7.6.0| | | | | | | | | | |
 |`CUDNN_SCALAR_INT64_T_BN_ACCUMULATION_COUNT`|7.6.0| | | | | | | | | | |
 |`CUDNN_SCALAR_SIZE_T_WORKSPACE_SIZE_IN_BYTES`|7.6.0| | | | | | | | | | |
-|`CUDNN_SEQDATA_BATCH_DIM`|7.5.0| | | | | | | | | | |
-|`CUDNN_SEQDATA_BEAM_DIM`|7.5.0| | | | | | | | | | |
+|`CUDNN_SEQDATA_BATCH_DIM`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_SEQDATA_BEAM_DIM`|7.5.0|9.22.0| | | | | | | | | |
 |`CUDNN_SEQDATA_DIM_COUNT`|7.5.0| | | | | | | | | | |
-|`CUDNN_SEQDATA_TIME_DIM`|7.5.0| | | | | | | | | | |
-|`CUDNN_SEQDATA_VECT_DIM`|7.5.0| | | | | | | | | | |
+|`CUDNN_SEQDATA_TIME_DIM`|7.5.0|9.22.0| | | | | | | | | |
+|`CUDNN_SEQDATA_VECT_DIM`|7.5.0|9.22.0| | | | | | | | | |
 |`CUDNN_SEV_ERROR`|7.1.3| | | | | | | | | | |
 |`CUDNN_SEV_ERROR_EN`|7.1.3| | | | | | | | | | |
 |`CUDNN_SEV_FATAL`|7.1.3| | | | | | | | | | |
@@ -892,7 +909,7 @@
 |`cudnnAlgorithm_t`|7.1.3| | |9.0.0| | | | | | | |
 |`cudnnAttnDescriptor_t`|7.5.0|9.0.0| | | | | | | | | |
 |`cudnnAttnQueryMap_t`|7.5.0| | |9.0.0| | | | | | | |
-|`cudnnAttnStruct`|7.5.0| | | | | | | | | | |
+|`cudnnAttnStruct`|7.5.0|9.22.0| | | | | | | | | |
 |`cudnnBackendAttributeName_t`|8.0.1| | | |`miopenBackendAttributeName_t`|6.2.0| | | | | |
 |`cudnnBackendAttributeType_t`|8.0.1| | | |`miopenBackendAttributeType_t`|6.2.0| | | | | |
 |`cudnnBackendBehaviorNote_t`|8.2.0| | | | | | | | | | |
@@ -961,9 +978,9 @@
 |`cudnnLRNMode_t`|3.0.0| | | |`miopenLRNMode_t`|2.1.0| | | | | |
 |`cudnnLRNStruct`|3.0.0| | | | | | | | | | |
 |`cudnnLossNormalizationMode_t`|7.6.0| | | | | | | | | | |
-|`cudnnMathType_t`|7.0.5| | | | | | | | | | |
+|`cudnnMathType_t`|7.0.5| | | |`miopenMathType_t`|7.12.0| | | | | |
 |`cudnnMoeGroupedMatmulMode_t`|9.15.0| | | | | | | | | | |
-|`cudnnMultiHeadAttnWeightKind_t`|7.5.0| | | | | | | | | | |
+|`cudnnMultiHeadAttnWeightKind_t`|7.5.0|9.22.0| | | | | | | | | |
 |`cudnnNanPropagation_t`|4.0.0| | | |`miopenNanPropagation_t`|3.9.0| | | | | |
 |`cudnnNormAlgo_t`|8.0.1|9.0.0| | | | | | | | | |
 |`cudnnNormMode_t`|8.0.1|9.0.0| | | | | | | | | |
@@ -998,9 +1015,9 @@
 |`cudnnRngDistribution_t`|8.7.0| | | |`miopenRngDistribution_t`|6.2.0| | | | | |
 |`cudnnRuntimeTag_t`|7.0.5|9.0.0| | | | | | | | | |
 |`cudnnSamplerType_t`|5.0.0| | | | | | | | | | |
-|`cudnnSeqDataAxis_t`|7.5.0| | | | | | | | | | |
+|`cudnnSeqDataAxis_t`|7.5.0|9.22.0| | | | | | | | | |
 |`cudnnSeqDataDescriptor_t`|7.5.0|9.0.0| | | | | | | | | |
-|`cudnnSeqDataStruct`|7.5.0| | | | | | | | | | |
+|`cudnnSeqDataStruct`|7.5.0|9.22.0| | | | | | | | | |
 |`cudnnSeverity_t`|7.1.3| | | | | | | | | | |
 |`cudnnSignalMode_t`|8.5.0| | | | | | | | | | |
 |`cudnnSoftmaxAlgorithm_t`|1.0.0| | | |`miopenSoftmaxAlgorithm_t`|2.6.0| | | | | |
@@ -1236,10 +1253,10 @@
 |`cudnnRNNForwardTraining`|5.0.0|8.0.1| |9.0.0|`miopenRNNForwardTraining`|2.1.0| | | | | |
 |`cudnnRNNForwardTrainingEx`|7.2.1|8.0.1| |9.0.0| | | | | | | |
 |`cudnnRNNGetClip`|7.2.1|8.0.1| |9.0.0| | | | | | | |
-|`cudnnRNNGetClip_v8`|8.0.1| | | | | | | | | | |
+|`cudnnRNNGetClip_v8`|8.0.1|9.22.0| | | | | | | | | |
 |`cudnnRNNGetClip_v9`|9.0.0| | | | | | | | | | |
 |`cudnnRNNSetClip`|7.2.1|8.0.1| |9.0.0| | | | | | | |
-|`cudnnRNNSetClip_v8`|8.0.1| | | | | | | | | | |
+|`cudnnRNNSetClip_v8`|8.0.1|9.22.0| | | | | | | | | |
 |`cudnnRNNSetClip_v9`|9.0.0| | | | | | | | | | |
 |`cudnnReduceTensor`|6.0.0|9.0.0| | |`miopenReduceTensor`|3.9.0| | | | | |
 |`cudnnReorderFilterAndBias`|7.6.0|9.0.0| | | | | | | | | |

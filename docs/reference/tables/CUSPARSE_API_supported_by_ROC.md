@@ -97,7 +97,7 @@
 |`CUSPARSE_SPMM_CSR_ALG1`|11.0| | | |`rocsparse_spmm_alg_csr`|4.2.0| | | | | |
 |`CUSPARSE_SPMM_CSR_ALG2`|11.0| | | |`rocsparse_spmm_alg_csr_row_split`|4.5.0| | | | | |
 |`CUSPARSE_SPMM_CSR_ALG3`|11.2| | | |`rocsparse_spmm_alg_csr_merge`|4.5.0| | | | | |
-|`CUSPARSE_SPMM_OP_ALG_DEFAULT`|11.5| | | | | | | | | | |
+|`CUSPARSE_SPMM_OP_ALG_DEFAULT`|11.5|13.2| | | | | | | | | |
 |`CUSPARSE_SPMV_ALG_DEFAULT`|11.2| | | |`rocsparse_spmv_alg_default`|4.1.0| | | | | |
 |`CUSPARSE_SPMV_BSR_ALG1`|13.0| | | | | | | | | | |
 |`CUSPARSE_SPMV_COO_ALG1`|11.2| | | |`rocsparse_spmv_alg_coo`|4.1.0| | | | | |
@@ -185,9 +185,9 @@
 |`cusparseSpGEMMDescr`|11.0| | | | | | | | | | |
 |`cusparseSpGEMMDescr_t`|11.0| | | | | | | | | | |
 |`cusparseSpMMAlg_t`|10.1| | | |`rocsparse_spmm_alg`|4.2.0| | | | | |
-|`cusparseSpMMOpAlg_t`|11.5| | | | | | | | | | |
+|`cusparseSpMMOpAlg_t`|11.5|13.2| | | | | | | | | |
 |`cusparseSpMMOpPlan`|11.5| | | | | | | | | | |
-|`cusparseSpMMOpPlan_t`|11.5| | | | | | | | | | |
+|`cusparseSpMMOpPlan_t`|11.5|13.2| | | | | | | | | |
 |`cusparseSpMVAlg_t`|10.2| | | |`rocsparse_spmv_alg`|4.1.0| | | | | |
 |`cusparseSpMVOpDescr`|13.1| | | | | | | | | | |
 |`cusparseSpMVOpDescr_t`|13.1| | | | | | | | | | |
@@ -890,14 +890,14 @@
 |`cusparseSpGEMM_estimateMemory`|12.0| | | | | | | | | | |
 |`cusparseSpGEMM_getNumProducts`|12.0| | | | | | | | | | |
 |`cusparseSpGEMM_workEstimation`|11.0| |12.0| | | | | | | | |
-|`cusparseSpGEMMreuse_compute`|11.3| |12.0| | | | | | | | |
-|`cusparseSpGEMMreuse_copy`|11.3| |12.0| | | | | | | | |
-|`cusparseSpGEMMreuse_nnz`|11.3| |12.0| | | | | | | | |
-|`cusparseSpGEMMreuse_workEstimation`|11.3| |12.0| | | | | | | | |
+|`cusparseSpGEMMreuse_compute`|11.3|13.2|12.0| | | | | | | | |
+|`cusparseSpGEMMreuse_copy`|11.3|13.2|12.0| | | | | | | | |
+|`cusparseSpGEMMreuse_nnz`|11.3|13.2|12.0| | | | | | | | |
+|`cusparseSpGEMMreuse_workEstimation`|11.3|13.2|12.0| | | | | | | | |
 |`cusparseSpMM`|10.1| |12.0| |`rocsparse_spmm`|4.2.0| |6.0.0| | | |
-|`cusparseSpMMOp`|11.5| | | | | | | | | | |
-|`cusparseSpMMOp_createPlan`|11.5| | | | | | | | | | |
-|`cusparseSpMMOp_destroyPlan`|11.5| | | | | | | | | | |
+|`cusparseSpMMOp`|11.5|13.2| | | | | | | | | |
+|`cusparseSpMMOp_createPlan`|11.5|13.2| | | | | | | | | |
+|`cusparseSpMMOp_destroyPlan`|11.5|13.2| | | | | | | | | |
 |`cusparseSpMM_bufferSize`|10.1| |12.0| |`rocsparse_spmm`|4.2.0| |6.0.0| | | |
 |`cusparseSpMM_preprocess`|11.2| |12.0| |`rocsparse_spmm`|4.2.0| |6.0.0| | | |
 |`cusparseSpMV`|10.1| |12.0| |`rocsparse_spmv`|4.1.0| |6.0.0| | | |

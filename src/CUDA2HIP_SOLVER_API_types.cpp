@@ -65,6 +65,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP = [] {
   m["CUSOLVER_EIG_RANGE_ALL"]                                         = {"HIPSOLVER_EIG_RANGE_ALL",                                   "rocblas_erange_all",                                               CONV_NUMERIC_LITERAL, API_SOLVER, 1};
   m["CUSOLVER_EIG_RANGE_I"]                                           = {"HIPSOLVER_EIG_RANGE_I",                                     "rocblas_erange_index",                                             CONV_NUMERIC_LITERAL, API_SOLVER, 1};
   m["CUSOLVER_EIG_RANGE_V"]                                           = {"HIPSOLVER_EIG_RANGE_V",                                     "rocblas_erange_value",                                             CONV_NUMERIC_LITERAL, API_SOLVER, 1};
+  m["cusolverEigComp_t"]                                              = {"hipsolverEigComp_t",                                        "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_EIG_COMP_N"]                                            = {"HIPSOLVER_EIG_COMP_N",                                      "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_EIG_COMP_I"]                                            = {"HIPSOLVER_EIG_COMP_I",                                      "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_EIG_COMP_V"]                                            = {"HIPSOLVER_EIG_COMP_V",                                      "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
   m["cusolverNorm_t"]                                                 = {"hipsolverNorm_t",                                           "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
   m["CUSOLVER_INF_NORM"]                                              = {"HIPSOLVER_INF_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
   m["CUSOLVER_MAX_NORM"]                                              = {"HIPSOLVER_MAX_NORM",                                        "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
@@ -122,6 +126,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP = [] {
   m["CUSOLVERDN_GETRF"]                                               = {"HIPSOLVERDN_GETRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
   m["CUSOLVERDN_POTRF"]                                               = {"HIPSOLVERDN_POTRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
   m["CUSOLVERDN_SYEVBATCHED"]                                         = {"HIPSOLVERDN_SYEVBATCHED",                                   "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVERDN_GEQRF"]                                               = {"HIPSOLVERDN_GEQRF",                                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
   m["cusolverDeterministicMode_t"]                                    = {"hipsolverDeterministicMode_t",                              "",                                                                 CONV_TYPE, API_SOLVER, 1, ROC_UNSUPPORTED};
   m["CUSOLVER_DETERMINISTIC_RESULTS"]                                 = {"HIPSOLVER_DETERMINISTIC_RESULTS",                           "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
   m["CUSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS"]                       = {"HIPSOLVER_ALLOW_NON_DETERMINISTIC_RESULTS",                 "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, ROC_UNSUPPORTED};
@@ -173,6 +178,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SOLVER_TYPE_NAME_MAP = [] {
   m["cusolverMathMode_t"]                                             = {"hipsolverMathMode_t",                                       "",                                                                 CONV_TYPE, API_SOLVER, 1, UNSUPPORTED};
   m["CUSOLVER_DEFAULT_MATH"]                                          = {"HIPSOLVER_DEFAULT_MATH",                                    "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
   m["CUSOLVER_FP32_EMULATED_BF16X9_MATH"]                             = {"HIPSOLVER_FP32_EMULATED_BF16X9_MATH",                       "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_FP64_EMULATED_FIXEDPOINT_MATH"]                         = {"HIPSOLVER_FP64_EMULATED_FIXEDPOINT_MATH",                   "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
+  m["CUSOLVER_FP32_FP64_EMULATED_MATH"]                               = {"HIPSOLVER_FP32_FP64_EMULATED_MATH",                         "",                                                                 CONV_NUMERIC_LITERAL, API_SOLVER, 1, UNSUPPORTED};
 
   return m;
 }();
@@ -284,6 +291,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SOLVER_TYPE_NAME_VER_MAP =
   m["CUSOLVER_DEFAULT_MATH"]                                          = {CUDA_130, CUDA_0,   CUDA_0  };
   m["CUSOLVER_FP32_EMULATED_BF16X9_MATH"]                             = {CUDA_130, CUDA_0,   CUDA_0  };
   m["CUSOLVERDN_SYEVBATCHED"]                                         = {CUDA_130, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_FP64_EMULATED_FIXEDPOINT_MATH"]                         = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CUSOLVER_FP32_FP64_EMULATED_MATH"]                               = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cusolverEigComp_t"]                                              = {CUDA_132, CUDA_0,   CUDA_0  };  // CUSOLVER_VERSION 12201
+  m["CUSOLVER_EIG_COMP_N"]                                            = {CUDA_132, CUDA_0,   CUDA_0  };  // CUSOLVER_VERSION 12201
+  m["CUSOLVER_EIG_COMP_I"]                                            = {CUDA_132, CUDA_0,   CUDA_0  };  // CUSOLVER_VERSION 12201
+  m["CUSOLVER_EIG_COMP_V"]                                            = {CUDA_132, CUDA_0,   CUDA_0  };  // CUSOLVER_VERSION 12201
+  m["CUSOLVERDN_GEQRF"]                                               = {CUDA_132, CUDA_0,   CUDA_0  };  // CUSOLVER_VERSION 12201
 
   return m;
 }();

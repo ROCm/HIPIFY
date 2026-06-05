@@ -47,6 +47,7 @@ int main() {
   int n2 = 0;
   int sign = 0;
   int rank = 0;
+  int batch_rank = 0;
   unsigned int flags = 0;
   double d_in = 0.0f;
   double d_out = 0.0f;
@@ -277,6 +278,79 @@ int main() {
   // HIP: HIPFFT_EXPORT void fftwf_cleanup();
   // CHECK: fftwf_cleanup();
   fftwf_cleanup();
+
+  // CHECK: fftw_iodim w_iodim, batch_dims;
+  // CHECK-NEXT: fftwf_iodim wf_iodim, fbatch_dims;
+  fftw_iodim w_iodim, batch_dims;
+  fftwf_iodim wf_iodim, fbatch_dims;
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_guru_dft(int rank, const fftw_iodim *dims, int batch_rank, const fftw_iodim * batch_dims, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_guru_dft(int rank, const fftw_iodim* dims, int howmany_rank, const fftw_iodim* howmany_dims, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
+  // CHECK: w_plan = fftw_plan_guru_dft(rank, &w_iodim, batch_rank, &batch_dims, &w_complex_in, &w_complex_out, sign, flags);
+  w_plan = fftw_plan_guru_dft(rank, &w_iodim, batch_rank, &batch_dims, &w_complex_in, &w_complex_out, sign, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_guru_dft(int rank, const fftwf_iodim *dims, int batch_rank, const fftwf_iodim* batch_dims, fftwf_complex* in, fftwf_complex* out, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_guru_dft(int rank, const fftwf_iodim* dims, int howmany_rank, const fftwf_iodim* howmany_dims, fftwf_complex* in, fftwf_complex* out, int sign, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_guru_dft(rank, &wf_iodim, batch_rank, &fbatch_dims, &wf_complex_in, &wf_complex_out, sign, flags);
+  twf_plan = fftwf_plan_guru_dft(rank, &wf_iodim, batch_rank, &fbatch_dims, &wf_complex_in, &wf_complex_out, sign, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_guru_dft_r2c(int rank, const fftw_iodim *dims, int batch_rank, const fftw_iodim* batch_dims, double* in, fftw_complex* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_guru_dft_r2c(int rank, const fftw_iodim* dims, int howmany_rank, const fftw_iodim* howmany_dims, double* in, fftw_complex* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_guru_dft_r2c(rank, &w_iodim, batch_rank, &batch_dims, &d_in, &w_complex_out, flags);
+  w_plan = fftw_plan_guru_dft_r2c(rank, &w_iodim, batch_rank, &batch_dims, &d_in, &w_complex_out, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_guru_dft_r2c(int rank, const fftwf_iodim *dims, int batch_rank, const fftwf_iodim* batch_dims, float* in, fftwf_complex* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_guru_dft_r2c(int rank, const fftwf_iodim* dims, int howmany_rank, const fftwf_iodim* howmany_dims, float* in, fftwf_complex* out, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_guru_dft_r2c(rank, &wf_iodim, batch_rank, &fbatch_dims, &f_in, &wf_complex_out, flags);
+  twf_plan = fftwf_plan_guru_dft_r2c(rank, &wf_iodim, batch_rank, &fbatch_dims, &f_in, &wf_complex_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_guru_dft_c2r(int rank, const fftw_iodim *dims, int batch_rank, const fftw_iodim* batch_dims, fftw_complex* in, double* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_guru_dft_c2r(int rank, const fftw_iodim* dims, int howmany_rank, const fftw_iodim* howmany_dims, fftw_complex* in, double* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_guru_dft_c2r(rank, &w_iodim, batch_rank, &batch_dims, &w_complex_in, &d_out, flags);
+  w_plan = fftw_plan_guru_dft_c2r(rank, &w_iodim, batch_rank, &batch_dims, &w_complex_in, &d_out, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_guru_dft_c2r(int rank, const fftwf_iodim *dims, int batch_rank, const fftwf_iodim *batch_dims, fftwf_complex *in, float *out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_guru_dft_c2r(int rank, const fftwf_iodim* dims, int howmany_rank, const fftwf_iodim* howmany_dims, fftwf_complex* in, float* out, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_guru_dft_c2r(rank, &wf_iodim, batch_rank, &fbatch_dims, &wf_complex_in, &f_out, flags);
+  twf_plan = fftwf_plan_guru_dft_c2r(rank, &wf_iodim, batch_rank, &fbatch_dims, &wf_complex_in, &f_out, flags);
+
+  // CHECK: fftw_iodim64 w_iodim64, batch_dims64;
+  fftw_iodim64 w_iodim64, batch_dims64;
+
+  // CHECK: fftwf_iodim64 wf_iodim64, fbatch_dims64;
+  fftwf_iodim64 wf_iodim64, fbatch_dims64;
+
+#if CUDA_VERSION >= 10000
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_guru64_dft(int rank, const fftw_iodim64* dims, int batch_rank, const fftw_iodim64* batch_dims, fftw_complex* in, fftw_complex* out, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_guru64_dft(int rank, const fftw_iodim* dims, int howmany_rank, const fftw_iodim* howmany_dims, fftw_complex* in, double* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_guru64_dft(rank, &w_iodim64, batch_rank, &batch_dims64, &w_complex_in, &w_complex_out, sign, flags);
+  w_plan = fftw_plan_guru64_dft(rank, &w_iodim64, batch_rank, &batch_dims64, &w_complex_in, &w_complex_out, sign, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_guru64_dft(int rank, const fftwf_iodim64* dims, int batch_rank, const fftwf_iodim64* batch_dims, fftwf_complex* in, fftwf_complex* out, int sign, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_guru64_dft(int rank, const fftwf_iodim64* dims, int howmany_rank, const fftwf_iodim64* howmany_dims, fftwf_complex* in, fftwf_complex* out, int sign, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_guru64_dft(rank, &wf_iodim64, batch_rank, &fbatch_dims64, &wf_complex_in, &wf_complex_out, sign, flags);
+  twf_plan = fftwf_plan_guru64_dft(rank, &wf_iodim64, batch_rank, &fbatch_dims64, &wf_complex_in, &wf_complex_out, sign, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_guru64_dft_r2c(int rank, const fftw_iodim64* dims, int batch_rank, const fftw_iodim64* batch_dims, double* in, fftw_complex* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_guru64_dft_r2c(int rank, const fftw_iodim64* dims, int howmany_rank, const fftw_iodim64* howmany_dims, double* in, fftw_complex* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_guru64_dft_r2c(rank, &w_iodim64, batch_rank, &batch_dims64, &d_in, &w_complex_out, flags);
+  w_plan = fftw_plan_guru64_dft_r2c(rank, &w_iodim64, batch_rank, &batch_dims64, &d_in, &w_complex_out, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_guru64_dft_r2c(int rank, const fftwf_iodim64* dims, int batch_rank, const fftwf_iodim64* batch_dims, float* in, fftwf_complex* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_guru64_dft_r2c(int rank, const fftwf_iodim64* dims, int howmany_rank, const fftwf_iodim64* howmany_dims, float* in, fftwf_complex* out, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_guru64_dft_r2c(rank, &wf_iodim64, batch_rank, &fbatch_dims64, &f_in, &wf_complex_out, flags);
+  twf_plan = fftwf_plan_guru64_dft_r2c(rank, &wf_iodim64, batch_rank, &fbatch_dims64, &f_in, &wf_complex_out, flags);
+
+  // CUDA: fftw_plan CUFFTAPI fftw_plan_guru64_dft_c2r(int rank, const fftw_iodim64* dims, int batch_rank, const fftw_iodim64* batch_dims, fftw_complex* in, double* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftw_plan fftw_plan_guru64_dft_c2r(int rank, const fftw_iodim64* dims, int howmany_rank, const fftw_iodim64* howmany_dims, fftw_complex* in, double* out, unsigned flags);
+  // CHECK: w_plan = fftw_plan_guru64_dft_c2r(rank, &w_iodim64, batch_rank, &batch_dims64, &w_complex_out, &d_out, flags);
+  w_plan = fftw_plan_guru64_dft_c2r(rank, &w_iodim64, batch_rank, &batch_dims64, &w_complex_out, &d_out, flags);
+
+  // CUDA: fftwf_plan CUFFTAPI fftwf_plan_guru64_dft_c2r(int rank, const fftwf_iodim64* dims, int batch_rank, const fftwf_iodim64* batch_dims, fftwf_complex* in, float* out, unsigned flags);
+  // HIP: HIPFFT_EXPORT fftwf_plan fftwf_plan_guru64_dft_c2r(int rank, const fftwf_iodim64* dims, int howmany_rank, const fftwf_iodim64* howmany_dims, fftwf_complex* in, float* out, unsigned flags);
+  // CHECK: twf_plan = fftwf_plan_guru64_dft_c2r(rank, &wf_iodim64, batch_rank, &fbatch_dims64, &wf_complex_in, &f_out, flags);
+  twf_plan = fftwf_plan_guru64_dft_c2r(rank, &wf_iodim64, batch_rank, &fbatch_dims64, &wf_complex_in, &f_out, flags);
+#endif
 
   return 0;
 }

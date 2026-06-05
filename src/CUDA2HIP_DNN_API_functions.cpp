@@ -302,10 +302,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP = [] {
 
   // cuDNN Clipping functions
   m["cudnnRNNSetClip"]                                          = {"hipdnnRNNSetClip",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
-  m["cudnnRNNSetClip_v8"]                                       = {"hipdnnRNNSetClip_v8",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnRNNSetClip_v8"]                                       = {"hipdnnRNNSetClip_v8",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
   m["cudnnRNNSetClip_v9"]                                       = {"hipdnnRNNSetClip_v9",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
   m["cudnnRNNGetClip"]                                          = {"hipdnnRNNGetClip",                                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED | CUDA_REMOVED};
-  m["cudnnRNNGetClip_v8"]                                       = {"hipdnnRNNGetClip_v8",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnRNNGetClip_v8"]                                       = {"hipdnnRNNGetClip_v8",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED | CUDA_DEPRECATED};
   m["cudnnRNNGetClip_v9"]                                       = {"hipdnnRNNGetClip_v9",                                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   // cuDNN Sequence functions
@@ -367,8 +367,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP = [] 
   m["cudnnGetRNNMatrixMathType"]                                = {CUDNN_713, CUDNN_801, CUDNN_900};
   m["cudnnSetRNNBiasMode"]                                      = {CUDNN_750, CUDNN_801, CUDNN_900};
   m["cudnnGetRNNBiasMode"]                                      = {CUDNN_750, CUDNN_801, CUDNN_900};
-  m["cudnnRNNSetClip_v8"]                                       = {CUDNN_801, CUDA_0,    CUDA_0   };
-  m["cudnnRNNGetClip_v8"]                                       = {CUDNN_801, CUDA_0,    CUDA_0   };
+  m["cudnnRNNSetClip_v8"]                                       = {CUDNN_801, CUDNN_9220,CUDA_0   };  
+  m["cudnnRNNGetClip_v8"]                                       = {CUDNN_801, CUDNN_9220,CUDA_0   };
   m["cudnnRNNSetClip"]                                          = {CUDNN_721, CUDNN_801, CUDNN_900};
   m["cudnnRNNGetClip"]                                          = {CUDNN_721, CUDNN_801, CUDNN_900};
   m["cudnnSetRNNProjectionLayers"]                              = {CUDNN_713, CUDNN_801, CUDNN_900};
@@ -377,7 +377,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP = [] 
   m["cudnnDestroyPersistentRNNPlan"]                            = {CUDNN_60,  CUDNN_801, CUDNN_900};
   m["cudnnSetPersistentRNNPlan"]                                = {CUDNN_60,  CUDNN_801, CUDNN_900};
   m["cudnnBuildRNNDynamic"]                                     = {CUDNN_801, CUDA_0,    CUDA_0   };
-  m["cudnnGetRNNWorkspaceSize"]                                 = {CUDNN_50,  CUDNN_801, CUDNN_900};
+  m["cudnnGetRNNWorkspaceSize"]                                 = {CUDNN_50,  CUDNN_801, CUDNN_900};  
   m["cudnnGetRNNTrainingReserveSize"]                           = {CUDNN_50,  CUDNN_801, CUDNN_900};
   m["cudnnGetRNNTempSpaceSizes"]                                = {CUDNN_801, CUDA_0,    CUDA_0   };
   m["cudnnGetRNNParamsSize"]                                    = {CUDNN_50,  CUDNN_801, CUDNN_900};

@@ -268,8 +268,8 @@
 |`CUBLASLT_EPILOGUE_DEFAULT`|10.1| | | |`HIPBLASLT_EPILOGUE_DEFAULT`|5.5.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_DGELU`|11.6| | | |`HIPBLASLT_EPILOGUE_DGELU`|5.7.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_DGELU_BGRAD`|11.3| | | |`HIPBLASLT_EPILOGUE_DGELU_BGRAD`|5.7.0| | | | | | | | | | | |
-|`CUBLASLT_EPILOGUE_DRELU`|11.6| | | | | | | | | | | | | | | | |
-|`CUBLASLT_EPILOGUE_DRELU_BGRAD`|11.3| | | | | | | | | | | | | | | | |
+|`CUBLASLT_EPILOGUE_DRELU`|11.6| | | |`HIPBLASLT_EPILOGUE_DRELU`|7.12.0| | | | | | | | | | | |
+|`CUBLASLT_EPILOGUE_DRELU_BGRAD`|11.3| | | |`HIPBLASLT_EPILOGUE_DRELU_BGRAD`|7.12.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_GELU`|11.3| | | |`HIPBLASLT_EPILOGUE_GELU`|5.5.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_GELU_AUX`|11.3| | | |`HIPBLASLT_EPILOGUE_GELU_AUX`|5.7.0| | | | | | | | | | | |
 |`CUBLASLT_EPILOGUE_GELU_AUX_BIAS`|11.3| | | |`HIPBLASLT_EPILOGUE_GELU_AUX_BIAS`|5.7.0| | | | | | | | | | | |
@@ -1928,14 +1928,14 @@
 |`cublasCgetrsBatched`| | | | |`hipblasCgetrsBatched`|3.5.0| |7.0.0| | | | | | | | | |
 |`cublasCherk3mEx`|8.0| | | | | | | | | | | | | | | | |
 |`cublasCherk3mEx_64`|12.0| | | | | | | | | | | | | | | | |
-|`cublasCherkEx`|8.0| | | | | | | | | | | | | | | | |
+|`cublasCherkEx`|8.0| | | |`hipblasHerkEx`|7.10.0| | | | | |`rocblas_herk_ex`|7.10.0| | | | |
 |`cublasCherkEx_64`|12.0| | | | | | | | | | | | | | | | |
 |`cublasCmatinvBatched`| | | | | | | | | | | | | | | | | |
 |`cublasCopyEx`|10.1| | | | | | | | | | | | | | | | |
 |`cublasCopyEx_64`|12.0| | | | | | | | | | | | | | | | |
 |`cublasCsyrk3mEx`|8.0| | | | | | | | | | | | | | | | |
 |`cublasCsyrk3mEx_64`|12.0| | | | | | | | | | | | | | | | |
-|`cublasCsyrkEx`|8.0| | | | | | | | | | | | | | | | |
+|`cublasCsyrkEx`|8.0| | | |`hipblasSyrkEx`|7.10.0| | | | | |`rocblas_syrk_ex`|7.10.0| | | | |
 |`cublasCsyrkEx_64`|12.0| | | | | | | | | | | | | | | | |
 |`cublasCtpttr`| | | | | | | | | | | | | | | | | |
 |`cublasCtrsmBatched`| | | | |`hipblasCtrsmBatched`|3.5.0| |7.0.0| | | |`rocblas_ctrsm_batched`|3.5.0| | | | |

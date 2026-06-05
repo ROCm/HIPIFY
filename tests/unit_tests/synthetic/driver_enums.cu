@@ -956,7 +956,9 @@ int main() {
 
 #if CUDA_VERSION >= 11000
   // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR = hipDeviceAttributeMaxBlocksPerMultiprocessor;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED = hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported;
   CUdevice_attribute DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR = CU_DEVICE_ATTRIBUTE_MAX_BLOCKS_PER_MULTIPROCESSOR;
+  CUdevice_attribute DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED = CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED;
 
   // CHECK: hipAccessProperty accessProperty;
   // CHECK-NEXT: hipAccessProperty accessProperty_enum;
@@ -1238,16 +1240,36 @@ int main() {
 #if CUDA_VERSION >= 11080
   // CHECK: hipLaunchAttributeID launchAttributeID;
   // CHECK-NEXT: hipLaunchAttributeID launchAttributeID_enum;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_IGNORE = hipLaunchAttributeIgnore;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = hipLaunchAttributeAccessPolicyWindow;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = hipLaunchAttributeCooperative;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY = hipLaunchAttributeSynchronizationPolicy;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION = hipLaunchAttributeClusterDimension;
+  // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE = hipLaunchAttributeClusterSchedulingPolicyPreference;
   // CHECK-NEXT: hipLaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = hipLaunchAttributePriority;
   CUlaunchAttributeID launchAttributeID;
   CUlaunchAttributeID_enum launchAttributeID_enum;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_IGNORE = CU_LAUNCH_ATTRIBUTE_IGNORE;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW = CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_COOPERATIVE = CU_LAUNCH_ATTRIBUTE_COOPERATIVE;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY = CU_LAUNCH_ATTRIBUTE_SYNCHRONIZATION_POLICY;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION = CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION;
+  CUlaunchAttributeID LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE = CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE;
   CUlaunchAttributeID LAUNCH_ATTRIBUTE_PRIORITY = CU_LAUNCH_ATTRIBUTE_PRIORITY;
+
+  // CHECK: hipError_t ERROR_INVALID_CLUSTER_SIZE = hipErrorInvalidClusterSize;
+  CUresult ERROR_INVALID_CLUSTER_SIZE = CUDA_ERROR_INVALID_CLUSTER_SIZE;
+
+  // CHECK: hipClusterSchedulingPolicy clusterSchedulingPolicy_enum;
+  // CHECK-NEXT: hipClusterSchedulingPolicy clusterSchedulingPolicy;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = hipClusterSchedulingPolicyDefault;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = hipClusterSchedulingPolicySpread;
+  // CHECK-NEXT: hipClusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = hipClusterSchedulingPolicyLoadBalancing;
+  CUclusterSchedulingPolicy_enum clusterSchedulingPolicy_enum;
+  CUclusterSchedulingPolicy clusterSchedulingPolicy;
+  CUclusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_DEFAULT = CU_CLUSTER_SCHEDULING_POLICY_DEFAULT;
+  CUclusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_SPREAD = CU_CLUSTER_SCHEDULING_POLICY_SPREAD;
+  CUclusterSchedulingPolicy CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING = CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING;
 #endif
 
 #if CUDA_VERSION >= 12000
@@ -1406,6 +1428,9 @@ int main() {
 #if CUDA_VERSION >= 13000
   // CHECK: hipMemLocationType MEM_LOCATION_TYPE_NONE = hipMemLocationTypeNone;
   CUmemLocationType MEM_LOCATION_TYPE_NONE = CU_MEM_LOCATION_TYPE_NONE;
+
+  // CHECK: hipMemAllocationType MemAllocationTypeManaged = hipMemAllocationTypeManaged;
+  CUmemAllocationType MemAllocationTypeManaged = CU_MEM_ALLOCATION_TYPE_MANAGED;
 #endif
 
   return 0;

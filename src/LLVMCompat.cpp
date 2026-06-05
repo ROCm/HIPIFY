@@ -28,7 +28,7 @@ THE SOFTWARE.
 #include "clang/Lex/PreprocessorOptions.h"
 #include "clang/Frontend/CompilerInstance.h"
 
-const std::string sHipify = "[HIPIFY] ", sConflict = "conflict: ", sError = "error: ", sWarning = "warning: ";
+const std::string sHipify = "[HIPIFY] ", sConflict = "conflict: ", sError = "error: ", sWarning = "warning: ", sInformation = "info: ";
 
 namespace llcompat {
 

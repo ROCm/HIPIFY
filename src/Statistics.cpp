@@ -176,7 +176,8 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_SOLVER",
   "API_RTC",
   "API_TENSOR",
-  "API_FILE"
+  "API_FILE",
+  "API_SPARSELT"
 };
 
 const std::vector<cudaVersions> CUDA_114_cuFile_version = { CUFILE_1000, CUFILE_1001, CUFILE_1002 };
@@ -538,6 +539,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDA_130: return "13.0";
     case CUDA_131: return "13.1";
     case CUDA_132: return "13.2";
+    case CUDA_133: return "13.3";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -605,6 +607,8 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDNN_9170: return "9.17.0";
     case CUDNN_9180: return "9.18.0";
     case CUDNN_9200: return "9.20.0";
+    case CUDNN_9210: return "9.21.0";
+    case CUDNN_9220: return "9.22.0";
     case CUTENSOR_1010: return "1.0.1.0";
     case CUTENSOR_1100: return "1.1.0.0";
     case CUTENSOR_1200: return "1.2.0.0";
@@ -664,6 +668,24 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUFILE_1160: return "1.16.0";
     case CUFILE_1161: return "1.16.1";
     case CUFILE_1170: return "1.17.0";
+    case CUSPARSELT_001: return "0.0.1";
+    case CUSPARSELT_010: return "0.1.0";
+    case CUSPARSELT_020: return "0.2.0";
+    case CUSPARSELT_030: return "0.3.0";
+    case CUSPARSELT_040: return "0.4.0";
+    case CUSPARSELT_050: return "0.5.0";
+    case CUSPARSELT_051: return "0.5.1";
+    case CUSPARSELT_052: return "0.5.2";
+    case CUSPARSELT_060: return "0.6.0";
+    case CUSPARSELT_061: return "0.6.1";
+    case CUSPARSELT_062: return "0.6.2";
+    case CUSPARSELT_063: return "0.6.3";
+    case CUSPARSELT_070: return "0.7.0";
+    case CUSPARSELT_071: return "0.7.1";
+    case CUSPARSELT_080: return "0.8.0";
+    case CUSPARSELT_081: return "0.8.1";
+    case CUSPARSELT_090: return "0.9.0";
+    case CUSPARSELT_091: return "0.9.1";
   }
   return "";
 }
@@ -837,7 +859,10 @@ std::string Statistics::getHipVersion(const hipVersions &ver) {
     case HIP_7000: return "7.0.0";
     case HIP_7010: return "7.1.0";
     case HIP_7020: return "7.2.0";
+    case HIP_7100: return "7.10.0";
+    case HIP_7110: return "7.11.0";
     case HIP_7120: return "7.12.0";
+    case HIP_7130: return "7.13.0";
     case HIP_8000: return "8.0.0";
   }
   return "";
@@ -889,6 +914,11 @@ cudaVersions Statistics::convertCudaToolkitVersion(const clang::CudaVersion &ver
     case clang::CudaVersion::CUDA_128: return CUDA_128;
 #if LLVM_VERSION_MAJOR > 21
     case clang::CudaVersion::CUDA_129: return CUDA_129;
+#if LLVM_VERSION_MAJOR > 22
+    case clang::CudaVersion::CUDA_130: return CUDA_130;
+    case clang::CudaVersion::CUDA_131: return CUDA_131;
+    case clang::CudaVersion::CUDA_132: return CUDA_132;
+#endif
 #endif
 #endif
 #endif
