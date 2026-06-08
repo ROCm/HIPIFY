@@ -272,9 +272,9 @@
 |`fftw_plan_guru_dft`| | | | |`fftw_plan_guru_dft`|7.11.0| | | | | |
 |`fftw_plan_guru_dft_c2r`| | | | |`fftw_plan_guru_dft_c2r`|7.11.0| | | | | |
 |`fftw_plan_guru_dft_r2c`| | | | |`fftw_plan_guru_dft_r2c`|7.11.0| | | | | |
-|`fftw_plan_many_dft`| | | | | | | | | | | |
-|`fftw_plan_many_dft_c2r`| | | | | | | | | | | |
-|`fftw_plan_many_dft_r2c`| | | | | | | | | | | |
+|`fftw_plan_many_dft`| | | | |`fftw_plan_many_dft`|7.10.0| | | | | |
+|`fftw_plan_many_dft_c2r`| | | | |`fftw_plan_many_dft_c2r`|7.10.0| | | | | |
+|`fftw_plan_many_dft_r2c`| | | | |`fftw_plan_many_dft_r2c`|7.10.0| | | | | |
 |`fftw_print_plan`| | | | |`fftw_print_plan`|7.1.0| | | | | |
 |`fftw_set_timelimit`| | | | |`fftw_set_timelimit`|7.1.0| | | | | |
 |`fftwf_cleanup`| | | | |`fftwf_cleanup`|7.1.0| | | | | |
@@ -305,9 +305,9 @@
 |`fftwf_plan_guru_dft`| | | | |`fftwf_plan_guru_dft`|7.11.0| | | | | |
 |`fftwf_plan_guru_dft_c2r`| | | | |`fftwf_plan_guru_dft_c2r`|7.11.0| | | | | |
 |`fftwf_plan_guru_dft_r2c`| | | | |`fftwf_plan_guru_dft_r2c`|7.11.0| | | | | |
-|`fftwf_plan_many_dft`| | | | | | | | | | | |
-|`fftwf_plan_many_dft_c2r`| | | | | | | | | | | |
-|`fftwf_plan_many_dft_r2c`| | | | | | | | | | | |
+|`fftwf_plan_many_dft`| | | | |`fftwf_plan_many_dft`|7.10.0| | | | | |
+|`fftwf_plan_many_dft_c2r`| | | | |`fftwf_plan_many_dft_c2r`|7.10.0| | | | | |
+|`fftwf_plan_many_dft_r2c`| | | | |`fftwf_plan_many_dft_r2c`|7.10.0| | | | | |
 |`fftwf_print_plan`| | | | |`fftwf_print_plan`|7.1.0| | | | | |
 |`fftwf_set_timelimit`| | | | |`fftwf_set_timelimit`|7.1.0| | | | | |
 
