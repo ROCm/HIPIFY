@@ -42,6 +42,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"cuda_profiler_api.h",                                   {"hip/hip_runtime_api.h",                                 "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cooperative_groups.h",                                  {"hip/hip_cooperative_groups.h",                          "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"cooperative_groups/reduce.h",                           {"hip/cooperative_groups/hip_reduce.h",                   "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
+  {"cooperative_groups/scan.h",                             {"hip/cooperative_groups/hip_scah",                       "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"library_types.h",                                       {"hip/library_types.h",                                   "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   {"math_constants.h",                                      {"hip/hip_math_constants.h",                              "",                                                               CONV_INCLUDE,                API_RUNTIME, 0}},
   // cuda-samples helper includes

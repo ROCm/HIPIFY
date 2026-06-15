@@ -9920,6 +9920,8 @@ sub simpleMappings {
 sub simpleIncludes {
     subst("channel_descriptor.h", "hip\/channel_descriptor.h", "include");
     subst("cooperative_groups.h", "hip\/hip_cooperative_groups.h", "include");
+    subst("cooperative_groups\/reduce.h", "hip\/cooperative_groups\/hip_reduce.h", "include");
+    subst("cooperative_groups\/scan.h", "hip\/cooperative_groups\/hip_scan.h", "include");
     subst("cuComplex.h", "hip\/hip_complex.h", "include_cuda_main_header");
     subst("cub\/cub.cuh", "hipcub\/hipcub.hpp", "include_cuda_main_header");
     subst("cublas.h", "hipblas.h", "include_cuda_main_header");
