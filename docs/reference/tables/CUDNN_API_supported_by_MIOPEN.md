@@ -189,6 +189,11 @@
 |`CUDNN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC`|8.7.0| | | |`MIOPEN_ATTR_OPERATION_MATMUL_GEMM_M_OVERRIDE_DESC`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC`|8.7.0| | | |`MIOPEN_ATTR_OPERATION_MATMUL_GEMM_N_OVERRIDE_DESC`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT`|8.1.0|9.0.0| | |`MIOPEN_ATTR_OPERATION_MATMUL_IRREGULARLY_STRIDED_BATCH_COUNT`|6.2.0| | | | | |
+|`CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_BWD_DOUTPUT_DESC`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_BWD_DWEIGHT_DESC`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_BWD_FIRST_TOKEN_OFFSET_DESC`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_BWD_MATH_PREC`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_BWD_TOKEN_DESC`|9.22.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_FIRST_TOKEN_OFFSET_DESC`|9.15.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MATH_PREC`|9.15.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_MOE_GROUPED_MATMUL_MODE`|9.15.0| | | | | | | | | | |
@@ -254,6 +259,7 @@
 |`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC`|8.3.0| | | |`MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_IDXDESC`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_XDESC`|8.3.0| | | |`MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_XDESC`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_RESAMPLE_FWD_YDESC`|8.3.0| | | |`MIOPEN_ATTR_OPERATION_RESAMPLE_FWD_YDESC`|6.2.0| | | | | |
+|`CUDNN_ATTR_OPERATION_RESHAPE_MODE`|9.22.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_RESHAPE_XDESC`|8.7.0| | | |`MIOPEN_ATTR_OPERATION_RESHAPE_XDESC`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_RESHAPE_YDESC`|8.7.0| | | |`MIOPEN_ATTR_OPERATION_RESHAPE_YDESC`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_RNG_DESC`|8.7.0| | | |`MIOPEN_ATTR_OPERATION_RNG_DESC`|6.2.0| | | | | |
@@ -304,12 +310,20 @@
 |`CUDNN_ATTR_OPERATION_SIGNAL_VALUE`|8.5.0| | | |`MIOPEN_ATTR_OPERATION_SIGNAL_VALUE`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_SIGNAL_XDESC`|8.5.0| | | |`MIOPEN_ATTR_OPERATION_SIGNAL_XDESC`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_SIGNAL_YDESC`|8.5.0| | | |`MIOPEN_ATTR_OPERATION_SIGNAL_YDESC`|6.2.0| | | | | |
+|`CUDNN_ATTR_OPERATION_SLICE_LIMIT_INDICES`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SLICE_START_INDICES`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SLICE_STRIDES`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SLICE_XDESC`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_SLICE_YDESC`|9.22.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SOFTMAX_MAX_DESC`|9.20.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SOFTMAX_SINK_DESC`|9.20.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SOFTMAX_STATS_DESC`|9.20.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SOFTMAX_SUM_EXP_DESC`|9.20.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SOFTMAX_XDESC`|9.20.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_SOFTMAX_YDESC`|9.20.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_TRANSPOSE_PERMUTATION`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_TRANSPOSE_XDESC`|9.22.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATION_TRANSPOSE_YDESC`|9.22.0| | | | | | | | | | |
 |`CUDNN_ATTR_POINTWISE_AXIS`|8.4.0| | | |`MIOPEN_ATTR_POINTWISE_AXIS`|6.2.0| | | | | |
 |`CUDNN_ATTR_POINTWISE_ELU_ALPHA`|8.1.0| | | |`MIOPEN_ATTR_POINTWISE_ELU_ALPHA`|6.2.0| | | | | |
 |`CUDNN_ATTR_POINTWISE_MATH_PREC`|8.0.1| | | |`MIOPEN_ATTR_POINTWISE_MATH_PREC`|6.2.0| | | | | |
@@ -339,6 +353,7 @@
 |`CUDNN_ATTR_RNG_UNIFORM_DIST_MAXIMUM`|8.7.0| | | |`MIOPEN_ATTR_RNG_UNIFORM_DIST_MAXIMUM`|6.2.0| | | | | |
 |`CUDNN_ATTR_RNG_UNIFORM_DIST_MINIMUM`|8.7.0| | | |`MIOPEN_ATTR_RNG_UNIFORM_DIST_MINIMUM`|6.2.0| | | | | |
 |`CUDNN_ATTR_TENSOR_BYTE_ALIGNMENT`|8.0.1| | | |`MIOPEN_ATTR_TENSOR_BYTE_ALIGNMENT`|6.2.0| | | | | |
+|`CUDNN_ATTR_TENSOR_CONSTANT_VALUE`|9.22.0| | | | | | | | | | |
 |`CUDNN_ATTR_TENSOR_DATA_TYPE`|8.0.1| | | |`MIOPEN_ATTR_TENSOR_DATA_TYPE`|6.2.0| | | | | |
 |`CUDNN_ATTR_TENSOR_DIMENSIONS`|8.0.1| | | |`MIOPEN_ATTR_TENSOR_DIMENSIONS`|6.2.0| | | | | |
 |`CUDNN_ATTR_TENSOR_IS_BY_VALUE`|8.1.0| | | |`MIOPEN_ATTR_TENSOR_IS_BY_VALUE`|6.2.0| | | | | |
@@ -382,6 +397,7 @@
 |`CUDNN_BACKEND_OPERATION_EXPAND_BAND_MATRIX_DESCRIPTOR`|9.10.0| | | | | | | | | | |
 |`CUDNN_BACKEND_OPERATION_GEN_STATS_DESCRIPTOR`|8.0.1| | | |`MIOPEN_BACKEND_OPERATION_GEN_STATS_DESCRIPTOR`|6.2.0| | | | | |
 |`CUDNN_BACKEND_OPERATION_MATMUL_DESCRIPTOR`|8.1.0| | | |`MIOPEN_BACKEND_OPERATION_MATMUL_DESCRIPTOR`|6.2.0| | | | | |
+|`CUDNN_BACKEND_OPERATION_MOE_GROUPED_MATMUL_BWD_DESCRIPTOR`|9.22.0| | | | | | | | | | |
 |`CUDNN_BACKEND_OPERATION_MOE_GROUPED_MATMUL_DESCRIPTOR`|9.15.0| | | | | | | | | | |
 |`CUDNN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR`|8.5.0| | | |`MIOPEN_BACKEND_OPERATION_NORM_BACKWARD_DESCRIPTOR`|6.2.0| | | | | |
 |`CUDNN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR`|8.5.0| | | |`MIOPEN_BACKEND_OPERATION_NORM_FORWARD_DESCRIPTOR`|6.2.0| | | | | |
@@ -395,7 +411,9 @@
 |`CUDNN_BACKEND_OPERATION_SDPA_BWD_DESCRIPTOR`|9.17.0| | | | | | | | | | |
 |`CUDNN_BACKEND_OPERATION_SDPA_FWD_DESCRIPTOR`|9.13.0| | | | | | | | | | |
 |`CUDNN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR`|8.5.0| | | |`MIOPEN_BACKEND_OPERATION_SIGNAL_DESCRIPTOR`|6.2.0| | | | | |
+|`CUDNN_BACKEND_OPERATION_SLICE_DESCRIPTOR`|9.22.0| | | | | | | | | | |
 |`CUDNN_BACKEND_OPERATION_SOFTMAX_DESCRIPTOR`|9.20.0| | | | | | | | | | |
+|`CUDNN_BACKEND_OPERATION_TRANSPOSE_DESCRIPTOR`|9.22.0| | | | | | | | | | |
 |`CUDNN_BACKEND_POINTWISE_DESCRIPTOR`|8.0.1| | | |`MIOPEN_BACKEND_POINTWISE_DESCRIPTOR`|6.2.0| | | | | |
 |`CUDNN_BACKEND_REDUCTION_DESCRIPTOR`|8.1.0| | | |`MIOPEN_BACKEND_REDUCTION_DESCRIPTOR`|6.2.0| | | | | |
 |`CUDNN_BACKEND_RESAMPLE_DESCRIPTOR`|8.3.0| | | |`MIOPEN_BACKEND_RESAMPLE_DESCRIPTOR`|6.2.0| | | | | |
@@ -419,6 +437,8 @@
 |`CUDNN_BN_FINALIZE_STATISTICS_INFERENCE`|8.1.0| | | | | | | | | | |
 |`CUDNN_BN_FINALIZE_STATISTICS_TRAINING`|8.1.0| | | | | | | | | | |
 |`CUDNN_BN_MIN_EPSILON`|4.0.0| | | | | | | | | | |
+|`CUDNN_CAUSAL_CONV1D_ACTIVATION_IDENTITY`|9.22.0| | | | | | | | | | |
+|`CUDNN_CAUSAL_CONV1D_ACTIVATION_SILU`|9.22.0| | | | | | | | | | |
 |`CUDNN_CONVOLUTION`|1.0.0|9.0.0| | |`miopenConvolution`|2.1.0| | | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_0`|3.0.0| | | |`miopenConvolutionBwdDataAlgoGEMM`|2.1.0| | | | | |
 |`CUDNN_CONVOLUTION_BWD_DATA_ALGO_1`|3.0.0| | | |`miopenConvolutionBwdDataAlgoDirect`|2.1.0| | | | | |
@@ -516,6 +536,7 @@
 |`CUDNN_KNOB_TYPE_CTA_SPLIT_K_MODE`|8.0.1|9.0.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_EDGE`|8.0.1| | | | | | | | | | |
 |`CUDNN_KNOB_TYPE_IDX_MODE`|8.0.1|9.0.0| | | | | | | | | |
+|`CUDNN_KNOB_TYPE_INPUT_TMA_ENABLE`|9.22.0| | | | | | | | | | |
 |`CUDNN_KNOB_TYPE_KBLOCK`|8.0.1|9.0.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_KERNEL_CFG`|8.1.0| | | | | | | | | | |
 |`CUDNN_KNOB_TYPE_LDGA`|8.0.1|9.0.0| | | | | | | | | |
@@ -525,6 +546,7 @@
 |`CUDNN_KNOB_TYPE_MULTIPLY`|8.0.1| | | | | | | | | | |
 |`CUDNN_KNOB_TYPE_NUM_C_PER_BLOCK`|8.9.0|9.0.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_OCCUPANCY`|8.9.0| | | | | | | | | | |
+|`CUDNN_KNOB_TYPE_OUTPUT_TMA_ENABLE`|9.22.0| | | | | | | | | | |
 |`CUDNN_KNOB_TYPE_REDUCTION_MODE`|8.0.1| | | | | | | | | | |
 |`CUDNN_KNOB_TYPE_SINGLEBUFFER`|8.0.1|9.0.0| | | | | | | | | |
 |`CUDNN_KNOB_TYPE_SLICED`|8.0.1|9.0.0| | | | | | | | | |
@@ -748,6 +770,8 @@
 |`CUDNN_RESAMPLE_BILINEAR`|8.3.0| | | | | | | | | | |
 |`CUDNN_RESAMPLE_MAXPOOL`|8.3.0| | | | | | | | | | |
 |`CUDNN_RESAMPLE_NEAREST`|8.3.0| | | | | | | | | | |
+|`CUDNN_RESHAPE_LOGICAL`|9.22.0| | | | | | | | | | |
+|`CUDNN_RESHAPE_VIEW_ONLY`|9.22.0| | | | | | | | | | |
 |`CUDNN_RMS_NORM`|8.9.6| | | | | | | | | | |
 |`CUDNN_RNG_DISTRIBUTION_BERNOULLI`|8.7.0| | | |`MIOPEN_RNG_DISTRIBUTION_BERNOULLI`|6.2.0| | | | | |
 |`CUDNN_RNG_DISTRIBUTION_NORMAL`|8.7.0| | | |`MIOPEN_RNG_DISTRIBUTION_NORMAL`|6.2.0| | | | | |
@@ -890,6 +914,7 @@
 |`CUDNN_TYPE_POINTWISE_MODE`|8.0.1| | | |`MIOPEN_TYPE_POINTWISE_MODE`|6.2.0| | | | | |
 |`CUDNN_TYPE_REDUCTION_OPERATOR_TYPE`|8.1.0| | | |`MIOPEN_TYPE_REDUCTION_OPERATOR_TYPE`|6.2.0| | | | | |
 |`CUDNN_TYPE_RESAMPLE_MODE`|8.3.0| | | |`MIOPEN_TYPE_RESAMPLE_MODE`|6.2.0| | | | | |
+|`CUDNN_TYPE_RESHAPE_MODE`|9.22.0| | | | | | | | | | |
 |`CUDNN_TYPE_RNG_DISTRIBUTION`|8.7.0| | | |`MIOPEN_TYPE_RNG_DISTRIBUTION`|6.2.0| | | | | |
 |`CUDNN_TYPE_SIGNAL_MODE`|8.5.0| | | |`MIOPEN_TYPE_SIGNAL_MODE`|6.2.0| | | | | |
 |`CUDNN_TYPE_TENSOR_REORDERING_MODE`|8.3.0| | | |`MIOPEN_TYPE_TENSOR_REORDERING_MODE`|6.2.0| | | | | |
@@ -921,6 +946,7 @@
 |`cudnnBackendNormFwdPhase_t`|8.5.0| | | | | | | | | | |
 |`cudnnBackendNormMode_t`|8.5.0| | | | | | | | | | |
 |`cudnnBackendNumericalNote_t`|8.0.1| | | | | | | | | | |
+|`cudnnBackendReshapeMode_t`|9.22.0| | | | | | | | | | |
 |`cudnnBackendTensorReordering_t`|8.3.0| | | | | | | | | | |
 |`cudnnBatchNormMode_t`|4.0.0|9.0.0| | |`miopenBatchNormMode_t`|2.1.0| | | | | |
 |`cudnnBatchNormOps_t`|7.4.1|9.0.0| | | | | | | | | |
@@ -930,6 +956,7 @@
 |`cudnnCTCLossDescriptor_t`|7.0.5| | | |`miopenCTCLossDescriptor_t`|2.6.0| | | | | |
 |`cudnnCTCLossStruct`|7.0.5| | | | | | | | | | |
 |`cudnnCallback_t`|7.1.3| | | | | | | | | | |
+|`cudnnCausalConv1dActivation_t`|9.22.0| | | | | | | | | | |
 |`cudnnContext`|1.0.0| | | |`miopenHandle`|2.1.0| | | | | |
 |`cudnnConvolutionBwdDataAlgoPerfStruct`|8.2.0|9.0.0| | |`miopenConvAlgoPerf_t`|2.1.0| | | | | |
 |`cudnnConvolutionBwdDataAlgoPerf_t`|3.0.0|9.0.0| | |`miopenConvAlgoPerf_t`|2.1.0| | | | | |
@@ -1061,6 +1088,8 @@
 |`cudnnBuildRNNDynamic`|8.0.1| | | | | | | | | | |
 |`cudnnCTCLoss`|7.0.5| | | |`miopenCTCLoss`|2.6.0| | | | | |
 |`cudnnCTCLoss_v8`|8.0.1| | | | | | | | | | |
+|`cudnnCausalConv1dBackward`|9.22.0| | | | | | | | | | |
+|`cudnnCausalConv1dForward`|9.22.0| | | | | | | | | | |
 |`cudnnCnnInferVersionCheck`|8.0.2| | | | | | | | | | |
 |`cudnnCnnTrainVersionCheck`|8.0.2| | | | | | | | | | |
 |`cudnnConvolutionBackwardBias`|1.0.0|9.0.0| | |`miopenConvolutionBackwardBias`|2.1.0| | | | | |
@@ -1315,6 +1344,7 @@
 |`cudnnSpatialTfGridGeneratorForward`|5.0.0| | | | | | | | | | |
 |`cudnnSpatialTfSamplerBackward`|5.0.0| | | | | | | | | | |
 |`cudnnSpatialTfSamplerForward`|5.0.0| | | | | | | | | | |
+|`cudnnSubquadraticOpsVersionCheck`|9.22.0| | | | | | | | | | |
 |`cudnnTransformFilter`|7.6.0|9.0.0| | | | | | | | | |
 |`cudnnTransformTensor`|2.0.0|9.0.0| | |`miopenTransformTensor`|2.1.0| | | | | |
 |`cudnnTransformTensorEx`|7.5.0|9.0.0| | | | | | | | | |
