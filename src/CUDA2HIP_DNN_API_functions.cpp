@@ -351,6 +351,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP = [] {
   m["cudnnBackendPopulateCudaGraph"]                            = {"hipdnnBackendPopulateCudaGraph",                            "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
   m["cudnnBackendUpdateCudaGraph"]                              = {"hipdnnBackendUpdateCudaGraph",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
+  // cuDNN Subquadratic Ops functions
+  m["cudnnSubquadraticOpsVersionCheck"]                         = {"hipdnnSubquadraticOpsVersionCheck",                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnCausalConv1dForward"]                                 = {"hipdnnCausalConv1dForward",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnCausalConv1dBackward"]                                = {"hipdnnCausalConv1dBackward",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+
   return m;
 }();
 
@@ -637,6 +642,9 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP = [] 
   m["cudnnOpsVersionCheck"]                                     = {CUDNN_900, CUDA_0,    CUDA_0   };
   m["cudnnBackendPopulateCudaGraph"]                            = {CUDNN_950, CUDA_0,    CUDA_0   };
   m["cudnnBackendUpdateCudaGraph"]                              = {CUDNN_950, CUDA_0,    CUDA_0   };
+  m["cudnnSubquadraticOpsVersionCheck"]                         = {CUDNN_9220,CUDA_0,    CUDA_0   };
+  m["cudnnCausalConv1dForward"]                                 = {CUDNN_9220,CUDA_0,    CUDA_0   };
+  m["cudnnCausalConv1dBackward"]                                = {CUDNN_9220,CUDA_0,    CUDA_0   };
 
   return m;
 }();
