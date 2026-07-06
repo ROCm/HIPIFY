@@ -90,6 +90,7 @@
 |`CUDNN_ATTR_OPERATIONGRAPH_IS_DYNAMIC_SHAPE_ENABLED`|9.4.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_IS_OVERRIDE_SHAPE_ENABLED`|9.21.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_IS_SAME_TOPOLOGY`|9.6.0| | | | | | | | | | |
+|`CUDNN_ATTR_OPERATIONGRAPH_MODE`|9.23.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATIONGRAPH_OPS`|8.0.1| | | |`MIOPEN_ATTR_OPERATIONGRAPH_OPS`|6.2.0| | | | | |
 |`CUDNN_ATTR_OPERATION_BLOCK_SCALE_DEQUANTIZE_BLOCK_SIZE`|9.7.0| | | | | | | | | | |
 |`CUDNN_ATTR_OPERATION_BLOCK_SCALE_DEQUANTIZE_MATH_PREC`|9.7.0| | | | | | | | | | |
@@ -625,6 +626,23 @@
 |`CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_13x13`|8.3.0| | | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_4x4`|8.3.0| | | | | | | | | | |
 |`CUDNN_NUMERICAL_NOTE_WINOGRAD_TILE_6x6`|8.3.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_AUTO`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_BLAS_MATMUL`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_CONV_BWD_DATA`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_CONV_BWD_FILTER`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_CONV_FORWARD`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_GENERIC_CONV_FUSION`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_GENERIC_MATMUL_FUSION`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_GENERIC_POINTWISE_FUSION`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_NORM_BWD`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_NORM_FWD_INFER`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_NORM_FWD_TRAIN`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_RESAMPLE_BWD`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_RESAMPLE_FWD`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_SDPA_BWD`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_SDPA_FWD`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_UNIFIED_SDPA_BWD`|9.23.0| | | | | | | | | | |
+|`CUDNN_OPERATIONGRAPH_MODE_UNIFIED_SDPA_FWD`|9.23.0| | | | | | | | | | |
 |`CUDNN_OP_TENSOR_ADD`|5.0.0| | | |`miopenTensorOpAdd`|2.1.0| | | | | |
 |`CUDNN_OP_TENSOR_MAX`|5.0.0| | | |`miopenTensorOpMax`|2.1.0| | | | | |
 |`CUDNN_OP_TENSOR_MIN`|5.0.0| | | |`miopenTensorOpMin`|2.1.0| | | | | |
@@ -910,6 +928,7 @@
 |`CUDNN_TYPE_NORM_FWD_PHASE`|8.5.0| | | |`MIOPEN_TYPE_NORM_FWD_PHASE`|6.2.0| | | | | |
 |`CUDNN_TYPE_NORM_MODE`|8.5.0| | | |`MIOPEN_TYPE_NORM_MODE`|6.2.0| | | | | |
 |`CUDNN_TYPE_NUMERICAL_NOTE`|8.0.1| | | |`MIOPEN_TYPE_NUMERICAL_NOTE`|6.2.0| | | | | |
+|`CUDNN_TYPE_OPERATIONGRAPH_MODE`|9.23.0| | | | | | | | | | |
 |`CUDNN_TYPE_PADDING_MODE`|8.3.0| | | |`MIOPEN_TYPE_PADDING_MODE`|6.2.0| | | | | |
 |`CUDNN_TYPE_POINTWISE_MODE`|8.0.1| | | |`MIOPEN_TYPE_POINTWISE_MODE`|6.2.0| | | | | |
 |`CUDNN_TYPE_REDUCTION_OPERATOR_TYPE`|8.1.0| | | |`MIOPEN_TYPE_REDUCTION_OPERATOR_TYPE`|6.2.0| | | | | |
@@ -946,6 +965,7 @@
 |`cudnnBackendNormFwdPhase_t`|8.5.0| | | | | | | | | | |
 |`cudnnBackendNormMode_t`|8.5.0| | | | | | | | | | |
 |`cudnnBackendNumericalNote_t`|8.0.1| | | | | | | | | | |
+|`cudnnBackendOperationGraphMode_t`|9.23.0| | | | | | | | | | |
 |`cudnnBackendReshapeMode_t`|9.22.0| | | | | | | | | | |
 |`cudnnBackendTensorReordering_t`|8.3.0| | | | | | | | | | |
 |`cudnnBatchNormMode_t`|4.0.0|9.0.0| | |`miopenBatchNormMode_t`|2.1.0| | | | | |
@@ -1201,6 +1221,7 @@
 |`cudnnGetCudartVersion`|6.0.0| | | | | | | | | | |
 |`cudnnGetDropoutDescriptor`|7.0.5| | | |`miopenGetDropoutDescriptor`|2.8.0| | | | | |
 |`cudnnGetErrorString`|2.0.0| | | |`miopenGetErrorString`|2.1.0| | | | | |
+|`cudnnGetExecutionPlanWorkspaceSize`|9.23.0| | | | | | | | | | |
 |`cudnnGetFilter4dDescriptor`|2.0.0|9.0.0| | | | | | | | | |
 |`cudnnGetFilterNdDescriptor`|2.0.0|9.0.0| | | | | | | | | |
 |`cudnnGetFilterSizeInBytes`|7.6.0|9.0.0| | | | | | | | | |
