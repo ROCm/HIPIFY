@@ -355,6 +355,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP = [] {
   m["cudnnSubquadraticOpsVersionCheck"]                         = {"hipdnnSubquadraticOpsVersionCheck",                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
   m["cudnnCausalConv1dForward"]                                 = {"hipdnnCausalConv1dForward",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
   m["cudnnCausalConv1dBackward"]                                = {"hipdnnCausalConv1dBackward",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGetExecutionPlanWorkspaceSize"]                       = {"hipdnnGetExecutionPlanWorkspaceSize",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   return m;
 }();
@@ -645,6 +646,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP = [] 
   m["cudnnSubquadraticOpsVersionCheck"]                         = {CUDNN_9220,CUDA_0,    CUDA_0   };
   m["cudnnCausalConv1dForward"]                                 = {CUDNN_9220,CUDA_0,    CUDA_0   };
   m["cudnnCausalConv1dBackward"]                                = {CUDNN_9220,CUDA_0,    CUDA_0   };
+  m["cudnnGetExecutionPlanWorkspaceSize"]                       = {CUDNN_9230,CUDA_0,    CUDA_0   };
 
   return m;
 }();
