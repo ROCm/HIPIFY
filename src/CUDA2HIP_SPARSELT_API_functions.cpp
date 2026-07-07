@@ -43,6 +43,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_FUNCTION_MAP = [] {
   m["cusparseLtSpMMAPruneCheck"]                                      = {"hipsparseLtSpMMAPruneCheck",                         "", CONV_LIB_FUNC, API_SPARSELT, 2};
   m["cusparseLtSpMMACompressedSize"]                                  = {"hipsparseLtSpMMACompressedSize",                     "", CONV_LIB_FUNC, API_SPARSELT, 2};
   m["cusparseLtSpMMACompress"]                                        = {"hipsparseLtSpMMACompress",                           "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtMatDescriptorDestroy"]                                 = {"hipsparseLtMatDescriptorDestroy",                    "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtSpMMAPrune2"]                                          = {"hipsparseLtSpMMAPrune2",                             "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtSpMMAPruneCheck2"]                                     = {"hipsparseLtSpMMAPruneCheck2",                        "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtSpMMACompressedSize2"]                                 = {"hipsparseLtSpMMACompressedSize2",                    "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtSpMMACompress2"]                                       = {"hipsparseLtSpMMACompress2",                          "", CONV_LIB_FUNC, API_SPARSELT, 2};
 
   return m;
 }();
@@ -67,6 +72,11 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_FUNCTION_VER_MAP 
   m["cusparseLtSpMMAPruneCheck"]                                      = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["cusparseLtSpMMACompressedSize"]                                  = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["cusparseLtSpMMACompress"]                                        = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatDescriptorDestroy"]                                 = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
+  m["cusparseLtSpMMAPrune2"]                                          = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
+  m["cusparseLtSpMMAPruneCheck2"]                                     = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
+  m["cusparseLtSpMMACompressedSize2"]                                 = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
+  m["cusparseLtSpMMACompress2"]                                       = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -74,23 +84,28 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_FUNCTION_VER_MAP 
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_FUNCTION_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
-  m["hipsparseLtInit"]                                                = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtDestroy"]                                             = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtDenseDescriptorInit"]                                 = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtStructuredDescriptorInit"]                            = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmulDescriptorInit"]                                = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmulAlgSelectionInit"]                              = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmulAlgSetAttribute"]                               = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmulAlgGetAttribute"]                               = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmulGetWorkspace"]                                  = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmulPlanInit"]                                      = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmulPlanDestroy"]                                   = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmul"]                                              = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtMatmulSearch"]                                        = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtSpMMAPrune"]                                          = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtSpMMAPruneCheck"]                                     = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtSpMMACompressedSize"]                                 = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipsparseLtSpMMACompress"]                                       = {HIP_7020, HIP_0,    HIP_0   };
+  m["hipsparseLtInit"]                                                = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtDestroy"]                                             = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtDenseDescriptorInit"]                                 = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtStructuredDescriptorInit"]                            = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulDescriptorInit"]                                = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulAlgSelectionInit"]                              = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulAlgSetAttribute"]                               = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulAlgGetAttribute"]                               = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulGetWorkspace"]                                  = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulPlanInit"]                                      = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulPlanDestroy"]                                   = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmul"]                                              = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulSearch"]                                        = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtSpMMAPrune"]                                          = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtSpMMAPruneCheck"]                                     = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtSpMMACompressedSize"]                                 = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtSpMMACompress"]                                       = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatDescriptorDestroy"]                                = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtSpMMAPrune2"]                                         = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtSpMMAPruneCheck2"]                                    = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtSpMMACompressedSize2"]                                = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtSpMMACompress2"]                                      = {HIP_7100, HIP_0,    HIP_0   };
 
   return m;
 }();
