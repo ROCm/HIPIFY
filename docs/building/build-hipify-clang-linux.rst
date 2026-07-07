@@ -134,8 +134,8 @@ Linux testing
 
 On Linux, the following configurations are tested:
 
-* Ubuntu 22-24: LLVM 13.0.0 - 22.1.7, CUDA 7.0 - 13.2.0, cuDNN 8.0.5 - 9.21.1, cuTensor 1.0.1.0 - 2.6.0.0
-* Ubuntu 20-21: LLVM 9.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 5.1.10 - 9.21.1, cuTensor 1.0.1.0 - 2.6.0.0
+* Ubuntu 22-24: LLVM 13.0.0 - 22.1.8, CUDA 7.0 - 13.2.0, cuDNN 8.0.5 - 9.23.0, cuTensor 1.0.1.0 - 2.6.0.0
+* Ubuntu 20-21: LLVM 9.0.0 - 20.1.8, CUDA 7.0 - 12.8.1, cuDNN 5.1.10 - 9.23.0, cuTensor 1.0.1.0 - 2.6.0.0
 * Ubuntu 16-19: LLVM 8.0.0 - 14.0.6, CUDA 7.0 - 10.2, cuDNN 5.1.10 - 8.0.5
 * Ubuntu 14: LLVM 4.0.0 - 7.1.0, CUDA 7.0 - 9.0, cuDNN 5.0.5 - 7.6.5
 
@@ -159,12 +159,12 @@ Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 24.04.02``
     -DCMAKE_INSTALL_PREFIX=../dist \
     -DCMAKE_PREFIX_PATH=$ROOT_DIR/dist \
     -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-12.9.1 \
-    -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.21.1 \
+    -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.23.0 \
     -DCUDA_TENSOR_ROOT_DIR=/usr/local/cutensor-2.6.0.0 \
     -DLLVM_EXTERNAL_LIT=$ROOT_DIR/build/bin/llvm-lit \
     ../hipify
 
-The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/22.1.7``):
+The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/22.1.8``):
 
 .. code-block:: shell
 
@@ -186,11 +186,11 @@ The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/22.1.7`
   --    - Is part of HIP SDK    : OFF
   --    - Install clang headers : ON
   -- Found ZLIB: /usr/lib/x86_64-linux-gnu/libz.so (found version "1.3")
-  -- Found LLVM 22.1.7:
-  --    - CMake module path     : /usr/llvm/22.1.7/dist/lib/cmake/llvm
-  --    - Clang include path    : /usr/llvm/22.1.7/dist/include
-  --    - LLVM Include path     : /usr/llvm/22.1.7/dist/include
-  --    - Binary path           : /usr/llvm/22.1.7/dist/bin
+  -- Found LLVM 22.1.8:
+  --    - CMake module path     : /usr/llvm/22.1.8/dist/lib/cmake/llvm
+  --    - Clang include path    : /usr/llvm/22.1.8/dist/include
+  --    - LLVM Include path     : /usr/llvm/22.1.8/dist/include
+  --    - Binary path           : /usr/llvm/22.1.8/dist/bin
   -- Linker detection: GNU ld
   -- ---- The below configuring for hipify-clang testing only ----
   -- Found Python: /usr/bin/python3.14 (found suitable version "3.14.5", required range is "3.0...3.15") found components: Interpreter
@@ -199,7 +199,7 @@ The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/22.1.7`
   -- Initial CUDA to configure:
   --    - CUDA Toolkit path     : /usr/local/cuda-12.9.1
   --    - CUDA Samples path     :
-  --    - cuDNN path            : /usr/local/cudnn-9.21.1
+  --    - cuDNN path            : /usr/local/cudnn-9.23.0
   --    - cuTENSOR path         : /usr/local/cuTensor/2.6.0.0
   --    - CUB path              :
   -- Found CUDAToolkit: /usr/local/cuda-12.9.1/targets/x86_64-linux/include (found version "12.9.86")
@@ -209,7 +209,7 @@ The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/22.1.7`
   -- Found CUDA config:
   --    - CUDA Toolkit path     : /usr/local/cuda-12.9.1
   --    - CUDA Samples path     : OFF
-  --    - cuDNN path            : /usr/local/cudnn-9.21.1/include
+  --    - cuDNN path            : /usr/local/cudnn-9.23.0/include
   --    - cuTENSOR path         : /usr/local/cuTensor/2.6.0.0/include
   --    - CUB path              : /usr/local/cuda-12.9.1/include/cub
   -- Configuring done (0.6s)
@@ -227,7 +227,7 @@ The corresponding successful output is:
   Running HIPify regression tests
   ===============================================================
   CUDA 12.9.86 - will be used for testing
-  LLVM 22.1.7 - will be used for testing
+  LLVM 22.1.8 - will be used for testing
   x86_64 - Platform architecture
   Linux 6.5.0-15-generic - Platform OS
   64 - hipify-clang binary bitness
