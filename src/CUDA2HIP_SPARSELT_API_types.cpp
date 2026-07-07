@@ -37,6 +37,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
   m["cusparseComputeType"]                                               = {"hipsparseLtComputetype_t",                      "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSE_COMPUTE_16F"]                                              = {"HIPSPARSELT_COMPUTE_16F",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSE_COMPUTE_32I"]                                              = {"HIPSPARSELT_COMPUTE_32I",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSE_COMPUTE_TF32"]                                             = {"HIPSPARSELT_COMPUTE_TF32",                      "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSE_COMPUTE_TF32_FAST"]                                        = {"HIPSPARSELT_COMPUTE_TF32_FAST",                 "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["cusparseLtMatmulAlg_t"]                                             = {"hipsparseLtMatmulAlg_t",                        "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_MATMUL_ALG_DEFAULT"]                                     = {"HIPSPARSELT_MATMUL_ALG_DEFAULT",                "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["cusparseLtMatmulAlgAttribute_t"]                                    = {"hipsparseLtMatmulAlgAttribute_t",               "", CONV_TYPE, API_SPARSELT, 1};
@@ -63,6 +65,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   m["cusparseComputeType"]                                               = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_16F"]                                              = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_32I"]                                              = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
+  m["CUSPARSE_COMPUTE_TF32"]                                             = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
+  m["CUSPARSE_COMPUTE_TF32_FAST"]                                        = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
   m["cusparseLtMatmulAlg_t"]                                             = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSELT_MATMUL_ALG_DEFAULT"]                                     = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["cusparseLtMatmulAlgAttribute_t"]                                    = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
@@ -79,25 +83,27 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
 const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP = [] {
   std::map<llvm::StringRef, hipAPIversions> m;
 
-  m["hipsparseLtHandle_t"]                                               = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtMatDescriptor_t"]                                        = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtMatmulDescriptor_t"]                                     = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtMatmulAlgSelection_t"]                                   = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtMatmulPlan_t"]                                           = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtSparsity_t"]                                             = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_SPARSITY_50_PERCENT"]                                   = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtComputetype_t"]                                          = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_COMPUTE_16F"]                                           = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_COMPUTE_32I"]                                           = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtMatmulAlg_t"]                                            = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_MATMUL_ALG_DEFAULT"]                                    = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtMatmulAlgAttribute_t"]                                   = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_MATMUL_ALG_CONFIG_ID"]                                  = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_MATMUL_ALG_CONFIG_MAX_ID"]                              = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_MATMUL_SEARCH_ITERATIONS"]                              = {HIP_7020, HIP_0,    HIP_0    };
-  m["hipsparseLtPruneAlg_t"]                                             = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_PRUNE_SPMMA_TILE"]                                      = {HIP_7020, HIP_0,    HIP_0    };
-  m["HIPSPARSELT_PRUNE_SPMMA_STRIP"]                                     = {HIP_7020, HIP_0,    HIP_0    };
+  m["hipsparseLtHandle_t"]                                               = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtMatDescriptor_t"]                                        = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulDescriptor_t"]                                     = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulAlgSelection_t"]                                   = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulPlan_t"]                                           = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtSparsity_t"]                                             = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_SPARSITY_50_PERCENT"]                                   = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtComputetype_t"]                                          = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_COMPUTE_16F"]                                           = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_COMPUTE_32I"]                                           = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulAlg_t"]                                            = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_ALG_DEFAULT"]                                    = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulAlgAttribute_t"]                                   = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_ALG_CONFIG_ID"]                                  = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_ALG_CONFIG_MAX_ID"]                              = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_SEARCH_ITERATIONS"]                              = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtPruneAlg_t"]                                             = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_PRUNE_SPMMA_TILE"]                                      = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_PRUNE_SPMMA_STRIP"]                                     = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_COMPUTE_TF32"]                                          = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_COMPUTE_TF32_FAST"]                                     = {HIP_7100, HIP_0,    HIP_0    };
 
   return m;
 }();
