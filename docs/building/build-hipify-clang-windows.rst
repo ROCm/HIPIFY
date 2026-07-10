@@ -1,4 +1,4 @@
-.. meta::
+    .. meta::
    :description: Tools to automatically translate CUDA source code into portable HIP C++
    :keywords: HIPIFY, ROCm, library, tool, CUDA, CUDA2HIP, hipify-clang, hipify-perl, Windows
 
@@ -249,27 +249,27 @@ Tested configurations:
   * - ``17.0.1`` :sup:`6` - ``18.1.8`` :sup:`7`
     - ``7.0 - 12.3.2``
     - ``8.0.5  - 9.23.1``
-    - ``2019.16.11.56, 2022.17.14.32, 2026.18.6.0``
-    - ``4.3.2``
-    - ``3.14.5``
+    - ``2019.16.11.57, 2022.17.14.35, 2026.18.7.3``
+    - ``4.3.3``
+    - ``3.14.6``
   * - ``19.1.0 - 20.1.8``
     - ``7.0 - 12.8.1``
     - ``8.0.5  - 9.23.1``
-    - ``2019.16.11.56, 2022.17.14.32, 2026.18.6.0``
-    - ``4.3.2``
-    - ``3.14.5``
+    - ``2019.16.11.57, 2022.17.14.35, 2026.18.7.3``
+    - ``4.3.3``
+    - ``3.14.6``
   * - ``21.1.0 - 22.1.8``
     - ``7.0 - 12.9.1``
     - ``8.0.5  - 9.23.1``
-    - ``2019.16.11.56, 2022.17.14.32, 2026.18.6.0``
-    - ``4.3.2``
-    - ``3.14.5``
+    - ``2019.16.11.57, 2022.17.14.35, 2026.18.7.3``
+    - ``4.3.3``
+    - ``3.14.6``
   * - ``23.0.0git``
     - ``7.0 - 13.2.0``
     - ``8.0.5  - 9.23.1``
-    - ``2019.16.11.56, 2022.17.14.32, 2026.18.6.0``
-    - ``4.3.2``
-    - ``3.14.5``
+    - ``2019.16.11.57, 2022.17.14.35, 2026.18.7.3``
+    - ``4.3.3``
+    - ``3.14.6``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 15 2017.
 
@@ -332,7 +332,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8`
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS - Failed
     -- ---- The below configuring for hipify-clang testing only ----
-    -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python314\python.exe (found suitable version "3.14.5", required range is "3.0...3.15") found components: Interpreter
+    -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python314\python.exe (found suitable version "3.14.6", required range is "3.0...3.15") found components: Interpreter
     -- Found lit: C:\Users\TT\AppData\Local\Programs\Python\Python314\Scripts\lit.exe
     -- Found FileCheck: D:\LLVM\22.1.8\dist\bin\FileCheck.exe
     -- Initial CUDA to configure:
