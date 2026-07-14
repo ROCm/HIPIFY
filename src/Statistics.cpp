@@ -161,6 +161,7 @@ const char *apiNames[NUM_API_TYPES] = {
   "RTC API",
   "TENSOR API",
   "cuFile API",
+  "cuSPARSELt API"
 };
 
 const char *apiTypes[NUM_API_TYPES] = {
@@ -171,9 +172,9 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_RAND",
   "API_DNN",
   "API_FFT",
-  "API_CUB",
   "API_SPARSE",
   "API_SOLVER",
+  "API_CUB",
   "API_RTC",
   "API_TENSOR",
   "API_FILE",
