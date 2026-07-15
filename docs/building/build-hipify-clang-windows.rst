@@ -341,7 +341,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8`
     --    - cuDNN path            : D:\CUDA\cuDNN\9.23.2
     --    - cuTENSOR path         : D:\CUDA\cuTensor\2.6.0.0
     --    - CUB path              :
-    --    - cuFile path           : D:\CUDA\cuFile\1.1\1.18.1
+    --    - cuFile path           : D:\CUDA\cuFile\1.18.1
     -- Found CUDAToolkit: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include (found version "12.9.86")
     -- Found CUDA config:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
