@@ -395,7 +395,10 @@ enum cudaVersions {
   CUFILE_1160 = 1000160,
   CUFILE_1161 = 1000161,
   CUFILE_1170 = 1000170,
-  CUFILE_LATEST = CUFILE_1170,
+  CUFILE_1171 = 1000171,
+  CUFILE_1180 = 1000180,
+  CUFILE_1181 = 1000181,
+  CUFILE_LATEST = CUFILE_1181,
   CUSPARSELT_001 = 1,
   CUSPARSELT_010 = 10,
   CUSPARSELT_020 = 20,
@@ -536,6 +539,8 @@ extern const std::vector<cudaVersions> CUDA_128_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_129_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_130_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_131_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_132_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_133_cuFile_version;
 extern const std::vector<cudaVersions> Empty_vector;
 
 struct hipCounter {
