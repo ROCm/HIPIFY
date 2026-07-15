@@ -126,19 +126,19 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
       -DCUDA_CUB_ROOT_DIR=D:\CUDA\CUB
 
-- [Optional] Download `cuFile <https://developer.download.nvidia.com/compute/cuda/redist/libcufile/linux-x86_64/libcufile-linux-x86_64-1.17.0.44-archive.tar.xz>`_ for ``CUDA >= 11.4`` only.
+- [Optional] Download `cuFile <https://developer.download.nvidia.com/compute/cuda/redist/libcufile/linux-x86_64/libcufile-linux-x86_64-1.18.1.6-archive.tar.xz>`_ for ``CUDA >= 11.4`` only.
   Then, extract the downloaded archive, extract it with ``tar``:
 
   .. code-block:: shell
 
-      tar -xf libcufile-linux-x86_64-1.17.0.44-archive.tar.xz
+      tar -xf libcufile-linux-x86_64-1.18.1.6-archive.tar.xz
 
-  Copy the extracted folder to a desired location, for example, ``D:\CUDA\cuFile\1.17.0``.
+  Copy the extracted folder to a desired location, for example, ``D:\CUDA\cuFile\1.18.1``.
   To specify the path to cuFile, use the ``CUDA_FILE_ROOT_DIR`` option:
 
   .. code-block:: shell
 
-      -DCUDA_FILE_ROOT_DIR=D:\CUDA\cuFile\1.17.0
+      -DCUDA_FILE_ROOT_DIR=D:\CUDA\cuFile\1.18.1
 
 - Install `Python <https://www.python.org/downloads>`_ version 3.0 or greater.
 
@@ -341,7 +341,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8`
     --    - cuDNN path            : D:\CUDA\cuDNN\9.23.2
     --    - cuTENSOR path         : D:\CUDA\cuTensor\2.6.0.0
     --    - CUB path              :
-    --    - cuFile path           : D:\CUDA\cuFile\1.17.0
+    --    - cuFile path           : D:\CUDA\cuFile\1.18.1
     -- Found CUDAToolkit: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include (found version "12.9.86")
     -- Found CUDA config:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
@@ -349,7 +349,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8`
     --    - cuDNN path            : D:\CUDA\cuDNN\9.23.2\include
     --    - cuTENSOR path         : D:\CUDA\cuTensor\2.6.0.0\include
     --    - CUB path              : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include
-    --    - cuFile path           : D:\CUDA\cuFile\1.17.0\include
+    --    - cuFile path           : D:\CUDA\cuFile\1.18.1\include
     -- Configuring done (4.2s)
     -- Generating done (0.1s)
     -- Build files have been written to: D:\HIPIFY\build

@@ -197,6 +197,8 @@ const std::vector<cudaVersions> CUDA_128_cuFile_version = { CUFILE_1130, CUFILE_
 const std::vector<cudaVersions> CUDA_129_cuFile_version = { CUFILE_1140, CUFILE_1141 };
 const std::vector<cudaVersions> CUDA_130_cuFile_version = { CUFILE_1150, CUFILE_1151 };
 const std::vector<cudaVersions> CUDA_131_cuFile_version = { CUFILE_1160, CUFILE_1161 };
+const std::vector<cudaVersions> CUDA_132_cuFile_version = { CUFILE_1170, CUFILE_1171 };
+const std::vector<cudaVersions> CUDA_133_cuFile_version = { CUFILE_1180, CUFILE_1181 };
 const std::vector<cudaVersions> Empty_vector = {};
 
 namespace {
@@ -670,6 +672,9 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUFILE_1160: return "1.16.0";
     case CUFILE_1161: return "1.16.1";
     case CUFILE_1170: return "1.17.0";
+    case CUFILE_1171: return "1.17.1";
+    case CUFILE_1180: return "1.18.0";
+    case CUFILE_1181: return "1.18.1";
     case CUSPARSELT_001: return "0.0.1";
     case CUSPARSELT_010: return "0.1.0";
     case CUSPARSELT_020: return "0.2.0";
@@ -782,6 +787,10 @@ const std::vector<cudaVersions> &Statistics::getCuFileVersionsForCudaVersion(con
       return CUDA_130_cuFile_version;
     case CUDA_131:
       return CUDA_131_cuFile_version;
+    case CUDA_132:
+      return CUDA_132_cuFile_version;
+    case CUDA_133:
+      return CUDA_133_cuFile_version;
     default:
       return Empty_vector;
   }
@@ -920,6 +929,7 @@ cudaVersions Statistics::convertCudaToolkitVersion(const clang::CudaVersion &ver
     case clang::CudaVersion::CUDA_130: return CUDA_130;
     case clang::CudaVersion::CUDA_131: return CUDA_131;
     case clang::CudaVersion::CUDA_132: return CUDA_132;
+    case clang::CudaVersion::CUDA_133: return CUDA_133;
 #endif
 #endif
 #endif
