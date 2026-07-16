@@ -185,7 +185,7 @@ requests==2.34.2
     # via
     #   pygithub
     #   sphinx
-rocm-docs-core==1.37.0
+rocm-docs-core==1.38.0
     # via -r requirements.in
 rpds-py==0.30.0
     # via
