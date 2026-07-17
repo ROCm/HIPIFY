@@ -13,44 +13,43 @@ int main() {
   // CHECK: hipFileOpError_t fileOpError;
   CUfileOpError fileOpError;
 
-  // CHECK: hipFileError_t fileError;
-  CUfileError_t fileError;
+  // CHECK: hipFileError fileError;
+  // CHECK-NEXT: hipFileError_t fileError_t;
+  CUfileError fileError;
+  CUfileError_t fileError_t;
 
-  // CHECK: hipFileDriverStatusFlags_t driverStatusFlags;
-  CUfileDriverStatusFlags_t driverStatusFlags;
+  // CHECK: hipFileDriverStatusFlags driverStatusFlags;
+  // CHECK-NEXT: hipFileDriverStatusFlags_t driverStatusFlags_t;
+  CUfileDriverStatusFlags driverStatusFlags;
+  CUfileDriverStatusFlags_t driverStatusFlags_t;
 
-  // CHECK: hipFileDriverControlFlags_t driverControlFlags;
-  CUfileDriverControlFlags_t driverControlFlags;
+  // CHECK: hipFileDriverControlFlags driverControlFlags;
+  // CHECK-NEXT: hipFileDriverControlFlags_t driverControlFlags_t;
+  CUfileDriverControlFlags driverControlFlags;
+  CUfileDriverControlFlags_t driverControlFlags_t;
 
-  // CHECK: hipFileDriverControlFlags_t driverControlFlags2;
-  CUfileDriverControlFlags driverControlFlags2;
-
-  // CHECK: hipFileFeatureFlags_t featureFlags;
-  CUfileFeatureFlags_t featureFlags;
-
-  // CHECK: hipFileFeatureFlags_t featureFlags2;
-  CUfileFeatureFlags featureFlags2;
+  // CHECK: hipFileFeatureFlags featureFlags;
+  // CHECK-NEXT: hipFileFeatureFlags_t featureFlags_t;
+  CUfileFeatureFlags featureFlags;
+  CUfileFeatureFlags_t featureFlags_t;
 
   // CHECK: hipFileFileHandleType fileHandleType;
   CUfileFileHandleType fileHandleType;
 
-  // CHECK: hipFileDriverProps_t driverProps;
-  CUfileDrvProps_t driverProps;
+  // CHECK: hipFileDriverProps driverProps;
+  // CHECK-NEXT: hipFileDriverProps_t driverProps_t;
+  CUfileDrvProps driverProps;
+  CUfileDrvProps_t driverProps_t;
 
-  // CHECK: hipFileDriverProps_t driverProps2;
-  CUfileDrvProps driverProps2;
+  // CHECK: hipFileRDMAInfo rdmaInfo;
+  // CHECK-NEXT: hipFileRDMAInfo_t rdmaInfo_t;
+  cufileRDMAInfo rdmaInfo;
+  cufileRDMAInfo_t rdmaInfo_t;
 
-  // CHECK: hipFileRDMAInfo_t rdmaInfo;
-  cufileRDMAInfo_t rdmaInfo;
-
-  // CHECK: hipFileRDMAInfo_t rdmaInfo2;
-  cufileRDMAInfo rdmaInfo2;
-
-  // CHECK: hipFileFSOps_t fsOps;
-  CUfileFSOps_t fsOps;
-
-  // CHECK: hipFileFSOps_t fsOps2;
-  CUfileFSOps fsOps2;
+  // CHECK: hipFileFSOps fsOps;
+  // CHECK-NEXT: hipFileFSOps_t fsOps_t;
+  CUfileFSOps fsOps;
+  CUfileFSOps_t fsOps_t;
 
   // CHECK: sockaddr sockAddr;
   sockaddr_t sockAddr;
@@ -62,29 +61,33 @@ int main() {
   CUfileHandle_t fileHandle;
 
 #if CUDA_VERSION >= 11060
-  // CHECK: hipFileOpcode_t opcode;
-  CUfileOpcode_t opcode;
+  // CHECK: hipFileOpcode opcode;
+  // CHECK-NEXT: hipFileOpcode_t opcode_t;
+  CUfileOpcode opcode;
+  CUfileOpcode_t opcode_t;
 
-  // CHECK: hipFileStatus_t fileStatus;
-  CUfileStatus_t fileStatus;
-
-  // CHECK: hipFileStatus_t fileStatus2;
-  CUFILEStatus_enum fileStatus2;
+  // CHECK: hipFileStatus fileStatus;
+  // CHECK: hipFileStatus_t fileStatus_t;
+  CUFILEStatus_enum fileStatus;
+  CUfileStatus_t fileStatus_t;
 
   // CHECK: hipFileBatchHandle_t batchHandle;
   CUfileBatchHandle_t batchHandle;
 
-  // CHECK: hipFileBatchMode_t batchMode;
-  CUfileBatchMode_t batchMode;
+  // CHECK: hipFileBatchMode batchMode;
+  // CHECK-NEXT: hipFileBatchMode_t batchMode_t;
+  cufileBatchMode batchMode;
+  CUfileBatchMode_t batchMode_t;
 
-  // CHECK: hipFileBatchMode_t batchMode2;
-  cufileBatchMode batchMode2;
-
-  // CHECK: hipFileIOParams_t ioParams;
+  // CHECK: hipFileIOParams ioParams;
+  // CHECK-NEXT: hipFileIOParams_t ioParams_t;
   CUfileIOParams ioParams;
+  CUfileIOParams_t ioParams_t;
 
-  // CHECK: hipFileIOEvents_t ioEvents;
+  // CHECK: hipFileIOEvents ioEvents;
+  // CHECK: hipFileIOEvents_t ioEvents_t;
   CUfileIOEvents ioEvents;
+  CUfileIOEvents_t ioEvents_t;
 #endif
 
   // CHECK: hipFileOpError_t FILE_SUCCESS = hipFileSuccess;
