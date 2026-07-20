@@ -69,36 +69,36 @@ int main() {
 
   // cuSPARSELt data types (Added: cuSPARSELt 0.0.1)
   // CHECK: hipsparseLtSparsity_t sparsity;
+  // CHECK-NEXT: hipsparseLtSparsity_t SPARSITY_50_PERCENT = HIPSPARSELT_SPARSITY_50_PERCENT;
   cusparseLtSparsity_t sparsity;
-  // CHECK: hipsparseLtSparsity_t SPARSITY_50_PERCENT = HIPSPARSELT_SPARSITY_50_PERCENT;
   cusparseLtSparsity_t SPARSITY_50_PERCENT = CUSPARSELT_SPARSITY_50_PERCENT;
 
   // CHECK: hipsparseLtComputetype_t computeType;
+  // CHECK-NEXT: hipsparseLtComputetype_t COMPUTE_16F = HIPSPARSELT_COMPUTE_16F;
+  // CHECK-NEXT: hipsparseLtComputetype_t COMPUTE_32I = HIPSPARSELT_COMPUTE_32I;
   cusparseComputeType computeType;
-  // CHECK: hipsparseLtComputetype_t COMPUTE_16F = HIPSPARSELT_COMPUTE_16F;
   cusparseComputeType COMPUTE_16F = CUSPARSE_COMPUTE_16F;
-  // CHECK: hipsparseLtComputetype_t COMPUTE_32I = HIPSPARSELT_COMPUTE_32I;
   cusparseComputeType COMPUTE_32I = CUSPARSE_COMPUTE_32I;
 
   // CHECK: hipsparseLtMatmulAlg_t alg;
+  // CHECK-NEXT: hipsparseLtMatmulAlg_t MATMUL_ALG_DEFAULT = HIPSPARSELT_MATMUL_ALG_DEFAULT;
   cusparseLtMatmulAlg_t alg;
-  // CHECK: hipsparseLtMatmulAlg_t MATMUL_ALG_DEFAULT = HIPSPARSELT_MATMUL_ALG_DEFAULT;
   cusparseLtMatmulAlg_t MATMUL_ALG_DEFAULT = CUSPARSELT_MATMUL_ALG_DEFAULT;
 
   // CHECK: hipsparseLtMatmulAlgAttribute_t algAttribute;
+  // CHECK-NEXT: hipsparseLtMatmulAlgAttribute_t MATMUL_ALG_CONFIG_ID = HIPSPARSELT_MATMUL_ALG_CONFIG_ID;
+  // CHECK-NEXT: hipsparseLtMatmulAlgAttribute_t MATMUL_ALG_CONFIG_MAX_ID = HIPSPARSELT_MATMUL_ALG_CONFIG_MAX_ID;
+  // CHECK-NEXT: hipsparseLtMatmulAlgAttribute_t MATMUL_SEARCH_ITERATIONS = HIPSPARSELT_MATMUL_SEARCH_ITERATIONS;
   cusparseLtMatmulAlgAttribute_t algAttribute;
-  // CHECK: hipsparseLtMatmulAlgAttribute_t MATMUL_ALG_CONFIG_ID = HIPSPARSELT_MATMUL_ALG_CONFIG_ID;
   cusparseLtMatmulAlgAttribute_t MATMUL_ALG_CONFIG_ID = CUSPARSELT_MATMUL_ALG_CONFIG_ID;
-  // CHECK: hipsparseLtMatmulAlgAttribute_t MATMUL_ALG_CONFIG_MAX_ID = HIPSPARSELT_MATMUL_ALG_CONFIG_MAX_ID;
   cusparseLtMatmulAlgAttribute_t MATMUL_ALG_CONFIG_MAX_ID = CUSPARSELT_MATMUL_ALG_CONFIG_MAX_ID;
-  // CHECK: hipsparseLtMatmulAlgAttribute_t MATMUL_SEARCH_ITERATIONS = HIPSPARSELT_MATMUL_SEARCH_ITERATIONS;
   cusparseLtMatmulAlgAttribute_t MATMUL_SEARCH_ITERATIONS = CUSPARSELT_MATMUL_SEARCH_ITERATIONS;
 
   // CHECK: hipsparseLtPruneAlg_t pruneAlg;
+  // CHECK-NEXT: hipsparseLtPruneAlg_t PRUNE_SPMMA_TILE = HIPSPARSELT_PRUNE_SPMMA_TILE;
+  // CHECK-NEXT: hipsparseLtPruneAlg_t PRUNE_SPMMA_STRIP = HIPSPARSELT_PRUNE_SPMMA_STRIP;
   cusparseLtPruneAlg_t pruneAlg;
-  // CHECK: hipsparseLtPruneAlg_t PRUNE_SPMMA_TILE = HIPSPARSELT_PRUNE_SPMMA_TILE;
   cusparseLtPruneAlg_t PRUNE_SPMMA_TILE = CUSPARSELT_PRUNE_SPMMA_TILE;
-  // CHECK: hipsparseLtPruneAlg_t PRUNE_SPMMA_STRIP = HIPSPARSELT_PRUNE_SPMMA_STRIP;
   cusparseLtPruneAlg_t PRUNE_SPMMA_STRIP = CUSPARSELT_PRUNE_SPMMA_STRIP;
 
   // NOTE: CUSPARSE_COMPUTE_TF32 / CUSPARSE_COMPUTE_TF32_FAST (cuSPARSELt 0.1.0) were removed
