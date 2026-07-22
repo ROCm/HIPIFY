@@ -189,7 +189,7 @@ int main() {
   fileError = cuFileWriteAsync(fileHandle, bufPtr, &writeSize, &writeFileOffset, &writeBufOffset, &bytesWritten, stream);
 #endif
 
-#if CUDA_VERSION >= 12050
+#if CUDA_VERSION >= 12090
   // CHECK: hipFileSizeTConfigParameter_t sizeTParam;
   CUFileSizeTConfigParameter_t sizeTParam;
 

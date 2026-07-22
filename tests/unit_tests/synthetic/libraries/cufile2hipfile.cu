@@ -182,8 +182,10 @@ int main() {
   CUfileOpError FILE_ASYNC_NOT_SUPPORTED = CU_FILE_ASYNC_NOT_SUPPORTED;
 #endif
 
+#if CUDA_VERSION >= 11050
   // CHECK: hipFileOpError_t FILE_IO_MAX_ERROR = hipFileIOMaxError;
   CUfileOpError FILE_IO_MAX_ERROR = CU_FILE_IO_MAX_ERROR;
+#endif
 
   // CHECK: hipFileDriverStatusFlags_t FILE_LUSTRE_SUPPORTED = hipFileLustreSupported;
   // CHECK-NEXT: hipFileDriverStatusFlags_t FILE_WEKAFS_SUPPORTED = hipFileWekaFSSupported;
@@ -209,7 +211,7 @@ int main() {
   CUfileDriverStatusFlags_t FILE_BEEGFS_SUPPORTED = CU_FILE_BEEGFS_SUPPORTED;
 #endif
 
-#if CUDA_VERSION >= 12050
+#if CUDA_VERSION >= 12080
   // CHECK: hipFileDriverStatusFlags_t FILE_NVME_P2P_SUPPORTED = hipFileNVMeP2PSupported;
   CUfileDriverStatusFlags_t FILE_NVME_P2P_SUPPORTED = CU_FILE_NVME_P2P_SUPPORTED;
 #endif
@@ -279,7 +281,7 @@ int main() {
   int STREAM_PAGE_ALIGNED_INPUTS = CU_FILE_STREAM_PAGE_ALIGNED_INPUTS;
 #endif
 
-#if CUDA_VERSION >= 12050
+#if CUDA_VERSION >= 12090
   // CHECK: hipFileSizeTConfigParameter_t PARAM_PROFILE_STATS = hipFileParamProfileStats;
   // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MAX_IO_QUEUE_DEPTH = hipFileParamExecutionMaxIOQueueDepth;
   // CHECK-NEXT: hipFileSizeTConfigParameter_t PARAM_MAX_IO_THREADS = hipFileParamExecutionMaxIOThreads;
