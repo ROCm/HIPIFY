@@ -27,9 +27,14 @@ SCRIPT_NAME=findcode_sources.sh
 shift
 elif [ "$2" = "-filter=custom" ]
 then
-SCRIPT_NANE=findcode_custom.sh
+SCRIPT_NAME=findcode_custom.sh
 shift
 fi
 shift
 
-$SCRIPT_DIR/hipify-perl -inplace -print-stats "$@" `$SCRIPT_DIR/$SCRIPT_NAME $SEARCH_DIR`
+mapfile -d '' -t files < <("$SCRIPT_DIR/$SCRIPT_NAME" "$SEARCH_DIR")
+if [ "${#files[@]}" -eq 0 ]; then
+  exit 0
+fi
+
+"$SCRIPT_DIR/hipify-perl" -inplace -print-stats "$@" "${files[@]}"

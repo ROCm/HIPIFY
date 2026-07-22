@@ -9,4 +9,10 @@
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 SEARCH_DIR=$1
 shift
-$SCRIPT_DIR/hipify-perl -no-output -print-stats "$@" `$SCRIPT_DIR/findcode.sh $SEARCH_DIR`
+
+mapfile -d '' -t files < <("$SCRIPT_DIR/findcode.sh" "$SEARCH_DIR")
+if [ "${#files[@]}" -eq 0 ]; then
+  exit 0
+fi
+
+"$SCRIPT_DIR/hipify-perl" -no-output -print-stats "$@" "${files[@]}"

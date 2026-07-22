@@ -1,6 +1,12 @@
 #!/bin/bash
 
-SEARCH_DIRS=$@
+# Outputs matched .cu files (excluding .cuh), NUL-delimited.
 
-find $SEARCH_DIRS -name '*.cu' -and -not -name '*.cuh'
-find $SEARCH_DIRS -name '*.CU' -and -not -name '*.CUH'
+if [ "$#" -eq 0 ]; then
+  exit 0
+fi
+
+find "$@" \( \
+  \( -name '*.cu' -a -not -name '*.cuh' \) -o \
+  \( -name '*.CU' -a -not -name '*.CUH' \) \
+\) -print0

@@ -1,8 +1,14 @@
 #!/bin/bash
 
-SEARCH_DIRS=$@
+# Outputs matched source files (excluding headers), NUL-delimited.
 
-find $SEARCH_DIRS -name '*.cu' -and -not -name '*.cuh'
-find $SEARCH_DIRS -name '*.CU' -and -not -name '*.CUH'
-find $SEARCH_DIRS -name '*.cpp' -o -name '*.cxx' -o -name '*.c' -o -name '*.cc'
-find $SEARCH_DIRS -name '*.CPP' -o -name '*.CXX' -o -name '*.C' -o -name '*.CC'
+if [ "$#" -eq 0 ]; then
+  exit 0
+fi
+
+find "$@" \( \
+  \( -name '*.cu' -a -not -name '*.cuh' \) -o \
+  \( -name '*.CU' -a -not -name '*.CUH' \) -o \
+  -name '*.cpp' -o -name '*.cxx' -o -name '*.c' -o -name '*.cc' -o \
+  -name '*.CPP' -o -name '*.CXX' -o -name '*.C' -o -name '*.CC' \
+\) -print0
