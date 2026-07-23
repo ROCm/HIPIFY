@@ -2,13 +2,9 @@
 
 # Outputs files that do not match known CUDA/HIP source/header extensions, NUL-delimited.
 
-SEARCH_DIR=$1
+SEARCH_DIR=${1:-.}
 
-if [ -z "$SEARCH_DIR" ]; then
-  exit 0
-fi
-
-find "$SEARCH_DIR" \( \
+find "$SEARCH_DIR" \
   -not -name '*.cu' -a \
   -not -name '*.cpp' -a \
   -not -name '*.cxx' -a \
@@ -21,4 +17,4 @@ find "$SEARCH_DIR" \( \
   -not -name '*.inl' -a \
   -not -name '*.hxx' -a \
   -not -name '*.hdl' \
-\) -print0
+  -print0

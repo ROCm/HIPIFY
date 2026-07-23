@@ -7,7 +7,7 @@
 
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
-SEARCH_DIR=$1
+SEARCH_DIR=${1:-.}
 shift
 
 mapfile -d '' -t files < <("$SCRIPT_DIR/findcode.sh" "$SEARCH_DIR")

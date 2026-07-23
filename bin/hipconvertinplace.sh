@@ -8,7 +8,7 @@
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 BIN_DIR="$SCRIPT_DIR/../../bin"
-SEARCH_DIR=$1
+SEARCH_DIR=${1:-.}
 shift
 
 hipify_args=()

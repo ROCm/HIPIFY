@@ -32,6 +32,8 @@ shift
 fi
 shift
 
+SEARCH_DIR=${SEARCH_DIR:-.}
+
 mapfile -d '' -t files < <("$SCRIPT_DIR/$SCRIPT_NAME" "$SEARCH_DIR")
 if [ "${#files[@]}" -eq 0 ]; then
   exit 0
