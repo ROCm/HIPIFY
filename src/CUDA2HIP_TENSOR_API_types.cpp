@@ -155,6 +155,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_TENSOR_TYPE_NAME_MAP = [] {
   m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT"]                     = {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT",              "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
   m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT"]                    = {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT",             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
   m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE"]                    = {"HIPTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE",             "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
+  m["CUTENSOR_OPERATION_DESCRIPTOR_BLOCKSPARSE_REPRODUCIBLE"]         = {"HIPTENSOR_OPERATION_DESCRIPTOR_BLOCKSPARSE_REPRODUCIBLE",  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1, UNSUPPORTED};
 
   m["cutensorPlanPreferenceAttribute_t"]                              = {"hiptensorPlanPreferenceAttribute_t",                       "", CONV_TYPE, API_TENSOR, 1};
   m["CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE"]                         = {"HIPTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE",                  "", CONV_NUMERIC_LITERAL, API_TENSOR, 1};
@@ -378,6 +379,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_TENSOR_TYPE_NAME_VER_MAP =
   m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_LEFT"]                     = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
   m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_RIGHT"]                    = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
   m["CUTENSOR_OPERATION_DESCRIPTOR_PADDING_VALUE"]                    = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
+  m["CUTENSOR_OPERATION_DESCRIPTOR_BLOCKSPARSE_REPRODUCIBLE"]         = {CUTENSOR_2700, CUDA_0,        CUDA_0        };
   m["cutensorPlanPreferenceAttribute_t"]                              = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
   m["CUTENSOR_PLAN_PREFERENCE_AUTOTUNE_MODE"]                         = {CUTENSOR_2000, CUDA_0,        CUDA_0        };
   m["CUTENSOR_PLAN_PREFERENCE_CACHE_MODE"]                            = {CUTENSOR_2000, CUDA_0,        CUDA_0        };

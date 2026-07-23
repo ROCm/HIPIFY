@@ -108,7 +108,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
   .. code-block:: shell
 
-      -DCUDA_TENSOR_ROOT_DIR=D:\CUDA\cuTensor\2.6.0.0
+      -DCUDA_TENSOR_ROOT_DIR=D:\CUDA\cuTensor\2.7.0.0
 
 - [Optional] Install `cuDNN <https://developer.nvidia.com/rdp/cudnn-archive>`__ belonging to the version corresponding to the CUDA version:
 
@@ -298,7 +298,7 @@ Building with testing support using ``Visual Studio 18 2026`` on ``Windows 11``:
     -DCUDA_TOOLKIT_ROOT_DIR="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9" \
     -DCUDA_SDK_ROOT_DIR="C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9" \
     -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.25.0 \
-    -DCUDA_TENSOR_ROOT_DIR=D:\CUDA\cuTensor\2.6.0.0 \
+    -DCUDA_TENSOR_ROOT_DIR=D:\CUDA\cuTensor\2.7.0.0 \
     -DLLVM_EXTERNAL_LIT=%ROOT_DIR%\build\Release\bin\llvm-lit.py \
     ..\hipify
 
@@ -339,7 +339,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8`
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
     --    - CUDA Samples path     : C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9
     --    - cuDNN path            : D:\CUDA\cuDNN\9.25.0
-    --    - cuTENSOR path         : D:\CUDA\cuTensor\2.6.0.0
+    --    - cuTENSOR path         : D:\CUDA\cuTensor\2.7.0.0
     --    - CUB path              :
     --    - cuFile path           : D:\CUDA\cuFile\1.18.1
     -- Found CUDAToolkit: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include (found version "12.9.86")
@@ -347,7 +347,7 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8`
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
     --    - CUDA Samples path     : C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9
     --    - cuDNN path            : D:\CUDA\cuDNN\9.25.0\include
-    --    - cuTENSOR path         : D:\CUDA\cuTensor\2.6.0.0\include
+    --    - cuTENSOR path         : D:\CUDA\cuTensor\2.7.0.0\include
     --    - CUB path              : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include
     --    - cuFile path           : D:\CUDA\cuFile\1.18.1\include
     -- Configuring done (4.2s)
