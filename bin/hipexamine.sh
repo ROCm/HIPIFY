@@ -6,8 +6,12 @@
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 BIN_DIR="$SCRIPT_DIR/../../bin"
-SEARCH_DIR=${1:-.}
-shift
+if [ "$#" -gt 0 ]; then
+  SEARCH_DIR=$1
+  shift
+else
+  SEARCH_DIR=.
+fi
 
 hipify_args=()
 clang_args=()

@@ -7,8 +7,12 @@
 
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
-SEARCH_DIR=${1:-.}
-shift
+if [ "$#" -gt 0 ]; then
+  SEARCH_DIR=$1
+  shift
+else
+  SEARCH_DIR=.
+fi
 
 mapfile -d '' -t files < <("$SCRIPT_DIR/findcode.sh" "$SEARCH_DIR")
 if [ "${#files[@]}" -eq 0 ]; then

@@ -13,6 +13,9 @@
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 SCRIPT_NAME=findcode.sh
+if [ "$#" -eq 0 ]; then
+SEARCH_DIR=.
+else
 SEARCH_DIR=$1
 if [ "$2" = "-filter=all" ]
 then
@@ -31,8 +34,8 @@ SCRIPT_NAME=findcode_custom.sh
 shift
 fi
 shift
-
 SEARCH_DIR=${SEARCH_DIR:-.}
+fi
 
 mapfile -d '' -t files < <("$SCRIPT_DIR/$SCRIPT_NAME" "$SEARCH_DIR")
 if [ "${#files[@]}" -eq 0 ]; then
