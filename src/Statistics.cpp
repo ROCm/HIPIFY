@@ -932,7 +932,6 @@ cudaVersions Statistics::convertCudaToolkitVersion(const clang::CudaVersion &ver
     case clang::CudaVersion::CUDA_130: return CUDA_130;
     case clang::CudaVersion::CUDA_131: return CUDA_131;
     case clang::CudaVersion::CUDA_132: return CUDA_132;
-    case clang::CudaVersion::CUDA_133: return CUDA_133;
 #endif
 #endif
 #endif
