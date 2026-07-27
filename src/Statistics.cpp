@@ -161,6 +161,7 @@ const char *apiNames[NUM_API_TYPES] = {
   "RTC API",
   "TENSOR API",
   "cuFile API",
+  "cuSPARSELt API"
 };
 
 const char *apiTypes[NUM_API_TYPES] = {
@@ -171,9 +172,9 @@ const char *apiTypes[NUM_API_TYPES] = {
   "API_RAND",
   "API_DNN",
   "API_FFT",
-  "API_CUB",
   "API_SPARSE",
   "API_SOLVER",
+  "API_CUB",
   "API_RTC",
   "API_TENSOR",
   "API_FILE",
@@ -196,6 +197,8 @@ const std::vector<cudaVersions> CUDA_128_cuFile_version = { CUFILE_1130, CUFILE_
 const std::vector<cudaVersions> CUDA_129_cuFile_version = { CUFILE_1140, CUFILE_1141 };
 const std::vector<cudaVersions> CUDA_130_cuFile_version = { CUFILE_1150, CUFILE_1151 };
 const std::vector<cudaVersions> CUDA_131_cuFile_version = { CUFILE_1160, CUFILE_1161 };
+const std::vector<cudaVersions> CUDA_132_cuFile_version = { CUFILE_1170, CUFILE_1171 };
+const std::vector<cudaVersions> CUDA_133_cuFile_version = { CUFILE_1180, CUFILE_1181 };
 const std::vector<cudaVersions> Empty_vector = {};
 
 namespace {
@@ -610,6 +613,8 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDNN_9210: return "9.21.0";
     case CUDNN_9220: return "9.22.0";
     case CUDNN_9230: return "9.23.0";
+    case CUDNN_9240: return "9.24.0";
+    case CUDNN_9250: return "9.25.0";
     case CUTENSOR_1010: return "1.0.1.0";
     case CUTENSOR_1100: return "1.1.0.0";
     case CUTENSOR_1200: return "1.2.0.0";
@@ -635,6 +640,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUTENSOR_2400: return "2.4.0.0";
     case CUTENSOR_2500: return "2.5.0.0";
     case CUTENSOR_2600: return "2.6.0.0";
+    case CUTENSOR_2700: return "2.7.0.0";
     case CUFILE_1000: return "1.0.0";
     case CUFILE_1001: return "1.0.1";
     case CUFILE_1002: return "1.0.2";
@@ -669,6 +675,9 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUFILE_1160: return "1.16.0";
     case CUFILE_1161: return "1.16.1";
     case CUFILE_1170: return "1.17.0";
+    case CUFILE_1171: return "1.17.1";
+    case CUFILE_1180: return "1.18.0";
+    case CUFILE_1181: return "1.18.1";
     case CUSPARSELT_001: return "0.0.1";
     case CUSPARSELT_010: return "0.1.0";
     case CUSPARSELT_020: return "0.2.0";
@@ -781,6 +790,10 @@ const std::vector<cudaVersions> &Statistics::getCuFileVersionsForCudaVersion(con
       return CUDA_130_cuFile_version;
     case CUDA_131:
       return CUDA_131_cuFile_version;
+    case CUDA_132:
+      return CUDA_132_cuFile_version;
+    case CUDA_133:
+      return CUDA_133_cuFile_version;
     default:
       return Empty_vector;
   }

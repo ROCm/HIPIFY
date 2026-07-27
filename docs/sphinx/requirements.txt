@@ -61,7 +61,7 @@ fastjsonschema==2.19.1
     #   rocm-docs-core
 gitdb==4.0.11
     # via gitpython
-gitpython==3.1.50
+gitpython==3.1.52
     # via rocm-docs-core
 greenlet==3.1.1
     # via sqlalchemy
@@ -188,7 +188,7 @@ requests==2.33.0
     # via
     #   pygithub
     #   sphinx
-rocm-docs-core==1.35.0
+rocm-docs-core==1.38.0
     # via -r requirements.in
 rpds-py==0.22.3
     # via
@@ -200,7 +200,7 @@ smmap==5.0.1
     # via gitdb
 snowballstemmer==2.2.0
     # via sphinx
-soupsieve==2.5
+soupsieve==2.8.4
     # via beautifulsoup4
 sphinx==7.3.7
     # via

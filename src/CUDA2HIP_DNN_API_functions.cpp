@@ -356,6 +356,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP = [] {
   m["cudnnCausalConv1dForward"]                                 = {"hipdnnCausalConv1dForward",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
   m["cudnnCausalConv1dBackward"]                                = {"hipdnnCausalConv1dBackward",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
   m["cudnnGetExecutionPlanWorkspaceSize"]                       = {"hipdnnGetExecutionPlanWorkspaceSize",                       "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnCausalConv1dNwhForward"]                              = {"hipdnnCausalConv1dNwhForward",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnCausalConv1dNwhBackward"]                             = {"hipdnnCausalConv1dNwhBackward",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnB2BCausalConv1dForward"]                              = {"hipdnnB2BCausalConv1dForward",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnB2BCausalConv1dBackward"]                             = {"hipdnnB2BCausalConv1dBackward",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
   return m;
 }();
@@ -647,6 +651,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP = [] 
   m["cudnnCausalConv1dForward"]                                 = {CUDNN_9220,CUDA_0,    CUDA_0   };
   m["cudnnCausalConv1dBackward"]                                = {CUDNN_9220,CUDA_0,    CUDA_0   };
   m["cudnnGetExecutionPlanWorkspaceSize"]                       = {CUDNN_9230,CUDA_0,    CUDA_0   };
+  m["cudnnCausalConv1dNwhForward"]                              = {CUDNN_9240,CUDA_0,    CUDA_0   };
+  m["cudnnCausalConv1dNwhBackward"]                             = {CUDNN_9240,CUDA_0,    CUDA_0   };
+  m["cudnnB2BCausalConv1dForward"]                              = {CUDNN_9240,CUDA_0,    CUDA_0   };
+  m["cudnnB2BCausalConv1dBackward"]                             = {CUDNN_9240,CUDA_0,    CUDA_0   };
 
   return m;
 }();

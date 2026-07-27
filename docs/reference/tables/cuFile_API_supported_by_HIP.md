@@ -14,7 +14,7 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`CUFILEStatus_enum`|1.2.0| | | |`hipFileStatus_t`|7.2.0| | | | | |
+|`CUFILEStatus_enum`|1.2.0| | | |`hipFileStatus`|7.2.0| | | | | |
 |`CUFILE_BATCH`|1.2.0| | | |`hipFileBatch`|7.2.0| | | | | |
 |`CUFILE_C2C`|1.16.0| | | | | | | | | | |
 |`CUFILE_CANCELED`|1.2.0| | | |`hipFileCanceled`|7.2.0| | | | | |
@@ -145,26 +145,28 @@
 |`CUfileBatchHandle_t`|1.2.0| | | |`hipFileBatchHandle_t`|7.2.0| | | | | |
 |`CUfileBatchMode_t`|1.2.0| | | |`hipFileBatchMode_t`|7.2.0| | | | | |
 |`CUfileDescr_t`|1.0.0| | | |`hipFileDescr_t`|7.2.0| | | | | |
-|`CUfileDriverControlFlags`|1.0.0| | | |`hipFileDriverControlFlags_t`|7.2.0| | | | | |
+|`CUfileDriverControlFlags`|1.0.0| | | |`hipFileDriverControlFlags`|7.2.0| | | | | |
 |`CUfileDriverControlFlags_t`|1.0.0| | | |`hipFileDriverControlFlags_t`|7.2.0| | | | | |
+|`CUfileDriverStatusFlags`|1.0.0| | | |`hipFileDriverStatusFlags`|7.2.0| | | | | |
 |`CUfileDriverStatusFlags_t`|1.0.0| | | |`hipFileDriverStatusFlags_t`|7.2.0| | | | | |
-|`CUfileDrvProps`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
+|`CUfileDrvProps`|1.0.0| | | |`hipFileDriverProps`|7.2.0| | | | | |
 |`CUfileDrvProps_t`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
+|`CUfileError`| | | | |`hipFileError`|7.2.0| | | | | |
 |`CUfileError_t`|1.0.0| | | |`hipFileError_t`|7.2.0| | | | | |
-|`CUfileFSOps`|1.0.0| | | |`hipFileFSOps_t`|7.2.0| | | | | |
+|`CUfileFSOps`|1.0.0| | | |`hipFileFSOps`|7.2.0| | | | | |
 |`CUfileFSOps_t`|1.0.0| | | |`hipFileFSOps_t`|7.2.0| | | | | |
-|`CUfileFeatureFlags`|1.0.0| | | |`hipFileFeatureFlags_t`|7.2.0| | | | | |
+|`CUfileFeatureFlags`|1.0.0| | | |`hipFileFeatureFlags`|7.2.0| | | | | |
 |`CUfileFeatureFlags_t`|1.0.0| | | |`hipFileFeatureFlags_t`|7.2.0| | | | | |
 |`CUfileFileHandleType`|1.0.0| | | |`hipFileFileHandleType`|7.2.0| | | | | |
 |`CUfileHandle_t`|1.0.0| | | |`hipFileHandle_t`|7.2.0| | | | | |
-|`CUfileIOEvents`|1.2.0| | | |`hipFileIOEvents_t`|7.2.0| | | | | |
+|`CUfileIOEvents`|1.2.0| | | |`hipFileIOEvents`|7.2.0| | | | | |
 |`CUfileIOEvents_t`|1.2.0| | | |`hipFileIOEvents_t`|7.2.0| | | | | |
-|`CUfileIOParams`|1.2.0| | | |`hipFileIOParams_t`|7.2.0| | | | | |
+|`CUfileIOParams`|1.2.0| | | |`hipFileIOParams`|7.2.0| | | | | |
 |`CUfileIOParams_t`|1.2.0| | | |`hipFileIOParams_t`|7.2.0| | | | | |
 |`CUfileOpCounter`|1.15.0| | | | | | | | | | |
 |`CUfileOpCounter_t`|1.15.0| | | | | | | | | | |
 |`CUfileOpError`|1.0.0| | | |`hipFileOpError_t`|7.2.0| | | | | |
-|`CUfileOpcode`|1.0.0| | | |`hipFileDriverProps_t`|7.2.0| | | | | |
+|`CUfileOpcode`|1.0.0| | | |`hipFileOpcode`|7.2.0| | | | | |
 |`CUfileOpcode_t`|1.2.0| | | |`hipFileOpcode_t`|7.2.0| | | | | |
 |`CUfileP2PFlags`|1.16.0| | | | | | | | | | |
 |`CUfileP2PFlags_t`|1.16.0| | | | | | | | | | |
@@ -179,8 +181,8 @@
 |`CUfileStatus_t`|1.2.0| | | |`hipFileStatus_t`|7.2.0| | | | | |
 |`IS_CUDA_ERR`|1.0.0| | | |`IS_HIP_DRV_ERR`|7.2.0| | | | | |
 |`IS_CUFILE_ERR`|1.0.0| | | |`IS_HIPFILE_ERR`|7.2.0| | | | | |
-|`cufileBatchMode`|1.2.0| | | |`hipFileBatchMode_t`|7.2.0| | | | | |
-|`cufileRDMAInfo`|1.0.0| | | |`hipFileRDMAInfo_t`|7.2.0| | | | | |
+|`cufileBatchMode`|1.2.0| | | |`hipFileBatchMode`|7.2.0| | | | | |
+|`cufileRDMAInfo`|1.0.0| | | |`hipFileRDMAInfo`|7.2.0| | | | | |
 |`cufileRDMAInfo_t`|1.0.0| | | |`hipFileRDMAInfo_t`|7.2.0| | | | | |
 |`sockaddr_t`|1.0.0| | | |`sockaddr`| | | | | | |
 
