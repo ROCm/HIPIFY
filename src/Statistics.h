@@ -334,7 +334,9 @@ enum cudaVersions {
   CUDNN_9210 = 9210,
   CUDNN_9220 = 9220,
   CUDNN_9230 = 9230,
-  CUDNN_LATEST = CUDNN_9230,
+  CUDNN_9240 = 9240,
+  CUDNN_9250 = 9250,
+  CUDNN_LATEST = CUDNN_9250,
   CUTENSOR_1010 = 100010,
   CUTENSOR_1100 = 100100,
   CUTENSOR_1200 = 100200,
@@ -360,7 +362,8 @@ enum cudaVersions {
   CUTENSOR_2400 = 200400,
   CUTENSOR_2500 = 200500,
   CUTENSOR_2600 = 200600,
-  CUTENSOR_LATEST = CUTENSOR_2600,
+  CUTENSOR_2700 = 200700,
+  CUTENSOR_LATEST = CUTENSOR_2700,
   CUFILE_1000 = 1000000,
   CUFILE_1001 = 1000001,
   CUFILE_1002 = 1000002,
@@ -395,7 +398,10 @@ enum cudaVersions {
   CUFILE_1160 = 1000160,
   CUFILE_1161 = 1000161,
   CUFILE_1170 = 1000170,
-  CUFILE_LATEST = CUFILE_1170,
+  CUFILE_1171 = 1000171,
+  CUFILE_1180 = 1000180,
+  CUFILE_1181 = 1000181,
+  CUFILE_LATEST = CUFILE_1181,
   CUSPARSELT_001 = 1,
   CUSPARSELT_010 = 10,
   CUSPARSELT_020 = 20,
@@ -536,6 +542,8 @@ extern const std::vector<cudaVersions> CUDA_128_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_129_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_130_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_131_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_132_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_133_cuFile_version;
 extern const std::vector<cudaVersions> Empty_vector;
 
 struct hipCounter {
