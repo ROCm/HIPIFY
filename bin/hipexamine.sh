@@ -6,18 +6,29 @@
 
 SCRIPT_DIR="$(dirname "$(realpath "$0")")"
 BIN_DIR="$SCRIPT_DIR/../../bin"
-SEARCH_DIR=$1
-
-hipify_args=''
-while (( "$#" )); do
+if [ "$#" -gt 0 ]; then
+  SEARCH_DIR=$1
   shift
-  if [ "$1" != "--" ]; then
-    hipify_args="$hipify_args $1"
+else
+  SEARCH_DIR=.
+fi
+
+hipify_args=()
+clang_args=()
+parsing_clang=0
+for arg in "$@"; do
+  if [ "$parsing_clang" -eq 1 ]; then
+    clang_args+=("$arg")
+  elif [ "$arg" = "--" ]; then
+    parsing_clang=1
   else
-    shift
-    break
+    hipify_args+=("$arg")
   fi
 done
-clang_args="$@"
 
-$BIN_DIR/hipify-clang -examine $hipify_args `$SCRIPT_DIR/findcode.sh $SEARCH_DIR` -- -x cuda $clang_args
+mapfile -d '' -t files < <("$SCRIPT_DIR/findcode.sh" "$SEARCH_DIR")
+if [ "${#files[@]}" -eq 0 ]; then
+  exit 0
+fi
+
+"$BIN_DIR/hipify-clang" -examine "${hipify_args[@]}" "${files[@]}" -- -x cuda "${clang_args[@]}"

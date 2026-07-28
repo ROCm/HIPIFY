@@ -1,5 +1,20 @@
 #!/bin/bash
 
-SEARCH_DIR=$1
+# Outputs files that do not match known CUDA/HIP source/header extensions, NUL-delimited.
 
-find $SEARCH_DIR -not -name '*.cu' -and -not -name '*.cpp' -and -not -name '*.cxx' -and -not -name '*.c' -and -not -name '*.cc' -and -not -name '*.cuh' -and -not -name '*.h' -and -not -name '*.hpp' -and -not -name '*.inc' -and -not -name '*.inl' -and -not -name '*.hxx' -and -not -name '*.hdl'
+SEARCH_DIR=${1:-.}
+
+find "$SEARCH_DIR" \
+  -not -name '*.cu' -a \
+  -not -name '*.cpp' -a \
+  -not -name '*.cxx' -a \
+  -not -name '*.c' -a \
+  -not -name '*.cc' -a \
+  -not -name '*.cuh' -a \
+  -not -name '*.h' -a \
+  -not -name '*.hpp' -a \
+  -not -name '*.inc' -a \
+  -not -name '*.inl' -a \
+  -not -name '*.hxx' -a \
+  -not -name '*.hdl' \
+  -print0
