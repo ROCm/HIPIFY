@@ -61,8 +61,8 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
   include_directories(${LLVM_INCLUDE_DIRS})
   add_definitions(${LLVM_DEFINITIONS})
 
-  file(GLOB_RECURSE HIPIFY_SOURCES src/*.cpp)
-  file(GLOB_RECURSE HIPIFY_HEADERS src/*.h)
+  file(GLOB_RECURSE HIPIFY_SOURCES CONFIGURE_DEPENDS src/*.cpp)
+  file(GLOB_RECURSE HIPIFY_HEADERS CONFIGURE_DEPENDS src/*.h)
 
   # In order to be compatible with an LLVM that uses LLVM_LINK_LLVM_DYLIB=ON,
   # hipify-clang must link core LLVM libraries via LLVM_LINK_COMPONENTS vs directly adding
