@@ -75,6 +75,7 @@
 |`CUDA_ERROR_FILE_NOT_FOUND`| | | | |`hipErrorFileNotFound`|1.6.0| | | | | |
 |`CUDA_ERROR_FUNCTION_NOT_LOADED`|12.4| | | | | | | | | | |
 |`CUDA_ERROR_GRAPH_EXEC_UPDATE_FAILURE`|10.2| | | |`hipErrorGraphExecUpdateFailure`|5.0.0| | | | | |
+|`CUDA_ERROR_GRAPH_RECAPTURE_FAILURE`|13.3| | | | | | | | | | |
 |`CUDA_ERROR_HARDWARE_STACK_ERROR`| | | | | | | | | | | |
 |`CUDA_ERROR_HOST_MEMORY_ALREADY_REGISTERED`| | | | |`hipErrorHostMemoryAlreadyRegistered`|1.6.0| | | | | |
 |`CUDA_ERROR_HOST_MEMORY_NOT_REGISTERED`| | | | |`hipErrorHostMemoryNotRegistered`|1.6.0| | | | | |
@@ -451,9 +452,11 @@
 |`CU_DEVICE_ATTRIBUTE_CONCURRENT_MANAGED_ACCESS`|8.0| | | |`hipDeviceAttributeConcurrentManagedAccess`|3.10.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_COOPERATIVE_LAUNCH`|9.0| | | |`hipDeviceAttributeCooperativeLaunch`|2.6.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_COOPERATIVE_MULTI_DEVICE_LAUNCH`|9.0| | | |`hipDeviceAttributeCooperativeMultiDeviceLaunch`|2.6.0| | | | | |
+|`CU_DEVICE_ATTRIBUTE_D3D12_CIG_STREAMS_SUPPORTED`|13.3| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED`|12.5| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DEFERRED_MAPPING_CUDA_ARRAY_SUPPORTED`|11.6| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DIRECT_MANAGED_MEM_ACCESS_FROM_HOST`|9.2| | | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | | | |
+|`CU_DEVICE_ATTRIBUTE_DMA_BUF_MMAP_SUPPORTED`|13.3| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_DMA_BUF_SUPPORTED`|11.7| | | |`hipDeviceAttributeDmaBufSupported`|7.12.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_ECC_ENABLED`| | | | |`hipDeviceAttributeEccEnabled`|2.10.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED`|11.0| | | | | | | | | | |
@@ -484,6 +487,10 @@
 |`CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT`| | | | |`hipDeviceAttributeKernelExecTimeout`|2.10.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_L2_CACHE_SIZE`| | | | |`hipDeviceAttributeL2CacheSize`|1.6.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_LOCAL_L1_CACHE_SUPPORTED`| | | | |`hipDeviceAttributeLocalL1CacheSupported`|4.3.0| | | | | |
+|`CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_COUNTED_OPS_SUPPORTED`|13.3| | | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_MULTICAST_SUPPORTED`|13.3| | | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_UNICAST_ACCESS_ON_OWNER_DEVICE_SUPPORTED`|13.3| | | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_UNICAST_SUPPORTED`|13.3| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_MANAGED_MEMORY`| | | | |`hipDeviceAttributeManagedMemory`|3.10.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_MAX`| | | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_MAXIMUM_SURFACE1D_LAYERED_LAYERS`| | | | | | | | | | | |
@@ -730,6 +737,7 @@
 |`CU_FUNC_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | | | | | | | | |
 |`CU_FUNC_ATTRIBUTE_CLUSTER_SIZE_MUST_BE_SET`|11.8| | | | | | | | | | |
 |`CU_FUNC_ATTRIBUTE_CONST_SIZE_BYTES`| | | | |`HIP_FUNC_ATTRIBUTE_CONST_SIZE_BYTES`|2.8.0| | | | | |
+|`CU_FUNC_ATTRIBUTE_DEVICE_NODE_UPDATE_SUPPORTED`|13.3| | | | | | | | | | |
 |`CU_FUNC_ATTRIBUTE_LOCAL_SIZE_BYTES`| | | | |`HIP_FUNC_ATTRIBUTE_LOCAL_SIZE_BYTES`|2.8.0| | | | | |
 |`CU_FUNC_ATTRIBUTE_MAX`| | | | |`HIP_FUNC_ATTRIBUTE_MAX`|2.8.0| | | | | |
 |`CU_FUNC_ATTRIBUTE_MAX_DYNAMIC_SHARED_SIZE_BYTES`|9.0| | | |`HIP_FUNC_ATTRIBUTE_MAX_DYNAMIC_SHARED_SIZE_BYTES`|2.8.0| | | | | |
@@ -824,6 +832,7 @@
 |`CU_GRAPH_NODE_TYPE_MEMSET`|10.0| | | |`hipGraphNodeTypeMemset`|4.3.0| | | | | |
 |`CU_GRAPH_NODE_TYPE_MEM_ALLOC`|11.4| | | |`hipGraphNodeTypeMemAlloc`|5.5.0| | | | | |
 |`CU_GRAPH_NODE_TYPE_MEM_FREE`|11.4| | | |`hipGraphNodeTypeMemFree`|5.5.0| | | | | |
+|`CU_GRAPH_NODE_TYPE_RESERVED_16`|13.3| | | | | | | | | | |
 |`CU_GRAPH_NODE_TYPE_WAIT_EVENT`|11.1| | | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | | | |
 |`CU_GRAPH_USER_OBJECT_MOVE`|11.3| | | |`hipGraphUserObjectMove`|5.3.0| | | | | |
 |`CU_GREEN_CTX_DEFAULT_STREAM`|12.4| | | | | | | | | | |
@@ -1279,8 +1288,8 @@
 |`CUcheckpointGpuPair_st`|13.0| | | | | | | | | | |
 |`CUcheckpointLockArgs`|12.8| | | | | | | | | | |
 |`CUcheckpointLockArgs_st`|12.8| | | | | | | | | | |
-|`CUcheckpointRestoreArgs`|12.8| | | | | | | | | | |
-|`CUcheckpointRestoreArgs_st`|12.8| | | | | | | | | | |
+|`CUcheckpointRestoreArgs`|12.8| |13.3| | | | | | | | |
+|`CUcheckpointRestoreArgs_st`|12.8| |13.3| | | | | | | | |
 |`CUcheckpointUnlockArgs`|12.8| | | | | | | | | | |
 |`CUcheckpointUnlockArgs_st`|12.8| | | | | | | | | | |
 |`CUcigDataType`|12.5| | | | | | | | | | |
@@ -1429,8 +1438,8 @@
 |`CUgraphMem_attribute`|11.4| | | |`hipGraphMemAttributeType`|5.3.0| | | | | |
 |`CUgraphMem_attribute_enum`|11.4| | | |`hipGraphMemAttributeType`|5.3.0| | | | | |
 |`CUgraphNode`|10.0| | | |`hipGraphNode_t`|4.3.0| | | | | |
-|`CUgraphNodeParams`|12.2| | | |`hipGraphNodeParams`|6.1.0| | | | | |
-|`CUgraphNodeParams_st`|12.2| | | |`hipGraphNodeParams`|6.1.0| | | | | |
+|`CUgraphNodeParams`|12.2| |13.3| |`hipGraphNodeParams`|6.1.0| | | | | |
+|`CUgraphNodeParams_st`|12.2| |13.3| |`hipGraphNodeParams`|6.1.0| | | | | |
 |`CUgraphNodeType`|10.0| | | |`hipGraphNodeType`|4.3.0| | | | | |
 |`CUgraphNodeType_enum`|10.0| | | |`hipGraphNodeType`|4.3.0| | | | | |
 |`CUgraphNode_st`|10.0| | | |`hipGraphNode`|4.3.0| | | | | |
@@ -1499,6 +1508,7 @@
 |`CUlogIterator`|12.9| | | | | | | | | | |
 |`CUlogLevel`|12.9| | | | | | | | | | |
 |`CUlogLevel_enum`|12.9| | | | | | | | | | |
+|`CUlogicalEndpointId`|13.3| | | | | | | | | | |
 |`CUlogsCallback`|12.9| | | | | | | | | | |
 |`CUlogsCallbackEntry_st`|12.9| | | | | | | | | | |
 |`CUlogsCallbackHandle`|12.9| | | | | | | | | | |
