@@ -1101,9 +1101,21 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED"]                  = {"hipDeviceAttributeHostHostAllocDmaBufSupported",             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 146
   // cudaDevAttrOnlyPartialHostNativeAtomicSupported
-  m["CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED"]     = {"hipDevAttributeOnlyPartialHostNativeAtomicSupported",        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 147
+  m["CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED"]     = {"hipDeviceAttributeOnlyPartialHostNativeAtomicSupported",     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 147
   //
-  m["CU_DEVICE_ATTRIBUTE_ATOMIC_REDUCTION_SUPPORTED"]                    = {"hipDevAttributeAtomicReductionSupported",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 148
+  m["CU_DEVICE_ATTRIBUTE_ATOMIC_REDUCTION_SUPPORTED"]                    = {"hipDeviceAttributeAtomicReductionSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 148
+  //
+  m["CU_DEVICE_ATTRIBUTE_D3D12_CIG_STREAMS_SUPPORTED"]                   = {"hipDeviceAttributeD3D12CigStreamsSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 151
+  //
+  m["CU_DEVICE_ATTRIBUTE_DMA_BUF_MMAP_SUPPORTED"]                        = {"hipDeviceAttributeDmaBufNmapSupported",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 152
+  //
+  m["CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_UNICAST_SUPPORTED"]            = {"hipDeviceAttributeLogicalEndpointUnicastSupported",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 153
+  //
+  m["CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_MULTICAST_SUPPORTED"]          = {"hipDeviceAttributeLogicalEndpointMulticastSupported",        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 154
+  //
+  m["CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_COUNTED_OPS_SUPPORTED"]        = {"hipDeviceAttributeLogicalEndpointCountedOpsSupported",       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 155
+  //
+  m["CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_UNICAST_ACCESS_ON_OWNER_DEVICE_SUPPORTED"]   = {"hipDeviceAttributeLogicalEndpointUnicastAccessOnOwnerDeviceSupported",   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 156
   // cudaDevAttrMax
   m["CU_DEVICE_ATTRIBUTE_MAX"]                                           = {"hipDeviceAttributeMax",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
@@ -1418,6 +1430,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_FUNC_ATTRIBUTE_NON_PORTABLE_CLUSTER_SIZE_ALLOWED"]               = {"HIP_FUNC_ATTRIBUTE_NON_PORTABLE_CLUSTER_SIZE_ALLOWED",       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 14
   // cudaFuncAttributeClusterSchedulingPolicyPreference
   m["CU_FUNC_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE"]            = {"HIP_FUNC_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE",    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 15
+  //
+  m["CU_FUNC_ATTRIBUTE_DEVICE_NODE_UPDATE_SUPPORTED"]                    = {"HIP_FUNC_ATTRIBUTE_DEVICE_NODE_UPDATE_SUPPORTED",            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 16
   // cudaFuncAttributeMax
   m["CU_FUNC_ATTRIBUTE_MAX"]                                             = {"HIP_FUNC_ATTRIBUTE_MAX",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 16
 
@@ -1479,6 +1493,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_GRAPH_NODE_TYPE_BATCH_MEM_OP"]                                   = {"hipGraphNodeTypeBatchMemOp",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 12
   // cudaGraphNodeTypeConditional
   m["CU_GRAPH_NODE_TYPE_CONDITIONAL"]                                    = {"hipGraphNodeTypeConditional",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 13
+  //
+  m["CU_GRAPH_NODE_TYPE_RESERVED_16"]                                    = {"hipGraphNodeTypeReserved16",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 16
   // cudaGraphNodeTypeCount
   m["CU_GRAPH_NODE_TYPE_COUNT"]                                          = {"hipGraphNodeTypeCount",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, CUDA_REMOVED};
 
@@ -2101,6 +2117,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUDA_ERROR_KEY_ROTATION"]                                           = {"hipErrorKeyRotation",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 916
   // cudaErrorStreamDetached
   m["CUDA_ERROR_STREAM_DETACHED"]                                        = {"hipErrorStreamDetached",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 917
+  //
+  m["CUDA_ERROR_GRAPH_RECAPTURE_FAILURE"]                                = {"hipErrorGraphRecaptureFailure",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 918
   // cudaErrorUnknown
   m["CUDA_ERROR_UNKNOWN"]                                                = {"hipErrorUnknown",                                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 999
 
@@ -3316,6 +3334,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
 
   //
   m["CUlogsCallback"]                                                    = {"hipLogsCallback",                                            "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  //
+  m["CUlogicalEndpointId"]                                               = {"hipLogicalEndpointId",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // 5. Defines
 
@@ -4627,6 +4648,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_TYPE_NAME_VER_MAP =
   m["CU_GRAPH_CHILD_GRAPH_OWNERSHIP_INVALID"]                            = {CUDA_132, CUDA_0,   CUDA_0  };
   m["CUcoredumpCallbackEntry_st"]                                        = {CUDA_132, CUDA_0,   CUDA_0  };
   m["CUcoredumpCallbackHandle"]                                          = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["CU_DEVICE_ATTRIBUTE_D3D12_CIG_STREAMS_SUPPORTED"]                   = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CU_DEVICE_ATTRIBUTE_DMA_BUF_MMAP_SUPPORTED"]                        = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_UNICAST_SUPPORTED"]            = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_MULTICAST_SUPPORTED"]          = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_COUNTED_OPS_SUPPORTED"]        = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CU_DEVICE_ATTRIBUTE_LOGICAL_ENDPOINT_UNICAST_ACCESS_ON_OWNER_DEVICE_SUPPORTED"]   = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CU_FUNC_ATTRIBUTE_DEVICE_NODE_UPDATE_SUPPORTED"]                    = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CU_GRAPH_NODE_TYPE_RESERVED_16"]                                    = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CUDA_ERROR_GRAPH_RECAPTURE_FAILURE"]                                = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["CUlogicalEndpointId"]                                               = {CUDA_133, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -5143,6 +5174,10 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_DRIVER_TYPE_CHANGED
   m["CUmemLocation_st"]                                                  = {CUDA_132};
   m["CUmemLocation"]                                                     = {CUDA_132};
   m["CUmemLocation_v1"]                                                  = {CUDA_132};
+  m["CUgraphNodeParams_st"]                                              = {CUDA_133};
+  m["CUgraphNodeParams"]                                                 = {CUDA_133};
+  m["CUcheckpointRestoreArgs_st"]                                        = {CUDA_133};
+  m["CUcheckpointRestoreArgs"]                                           = {CUDA_133};
 
   return m;
   }();
