@@ -14,10 +14,18 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
+|`CUSPARSELT_MATMUL_ACTIVATION_GELU`|0.2.0| | | |`HIPSPARSELT_MATMUL_ACTIVATION_GELU`|7.10.0| | | | | |
+|`CUSPARSELT_MATMUL_ACTIVATION_RELU`|0.2.0| | | |`HIPSPARSELT_MATMUL_ACTIVATION_RELU`|7.10.0| | | | | |
+|`CUSPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD`|0.2.0| | | |`HIPSPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD`|7.10.0| | | | | |
+|`CUSPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND`|0.2.0| | | |`HIPSPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_ALG_CONFIG_ID`|0.0.1| | | |`HIPSPARSELT_MATMUL_ALG_CONFIG_ID`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_ALG_CONFIG_MAX_ID`|0.0.1| | | |`HIPSPARSELT_MATMUL_ALG_CONFIG_MAX_ID`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_ALG_DEFAULT`|0.0.1| | | |`HIPSPARSELT_MATMUL_ALG_DEFAULT`|7.10.0| | | | | |
+|`CUSPARSELT_MATMUL_BIAS_POINTER`|0.2.0| | | |`HIPSPARSELT_MATMUL_BIAS_POINTER`|7.10.0| | | | | |
+|`CUSPARSELT_MATMUL_BIAS_STRIDE`|0.2.0| | | |`HIPSPARSELT_MATMUL_BIAS_STRIDE`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_SEARCH_ITERATIONS`|0.0.1| | | |`HIPSPARSELT_MATMUL_SEARCH_ITERATIONS`|7.10.0| | | | | |
+|`CUSPARSELT_MAT_BATCH_STRIDE`|0.2.0| | | |`HIPSPARSELT_MAT_BATCH_STRIDE`|7.10.0| | | | | |
+|`CUSPARSELT_MAT_NUM_BATCHES`|0.2.0| | | |`HIPSPARSELT_MAT_NUM_BATCHES`|7.10.0| | | | | |
 |`CUSPARSELT_PRUNE_SPMMA_STRIP`|0.0.1| | | |`HIPSPARSELT_PRUNE_SPMMA_STRIP`|7.10.0| | | | | |
 |`CUSPARSELT_PRUNE_SPMMA_TILE`|0.0.1| | | |`HIPSPARSELT_PRUNE_SPMMA_TILE`|7.10.0| | | | | |
 |`CUSPARSELT_SPARSITY_50_PERCENT`|0.0.1| | | |`HIPSPARSELT_SPARSITY_50_PERCENT`|7.10.0| | | | | |
@@ -26,13 +34,15 @@
 |`CUSPARSE_COMPUTE_TF32`|0.1.0| | | |`HIPSPARSELT_COMPUTE_TF32`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_TF32_FAST`|0.1.0| | | |`HIPSPARSELT_COMPUTE_TF32_FAST`|7.10.0| | | | | |
 |`cusparseComputeType`|0.0.1| | | |`hipsparseLtComputetype_t`|7.10.0| | | | | |
-|`cusparseLtHandle_t`|0.0.1| | | |`hipsparseLtHandle_t`|7.10.0| | | | | |
-|`cusparseLtMatDescriptor_t`|0.0.1| | | |`hipsparseLtMatDescriptor_t`|7.10.0| | | | | |
+|`cusparseLtHandle_t`|0.0.1| |0.2.0| |`hipsparseLtHandle_t`|7.10.0| | | | | |
+|`cusparseLtMatDescAttribute_t`|0.2.0| | | |`hipsparseLtMatDescAttribute_t`|7.10.0| | | | | |
+|`cusparseLtMatDescriptor_t`|0.0.1| |0.2.0| |`hipsparseLtMatDescriptor_t`|7.10.0| | | | | |
 |`cusparseLtMatmulAlgAttribute_t`|0.0.1| | | |`hipsparseLtMatmulAlgAttribute_t`|7.10.0| | | | | |
-|`cusparseLtMatmulAlgSelection_t`|0.0.1| | | |`hipsparseLtMatmulAlgSelection_t`|7.10.0| | | | | |
+|`cusparseLtMatmulAlgSelection_t`|0.0.1| |0.2.0| |`hipsparseLtMatmulAlgSelection_t`|7.10.0| | | | | |
 |`cusparseLtMatmulAlg_t`|0.0.1| | | |`hipsparseLtMatmulAlg_t`|7.10.0| | | | | |
-|`cusparseLtMatmulDescriptor_t`|0.0.1| | | |`hipsparseLtMatmulDescriptor_t`|7.10.0| | | | | |
-|`cusparseLtMatmulPlan_t`|0.0.1| | | |`hipsparseLtMatmulPlan_t`|7.10.0| | | | | |
+|`cusparseLtMatmulDescAttribute_t`|0.2.0| | | |`hipsparseLtMatmulDescAttribute_t`|7.10.0| | | | | |
+|`cusparseLtMatmulDescriptor_t`|0.0.1| |0.2.0| |`hipsparseLtMatmulDescriptor_t`|7.10.0| | | | | |
+|`cusparseLtMatmulPlan_t`|0.0.1| |0.2.0| |`hipsparseLtMatmulPlan_t`|7.10.0| | | | | |
 |`cusparseLtPruneAlg_t`|0.0.1| | | |`hipsparseLtPruneAlg_t`|7.10.0| | | | | |
 |`cusparseLtSparsity_t`|0.0.1| | | |`hipsparseLtSparsity_t`|7.10.0| | | | | |
 
@@ -43,11 +53,15 @@
 |`cusparseLtDenseDescriptorInit`|0.0.1| | | |`hipsparseLtDenseDescriptorInit`|7.10.0| | | | | |
 |`cusparseLtDestroy`|0.0.1| | | |`hipsparseLtDestroy`|7.10.0| | | | | |
 |`cusparseLtInit`|0.0.1| | | |`hipsparseLtInit`|7.10.0| | | | | |
+|`cusparseLtMatDescGetAttribute`|0.2.0| | | |`hipsparseLtMatDescGetAttribute`|7.10.0| | | | | |
+|`cusparseLtMatDescSetAttribute`|0.2.0| | | |`hipsparseLtMatDescSetAttribute`|7.10.0| | | | | |
 |`cusparseLtMatDescriptorDestroy`|0.1.0| | | |`hipsparseLtMatDescriptorDestroy`|7.10.0| | | | | |
 |`cusparseLtMatmul`|0.0.1| | | |`hipsparseLtMatmul`|7.10.0| | | | | |
 |`cusparseLtMatmulAlgGetAttribute`|0.0.1| | | |`hipsparseLtMatmulAlgGetAttribute`|7.10.0| | | | | |
 |`cusparseLtMatmulAlgSelectionInit`|0.0.1| | | |`hipsparseLtMatmulAlgSelectionInit`|7.10.0| | | | | |
 |`cusparseLtMatmulAlgSetAttribute`|0.0.1| | | |`hipsparseLtMatmulAlgSetAttribute`|7.10.0| | | | | |
+|`cusparseLtMatmulDescGetAttribute`|0.2.0| | | |`hipsparseLtMatmulDescGetAttribute`|7.10.0| | | | | |
+|`cusparseLtMatmulDescSetAttribute`|0.2.0| | | |`hipsparseLtMatmulDescSetAttribute`|7.10.0| | | | | |
 |`cusparseLtMatmulDescriptorInit`|0.0.1| | | |`hipsparseLtMatmulDescriptorInit`|7.10.0| | | | | |
 |`cusparseLtMatmulGetWorkspace`|0.0.1| | | |`hipsparseLtMatmulGetWorkspace`|7.10.0| | | | | |
 |`cusparseLtMatmulPlanDestroy`|0.0.1| | | |`hipsparseLtMatmulPlanDestroy`|7.10.0| | | | | |
