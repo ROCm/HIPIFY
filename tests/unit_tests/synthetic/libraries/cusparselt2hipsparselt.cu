@@ -217,5 +217,49 @@ int main() {
   // CHECK: status = hipsparseLtSpMMACompress2(&handle, &matA, isSparseA, op, d_dense, d_compressed, d_compressBuffer, stream);
   status = cusparseLtSpMMACompress2(&handle, &matA, isSparseA, op, d_dense, d_compressed, d_compressBuffer, stream);
 
+#if CUSPARSELT_VERSION >= 200
+  // CHECK: hipsparseLtMatmulDescAttribute_t sparseLtMatmulDescAttribute_t;
+  // CHECK-NEXT: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_RELU = HIPSPARSELT_MATMUL_ACTIVATION_RELU;
+  // CHECK-NEXT: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND = HIPSPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND;
+  // CHECK-NEXT: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD = HIPSPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD;
+  // CHECK-NEXT: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_GELU = HIPSPARSELT_MATMUL_ACTIVATION_GELU;
+  // CHECK-NEXT: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_BIAS_STRIDE = HIPSPARSELT_MATMUL_BIAS_STRIDE;
+  // CHECK-NEXT: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_BIAS_POINTER = HIPSPARSELT_MATMUL_BIAS_POINTER;
+  cusparseLtMatmulDescAttribute_t sparseLtMatmulDescAttribute_t;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_RELU = CUSPARSELT_MATMUL_ACTIVATION_RELU;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND = CUSPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD = CUSPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_GELU = CUSPARSELT_MATMUL_ACTIVATION_GELU;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_BIAS_STRIDE = CUSPARSELT_MATMUL_BIAS_STRIDE;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_BIAS_POINTER = CUSPARSELT_MATMUL_BIAS_POINTER;
+
+  // CHECK: hipsparseLtMatDescAttribute_t sparseLtMatDescAttribute_t;
+  // CHECK-NEXT: hipsparseLtMatDescAttribute_t SPARSELT_MAT_NUM_BATCHES = HIPSPARSELT_MAT_NUM_BATCHES;
+  // CHECK-NEXT: hipsparseLtMatDescAttribute_t SPARSELT_MAT_BATCH_STRIDE = HIPSPARSELT_MAT_BATCH_STRIDE;
+  cusparseLtMatDescAttribute_t sparseLtMatDescAttribute_t;
+  cusparseLtMatDescAttribute_t SPARSELT_MAT_NUM_BATCHES = CUSPARSELT_MAT_NUM_BATCHES;
+  cusparseLtMatDescAttribute_t SPARSELT_MAT_BATCH_STRIDE = CUSPARSELT_MAT_BATCH_STRIDE;
+
+  // CUDA: cusparseStatus_t CUSPARSELT_API cusparseLtMatDescSetAttribute(const cusparseLtHandle_t* handle, cusparseLtMatDescriptor_t* matmulDescr, cusparseLtMatDescAttribute_t matAttribute, const void* data, size_t dataSize);
+  // HIP: HIPSPARSELT_EXPORT hipsparseStatus_t hipsparseLtMatDescSetAttribute(const hipsparseLtHandle_t* handle, hipsparseLtMatDescriptor_t* matDescr, hipsparseLtMatDescAttribute_t matAttribute, const void* data, size_t dataSize);
+  // CHECK: status = hipsparseLtMatDescSetAttribute(&handle, &matA, sparseLtMatDescAttribute_t, data, dataSize);
+  status = cusparseLtMatDescSetAttribute(&handle, &matA, sparseLtMatDescAttribute_t, data, dataSize);
+
+  // CUDA: cusparseStatus_t CUSPARSELT_API cusparseLtMatDescGetAttribute(const cusparseLtHandle_t* handle, const cusparseLtMatDescriptor_t* matmulDescr, cusparseLtMatDescAttribute_t matAttribute, void* data, size_t dataSize);
+  // HIP: HIPSPARSELT_EXPORT hipsparseStatus_t hipsparseLtMatDescGetAttribute(const hipsparseLtHandle_t* handle, const hipsparseLtMatDescriptor_t* matDescr, hipsparseLtMatDescAttribute_t matAttribute, void* data, size_t dataSize);
+  // CHECK: status = hipsparseLtMatDescGetAttribute(&handle, &matA, sparseLtMatDescAttribute_t, data, dataSize);
+  status = cusparseLtMatDescGetAttribute(&handle, &matA, sparseLtMatDescAttribute_t, data, dataSize);
+
+  // CUDA: cusparseStatus_t CUSPARSELT_API cusparseLtMatmulDescSetAttribute(const cusparseLtHandle_t* handle, cusparseLtMatmulDescriptor_t* matmulDescr, cusparseLtMatmulDescAttribute_t matmulAttribute, const void* data, size_t dataSize);
+  // HIP: HIPSPARSELT_EXPORT hipsparseStatus_t hipsparseLtMatmulDescSetAttribute(const hipsparseLtHandle_t* handle, hipsparseLtMatmulDescriptor_t* matmulDescr, hipsparseLtMatmulDescAttribute_t matmulAttribute, const void* data, size_t dataSize);
+  // CHECK: status = hipsparseLtMatmulDescSetAttribute(&handle, &matmulDescr, sparseLtMatmulDescAttribute_t, data, dataSize);
+  status = cusparseLtMatmulDescSetAttribute(&handle, &matmulDescr, sparseLtMatmulDescAttribute_t, data, dataSize);
+
+  // CUDA: cusparseStatus_t CUSPARSELT_API cusparseLtMatmulDescGetAttribute(const cusparseLtHandle_t* handle, const cusparseLtMatmulDescriptor_t* matmulDescr, cusparseLtMatmulDescAttribute_t matmulAttribute, void* data, size_t dataSize);
+  // HIP: HIPSPARSELT_EXPORT hipsparseStatus_t hipsparseLtMatmulDescGetAttribute(const hipsparseLtHandle_t* handle, const hipsparseLtMatmulDescriptor_t* matmulDescr, hipsparseLtMatmulDescAttribute_t matmulAttribute, void* data, size_t dataSize);
+  // CHECK: status = hipsparseLtMatmulDescGetAttribute(&handle, &matmulDescr, sparseLtMatmulDescAttribute_t, data, dataSize);
+  status = cusparseLtMatmulDescGetAttribute(&handle, &matmulDescr, sparseLtMatmulDescAttribute_t, data, dataSize);
+#endif
+
   return 0;
 }

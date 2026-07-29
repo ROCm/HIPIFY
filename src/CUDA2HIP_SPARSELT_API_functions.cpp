@@ -48,6 +48,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_FUNCTION_MAP = [] {
   m["cusparseLtSpMMAPruneCheck2"]                                     = {"hipsparseLtSpMMAPruneCheck2",                        "", CONV_LIB_FUNC, API_SPARSELT, 2};
   m["cusparseLtSpMMACompressedSize2"]                                 = {"hipsparseLtSpMMACompressedSize2",                    "", CONV_LIB_FUNC, API_SPARSELT, 2};
   m["cusparseLtSpMMACompress2"]                                       = {"hipsparseLtSpMMACompress2",                          "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtMatDescSetAttribute"]                                  = {"hipsparseLtMatDescSetAttribute",                     "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtMatDescGetAttribute"]                                  = {"hipsparseLtMatDescGetAttribute",                     "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtMatmulDescSetAttribute"]                               = {"hipsparseLtMatmulDescSetAttribute",                  "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtMatmulDescGetAttribute"]                               = {"hipsparseLtMatmulDescGetAttribute",                  "", CONV_LIB_FUNC, API_SPARSELT, 2};
 
   return m;
 }();
@@ -77,6 +81,10 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_FUNCTION_VER_MAP 
   m["cusparseLtSpMMAPruneCheck2"]                                     = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
   m["cusparseLtSpMMACompressedSize2"]                                 = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
   m["cusparseLtSpMMACompress2"]                                       = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatDescSetAttribute"]                                  = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatDescGetAttribute"]                                  = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatmulDescSetAttribute"]                               = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatmulDescGetAttribute"]                               = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -106,6 +114,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_FUNCTION_VER_MAP = 
   m["hipsparseLtSpMMAPruneCheck2"]                                    = {HIP_7100, HIP_0,    HIP_0   };
   m["hipsparseLtSpMMACompressedSize2"]                                = {HIP_7100, HIP_0,    HIP_0   };
   m["hipsparseLtSpMMACompress2"]                                      = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatDescSetAttribute"]                                 = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatDescGetAttribute"]                                 = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulDescSetAttribute"]                              = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulDescGetAttribute"]                              = {HIP_7100, HIP_0,    HIP_0   };
 
   return m;
 }();
