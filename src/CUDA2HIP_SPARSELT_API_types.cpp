@@ -48,6 +48,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
   m["cusparseLtPruneAlg_t"]                                              = {"hipsparseLtPruneAlg_t",                         "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_PRUNE_SPMMA_TILE"]                                       = {"HIPSPARSELT_PRUNE_SPMMA_TILE",                  "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_PRUNE_SPMMA_STRIP"]                                      = {"HIPSPARSELT_PRUNE_SPMMA_STRIP",                 "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["cusparseLtMatmulDescAttribute_t"]                                   = {"hipsparseLtMatmulDescAttribute_t",              "", CONV_TYPE, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_ACTIVATION_RELU"]                                 = {"HIPSPARSELT_MATMUL_ACTIVATION_RELU",            "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND"]                      = {"HIPSPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND", "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD"]                       = {"HIPSPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD",  "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_ACTIVATION_GELU"]                                 = {"HIPSPARSELT_MATMUL_ACTIVATION_GELU",            "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_BIAS_STRIDE"]                                     = {"HIPSPARSELT_MATMUL_BIAS_STRIDE",                "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_BIAS_POINTER"]                                    = {"HIPSPARSELT_MATMUL_BIAS_POINTER",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["cusparseLtMatDescAttribute_t"]                                      = {"hipsparseLtMatDescAttribute_t",                 "", CONV_TYPE, API_SPARSELT, 1};
+  m["CUSPARSELT_MAT_NUM_BATCHES"]                                        = {"HIPSPARSELT_MAT_NUM_BATCHES",                   "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MAT_BATCH_STRIDE"]                                       = {"HIPSPARSELT_MAT_BATCH_STRIDE",                  "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
 
   return m;
 }();
@@ -76,6 +86,16 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   m["cusparseLtPruneAlg_t"]                                              = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSELT_PRUNE_SPMMA_TILE"]                                       = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSELT_PRUNE_SPMMA_STRIP"]                                      = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatmulDescAttribute_t"]                                   = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_ACTIVATION_RELU"]                                 = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND"]                      = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD"]                       = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_ACTIVATION_GELU"]                                 = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_BIAS_STRIDE"]                                     = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_BIAS_POINTER"]                                    = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatDescAttribute_t"]                                      = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MAT_NUM_BATCHES"]                                        = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MAT_BATCH_STRIDE"]                                       = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -104,6 +124,28 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP =
   m["HIPSPARSELT_PRUNE_SPMMA_STRIP"]                                     = {HIP_7100, HIP_0,    HIP_0    };
   m["HIPSPARSELT_COMPUTE_TF32"]                                          = {HIP_7100, HIP_0,    HIP_0    };
   m["HIPSPARSELT_COMPUTE_TF32_FAST"]                                     = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtMatmulDescAttribute_t"]                                  = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_ACTIVATION_RELU"]                                = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_ACTIVATION_RELU_UPPERBOUND"]                     = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_ACTIVATION_RELU_THRESHOLD"]                      = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_ACTIVATION_GELU"]                                = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_BIAS_STRIDE"]                                    = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_BIAS_POINTER"]                                   = {HIP_7100, HIP_0,    HIP_0    };
+  m["hipsparseLtMatDescAttribute_t"]                                     = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MAT_NUM_BATCHES"]                                       = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MAT_BATCH_STRIDE"]                                      = {HIP_7100, HIP_0,    HIP_0    };
 
   return m;
 }();
+
+const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSELT_TYPE_CHANGED_VER_MAP = [] {
+  std::map<llvm::StringRef, cudaAPIChangedVersions> m;
+
+  m["cusparseLtHandle_t"]                                                = { CUSPARSELT_020 };
+  m["cusparseLtMatDescriptor_t"]                                         = { CUSPARSELT_020 };
+  m["cusparseLtMatmulDescriptor_t"]                                      = { CUSPARSELT_020 };
+  m["cusparseLtMatmulAlgSelection_t"]                                    = { CUSPARSELT_020 };
+  m["cusparseLtMatmulPlan_t"]                                            = { CUSPARSELT_020 };
+
+  return m;
+  }();
