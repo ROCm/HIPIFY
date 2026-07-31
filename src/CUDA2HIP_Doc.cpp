@@ -878,7 +878,8 @@ namespace doc {
     const string& getAdditionalMetaKeywords() const override { return sMetaKeywords; }
     const sectionMap &getSections() const override { return CUDA_SPARSELT_API_SECTION_MAP; }
     const functionMap &getFunctions() const override { return CUDA_SPARSELT_FUNCTION_MAP; }
-      const cudaChangedVersionMap &getCudaChangedTypeVersions() const override { return CUDA_SPARSELT_TYPE_CHANGED_VER_MAP; }
+    const cudaChangedVersionMap &getCudaChangedTypeVersions() const override { return CUDA_SPARSELT_TYPE_CHANGED_VER_MAP; }
+    const cudaChangedVersionMap &getCudaChangedFunctionVersions() const override { return CUDA_SPARSELT_FUNCTION_CHANGED_VER_MAP; }
     const typeMap &getTypes() const override { return CUDA_SPARSELT_TYPE_NAME_MAP; }
     const versionMap &getFunctionVersions() const override { return CUDA_SPARSELT_FUNCTION_VER_MAP; }
     const hipVersionMap &getHipFunctionVersions() const override { return HIP_SPARSELT_FUNCTION_VER_MAP; }

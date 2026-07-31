@@ -125,6 +125,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_FUNCTION_VER_MAP = 
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSELT_FUNCTION_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
+  m["cusparseLtMatmulGetWorkspace"]                                   = { CUSPARSELT_030 };
+
   return m;
 }();
 
