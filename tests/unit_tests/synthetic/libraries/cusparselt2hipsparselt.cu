@@ -146,11 +146,6 @@ int main() {
   // CHECK: status = hipsparseLtMatmulAlgGetAttribute(&handle, &algSelection, algAttribute, data, dataSize);
   status = cusparseLtMatmulAlgGetAttribute(&handle, &algSelection, algAttribute, data, dataSize);
 
-  // CUDA: cusparseStatus_t cusparseLtMatmulGetWorkspace(const cusparseLtHandle_t* handle, const cusparseLtMatmulPlan_t* plan, size_t* workspaceSize);
-  // HIP: hipsparseStatus_t hipsparseLtMatmulGetWorkspace(const hipsparseLtHandle_t* handle, const hipsparseLtMatmulPlan_t* plan, size_t* workspaceSize);
-  // CHECK: status = hipsparseLtMatmulGetWorkspace(&handle, &plan, &workspaceSize);
-  status = cusparseLtMatmulGetWorkspace(&handle, &plan, &workspaceSize);
-
   // CUDA: cusparseStatus_t cusparseLtMatmulPlanInit(const cusparseLtHandle_t* handle, cusparseLtMatmulPlan_t* plan, const cusparseLtMatmulDescriptor_t* matmulDescr, const cusparseLtMatmulAlgSelection_t* algSelection);
   // HIP: hipsparseStatus_t hipsparseLtMatmulPlanInit(const hipsparseLtHandle_t* handle, hipsparseLtMatmulPlan_t* plan, const hipsparseLtMatmulDescriptor_t* matmulDescr, const hipsparseLtMatmulAlgSelection_t* algSelection);
   // CHECK: status = hipsparseLtMatmulPlanInit(&handle, &plan, &matmulDescr, &algSelection);
@@ -261,5 +256,33 @@ int main() {
   status = cusparseLtMatmulDescGetAttribute(&handle, &matmulDescr, sparseLtMatmulDescAttribute_t, data, dataSize);
 #endif
 
-  return 0;
+#if CUSPARSELT_VERSION >= 300
+  // CHECK: hipsparseLtMatmulAlgAttribute_t SPARSELT_MATMUL_SPLIT_K = HIPSPARSELT_MATMUL_SPLIT_K;
+  // CHECK-NEXT: hipsparseLtMatmulAlgAttribute_t SPARSELT_MATMUL_SPLIT_K_MODE = HIPSPARSELT_MATMUL_SPLIT_K_MODE;
+  // CHECK-NEXT: hipsparseLtMatmulAlgAttribute_t SPARSELT_MATMUL_SPLIT_K_BUFFERS = HIPSPARSELT_MATMUL_SPLIT_K_BUFFERS;
+  cusparseLtMatmulAlgAttribute_t SPARSELT_MATMUL_SPLIT_K = CUSPARSELT_MATMUL_SPLIT_K;
+  cusparseLtMatmulAlgAttribute_t SPARSELT_MATMUL_SPLIT_K_MODE = CUSPARSELT_MATMUL_SPLIT_K_MODE;
+  cusparseLtMatmulAlgAttribute_t SPARSELT_MATMUL_SPLIT_K_BUFFERS = CUSPARSELT_MATMUL_SPLIT_K_BUFFERS;
+
+  // CHECK: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_GELU_SCALING = HIPSPARSELT_MATMUL_ACTIVATION_GELU_SCALING;
+  // CHECK-NEXT: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ALPHA_VECTOR_SCALING = HIPSPARSELT_MATMUL_ALPHA_VECTOR_SCALING;
+  // CHECK-NEXT: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_BETA_VECTOR_SCALING = HIPSPARSELT_MATMUL_BETA_VECTOR_SCALING;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ACTIVATION_GELU_SCALING = CUSPARSELT_MATMUL_ACTIVATION_GELU_SCALING;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_ALPHA_VECTOR_SCALING = CUSPARSELT_MATMUL_ALPHA_VECTOR_SCALING;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_BETA_VECTOR_SCALING = CUSPARSELT_MATMUL_BETA_VECTOR_SCALING;
+
+  // CHECK: hipsparseLtSplitKMode_t sparseLtSplitKMode_t;
+  // CHECK-NEXT: hipsparseLtSplitKMode_t SPARSELT_SPLIT_K_MODE_ONE_KERNEL = HIPSPARSELT_SPLIT_K_MODE_ONE_KERNEL;
+  // CHECK-NEXT: hipsparseLtSplitKMode_t SPARSELT_SPLIT_K_MODE_TWO_KERNELS = HIPSPARSELT_SPLIT_K_MODE_TWO_KERNELS;
+  cusparseLtSplitKMode_t sparseLtSplitKMode_t;
+  cusparseLtSplitKMode_t SPARSELT_SPLIT_K_MODE_ONE_KERNEL = CUSPARSELT_SPLIT_K_MODE_ONE_KERNEL;
+  cusparseLtSplitKMode_t SPARSELT_SPLIT_K_MODE_TWO_KERNELS = CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS;
+
+  // CUDA: cusparseStatus_t cusparseLtMatmulGetWorkspace(const cusparseLtHandle_t* handle, const cusparseLtMatmulPlan_t* plan, size_t* workspaceSize);
+  // HIP: hipsparseStatus_t hipsparseLtMatmulGetWorkspace(const hipsparseLtHandle_t* handle, const hipsparseLtMatmulPlan_t* plan, size_t* workspaceSize);
+  // CHECK: status = hipsparseLtMatmulGetWorkspace(&handle, &plan, &workspaceSize);
+  status = cusparseLtMatmulGetWorkspace(&handle, &plan, &workspaceSize);
+#endif
+
+  return 0; 
 }
