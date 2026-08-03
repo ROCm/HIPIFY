@@ -126,6 +126,10 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSELT_FUNCTION_C
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
   m["cusparseLtMatmulGetWorkspace"]                                   = { CUSPARSELT_030 };
+  m["cusparseLtMatmulPlanInit"]                                       = { CUSPARSELT_040 };
+  m["cusparseLtSpMMACompress"]                                        = { CUSPARSELT_040 };
+  m["cusparseLtSpMMACompressedSize"]                                  = { CUSPARSELT_040 };
+  m["cusparseLtSpMMACompress2"]                                       = { CUSPARSELT_040 };
 
   return m;
 }();
