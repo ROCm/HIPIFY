@@ -24,15 +24,17 @@ THE SOFTWARE.
 #include "LLVMCompat.h"
 
 #include <memory>
-#include <set>
+#include <string>
 #include <vector>
 
+#include "clang/Basic/SourceManager.h"
 #include "clang/Frontend/CompilerInstance.h"
 #include "clang/Frontend/FrontendActions.h"
 #include "clang/Lex/PPCallbacks.h"
 #include "clang/Lex/Preprocessor.h"
 #include "clang/Tooling/CompilationDatabase.h"
 #include "clang/Tooling/Tooling.h"
+#include "llvm/ADT/StringSet.h"
 #include "llvm/Support/Path.h"
 #include "llvm/Support/raw_ostream.h"
 
@@ -43,79 +45,97 @@ using namespace std;
 
 namespace {
 
+std::string getFilePathForID(const clang::SourceManager &SM,
+                             clang::FileID FID) {
+  const clang::FileEntry *FE = SM.getFileEntryForID(FID);
+  if (!FE)
+    return std::string();
+  StringRef RealPath = FE->tryGetRealPathName();
+  if (!RealPath.empty())
+    return RealPath.str();
+  return SM.getFilename(SM.getLocForStartOfFile(FID)).str();
+}
+
+// Records every `#include` of a translation unit, except those issued from a
+// system header or from the command line.
 class IncludeCollectorCallbacks : public clang::PPCallbacks {
   const clang::SourceManager &SM;
   std::vector<IncludeEntry> &Entries;
 
 public:
   IncludeCollectorCallbacks(const clang::SourceManager &SM,
-                            std::vector<IncludeEntry> &entries)
-      : SM(SM), Entries(entries) {}
+                            std::vector<IncludeEntry> &Entries)
+      : SM(SM), Entries(Entries) {}
 
-  void InclusionDirective(clang::SourceLocation hash_loc,
-                          const clang::Token &include_token,
-                          StringRef file_name, bool is_angled,
-                          clang::CharSourceRange filename_range,
+  void InclusionDirective(clang::SourceLocation HashLoc, const clang::Token &,
+                          StringRef FileName, bool IsAngled,
+                          clang::CharSourceRange,
 #if LLVM_VERSION_MAJOR < 15
-                          const clang::FileEntry *file,
+                          const clang::FileEntry *File,
 #elif LLVM_VERSION_MAJOR == 15
-                          Optional<clang::FileEntryRef> file,
+                          Optional<clang::FileEntryRef> File,
 #else
-                          clang::OptionalFileEntryRef file,
+                          clang::OptionalFileEntryRef File,
 #endif
-                          StringRef search_path, StringRef relative_path,
+                          StringRef, StringRef,
 #if LLVM_VERSION_MAJOR < 19
-                          const clang::Module *SuggestedModule
+                          const clang::Module *
 #else
-                          const clang::Module *SuggestedModule,
-                          bool ModuleImported
+                          const clang::Module *, bool
 #endif
 #if LLVM_VERSION_MAJOR > 6
                           ,
                           clang::SrcMgr::CharacteristicKind FileType
 #endif
                           ) override {
-    if (!SM.isWrittenInMainFile(hash_loc))
+    const clang::FileID IncluderID = SM.getFileID(HashLoc);
+    std::string IncluderPath = getFilePathForID(SM, IncluderID);
+    if (IncluderPath.empty() || SM.isInSystemHeader(HashLoc))
       return;
 
-    IncludeEntry entry;
-    entry.fileName = file_name.str();
-    entry.isAngled = is_angled;
+    IncludeEntry Entry;
+    Entry.fileName = FileName.str();
+    Entry.isAngled = IsAngled;
+    Entry.includerPath = std::move(IncluderPath);
+    Entry.isFromMainFile = IncluderID == SM.getMainFileID();
+#if LLVM_VERSION_MAJOR > 6
+    Entry.isSystem = FileType != clang::SrcMgr::C_User;
+#endif
 
-    if (file) {
+    if (File) {
 #if LLVM_VERSION_MAJOR < 15
-      entry.resolvedPath = file->tryGetRealPathName().str();
-      if (entry.resolvedPath.empty())
-        entry.resolvedPath = file->getName().str();
+      Entry.resolvedPath = File->tryGetRealPathName().str();
+      if (Entry.resolvedPath.empty())
+        Entry.resolvedPath = File->getName().str();
 #else
-      entry.resolvedPath = file->getFileEntry().tryGetRealPathName().str();
-      if (entry.resolvedPath.empty())
-        entry.resolvedPath = file->getName().str();
+      Entry.resolvedPath = File->getFileEntry().tryGetRealPathName().str();
+      if (Entry.resolvedPath.empty())
+        Entry.resolvedPath = File->getName().str();
 #endif
     }
 
-    Entries.push_back(std::move(entry));
+    Entries.push_back(std::move(Entry));
   }
 };
 
-class IncludeCollectorAction : public clang::PreprocessorFrontendAction {
+// PreprocessOnlyAction supplies the lexing loop and IgnorePragmas().
+class IncludeCollectorAction : public clang::PreprocessOnlyAction {
   std::vector<IncludeEntry> &Entries;
 
 public:
-  explicit IncludeCollectorAction(std::vector<IncludeEntry> &entries)
-      : Entries(entries) {}
+  explicit IncludeCollectorAction(std::vector<IncludeEntry> &Entries)
+      : Entries(Entries) {}
 
-  void ExecuteAction() override {
-    clang::CompilerInstance &CI = getCompilerInstance();
-    clang::Preprocessor &PP = CI.getPreprocessor();
-    PP.addPPCallbacks(std::make_unique<IncludeCollectorCallbacks>(
-        CI.getSourceManager(), Entries));
-
-    PP.EnterMainSourceFile();
-    clang::Token Tok;
-    do {
-      PP.Lex(Tok);
-    } while (Tok.isNot(clang::tok::eof));
+protected:
+#if LLVM_VERSION_MAJOR < 5
+  bool BeginSourceFileAction(clang::CompilerInstance &CI, StringRef) override {
+#else
+  bool BeginSourceFileAction(clang::CompilerInstance &CI) override {
+#endif
+    CI.getPreprocessor().addPPCallbacks(
+        std::make_unique<IncludeCollectorCallbacks>(CI.getSourceManager(),
+                                                    Entries));
+    return true;
   }
 };
 
@@ -137,6 +157,49 @@ public:
 #endif
 };
 
+// Returns entries.size() when headerPath was never included.
+size_t findFirstInclusion(const std::vector<IncludeEntry> &entries,
+                          StringRef headerPath) {
+  size_t i = 0;
+  for (; i < entries.size(); ++i)
+    if (entries[i].resolvedPath == headerPath)
+      break;
+  return i;
+}
+
+// Files to `-include` in front of headerPath so that a header which is not
+// self-contained still sees what its ancestors included before it.
+std::vector<std::string>
+buildIncludeContext(const std::vector<IncludeEntry> &entries,
+                    StringRef headerPath) {
+  const size_t pos = findFirstInclusion(entries, headerPath);
+  if (pos == entries.size())
+    return std::vector<std::string>();
+
+  StringSet<> ancestors;
+  std::string file = entries[pos].includerPath;
+  while (!file.empty() && ancestors.insert(file).second) {
+    const size_t idx = findFirstInclusion(entries, file);
+    file = idx == entries.size() ? std::string() : entries[idx].includerPath;
+  }
+
+  std::vector<std::string> context;
+  StringSet<> seen;
+  for (size_t i = 0; i < pos; ++i) {
+    const IncludeEntry &e = entries[i];
+    // An ancestor would re-include headerPath, whose guard then empties the
+    // copy being hipified.
+    if (!ancestors.count(e.includerPath) || ancestors.count(e.resolvedPath))
+      continue;
+    // System headers are injected as spelled, to be found via the search paths.
+    std::string arg = e.isSystem ? e.fileName : e.resolvedPath;
+    if (arg.empty() || !seen.insert(arg).second)
+      continue;
+    context.push_back(std::move(arg));
+  }
+  return context;
+}
+
 } // namespace
 
 bool appendArgumentsAdjusters(ct::RefactoringTool &Tool,
@@ -147,134 +210,74 @@ bool collectIncludeTree(const std::string &srcPath,
                         const ct::CompilationDatabase *compDB,
                         ct::CommonOptionsParser *OptionsParserPtr,
                         const char *hipify_exe,
-                        const std::string &mainContextPath,
                         std::vector<IncludeEntry> &outEntries) {
   outEntries.clear();
 
-  const ct::CompilationDatabase &baseDB =
-      compDB ? *compDB : OptionsParserPtr->getCompilations();
+  ct::RefactoringTool Tool(
+      compDB ? *compDB : OptionsParserPtr->getCompilations(), {srcPath});
 
-  // If srcPath has no entry in the compilation database, fall back to a
-  // FixedCompilationDatabase rooted at the mainContextPath's directory so that
-  // the tool doesn't skip the file.
-  std::vector<ct::CompileCommand> cmds = baseDB.getCompileCommands(srcPath);
-  std::unique_ptr<ct::FixedCompilationDatabase> fallbackDB;
-  if (cmds.empty()) {
-    std::string dir = sys::path::parent_path(mainContextPath).str();
-    fallbackDB = std::make_unique<ct::FixedCompilationDatabase>(
-        dir, std::vector<std::string>());
-  }
-
-  ct::RefactoringTool Tool(fallbackDB ? *fallbackDB : baseDB, {srcPath});
-
-  if (!appendArgumentsAdjusters(Tool, mainContextPath, hipify_exe)) {
+  if (!appendArgumentsAdjusters(Tool, srcPath, hipify_exe)) {
     return false;
   }
 
   IncludeCollectorActionFactory factory(outEntries);
-  Tool.run(&factory);
-  return true;
-}
-
-bool collectLocalQuotedIncludes(const std::string &mainSourceAbsPath,
-                                const ct::CompilationDatabase *compDB,
-                                ct::CommonOptionsParser *OptionsParserPtr,
-                                const char *hipify_exe,
-                                std::vector<std::string> &outHeaders) {
-  std::vector<IncludeEntry> entries;
-  if (!collectIncludeTree(mainSourceAbsPath, compDB, OptionsParserPtr,
-                          hipify_exe, mainSourceAbsPath, entries)) {
-    errs() << "\n"
-           << sHipify << sError
-           << "Failed to collect includes from: " << mainSourceAbsPath << "\n";
-    return false;
-  }
-
-  std::set<std::string> uniq;
-  for (const auto &e : entries) {
-    if (!e.isAngled && !e.resolvedPath.empty())
-      uniq.insert(e.resolvedPath);
-  }
-  outHeaders.assign(uniq.begin(), uniq.end());
-  return true;
+  return Tool.run(&factory) == 0;
 }
 
 bool hipifyLocalHeaders(const std::string &mainSourceAbsPath,
                         const ct::CompilationDatabase *compDB,
                         ct::CommonOptionsParser *OptionsParserPtr,
                         const char *hipify_exe, bool recursive) {
-
-  std::vector<std::string> initial;
-  if (!collectLocalQuotedIncludes(mainSourceAbsPath, compDB, OptionsParserPtr,
-                                  hipify_exe, initial)) {
+  std::vector<IncludeEntry> entries;
+  if (!collectIncludeTree(mainSourceAbsPath, compDB, OptionsParserPtr,
+                          hipify_exe, entries)) {
+    errs() << "\n"
+           << sHipify << sError
+           << "Failed to collect includes from: " << mainSourceAbsPath << "\n";
     return false;
   }
 
-  if (initial.empty()) {
+  // The single run already walked the whole tree; recursion is just the
+  // unfiltered result. Include guards make each path appear at most once.
+  std::vector<std::string> headers;
+  StringSet<> seen;
+  for (const IncludeEntry &e : entries) {
+    if (e.isAngled || e.isSystem || e.resolvedPath.empty())
+      continue;
+    if (!recursive && !e.isFromMainFile)
+      continue;
+    if (seen.insert(e.resolvedPath).second)
+      headers.push_back(e.resolvedPath);
+  }
+
+  if (headers.empty()) {
     outs() << "\n" << sHipify << "No local headers detected in "
            << sys::path::filename(mainSourceAbsPath) << "\n";
     return true;
   }
 
-  outs() << "\n" << sHipify << "Local headers found: " << initial.size()
+  outs() << "\n" << sHipify << "Local headers found: " << headers.size()
          << " in " << sys::path::filename(mainSourceAbsPath) << "\n";
-  for (size_t i = 0; i < initial.size(); ++i) {
-    outs() << (i + 1) << "/" << initial.size()
-           << ": " << sys::path::filename(initial[i]) << "\n";
+  for (size_t i = 0; i < headers.size(); ++i) {
+    outs() << (i + 1) << "/" << headers.size() << ": "
+           << sys::path::filename(headers[i]) << "\n";
   }
 
-  std::vector<std::string> work(initial.begin(), initial.end());
-  std::set<std::string> processed;
-  std::set<std::string> queued(initial.begin(), initial.end());
-  size_t total = initial.size();
-  size_t current = 0;
-
-  while (!work.empty()) {
-    std::string hdr = work.back();
-    work.pop_back();
-    if (processed.count(hdr)) {
-      continue;
-    }
-    processed.insert(hdr);
-    ++current;
-
+  for (size_t i = 0; i < headers.size(); ++i) {
+    const std::string &hdr = headers[i];
     std::string hipOut = hdr + ".hip";
-    bool ok = hipifySingleSource(hdr, hipOut, compDB, OptionsParserPtr,
-                                 hipify_exe, mainSourceAbsPath, false);
-
-    if (!ok) {
-      errs() << "\n" << sHipify << sError
-             << "Hipify failed for header [" << current << "/" << total
-             << "]: " << sys::path::filename(hdr) << "\n";
+    if (!hipifySingleSource(hdr, hipOut, compDB, OptionsParserPtr, hipify_exe,
+                            mainSourceAbsPath, false,
+                            buildIncludeContext(entries, hdr))) {
+      errs() << "\n" << sHipify << sError << "Hipify failed for header ["
+             << (i + 1) << "/" << headers.size() << "]: "
+             << sys::path::filename(hdr) << "\n";
       return false;
     }
     outs() << sHipify << "Successfully hipified header file" << "\n";
-
-    if (recursive) {
-      std::vector<IncludeEntry> childEntries;
-      if (collectIncludeTree(hdr, compDB, OptionsParserPtr, hipify_exe,
-                             mainSourceAbsPath, childEntries)) {
-        std::vector<std::string> newHeaders;
-        for (const auto &e : childEntries) {
-          if (!e.isAngled && !e.resolvedPath.empty() &&
-              !processed.count(e.resolvedPath) &&
-              !queued.count(e.resolvedPath)) {
-            newHeaders.push_back(e.resolvedPath);
-            work.push_back(e.resolvedPath);
-            queued.insert(e.resolvedPath);
-          }
-        }
-        if (!newHeaders.empty()) {
-          total += newHeaders.size();
-          outs() << sHipify << "  Recursive: found " << newHeaders.size()
-                 << " additional local header(s) in "
-                 << sys::path::filename(hdr) << "\n";
-        }
-      }
-    }
   }
 
   outs() << "\n" << sHipify << "Local header hipification complete: "
-         << processed.size() << " header(s) processed.\n";
+         << headers.size() << " header(s) processed.\n";
   return true;
 }

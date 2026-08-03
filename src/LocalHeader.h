@@ -22,8 +22,6 @@ THE SOFTWARE.
 
 #pragma once
 
-#include "clang/Frontend/FrontendActions.h"
-#include "clang/Lex/PPCallbacks.h"
 #include "clang/Tooling/CommonOptionsParser.h"
 #include "clang/Tooling/Refactoring.h"
 #include <string>
@@ -31,10 +29,14 @@ THE SOFTWARE.
 
 namespace ct = clang::tooling;
 
+// A single `#include` directive, recorded in preprocessing order.
 struct IncludeEntry {
   std::string fileName;
   std::string resolvedPath;
-  bool isAngled;
+  std::string includerPath;
+  bool isAngled = false;
+  bool isSystem = false;
+  bool isFromMainFile = false;
 };
 
 extern bool hipifySingleSource(const std::string &srcPath,
@@ -52,15 +54,9 @@ bool hipifyLocalHeaders(const std::string &srcPath,
                         const char *hipify_exe,
                         bool recursive = false);
 
+// Preprocesses srcPath and records its whole include tree in outEntries.
 bool collectIncludeTree(const std::string &srcPath,
                         const ct::CompilationDatabase *compDB,
                         ct::CommonOptionsParser *OptionsParserPtr,
                         const char *hipify_exe,
-                        const std::string &mainContextPath,
                         std::vector<IncludeEntry> &outEntries);
-
-bool collectLocalQuotedIncludes(const std::string &mainSourceAbsPath,
-                                const ct::CompilationDatabase *compDB,
-                                ct::CommonOptionsParser *OptionsParserPtr,
-                                const char *hipify_exe,
-                                std::vector<std::string> &outHeaders);

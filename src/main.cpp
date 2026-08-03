@@ -278,13 +278,25 @@ bool hipifySingleSource(const std::string &srcPath,
     return false;
   }
 
-  for (auto it = additionalIncludes.rbegin(); it != additionalIncludes.rend(); ++it) {
-    Tool.appendArgumentsAdjuster(
-        ct::getInsertArgumentAdjuster(it->c_str(),
-                                       ct::ArgumentInsertPosition::BEGIN));
-    Tool.appendArgumentsAdjuster(
-        ct::getInsertArgumentAdjuster("-include",
-                                       ct::ArgumentInsertPosition::BEGIN));
+  // The copy is preprocessed from a temporary directory, so includes quoted
+  // relative to the original one need an explicit search path.
+  StringRef srcDir = sys::path::parent_path(srcPath);
+  if (!srcDir.empty()) {
+    std::string sSrcDir = "-I" + srcDir.str();
+    Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(
+        sSrcDir.c_str(), ct::ArgumentInsertPosition::BEGIN));
+  }
+
+  // Appended at the end to follow the implicit CUDA headers, inserted at the
+  // beginning: a header may use CUDA declarations without including any.
+  if (!additionalIncludes.empty()) {
+    ct::CommandLineArguments includeArgs;
+    for (const std::string &include : additionalIncludes) {
+      includeArgs.push_back("-include");
+      includeArgs.push_back(include);
+    }
+    Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(
+        includeArgs, ct::ArgumentInsertPosition::END));
   }
 
   // Hipify _all_ the things!
