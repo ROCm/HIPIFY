@@ -26,33 +26,46 @@ if sys.platform in ['win32']:
     if not config.build_type:
         config.build_type = "Debug"
 
-pattern_major = r'_MAJOR ([1-9]|1[0-9])'
+pattern_major = r'_MAJOR ([0-9]+)'
+pattern_minor = r'_MINOR ([0-9]+)'
+pattern_patch = r'_PATCH ([0-9]+)'
 
-def get_lib_major_ver(file_name):
+def get_lib_ver(file_name, pattern=pattern_major):
     if os.path.isfile(file_name):
         with open(file_name, 'r') as f:
-            match = re.search(pattern_major, f.read())
+            match = re.search(pattern, f.read())
         if match:
             s = match.group(0)[7:]
             return int(s)
     return 0
 
+def get_lib_version_sum(file_name):
+    major = get_lib_ver(file_name, pattern_major)
+    minor = get_lib_ver(file_name, pattern_minor)
+    patch = get_lib_ver(file_name, pattern_patch)
+    return major * 1000 + minor * 100 + patch
+
 def get_cudnn_major_ver():
     ver_file = config.cuda_dnn_root + '/cudnn_version.h'
-    ver = get_lib_major_ver(ver_file)
+    ver = get_lib_ver(ver_file)
     if ver == 0:
         ver_file = config.cuda_dnn_root + '/cudnn_version_v9.h'
-        ver = get_lib_major_ver(ver_file)
+        ver = get_lib_ver(ver_file)
     if ver == 0:
         ver_file = config.cuda_dnn_root + '/cudnn_version_v999.h'
-        ver = get_lib_major_ver(ver_file)
+        ver = get_lib_ver(ver_file)
     return int(ver)
 
 def get_cutensor_major_ver():
     ver_file = config.cuda_tensor_root + '/cutensor.h'
-    ver = get_lib_major_ver(ver_file)
+    ver = get_lib_ver(ver_file)
     if ver == 0:
         ver = 1
+    return ver
+
+def get_cusparselt_ver():
+    ver_file = config.cuda_sparselt_root + '/cusparselt.h'
+    ver = get_lib_version_sum(ver_file)
     return ver
 
 if config.cuda_dnn_root and config.cuda_dnn_root != "OFF":
@@ -60,6 +73,9 @@ if config.cuda_dnn_root and config.cuda_dnn_root != "OFF":
 
 if config.cuda_tensor_root and config.cuda_tensor_root != "OFF":
     config.cutensor_version_major = get_cutensor_major_ver()
+
+if config.cuda_sparselt_root and config.cuda_sparselt_root != "OFF":
+    config.cusparselt_version = get_cusparselt_ver()
 
 # Support substitution of the tools and libs dirs with user parameters. This is
 # used when we can't determine the tool dir at configuration time.

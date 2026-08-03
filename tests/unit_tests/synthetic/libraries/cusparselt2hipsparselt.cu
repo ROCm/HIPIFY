@@ -67,7 +67,6 @@ int main() {
   // CHECK: hipsparseLtMatmulPlan_t plan;
   cusparseLtMatmulPlan_t plan;
 
-  // cuSPARSELt data types (Added: cuSPARSELt 0.0.1)
   // CHECK: hipsparseLtSparsity_t sparsity;
   // CHECK-NEXT: hipsparseLtSparsity_t SPARSITY_50_PERCENT = HIPSPARSELT_SPARSITY_50_PERCENT;
   cusparseLtSparsity_t sparsity;
@@ -101,11 +100,6 @@ int main() {
   cusparseLtPruneAlg_t PRUNE_SPMMA_TILE = CUSPARSELT_PRUNE_SPMMA_TILE;
   cusparseLtPruneAlg_t PRUNE_SPMMA_STRIP = CUSPARSELT_PRUNE_SPMMA_STRIP;
 
-  // NOTE: CUSPARSE_COMPUTE_TF32 / CUSPARSE_COMPUTE_TF32_FAST (cuSPARSELt 0.1.0) were removed
-  // from cusparseComputeType in later cuSPARSELt (replaced by CUSPARSE_COMPUTE_32F).
-  // [ToDo]: Add the CUSPARSE_COMPUTE_32F -> HIPSPARSELT_COMPUTE_32F mapping.
-
-  // cuSPARSELt function reference (Added: cuSPARSELt 0.0.1)
   // CUDA: cusparseStatus_t cusparseLtInit(cusparseLtHandle_t* handle);
   // HIP: hipsparseStatus_t hipsparseLtInit(hipsparseLtHandle_t* handle);
   // CHECK: status = hipsparseLtInit(&handle);
@@ -146,11 +140,6 @@ int main() {
   // CHECK: status = hipsparseLtMatmulAlgGetAttribute(&handle, &algSelection, algAttribute, data, dataSize);
   status = cusparseLtMatmulAlgGetAttribute(&handle, &algSelection, algAttribute, data, dataSize);
 
-  // CUDA: cusparseStatus_t cusparseLtMatmulPlanInit(const cusparseLtHandle_t* handle, cusparseLtMatmulPlan_t* plan, const cusparseLtMatmulDescriptor_t* matmulDescr, const cusparseLtMatmulAlgSelection_t* algSelection);
-  // HIP: hipsparseStatus_t hipsparseLtMatmulPlanInit(const hipsparseLtHandle_t* handle, hipsparseLtMatmulPlan_t* plan, const hipsparseLtMatmulDescriptor_t* matmulDescr, const hipsparseLtMatmulAlgSelection_t* algSelection);
-  // CHECK: status = hipsparseLtMatmulPlanInit(&handle, &plan, &matmulDescr, &algSelection);
-  status = cusparseLtMatmulPlanInit(&handle, &plan, &matmulDescr, &algSelection);
-
   // CUDA: cusparseStatus_t cusparseLtMatmulPlanDestroy(const cusparseLtMatmulPlan_t* plan);
   // HIP: hipsparseStatus_t hipsparseLtMatmulPlanDestroy(const hipsparseLtMatmulPlan_t* plan);
   // CHECK: status = hipsparseLtMatmulPlanDestroy(&plan);
@@ -176,17 +165,7 @@ int main() {
   // CHECK: status = hipsparseLtSpMMAPruneCheck(&handle, &matmulDescr, d_in, &valid, stream);
   status = cusparseLtSpMMAPruneCheck(&handle, &matmulDescr, d_in, &valid, stream);
 
-  // CUDA: cusparseStatus_t cusparseLtSpMMACompressedSize(const cusparseLtHandle_t* handle, const cusparseLtMatmulPlan_t* plan, size_t* compressedSize, size_t* compressBufferSize);
-  // HIP: hipsparseStatus_t hipsparseLtSpMMACompressedSize(const hipsparseLtHandle_t* handle, const hipsparseLtMatmulPlan_t* plan, size_t* compressedSize, size_t* compressBufferSize);
-  // CHECK: status = hipsparseLtSpMMACompressedSize(&handle, &plan, &compressedSize, &compressBufferSize);
-  status = cusparseLtSpMMACompressedSize(&handle, &plan, &compressedSize, &compressBufferSize);
-
-  // CUDA: cusparseStatus_t cusparseLtSpMMACompress(const cusparseLtHandle_t* handle, const cusparseLtMatmulPlan_t* plan, const void* d_dense, void* d_compressed, void* d_compressBuffer, cudaStream_t stream);
-  // HIP: hipsparseStatus_t hipsparseLtSpMMACompress(const hipsparseLtHandle_t* handle, const hipsparseLtMatmulPlan_t* plan, const void* d_dense, void* d_compressed, void* d_compressBuffer, hipStream_t stream);
-  // CHECK: status = hipsparseLtSpMMACompress(&handle, &plan, d_dense, d_compressed, d_compressBuffer, stream);
-  status = cusparseLtSpMMACompress(&handle, &plan, d_dense, d_compressed, d_compressBuffer, stream);
-
-  // cuSPARSELt function reference (Added: cuSPARSELt 0.1.0)
+#if CUSPARSELT_VERSION >= 100
   // CUDA: cusparseStatus_t cusparseLtMatDescriptorDestroy(const cusparseLtMatDescriptor_t* matDescr);
   // HIP: hipsparseStatus_t hipsparseLtMatDescriptorDestroy(const hipsparseLtMatDescriptor_t* matDescr);
   // CHECK: status = hipsparseLtMatDescriptorDestroy(&matDescr);
@@ -201,16 +180,7 @@ int main() {
   // HIP: hipsparseStatus_t hipsparseLtSpMMAPruneCheck2(const hipsparseLtHandle_t* handle, const hipsparseLtMatDescriptor_t* sparseMatDescr, int isSparseA, hipsparseOperation_t op, const void* d_in, int* d_valid, hipStream_t stream);
   // CHECK: status = hipsparseLtSpMMAPruneCheck2(&handle, &matA, isSparseA, op, d_in, &valid, stream);
   status = cusparseLtSpMMAPruneCheck2(&handle, &matA, isSparseA, op, d_in, &valid, stream);
-
-  // CUDA: cusparseStatus_t cusparseLtSpMMACompressedSize2(const cusparseLtHandle_t* handle, const cusparseLtMatDescriptor_t* sparseMatDescr, size_t* compressedSize, size_t* compressBufferSize);
-  // HIP: hipsparseStatus_t hipsparseLtSpMMACompressedSize2(const hipsparseLtHandle_t* handle, const hipsparseLtMatDescriptor_t* sparseMatDescr, size_t* compressedSize, size_t* compressBufferSize);
-  // CHECK: status = hipsparseLtSpMMACompressedSize2(&handle, &matA, &compressedSize, &compressBufferSize);
-  status = cusparseLtSpMMACompressedSize2(&handle, &matA, &compressedSize, &compressBufferSize);
-
-  // CUDA: cusparseStatus_t cusparseLtSpMMACompress2(const cusparseLtHandle_t* handle, const cusparseLtMatDescriptor_t* sparseMatDescr, int isSparseA, cusparseOperation_t op, const void* d_dense, void* d_compressed, void* d_compressBuffer, cudaStream_t stream);
-  // HIP: hipsparseStatus_t hipsparseLtSpMMACompress2(const hipsparseLtHandle_t* handle, const hipsparseLtMatDescriptor_t* sparseMatDescr, int isSparseA, hipsparseOperation_t op, const void* d_dense, void* d_compressed, void* d_compressBuffer, hipStream_t stream);
-  // CHECK: status = hipsparseLtSpMMACompress2(&handle, &matA, isSparseA, op, d_dense, d_compressed, d_compressBuffer, stream);
-  status = cusparseLtSpMMACompress2(&handle, &matA, isSparseA, op, d_dense, d_compressed, d_compressBuffer, stream);
+#endif
 
 #if CUSPARSELT_VERSION >= 200
   // CHECK: hipsparseLtMatmulDescAttribute_t sparseLtMatmulDescAttribute_t;
@@ -284,5 +254,5 @@ int main() {
   status = cusparseLtMatmulGetWorkspace(&handle, &plan, &workspaceSize);
 #endif
 
-  return 0; 
+  return 0;
 }

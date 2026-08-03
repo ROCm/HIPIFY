@@ -75,11 +75,11 @@
 |`cusparseLtMatmulDescriptorInit`|0.0.1| | | |`hipsparseLtMatmulDescriptorInit`|7.10.0| | | | | |
 |`cusparseLtMatmulGetWorkspace`|0.0.1| |0.3.0| |`hipsparseLtMatmulGetWorkspace`|7.10.0| | | | | |
 |`cusparseLtMatmulPlanDestroy`|0.0.1| | | |`hipsparseLtMatmulPlanDestroy`|7.10.0| | | | | |
-|`cusparseLtMatmulPlanInit`|0.0.1| | | |`hipsparseLtMatmulPlanInit`|7.10.0| | | | | |
+|`cusparseLtMatmulPlanInit`|0.0.1| |0.4.0| |`hipsparseLtMatmulPlanInit`|7.10.0| | | | | |
 |`cusparseLtMatmulSearch`|0.0.1| | | |`hipsparseLtMatmulSearch`|7.10.0| | | | | |
-|`cusparseLtSpMMACompress`|0.0.1| | | |`hipsparseLtSpMMACompress`|7.10.0| | | | | |
-|`cusparseLtSpMMACompress2`|0.1.0| | | |`hipsparseLtSpMMACompress2`|7.10.0| | | | | |
-|`cusparseLtSpMMACompressedSize`|0.0.1| | | |`hipsparseLtSpMMACompressedSize`|7.10.0| | | | | |
+|`cusparseLtSpMMACompress`|0.0.1| |0.4.0| |`hipsparseLtSpMMACompress`|7.10.0| | | | | |
+|`cusparseLtSpMMACompress2`|0.1.0| |0.4.0| |`hipsparseLtSpMMACompress2`|7.10.0| | | | | |
+|`cusparseLtSpMMACompressedSize`|0.0.1| |0.4.0| |`hipsparseLtSpMMACompressedSize`|7.10.0| | | | | |
 |`cusparseLtSpMMACompressedSize2`|0.1.0| | | |`hipsparseLtSpMMACompressedSize2`|7.10.0| | | | | |
 |`cusparseLtSpMMAPrune`|0.0.1| | | |`hipsparseLtSpMMAPrune`|7.10.0| | | | | |
 |`cusparseLtSpMMAPrune2`|0.1.0| | | |`hipsparseLtSpMMAPrune2`|7.10.0| | | | | |
