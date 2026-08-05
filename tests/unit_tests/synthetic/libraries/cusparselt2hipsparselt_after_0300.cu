@@ -15,6 +15,8 @@ int main() {
   size_t compressedSize = 0;
   size_t compressBufferSize = 0;
   int isSparseA = 1;
+  int version = 1;
+  int value = 1;
   const void *d_dense = nullptr;
   void *d_compressed = nullptr;
   void* d_compressBuffer = nullptr;
@@ -43,6 +45,13 @@ int main() {
   // CHECK: hipsparseOperation_t opA, opB, op;
   cusparseOperation_t opA, opB, op;
 
+#if CUDA_VERSION >= 8000
+  // CHECK: hipLibraryPropertyType libPropertyType;
+  // CHECK-NEXT: hipLibraryPropertyType libPropertyType_t;
+  libraryPropertyType libPropertyType;
+  libraryPropertyType_t libPropertyType_t;
+#endif
+
 #if CUSPARSELT_VERSION >= 400
   // CUDA: cusparseStatus_t cusparseLtMatmulPlanInit(const cusparseLtHandle_t* handle, cusparseLtMatmulPlan_t* plan, const cusparseLtMatmulDescriptor_t* matmulDescr, const cusparseLtMatmulAlgSelection_t* algSelection);
   // HIP: hipsparseStatus_t hipsparseLtMatmulPlanInit(const hipsparseLtHandle_t* handle, hipsparseLtMatmulPlan_t* plan, const hipsparseLtMatmulDescriptor_t* matmulDescr, const hipsparseLtMatmulAlgSelection_t* algSelection);
@@ -68,6 +77,16 @@ int main() {
   // HIP: hipsparseStatus_t hipsparseLtSpMMACompressedSize2(const hipsparseLtHandle_t* handle, const hipsparseLtMatDescriptor_t* sparseMatDescr, size_t* compressedSize, size_t* compressBufferSize);
   // CHECK: status = hipsparseLtSpMMACompressedSize2(&handle, &matA, &compressedSize, &compressBufferSize);
   status = cusparseLtSpMMACompressedSize2(&handle, &matA, &compressedSize, &compressBufferSize);
+
+  // CUDA: cusparseStatus_t CUSPARSELT_API cusparseLtGetVersion(const cusparseLtHandle_t * handle, int* version);
+  // HIP: HIPSPARSELT_EXPORT hipsparseStatus_t hipsparseLtGetVersion(const hipsparseLtHandle_t * handle, int* version);
+  // CHECK: status = hipsparseLtGetVersion(&handle, &version);
+  status = cusparseLtGetVersion(&handle, &version);
+
+  // CUDA: cusparseStatus_t CUSPARSELT_API cusparseLtGetProperty(libraryPropertyType propertyType, int* value);
+  // HIP: HIPSPARSELT_EXPORT hipsparseStatus_t hipsparseLtGetProperty(hipLibraryPropertyType propertyType, int* value);
+  // CHECK: status = hipsparseLtGetProperty(libPropertyType, &value);
+  status = cusparseLtGetProperty(libPropertyType, &value);
 #endif
 
   return 0;
