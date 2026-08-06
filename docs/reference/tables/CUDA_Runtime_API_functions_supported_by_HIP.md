@@ -1874,8 +1874,8 @@
 |`cudaUserObjectRetainFlags`|11.3| | | |`hipUserObjectRetainFlags`|5.3.0| | | | | |
 |`cudaUserObject_t`|11.3| | | |`hipUserObject_t`|5.3.0| | | | | |
 |`cudalibraryHostUniversalFunctionAndDataTable`|12.8| | | | | | | | | | |
-|`libraryPropertyType`|8.0| | | | | | | | | | |
-|`libraryPropertyType_t`|8.0| | | | | | | | | | |
+|`libraryPropertyType`|8.0| | | |`hipLibraryPropertyType`|3.0.0| | | | | |
+|`libraryPropertyType_t`|8.0| | | |`hipLibraryPropertyType`|3.0.0| | | | | |
 |`surfaceReference`| | | |12.0|`surfaceReference`|1.9.0| | | | | |
 |`texture`| | | |12.0|`texture`| | | | | | |
 |`textureReference`| | | | |`textureReference`|1.6.0| | | | | |

@@ -62,6 +62,8 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cusparseLtDenseDescriptorInit`|0.0.1| | | |`hipsparseLtDenseDescriptorInit`|7.10.0| | | | | |
 |`cusparseLtDestroy`|0.0.1| | | |`hipsparseLtDestroy`|7.10.0| | | | | |
+|`cusparseLtGetProperty`|0.4.0| | | |`hipsparseLtGetProperty`|7.10.0| | | | | |
+|`cusparseLtGetVersion`|0.4.0| | | |`hipsparseLtGetVersion`|7.10.0| | | | | |
 |`cusparseLtInit`|0.0.1| | | |`hipsparseLtInit`|7.10.0| | | | | |
 |`cusparseLtMatDescGetAttribute`|0.2.0| | | |`hipsparseLtMatDescGetAttribute`|7.10.0| | | | | |
 |`cusparseLtMatDescSetAttribute`|0.2.0| | | |`hipsparseLtMatDescSetAttribute`|7.10.0| | | | | |

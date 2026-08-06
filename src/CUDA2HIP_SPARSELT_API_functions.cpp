@@ -52,6 +52,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_FUNCTION_MAP = [] {
   m["cusparseLtMatDescGetAttribute"]                                  = {"hipsparseLtMatDescGetAttribute",                     "", CONV_LIB_FUNC, API_SPARSELT, 2};
   m["cusparseLtMatmulDescSetAttribute"]                               = {"hipsparseLtMatmulDescSetAttribute",                  "", CONV_LIB_FUNC, API_SPARSELT, 2};
   m["cusparseLtMatmulDescGetAttribute"]                               = {"hipsparseLtMatmulDescGetAttribute",                  "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtGetVersion"]                                           = {"hipsparseLtGetVersion",                              "", CONV_LIB_FUNC, API_SPARSELT, 2};
+  m["cusparseLtGetProperty"]                                          = {"hipsparseLtGetProperty",                             "", CONV_LIB_FUNC, API_SPARSELT, 2};
 
   return m;
 }();
@@ -85,6 +87,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_FUNCTION_VER_MAP 
   m["cusparseLtMatDescGetAttribute"]                                  = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
   m["cusparseLtMatmulDescSetAttribute"]                               = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
   m["cusparseLtMatmulDescGetAttribute"]                               = {CUSPARSELT_020, CUDA_0      , CUDA_0      };
+  m["cusparseLtGetVersion"]                                           = {CUSPARSELT_040, CUDA_0      , CUDA_0      };
+  m["cusparseLtGetProperty"]                                          = {CUSPARSELT_040, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -118,6 +122,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_FUNCTION_VER_MAP = 
   m["hipsparseLtMatDescGetAttribute"]                                 = {HIP_7100, HIP_0,    HIP_0   };
   m["hipsparseLtMatmulDescSetAttribute"]                              = {HIP_7100, HIP_0,    HIP_0   };
   m["hipsparseLtMatmulDescGetAttribute"]                              = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtGetVersion"]                                          = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtGetProperty"]                                         = {HIP_7100, HIP_0,    HIP_0   };
 
   return m;
 }();
