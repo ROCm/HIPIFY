@@ -533,6 +533,11 @@ int main() {
   cudaMemRangeAttribute MemRangeAttributePreferredLocation = cudaMemRangeAttributePreferredLocation;
   cudaMemRangeAttribute MemRangeAttributeAccessedBy = cudaMemRangeAttributeAccessedBy;
   cudaMemRangeAttribute MemRangeAttributeLastPrefetchLocation = cudaMemRangeAttributeLastPrefetchLocation;
+
+  // CHECK: hipLibraryPropertyType libPropertyType;
+  // CHECK-NEXT: hipLibraryPropertyType libPropertyType_t;
+  libraryPropertyType libPropertyType;
+  libraryPropertyType_t libPropertyType_t;
 #endif
 
 #if CUDA_VERSION >= 9000

@@ -57,10 +57,6 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     return()
   endif()
 
-  include_directories(${CLANG_INCLUDE_DIRS})
-  include_directories(${LLVM_INCLUDE_DIRS})
-  add_definitions(${LLVM_DEFINITIONS})
-
   file(GLOB_RECURSE HIPIFY_SOURCES CONFIGURE_DEPENDS src/*.cpp)
   file(GLOB_RECURSE HIPIFY_HEADERS CONFIGURE_DEPENDS src/*.h)
 
@@ -95,6 +91,9 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
   add_llvm_executable(hipify-clang
     ${HIPIFY_SOURCES} ${HIPIFY_HEADERS}
   )
+  target_include_directories(hipify-clang PRIVATE ${CLANG_INCLUDE_DIRS} ${LLVM_INCLUDE_DIRS})
+  separate_arguments(LLVM_DEFS_LIST UNIX_COMMAND "${LLVM_DEFINITIONS}")
+  target_compile_options(hipify-clang PRIVATE ${LLVM_DEFS_LIST})
   target_link_directories(hipify-clang PRIVATE ${LLVM_LIBRARY_DIRS})
 
   if(HIPIFY_INCLUDE_IN_HIP_SDK)
