@@ -1802,8 +1802,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaD3D11DeviceListNextFrame"]                             = {"HIP_D3D11_DEVICE_LIST_NEXT_FRAME",                         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 3
 
   // no analogue
-  m["libraryPropertyType"]                                      = {"hipLibraryPropertyType_t",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  m["libraryPropertyType_t"]                                    = {"hipLibraryPropertyType_t",                                 "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["libraryPropertyType"]                                      = {"hipLibraryPropertyType",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
+  m["libraryPropertyType_t"]                                    = {"hipLibraryPropertyType",                                   "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUaccessProperty
   m["cudaAccessProperty"]                                       = {"hipAccessProperty",                                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
@@ -3569,6 +3569,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = 
   m["hipFuncAttributeMaxDynamicSharedMemorySize"]               = {HIP_3090, HIP_0,    HIP_0   };
   m["hipFuncAttributePreferredSharedMemoryCarveout"]            = {HIP_3090, HIP_0,    HIP_0   };
   m["hipFuncAttributeMax"]                                      = {HIP_3090, HIP_0,    HIP_0   };
+  m["hipLibraryPropertyType"]                                   = {HIP_3000, HIP_0,    HIP_0   };
   m["hipChannelFormatKind"]                                     = {HIP_1060, HIP_0,    HIP_0   };
   m["hipChannelFormatKindSigned"]                               = {HIP_1060, HIP_0,    HIP_0   };
   m["hipChannelFormatKindUnsigned"]                             = {HIP_1060, HIP_0,    HIP_0   };

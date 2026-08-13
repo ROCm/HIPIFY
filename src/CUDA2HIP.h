@@ -185,6 +185,7 @@ extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_TENSOR_TYPE_
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_TYPE_NAME_VER_MAP;
 extern const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_FUNCTION_VER_MAP;
 extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSELT_TYPE_CHANGED_VER_MAP;
+extern const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSELT_FUNCTION_CHANGED_VER_MAP;
 
 // The union of all the above maps.
 const std::map<llvm::StringRef, hipAPIversions> &HIP_VERSIONS_MAP();
