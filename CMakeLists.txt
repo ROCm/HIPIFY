@@ -248,10 +248,28 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
   endif()
 
   if(UNIX)
+    # hipify-clang cannot be statically linked against LLVM/clang on platforms
+    # (e.g. TheRock's Linux build) where LLVM_LINK_LLVM_DYLIB=ON: clang's static
+    # libraries carry a transitive dependency on libLLVM in that configuration,
+    # so mixing them with statically-linked LLVM components causes ODR
+    # violations ("duplicate cl::opt registered") at runtime - see #1840/#1873.
+    # hipify-clang must therefore be able to find libLLVM at runtime, wherever
+    # the consumed LLVM package installed it, hence deriving the RPATH below
+    # from LLVM_LIBRARY_DIRS instead of assuming a fixed layout.
+    set(HIPIFY_RPATH_DIRS "\\$ORIGIN/../lib" "\\$ORIGIN/../lib/llvm/lib")
+    foreach(_llvm_lib_dir ${LLVM_LIBRARY_DIRS})
+      file(RELATIVE_PATH _llvm_lib_rel "${CMAKE_INSTALL_PREFIX}" "${_llvm_lib_dir}")
+      if(_llvm_lib_rel AND NOT IS_ABSOLUTE "${_llvm_lib_rel}" AND NOT _llvm_lib_rel MATCHES "^\\.\\.")
+        list(APPEND HIPIFY_RPATH_DIRS "\\$ORIGIN/../${_llvm_lib_rel}")
+      endif()
+    endforeach()
+    list(REMOVE_DUPLICATES HIPIFY_RPATH_DIRS)
+    list(JOIN HIPIFY_RPATH_DIRS ":" HIPIFY_RPATH)
+
     # Get rid of any RPATH definations already.
     set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
     # Set RPATH for the binary.
-    set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,\\$ORIGIN/../lib:\\$ORIGIN/../lib/llvm/lib" )
+    set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,${HIPIFY_RPATH}" )
 
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm" CACHE PATH "HIP Package Installation Path")
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
