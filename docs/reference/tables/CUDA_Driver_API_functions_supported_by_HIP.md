@@ -603,17 +603,17 @@
 |`CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED`|13.0| | | | | | | | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | | |
-|`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | |`hipDevResourceTypeInvalid`|7.14.0| | | | | |
 |`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | |13.1| | | | | | | |
-|`CU_DEV_RESOURCE_TYPE_SM`|12.4| | | | | | | | | | |
-|`CU_DEV_RESOURCE_TYPE_WORKQUEUE`|13.1| | | | | | | | | | |
-|`CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_GROUP_BACKFILL`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_GROUP_DEFAULT`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_GROUP_PARAMS`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_GROUP_PARAMS_st`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING`|12.5| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE`|12.5| | | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_SM`|12.4| | | |`hipDevResourceTypeSm`|7.14.0| | | | | |
+|`CU_DEV_RESOURCE_TYPE_WORKQUEUE`|13.1| | | |`hipDevResourceTypeWorkqueue`|7.14.0| | | | | |
+|`CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG`|13.1| | | |`hipDevResourceTypeWorkqueueConfig`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_BACKFILL`|13.1| | | |`hipDevSmResourceGroupBackfill`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_DEFAULT`|13.1| | | |`hipDevSmResourceGroupDefault`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_PARAMS`|13.1| | | |`hipDevSmResourceGroupParams`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_PARAMS_st`|13.1| | | |`hipDevSmResourceGroupParams_st`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING`|12.5| | | |`hipDevSmResourceSplitIgnoreSmCoscheduling`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE`|12.5| | | |`hipDevSmResourceSplitMaxPotentialClusterSize`|7.14.0| | | | | |
 |`CU_EGL_COLOR_FORMAT_A`|9.1| | | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ABGR`|9.1| | | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ARGB`|9.0| | | | | | | | | | |
@@ -1324,16 +1324,16 @@
 |`CUd3d9map_flags_enum`| | | | | | | | | | | |
 |`CUd3d9register_flags`| | | | | | | | | | | |
 |`CUd3d9register_flags_enum`| | | | | | | | | | | |
-|`CUdevResource`|12.4| | | | | | | | | | |
-|`CUdevResourceDesc`|12.4| | | | | | | | | | |
+|`CUdevResource`|12.4| | | |`hipDevResource`|7.14.0| | | | | |
+|`CUdevResourceDesc`|12.4| | | |`hipDevResourceDesc_t`|7.14.0| | | | | |
 |`CUdevResourceDesc_st`|12.4| | | | | | | | | | |
-|`CUdevResourceType`|12.4| | | | | | | | | | |
-|`CUdevResource_st`|12.4| |13.1| | | | | | | | |
-|`CUdevSmResource`|12.4| | | | | | | | | | |
-|`CUdevSmResourceGroup_flags`|13.1| | | | | | | | | | |
-|`CUdevSmResourceSplitByCount_flags`|13.1| | | | | | | | | | |
+|`CUdevResourceType`|12.4| | | |`hipDevResourceType`|7.14.0| | | | | |
+|`CUdevResource_st`|12.4| |13.1| |`hipDevResource_st`|7.14.0| | | | | |
+|`CUdevSmResource`|12.4| | | |`hipDevSmResource`|7.14.0| | | | | |
+|`CUdevSmResourceGroup_flags`|13.1| | | |`hipDevSmResourceGroup_flags`|7.14.0| | | | | |
+|`CUdevSmResourceSplitByCount_flags`|13.1| | | |`hipDevSmResourceSplitByCount_flags`|7.14.0| | | | | |
 |`CUdevSmResourceSplit_flags`|12.5| | |13.1| | | | | | | |
-|`CUdevSmResource_st`|12.4| |13.1| | | | | | | | |
+|`CUdevSmResource_st`|12.4| |13.1| |`hipDevSmResource`|7.14.0| | | | | |
 |`CUdevWorkqueueConfigResource`|13.1| | | | | | | | | | |
 |`CUdevWorkqueueConfigResource_st`|13.1| | | | | | | | | | |
 |`CUdevWorkqueueConfigScope`|13.1| | | | | | | | | | |
