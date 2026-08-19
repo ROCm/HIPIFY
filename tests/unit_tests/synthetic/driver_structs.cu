@@ -417,6 +417,13 @@ int main() {
   // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
   CUgraphEdgeData_st graphEdgeData_st;
   CUgraphEdgeData graphEdgeData;
+
+  // CHECK: hipMemFabricHandle_st memFabricHandle_st;
+  // CHECK-NEXT: hipMemFabricHandle_t memFabricHandle;
+  // CHECK-NEXT: hipMemFabricHandle_t memFabricHandle_v1;
+  CUmemFabricHandle_st memFabricHandle_st;
+  CUmemFabricHandle memFabricHandle;
+  CUmemFabricHandle_v1 memFabricHandle_v1;
 #endif
 
 #if CUDA_VERSION >= 12080

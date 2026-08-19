@@ -315,9 +315,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaGraphExecUpdateResultInfo"]                            = {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // CUmemFabricHandle_st
-  m["cudaMemFabricHandle_st"]                                   = {"hipMemFabricHandle",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaMemFabricHandle_st"]                                   = {"hipMemFabricHandle_st",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // CUmemFabricHandle
-  m["cudaMemFabricHandle_t"]                                    = {"hipMemFabricHandle",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaMemFabricHandle_t"]                                    = {"hipMemFabricHandle_t",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUgraphDeviceNode
   m["cudaGraphDeviceNode_t"]                                    = {"hipGraphDeviceNode",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -1918,7 +1918,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_MEM_HANDLE_TYPE_WIN32_KMT
   m["cudaMemHandleTypeWin32Kmt"]                                = {"hipMemHandleTypeWin32Kmt",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 4
   // CU_MEM_HANDLE_TYPE_FABRIC
-  m["cudaMemHandleTypeFabric"]                                  = {"hipMemHandleTypeFabric",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 8
+  m["cudaMemHandleTypeFabric"]                                  = {"hipMemHandleTypeFabric",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 8
 
   // CUstreamUpdateCaptureDependencies_flags
   m["cudaStreamUpdateCaptureDependenciesFlags"]                 = {"hipStreamUpdateCaptureDependenciesFlags",                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
@@ -3992,6 +3992,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = 
   m["hipLaunchAttributeIgnore"]                                 = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipLaunchAttributeClusterDimension"]                       = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipLaunchAttributeClusterSchedulingPolicyPreference"]      = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipMemFabricHandle_st"]                                    = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemFabricHandle_t"]                                     = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemHandleTypeFabric"]                                   = {HIP_7140, HIP_0,    HIP_0   };
 
   return m;
 }();
