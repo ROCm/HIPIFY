@@ -1382,6 +1382,11 @@ int main() {
   CUjit_option JIT_MAX_THREADS_PER_BLOCK = CU_JIT_MAX_THREADS_PER_BLOCK;
   CUjit_option JIT_OVERRIDE_DIRECTIVE_VALUES = CU_JIT_OVERRIDE_DIRECTIVE_VALUES;
 
+  // CHECK: hipError_t ERROR_INVALID_RESOURCE_TYPE = hipErrorInvalidResourceType;
+  // CHECK-NEXT: hipError_t ERROR_INVALID_RESOURCE_CONFIGURATION = hipErrorInvalidResourceConfiguration;
+  CUresult ERROR_INVALID_RESOURCE_TYPE = CUDA_ERROR_INVALID_RESOURCE_TYPE;
+  CUresult ERROR_INVALID_RESOURCE_CONFIGURATION = CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION;
+
   // CHECK: hipDevResourceType devResourceType;
   // CHECK-NEXT: hipDevResourceType DEV_RESOURCE_TYPE_INVALID = hipDevResourceTypeInvalid;
   // CHECK-NEXT: hipDevResourceType DEV_RESOURCE_TYPE_SM = hipDevResourceTypeSm;
@@ -1441,6 +1446,9 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 13010
+  // CHECK: hipError_t ERROR_STREAM_DETACHED = hipErrorStreamDetached;
+  CUresult ERROR_STREAM_DETACHED = CUDA_ERROR_STREAM_DETACHED;
+
   // CHECK: hipDevResourceType DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG = hipDevResourceTypeWorkqueueConfig;
   // CHECK-NEXT: hipDevResourceType DEV_RESOURCE_TYPE_WORKQUEUE = hipDevResourceTypeWorkqueue;
   CUdevResourceType DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG = CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG;
@@ -1459,6 +1467,13 @@ int main() {
   CUdevSmResourceGroup_flags devSmResourceGroup_flags;
   CUdevSmResourceGroup_flags DEV_SM_RESOURCE_GROUP_DEFAULT = CU_DEV_SM_RESOURCE_GROUP_DEFAULT;
   CUdevSmResourceGroup_flags DEV_SM_RESOURCE_GROUP_BACKFILL = CU_DEV_SM_RESOURCE_GROUP_BACKFILL;
+
+  // CHECK: hipDevWorkqueueConfigScope devWorkqueueConfigScope;
+  // CHECK-NEXT: hipDevWorkqueueConfigScope WORKQUEUE_SCOPE_DEVICE_CTX = hipDevWorkqueueConfigScopeDeviceCtx;
+  // CHECK-NEXT: hipDevWorkqueueConfigScope WORKQUEUE_SCOPE_GREEN_CTX_BALANCED = hipDevWorkqueueConfigScopeGreenCtxBalanced;
+  CUdevWorkqueueConfigScope devWorkqueueConfigScope;
+  CUdevWorkqueueConfigScope WORKQUEUE_SCOPE_DEVICE_CTX = CU_WORKQUEUE_SCOPE_DEVICE_CTX;
+  CUdevWorkqueueConfigScope WORKQUEUE_SCOPE_GREEN_CTX_BALANCED = CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED;
 #endif
 
   return 0;

@@ -91,8 +91,8 @@
 |`CUDA_ERROR_INVALID_IMAGE`| | | | |`hipErrorInvalidImage`|1.6.0| | | | | |
 |`CUDA_ERROR_INVALID_PC`| | | | | | | | | | | |
 |`CUDA_ERROR_INVALID_PTX`| | | | |`hipErrorInvalidKernelFile`|1.6.0| | | | | |
-|`CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION`|12.4| | | | | | | | | | |
-|`CUDA_ERROR_INVALID_RESOURCE_TYPE`|12.4| | | | | | | | | | |
+|`CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION`|12.4| | | |`hipErrorInvalidResourceConfiguration`|7.14.0| | | | | |
+|`CUDA_ERROR_INVALID_RESOURCE_TYPE`|12.4| | | |`hipErrorInvalidResourceType`|7.14.0| | | | | |
 |`CUDA_ERROR_INVALID_SOURCE`| | | | |`hipErrorInvalidSource`|1.6.0| | | | | |
 |`CUDA_ERROR_INVALID_VALUE`| | | | |`hipErrorInvalidValue`|1.6.0| | | | | |
 |`CUDA_ERROR_JIT_COMPILATION_DISABLED`|11.2| | | | | | | | | | |
@@ -142,7 +142,7 @@
 |`CUDA_ERROR_STREAM_CAPTURE_UNMATCHED`|10.0| | | |`hipErrorStreamCaptureUnmatched`|4.3.0| | | | | |
 |`CUDA_ERROR_STREAM_CAPTURE_UNSUPPORTED`|10.0| | | |`hipErrorStreamCaptureUnsupported`|4.3.0| | | | | |
 |`CUDA_ERROR_STREAM_CAPTURE_WRONG_THREAD`|10.1| | | |`hipErrorStreamCaptureWrongThread`|4.3.0| | | | | |
-|`CUDA_ERROR_STREAM_DETACHED`|13.1| | | | | | | | | | |
+|`CUDA_ERROR_STREAM_DETACHED`|13.1| | | |`hipErrorStreamDetached`|7.14.0| | | | | |
 |`CUDA_ERROR_STUB_LIBRARY`|11.1| | | | | | | | | | |
 |`CUDA_ERROR_SYSTEM_DRIVER_MISMATCH`|10.1| | | | | | | | | | |
 |`CUDA_ERROR_SYSTEM_NOT_READY`|10.0| | | | | | | | | | |
@@ -1252,8 +1252,8 @@
 |`CU_TR_FILTER_MODE_LINEAR`| | | | |`HIP_TR_FILTER_MODE_LINEAR`|3.5.0| | | | | |
 |`CU_TR_FILTER_MODE_POINT`| | | | |`HIP_TR_FILTER_MODE_POINT`|3.5.0| | | | | |
 |`CU_USER_OBJECT_NO_DESTRUCTOR_SYNC`|11.3| | | |`hipUserObjectNoDestructorSync`|5.3.0| | | | | |
-|`CU_WORKQUEUE_SCOPE_DEVICE_CTX`|13.1| | | | | | | | | | |
-|`CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED`|13.1| | | | | | | | | | |
+|`CU_WORKQUEUE_SCOPE_DEVICE_CTX`|13.1| | | |`hipDevWorkqueueConfigScopeDeviceCtx`|7.14.0| | | | | |
+|`CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED`|13.1| | | |`hipDevWorkqueueConfigScopeGreenCtxBalanced`|7.14.0| | | | | |
 |`CUaccessPolicyWindow`|11.0| | | |`hipAccessPolicyWindow`|5.2.0| | | | | |
 |`CUaccessPolicyWindow_st`|11.0| | | |`hipAccessPolicyWindow`|5.2.0| | | | | |
 |`CUaccessProperty`|11.0| | | |`hipAccessProperty`|5.2.0| | | | | |
@@ -1334,11 +1334,11 @@
 |`CUdevSmResourceSplitByCount_flags`|13.1| | | |`hipDevSmResourceSplitByCount_flags`|7.14.0| | | | | |
 |`CUdevSmResourceSplit_flags`|12.5| | |13.1| | | | | | | |
 |`CUdevSmResource_st`|12.4| |13.1| |`hipDevSmResource`|7.14.0| | | | | |
-|`CUdevWorkqueueConfigResource`|13.1| | | | | | | | | | |
-|`CUdevWorkqueueConfigResource_st`|13.1| | | | | | | | | | |
-|`CUdevWorkqueueConfigScope`|13.1| | | | | | | | | | |
-|`CUdevWorkqueueResource`|13.1| | | | | | | | | | |
-|`CUdevWorkqueueResource_st`|13.1| | | | | | | | | | |
+|`CUdevWorkqueueConfigResource`|13.1| | | |`hipDevWorkqueueConfigResource`|7.14.0| | | | | |
+|`CUdevWorkqueueConfigResource_st`|13.1| | | |`hipDevWorkqueueConfigResource`|7.14.0| | | | | |
+|`CUdevWorkqueueConfigScope`|13.1| | | |`hipDevWorkqueueConfigScope`|7.14.0| | | | | |
+|`CUdevWorkqueueResource`|13.1| | | |`hipDevWorkqueueResource`|7.14.0| | | | | |
+|`CUdevWorkqueueResource_st`|13.1| | | |`hipDevWorkqueueResource`|7.14.0| | | | | |
 |`CUdevice`| | | | |`hipDevice_t`|1.6.0| | | | | |
 |`CUdeviceNumaConfig`|12.2| | | | | | | | | | |
 |`CUdeviceNumaConfig_enum`|12.2| | | | | | | | | | |

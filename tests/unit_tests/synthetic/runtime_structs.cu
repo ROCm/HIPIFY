@@ -280,8 +280,17 @@ int main() {
   // CHECK: hipDevResourceDesc_t DevResourceDesc;
   cudaDevResourceDesc_t DevResourceDesc;
 
+  // CHECK: hipExecutionCtx_t ExecutionContext;
+  cudaExecutionContext_t ExecutionContext;
+
   // CHECK: hipDevSmResource DevSmResource;
   cudaDevSmResource DevSmResource;
+
+  // CHECK: hipDevWorkqueueConfigResource DevWorkqueueConfigResource;
+  cudaDevWorkqueueConfigResource DevWorkqueueConfigResource;
+
+  // CHECK: hipDevWorkqueueResource DevWorkqueueResource;
+  cudaDevWorkqueueResource DevWorkqueueResource;
 
   // CHECK: hipDevSmResourceGroupParams_st DevSmResourceGroupParams_st;
   // CHECK-NEXT: hipDevSmResourceGroupParams DevSmResourceGroupParams;
