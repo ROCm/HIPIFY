@@ -420,11 +420,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUmulticastObjectProp"]                                             = {"hipMulticastObjectProperties",                               "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // cudaMemFabricHandle_st
-  m["CUmemFabricHandle_st"]                                              = {"hipMemFabricHandle",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CUmemFabricHandle_st"]                                              = {"hipMemFabricHandle_st",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
   // cudaMemFabricHandle_t
-  m["CUmemFabricHandle_v1"]                                              = {"hipMemFabricHandle",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CUmemFabricHandle_v1"]                                              = {"hipMemFabricHandle_t",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
   // cudaMemFabricHandle_t
-  m["CUmemFabricHandle"]                                                 = {"hipMemFabricHandle",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CUmemFabricHandle"]                                                 = {"hipMemFabricHandle_t",                                       "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
 
   // cudaConditionalNodeParams
   m["CUDA_CONDITIONAL_NODE_PARAMS"]                                      = {"hipConditionalNodeParams",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -5155,8 +5155,10 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [
   m["hipClusterSchedulingPolicyDefault"]                                 = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipClusterSchedulingPolicySpread"]                                  = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipClusterSchedulingPolicyLoadBalancing"]                           = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
-  m["hipDeviceAttributeHandleTypeFabricSupported"]                       = {HIP_8000, HIP_0,    HIP_0,  };
-  m["hipMemHandleTypeFabric"]                                            = {HIP_8000, HIP_0,    HIP_0,  };
+  m["hipDeviceAttributeHandleTypeFabricSupported"]                       = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemHandleTypeFabric"]                                            = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemFabricHandle_st"]                                             = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemFabricHandle_t"]                                              = {HIP_7140, HIP_0,    HIP_0   };
 
   return m;
 }();

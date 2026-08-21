@@ -1057,6 +1057,11 @@ int main() {
   cudaGraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = cudaGraphDependencyTypeProgrammatic;
 #endif
 
+#if CUDA_VERSION >= 12040
+  // CHECK: hipMemAllocationHandleType MemHandleTypeFabric = hipMemHandleTypeFabric;
+  cudaMemAllocationHandleType MemHandleTypeFabric = cudaMemHandleTypeFabric;
+#endif
+
 #if CUDA_VERSION >= 12080
   // CHECK: hipJitOption jit_option;
   // CHECK-NEXT: hipJitOption JIT_MAX_REGISTERS = hipJitOptionMaxRegisters;
