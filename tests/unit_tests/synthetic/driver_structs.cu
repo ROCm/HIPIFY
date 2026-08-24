@@ -426,6 +426,21 @@ int main() {
   CUmemFabricHandle_v1 memFabricHandle_v1;
 #endif
 
+#if CUDA_VERSION >= 12040
+  // CHECK: hipDevResourceDesc_t devResourceDesc;
+  CUdevResourceDesc devResourceDesc;
+
+  // CHECK: hipDevSmResource devSmResource_st;
+  // CHECK-NEXT: hipDevSmResource devSmResource;
+  CUdevSmResource_st devSmResource_st;
+  CUdevSmResource devSmResource;
+
+  // CHECK: hipDevResource_st devResource_st;
+  // CHECK-NEXT: hipDevResource devResource;
+  CUdevResource_st devResource_st;
+  CUdevResource devResource;
+#endif
+
 #if CUDA_VERSION >= 12080
   // CHECK: hipMemcpyAttributes memcpyAttributes_st;
   // CHECK-NEXT: hipMemcpyAttributes memcpyAttributes;
@@ -454,6 +469,13 @@ int main() {
   CUDA_MEMCPY3D_BATCH_OP Memcpy3DBatchOp;
   CUDA_MEMCPY3D_BATCH_OP_st Memcpy3DBatchOp_st;
   CUDA_MEMCPY3D_BATCH_OP_v1  Memcpy3DBatchOp_v1;
+#endif
+
+#if CUDA_VERSION >= 13010
+  // CHECK: hipDevSmResourceGroupParams_st DEV_SM_RESOURCE_GROUP_PARAMS_st;
+  // CHECK-NEXT: hipDevSmResourceGroupParams DEV_SM_RESOURCE_GROUP_PARAMS;
+  CU_DEV_SM_RESOURCE_GROUP_PARAMS_st DEV_SM_RESOURCE_GROUP_PARAMS_st;
+  CU_DEV_SM_RESOURCE_GROUP_PARAMS DEV_SM_RESOURCE_GROUP_PARAMS;
 #endif
 
   return 0;

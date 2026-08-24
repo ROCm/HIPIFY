@@ -276,5 +276,23 @@ int main() {
   cudaMemcpy3DBatchOp Memcpy3DBatchOp;
 #endif
 
+#if CUDA_VERSION >= 13010
+  // CHECK: hipDevResourceDesc_t DevResourceDesc;
+  cudaDevResourceDesc_t DevResourceDesc;
+
+  // CHECK: hipDevSmResource DevSmResource;
+  cudaDevSmResource DevSmResource;
+
+  // CHECK: hipDevSmResourceGroupParams_st DevSmResourceGroupParams_st;
+  // CHECK-NEXT: hipDevSmResourceGroupParams DevSmResourceGroupParams;
+  cudaDevSmResourceGroupParams_st DevSmResourceGroupParams_st;
+  cudaDevSmResourceGroupParams DevSmResourceGroupParams;
+
+  // CHECK: hipDevResource_st DevResource_st;
+  // CHECK-NEXT: hipDevResource DevResource;
+  cudaDevResource_st DevResource_st;
+  cudaDevResource DevResource;
+#endif
+
   return 0;
 }
