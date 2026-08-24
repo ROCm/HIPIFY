@@ -15,6 +15,7 @@ external_projects_current_project = "hipify"
 
 # Theme-related settings
 html_theme = "rocm_docs_theme"
+html_title = "HIPIFY Documentation"
 html_theme_options = {
     "flavor": "rocm",
     "repository_url": "https://github.com/ROCm/HIPIFY",
