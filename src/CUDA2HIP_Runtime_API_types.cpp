@@ -275,7 +275,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaMemcpyAttributes"]                                     = {"hipMemcpyAttributes",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUdevSmResource_st
-  m["cudaDevSmResource"]                                        = {"hipDevSmResource",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResource"]                                        = {"hipDevSmResource",                                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUdevWorkqueueConfigResource_st
   m["cudaDevWorkqueueConfigResource"]                           = {"hipDevWorkqueueConfigResource",                            "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -315,9 +315,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaGraphExecUpdateResultInfo"]                            = {"hipGraphExecUpdateResultInfo",                             "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // CUmemFabricHandle_st
-  m["cudaMemFabricHandle_st"]                                   = {"hipMemFabricHandle",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaMemFabricHandle_st"]                                   = {"hipMemFabricHandle_st",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // CUmemFabricHandle
-  m["cudaMemFabricHandle_t"]                                    = {"hipMemFabricHandle",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaMemFabricHandle_t"]                                    = {"hipMemFabricHandle_t",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUgraphDeviceNode
   m["cudaGraphDeviceNode_t"]                                    = {"hipGraphDeviceNode",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -345,7 +345,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CUdevResourceDesc_st
   m["CUdevResourceDesc_st"]                                     = {"hipDevResourceDesc",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUdevResourceDesc
-  m["cudaDevResourceDesc_t"]                                    = {"hipDevResourceDesc_t",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevResourceDesc_t"]                                    = {"hipDevResourceDesc_t",                                     "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   //
   m["cudaExecutionContext_st"]                                  = {"hipExecutionContext",                                      "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -353,14 +353,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaExecutionContext_t"]                                   = {"hipExecutionContext_t",                                    "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // CU_DEV_SM_RESOURCE_GROUP_PARAMS_st
-  m["cudaDevSmResourceGroupParams_st"]                          = {"hipDevSmResourceGroupParams",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResourceGroupParams_st"]                          = {"hipDevSmResourceGroupParams_st",                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // CU_DEV_SM_RESOURCE_GROUP_PARAMS
-  m["cudaDevSmResourceGroupParams"]                             = {"hipDevSmResourceGroupParams",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResourceGroupParams"]                             = {"hipDevSmResourceGroupParams",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUdevResource_st
-  m["cudaDevResource_st"]                                       = {"hipDevResource",                                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevResource_st"]                                       = {"hipDevResource_st",                                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // CUdevResource
-  m["cudaDevResource"]                                          = {"hipDevResource",                                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevResource"]                                          = {"hipDevResource",                                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
 
   // 3. Enums
 
@@ -1918,7 +1918,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_MEM_HANDLE_TYPE_WIN32_KMT
   m["cudaMemHandleTypeWin32Kmt"]                                = {"hipMemHandleTypeWin32Kmt",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 4
   // CU_MEM_HANDLE_TYPE_FABRIC
-  m["cudaMemHandleTypeFabric"]                                  = {"hipMemHandleTypeFabric",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 8
+  m["cudaMemHandleTypeFabric"]                                  = {"hipMemHandleTypeFabric",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 8
 
   // CUstreamUpdateCaptureDependencies_flags
   m["cudaStreamUpdateCaptureDependenciesFlags"]                 = {"hipStreamUpdateCaptureDependenciesFlags",                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
@@ -2348,32 +2348,32 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["CUDA_EMULATION_SPECIAL_VALUES_SUPPORT_NAN"]                = {"HIP_EMULATION_SPECIAL_VALUES_SUPPORT_NAN",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // CUdevSmResourceGroup_flags
-  m["cudaDevSmResourceGroup_flags"]                             = {"hipDevSmResourceGroup_flags",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResourceGroup_flags"]                             = {"hipDevSmResourceGroup_flags",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // cudaDevSmResourceGroupDefault enum values
   // CU_DEV_SM_RESOURCE_GROUP_DEFAULT
-  m["cudaDevSmResourceGroupDefault"]                            = {"hipDevSmResourceGroupDefault",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResourceGroupDefault"]                            = {"hipDevSmResourceGroupDefault",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
   // CU_DEV_SM_RESOURCE_GROUP_BACKFILL
-  m["cudaDevSmResourceGroupBackfill"]                           = {"hipDevSmResourceGroupBackfill",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResourceGroupBackfill"]                           = {"hipDevSmResourceGroupBackfill",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUdevSmResourceSplitByCount_flags
-  m["cudaDevSmResourceSplitByCount_flags"]                      = {"hipDevSmResourceSplitByCount_flags",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResourceSplitByCount_flags"]                      = {"hipDevSmResourceSplitByCount_flags",                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // cudaDevSmResourceSplitByCount_flags enum values
   // CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING
-  m["cudaDevSmResourceSplitIgnoreSmCoscheduling"]               = {"hipDevSmResourceSplitIgnoreSmCoscheduling",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResourceSplitIgnoreSmCoscheduling"]               = {"hipDevSmResourceSplitIgnoreSmCoscheduling",                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
   // CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE
-  m["cudaDevSmResourceSplitMaxPotentialClusterSize"]            = {"hipDevSmResourceSplitMaxPotentialClusterSize",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevSmResourceSplitMaxPotentialClusterSize"]            = {"hipDevSmResourceSplitMaxPotentialClusterSize",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUdevResourceType
-  m["cudaDevResourceType"]                                      = {"hipDevResourceType",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevResourceType"]                                      = {"hipDevResourceType",                                       "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
   // cudaDevResourceType enum values
   // CU_DEV_RESOURCE_TYPE_INVALID
-  m["cudaDevResourceTypeInvalid"]                               = {"hipDevResourceTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevResourceTypeInvalid"]                               = {"hipDevResourceTypeInvalid",                                "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
   // CU_DEV_RESOURCE_TYPE_SM
-  m["cudaDevResourceTypeSm"]                                    = {"hipDevResourceTypeSm",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevResourceTypeSm"]                                    = {"hipDevResourceTypeSm",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
   // CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG
-  m["cudaDevResourceTypeWorkqueueConfig"]                       = {"hipDevResourceTypeWorkqueueConfig",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevResourceTypeWorkqueueConfig"]                       = {"hipDevResourceTypeWorkqueueConfig",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
   // CU_DEV_RESOURCE_TYPE_WORKQUEUE
-  m["cudaDevResourceTypeWorkqueue"]                             = {"hipDevResourceTypeWorkqueue",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaDevResourceTypeWorkqueue"]                             = {"hipDevResourceTypeWorkqueue",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
 
   // CUdevWorkqueueConfigScope
   m["cudaDevWorkqueueConfigScope"]                              = {"hipDevWorkqueueConfigScope",                               "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -3992,6 +3992,26 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = 
   m["hipLaunchAttributeIgnore"]                                 = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipLaunchAttributeClusterDimension"]                       = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
   m["hipLaunchAttributeClusterSchedulingPolicyPreference"]      = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipDevSmResource"]                                         = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemFabricHandle_st"]                                    = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemFabricHandle_t"]                                     = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResourceDesc_t"]                                     = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceGroupParams"]                              = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceGroupParams_st"]                           = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResource"]                                           = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResource_st"]                                        = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemHandleTypeFabric"]                                   = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceGroup_flags"]                              = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceGroupDefault"]                             = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceGroupBackfill"]                            = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceSplitByCount_flags"]                       = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceSplitIgnoreSmCoscheduling"]                = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceSplitMaxPotentialClusterSize"]             = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResourceType"]                                       = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResourceTypeInvalid"]                                = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResourceTypeSm"]                                     = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResourceTypeWorkqueueConfig"]                        = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResourceTypeWorkqueue"]                              = {HIP_7140, HIP_0,    HIP_0   };
 
   return m;
 }();

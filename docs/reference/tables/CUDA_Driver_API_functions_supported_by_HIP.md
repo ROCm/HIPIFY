@@ -83,7 +83,7 @@
 |`CUDA_ERROR_ILLEGAL_INSTRUCTION`| | | | | | | | | | | |
 |`CUDA_ERROR_ILLEGAL_STATE`|10.0| | | |`hipErrorIllegalState`|5.0.0| | | | | |
 |`CUDA_ERROR_INVALID_ADDRESS_SPACE`| | | | | | | | | | | |
-|`CUDA_ERROR_INVALID_CLUSTER_SIZE`|11.8| | | |`hipErrorInvalidClusterSize`|7.13.0| | | | |7.13.0|
+|`CUDA_ERROR_INVALID_CLUSTER_SIZE`|11.8| | | |`hipErrorInvalidClusterSize`|7.13.0| | | | |7.14.0|
 |`CUDA_ERROR_INVALID_CONTEXT`| | | | |`hipErrorInvalidContext`|1.6.0| | | | | |
 |`CUDA_ERROR_INVALID_DEVICE`| | | | |`hipErrorInvalidDevice`|1.6.0| | | | | |
 |`CUDA_ERROR_INVALID_GRAPHICS_CONTEXT`| | | | |`hipErrorInvalidGraphicsContext`|1.6.0| | | | | |
@@ -365,9 +365,9 @@
 |`CU_ATOMIC_OPERATION_MAX`|13.0| | | | | | | | | | |
 |`CU_ATOMIC_OPERATION_OR`|13.0| | | | | | | | | | |
 |`CU_ATOMIC_OPERATION_XOR`|13.0| | | | | | | | | | |
-|`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | |`hipClusterSchedulingPolicyDefault`|7.13.0| | | | |7.13.0|
-|`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | |`hipClusterSchedulingPolicyLoadBalancing`|7.13.0| | | | |7.13.0|
-|`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | |`hipClusterSchedulingPolicySpread`|7.13.0| | | | |7.13.0|
+|`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | |`hipClusterSchedulingPolicyDefault`|7.13.0| | | | |7.14.0|
+|`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | |`hipClusterSchedulingPolicyLoadBalancing`|7.13.0| | | | |7.14.0|
+|`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | |`hipClusterSchedulingPolicySpread`|7.13.0| | | | |7.14.0|
 |`CU_COMPUTEMODE_DEFAULT`| | | | |`hipComputeModeDefault`|1.9.0| | | | | |
 |`CU_COMPUTEMODE_EXCLUSIVE`| | | |8.0|`hipComputeModeExclusive`|1.9.0| | | | | |
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | | |`hipComputeModeExclusiveProcess`|2.0.0| | | | | |
@@ -464,12 +464,12 @@
 |`CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH`| | | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS`|11.3| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED`|11.3| | | | | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED`|11.0| | | |`hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported`|7.13.0| | | | |7.13.0|
+|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED`|11.0| | | |`hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported`|7.13.0| | | | |7.14.0|
 |`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING`|11.3| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_OVERLAP`| |5.0| | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_DEVICE_ID`|12.8| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_SUBSYSTEM_ID`|12.8| | | | | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED`|12.3| | | |`hipDeviceAttributeHandleTypeFabricSupported`|8.0.0| | | | | |
+|`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_FABRIC_SUPPORTED`|12.3| | | |`hipDeviceAttributeHandleTypeFabricSupported`|7.14.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED`|10.2| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED`|10.2| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED`|10.2| | | | | | | | | | |
@@ -603,17 +603,17 @@
 |`CU_DEVICE_P2P_ATTRIBUTE_NATIVE_ATOMIC_SUPPORTED`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_ONLY_PARTIAL_NATIVE_ATOMIC_SUPPORTED`|13.0| | | | | | | | | | |
 |`CU_DEVICE_P2P_ATTRIBUTE_PERFORMANCE_RANK`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | | |
-|`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_INVALID`|12.4| | | |`hipDevResourceTypeInvalid`|7.14.0| | | | | |
 |`CU_DEV_RESOURCE_TYPE_MAX`|12.4| | |13.1| | | | | | | |
-|`CU_DEV_RESOURCE_TYPE_SM`|12.4| | | | | | | | | | |
-|`CU_DEV_RESOURCE_TYPE_WORKQUEUE`|13.1| | | | | | | | | | |
-|`CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_GROUP_BACKFILL`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_GROUP_DEFAULT`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_GROUP_PARAMS`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_GROUP_PARAMS_st`|13.1| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING`|12.5| | | | | | | | | | |
-|`CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE`|12.5| | | | | | | | | | |
+|`CU_DEV_RESOURCE_TYPE_SM`|12.4| | | |`hipDevResourceTypeSm`|7.14.0| | | | | |
+|`CU_DEV_RESOURCE_TYPE_WORKQUEUE`|13.1| | | |`hipDevResourceTypeWorkqueue`|7.14.0| | | | | |
+|`CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG`|13.1| | | |`hipDevResourceTypeWorkqueueConfig`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_BACKFILL`|13.1| | | |`hipDevSmResourceGroupBackfill`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_DEFAULT`|13.1| | | |`hipDevSmResourceGroupDefault`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_PARAMS`|13.1| | | |`hipDevSmResourceGroupParams`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_GROUP_PARAMS_st`|13.1| | | |`hipDevSmResourceGroupParams_st`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING`|12.5| | | |`hipDevSmResourceSplitIgnoreSmCoscheduling`|7.14.0| | | | | |
+|`CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE`|12.5| | | |`hipDevSmResourceSplitMaxPotentialClusterSize`|7.14.0| | | | | |
 |`CU_EGL_COLOR_FORMAT_A`|9.1| | | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ABGR`|9.1| | | | | | | | | | |
 |`CU_EGL_COLOR_FORMAT_ARGB`|9.0| | | | | | | | | | |
@@ -898,11 +898,11 @@
 |`CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
-|`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | |`hipLaunchAttributeClusterDimension`|7.13.0| | | | |7.13.0|
-|`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | |`hipLaunchAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.13.0|
+|`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | |`hipLaunchAttributeClusterDimension`|7.13.0| | | | |7.14.0|
+|`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | |`hipLaunchAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.14.0|
 |`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | |`hipLaunchAttributeCooperative`|6.2.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | |`hipLaunchAttributeIgnore`|7.13.0| | | | |7.13.0|
+|`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | |`hipLaunchAttributeIgnore`|7.13.0| | | | |7.14.0|
 |`CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT`|12.3| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | |`hipLaunchAttributeMax`|7.0.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | | |
@@ -1004,7 +1004,7 @@
 |`CU_MEM_DECOMPRESS_ALGORITHM_LZ4`|12.9| | | | | | | | | | |
 |`CU_MEM_DECOMPRESS_ALGORITHM_SNAPPY`|12.8| | | | | | | | | | |
 |`CU_MEM_DECOMPRESS_UNSUPPORTED`|12.8| | | | | | | | | | |
-|`CU_MEM_HANDLE_TYPE_FABRIC`|12.3| | | |`hipMemHandleTypeFabric`|8.0.0| | | | | |
+|`CU_MEM_HANDLE_TYPE_FABRIC`|12.3| | | |`hipMemHandleTypeFabric`|7.14.0| | | | | |
 |`CU_MEM_HANDLE_TYPE_GENERIC`|11.1| | | |`hipMemHandleTypeGeneric`|5.2.0| | | | | |
 |`CU_MEM_HANDLE_TYPE_MAX`|10.2| | | | | | | | | | |
 |`CU_MEM_HANDLE_TYPE_NONE`|11.2| | | |`hipMemHandleTypeNone`|5.2.0| | | | | |
@@ -1154,7 +1154,7 @@
 |`CU_STREAM_WAIT_VALUE_FLUSH`|8.0| | | | | | | | | | |
 |`CU_STREAM_WAIT_VALUE_GEQ`|8.0| | | |`hipStreamWaitValueGte`|4.2.0| | | | | |
 |`CU_STREAM_WAIT_VALUE_NOR`|9.0| | | |`hipStreamWaitValueNor`|4.2.0| | | | | |
-|`CU_STREAM_WRITE_VALUE_DEFAULT`|8.0| | | |`hipStreamWriteValueDefault`|7.13.0| | | | |7.13.0|
+|`CU_STREAM_WRITE_VALUE_DEFAULT`|8.0| | | |`hipStreamWriteValueDefault`|7.13.0| | | | |7.14.0|
 |`CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER`|8.0| | | | | | | | | | |
 |`CU_SYNC_POLICY_AUTO`|11.0| | | |`hipSyncPolicyAuto`|7.1.0| | | | | |
 |`CU_SYNC_POLICY_BLOCKING_SYNC`|11.0| | | |`hipSyncPolicyBlockingSync`|7.1.0| | | | | |
@@ -1294,8 +1294,8 @@
 |`CUcheckpointUnlockArgs_st`|12.8| | | | | | | | | | |
 |`CUcigDataType`|12.5| | | | | | | | | | |
 |`CUcigDataType_enum`|12.5| | | | | | | | | | |
-|`CUclusterSchedulingPolicy`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.13.0|
-|`CUclusterSchedulingPolicy_enum`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.13.0|
+|`CUclusterSchedulingPolicy`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.14.0|
+|`CUclusterSchedulingPolicy_enum`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.14.0|
 |`CUcomputemode`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`CUcomputemode_enum`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`CUcontext`| | | | |`hipCtx_t`|1.6.0| | | | | |
@@ -1324,16 +1324,16 @@
 |`CUd3d9map_flags_enum`| | | | | | | | | | | |
 |`CUd3d9register_flags`| | | | | | | | | | | |
 |`CUd3d9register_flags_enum`| | | | | | | | | | | |
-|`CUdevResource`|12.4| | | | | | | | | | |
-|`CUdevResourceDesc`|12.4| | | | | | | | | | |
+|`CUdevResource`|12.4| | | |`hipDevResource`|7.14.0| | | | | |
+|`CUdevResourceDesc`|12.4| | | |`hipDevResourceDesc_t`|7.14.0| | | | | |
 |`CUdevResourceDesc_st`|12.4| | | | | | | | | | |
-|`CUdevResourceType`|12.4| | | | | | | | | | |
-|`CUdevResource_st`|12.4| |13.1| | | | | | | | |
-|`CUdevSmResource`|12.4| | | | | | | | | | |
-|`CUdevSmResourceGroup_flags`|13.1| | | | | | | | | | |
-|`CUdevSmResourceSplitByCount_flags`|13.1| | | | | | | | | | |
+|`CUdevResourceType`|12.4| | | |`hipDevResourceType`|7.14.0| | | | | |
+|`CUdevResource_st`|12.4| |13.1| |`hipDevResource_st`|7.14.0| | | | | |
+|`CUdevSmResource`|12.4| | | |`hipDevSmResource`|7.14.0| | | | | |
+|`CUdevSmResourceGroup_flags`|13.1| | | |`hipDevSmResourceGroup_flags`|7.14.0| | | | | |
+|`CUdevSmResourceSplitByCount_flags`|13.1| | | |`hipDevSmResourceSplitByCount_flags`|7.14.0| | | | | |
 |`CUdevSmResourceSplit_flags`|12.5| | |13.1| | | | | | | |
-|`CUdevSmResource_st`|12.4| |13.1| | | | | | | | |
+|`CUdevSmResource_st`|12.4| |13.1| |`hipDevSmResource`|7.14.0| | | | | |
 |`CUdevWorkqueueConfigResource`|13.1| | | | | | | | | | |
 |`CUdevWorkqueueConfigResource_st`|13.1| | | | | | | | | | |
 |`CUdevWorkqueueConfigScope`|13.1| | | | | | | | | | |
@@ -1532,9 +1532,9 @@
 |`CUmemDecompressAlgorithm_enum`|12.8| | | | | | | | | | |
 |`CUmemDecompressParams`|12.8| | | | | | | | | | |
 |`CUmemDecompressParams_st`|12.8| | | | | | | | | | |
-|`CUmemFabricHandle`|12.3| | | | | | | | | | |
-|`CUmemFabricHandle_st`|12.3| | | | | | | | | | |
-|`CUmemFabricHandle_v1`|12.3| | | | | | | | | | |
+|`CUmemFabricHandle`|12.3| | | |`hipMemFabricHandle_t`|7.14.0| | | | | |
+|`CUmemFabricHandle_st`|12.3| | | |`hipMemFabricHandle_st`|7.14.0| | | | | |
+|`CUmemFabricHandle_v1`|12.3| | | |`hipMemFabricHandle_t`|7.14.0| | | | | |
 |`CUmemGenericAllocationHandle`|10.2| | | |`hipMemGenericAllocationHandle_t`|5.2.0| | | | | |
 |`CUmemGenericAllocationHandle_v1`|11.3| | | |`hipMemGenericAllocationHandle_t`|5.2.0| | | | | |
 |`CUmemHandleType`|11.1| | | |`hipMemHandleType`|5.2.0| | | | | |
@@ -2038,7 +2038,7 @@
 |`cuMemDiscardBatchAsync`|13.0| | | | | | | | | | |
 |`cuMemPrefetchAsync`|8.0| |13.0| |`hipMemPrefetchAsync`|3.7.0| | | |13.0| |
 |`cuMemPrefetchAsync_v2`|12.2| | | | | | | | | | |
-|`cuMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | |7.13.0|
+|`cuMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | |7.14.0|
 |`cuMemRangeGetAttribute`|8.0| | | |`hipMemRangeGetAttribute`|3.7.0| | | | | |
 |`cuMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | | |
 |`cuPointerGetAttribute`| | | | |`hipPointerGetAttribute`|5.0.0| | | | | |
