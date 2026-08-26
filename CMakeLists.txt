@@ -256,20 +256,37 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     # hipify-clang must therefore be able to find libLLVM at runtime, wherever
     # the consumed LLVM package installed it, hence deriving the RPATH below
     # from LLVM_LIBRARY_DIRS instead of assuming a fixed layout.
-    set(HIPIFY_RPATH_DIRS "\\$ORIGIN/../lib" "\\$ORIGIN/../lib/llvm/lib")
-    foreach(_llvm_lib_dir ${LLVM_LIBRARY_DIRS})
+    #
+    # $ORIGIN/../lib covers the flat layout; the versioned ROCm layout installs
+    # the binary in core-X.Y/bin and libLLVM in core-X.Y/lib/llvm/lib.
+    set(HIPIFY_INSTALL_RPATH "\$ORIGIN/../lib" "\$ORIGIN/../lib/llvm/lib")
+    foreach(_llvm_lib_dir IN LISTS LLVM_LIBRARY_DIRS)
       file(RELATIVE_PATH _llvm_lib_rel "${CMAKE_INSTALL_PREFIX}" "${_llvm_lib_dir}")
-      if(_llvm_lib_rel AND NOT IS_ABSOLUTE "${_llvm_lib_rel}" AND NOT _llvm_lib_rel MATCHES "^\\.\\.")
-        list(APPEND HIPIFY_RPATH_DIRS "\\$ORIGIN/../${_llvm_lib_rel}")
+      if(NOT _llvm_lib_rel OR IS_ABSOLUTE "${_llvm_lib_rel}" OR _llvm_lib_rel MATCHES "^\\.\\.")
+        # Outside CMAKE_INSTALL_PREFIX, so deliberately left out of the install
+        # RPATH: an absolute build-machine path must not be baked into a
+        # redistributable binary. The build-tree binary still resolves libLLVM
+        # through the BUILD_RPATH that llvm_setup_rpath() derives from
+        # LLVM_LIBRARY_DIR for exactly this out-of-prefix case.
+        message(STATUS "   - LLVM lib dir outside install prefix, omitted from hipify-clang install RPATH: ${_llvm_lib_dir}")
+      elseif(_llvm_lib_rel MATCHES ":")
+        # ':' separates entries in an ELF RPATH and cannot be escaped.
+        message(WARNING "LLVM lib dir contains ':' and cannot be represented in an RPATH, omitted from hipify-clang install RPATH: ${_llvm_lib_dir}")
+      else()
+        list(APPEND HIPIFY_INSTALL_RPATH "\$ORIGIN/../${_llvm_lib_rel}")
       endif()
     endforeach()
-    list(REMOVE_DUPLICATES HIPIFY_RPATH_DIRS)
-    list(JOIN HIPIFY_RPATH_DIRS ":" HIPIFY_RPATH)
+    list(REMOVE_DUPLICATES HIPIFY_INSTALL_RPATH)
 
-    # Get rid of any RPATH definations already.
-    set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "")
-    # Set RPATH for the binary.
-    set_target_properties(hipify-clang PROPERTIES LINK_FLAGS "-Wl,--enable-new-dtags -Wl,--rpath,${HIPIFY_RPATH}" )
+    # Set the RPATH via INSTALL_RPATH rather than a hand-built LINK_FLAGS
+    # string. LINK_FLAGS is a single unquoted string, so any path containing a
+    # space would split the -Wl,--rpath argument, and assigning it here would
+    # also discard the -Wl,-rpath-link (GNU ld) and -Wl,-z,origin (FreeBSD)
+    # flags that llvm_setup_rpath() appended from add_llvm_executable().
+    # INSTALL_RPATH is a real list that CMake quotes and joins itself, and
+    # setting it replaces the value llvm_setup_rpath() had installed.
+    set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "${HIPIFY_INSTALL_RPATH}")
+    target_link_options(hipify-clang PRIVATE "LINKER:--enable-new-dtags")
 
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm" CACHE PATH "HIP Package Installation Path")
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
