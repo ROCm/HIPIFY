@@ -472,6 +472,16 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 13010
+  // CHECK: hipDevWorkqueueConfigResource devWorkqueueConfigResource_st;
+  // CHECK-NEXT: hipDevWorkqueueConfigResource devWorkqueueConfigResource;
+  CUdevWorkqueueConfigResource_st devWorkqueueConfigResource_st;
+  CUdevWorkqueueConfigResource devWorkqueueConfigResource;
+
+  // CHECK: hipDevWorkqueueResource devWorkqueueResource_st;
+  // CHECK-NEXT: hipDevWorkqueueResource devWorkqueueResource;
+  CUdevWorkqueueResource_st devWorkqueueResource_st;
+  CUdevWorkqueueResource devWorkqueueResource;
+
   // CHECK: hipDevSmResourceGroupParams_st DEV_SM_RESOURCE_GROUP_PARAMS_st;
   // CHECK-NEXT: hipDevSmResourceGroupParams DEV_SM_RESOURCE_GROUP_PARAMS;
   CU_DEV_SM_RESOURCE_GROUP_PARAMS_st DEV_SM_RESOURCE_GROUP_PARAMS_st;

@@ -1062,6 +1062,13 @@ int main() {
   cudaMemAllocationHandleType MemHandleTypeFabric = cudaMemHandleTypeFabric;
 #endif
 
+#if CUDA_VERSION >= 12060
+  // CHECK: hipError_t ErrorInvalidResourceType = hipErrorInvalidResourceType;
+  // CHECK-NEXT: hipError_t ErrorInvalidResourceConfiguration = hipErrorInvalidResourceConfiguration;
+  cudaError_t ErrorInvalidResourceType = cudaErrorInvalidResourceType;
+  cudaError_t ErrorInvalidResourceConfiguration = cudaErrorInvalidResourceConfiguration;
+#endif
+
 #if CUDA_VERSION >= 12080
   // CHECK: hipJitOption jit_option;
   // CHECK-NEXT: hipJitOption JIT_MAX_REGISTERS = hipJitOptionMaxRegisters;
@@ -1146,6 +1153,9 @@ int main() {
 #endif
 
 #if CUDA_VERSION >= 13010
+  // CHECK: hipError_t ErrorStreamDetached = hipErrorStreamDetached;
+  cudaError_t ErrorStreamDetached = cudaErrorStreamDetached;
+
   // CHECK: hipDevResourceType DevResourceType;
   // CHECK-NEXT: hipDevResourceType DevResourceTypeInvalid = hipDevResourceTypeInvalid;
   // CHECK-NEXT: hipDevResourceType DevResourceTypeSm = hipDevResourceTypeSm;
@@ -1170,6 +1180,13 @@ int main() {
   cudaDevSmResourceGroup_flags DevSmResourceGroup_flags;
   cudaDevSmResourceGroup_flags DevSmResourceGroupDefault = cudaDevSmResourceGroupDefault;
   cudaDevSmResourceGroup_flags DevSmResourceGroupBackfill = cudaDevSmResourceGroupBackfill;
+
+  // CHECK: hipDevWorkqueueConfigScope DevWorkqueueConfigScope;
+  // CHECK-NEXT: hipDevWorkqueueConfigScope DevWorkqueueConfigScopeDeviceCtx = hipDevWorkqueueConfigScopeDeviceCtx;
+  // CHECK-NEXT: hipDevWorkqueueConfigScope DevWorkqueueConfigScopeGreenCtxBalanced = hipDevWorkqueueConfigScopeGreenCtxBalanced;
+  cudaDevWorkqueueConfigScope DevWorkqueueConfigScope;
+  cudaDevWorkqueueConfigScope DevWorkqueueConfigScopeDeviceCtx = cudaDevWorkqueueConfigScopeDeviceCtx;
+  cudaDevWorkqueueConfigScope DevWorkqueueConfigScopeGreenCtxBalanced = cudaDevWorkqueueConfigScopeGreenCtxBalanced;
 #endif
 
   return 0;
