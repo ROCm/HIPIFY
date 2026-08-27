@@ -1728,6 +1728,16 @@ int main() {
   // HIP: hipError_t hipLibraryGetKernelCount(unsigned int *count, hipLibrary_t library);
   // CHECK: result = hipLibraryGetKernelCount(&count, library);
   result = cudaLibraryGetKernelCount(&count, library);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLibraryGetGlobal(void **dptr, size_t *bytes, cudaLibrary_t library, const char *name);
+  // HIP: hipError_t hipLibraryGetGlobal(void** dptr, size_t* bytes, hipLibrary_t library, const char* name);
+  // CHECK: result = hipLibraryGetGlobal(&deviceptr, &bytes, library, const_ch);
+  result = cudaLibraryGetGlobal(&deviceptr, &bytes, library, const_ch);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaLibraryGetManaged(void **dptr, size_t *bytes, cudaLibrary_t library, const char *name);
+  // HIP: hipError_t hipLibraryGetManaged(void** dptr, size_t* bytes, hipLibrary_t library, const char* name);
+  // CHECK: result = hipLibraryGetManaged(&deviceptr, &bytes, library, const_ch);
+  result = cudaLibraryGetManaged(&deviceptr, &bytes, library, const_ch);
 #endif
 
 #if CUDA_VERSION >= 13000
@@ -1748,6 +1758,103 @@ int main() {
   // HIP: hipError_t hipMemPrefetchBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, hipMemLocation* prefetch_locs, size_t* prefetch_loc_idxs, size_t num_prefetch_locs, unsigned long long flags, hipStream_t stream);
   // CHECK: result = hipMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
   result = cudaMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+#endif
+
+#if CUDA_VERSION >= 13010
+  // CHECK: hipDevResource DevResource;
+  // CHECK-NEXT: hipDevResource DevResource_2;
+  // CHECK-NEXT: hipDevResource DevResource_3;
+  // CHECK-NEXT: hipDevResourceType DevResourceType;
+  // CHECK-NEXT: hipDevResourceDesc_t DevResourceDesc;
+  // CHECK-NEXT: hipExecutionCtx_t ExecutionContext;
+  // CHECK-NEXT: hipDevSmResourceGroupParams DevSmResourceGroupParams;
+  cudaDevResource DevResource;
+  cudaDevResource DevResource_2;
+  cudaDevResource DevResource_3;
+  cudaDevResourceType DevResourceType;
+  cudaDevResourceDesc_t DevResourceDesc;
+  cudaExecutionContext_t ExecutionContext;
+  cudaDevSmResourceGroupParams DevSmResourceGroupParams;
+
+  unsigned int nbGroups = 0;
+  unsigned int minCount = 0;
+  unsigned int nbResources = 0;
+  int priority = 0;
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceGetDevResource(int device, cudaDevResource *resource, cudaDevResourceType type);
+  // HIP: hipError_t hipDeviceGetDevResource(hipDevice_t device, hipDevResource* resource, hipDevResourceType type);
+  // CHECK: result = hipDeviceGetDevResource(device, &DevResource, DevResourceType);
+  result = cudaDeviceGetDevResource(device, &DevResource, DevResourceType);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDevSmResourceSplitByCount(cudaDevResource *result, unsigned int *nbGroups, const cudaDevResource *input, cudaDevResource *remainder, unsigned int flags, unsigned int minCount);
+  // HIP: hipError_t hipDevSmResourceSplitByCount(hipDevResource* result, unsigned int* nbGroups, const hipDevResource* input, hipDevResource* remainder, unsigned int flags, unsigned int minCount);
+  // CHECK: result = hipDevSmResourceSplitByCount(&DevResource, &nbGroups, &DevResource_2, &DevResource_3, flags, minCount);
+  result = cudaDevSmResourceSplitByCount(&DevResource, &nbGroups, &DevResource_2, &DevResource_3, flags, minCount);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDevSmResourceSplit(cudaDevResource *result, unsigned int nbGroups, const cudaDevResource *input, cudaDevResource *remainder, unsigned int flags, cudaDevSmResourceGroupParams *groupParams);
+  // HIP: hipError_t hipDevSmResourceSplit(hipDevResource* result, unsigned int nbGroups, const hipDevResource* input, hipDevResource* remainder, unsigned int flags, hipDevSmResourceGroupParams* groupParams);
+  // CHECK: result = hipDevSmResourceSplit(&DevResource, nbGroups, &DevResource_2, &DevResource_3, flags, &DevSmResourceGroupParams);
+  result = cudaDevSmResourceSplit(&DevResource, nbGroups, &DevResource_2, &DevResource_3, flags, &DevSmResourceGroupParams);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDevResourceGenerateDesc(cudaDevResourceDesc_t *desc, cudaDevResource *resources, unsigned int nbResources);
+  // HIP: hipError_t hipDevResourceGenerateDesc(hipDevResourceDesc_t* phDesc, hipDevResource* resources, unsigned int nbResources);
+  // CHECK: result = hipDevResourceGenerateDesc(&DevResourceDesc, &DevResource, nbResources);
+  result = cudaDevResourceGenerateDesc(&DevResourceDesc, &DevResource, nbResources);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaGreenCtxCreate(cudaExecutionContext_t *ctx, cudaDevResourceDesc_t desc, int device, unsigned int flags);
+  // HIP: hipError_t hipGreenCtxCreate(hipExecutionCtx_t* ctx, hipDevResourceDesc_t desc, int device, unsigned int flags);
+  // CHECK: result = hipGreenCtxCreate(&ExecutionContext, DevResourceDesc, device, flags);
+  result = cudaGreenCtxCreate(&ExecutionContext, DevResourceDesc, device, flags);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxDestroy(cudaExecutionContext_t ctx);
+  // HIP: hipError_t hipExecutionCtxDestroy(hipExecutionCtx_t ctx);
+  // CHECK: result = hipExecutionCtxDestroy(ExecutionContext);
+  result = cudaExecutionCtxDestroy(ExecutionContext);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxGetDevResource(cudaExecutionContext_t ctx, cudaDevResource *resource, cudaDevResourceType type);
+  // HIP: hipError_t hipExecutionCtxGetDevResource(hipExecutionCtx_t ctx, hipDevResource* resource, hipDevResourceType type);
+  // CHECK: result = hipExecutionCtxGetDevResource(ExecutionContext, &DevResource, DevResourceType);
+  result = cudaExecutionCtxGetDevResource(ExecutionContext, &DevResource, DevResourceType);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxGetDevice(int *device, cudaExecutionContext_t ctx);
+  // HIP: hipError_t hipExecutionCtxGetDevice(int* device, hipExecutionCtx_t ctx);
+  // CHECK: result = hipExecutionCtxGetDevice(&device, ExecutionContext);
+  result = cudaExecutionCtxGetDevice(&device, ExecutionContext);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxGetId(cudaExecutionContext_t ctx, unsigned long long *ctxId);
+  // HIP: hipError_t hipExecutionCtxGetId(hipExecutionCtx_t ctx, unsigned long long* ctxId);
+  // CHECK: result = hipExecutionCtxGetId(ExecutionContext, &ull);
+  result = cudaExecutionCtxGetId(ExecutionContext, &ull);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxStreamCreate(cudaStream_t *stream, cudaExecutionContext_t greenctx, unsigned int flags, int priority);
+  // HIP: hipError_t hipExecutionCtxStreamCreate(hipStream_t* stream, hipExecutionCtx_t greenctx, unsigned int flags, int priority);
+  // CHECK: result = hipExecutionCtxStreamCreate(&stream, ExecutionContext, flags, priority);
+  result = cudaExecutionCtxStreamCreate(&stream, ExecutionContext, flags, priority);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxSynchronize(cudaExecutionContext_t ctx);
+  // HIP: hipError_t hipExecutionCtxSynchronize(hipExecutionCtx_t ctx);
+  // CHECK: result = hipExecutionCtxSynchronize(ExecutionContext);
+  result = cudaExecutionCtxSynchronize(ExecutionContext);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaStreamGetDevResource(cudaStream_t hStream, cudaDevResource *resource, cudaDevResourceType type);
+  // HIP: hipError_t hipStreamGetDevResource(hipStream_t hStream, hipDevResource* resource, hipDevResourceType type);
+  // CHECK: result = hipStreamGetDevResource(stream, &DevResource, DevResourceType);
+  result = cudaStreamGetDevResource(stream, &DevResource, DevResourceType);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxRecordEvent(cudaExecutionContext_t ctx, cudaEvent_t event);
+  // HIP: hipError_t hipExecutionCtxRecordEvent(hipExecutionCtx_t ctx, hipEvent_t event);
+  // CHECK: result = hipExecutionCtxRecordEvent(ExecutionContext, Event_t);
+  result = cudaExecutionCtxRecordEvent(ExecutionContext, Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxWaitEvent(cudaExecutionContext_t ctx, cudaEvent_t event);
+  // HIP: hipError_t hipExecutionCtxWaitEvent(hipExecutionCtx_t ctx, hipEvent_t event);
+  // CHECK: result = hipExecutionCtxWaitEvent(ExecutionContext, Event_t);
+  result = cudaExecutionCtxWaitEvent(ExecutionContext, Event_t);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaDeviceGetExecutionCtx(cudaExecutionContext_t *ctx, int device);
+  // HIP: hipError_t hipDeviceGetExecutionCtx(hipExecutionCtx_t* ctx, int device);
+  // CHECK: result = hipDeviceGetExecutionCtx(&ExecutionContext, device);
+  result = cudaDeviceGetExecutionCtx(&ExecutionContext, device);
 #endif
 
   return 0;
