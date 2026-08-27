@@ -737,7 +737,7 @@
 |`CUlogsCallbackEntry_st`|13.0| | | | | | | | | | |
 |`CUstream_st`| | | | |`ihipStream_t`|1.5.0| | | | | |
 |`CUuuid_st`| | | | |`hipUUID_t`|5.2.0| | | | | |
-|`RESOURCE_ABI_BYTES`|13.1| | | | | | | | | | |
+|`RESOURCE_ABI_BYTES`|13.1| | | |`HIP_RESOURCE_ABI_BYTES`|7.14.0| | | | | |
 |`cudaAccessPolicyWindow`|11.0| | | |`hipAccessPolicyWindow`|5.2.0| | | | | |
 |`cudaAccessProperty`|11.0| | | |`hipAccessProperty`|5.2.0| | | | | |
 |`cudaAccessPropertyNormal`|11.0| | | |`hipAccessPropertyNormal`|5.2.0| | | | | |
@@ -1032,11 +1032,11 @@
 |`cudaDevSmResourceSplitByCount_flags`|13.1| | | |`hipDevSmResourceSplitByCount_flags`|7.14.0| | | | | |
 |`cudaDevSmResourceSplitIgnoreSmCoscheduling`|13.1| | | |`hipDevSmResourceSplitIgnoreSmCoscheduling`|7.14.0| | | | | |
 |`cudaDevSmResourceSplitMaxPotentialClusterSize`|13.1| | | |`hipDevSmResourceSplitMaxPotentialClusterSize`|7.14.0| | | | | |
-|`cudaDevWorkqueueConfigResource`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueConfigScope`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueConfigScopeDeviceCtx`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueConfigScopeGreenCtxBalanced`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueResource`|13.1| | | | | | | | | | |
+|`cudaDevWorkqueueConfigResource`|13.1| | | |`hipDevWorkqueueConfigResource`|7.14.0| | | | | |
+|`cudaDevWorkqueueConfigScope`|13.1| | | |`hipDevWorkqueueConfigScope`|7.14.0| | | | | |
+|`cudaDevWorkqueueConfigScopeDeviceCtx`|13.1| | | |`hipDevWorkqueueConfigScopeDeviceCtx`|7.14.0| | | | | |
+|`cudaDevWorkqueueConfigScopeGreenCtxBalanced`|13.1| | | |`hipDevWorkqueueConfigScopeGreenCtxBalanced`|7.14.0| | | | | |
+|`cudaDevWorkqueueResource`|13.1| | | |`hipDevWorkqueueResource`|7.14.0| | | | | |
 |`cudaDeviceAttr`| | | | |`hipDeviceAttribute_t`|1.6.0| | | | | |
 |`cudaDeviceBlockingSync`| | | | |`hipDeviceScheduleBlockingSync`|1.6.0| | | | | |
 |`cudaDeviceLmemResizeToMax`| | | | |`hipDeviceLmemResizeToMax`|1.6.0| | | | | |
@@ -1248,9 +1248,9 @@
 |`cudaErrorInvalidPc`| | | | | | | | | | | |
 |`cudaErrorInvalidPitchValue`| | | | |`hipErrorInvalidPitchValue`|4.2.0| | | | | |
 |`cudaErrorInvalidPtx`| | | | |`hipErrorInvalidKernelFile`|1.6.0| | | | | |
-|`cudaErrorInvalidResourceConfiguration`|12.6| | | | | | | | | | |
+|`cudaErrorInvalidResourceConfiguration`|12.6| | | |`hipErrorInvalidResourceConfiguration`|7.14.0| | | | | |
 |`cudaErrorInvalidResourceHandle`| | | | |`hipErrorInvalidHandle`|1.6.0| | | | | |
-|`cudaErrorInvalidResourceType`|12.6| | | | | | | | | | |
+|`cudaErrorInvalidResourceType`|12.6| | | |`hipErrorInvalidResourceType`|7.14.0| | | | | |
 |`cudaErrorInvalidSource`|10.1| | | |`hipErrorInvalidSource`|1.6.0| | | | | |
 |`cudaErrorInvalidSurface`| | | | | | | | | | | |
 |`cudaErrorInvalidSymbol`| | | | |`hipErrorInvalidSymbol`|1.6.0| | | | | |
@@ -1312,7 +1312,7 @@
 |`cudaErrorStreamCaptureUnmatched`|10.0| | | |`hipErrorStreamCaptureUnmatched`|4.3.0| | | | | |
 |`cudaErrorStreamCaptureUnsupported`|10.0| | | |`hipErrorStreamCaptureUnsupported`|4.3.0| | | | | |
 |`cudaErrorStreamCaptureWrongThread`|10.1| | | |`hipErrorStreamCaptureWrongThread`|4.3.0| | | | | |
-|`cudaErrorStreamDetached`|13.1| | | | | | | | | | |
+|`cudaErrorStreamDetached`|13.1| | | |`hipErrorStreamDetached`|7.14.0| | | | | |
 |`cudaErrorStubLibrary`|11.1| | | | | | | | | | |
 |`cudaErrorSymbolNotFound`|10.1| | | |`hipErrorNotFound`|1.6.0| | | | | |
 |`cudaErrorSyncDepthExceeded`| | | | | | | | | | | |
@@ -1344,7 +1344,7 @@
 |`cudaEventWaitNodeParams`|12.2| | | |`hipEventWaitNodeParams`|6.1.0| | | | | |
 |`cudaEvent_t`| | | | |`hipEvent_t`|1.6.0| | | | | |
 |`cudaExecutionContext_st`|13.1| | | | | | | | | | |
-|`cudaExecutionContext_t`|13.1| | | | | | | | | | |
+|`cudaExecutionContext_t`|13.1| | | |`hipExecutionCtx_t`|7.14.0| | | | | |
 |`cudaExtent`| | | | |`hipExtent`|1.7.0| | | | | |
 |`cudaExternalMemoryBufferDesc`|10.0| | | |`hipExternalMemoryBufferDesc`|4.3.0| | | | | |
 |`cudaExternalMemoryDedicated`|10.0| | | |`hipExternalMemoryDedicated`|5.5.0| | | | | |
