@@ -59,7 +59,7 @@ fastjsonschema==2.22.2
     #   rocm-docs-core
 gitdb==4.0.12
     # via gitpython
-gitpython==3.1.60
+gitpython==3.1.61
     # via rocm-docs-core
 greenlet==3.5.5
     # via sqlalchemy
@@ -89,7 +89,7 @@ jsonschema-specifications==2025.9.1
     # via jsonschema
 jupyter-cache==1.0.1
     # via myst-nb
-jupyter-client==8.9.1
+jupyter-client==8.10.0
     # via
     #   ipykernel
     #   nbclient
@@ -137,7 +137,7 @@ parso==0.8.7
     # via jedi
 pexpect==4.9.0
     # via ipython
-platformdirs==4.11.4
+platformdirs==4.11.5
     # via jupyter-core
 prompt-toolkit==3.0.53
     # via ipython
@@ -186,7 +186,7 @@ requests==2.34.2
     # via
     #   pygithub
     #   sphinx
-rocm-docs-core[llms]==1.40.1
+rocm-docs-core[llms]==1.40.2
     # via -r requirements.in
 rpds-py==0.30.0
     # via
