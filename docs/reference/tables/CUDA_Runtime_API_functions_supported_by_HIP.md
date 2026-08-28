@@ -566,10 +566,10 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaKernelSetAttributeForDevice`|12.8| | | | | | | | | | |
 |`cudaLibraryEnumerateKernels`|12.8| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | | |
-|`cudaLibraryGetGlobal`|12.8| | | | | | | | | | |
+|`cudaLibraryGetGlobal`|12.8| | | |`hipLibraryGetGlobal`|7.14.0| | | | | |
 |`cudaLibraryGetKernel`|12.8| | | |`hipLibraryGetKernel`|7.1.0| | | | | |
 |`cudaLibraryGetKernelCount`|12.8| | | |`hipLibraryGetKernelCount`|7.1.0| | | | | |
-|`cudaLibraryGetManaged`|12.8| | | | | | | | | | |
+|`cudaLibraryGetManaged`|12.8| | | |`hipLibraryGetManaged`|7.14.0| | | | | |
 |`cudaLibraryGetUnifiedFunction`|12.8| | | | | | | | | | |
 |`cudaLibraryLoadData`|12.8| | | |`hipLibraryLoadData`|7.1.0| | | | | |
 |`cudaLibraryLoadFromFile`|12.8| | | |`hipLibraryLoadFromFile`|7.1.0| | | | | |
@@ -579,21 +579,21 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cudaDevResourceGenerateDesc`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceSplit`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceSplitByCount`|13.1| | | | | | | | | | |
-|`cudaDeviceGetDevResource`|13.1| | | | | | | | | | |
-|`cudaDeviceGetExecutionCtx`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxDestroy`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxGetDevResource`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxGetDevice`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxGetId`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxRecordEvent`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxStreamCreate`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxSynchronize`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxWaitEvent`|13.1| | | | | | | | | | |
-|`cudaGreenCtxCreate`|13.1| | | | | | | | | | |
-|`cudaStreamGetDevResource`|13.1| | | | | | | | | | |
+|`cudaDevResourceGenerateDesc`|13.1| | | |`hipDevResourceGenerateDesc`|7.14.0| | | | | |
+|`cudaDevSmResourceSplit`|13.1| | | |`hipDevSmResourceSplit`|7.14.0| | | | | |
+|`cudaDevSmResourceSplitByCount`|13.1| | | |`hipDevSmResourceSplitByCount`|7.14.0| | | | | |
+|`cudaDeviceGetDevResource`|13.1| | | |`hipDeviceGetDevResource`|7.14.0| | | | | |
+|`cudaDeviceGetExecutionCtx`|13.1| | | |`hipDeviceGetExecutionCtx`|7.14.0| | | | | |
+|`cudaExecutionCtxDestroy`|13.1| | | |`hipExecutionCtxDestroy`|7.14.0| | | | | |
+|`cudaExecutionCtxGetDevResource`|13.1| | | |`hipExecutionCtxGetDevResource`|7.14.0| | | | | |
+|`cudaExecutionCtxGetDevice`|13.1| | | |`hipExecutionCtxGetDevice`|7.14.0| | | | | |
+|`cudaExecutionCtxGetId`|13.1| | | |`hipExecutionCtxGetId`|7.14.0| | | | | |
+|`cudaExecutionCtxRecordEvent`|13.1| | | |`hipExecutionCtxRecordEvent`|7.14.0| | | | | |
+|`cudaExecutionCtxStreamCreate`|13.1| | | |`hipExecutionCtxStreamCreate`|7.14.0| | | | | |
+|`cudaExecutionCtxSynchronize`|13.1| | | |`hipExecutionCtxSynchronize`|7.14.0| | | | | |
+|`cudaExecutionCtxWaitEvent`|13.1| | | |`hipExecutionCtxWaitEvent`|7.14.0| | | | | |
+|`cudaGreenCtxCreate`|13.1| | | |`hipGreenCtxCreate`|7.14.0| | | | | |
+|`cudaStreamGetDevResource`|13.1| | | |`hipStreamGetDevResource`|7.14.0| | | | | |
 
 ## **34. C++ API Routines**
 

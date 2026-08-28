@@ -1847,10 +1847,10 @@
 |`cuKernelSetAttribute`|12.0| | | |`hipKernelSetAttribute`|7.12.0| | | | | |
 |`cuKernelSetCacheConfig`|12.0| | | | | | | | | | |
 |`cuLibraryEnumerateKernels`|12.4| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | | |
-|`cuLibraryGetGlobal`|12.0| | | | | | | | | | |
+|`cuLibraryGetGlobal`|12.0| | | |`hipLibraryGetGlobal`|7.14.0| | | | | |
 |`cuLibraryGetKernel`|12.0| | | |`hipLibraryGetKernel`|7.1.0| | | | | |
 |`cuLibraryGetKernelCount`|12.4| | | |`hipLibraryGetKernelCount`|7.1.0| | | | | |
-|`cuLibraryGetManaged`|12.0| | | | | | | | | | |
+|`cuLibraryGetManaged`|12.0| | | |`hipLibraryGetManaged`|7.14.0| | | | | |
 |`cuLibraryGetModule`|12.0| | | | | | | | | | |
 |`cuLibraryGetUnifiedFunction`|12.0| | | | | | | | | | |
 |`cuLibraryLoadData`|12.0| | | |`hipLibraryLoadData`|7.1.0| | | | | |
@@ -2393,10 +2393,10 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cuCtxFromGreenCtx`|12.4| | | | | | | | | | |
 |`cuCtxGetDevResource`|12.4| | | | | | | | | | |
-|`cuDevResourceGenerateDesc`|12.4| | | | | | | | | | |
-|`cuDevSmResourceSplit`|13.1| | | | | | | | | | |
-|`cuDevSmResourceSplitByCount`|12.4| | | | | | | | | | |
-|`cuDeviceGetDevResource`|12.4| | | | | | | | | | |
+|`cuDevResourceGenerateDesc`|12.4| | | |`hipDevResourceGenerateDesc`|7.14.0| | | | | |
+|`cuDevSmResourceSplit`|13.1| | | |`hipDevSmResourceSplit`|7.14.0| | | | | |
+|`cuDevSmResourceSplitByCount`|12.4| | | |`hipDevSmResourceSplitByCount`|7.14.0| | | | | |
+|`cuDeviceGetDevResource`|12.4| | | |`hipDeviceGetDevResource`|7.14.0| | | | | |
 |`cuGreenCtxCreate`|12.4| | | | | | | | | | |
 |`cuGreenCtxDestroy`|12.4| | | | | | | | | | |
 |`cuGreenCtxGetDevResource`|12.4| | | | | | | | | | |
@@ -2404,7 +2404,7 @@
 |`cuGreenCtxRecordEvent`|12.4| | | | | | | | | | |
 |`cuGreenCtxStreamCreate`|12.5| | | | | | | | | | |
 |`cuGreenCtxWaitEvent`|12.4| | | | | | | | | | |
-|`cuStreamGetDevResource`|13.1| | | | | | | | | | |
+|`cuStreamGetDevResource`|13.1| | | |`hipStreamGetDevResource`|7.14.0| | | | | |
 |`cuStreamGetGreenCtx`|12.4| | | | | | | | | | |
 
 ## **36. Error Log Management**
