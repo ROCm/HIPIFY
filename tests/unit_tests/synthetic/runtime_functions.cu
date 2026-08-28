@@ -1758,6 +1758,16 @@ int main() {
   // HIP: hipError_t hipMemPrefetchBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, hipMemLocation* prefetch_locs, size_t* prefetch_loc_idxs, size_t num_prefetch_locs, unsigned long long flags, hipStream_t stream);
   // CHECK: result = hipMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
   result = cudaMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemDiscardBatchAsync(void **dptrs, size_t *sizes, size_t count, unsigned long long flags, cudaStream_t stream);
+  // HIP: hipError_t hipMemDiscardBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, unsigned long long flags, hipStream_t stream);
+  // CHECK: result = hipMemDiscardBatchAsync(&deviceptr, &sizes, sizeCount, ull_2, stream);
+  result = cudaMemDiscardBatchAsync(&deviceptr, &sizes, sizeCount, ull_2, stream);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemDiscardAndPrefetchBatchAsync(void **dptrs, size_t *sizes, size_t count, struct cudaMemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, cudaStream_t stream);
+  // HIP: hipError_t hipMemDiscardAndPrefetchBatchAsync(void** dptrs, size_t* sizes, size_t count, hipMemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, hipStream_t stream);
+  // CHECK: result = hipMemDiscardAndPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+  result = cudaMemDiscardAndPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
 #endif
 
 #if CUDA_VERSION >= 13010

@@ -419,9 +419,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuDeviceUnregisterAsyncNotification
   m["cudaDeviceUnregisterAsyncNotification"]                   = {"hipDeviceUnregisterAsyncNotification",                   "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
   // cuMemDiscardBatchAsync
-  m["cudaMemDiscardBatchAsync"]                                = {"hipMemDiscardBatchAsync",                                "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemDiscardBatchAsync"]                                = {"hipMemDiscardBatchAsync",                                "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY};
   // cuMemDiscardAndPrefetchBatchAsync
-  m["cudaMemDiscardAndPrefetchBatchAsync"]                     = {"hipMemDiscardAndPrefetchBatchAsync",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemDiscardAndPrefetchBatchAsync"]                     = {"hipMemDiscardAndPrefetchBatchAsync",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY};
   // cuMemPrefetchBatchAsync
   m["cudaMemPrefetchBatchAsync"]                               = {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL};
   // cuMemcpyWithAttributesAsync
@@ -1650,6 +1650,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [
   m["hipExecutionCtxRecordEvent"]                              = {HIP_7140, HIP_0,    HIP_0   };
   m["hipExecutionCtxWaitEvent"]                                = {HIP_7140, HIP_0,    HIP_0   };
   m["hipDeviceGetExecutionCtx"]                                = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemDiscardBatchAsync"]                                 = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemDiscardAndPrefetchBatchAsync"]                      = {HIP_7140, HIP_0,    HIP_0   };
 
   return m;
 }();

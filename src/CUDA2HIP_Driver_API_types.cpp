@@ -445,9 +445,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUasyncNotificationInfo"]                                           = {"hipAsyncNotificationInfo",                                   "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   //
-  m["CUgreenCtx_st"]                                                     = {"hipGreenCtx",                                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CUgreenCtx_st"]                                                     = {"ihipExecutionCtx_t",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
   //
-  m["CUgreenCtx"]                                                        = {"hipGreenCtx",                                                "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CUgreenCtx"]                                                        = {"hipExecutionCtx_t",                                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
 
   // CUdevResourceDesc_st
   m["CUdevResourceDesc_st"]                                              = {"hipDevResourceDesc",                                         "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
@@ -5184,6 +5184,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [
   m["hipErrorInvalidResourceType"]                                       = {HIP_7140, HIP_0,    HIP_0   };
   m["hipErrorInvalidResourceConfiguration"]                              = {HIP_7140, HIP_0,    HIP_0   };
   m["hipErrorStreamDetached"]                                            = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipExecutionCtx_t"]                                                 = {HIP_7140, HIP_0,    HIP_0   };
+  m["ihipExecutionCtx_t"]                                                = {HIP_7140, HIP_0,    HIP_0   };
 
   return m;
 }();

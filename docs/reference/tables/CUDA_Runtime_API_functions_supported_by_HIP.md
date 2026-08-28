@@ -196,8 +196,8 @@
 |`cudaMallocPitch`| | | | |`hipMallocPitch`|1.6.0| | | | | |
 |`cudaMemAdvise`|8.0| |13.0| |`hipMemAdvise`|3.7.0| | | |13.0| |
 |`cudaMemAdvise_v2`|12.2| | | | | | | | | | |
-|`cudaMemDiscardAndPrefetchBatchAsync`|13.0| | | | | | | | | | |
-|`cudaMemDiscardBatchAsync`|13.0| | | | | | | | | | |
+|`cudaMemDiscardAndPrefetchBatchAsync`|13.0| | | |`hipMemDiscardAndPrefetchBatchAsync`|7.14.0| | | | | |
+|`cudaMemDiscardBatchAsync`|13.0| | | |`hipMemDiscardBatchAsync`|7.14.0| | | | | |
 |`cudaMemGetInfo`| | | | |`hipMemGetInfo`|1.6.0| | | | | |
 |`cudaMemPrefetchAsync`|8.0| |13.0| |`hipMemPrefetchAsync`|3.7.0| | | |13.0| |
 |`cudaMemPrefetchAsync_v2`|12.2| | | | | | | | | | |
