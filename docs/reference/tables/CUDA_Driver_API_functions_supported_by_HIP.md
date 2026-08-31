@@ -1450,9 +1450,9 @@
 |`CUgraphicsRegisterFlags_enum`| | | | |`hipGraphicsRegisterFlags`|4.4.0| | | | | |
 |`CUgraphicsResource`| | | | |`hipGraphicsResource_t`|4.4.0| | | | | |
 |`CUgraphicsResource_st`| | | | |`hipGraphicsResource`|4.4.0| | | | | |
-|`CUgreenCtx`|12.4| | | | | | | | | | |
+|`CUgreenCtx`|12.4| | | |`hipExecutionCtx_t`|7.14.0| | | | | |
 |`CUgreenCtxCreate_flags`|12.4| | | | | | | | | | |
-|`CUgreenCtx_st`|12.4| | | | | | | | | | |
+|`CUgreenCtx_st`|12.4| | | |`ihipExecutionCtx_t`|7.14.0| | | | | |
 |`CUhostFn`|10.0| | | |`hipHostFn_t`|4.3.0| | | | | |
 |`CUhostTaskSyncMode`|13.2| | | | | | | | | | |
 |`CUhostTaskSyncMode_enum`|13.2| | | | | | | | | | |
@@ -2034,8 +2034,8 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cuMemAdvise`|8.0| |13.0| |`hipMemAdvise`|3.7.0| | | |13.0| |
 |`cuMemAdvise_v2`|12.2| | | | | | | | | | |
-|`cuMemDiscardAndPrefetchBatchAsync`|13.0| | | | | | | | | | |
-|`cuMemDiscardBatchAsync`|13.0| | | | | | | | | | |
+|`cuMemDiscardAndPrefetchBatchAsync`|13.0| | | |`hipDrvMemDiscardAndPrefetchBatchAsync`|7.14.0| | | | | |
+|`cuMemDiscardBatchAsync`|13.0| | | |`hipDrvMemDiscardBatchAsync`|7.14.0| | | | | |
 |`cuMemPrefetchAsync`|8.0| |13.0| |`hipMemPrefetchAsync`|3.7.0| | | |13.0| |
 |`cuMemPrefetchAsync_v2`|12.2| | | | | | | | | | |
 |`cuMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | |7.14.0|
@@ -2397,13 +2397,13 @@
 |`cuDevSmResourceSplit`|13.1| | | |`hipDevSmResourceSplit`|7.14.0| | | | | |
 |`cuDevSmResourceSplitByCount`|12.4| | | |`hipDevSmResourceSplitByCount`|7.14.0| | | | | |
 |`cuDeviceGetDevResource`|12.4| | | |`hipDeviceGetDevResource`|7.14.0| | | | | |
-|`cuGreenCtxCreate`|12.4| | | | | | | | | | |
-|`cuGreenCtxDestroy`|12.4| | | | | | | | | | |
-|`cuGreenCtxGetDevResource`|12.4| | | | | | | | | | |
-|`cuGreenCtxGetId`|13.0| | | | | | | | | | |
-|`cuGreenCtxRecordEvent`|12.4| | | | | | | | | | |
-|`cuGreenCtxStreamCreate`|12.5| | | | | | | | | | |
-|`cuGreenCtxWaitEvent`|12.4| | | | | | | | | | |
+|`cuGreenCtxCreate`|12.4| | | |`hipGreenCtxCreate`|7.14.0| | | | | |
+|`cuGreenCtxDestroy`|12.4| | | |`hipExecutionCtxDestroy`|7.14.0| | | | | |
+|`cuGreenCtxGetDevResource`|12.4| | | |`hipExecutionCtxGetDevResource`|7.14.0| | | | | |
+|`cuGreenCtxGetId`|13.0| | | |`hipExecutionCtxGetId`|7.14.0| | | | | |
+|`cuGreenCtxRecordEvent`|12.4| | | |`hipExecutionCtxRecordEvent`|7.14.0| | | | | |
+|`cuGreenCtxStreamCreate`|12.5| | | |`hipExecutionCtxStreamCreate`|7.14.0| | | | | |
+|`cuGreenCtxWaitEvent`|12.4| | | |`hipExecutionCtxWaitEvent`|7.14.0| | | | | |
 |`cuStreamGetDevResource`|13.1| | | |`hipStreamGetDevResource`|7.14.0| | | | | |
 |`cuStreamGetGreenCtx`|12.4| | | | | | | | | | |
 
