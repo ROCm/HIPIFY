@@ -823,7 +823,7 @@
 |`cudaDevAttrGpuPciDeviceId`|12.8| | | | | | | | | |
 |`cudaDevAttrGpuPciSubsystemId`|12.8| | | | | | | | | |
 |`cudaDevAttrHostNativeAtomicSupported`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | |
-|`cudaDevAttrHostNumaId`|12.2| | | | | | | | | |
+|`cudaDevAttrHostNumaId`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | |
 |`cudaDevAttrHostNumaMemoryPoolsSupported`|12.9| | | | | | | | | |
 |`cudaDevAttrHostNumaMultinodeIpcSupported`|12.8| | | | | | | | | |
 |`cudaDevAttrHostRegisterReadOnlySupported`|11.1| | | | | | | | | |
@@ -1550,8 +1550,8 @@
 |`cudaMemLocation`|11.2| | | |`hipMemLocation`|5.2.0| | | | |
 |`cudaMemLocationType`|11.2| | | |`hipMemLocationType`|5.2.0| | | | |
 |`cudaMemLocationTypeDevice`|11.2| | | |`hipMemLocationTypeDevice`|5.2.0| | | | |
-|`cudaMemLocationTypeHost`|12.2| | | | | | | | | |
-|`cudaMemLocationTypeHostNuma`|12.2| | | | | | | | | |
+|`cudaMemLocationTypeHost`|12.2| | | |`hipMemLocationTypeHost`|7.1.0| | | | |
+|`cudaMemLocationTypeHostNuma`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | |
 |`cudaMemLocationTypeHostNumaCurrent`|12.2| | | | | | | | | |
 |`cudaMemLocationTypeInvalid`|11.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | |
 |`cudaMemPoolAttr`|11.2| | | |`hipMemPoolAttr`|5.2.0| | | | |

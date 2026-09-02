@@ -8514,6 +8514,7 @@ sub simpleSubstitutions {
     subst("CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED", "hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_GPU_OVERLAP", "hipDeviceAttributeAsyncEngineCount", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED", "hipDeviceAttributeHostNativeAtomicSupported", "numeric_literal");
+    subst("CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID", "hipDeviceAttributeHostNumaId", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_HOST_REGISTER_SUPPORTED", "hipDeviceAttributeHostRegisterSupported", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_INTEGRATED", "hipDeviceAttributeIntegrated", "numeric_literal");
     subst("CU_DEVICE_ATTRIBUTE_KERNEL_EXEC_TIMEOUT", "hipDeviceAttributeKernelExecTimeout", "numeric_literal");
@@ -8769,6 +8770,8 @@ sub simpleSubstitutions {
     subst("CU_MEM_HANDLE_TYPE_WIN32", "hipMemHandleTypeWin32", "numeric_literal");
     subst("CU_MEM_HANDLE_TYPE_WIN32_KMT", "hipMemHandleTypeWin32Kmt", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_DEVICE", "hipMemLocationTypeDevice", "numeric_literal");
+    subst("CU_MEM_LOCATION_TYPE_HOST", "hipMemLocationTypeHost", "numeric_literal");
+    subst("CU_MEM_LOCATION_TYPE_HOST_NUMA", "hipMemLocationTypeHostNuma", "numeric_literal");
     subst("CU_MEM_LOCATION_TYPE_INVALID", "hipMemLocationTypeInvalid", "numeric_literal");
     subst("CU_MEM_OPERATION_TYPE_MAP", "hipMemOperationTypeMap", "numeric_literal");
     subst("CU_MEM_OPERATION_TYPE_UNMAP", "hipMemOperationTypeUnmap", "numeric_literal");
@@ -8918,6 +8921,7 @@ sub simpleSubstitutions {
     subst("cudaDevAttrGlobalMemoryBusWidth", "hipDeviceAttributeMemoryBusWidth", "numeric_literal");
     subst("cudaDevAttrGpuOverlap", "hipDeviceAttributeAsyncEngineCount", "numeric_literal");
     subst("cudaDevAttrHostNativeAtomicSupported", "hipDeviceAttributeHostNativeAtomicSupported", "numeric_literal");
+    subst("cudaDevAttrHostNumaId", "hipDeviceAttributeHostNumaId", "numeric_literal");
     subst("cudaDevAttrHostRegisterSupported", "hipDeviceAttributeHostRegisterSupported", "numeric_literal");
     subst("cudaDevAttrIntegrated", "hipDeviceAttributeIntegrated", "numeric_literal");
     subst("cudaDevAttrIsMultiGpuBoard", "hipDeviceAttributeIsMultiGpuBoard", "numeric_literal");
@@ -9197,6 +9201,8 @@ sub simpleSubstitutions {
     subst("cudaMemHandleTypeWin32", "hipMemHandleTypeWin32", "numeric_literal");
     subst("cudaMemHandleTypeWin32Kmt", "hipMemHandleTypeWin32Kmt", "numeric_literal");
     subst("cudaMemLocationTypeDevice", "hipMemLocationTypeDevice", "numeric_literal");
+    subst("cudaMemLocationTypeHost", "hipMemLocationTypeHost", "numeric_literal");
+    subst("cudaMemLocationTypeHostNuma", "hipMemLocationTypeHostNuma", "numeric_literal");
     subst("cudaMemLocationTypeInvalid", "hipMemLocationTypeInvalid", "numeric_literal");
     subst("cudaMemPoolAttrReleaseThreshold", "hipMemPoolAttrReleaseThreshold", "numeric_literal");
     subst("cudaMemPoolAttrReservedMemCurrent", "hipMemPoolAttrReservedMemCurrent", "numeric_literal");
@@ -11308,8 +11314,6 @@ sub warnRemovedFunctions {
     "cudaMemPrefetchAsync_v2",
     "cudaMemPoolCreateUsageHwDecompress",
     "cudaMemLocationTypeHostNumaCurrent",
-    "cudaMemLocationTypeHostNuma",
-    "cudaMemLocationTypeHost",
     "cudaMemHandleTypeFabric",
     "cudaMemFabricHandle_t",
     "cudaMemFabricHandle_st",
@@ -11711,7 +11715,6 @@ sub warnRemovedFunctions {
     "cudaDevAttrHostRegisterReadOnlySupported",
     "cudaDevAttrHostNumaMultinodeIpcSupported",
     "cudaDevAttrHostNumaMemoryPoolsSupported",
-    "cudaDevAttrHostNumaId",
     "cudaDevAttrGpuPciSubsystemId",
     "cudaDevAttrGpuPciDeviceId",
     "cudaDevAttrGPUDirectRDMAWritesOrdering",
@@ -12551,8 +12554,6 @@ sub warnRemovedFunctions {
     "CU_MEM_POOL_CREATE_USAGE_HW_DECOMPRESS",
     "CU_MEM_LOCATION_TYPE_MAX",
     "CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT",
-    "CU_MEM_LOCATION_TYPE_HOST_NUMA",
-    "CU_MEM_LOCATION_TYPE_HOST",
     "CU_MEM_HANDLE_TYPE_MAX",
     "CU_MEM_HANDLE_TYPE_FABRIC",
     "CU_MEM_DECOMPRESS_UNSUPPORTED",
@@ -12783,7 +12784,6 @@ sub warnRemovedFunctions {
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED",
-    "CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED",
     "CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED",

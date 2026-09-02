@@ -432,7 +432,7 @@
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_HANDLE_SUPPORTED`|10.2| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_WIN32_KMT_HANDLE_SUPPORTED`|10.2| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NATIVE_ATOMIC_SUPPORTED`|8.0| | | |`hipDeviceAttributeHostNativeAtomicSupported`|4.3.0| | | | |
-|`CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID`|12.2| | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID`|12.2| | | |`hipDeviceAttributeHostNumaId`|7.2.0| | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_MEMORY_POOLS_SUPPORTED`|12.9| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_MULTINODE_IPC_SUPPORTED`|12.8| | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_HOST_NUMA_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED`|12.9| | | | | | | | | |
@@ -934,8 +934,8 @@
 |`CU_MEM_HANDLE_TYPE_WIN32`|10.2| | | |`hipMemHandleTypeWin32`|5.2.0| | | | |
 |`CU_MEM_HANDLE_TYPE_WIN32_KMT`|10.2| | | |`hipMemHandleTypeWin32Kmt`|5.2.0| | | | |
 |`CU_MEM_LOCATION_TYPE_DEVICE`|10.2| | | |`hipMemLocationTypeDevice`|5.2.0| | | | |
-|`CU_MEM_LOCATION_TYPE_HOST`|12.2| | | | | | | | | |
-|`CU_MEM_LOCATION_TYPE_HOST_NUMA`|12.2| | | | | | | | | |
+|`CU_MEM_LOCATION_TYPE_HOST`|12.2| | | |`hipMemLocationTypeHost`|7.1.0| | | | |
+|`CU_MEM_LOCATION_TYPE_HOST_NUMA`|12.2| | | |`hipMemLocationTypeHostNuma`|7.1.0| | | | |
 |`CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT`|12.2| | | | | | | | | |
 |`CU_MEM_LOCATION_TYPE_INVALID`|10.2| | | |`hipMemLocationTypeInvalid`|5.2.0| | | | |
 |`CU_MEM_LOCATION_TYPE_MAX`|10.2| | | | | | | | | |

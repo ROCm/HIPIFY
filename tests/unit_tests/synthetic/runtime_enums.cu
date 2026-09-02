@@ -946,6 +946,15 @@ int main() {
   cudaDriverEntryPointQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = cudaDriverEntryPointVersionNotSufficent;
 #endif
 
+#if CUDA_VERSION >= 12020
+  // CHECK: hipMemLocationType MemLocationTypeHost = hipMemLocationTypeHost;
+  // CHECK-NEXT: hipMemLocationType MemLocationTypeHostNuma = hipMemLocationTypeHostNuma;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrHostNumaId = hipDeviceAttributeHostNumaId;
+  cudaMemLocationType MemLocationTypeHost = cudaMemLocationTypeHost;
+  cudaMemLocationType MemLocationTypeHostNuma = cudaMemLocationTypeHostNuma;
+  cudaDeviceAttr DevAttrHostNumaId = cudaDevAttrHostNumaId;
+#endif
+
 #if CUDA_VERSION >= 12030
   // CHECK: hipGraphDependencyType graphDependencyType;
   // CHECK-NEXT: hipGraphDependencyType graphDependencyType_enum;
