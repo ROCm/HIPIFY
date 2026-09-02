@@ -2053,6 +2053,16 @@ int main() {
   // CHECK: result = hipLibraryGetKernel(kernels, library, const_ch);
   result = cuLibraryGetKernel(kernels, library, const_ch);
 
+  // CUDA: CUresult CUDAAPI cuLibraryGetGlobal(CUdeviceptr *dptr, size_t *bytes, CUlibrary library, const char *name);
+  // HIP: hipError_t hipLibraryGetGlobal(void** dptr, size_t* bytes, hipLibrary_t library, const char* name);
+  // CHECK: result = hipLibraryGetGlobal(&deviceptr, &bytes, library, const_ch);
+  result = cuLibraryGetGlobal(&deviceptr, &bytes, library, const_ch);
+
+  // CUDA: CUresult CUDAAPI cuLibraryGetManaged(CUdeviceptr *dptr, size_t *bytes, CUlibrary library, const char *name);
+  // HIP: hipError_t hipLibraryGetManaged(void** dptr, size_t* bytes, hipLibrary_t library, const char* name);
+  // CHECK: result = hipLibraryGetManaged(&deviceptr, &bytes, library, const_ch);
+  result = cuLibraryGetManaged(&deviceptr, &bytes, library, const_ch);
+
   // CUDA: CUresult CUDAAPI cuKernelSetAttribute(CUfunction_attribute attrib, int val, CUkernel kernel, CUdevice dev);
   // HIP: hipError_t hipKernelSetAttribute(hipFunction_attribute attrib, int value, hipKernel_t kernel, hipDevice_t dev);
   // CHECK: result = hipKernelSetAttribute(function_attribute, val, kernel, device);
@@ -2114,6 +2124,73 @@ int main() {
   // HIP: hipError_t hipLibraryGetKernelCount(unsigned int *count, hipLibrary_t library);
   // CHECK: result = hipLibraryGetKernelCount(&icount, library);
   result = cuLibraryGetKernelCount(&icount, library);
+
+  // CHECK: hipDevResource devResource;
+  // CHECK-NEXT: hipDevResource devResource_2;
+  // CHECK-NEXT: hipDevResource devResource_3;
+  // CHECK-NEXT: hipDevResourceType devResourceType;
+  // CHECK-NEXT: hipDevResourceDesc_t devResourceDesc;
+  CUdevResource devResource;
+  CUdevResource devResource_2;
+  CUdevResource devResource_3;
+  CUdevResourceType devResourceType;
+  CUdevResourceDesc devResourceDesc;
+
+  unsigned int nbGroups = 0;
+  unsigned int minCount = 0;
+  unsigned int nbResources = 0;
+
+  // CUDA: CUresult CUDAAPI cuDeviceGetDevResource(CUdevice device, CUdevResource *resource, CUdevResourceType type);
+  // HIP: hipError_t hipDeviceGetDevResource(hipDevice_t device, hipDevResource* resource, hipDevResourceType type);
+  // CHECK: result = hipDeviceGetDevResource(device, &devResource, devResourceType);
+  result = cuDeviceGetDevResource(device, &devResource, devResourceType);
+
+  // CUDA: CUresult CUDAAPI cuDevSmResourceSplitByCount(CUdevResource *result, unsigned int *nbGroups, const CUdevResource *input, CUdevResource *remainder, unsigned int flags, unsigned int minCount);
+  // HIP: hipError_t hipDevSmResourceSplitByCount(hipDevResource* result, unsigned int* nbGroups, const hipDevResource* input, hipDevResource* remainder, unsigned int flags, unsigned int minCount);
+  // CHECK: result = hipDevSmResourceSplitByCount(&devResource, &nbGroups, &devResource_2, &devResource_3, flags, minCount);
+  result = cuDevSmResourceSplitByCount(&devResource, &nbGroups, &devResource_2, &devResource_3, flags, minCount);
+
+  // CUDA: CUresult CUDAAPI cuDevResourceGenerateDesc(CUdevResourceDesc *phDesc, CUdevResource *resources, unsigned int nbResources);
+  // HIP: hipError_t hipDevResourceGenerateDesc(hipDevResourceDesc_t* phDesc, hipDevResource* resources, unsigned int nbResources);
+  // CHECK: result = hipDevResourceGenerateDesc(&devResourceDesc, &devResource, nbResources);
+  result = cuDevResourceGenerateDesc(&devResourceDesc, &devResource, nbResources);
+
+  // CHECK: hipExecutionCtx_t greenCtx;
+  CUgreenCtx greenCtx;
+
+  // CUDA: CUresult CUDAAPI cuGreenCtxCreate(CUgreenCtx *phCtx, CUdevResourceDesc desc, CUdevice dev, unsigned int flags);
+  // HIP: hipError_t hipGreenCtxCreate(hipExecutionCtx_t* ctx, hipDevResourceDesc_t desc, int device, unsigned int flags);
+  // CHECK: result = hipGreenCtxCreate(&greenCtx, devResourceDesc, device, flags);
+  result = cuGreenCtxCreate(&greenCtx, devResourceDesc, device, flags);
+
+  // CUDA: CUresult CUDAAPI cuGreenCtxGetDevResource(CUgreenCtx hCtx, CUdevResource *resource, CUdevResourceType type);
+  // HIP: hipError_t hipExecutionCtxGetDevResource(hipExecutionCtx_t ctx, hipDevResource* resource, hipDevResourceType type);
+  // CHECK: result = hipExecutionCtxGetDevResource(greenCtx, &devResource, devResourceType);
+  result = cuGreenCtxGetDevResource(greenCtx, &devResource, devResourceType);
+
+  // CUDA: CUresult CUDAAPI cuGreenCtxRecordEvent(CUgreenCtx hCtx, CUevent hEvent);
+  // HIP: hipError_t hipExecutionCtxRecordEvent(hipExecutionCtx_t ctx, hipEvent_t event);
+  // CHECK: result = hipExecutionCtxRecordEvent(greenCtx, event_start);
+  result = cuGreenCtxRecordEvent(greenCtx, event_start);
+
+  // CUDA: CUresult CUDAAPI cuGreenCtxWaitEvent(CUgreenCtx hCtx, CUevent hEvent);
+  // HIP: hipError_t hipExecutionCtxWaitEvent(hipExecutionCtx_t ctx, hipEvent_t event);
+  // CHECK: result = hipExecutionCtxWaitEvent(greenCtx, event_end);
+  result = cuGreenCtxWaitEvent(greenCtx, event_end);
+
+  // CUDA: CUresult CUDAAPI cuGreenCtxDestroy(CUgreenCtx hCtx);
+  // HIP: hipError_t hipExecutionCtxDestroy(hipExecutionCtx_t ctx);
+  // CHECK: result = hipExecutionCtxDestroy(greenCtx);
+  result = cuGreenCtxDestroy(greenCtx);
+#endif
+
+#if CUDA_VERSION >= 12050
+  int priority = 0;
+
+  // CUDA: CUresult CUDAAPI cuGreenCtxStreamCreate(CUstream *phStream, CUgreenCtx greenCtx, unsigned int flags, int priority);
+  // HIP: hipError_t hipExecutionCtxStreamCreate(hipStream_t* stream, hipExecutionCtx_t greenctx, unsigned int flags, int priority);
+  // CHECK: result = hipExecutionCtxStreamCreate(&stream, greenCtx, flags, priority);
+  result = cuGreenCtxStreamCreate(&stream, greenCtx, flags, priority);
 #endif
 
 #if CUDA_VERSION >= 12080
@@ -2151,6 +2228,36 @@ int main() {
   // HIP: hipError_t hipMemPrefetchBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, hipMemLocation* prefetch_locs, size_t* prefetch_loc_idxs, size_t num_prefetch_locs, unsigned long long flags, hipStream_t stream);
     // CHECK: result = hipMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
   result = cuMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemDiscardBatchAsync(CUdeviceptr* dptrs, size_t* sizes, size_t count, unsigned long long flags, CUstream hStream);
+  // HIP: hipError_t hipDrvMemDiscardBatchAsync(hipDeviceptr_t* dptrs, size_t* sizes, size_t count, unsigned long long flags, hipStream_t stream);
+  // CHECK: result = hipDrvMemDiscardBatchAsync(&deviceptr, &sizes, sizeCount, ull_2, stream);
+  result = cuMemDiscardBatchAsync(&deviceptr, &sizes, sizeCount, ull_2, stream);
+
+  // CUDA: CUresult CUDAAPI cuMemDiscardAndPrefetchBatchAsync(CUdeviceptr* dptrs, size_t* sizes, size_t count, CUmemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, CUstream hStream);
+  // HIP: hipError_t hipDrvMemDiscardAndPrefetchBatchAsync(hipDeviceptr_t* dptrs, size_t* sizes, size_t count, hipMemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, hipStream_t stream);
+  // CHECK: result = hipDrvMemDiscardAndPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+  result = cuMemDiscardAndPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
+
+  // CUDA: CUresult CUDAAPI cuGreenCtxGetId(CUgreenCtx greenCtx, unsigned long long *greenCtxId);
+  // HIP: hipError_t hipExecutionCtxGetId(hipExecutionCtx_t ctx, unsigned long long* ctxId);
+  // CHECK: result = hipExecutionCtxGetId(greenCtx, &ull);
+  result = cuGreenCtxGetId(greenCtx, &ull);
+#endif
+
+#if CUDA_VERSION >= 13010
+  // CHECK: hipDevSmResourceGroupParams DEV_SM_RESOURCE_GROUP_PARAMS;
+  CU_DEV_SM_RESOURCE_GROUP_PARAMS DEV_SM_RESOURCE_GROUP_PARAMS;
+
+  // CUDA: CUresult CUDAAPI cuDevSmResourceSplit(CUdevResource *result, unsigned int nbGroups, const CUdevResource *input, CUdevResource *remainder, unsigned int flags, CU_DEV_SM_RESOURCE_GROUP_PARAMS *groupParams);
+  // HIP: hipError_t hipDevSmResourceSplit(hipDevResource* result, unsigned int nbGroups, const hipDevResource* input, hipDevResource* remainder, unsigned int flags, hipDevSmResourceGroupParams* groupParams);
+  // CHECK: result = hipDevSmResourceSplit(&devResource, nbGroups, &devResource_2, &devResource_3, flags, &DEV_SM_RESOURCE_GROUP_PARAMS);
+  result = cuDevSmResourceSplit(&devResource, nbGroups, &devResource_2, &devResource_3, flags, &DEV_SM_RESOURCE_GROUP_PARAMS);
+
+  // CUDA: CUresult CUDAAPI cuStreamGetDevResource(CUstream hStream, CUdevResource *resource, CUdevResourceType type);
+  // HIP: hipError_t hipStreamGetDevResource(hipStream_t hStream, hipDevResource* resource, hipDevResourceType type);
+  // CHECK: result = hipStreamGetDevResource(stream, &devResource, devResourceType);
+  result = cuStreamGetDevResource(stream, &devResource, devResourceType);
 #endif
 
   return 0;

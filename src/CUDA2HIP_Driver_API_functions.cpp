@@ -193,9 +193,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuKernelGetFunction"]                                               = {"hipKernelGetFunction",                                        "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY};
   // cudaLibraryGetGlobal
-  m["cuLibraryGetGlobal"]                                                = {"hipLibraryGetGlobal",                                         "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
+  m["cuLibraryGetGlobal"]                                                = {"hipLibraryGetGlobal",                                         "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY};
   // cudaLibraryGetManaged
-  m["cuLibraryGetManaged"]                                               = {"hipLibraryGetManaged",                                        "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
+  m["cuLibraryGetManaged"]                                               = {"hipLibraryGetManaged",                                        "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY};
   // cudaLibraryGetUnifiedFunction
   m["cuLibraryGetUnifiedFunction"]                                       = {"hipLibraryGetUnifiedFunction",                                "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY, HIP_UNSUPPORTED};
   // no analogue
@@ -552,9 +552,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaMemPrefetchBatchAsync
   m["cuMemPrefetchBatchAsync"]                                           = {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_EXPERIMENTAL};
   // cudaMemDiscardBatchAsync
-  m["cuMemDiscardBatchAsync"]                                            = {"hipMemDiscardBatchAsync",                                     "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED};
+  m["cuMemDiscardBatchAsync"]                                            = {"hipDrvMemDiscardBatchAsync",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
   // cudaMemDiscardAndPrefetchBatchAsync
-  m["cuMemDiscardAndPrefetchBatchAsync"]                                 = {"hipMemDiscardAndPrefetchBatchAsync",                          "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_UNSUPPORTED};
+  m["cuMemDiscardAndPrefetchBatchAsync"]                                 = {"hipDrvMemDiscardAndPrefetchBatchAsync",                       "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
 
   // 18. Stream Management
   // cudaStreamAddCallback
@@ -1102,35 +1102,35 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
 
   // 35. Green Contexts
   //
-  m["cuGreenCtxCreate"]                                                  = {"hipGreenCtxCreate",                                           "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuGreenCtxCreate"]                                                  = {"hipGreenCtxCreate",                                           "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
-  m["cuGreenCtxDestroy"]                                                 = {"hipGreenCtxDestroy",                                          "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuGreenCtxDestroy"]                                                 = {"hipExecutionCtxDestroy",                                      "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
   m["cuCtxFromGreenCtx"]                                                 = {"hipCtxFromGreenCtx",                                          "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
   //
-  m["cuDeviceGetDevResource"]                                            = {"hipDeviceGetDevResource",                                     "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuDeviceGetDevResource"]                                            = {"hipDeviceGetDevResource",                                     "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
   m["cuCtxGetDevResource"]                                               = {"hipCtxGetDevResource",                                        "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
   //
-  m["cuGreenCtxGetDevResource"]                                          = {"hipGreenCtxGetDevResource",                                   "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuGreenCtxGetDevResource"]                                          = {"hipExecutionCtxGetDevResource",                               "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
-  m["cuDevSmResourceSplitByCount"]                                       = {"hipDevSmResourceSplitByCount",                                "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuDevSmResourceSplitByCount"]                                       = {"hipDevSmResourceSplitByCount",                                "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
-  m["cuDevResourceGenerateDesc"]                                         = {"hipDevResourceGenerateDesc",                                  "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuDevResourceGenerateDesc"]                                         = {"hipDevResourceGenerateDesc",                                  "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
-  m["cuGreenCtxRecordEvent"]                                             = {"hipGreenCtxRecordEvent",                                      "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuGreenCtxRecordEvent"]                                             = {"hipExecutionCtxRecordEvent",                                  "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
-  m["cuGreenCtxWaitEvent"]                                               = {"hipGreenCtxWaitEvent",                                        "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuGreenCtxWaitEvent"]                                               = {"hipExecutionCtxWaitEvent",                                    "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
   m["cuStreamGetGreenCtx"]                                               = {"hipStreamGetGreenCtx",                                        "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
   //
-  m["cuGreenCtxStreamCreate"]                                            = {"hipGreenCtxStreamCreate",                                     "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuGreenCtxStreamCreate"]                                            = {"hipExecutionCtxStreamCreate",                                 "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
-  m["cuGreenCtxGetId"]                                                   = {"hipGreenCtxGetId",                                            "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuGreenCtxGetId"]                                                   = {"hipExecutionCtxGetId",                                        "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
-  m["cuDevSmResourceSplit"]                                              = {"hipDevSmResourceSplit",                                       "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuDevSmResourceSplit"]                                              = {"hipDevSmResourceSplit",                                       "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
-  m["cuStreamGetDevResource"]                                            = {"hipStreamGetDevResource",                                     "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT, HIP_UNSUPPORTED};
+  m["cuStreamGetDevResource"]                                            = {"hipStreamGetDevResource",                                     "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
 
   // 36. Error Log Management Functions
   // cudaLogsRegisterCallback
@@ -1912,6 +1912,22 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP = []
   m["hipMemGetMemPool"]                                                  = {HIP_7120, HIP_0,    HIP_0   };
   m["hipMipmappedArrayGetMemoryRequirements"]                            = {HIP_7120, HIP_0,    HIP_0   };
   m["hipKernelGetAttribute"]                                             = {HIP_7120, HIP_0,    HIP_0   };
+  m["hipLibraryGetGlobal"]                                               = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipLibraryGetManaged"]                                              = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDeviceGetDevResource"]                                           = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceSplitByCount"]                                      = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevResourceGenerateDesc"]                                        = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDevSmResourceSplit"]                                             = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipStreamGetDevResource"]                                           = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipGreenCtxCreate"]                                                 = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipExecutionCtxDestroy"]                                            = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipExecutionCtxGetDevResource"]                                     = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipExecutionCtxRecordEvent"]                                        = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipExecutionCtxWaitEvent"]                                          = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipExecutionCtxStreamCreate"]                                       = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipExecutionCtxGetId"]                                              = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDrvMemDiscardBatchAsync"]                                        = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDrvMemDiscardAndPrefetchBatchAsync"]                             = {HIP_7140, HIP_0,    HIP_0   };
 
   return m;
 }();

@@ -1381,6 +1381,18 @@ int main() {
   // CHECK-NEXT: hipJitOption JIT_OVERRIDE_DIRECTIVE_VALUES = hipJitOptionOverrideDirectiveValues;
   CUjit_option JIT_MAX_THREADS_PER_BLOCK = CU_JIT_MAX_THREADS_PER_BLOCK;
   CUjit_option JIT_OVERRIDE_DIRECTIVE_VALUES = CU_JIT_OVERRIDE_DIRECTIVE_VALUES;
+
+  // CHECK: hipError_t ERROR_INVALID_RESOURCE_TYPE = hipErrorInvalidResourceType;
+  // CHECK-NEXT: hipError_t ERROR_INVALID_RESOURCE_CONFIGURATION = hipErrorInvalidResourceConfiguration;
+  CUresult ERROR_INVALID_RESOURCE_TYPE = CUDA_ERROR_INVALID_RESOURCE_TYPE;
+  CUresult ERROR_INVALID_RESOURCE_CONFIGURATION = CUDA_ERROR_INVALID_RESOURCE_CONFIGURATION;
+
+  // CHECK: hipDevResourceType devResourceType;
+  // CHECK-NEXT: hipDevResourceType DEV_RESOURCE_TYPE_INVALID = hipDevResourceTypeInvalid;
+  // CHECK-NEXT: hipDevResourceType DEV_RESOURCE_TYPE_SM = hipDevResourceTypeSm;
+  CUdevResourceType devResourceType;
+  CUdevResourceType DEV_RESOURCE_TYPE_INVALID = CU_DEV_RESOURCE_TYPE_INVALID;
+  CUdevResourceType DEV_RESOURCE_TYPE_SM = CU_DEV_RESOURCE_TYPE_SM;
 #endif
 
 #if CUDA_VERSION >= 12080
@@ -1431,6 +1443,37 @@ int main() {
 
   // CHECK: hipMemAllocationType MemAllocationTypeManaged = hipMemAllocationTypeManaged;
   CUmemAllocationType MemAllocationTypeManaged = CU_MEM_ALLOCATION_TYPE_MANAGED;
+#endif
+
+#if CUDA_VERSION >= 13010
+  // CHECK: hipError_t ERROR_STREAM_DETACHED = hipErrorStreamDetached;
+  CUresult ERROR_STREAM_DETACHED = CUDA_ERROR_STREAM_DETACHED;
+
+  // CHECK: hipDevResourceType DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG = hipDevResourceTypeWorkqueueConfig;
+  // CHECK-NEXT: hipDevResourceType DEV_RESOURCE_TYPE_WORKQUEUE = hipDevResourceTypeWorkqueue;
+  CUdevResourceType DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG = CU_DEV_RESOURCE_TYPE_WORKQUEUE_CONFIG;
+  CUdevResourceType DEV_RESOURCE_TYPE_WORKQUEUE = CU_DEV_RESOURCE_TYPE_WORKQUEUE;
+
+  // CHECK: hipDevSmResourceSplitByCount_flags devSmResourceSplitByCount_flags;
+  // CHECK-NEXT: hipDevSmResourceSplitByCount_flags DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING = hipDevSmResourceSplitIgnoreSmCoscheduling;
+  // CHECK-NEXT: hipDevSmResourceSplitByCount_flags DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE = hipDevSmResourceSplitMaxPotentialClusterSize;
+  CUdevSmResourceSplitByCount_flags devSmResourceSplitByCount_flags;
+  CUdevSmResourceSplitByCount_flags DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING = CU_DEV_SM_RESOURCE_SPLIT_IGNORE_SM_COSCHEDULING;
+  CUdevSmResourceSplitByCount_flags DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE = CU_DEV_SM_RESOURCE_SPLIT_MAX_POTENTIAL_CLUSTER_SIZE;
+
+  // CHECK: hipDevSmResourceGroup_flags devSmResourceGroup_flags;
+  // CHECK-NEXT: hipDevSmResourceGroup_flags DEV_SM_RESOURCE_GROUP_DEFAULT = hipDevSmResourceGroupDefault;
+  // CHECK-NEXT: hipDevSmResourceGroup_flags DEV_SM_RESOURCE_GROUP_BACKFILL = hipDevSmResourceGroupBackfill;
+  CUdevSmResourceGroup_flags devSmResourceGroup_flags;
+  CUdevSmResourceGroup_flags DEV_SM_RESOURCE_GROUP_DEFAULT = CU_DEV_SM_RESOURCE_GROUP_DEFAULT;
+  CUdevSmResourceGroup_flags DEV_SM_RESOURCE_GROUP_BACKFILL = CU_DEV_SM_RESOURCE_GROUP_BACKFILL;
+
+  // CHECK: hipDevWorkqueueConfigScope devWorkqueueConfigScope;
+  // CHECK-NEXT: hipDevWorkqueueConfigScope WORKQUEUE_SCOPE_DEVICE_CTX = hipDevWorkqueueConfigScopeDeviceCtx;
+  // CHECK-NEXT: hipDevWorkqueueConfigScope WORKQUEUE_SCOPE_GREEN_CTX_BALANCED = hipDevWorkqueueConfigScopeGreenCtxBalanced;
+  CUdevWorkqueueConfigScope devWorkqueueConfigScope;
+  CUdevWorkqueueConfigScope WORKQUEUE_SCOPE_DEVICE_CTX = CU_WORKQUEUE_SCOPE_DEVICE_CTX;
+  CUdevWorkqueueConfigScope WORKQUEUE_SCOPE_GREEN_CTX_BALANCED = CU_WORKQUEUE_SCOPE_GREEN_CTX_BALANCED;
 #endif
 
   return 0;

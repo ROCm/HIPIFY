@@ -162,7 +162,7 @@
 |`cudaOccupancyMaxPotentialBlockSizeVariableSMem`| | | | |`hipOccupancyMaxPotentialBlockSizeVariableSMem`|5.5.0| | | | | |
 |`cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`| | | | |`hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags`|5.5.0| | | | | |
 |`cudaOccupancyMaxPotentialBlockSizeWithFlags`| | | | |`hipOccupancyMaxPotentialBlockSizeWithFlags`|3.5.0| | | | | |
-|`cudaOccupancyMaxPotentialClusterSize`|11.8| | | |`hipOccupancyMaxPotentialClusterSize`|7.13.0| | | | |7.13.0|
+|`cudaOccupancyMaxPotentialClusterSize`|11.8| | | |`hipOccupancyMaxPotentialClusterSize`|7.13.0| | | | |7.14.0|
 
 ## **10. Memory Management**
 
@@ -196,12 +196,12 @@
 |`cudaMallocPitch`| | | | |`hipMallocPitch`|1.6.0| | | | | |
 |`cudaMemAdvise`|8.0| |13.0| |`hipMemAdvise`|3.7.0| | | |13.0| |
 |`cudaMemAdvise_v2`|12.2| | | | | | | | | | |
-|`cudaMemDiscardAndPrefetchBatchAsync`|13.0| | | | | | | | | | |
-|`cudaMemDiscardBatchAsync`|13.0| | | | | | | | | | |
+|`cudaMemDiscardAndPrefetchBatchAsync`|13.0| | | |`hipMemDiscardAndPrefetchBatchAsync`|7.14.0| | | | | |
+|`cudaMemDiscardBatchAsync`|13.0| | | |`hipMemDiscardBatchAsync`|7.14.0| | | | | |
 |`cudaMemGetInfo`| | | | |`hipMemGetInfo`|1.6.0| | | | | |
 |`cudaMemPrefetchAsync`|8.0| |13.0| |`hipMemPrefetchAsync`|3.7.0| | | |13.0| |
 |`cudaMemPrefetchAsync_v2`|12.2| | | | | | | | | | |
-|`cudaMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | |7.13.0|
+|`cudaMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | |7.14.0|
 |`cudaMemRangeGetAttribute`|8.0| | | |`hipMemRangeGetAttribute`|3.7.0| | | | | |
 |`cudaMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | | |
 |`cudaMemcpy`| | | | |`hipMemcpy`|1.5.0| | | | | |
@@ -566,10 +566,10 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cudaKernelSetAttributeForDevice`|12.8| | | | | | | | | | |
 |`cudaLibraryEnumerateKernels`|12.8| | | |`hipLibraryEnumerateKernels`|7.2.0| | | | | |
-|`cudaLibraryGetGlobal`|12.8| | | | | | | | | | |
+|`cudaLibraryGetGlobal`|12.8| | | |`hipLibraryGetGlobal`|7.14.0| | | | | |
 |`cudaLibraryGetKernel`|12.8| | | |`hipLibraryGetKernel`|7.1.0| | | | | |
 |`cudaLibraryGetKernelCount`|12.8| | | |`hipLibraryGetKernelCount`|7.1.0| | | | | |
-|`cudaLibraryGetManaged`|12.8| | | | | | | | | | |
+|`cudaLibraryGetManaged`|12.8| | | |`hipLibraryGetManaged`|7.14.0| | | | | |
 |`cudaLibraryGetUnifiedFunction`|12.8| | | | | | | | | | |
 |`cudaLibraryLoadData`|12.8| | | |`hipLibraryLoadData`|7.1.0| | | | | |
 |`cudaLibraryLoadFromFile`|12.8| | | |`hipLibraryLoadFromFile`|7.1.0| | | | | |
@@ -579,21 +579,21 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`cudaDevResourceGenerateDesc`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceSplit`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceSplitByCount`|13.1| | | | | | | | | | |
-|`cudaDeviceGetDevResource`|13.1| | | | | | | | | | |
-|`cudaDeviceGetExecutionCtx`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxDestroy`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxGetDevResource`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxGetDevice`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxGetId`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxRecordEvent`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxStreamCreate`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxSynchronize`|13.1| | | | | | | | | | |
-|`cudaExecutionCtxWaitEvent`|13.1| | | | | | | | | | |
-|`cudaGreenCtxCreate`|13.1| | | | | | | | | | |
-|`cudaStreamGetDevResource`|13.1| | | | | | | | | | |
+|`cudaDevResourceGenerateDesc`|13.1| | | |`hipDevResourceGenerateDesc`|7.14.0| | | | | |
+|`cudaDevSmResourceSplit`|13.1| | | |`hipDevSmResourceSplit`|7.14.0| | | | | |
+|`cudaDevSmResourceSplitByCount`|13.1| | | |`hipDevSmResourceSplitByCount`|7.14.0| | | | | |
+|`cudaDeviceGetDevResource`|13.1| | | |`hipDeviceGetDevResource`|7.14.0| | | | | |
+|`cudaDeviceGetExecutionCtx`|13.1| | | |`hipDeviceGetExecutionCtx`|7.14.0| | | | | |
+|`cudaExecutionCtxDestroy`|13.1| | | |`hipExecutionCtxDestroy`|7.14.0| | | | | |
+|`cudaExecutionCtxGetDevResource`|13.1| | | |`hipExecutionCtxGetDevResource`|7.14.0| | | | | |
+|`cudaExecutionCtxGetDevice`|13.1| | | |`hipExecutionCtxGetDevice`|7.14.0| | | | | |
+|`cudaExecutionCtxGetId`|13.1| | | |`hipExecutionCtxGetId`|7.14.0| | | | | |
+|`cudaExecutionCtxRecordEvent`|13.1| | | |`hipExecutionCtxRecordEvent`|7.14.0| | | | | |
+|`cudaExecutionCtxStreamCreate`|13.1| | | |`hipExecutionCtxStreamCreate`|7.14.0| | | | | |
+|`cudaExecutionCtxSynchronize`|13.1| | | |`hipExecutionCtxSynchronize`|7.14.0| | | | | |
+|`cudaExecutionCtxWaitEvent`|13.1| | | |`hipExecutionCtxWaitEvent`|7.14.0| | | | | |
+|`cudaGreenCtxCreate`|13.1| | | |`hipGreenCtxCreate`|7.14.0| | | | | |
+|`cudaStreamGetDevResource`|13.1| | | |`hipStreamGetDevResource`|7.14.0| | | | | |
 
 ## **34. C++ API Routines**
 
@@ -737,7 +737,7 @@
 |`CUlogsCallbackEntry_st`|13.0| | | | | | | | | | |
 |`CUstream_st`| | | | |`ihipStream_t`|1.5.0| | | | | |
 |`CUuuid_st`| | | | |`hipUUID_t`|5.2.0| | | | | |
-|`RESOURCE_ABI_BYTES`|13.1| | | | | | | | | | |
+|`RESOURCE_ABI_BYTES`|13.1| | | |`HIP_RESOURCE_ABI_BYTES`|7.14.0| | | | | |
 |`cudaAccessPolicyWindow`|11.0| | | |`hipAccessPolicyWindow`|5.2.0| | | | | |
 |`cudaAccessProperty`|11.0| | | |`hipAccessProperty`|5.2.0| | | | | |
 |`cudaAccessPropertyNormal`|11.0| | | |`hipAccessPropertyNormal`|5.2.0| | | | | |
@@ -831,10 +831,10 @@
 |`cudaChannelFormatKindUnsignedNormalized8X2`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindUnsignedNormalized8X4`|11.5| | | | | | | | | | |
 |`cudaChildGraphNodeParams`|12.2| | | |`hipChildGraphNodeParams`|6.1.0| | | | | |
-|`cudaClusterSchedulingPolicy`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.13.0|
-|`cudaClusterSchedulingPolicyDefault`|11.8| | | |`hipClusterSchedulingPolicyDefault`|7.13.0| | | | |7.13.0|
-|`cudaClusterSchedulingPolicyLoadBalancing`|11.8| | | |`hipClusterSchedulingPolicyLoadBalancing`|7.13.0| | | | |7.13.0|
-|`cudaClusterSchedulingPolicySpread`|11.8| | | |`hipClusterSchedulingPolicySpread`|7.13.0| | | | |7.13.0|
+|`cudaClusterSchedulingPolicy`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.14.0|
+|`cudaClusterSchedulingPolicyDefault`|11.8| | | |`hipClusterSchedulingPolicyDefault`|7.13.0| | | | |7.14.0|
+|`cudaClusterSchedulingPolicyLoadBalancing`|11.8| | | |`hipClusterSchedulingPolicyLoadBalancing`|7.13.0| | | | |7.14.0|
+|`cudaClusterSchedulingPolicySpread`|11.8| | | |`hipClusterSchedulingPolicySpread`|7.13.0| | | | |7.14.0|
 |`cudaComputeMode`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`cudaComputeModeDefault`| | | | |`hipComputeModeDefault`|1.9.0| | | | | |
 |`cudaComputeModeExclusive`| | | | |`hipComputeModeExclusive`|1.9.0| | | | | |
@@ -1015,28 +1015,28 @@
 |`cudaDevP2PAttrNativeAtomicSupported`|8.0| | | |`hipDevP2PAttrNativeAtomicSupported`|3.8.0| | | | | |
 |`cudaDevP2PAttrOnlyPartialNativeAtomicSupported`|13.0| | | | | | | | | | |
 |`cudaDevP2PAttrPerformanceRank`|8.0| | | |`hipDevP2PAttrPerformanceRank`|3.8.0| | | | | |
-|`cudaDevResource`|13.1| | | | | | | | | | |
-|`cudaDevResourceDesc_t`|13.1| | | | | | | | | | |
-|`cudaDevResourceType`|13.1| | | | | | | | | | |
-|`cudaDevResourceTypeInvalid`|13.1| | | | | | | | | | |
-|`cudaDevResourceTypeSm`|13.1| | | | | | | | | | |
-|`cudaDevResourceTypeWorkqueue`|13.1| | | | | | | | | | |
-|`cudaDevResourceTypeWorkqueueConfig`|13.1| | | | | | | | | | |
-|`cudaDevResource_st`|13.1| | | | | | | | | | |
-|`cudaDevSmResource`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceGroupBackfill`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceGroupDefault`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceGroupParams`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceGroupParams_st`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceGroup_flags`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceSplitByCount_flags`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceSplitIgnoreSmCoscheduling`|13.1| | | | | | | | | | |
-|`cudaDevSmResourceSplitMaxPotentialClusterSize`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueConfigResource`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueConfigScope`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueConfigScopeDeviceCtx`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueConfigScopeGreenCtxBalanced`|13.1| | | | | | | | | | |
-|`cudaDevWorkqueueResource`|13.1| | | | | | | | | | |
+|`cudaDevResource`|13.1| | | |`hipDevResource`|7.14.0| | | | | |
+|`cudaDevResourceDesc_t`|13.1| | | |`hipDevResourceDesc_t`|7.14.0| | | | | |
+|`cudaDevResourceType`|13.1| | | |`hipDevResourceType`|7.14.0| | | | | |
+|`cudaDevResourceTypeInvalid`|13.1| | | |`hipDevResourceTypeInvalid`|7.14.0| | | | | |
+|`cudaDevResourceTypeSm`|13.1| | | |`hipDevResourceTypeSm`|7.14.0| | | | | |
+|`cudaDevResourceTypeWorkqueue`|13.1| | | |`hipDevResourceTypeWorkqueue`|7.14.0| | | | | |
+|`cudaDevResourceTypeWorkqueueConfig`|13.1| | | |`hipDevResourceTypeWorkqueueConfig`|7.14.0| | | | | |
+|`cudaDevResource_st`|13.1| | | |`hipDevResource_st`|7.14.0| | | | | |
+|`cudaDevSmResource`|13.1| | | |`hipDevSmResource`|7.14.0| | | | | |
+|`cudaDevSmResourceGroupBackfill`|13.1| | | |`hipDevSmResourceGroupBackfill`|7.14.0| | | | | |
+|`cudaDevSmResourceGroupDefault`|13.1| | | |`hipDevSmResourceGroupDefault`|7.14.0| | | | | |
+|`cudaDevSmResourceGroupParams`|13.1| | | |`hipDevSmResourceGroupParams`|7.14.0| | | | | |
+|`cudaDevSmResourceGroupParams_st`|13.1| | | |`hipDevSmResourceGroupParams_st`|7.14.0| | | | | |
+|`cudaDevSmResourceGroup_flags`|13.1| | | |`hipDevSmResourceGroup_flags`|7.14.0| | | | | |
+|`cudaDevSmResourceSplitByCount_flags`|13.1| | | |`hipDevSmResourceSplitByCount_flags`|7.14.0| | | | | |
+|`cudaDevSmResourceSplitIgnoreSmCoscheduling`|13.1| | | |`hipDevSmResourceSplitIgnoreSmCoscheduling`|7.14.0| | | | | |
+|`cudaDevSmResourceSplitMaxPotentialClusterSize`|13.1| | | |`hipDevSmResourceSplitMaxPotentialClusterSize`|7.14.0| | | | | |
+|`cudaDevWorkqueueConfigResource`|13.1| | | |`hipDevWorkqueueConfigResource`|7.14.0| | | | | |
+|`cudaDevWorkqueueConfigScope`|13.1| | | |`hipDevWorkqueueConfigScope`|7.14.0| | | | | |
+|`cudaDevWorkqueueConfigScopeDeviceCtx`|13.1| | | |`hipDevWorkqueueConfigScopeDeviceCtx`|7.14.0| | | | | |
+|`cudaDevWorkqueueConfigScopeGreenCtxBalanced`|13.1| | | |`hipDevWorkqueueConfigScopeGreenCtxBalanced`|7.14.0| | | | | |
+|`cudaDevWorkqueueResource`|13.1| | | |`hipDevWorkqueueResource`|7.14.0| | | | | |
 |`cudaDeviceAttr`| | | | |`hipDeviceAttribute_t`|1.6.0| | | | | |
 |`cudaDeviceBlockingSync`| | | | |`hipDeviceScheduleBlockingSync`|1.6.0| | | | | |
 |`cudaDeviceLmemResizeToMax`| | | | |`hipDeviceLmemResizeToMax`|1.6.0| | | | | |
@@ -1234,7 +1234,7 @@
 |`cudaErrorInsufficientDriver`| | | | |`hipErrorInsufficientDriver`|1.7.0| | | | | |
 |`cudaErrorInvalidAddressSpace`| | | | | | | | | | | |
 |`cudaErrorInvalidChannelDescriptor`| | | | |`hipErrorInvalidChannelDescriptor`|6.4.0| | | | | |
-|`cudaErrorInvalidClusterSize`|11.8| | | |`hipErrorInvalidClusterSize`|7.13.0| | | | |7.13.0|
+|`cudaErrorInvalidClusterSize`|11.8| | | |`hipErrorInvalidClusterSize`|7.13.0| | | | |7.14.0|
 |`cudaErrorInvalidConfiguration`| | | | |`hipErrorInvalidConfiguration`|1.6.0| | | | | |
 |`cudaErrorInvalidDevice`| | | | |`hipErrorInvalidDevice`|1.6.0| | | | | |
 |`cudaErrorInvalidDeviceFunction`| | | | |`hipErrorInvalidDeviceFunction`|1.6.0| | | | | |
@@ -1248,9 +1248,9 @@
 |`cudaErrorInvalidPc`| | | | | | | | | | | |
 |`cudaErrorInvalidPitchValue`| | | | |`hipErrorInvalidPitchValue`|4.2.0| | | | | |
 |`cudaErrorInvalidPtx`| | | | |`hipErrorInvalidKernelFile`|1.6.0| | | | | |
-|`cudaErrorInvalidResourceConfiguration`|12.6| | | | | | | | | | |
+|`cudaErrorInvalidResourceConfiguration`|12.6| | | |`hipErrorInvalidResourceConfiguration`|7.14.0| | | | | |
 |`cudaErrorInvalidResourceHandle`| | | | |`hipErrorInvalidHandle`|1.6.0| | | | | |
-|`cudaErrorInvalidResourceType`|12.6| | | | | | | | | | |
+|`cudaErrorInvalidResourceType`|12.6| | | |`hipErrorInvalidResourceType`|7.14.0| | | | | |
 |`cudaErrorInvalidSource`|10.1| | | |`hipErrorInvalidSource`|1.6.0| | | | | |
 |`cudaErrorInvalidSurface`| | | | | | | | | | | |
 |`cudaErrorInvalidSymbol`| | | | |`hipErrorInvalidSymbol`|1.6.0| | | | | |
@@ -1312,7 +1312,7 @@
 |`cudaErrorStreamCaptureUnmatched`|10.0| | | |`hipErrorStreamCaptureUnmatched`|4.3.0| | | | | |
 |`cudaErrorStreamCaptureUnsupported`|10.0| | | |`hipErrorStreamCaptureUnsupported`|4.3.0| | | | | |
 |`cudaErrorStreamCaptureWrongThread`|10.1| | | |`hipErrorStreamCaptureWrongThread`|4.3.0| | | | | |
-|`cudaErrorStreamDetached`|13.1| | | | | | | | | | |
+|`cudaErrorStreamDetached`|13.1| | | |`hipErrorStreamDetached`|7.14.0| | | | | |
 |`cudaErrorStubLibrary`|11.1| | | | | | | | | | |
 |`cudaErrorSymbolNotFound`|10.1| | | |`hipErrorNotFound`|1.6.0| | | | | |
 |`cudaErrorSyncDepthExceeded`| | | | | | | | | | | |
@@ -1344,7 +1344,7 @@
 |`cudaEventWaitNodeParams`|12.2| | | |`hipEventWaitNodeParams`|6.1.0| | | | | |
 |`cudaEvent_t`| | | | |`hipEvent_t`|1.6.0| | | | | |
 |`cudaExecutionContext_st`|13.1| | | | | | | | | | |
-|`cudaExecutionContext_t`|13.1| | | | | | | | | | |
+|`cudaExecutionContext_t`|13.1| | | |`hipExecutionCtx_t`|7.14.0| | | | | |
 |`cudaExtent`| | | | |`hipExtent`|1.7.0| | | | | |
 |`cudaExternalMemoryBufferDesc`|10.0| | | |`hipExternalMemoryBufferDesc`|4.3.0| | | | | |
 |`cudaExternalMemoryDedicated`|10.0| | | |`hipExternalMemoryDedicated`|5.5.0| | | | | |
@@ -1396,15 +1396,15 @@
 |`cudaFormatModeAuto`| | | | | | | | | | | |
 |`cudaFormatModeForced`| | | | | | | | | | | |
 |`cudaFuncAttribute`|9.0| | | |`hipFuncAttribute`|3.9.0| | | | | |
-|`cudaFuncAttributeClusterDimMustBeSet`|11.8| | | |`hipFuncAttributeClusterDimMustBeSet`|7.13.0| | | | |7.13.0|
-|`cudaFuncAttributeClusterSchedulingPolicyPreference`|11.8| | | |`hipFuncAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.13.0|
+|`cudaFuncAttributeClusterDimMustBeSet`|11.8| | | |`hipFuncAttributeClusterDimMustBeSet`|7.13.0| | | | |7.14.0|
+|`cudaFuncAttributeClusterSchedulingPolicyPreference`|11.8| | | |`hipFuncAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.14.0|
 |`cudaFuncAttributeMax`|9.0| | | |`hipFuncAttributeMax`|3.9.0| | | | | |
 |`cudaFuncAttributeMaxDynamicSharedMemorySize`|9.0| | | |`hipFuncAttributeMaxDynamicSharedMemorySize`|3.9.0| | | | | |
-|`cudaFuncAttributeNonPortableClusterSizeAllowed`|11.8| | | |`hipFuncAttributeNonPortableClusterSizeAllowed`|7.13.0| | | | |7.13.0|
+|`cudaFuncAttributeNonPortableClusterSizeAllowed`|11.8| | | |`hipFuncAttributeNonPortableClusterSizeAllowed`|7.13.0| | | | |7.14.0|
 |`cudaFuncAttributePreferredSharedMemoryCarveout`|9.0| | | |`hipFuncAttributePreferredSharedMemoryCarveout`|3.9.0| | | | | |
-|`cudaFuncAttributeRequiredClusterDepth`|11.8| | | |`hipFuncAttributeRequiredClusterDepth`|7.13.0| | | | |7.13.0|
-|`cudaFuncAttributeRequiredClusterHeight`|11.8| | | |`hipFuncAttributeRequiredClusterHeight`|7.13.0| | | | |7.13.0|
-|`cudaFuncAttributeRequiredClusterWidth`|11.8| | | |`hipFuncAttributeRequiredClusterWidth`|7.13.0| | | | |7.13.0|
+|`cudaFuncAttributeRequiredClusterDepth`|11.8| | | |`hipFuncAttributeRequiredClusterDepth`|7.13.0| | | | |7.14.0|
+|`cudaFuncAttributeRequiredClusterHeight`|11.8| | | |`hipFuncAttributeRequiredClusterHeight`|7.13.0| | | | |7.14.0|
+|`cudaFuncAttributeRequiredClusterWidth`|11.8| | | |`hipFuncAttributeRequiredClusterWidth`|7.13.0| | | | |7.14.0|
 |`cudaFuncAttributes`| | | | |`hipFuncAttributes`|1.9.0| | | | | |
 |`cudaFuncCache`| | | | |`hipFuncCache_t`|1.6.0| | | | | |
 |`cudaFuncCachePreferEqual`| | | | |`hipFuncCachePreferEqual`|1.6.0| | | | | |
@@ -1602,12 +1602,12 @@
 |`cudaKeyValuePair`| | | |12.0| | | | | | | |
 |`cudaLaunchAttribute`|11.8| | | |`hipLaunchAttribute`|7.0.0| | | | | |
 |`cudaLaunchAttributeAccessPolicyWindow`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
-|`cudaLaunchAttributeClusterDimension`|11.8| | | |`hipLaunchAttributeClusterDimension`|7.13.0| | | | |7.13.0|
-|`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | |`hipLaunchAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.13.0|
+|`cudaLaunchAttributeClusterDimension`|11.8| | | |`hipLaunchAttributeClusterDimension`|7.13.0| | | | |7.14.0|
+|`cudaLaunchAttributeClusterSchedulingPolicyPreference`|11.8| | | |`hipLaunchAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.14.0|
 |`cudaLaunchAttributeCooperative`|11.8| | | |`hipLaunchAttributeCooperative`|6.2.0| | | | | |
 |`cudaLaunchAttributeDeviceUpdatableKernelNode`|12.4| | | | | | | | | | |
 |`cudaLaunchAttributeID`|11.8| | | |`hipLaunchAttributeID`|6.2.0| | | | | |
-|`cudaLaunchAttributeIgnore`|11.8| | | |`hipLaunchAttributeIgnore`|7.13.0| | | | |7.13.0|
+|`cudaLaunchAttributeIgnore`|11.8| | | |`hipLaunchAttributeIgnore`|7.13.0| | | | |7.14.0|
 |`cudaLaunchAttributeLaunchCompletionEvent`|12.3| | | | | | | | | | |
 |`cudaLaunchAttributeMemSyncDomain`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | | |
 |`cudaLaunchAttributeMemSyncDomainMap`|12.0| | | |`hipLaunchAttributeMemSyncDomainMap`|7.1.0| | | | | |
@@ -1673,10 +1673,10 @@
 |`cudaMemAttachGlobal`| | | | |`hipMemAttachGlobal`|2.5.0| | | | | |
 |`cudaMemAttachHost`| | | | |`hipMemAttachHost`|2.5.0| | | | | |
 |`cudaMemAttachSingle`| | | | |`hipMemAttachSingle`|3.7.0| | | | | |
-|`cudaMemFabricHandle_st`|12.3| | | | | | | | | | |
-|`cudaMemFabricHandle_t`|12.3| | | | | | | | | | |
+|`cudaMemFabricHandle_st`|12.3| | | |`hipMemFabricHandle_st`|7.14.0| | | | | |
+|`cudaMemFabricHandle_t`|12.3| | | |`hipMemFabricHandle_t`|7.14.0| | | | | |
 |`cudaMemFreeNodeParams`|12.2| | | |`hipMemFreeNodeParams`|6.1.0| | | | | |
-|`cudaMemHandleTypeFabric`|12.4| | | | | | | | | | |
+|`cudaMemHandleTypeFabric`|12.4| | | |`hipMemHandleTypeFabric`|7.14.0| | | | | |
 |`cudaMemHandleTypeNone`|11.2| | | |`hipMemHandleTypeNone`|5.2.0| | | | | |
 |`cudaMemHandleTypePosixFileDescriptor`|11.2| | | |`hipMemHandleTypePosixFileDescriptor`|5.2.0| | | | | |
 |`cudaMemHandleTypeWin32`|11.2| | | |`hipMemHandleTypeWin32`|5.2.0| | | | | |

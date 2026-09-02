@@ -44,7 +44,7 @@ int main() {
   // CUDA < 12000: extern __host__ cudaError_t CUDARTAPI cudaGetDriverEntryPoint(const char *symbol, void **funcPtr, unsigned long long flags);
   // NOTE: cudaGetDriverEntryPoint for CUDA < 12000 is not supported by HIP
   // HIP: hipError_t hipGetDriverEntryPoint(const char* symbol, void** funcPtr, unsigned long long flags, hipDriverEntryPointQueryResult* driverStatus);
-  // CHECK: result = hipGetDriverEntryPoint(symbol.c_str(), &pfn, 713, ull, &driverProcAddressQueryResult);
+  // CHECK: result = hipGetDriverEntryPoint(symbol.c_str(), &pfn, 714, ull, &driverProcAddressQueryResult);
   result = cudaGetDriverEntryPoint(symbol.c_str(), &pfn, ull, &driverProcAddressQueryResult);
 #endif
 
