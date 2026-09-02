@@ -42,6 +42,11 @@ class HipifyAction : public clang::ASTFrontendAction,
 private:
   ct::Replacements *replacements = nullptr;
   std::map<std::string, clang::SourceLocation> Ifndefs;
+  // Tracks how many times each inserted variable name (e.g., hipify_use_mask)
+  // has been used per C++ block scope, to avoid redefinition when the same
+  // API is called multiple times in the same scope. getRawEncoding() is
+  // globally unique per block across the entire translation unit.
+  std::map<std::tuple<clang::FileID,unsigned, std::string>, unsigned> InsertedVarCounter;
   std::vector<clang::SourceRange> SkippedSourceRanges;
   std::unique_ptr<mat::MatchFinder> Finder;
   // CUDA implicitly adds its runtime header. We rewrite explicitly-provided CUDA includes with equivalent
