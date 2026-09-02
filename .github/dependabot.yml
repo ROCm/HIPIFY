@@ -5,6 +5,10 @@
 
 version: 2
 updates:
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "weekly"
   - package-ecosystem: "pip" # See documentation for possible values
     directory: "/docs/sphinx" # Location of package manifests
     open-pull-requests-limit: 10
