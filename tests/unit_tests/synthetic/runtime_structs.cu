@@ -255,6 +255,11 @@ int main() {
   // CHECK-NEXT: hipGraphEdgeData graphEdgeData;
   cudaGraphEdgeData_st graphEdgeData_st;
   cudaGraphEdgeData graphEdgeData;
+
+  // CHECK: hipMemFabricHandle_st MemFabricHandle_st;
+  // CHECK-NEXT: hipMemFabricHandle_t MemFabricHandle;
+  cudaMemFabricHandle_st MemFabricHandle_st;
+  cudaMemFabricHandle_t MemFabricHandle;
 #endif
 
 #if CUDA_VERSION >= 12080
@@ -269,6 +274,33 @@ int main() {
 
   // CHECK: hipMemcpy3DBatchOp Memcpy3DBatchOp;
   cudaMemcpy3DBatchOp Memcpy3DBatchOp;
+#endif
+
+#if CUDA_VERSION >= 13010
+  // CHECK: hipDevResourceDesc_t DevResourceDesc;
+  cudaDevResourceDesc_t DevResourceDesc;
+
+  // CHECK: hipExecutionCtx_t ExecutionContext;
+  cudaExecutionContext_t ExecutionContext;
+
+  // CHECK: hipDevSmResource DevSmResource;
+  cudaDevSmResource DevSmResource;
+
+  // CHECK: hipDevWorkqueueConfigResource DevWorkqueueConfigResource;
+  cudaDevWorkqueueConfigResource DevWorkqueueConfigResource;
+
+  // CHECK: hipDevWorkqueueResource DevWorkqueueResource;
+  cudaDevWorkqueueResource DevWorkqueueResource;
+
+  // CHECK: hipDevSmResourceGroupParams_st DevSmResourceGroupParams_st;
+  // CHECK-NEXT: hipDevSmResourceGroupParams DevSmResourceGroupParams;
+  cudaDevSmResourceGroupParams_st DevSmResourceGroupParams_st;
+  cudaDevSmResourceGroupParams DevSmResourceGroupParams;
+
+  // CHECK: hipDevResource_st DevResource_st;
+  // CHECK-NEXT: hipDevResource DevResource;
+  cudaDevResource_st DevResource_st;
+  cudaDevResource DevResource;
 #endif
 
   return 0;

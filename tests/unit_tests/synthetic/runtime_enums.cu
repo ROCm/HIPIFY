@@ -1057,6 +1057,18 @@ int main() {
   cudaGraphDependencyType GRAPH_DEPENDENCY_TYPE_PROGRAMMATIC = cudaGraphDependencyTypeProgrammatic;
 #endif
 
+#if CUDA_VERSION >= 12040
+  // CHECK: hipMemAllocationHandleType MemHandleTypeFabric = hipMemHandleTypeFabric;
+  cudaMemAllocationHandleType MemHandleTypeFabric = cudaMemHandleTypeFabric;
+#endif
+
+#if CUDA_VERSION >= 12060
+  // CHECK: hipError_t ErrorInvalidResourceType = hipErrorInvalidResourceType;
+  // CHECK-NEXT: hipError_t ErrorInvalidResourceConfiguration = hipErrorInvalidResourceConfiguration;
+  cudaError_t ErrorInvalidResourceType = cudaErrorInvalidResourceType;
+  cudaError_t ErrorInvalidResourceConfiguration = cudaErrorInvalidResourceConfiguration;
+#endif
+
 #if CUDA_VERSION >= 12080
   // CHECK: hipJitOption jit_option;
   // CHECK-NEXT: hipJitOption JIT_MAX_REGISTERS = hipJitOptionMaxRegisters;
@@ -1138,6 +1150,43 @@ int main() {
 
   // CHECK: hipMemAllocationType MemAllocationTypeManaged = hipMemAllocationTypeManaged;
   cudaMemAllocationType MemAllocationTypeManaged = cudaMemAllocationTypeManaged;
+#endif
+
+#if CUDA_VERSION >= 13010
+  // CHECK: hipError_t ErrorStreamDetached = hipErrorStreamDetached;
+  cudaError_t ErrorStreamDetached = cudaErrorStreamDetached;
+
+  // CHECK: hipDevResourceType DevResourceType;
+  // CHECK-NEXT: hipDevResourceType DevResourceTypeInvalid = hipDevResourceTypeInvalid;
+  // CHECK-NEXT: hipDevResourceType DevResourceTypeSm = hipDevResourceTypeSm;
+  // CHECK-NEXT: hipDevResourceType DevResourceTypeWorkqueueConfig = hipDevResourceTypeWorkqueueConfig;
+  // CHECK-NEXT: hipDevResourceType DevResourceTypeWorkqueue = hipDevResourceTypeWorkqueue;
+  cudaDevResourceType DevResourceType;
+  cudaDevResourceType DevResourceTypeInvalid = cudaDevResourceTypeInvalid;
+  cudaDevResourceType DevResourceTypeSm = cudaDevResourceTypeSm;
+  cudaDevResourceType DevResourceTypeWorkqueueConfig = cudaDevResourceTypeWorkqueueConfig;
+  cudaDevResourceType DevResourceTypeWorkqueue = cudaDevResourceTypeWorkqueue;
+
+  // CHECK: hipDevSmResourceSplitByCount_flags DevSmResourceSplitByCount_flags;
+  // CHECK-NEXT: hipDevSmResourceSplitByCount_flags DevSmResourceSplitIgnoreSmCoscheduling = hipDevSmResourceSplitIgnoreSmCoscheduling;
+  // CHECK-NEXT: hipDevSmResourceSplitByCount_flags DevSmResourceSplitMaxPotentialClusterSize = hipDevSmResourceSplitMaxPotentialClusterSize;
+  cudaDevSmResourceSplitByCount_flags DevSmResourceSplitByCount_flags;
+  cudaDevSmResourceSplitByCount_flags DevSmResourceSplitIgnoreSmCoscheduling = cudaDevSmResourceSplitIgnoreSmCoscheduling;
+  cudaDevSmResourceSplitByCount_flags DevSmResourceSplitMaxPotentialClusterSize = cudaDevSmResourceSplitMaxPotentialClusterSize;
+
+  // CHECK: hipDevSmResourceGroup_flags DevSmResourceGroup_flags;
+  // CHECK-NEXT: hipDevSmResourceGroup_flags DevSmResourceGroupDefault = hipDevSmResourceGroupDefault;
+  // CHECK-NEXT: hipDevSmResourceGroup_flags DevSmResourceGroupBackfill = hipDevSmResourceGroupBackfill;
+  cudaDevSmResourceGroup_flags DevSmResourceGroup_flags;
+  cudaDevSmResourceGroup_flags DevSmResourceGroupDefault = cudaDevSmResourceGroupDefault;
+  cudaDevSmResourceGroup_flags DevSmResourceGroupBackfill = cudaDevSmResourceGroupBackfill;
+
+  // CHECK: hipDevWorkqueueConfigScope DevWorkqueueConfigScope;
+  // CHECK-NEXT: hipDevWorkqueueConfigScope DevWorkqueueConfigScopeDeviceCtx = hipDevWorkqueueConfigScopeDeviceCtx;
+  // CHECK-NEXT: hipDevWorkqueueConfigScope DevWorkqueueConfigScopeGreenCtxBalanced = hipDevWorkqueueConfigScopeGreenCtxBalanced;
+  cudaDevWorkqueueConfigScope DevWorkqueueConfigScope;
+  cudaDevWorkqueueConfigScope DevWorkqueueConfigScopeDeviceCtx = cudaDevWorkqueueConfigScopeDeviceCtx;
+  cudaDevWorkqueueConfigScope DevWorkqueueConfigScopeGreenCtxBalanced = cudaDevWorkqueueConfigScopeGreenCtxBalanced;
 #endif
 
   return 0;
