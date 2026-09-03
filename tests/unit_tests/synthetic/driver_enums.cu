@@ -1257,6 +1257,15 @@ int main() {
   CUdriverProcAddressQueryResult GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT = CU_GET_PROC_ADDRESS_VERSION_NOT_SUFFICIENT;
 #endif
 
+#if CUDA_VERSION >= 12020
+  // CHECK: hipMemLocationType MEM_LOCATION_TYPE_HOST = hipMemLocationTypeHost;
+  // CHECK-NEXT: hipMemLocationType MEM_LOCATION_TYPE_HOST_NUMA = hipMemLocationTypeHostNuma;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_HOST_NUMA_ID = hipDeviceAttributeHostNumaId;
+  CUmemLocationType MEM_LOCATION_TYPE_HOST = CU_MEM_LOCATION_TYPE_HOST;
+  CUmemLocationType MEM_LOCATION_TYPE_HOST_NUMA = CU_MEM_LOCATION_TYPE_HOST_NUMA;
+  CUdevice_attribute DEVICE_ATTRIBUTE_HOST_NUMA_ID = CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID;
+#endif
+
 #if CUDA_VERSION >= 12030
   // CHECK: hipGraphDependencyType graphDependencyType;
   // CHECK-NEXT: hipGraphDependencyType graphDependencyType_enum;

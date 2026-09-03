@@ -1014,7 +1014,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaDevAttrMpsEnabled
   {"CU_DEVICE_ATTRIBUTE_MPS_ENABLED",                                  {"hipDeviceAttributeMpsEnables",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 133
   // cudaDevAttrHostNumaId
-  {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID",                                 {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 134
+  {"CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID",                                 {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 134
   // cudaDevAttrD3D12CigSupported
   {"CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED",                          {"hipDeviceAttributeD3D12CigSupported",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 135
   //
@@ -2233,9 +2233,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP {
   // cudaMemLocationTypeDevice
   {"CU_MEM_LOCATION_TYPE_DEVICE",                                      {"hipMemLocationTypeDevice",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x1
   // cudaMemLocationTypeHost
-  {"CU_MEM_LOCATION_TYPE_HOST",                                        {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x2
+  {"CU_MEM_LOCATION_TYPE_HOST",                                        {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x2
   // cudaMemLocationTypeHostNuma
-  {"CU_MEM_LOCATION_TYPE_HOST_NUMA",                                   {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x3
+  {"CU_MEM_LOCATION_TYPE_HOST_NUMA",                                   {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}}, // 0x3
   // cudaMemLocationTypeHostNumaCurrent
   {"CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT",                           {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 0x4
   // no analogue
@@ -4746,6 +4746,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP {
   {"hipMemRangeHandleTypeMax",                                         {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemRangeFlags",                                                 {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipMemRangeFlagDmaBufMappingTypePcie",                             {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeDmaBufSupported",                                {HIP_7120, HIP_0,    HIP_0   }},
   {"hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported",               {HIP_7130, HIP_0,    HIP_0   }},
   {"hipStreamWriteValueDefault",                                       {HIP_7130, HIP_0,    HIP_0   }},

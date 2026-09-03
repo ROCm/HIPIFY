@@ -683,7 +683,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_DEVICE_ATTRIBUTE_MPS_ENABLED
   {"cudaDevAttrMpsEnabled",                                            {"hipDeviceAttributeMpsEnables",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 133
   // CU_DEVICE_ATTRIBUTE_HOST_NUMA_ID
-  {"cudaDevAttrHostNumaId",                                            {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 134
+  {"cudaDevAttrHostNumaId",                                            {"hipDeviceAttributeHostNumaId",                             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 134
   // CU_DEVICE_ATTRIBUTE_D3D12_CIG_SUPPORTED
   {"cudaDevAttrD3D12CigSupported",                                     {"hipDeviceAttributeD3D12CigSupported",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 135
   // CU_DEVICE_ATTRIBUTE_VULKAN_CIG_SUPPORTED
@@ -1816,9 +1816,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP {
   // CU_MEM_LOCATION_TYPE_DEVICE
   {"cudaMemLocationTypeDevice",                                        {"hipMemLocationTypeDevice",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 1
   // CU_MEM_LOCATION_TYPE_HOST
-  {"cudaMemLocationTypeHost",                                          {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 2
+  {"cudaMemLocationTypeHost",                                          {"hipMemLocationTypeHost",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 2
   // CU_MEM_LOCATION_TYPE_HOST_NUMA
-  {"cudaMemLocationTypeHostNuma",                                      {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 3
+  {"cudaMemLocationTypeHostNuma",                                      {"hipMemLocationTypeHostNuma",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}}, // 3
   // CU_MEM_LOCATION_TYPE_HOST_NUMA_CURRENT
   {"cudaMemLocationTypeHostNumaCurrent",                               {"hipMemLocationTypeHostNumaCurrent",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}}, // 4
 
@@ -3552,5 +3552,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP {
   {"hipLaunchAttribute",                                               {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLaunchConfig_st",                                               {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
   {"hipLaunchConfig_t",                                                {HIP_7000, HIP_0,    HIP_0,  HIP_LATEST}},
+  {"hipMemLocationTypeHost",                                           {HIP_7010, HIP_0,    HIP_0   }},
+  {"hipMemLocationTypeHostNuma",                                       {HIP_7010, HIP_0,    HIP_0   }},
+  {"hipDeviceAttributeHostNumaId",                                     {HIP_7020, HIP_0,    HIP_0   }},
   {"hipErrorInvalidClusterSize",                                       {HIP_7130, HIP_0,    HIP_0   }},
 };
