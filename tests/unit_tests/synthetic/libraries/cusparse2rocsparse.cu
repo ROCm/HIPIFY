@@ -2575,5 +2575,15 @@ int main() {
   cusparseFormat_t FORMAT_SLICED_ELLPACK = CUSPARSE_FORMAT_SLICED_ELLPACK;
 #endif
 
+#if CUDA_VERSION >= 12050 && CUSPARSE_VERSION >= 12501
+  // CHECK: rocsparse_spmm_alg SPMM_BSR_ALG1 = rocsparse_spmm_alg_bsr;
+  cusparseSpMMAlg_t SPMM_BSR_ALG1 = CUSPARSE_SPMM_BSR_ALG1;
+#endif
+
+#if CUDA_VERSION >= 13000 && CUSPARSE_VERSION >= 12603
+  // CHECK: rocsparse_spmv_alg SPMV_BSR_ALG1 = rocsparse_spmv_alg_bsr;
+  cusparseSpMVAlg_t SPMV_BSR_ALG1 = CUSPARSE_SPMV_BSR_ALG1;
+#endif
+
   return 0;
 }

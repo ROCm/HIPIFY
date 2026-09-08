@@ -3538,6 +3538,9 @@ int main() {
   // CHECK: hipsparseSpMVAlg_t SPARSE_SPMV_SELL_ALG1 = HIPSPARSE_SPMV_SELL_ALG1;
   cusparseSpMVAlg_t SPARSE_SPMV_SELL_ALG1 = CUSPARSE_SPMV_SELL_ALG1;
 
+  // CHECK: hipsparseFormat_t FORMAT_BSR = HIPSPARSE_FORMAT_BSR;
+  cusparseFormat_t FORMAT_BSR = CUSPARSE_FORMAT_BSR;
+
   // CUDA: cusparseStatus_t CUSPARSEAPI cusparseCreateSlicedEll(cusparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, int64_t sellValuesSize, int64_t sliceSize, void* sellSliceOffsets, void* sellColInd, void* sellValues, cusparseIndexType_t sellSliceOffsetsType, cusparseIndexType_t sellColIndType, cusparseIndexBase_t idxBase, cudaDataType valueType);
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseCreateSlicedEll(hipsparseSpMatDescr_t* spMatDescr, int64_t rows, int64_t cols, int64_t nnz, int64_t sellValuesSize, int64_t sliceSize, void* sellSliceOffsets, void* sellColInd, void* sellValues, hipsparseIndexType_t sellSliceOffsetsType, hipsparseIndexType_t sellColIndType, hipsparseIndexBase_t idxBase, hipDataType valueType);
   // CHECK: status_t = hipsparseCreateSlicedEll(&spMatDescr_t, rows, cols, nnz, sellValuesSize, sliceSize, sellSliceOffset, sellColInd, sellValues, sellSliceOffsetsType, sellColIndType, indexBase_t, dataType);
@@ -3554,6 +3557,16 @@ int main() {
   // HIP: HIPSPARSE_EXPORT hipsparseStatus_t hipsparseSpMV_preprocess(hipsparseHandle_t handle, hipsparseOperation_t opA, const void* alpha, hipsparseConstSpMatDescr_t matA, hipsparseConstDnVecDescr_t vecX, const void* beta, const hipsparseDnVecDescr_t vecY, hipDataType computeType, hipsparseSpMVAlg_t alg, void* externalBuffer);
   // CHECK: status_t = hipsparseSpMV_preprocess(handle_t, opA, alpha, constSpMatDescrA, constDnVecDescrX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
   status_t = cusparseSpMV_preprocess(handle_t, opA, alpha, constSpMatDescrA, constDnVecDescrX, beta, vecY, dataType, spMVAlg_t, tempBuffer);
+#endif
+
+#if CUSPARSE_VERSION >= 12501
+  // CHECK: hipsparseSpMMAlg_t SPMM_BSR_ALG1 = HIPSPARSE_SPMM_BSR_ALG1;
+  cusparseSpMMAlg_t SPMM_BSR_ALG1 = CUSPARSE_SPMM_BSR_ALG1;
+#endif
+
+#if CUSPARSE_VERSION >= 12603
+  // CHECK: hipsparseSpMVAlg_t SPMV_BSR_ALG1 = HIPSPARSE_SPMV_BSR_ALG1;
+  cusparseSpMVAlg_t SPMV_BSR_ALG1 = CUSPARSE_SPMV_BSR_ALG1;
 #endif
   return 0;
 }
