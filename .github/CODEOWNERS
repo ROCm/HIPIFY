@@ -1,7 +1,7 @@
 * @searlmc1 @emankov @kzhuravl @ranapratap55
 
 # Documentation files
-docs/ @ROCm/rocm-documentation @searlmc1 @emankov
-*.md @ROCm/rocm-documentation @searlmc1 @emankov
-*.rst @ROCm/rocm-documentation @searlmc1 @emankov
-.readthedocs.yaml @ROCm/rocm-documentation @searlmc1 @emankov
+docs/ @ROCm/rocm-documentation @searlmc1 @emankov @kzhuravl @ranapratap55
+*.md @ROCm/rocm-documentation @searlmc1 @emankov @kzhuravl @ranapratap55
+*.rst @ROCm/rocm-documentation @searlmc1 @emankov @kzhuravl @ranapratap55
+.readthedocs.yaml @ROCm/rocm-documentation @searlmc1 @emankov @kzhuravl @ranapratap55
