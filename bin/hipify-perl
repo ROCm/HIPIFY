@@ -3032,6 +3032,7 @@ my %hash_SupportedDeviceDataTypes = (
     '__nv_fp6x4_storage_t' => 1,
     '__nv_fp8_e4m3' => 1,
     '__nv_fp8_e5m2' => 1,
+    '__nv_fp8_e8m0' => 1,
     '__nv_fp8_interpretation_t' => 1,
     '__nv_fp8_storage_t' => 1,
     '__nv_fp8x2_e4m3' => 1,
@@ -3098,7 +3099,6 @@ my %hash_SupportedDeviceDataTypes = (
 );
 
 my %hash_UnsupportedDeviceDataTypes = (
-    '__nv_fp8_e8m0' => 1,
     '__nv_fp8x2_e8m0' => 1,
     '__nv_fp8x4_e8m0' => 1,
     'double4_16a' => 1,
@@ -12336,6 +12336,7 @@ my %map_core = (
     '__nv_fp6x4_storage_t' => ['__hip_fp6x4_storage_t', 'device_type'],
     '__nv_fp8_e4m3' => ['__hip_fp8_e4m3_fnuz', 'device_type'],
     '__nv_fp8_e5m2' => ['__hip_fp8_e5m2_fnuz', 'device_type'],
+    '__nv_fp8_e8m0' => ['__hip_fp8_e8m0', 'device_type'],
     '__nv_fp8_interpretation_t' => ['__hip_fp8_interpretation_t', 'device_type'],
     '__nv_fp8_storage_t' => ['__hip_fp8_storage_t', 'device_type'],
     '__nv_fp8x2_e4m3' => ['__hip_fp8x2_e4m3_fnuz', 'device_type'],

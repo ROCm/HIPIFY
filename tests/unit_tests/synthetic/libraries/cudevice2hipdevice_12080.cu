@@ -54,6 +54,9 @@ int main() {
   __nv_fp4x2_e2m1 fp4x2_e2m1;
   __nv_fp4x4_e2m1 fp4x4_e2m1;
 
+  // CHECK: __hip_fp8_e8m0 fp8_e8m0;
+  __nv_fp8_e8m0 fp8_e8m0;
+
   // CUDA: __CUDA_HOSTDEVICE_FP4_DECL__ __nv_fp4_storage_t __nv_cvt_double_to_fp4(const double x, const __nv_fp4_interpretation_t fp4_interpretation, const enum cudaRoundMode rounding);
   // HIP: __FP4_HOST_DEVICE_STATIC__ __hip_fp4_storage_t __hip_cvt_double_to_fp4(const double x, const __hip_fp4_interpretation_t, const enum hipRoundMode);
   // CHECK: fp4_storage_t = __hip_cvt_double_to_fp4(dx, fp4_interpretation_t, RoundMode);
