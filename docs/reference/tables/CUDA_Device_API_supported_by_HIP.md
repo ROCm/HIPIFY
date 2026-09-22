@@ -1002,7 +1002,7 @@
 |`__nv_fp6x4_storage_t`|12.8| | | |`__hip_fp6x4_storage_t`|7.0.0| | | | | |
 |`__nv_fp8_e4m3`|11.8| | | |`__hip_fp8_e4m3_fnuz`|6.2.0| | | | | |
 |`__nv_fp8_e5m2`|11.8| | | |`__hip_fp8_e5m2_fnuz`|6.2.0| | | | | |
-|`__nv_fp8_e8m0`|12.8| | | | | | | | | | |
+|`__nv_fp8_e8m0`|12.8| | | |`__hip_fp8_e8m0`|7.14.0| | | | | |
 |`__nv_fp8_interpretation_t`|11.8| | | |`__hip_fp8_interpretation_t`|6.2.0| | | | | |
 |`__nv_fp8_storage_t`|11.8| | | |`__hip_fp8_storage_t`|6.2.0| | | | | |
 |`__nv_fp8x2_e4m3`|11.8| | | |`__hip_fp8x2_e4m3_fnuz`|6.2.0| | | | | |
