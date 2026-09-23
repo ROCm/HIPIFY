@@ -54,7 +54,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP = [] {
   m["__NV_E4M3"]                           = {"__HIP_E4M3_FNUZ",                       "",                                        CONV_NUMERIC_LITERAL, API_RUNTIME, 2};
   m["__NV_E5M2"]                           = {"__HIP_E5M2_FNUZ",                       "",                                        CONV_NUMERIC_LITERAL, API_RUNTIME, 2};
   m["__nv_fp8x4_e5m2"]                     = {"__hip_fp8x4_e5m2_fnuz",                 "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
-  m["__nv_fp8_e8m0"]                       = {"__hip_fp8_e8m0",                        "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED};
+  m["__nv_fp8_e8m0"]                       = {"__hip_fp8_e8m0",                        "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
   m["__nv_fp8x2_e8m0"]                     = {"__hip_fp8x2_e8m0",                      "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED};
   m["__nv_fp8x4_e8m0"]                     = {"__hip_fp8x4_e8m0",                      "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED};
   // float6 Precision Device types
@@ -336,6 +336,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DEVICE_TYPE_NAME_VER_MAP = [
   m["__hip_fp6_interpretation_t"]          = {HIP_7000, HIP_0,    HIP_0   };
   m["__HIP_E2M3"]                          = {HIP_7000, HIP_0,    HIP_0   };
   m["__HIP_E3M2"]                          = {HIP_7000, HIP_0,    HIP_0   };
+  m["__hip_fp8_e8m0"]                      = {HIP_7140, HIP_0,    HIP_0   };
 
   m["rocblas_half"]                        = {HIP_1050, HIP_0,    HIP_0   };
   m["rocblas_bfloat16"]                    = {HIP_3050, HIP_0,    HIP_0   };
