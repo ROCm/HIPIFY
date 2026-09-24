@@ -2,7 +2,9 @@
 
 // CHECK: #include <hip/hip_runtime.h>
 // CHECK-NOT: #include <cuda_runtime.h>
-// CHECK: #include "common.h"
+// CHECK: #include "transitive_parent.h"
 #include <cuda_runtime.h>
-#include "common.h"
-int main(){}
+#include <algorithm>
+#include "transitive_parent.h"
+
+int main() { return 0; }
