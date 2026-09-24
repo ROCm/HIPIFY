@@ -2591,9 +2591,9 @@ void HipifyAction::InclusionDirective(clang::SourceLocation hash_loc,
   // Keep the same include type that the user gave.
   if (!exclude) {
     clang::SmallString<128> includeBuffer;
-    llvm::StringRef name = Statistics::isToRoc(found->second) ? (found->second.rocName.empty() ? found->second.hipName : found->second.rocName) : found->second.hipName;
-    if (is_angled) newInclude = llvm::Twine("<" + name+ ">").toStringRef(includeBuffer);
-    else           newInclude = llvm::Twine("\"" + name + "\"").toStringRef(includeBuffer);
+    StringRef name = Statistics::isToRoc(found->second) ? (found->second.rocName.empty() ? found->second.hipName : found->second.rocName) : found->second.hipName;
+    if (is_angled) newInclude = Twine("<" + name+ ">").toStringRef(includeBuffer);
+    else           newInclude = Twine("\"" + name + "\"").toStringRef(includeBuffer);
   } else {
     // hashLoc is location of the '#', thus replacing the whole include directive by empty newInclude starting with '#'.
     sl = hash_loc;
@@ -2629,7 +2629,7 @@ bool HipifyAction::cudaLaunchKernel(const mat::MatchFinder::MatchResult &Result)
   if (!config) return false;
   if (CudaKernelExecutionSyntax && !HipKernelExecutionSyntax) return false;
   clang::SmallString<40> XStr;
-  llvm::raw_svector_ostream OS(XStr);
+  raw_svector_ostream OS(XStr);
   clang::LangOptions DefaultLangOptions;
   auto &SM = *Result.SourceManager;
   clang::SourceRange sr = calleeExpr->getSourceRange();
@@ -2826,7 +2826,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
         size_t length = 0;
         unsigned int argNum = c.first;
         clang::SmallString<40> XStr;
-        llvm::raw_svector_ostream OS(XStr);
+        raw_svector_ostream OS(XStr);
         clang::SourceRange sr, replacementRange;
         clang::SourceLocation s, e;
         if (argNum < call->getNumArgs()) {
@@ -2863,7 +2863,7 @@ bool HipifyAction::cudaHostFuncCall(const mat::MatchFinder::MatchResult &Result)
           {
             std::string sArg;
             clang::SmallString<40> dst_XStr;
-            llvm::raw_svector_ostream dst_OS(dst_XStr);
+            raw_svector_ostream dst_OS(dst_XStr);
             if (c.second.numberToMoveOrCopy > 1) {
               if ((argNum + c.second.numberToMoveOrCopy - 1) >= call->getNumArgs())
                 continue;
@@ -2998,7 +2998,7 @@ bool HipifyAction::half2Member(const mat::MatchFinder::MatchResult &Result) {
     const clang::SourceRange sr = expr->getSourceRange();
     std::string exprName = readSourceText(*Result.SourceManager, sr).str();
     clang::SmallString<40> XStr;
-    llvm::raw_svector_ostream OS(XStr);
+    raw_svector_ostream OS(XStr);
     OS << "reinterpret_cast<half&>(" << exprName << ")";
     clang::SourceRange replacementRange = getWriteRange(*Result.SourceManager, sr);
     ct::Replacement Rep(*Result.SourceManager, replacementRange.getBegin(), exprName.size(), OS.str());
@@ -3434,8 +3434,8 @@ void HipifyAction::ExecuteAction() {
   PP.addPPCallbacks(std::unique_ptr<PPCallbackProxy>(new PPCallbackProxy(*this)));
 #if LLVM_VERSION_MAJOR > 3
   Statistics::cudaVersionUsedByClang = Statistics::convertCudaToolkitVersion(clang::ToCudaVersion(PP.getTargetInfo().getSDKVersion()));
-  llvm::errs() << "\n" << sHipify << sInformation << "Actual CUDA SDK version is used by clang as   : " << Statistics::getCudaVersion((cudaVersions)Statistics::getCudaVersion());
-  llvm::errs() << "\n" << sHipify << sInformation << "Actual CUDA SDK version is treated by clang as: " << Statistics::getCudaVersion(Statistics::getCudaVersionUsedByClang()) << "\n\n";
+  errs() << "\n" << sHipify << sInformation << "Actual CUDA SDK version is used by clang as   : " << Statistics::getCudaVersion((cudaVersions)Statistics::getCudaVersion());
+  errs() << "\n" << sHipify << sInformation << "Actual CUDA SDK version is treated by clang as: " << Statistics::getCudaVersion(Statistics::getCudaVersionUsedByClang()) << "\n\n";
 #endif
   // Now we're done futzing with the lexer, have the subclass proceeed with Sema and AST matching.
   clang::ASTFrontendAction::ExecuteAction();
