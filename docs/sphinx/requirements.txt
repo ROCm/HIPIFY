@@ -161,7 +161,7 @@ pygments==2.21.0
     #   ipython
     #   pydata-sphinx-theme
     #   sphinx
-pyjwt[crypto]==2.13.0
+pyjwt[crypto]==2.15.0
     # via pygithub
 pynacl==1.6.2
     # via pygithub
