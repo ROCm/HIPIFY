@@ -31,7 +31,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
   // Blas management functions
   m["cublasInit"]                                                   = {"hipblasInit",                                               "rocblas_initialize",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, HIP_UNSUPPORTED};
   m["cublasShutdown"]                                               = {"hipblasShutdown",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
-  m["cublasGetVersion"]                                             = {"hipblasGetVersion",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetVersion"]                                             = {"hipblasGetVersion",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, HIP_SUPPORTED_V2_ONLY | ROC_UNSUPPORTED};
   m["cublasGetError"]                                               = {"hipblasGetError",                                           "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
   m["cublasAlloc"]                                                  = {"hipblasAlloc",                                              "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
   m["cublasFree"]                                                   = {"hipblasFree",                                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
@@ -94,8 +94,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
   // Blas2 (v2) Routines
   m["cublasCreate_v2"]                                              = {"hipblasCreate",                                             "rocblas_create_handle",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
   m["cublasDestroy_v2"]                                             = {"hipblasDestroy",                                            "rocblas_destroy_handle",                             CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
-  m["cublasGetVersion_v2"]                                          = {"hipblasGetVersion",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
-  m["cublasGetProperty"]                                            = {"hipblasGetProperty",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, UNSUPPORTED};
+  m["cublasGetVersion_v2"]                                          = {"hipblasGetVersion",                                         "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, ROC_UNSUPPORTED};
+  // NOTE: hipblasGetProperty takes hipblasLibraryProperty_t, not hipLibraryPropertyType, which libraryPropertyType is mapped to
+  m["cublasGetProperty"]                                            = {"hipblasGetProperty",                                        "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER, ROC_UNSUPPORTED};
   m["cublasSetStream_v2"]                                           = {"hipblasSetStream",                                          "rocblas_set_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
   m["cublasGetStream_v2"]                                           = {"hipblasGetStream",                                          "rocblas_get_stream",                                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
   m["cublasSetPointerMode_v2"]                                      = {"hipblasSetPointerMode",                                     "rocblas_set_pointer_mode",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_HELPER};
@@ -2589,6 +2590,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
   m["hipblasSetWorkspace"]                                          = {HIP_7000, HIP_0,    HIP_0   };
   m["hipblasSyrkEx"]                                                = {HIP_7100, HIP_0,    HIP_0   };
   m["hipblasHerkEx"]                                                = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipblasGetVersion"]                                            = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipblasGetProperty"]                                           = {HIP_7140, HIP_0,    HIP_0   };
 
   return m;
 }();

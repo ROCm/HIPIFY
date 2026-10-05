@@ -1152,7 +1152,7 @@
 |`cublasGetMatrix_64`|12.0| | | | | | | | | | |
 |`cublasGetPointerMode`| | | | |`hipblasGetPointerMode`|1.8.2| | | | | |
 |`cublasGetPointerMode_v2`| | | | |`hipblasGetPointerMode`|1.8.2| | | | | |
-|`cublasGetProperty`| | | | | | | | | | | |
+|`cublasGetProperty`| | | | |`hipblasGetProperty`|7.14.0| | | | | |
 |`cublasGetSmCountTarget`|11.3| | | | | | | | | | |
 |`cublasGetStatusName`|11.4| | | | | | | | | | |
 |`cublasGetStatusString`|11.4| | | | | | | | | | |
@@ -1162,8 +1162,8 @@
 |`cublasGetVectorAsync`| | | | |`hipblasGetVectorAsync`|3.7.0| | | | | |
 |`cublasGetVectorAsync_64`|12.0| | | | | | | | | | |
 |`cublasGetVector_64`|12.0| | | | | | | | | | |
-|`cublasGetVersion`| | | | | | | | | | | |
-|`cublasGetVersion_v2`| | | | | | | | | | | |
+|`cublasGetVersion`| | | | |`hipblasGetVersion`|7.14.0| | | | | |
+|`cublasGetVersion_v2`| | | | |`hipblasGetVersion`|7.14.0| | | | | |
 |`cublasInit`| | | | | | | | | | | |
 |`cublasLogCallback`|9.2| | | | | | | | | | |
 |`cublasLoggerConfigure`|9.2| | | | | | | | | | |
