@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 #include <fstream>
+#include <vector>
 #include "CUDA2HIP.h"
 #include "CUDA2HIP_Scripting.h"
 #include "LLVMCompat.h"
@@ -241,7 +242,8 @@ bool hipifySingleSource(const std::string &srcPath,
                                ct::CommonOptionsParser *OptionsParserPtr,
                                const char *hipify_exe_path,
                                const std::string &mainContextPath,
-                               bool preserveTemp) {
+                               bool preserveTemp,
+                               const std::vector<std::string> &additionalIncludes) {
   std::error_code EC;
   SmallString<128> tmpFile;
   StringRef srcFileName = sys::path::filename(srcPath);
@@ -274,6 +276,27 @@ bool hipifySingleSource(const std::string &srcPath,
                  << "LLVM/resource config failed for: " << srcPath << "\n";
     if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
     return false;
+  }
+
+  // The copy is preprocessed from a temporary directory, so includes quoted
+  // relative to the original one need an explicit search path.
+  StringRef srcDir = sys::path::parent_path(srcPath);
+  if (!srcDir.empty()) {
+    std::string sSrcDir = "-I" + srcDir.str();
+    Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(
+        sSrcDir.c_str(), ct::ArgumentInsertPosition::BEGIN));
+  }
+
+  // Appended at the end to follow the implicit CUDA headers, inserted at the
+  // beginning: a header may use CUDA declarations without including any.
+  if (!additionalIncludes.empty()) {
+    ct::CommandLineArguments includeArgs;
+    for (const std::string &include : additionalIncludes) {
+      includeArgs.push_back("-include");
+      includeArgs.push_back(include);
+    }
+    Tool.appendArgumentsAdjuster(ct::getInsertArgumentAdjuster(
+        includeArgs, ct::ArgumentInsertPosition::END));
   }
 
   // Hipify _all_ the things!
@@ -516,26 +539,25 @@ int main(int argc, const char **argv) {
     }
     // Initialise the statistics counters for this file.
     Statistics::setActive(src);
-    // Checks the local headers if --local-headers/--local-header-recursive specified.
     if (OptLocalHeaders || OptLocalHeadersRecursive) {
-      if (!hipifyLocalHeaders(sSourceAbsPath,
-                              compilationDatabase.get(),
-                              &OptionsParser,
-                              argv[0],
+      if (!hipifyLocalHeaders(sSourceAbsPath, compilationDatabase.get(),
+                              &OptionsParser, argv[0],
                               OptLocalHeadersRecursive)) {
+        llvm::errs() << "\n" << sHipify << sError
+                     << "Local header hipification failed for: "
+                     << sys::path::filename(sSourceAbsPath) << "\n";
         Statistics::current().hasErrors = true;
-        LLVM_DEBUG(llvm::dbgs() << "Local header hipification failed for: " << sSourceAbsPath << "\n");
         Result = 1;
       }
     }
-   
+
     std::string outputPath = NoOutput ? "" : dst;
     if (!hipifySingleSource(src, outputPath,
                             compilationDatabase.get(),
                             &OptionsParser,
                             argv[0],
                             sSourceAbsPath,
-                            false)) {
+                            false, {})) {
       Statistics::current().hasErrors = true;
       Result = 1;
       LLVM_DEBUG(llvm::dbgs() << "Hipification failed for: " << src << "\n");
