@@ -102,6 +102,14 @@ int main() {
   // CHECK: blasStatus = hipblasDestroy(blasHandle);
   blasStatus = cublasDestroy_v2(blasHandle);
 
+  int version = 0;
+
+  // NOTE: cublasStatus CUBLASWINAPI cublasGetVersion(int* version); is not supported by HIP
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetVersion_v2(cublasHandle_t handle, int* version);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetVersion(hipblasHandle_t handle, int* version);
+  // CHECK: blasStatus = hipblasGetVersion(blasHandle, &version);
+  blasStatus = cublasGetVersion_v2(blasHandle, &version);
+
   // CHECK: hipStream_t stream;
   cudaStream_t stream;
 
@@ -1631,6 +1639,16 @@ int main() {
   // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasDotcEx(hipblasHandle_t handle, int n, const void* x, hipDataType xType, int incx, const void* y, hipDataType yType, int incy, void* result, hipDataType resultType, hipDataType executionType);
   // CHECK: blasStatus = hipblasDotcEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
   blasStatus = cublasDotcEx(blasHandle, n, xptr, Xtype, incx, yptr, Ytype, incy, image, DataType, Executiontype);
+
+  int value = 0;
+
+  // CHECK: hipLibraryPropertyType libPropertyType;
+  libraryPropertyType libPropertyType;
+
+  // CUDA: CUBLASAPI cublasStatus_t CUBLASWINAPI cublasGetProperty(libraryPropertyType type, int* value);
+  // HIP: HIPBLAS_EXPORT hipblasStatus_t hipblasGetProperty(hipblasLibraryProperty_t type, int* value);
+  // CHECK: blasStatus = hipblasGetProperty(libPropertyType, &value);
+  blasStatus = cublasGetProperty(libPropertyType, &value);
 #endif
 
 #if CUDA_VERSION >= 9000
