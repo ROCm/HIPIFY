@@ -2241,8 +2241,8 @@ int main() {
 
   // CUDA: CUresult CUDAAPI cuGreenCtxGetId(CUgreenCtx greenCtx, unsigned long long *greenCtxId);
   // HIP: hipError_t hipExecutionCtxGetId(hipExecutionCtx_t ctx, unsigned long long* ctxId);
-  // CHECK: result = hipExecutionCtxGetId(greenCtx, &ull);
-  result = cuGreenCtxGetId(greenCtx, &ull);
+  // CHECK: result = hipExecutionCtxGetId(greenCtx, &ull_2);
+  result = cuGreenCtxGetId(greenCtx, &ull_2);
 #endif
 
 #if CUDA_VERSION >= 13010

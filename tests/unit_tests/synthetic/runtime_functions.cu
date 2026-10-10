@@ -1833,8 +1833,8 @@ int main() {
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxGetId(cudaExecutionContext_t ctx, unsigned long long *ctxId);
   // HIP: hipError_t hipExecutionCtxGetId(hipExecutionCtx_t ctx, unsigned long long* ctxId);
-  // CHECK: result = hipExecutionCtxGetId(ExecutionContext, &ull);
-  result = cudaExecutionCtxGetId(ExecutionContext, &ull);
+  // CHECK: result = hipExecutionCtxGetId(ExecutionContext, &ull_2);
+  result = cudaExecutionCtxGetId(ExecutionContext, &ull_2);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaExecutionCtxStreamCreate(cudaStream_t *stream, cudaExecutionContext_t greenctx, unsigned int flags, int priority);
   // HIP: hipError_t hipExecutionCtxStreamCreate(hipStream_t* stream, hipExecutionCtx_t greenctx, unsigned int flags, int priority);
