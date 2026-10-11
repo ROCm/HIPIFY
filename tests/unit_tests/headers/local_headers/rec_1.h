@@ -1,4 +1,4 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args --local-headers-recursive %clang_args
+// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
 
 #ifndef REC_H
 #define REC_H
