@@ -903,6 +903,11 @@ int main() {
   cudaKernelNodeAttrID KernelNodeAttributePriority = cudaKernelNodeAttributePriority;
 #endif
 
+#if CUDA_VERSION >= 11080
+  // CHECK: hipError_t ErrorInvalidClusterSize = hipErrorInvalidClusterSize;
+  cudaError_t ErrorInvalidClusterSize = cudaErrorInvalidClusterSize;
+#endif
+
 #if CUDA_VERSION >= 12000
   // CHECK: hipGraphInstantiateFlags GraphInstantiateFlagUpload = hipGraphInstantiateFlagUpload;
   // CHECK-NEXT: hipGraphInstantiateFlags GraphInstantiateFlagDeviceLaunch = hipGraphInstantiateFlagDeviceLaunch;

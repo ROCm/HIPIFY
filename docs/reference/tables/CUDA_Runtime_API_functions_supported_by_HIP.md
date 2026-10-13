@@ -1127,7 +1127,7 @@
 |`cudaErrorInsufficientDriver`| | | | |`hipErrorInsufficientDriver`|1.7.0| | | | |
 |`cudaErrorInvalidAddressSpace`| | | | | | | | | | |
 |`cudaErrorInvalidChannelDescriptor`| | | | |`hipErrorInvalidChannelDescriptor`|6.4.0| | | | |
-|`cudaErrorInvalidClusterSize`|11.8| | | | | | | | | |
+|`cudaErrorInvalidClusterSize`|11.8| | | |`hipErrorInvalidClusterSize`|7.13.0| | | | |
 |`cudaErrorInvalidConfiguration`| | | | |`hipErrorInvalidConfiguration`|1.6.0| | | | |
 |`cudaErrorInvalidDevice`| | | | |`hipErrorInvalidDevice`|1.6.0| | | | |
 |`cudaErrorInvalidDeviceFunction`| | | | |`hipErrorInvalidDeviceFunction`|1.6.0| | | | |
