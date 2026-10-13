@@ -57,15 +57,13 @@ clang::SourceLocation getEndLoc(const clang::TypeLoc &typeLoc);
 
 void PrintStackTraceOnErrorSignal();
 
-using namespace llvm;
-
 /**
   * Get the replacement map for a given filename in a RefactoringTool.
   *
   * Older LLVM versions don't actually support multiple filenames, so everything all gets
   * smushed together. It is the caller's responsibility to cope with this.
   */
-ct::Replacements &getReplacements(ct::RefactoringTool &Tool, StringRef file);
+ct::Replacements &getReplacements(ct::RefactoringTool &Tool, llvm::StringRef file);
 
 /**
   * Add a Replacement to a Replacements.
@@ -80,7 +78,7 @@ void EnterPreprocessorTokenStream(clang::Preprocessor &_pp,
                                   size_t len,
                                   bool DisableMacroExpansion);
 
-std::error_code real_path(const Twine &path, SmallVectorImpl<char> &output,
+std::error_code real_path(const llvm::Twine &path, llvm::SmallVectorImpl<char> &output,
                           bool expand_tilde = false);
 
 bool pragma_once_outside_header();
@@ -92,9 +90,9 @@ bool CheckCompatibility();
 clang::SourceLocation getEndOfExpansionRangeForLoc(const clang::SourceManager &SM, const clang::SourceLocation &loc);
 
 #if LLVM_VERSION_MAJOR >= 12
-  typedef MemoryBufferRef Memory_Buffer;
+  typedef llvm::MemoryBufferRef Memory_Buffer;
 #else
-  typedef const MemoryBuffer *Memory_Buffer;
+  typedef const llvm::MemoryBuffer *Memory_Buffer;
 #endif
 
 Memory_Buffer getMemoryBuffer(const clang::SourceManager &SM);
