@@ -475,7 +475,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuMemPoolImportPointer
   m["cudaMemPoolImportPointer"]                                = {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
   // cuMemGetDefaultMemPool
-  m["cudaMemGetDefaultMemPool"]                                = {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemGetDefaultMemPool"]                                = {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
   // cuMemGetMemPool
   m["cudaMemGetMemPool"]                                       = {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
   // cuMemSetMemPool
@@ -1652,6 +1652,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [
   m["hipDeviceGetExecutionCtx"]                                = {HIP_7140, HIP_0,    HIP_0   };
   m["hipMemDiscardBatchAsync"]                                 = {HIP_7140, HIP_0,    HIP_0   };
   m["hipMemDiscardAndPrefetchBatchAsync"]                      = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemGetDefaultMemPool"]                                 = {HIP_10000, HIP_0,   HIP_0   };
 
   return m;
 }();

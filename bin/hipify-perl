@@ -1712,34 +1712,34 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-    "cudaOccupancyMaxPotentialClusterSize" => "7.14.0",
-    "cudaMemPrefetchBatchAsync" => "7.14.0",
-    "cudaLaunchAttributeIgnore" => "7.14.0",
-    "cudaLaunchAttributeClusterSchedulingPolicyPreference" => "7.14.0",
-    "cudaLaunchAttributeClusterDimension" => "7.14.0",
-    "cudaFuncAttributeRequiredClusterWidth" => "7.14.0",
-    "cudaFuncAttributeRequiredClusterHeight" => "7.14.0",
-    "cudaFuncAttributeRequiredClusterDepth" => "7.14.0",
-    "cudaFuncAttributeNonPortableClusterSizeAllowed" => "7.14.0",
-    "cudaFuncAttributeClusterSchedulingPolicyPreference" => "7.14.0",
-    "cudaFuncAttributeClusterDimMustBeSet" => "7.14.0",
-    "cudaErrorInvalidClusterSize" => "7.14.0",
-    "cudaClusterSchedulingPolicySpread" => "7.14.0",
-    "cudaClusterSchedulingPolicyLoadBalancing" => "7.14.0",
-    "cudaClusterSchedulingPolicyDefault" => "7.14.0",
-    "cudaClusterSchedulingPolicy" => "7.14.0",
-    "cuMemPrefetchBatchAsync" => "7.14.0",
-    "CUclusterSchedulingPolicy_enum" => "7.14.0",
-    "CUclusterSchedulingPolicy" => "7.14.0",
-    "CU_STREAM_WRITE_VALUE_DEFAULT" => "7.14.0",
-    "CU_LAUNCH_ATTRIBUTE_IGNORE" => "7.14.0",
-    "CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE" => "7.14.0",
-    "CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION" => "7.14.0",
-    "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED" => "7.14.0",
-    "CU_CLUSTER_SCHEDULING_POLICY_SPREAD" => "7.14.0",
-    "CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING" => "7.14.0",
-    "CU_CLUSTER_SCHEDULING_POLICY_DEFAULT" => "7.14.0",
-    "CUDA_ERROR_INVALID_CLUSTER_SIZE" => "7.14.0"
+    "cudaOccupancyMaxPotentialClusterSize" => "10.0.0",
+    "cudaMemPrefetchBatchAsync" => "10.0.0",
+    "cudaLaunchAttributeIgnore" => "10.0.0",
+    "cudaLaunchAttributeClusterSchedulingPolicyPreference" => "10.0.0",
+    "cudaLaunchAttributeClusterDimension" => "10.0.0",
+    "cudaFuncAttributeRequiredClusterWidth" => "10.0.0",
+    "cudaFuncAttributeRequiredClusterHeight" => "10.0.0",
+    "cudaFuncAttributeRequiredClusterDepth" => "10.0.0",
+    "cudaFuncAttributeNonPortableClusterSizeAllowed" => "10.0.0",
+    "cudaFuncAttributeClusterSchedulingPolicyPreference" => "10.0.0",
+    "cudaFuncAttributeClusterDimMustBeSet" => "10.0.0",
+    "cudaErrorInvalidClusterSize" => "10.0.0",
+    "cudaClusterSchedulingPolicySpread" => "10.0.0",
+    "cudaClusterSchedulingPolicyLoadBalancing" => "10.0.0",
+    "cudaClusterSchedulingPolicyDefault" => "10.0.0",
+    "cudaClusterSchedulingPolicy" => "10.0.0",
+    "cuMemPrefetchBatchAsync" => "10.0.0",
+    "CUclusterSchedulingPolicy_enum" => "10.0.0",
+    "CUclusterSchedulingPolicy" => "10.0.0",
+    "CU_STREAM_WRITE_VALUE_DEFAULT" => "10.0.0",
+    "CU_LAUNCH_ATTRIBUTE_IGNORE" => "10.0.0",
+    "CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE" => "10.0.0",
+    "CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION" => "10.0.0",
+    "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED" => "10.0.0",
+    "CU_CLUSTER_SCHEDULING_POLICY_SPREAD" => "10.0.0",
+    "CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING" => "10.0.0",
+    "CU_CLUSTER_SCHEDULING_POLICY_DEFAULT" => "10.0.0",
+    "CUDA_ERROR_INVALID_CLUSTER_SIZE" => "10.0.0"
 );
 
 $print_stats = 1 if $examine;
@@ -5260,7 +5260,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cuLogsUnregisterCallback' => 1,
     'cuMemAdvise_v2' => 1,
     'cuMemBatchDecompressAsync' => 1,
-    'cuMemGetDefaultMemPool' => 1,
     'cuMemPrefetchAsync_v2' => 1,
     'cuMemcpy' => 1,
     'cuMemcpy3DPeer' => 1,
@@ -6019,7 +6018,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cudaLogsUnregisterCallback' => 1,
     'cudaMemAdvise_v2' => 1,
     'cudaMemAllocNodeParamsV2' => 1,
-    'cudaMemGetDefaultMemPool' => 1,
     'cudaMemLocationTypeInvisible' => 1,
     'cudaMemPoolCreateUsageHwDecompress' => 1,
     'cudaMemPrefetchAsync_v2' => 1,
@@ -12762,6 +12760,7 @@ my %map_core = (
     'cuMemGetAddressRange_v2' => ['hipMemGetAddressRange', 'memory'],
     'cuMemGetAllocationGranularity' => ['hipMemGetAllocationGranularity', 'virtual_memory'],
     'cuMemGetAllocationPropertiesFromHandle' => ['hipMemGetAllocationPropertiesFromHandle', 'virtual_memory'],
+    'cuMemGetDefaultMemPool' => ['hipMemGetDefaultMemPool', 'ordered_memory'],
     'cuMemGetHandleForAddressRange' => ['hipMemGetHandleForAddressRange', 'memory'],
     'cuMemGetInfo' => ['hipMemGetInfo', 'memory'],
     'cuMemGetInfo_v2' => ['hipMemGetInfo', 'memory'],
@@ -14461,6 +14460,7 @@ my %map_core = (
     'cudaMemFabricHandle_st' => ['hipMemFabricHandle_st', 'type'],
     'cudaMemFabricHandle_t' => ['hipMemFabricHandle_t', 'type'],
     'cudaMemFreeNodeParams' => ['hipMemFreeNodeParams', 'type'],
+    'cudaMemGetDefaultMemPool' => ['hipMemGetDefaultMemPool', 'memory'],
     'cudaMemGetInfo' => ['hipMemGetInfo', 'memory'],
     'cudaMemGetMemPool' => ['hipMemGetMemPool', 'memory'],
     'cudaMemHandleTypeFabric' => ['hipMemHandleTypeFabric', 'numeric_literal'],
@@ -18208,7 +18208,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 7.14.0\n";
+    print STDERR "HIP version 10.0.0\n";
 }
 
 my %mappings = %map_core;
