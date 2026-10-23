@@ -1206,6 +1206,12 @@ int main() {
   // CHECK: result = hipDeviceGetUuid(&uuid, device);
   result = cuDeviceGetUuid(&uuid, device);
 
+  char *luid = nullptr;
+  // CUDA: CUresult CUDAAPI cuDeviceGetLuid(char *luid, unsigned int *deviceNodeMask, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetLuid(char* luid, unsigned int* deviceNodeMask, hipDevice_t device);
+  // CHECK: result = hipDeviceGetLuid(luid, &flags, device);
+  result = cuDeviceGetLuid(luid, &flags, device);
+
   // CHECK: hipHostFn_t hostFn;
   CUhostFn hostFn;
 

@@ -2609,7 +2609,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_KERNEL_NODE_ATTRIBUTE_MEM_SYNC_DOMAIN
   m["cudaKernelNodeAttributePreferredSharedMemoryCarveout"]     = {"hipKernelNodeAttributePreferredSharedMemoryCarveout",      "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // cudaLaunchAttributePreferredSharedMemoryCarveout
   //
-  m["cudaInitDeviceFlagsAreValid"]                              = {"hipInitDeviceFlagsAreValid",                               "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 0x01
+  m["cudaInitDeviceFlagsAreValid"]                              = {"hipInitDeviceFlagsAreValid",                               "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}; // 0x01
   // CUstreamAttrID
   m["cudaStreamAttrID"]                                         = {"hipLaunchAttributeID",                                     "", CONV_DEFINE, API_RUNTIME, SEC::DATA_TYPES}; // cudaLaunchAttributeID
   // CU_STREAM_ATTRIBUTE_ACCESS_POLICY_WINDOW
@@ -4022,6 +4022,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_TYPE_NAME_VER_MAP = 
   m["hipDevWorkqueueConfigScopeDeviceCtx"]                      = {HIP_7140, HIP_0,    HIP_0   };
   m["hipDevWorkqueueConfigScopeGreenCtxBalanced"]               = {HIP_7140, HIP_0,    HIP_0   };
   m["HIP_RESOURCE_ABI_BYTES"]                                   = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipInitDeviceFlagsAreValid"]                               = {HIP_10010, HIP_0,   HIP_0   };
 
   return m;
 }();
