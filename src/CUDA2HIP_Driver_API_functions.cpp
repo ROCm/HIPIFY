@@ -53,7 +53,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGetDeviceCount
   m["cuDeviceGetCount"]                                                  = {"hipGetDeviceCount",                                           "", CONV_DEVICE, API_DRIVER, SEC::DEVICE};
   // no analogue
-  m["cuDeviceGetLuid"]                                                   = {"hipDeviceGetLuid",                                            "", CONV_DEVICE, API_DRIVER, SEC::DEVICE, HIP_UNSUPPORTED};
+  m["cuDeviceGetLuid"]                                                   = {"hipDeviceGetLuid",                                            "", CONV_DEVICE, API_DRIVER, SEC::DEVICE};
   // no analogue
   m["cuDeviceGetName"]                                                   = {"hipDeviceGetName",                                            "", CONV_DEVICE, API_DRIVER, SEC::DEVICE};
   // cudaDeviceGetNvSciSyncAttributes
@@ -1929,6 +1929,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP = []
   m["hipDrvMemDiscardBatchAsync"]                                        = {HIP_7140, HIP_0,    HIP_0   };
   m["hipDrvMemDiscardAndPrefetchBatchAsync"]                             = {HIP_7140, HIP_0,    HIP_0   };
   m["hipMemGetDefaultMemPool"]                                           = {HIP_10000, HIP_0,   HIP_0   };
+  m["hipDeviceGetLuid"]                                                  = {HIP_10010, HIP_0,   HIP_0   };
 
   return m;
 }();

@@ -1657,6 +1657,11 @@ int main() {
   // HIP: hipError_t hipStreamGetId(hipStream_t stream, unsigned long long* streamId);
   // CHECK: result = hipStreamGetId(stream, &ull_2);
   result = cudaStreamGetId(stream, &ull_2);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaInitDevice(int device, unsigned int deviceFlags, unsigned int flags);
+  // HIP: hipError_t hipInitDevice(int device, unsigned int deviceFlags, unsigned int flags);
+  // CHECK: result = hipInitDevice(deviceId, flags, hipInitDeviceFlagsAreValid);
+  result = cudaInitDevice(deviceId, flags, cudaInitDeviceFlagsAreValid);
 #endif
 
 #if CUDA_VERSION >= 12020
