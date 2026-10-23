@@ -428,12 +428,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
   // BATCH GEMM
   m["cublasSgemmBatched"]                                           = {"hipblasSgemmBatched",                                       "rocblas_sgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
   m["cublasSgemmBatched_64"]                                        = {"hipblasSgemmBatched_64",                                    "rocblas_sgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
-  m["cublasSgemmGroupedBatched"]                                    = {"hipblasSgemmGroupedBatched",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
-  m["cublasSgemmGroupedBatched_64"]                                 = {"hipblasSgemmGroupedBatched_64",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasSgemmGroupedBatched"]                                    = {"hipblasSgemmGroupedBatched",                                "rocblas_sgemm_grouped_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasSgemmGroupedBatched_64"]                                 = {"hipblasSgemmGroupedBatched_64",                             "rocblas_sgemm_grouped_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
   m["cublasDgemmBatched"]                                           = {"hipblasDgemmBatched",                                       "rocblas_dgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
   m["cublasDgemmBatched_64"]                                        = {"hipblasDgemmBatched_64",                                    "rocblas_dgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
-  m["cublasDgemmGroupedBatched"]                                    = {"hipblasDgemmGroupedBatched",                                "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
-  m["cublasDgemmGroupedBatched_64"]                                 = {"hipblasDgemmGroupedBatched_64",                             "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasDgemmGroupedBatched"]                                    = {"hipblasDgemmGroupedBatched",                                "rocblas_dgemm_grouped_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasDgemmGroupedBatched_64"]                                 = {"hipblasDgemmGroupedBatched_64",                             "rocblas_dgemm_grouped_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
   m["cublasHgemmBatched"]                                           = {"hipblasHgemmBatched",                                       "rocblas_hgemm_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
   m["cublasHgemmBatched_64"]                                        = {"hipblasHgemmBatched_64",                                    "rocblas_hgemm_batched_64",                           CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
   m["cublasSgemmStridedBatched"]                                    = {"hipblasSgemmStridedBatched",                                "rocblas_sgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
@@ -454,8 +454,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_BLAS_FUNCTION_MAP = [] {
   m["cublasZgemmStridedBatched_64"]                                 = {"hipblasZgemmStridedBatched_64",                             "rocblas_zgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
   m["cublasHgemmStridedBatched"]                                    = {"hipblasHgemmStridedBatched",                                "rocblas_hgemm_strided_batched",                      CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
   m["cublasHgemmStridedBatched_64"]                                 = {"hipblasHgemmStridedBatched_64",                             "rocblas_hgemm_strided_batched_64",                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
-  m["cublasGemmGroupedBatchedEx"]                                   = {"hipblasGemmGroupedBatchedEx",                               "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
-  m["cublasGemmGroupedBatchedEx_64"]                                = {"hipblasGemmGroupedBatchedEx_64",                            "",                                                   CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3, UNSUPPORTED};
+  m["cublasGemmGroupedBatchedEx"]                                   = {"hipblasGemmGroupedBatchedEx",                               "rocblas_gemm_grouped_batched_ex",                    CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
+  m["cublasGemmGroupedBatchedEx_64"]                                = {"hipblasGemmGroupedBatchedEx_64",                            "rocblas_gemm_grouped_batched_ex_64",                 CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
 
   // BATCH GEMV
   m["cublasSgemvBatched"]                                           = {"hipblasSgemvBatched",                                       "rocblas_sgemv_batched",                              CONV_LIB_FUNC, API_BLAS, SEC::BLAS_LEVEL_3};
@@ -2592,6 +2592,18 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_BLAS_FUNCTION_VER_MAP = [] {
   m["hipblasHerkEx"]                                                = {HIP_7100, HIP_0,    HIP_0   };
   m["hipblasGetVersion"]                                            = {HIP_7140, HIP_0,    HIP_0   };
   m["hipblasGetProperty"]                                           = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipblasSgemmGroupedBatched"]                                   = {HIP_10010, HIP_0,   HIP_0   };
+  m["hipblasSgemmGroupedBatched_64"]                                = {HIP_10010, HIP_0,   HIP_0   };
+  m["hipblasDgemmGroupedBatched"]                                   = {HIP_10010, HIP_0,   HIP_0   };
+  m["hipblasDgemmGroupedBatched_64"]                                = {HIP_10010, HIP_0,   HIP_0   };
+  m["hipblasGemmGroupedBatchedEx"]                                  = {HIP_10010, HIP_0,   HIP_0   };
+  m["hipblasGemmGroupedBatchedEx_64"]                               = {HIP_10010, HIP_0,   HIP_0   };
+  m["rocblas_sgemm_grouped_batched"]                                = {HIP_10010, HIP_0,   HIP_0   };
+  m["rocblas_sgemm_grouped_batched_64"]                             = {HIP_10010, HIP_0,   HIP_0   };
+  m["rocblas_dgemm_grouped_batched"]                                = {HIP_10010, HIP_0,   HIP_0   };
+  m["rocblas_dgemm_grouped_batched_64"]                             = {HIP_10010, HIP_0,   HIP_0   };
+  m["rocblas_gemm_grouped_batched_ex"]                              = {HIP_10010, HIP_0,   HIP_0   };
+  m["rocblas_gemm_grouped_batched_ex_64"]                           = {HIP_10010, HIP_0,   HIP_0   };
 
   return m;
 }();

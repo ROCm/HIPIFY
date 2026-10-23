@@ -1763,8 +1763,8 @@
 |`cublasDgemm`| | | | |`hipblasDgemm`|1.8.2| | | | | |
 |`cublasDgemmBatched`| | | | |`hipblasDgemmBatched`|1.8.2| | | | | |
 |`cublasDgemmBatched_64`|12.0| | | |`hipblasDgemmBatched_64`|6.3.0| | | | | |
-|`cublasDgemmGroupedBatched`|12.4| | | | | | | | | | |
-|`cublasDgemmGroupedBatched_64`|12.4| | | | | | | | | | |
+|`cublasDgemmGroupedBatched`|12.4| | | |`hipblasDgemmGroupedBatched`|10.1.0| | | | | |
+|`cublasDgemmGroupedBatched_64`|12.4| | | |`hipblasDgemmGroupedBatched_64`|10.1.0| | | | | |
 |`cublasDgemmStridedBatched`|8.0| | | |`hipblasDgemmStridedBatched`|1.8.2| | | | | |
 |`cublasDgemmStridedBatched_64`|12.0| | | |`hipblasDgemmStridedBatched_64`|6.3.0| | | | | |
 |`cublasDgemm_64`|12.0| | | |`hipblasDgemm_64`|6.3.0| | | | | |
@@ -1796,8 +1796,8 @@
 |`cublasDtrsm_64`|12.0| | | |`hipblasDtrsm_64`|6.3.0| | | | | |
 |`cublasDtrsm_v2`| | | | |`hipblasDtrsm`|1.8.2| | | | | |
 |`cublasDtrsm_v2_64`|12.0| | | |`hipblasDtrsm_64`|6.3.0| | | | | |
-|`cublasGemmGroupedBatchedEx`|12.5| | | | | | | | | | |
-|`cublasGemmGroupedBatchedEx_64`|12.5| | | | | | | | | | |
+|`cublasGemmGroupedBatchedEx`|12.5| | | |`hipblasGemmGroupedBatchedEx`|10.1.0| | | | | |
+|`cublasGemmGroupedBatchedEx_64`|12.5| | | |`hipblasGemmGroupedBatchedEx_64`|10.1.0| | | | | |
 |`cublasHSHgemvBatched`|11.6| | | | | | | | | | |
 |`cublasHSHgemvBatched_64`|12.0| | | | | | | | | | |
 |`cublasHSHgemvStridedBatched`|11.6| | | | | | | | | | |
@@ -1815,8 +1815,8 @@
 |`cublasSgemm`| | | | |`hipblasSgemm`|1.8.2| | | | | |
 |`cublasSgemmBatched`| | | | |`hipblasSgemmBatched`|1.8.2| | | | | |
 |`cublasSgemmBatched_64`|12.0| | | |`hipblasSgemmBatched_64`|6.3.0| | | | | |
-|`cublasSgemmGroupedBatched`|12.4| | | | | | | | | | |
-|`cublasSgemmGroupedBatched_64`|12.4| | | | | | | | | | |
+|`cublasSgemmGroupedBatched`|12.4| | | |`hipblasSgemmGroupedBatched`|10.1.0| | | | | |
+|`cublasSgemmGroupedBatched_64`|12.4| | | |`hipblasSgemmGroupedBatched_64`|10.1.0| | | | | |
 |`cublasSgemmStridedBatched`|8.0| | | |`hipblasSgemmStridedBatched`|1.8.2| | | | | |
 |`cublasSgemmStridedBatched_64`|12.0| | | |`hipblasSgemmStridedBatched_64`|6.3.0| | | | | |
 |`cublasSgemm_64`|12.0| | | |`hipblasSgemm_64`|6.3.0| | | | | |
