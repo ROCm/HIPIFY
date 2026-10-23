@@ -242,7 +242,7 @@
 |`cufftXtSetCallbackSharedSize`| | | | |`hipfftXtSetCallbackSharedSize`|4.3.0| | | | | |
 |`cufftXtSetDistribution`|11.8| | | | | | | | | | |
 |`cufftXtSetGPUs`| | | | |`hipfftXtSetGPUs`|6.0.0| | | | | |
-|`cufftXtSetWorkArea`| | | | | | | | | | | |
+|`cufftXtSetWorkArea`| | | | |`hipfftXtSetWorkArea`|10.1.0| | | | |10.1.0|
 |`cufftXtSetWorkAreaPolicy`|9.2| | | | | | | | | | |
 |`fftw_cleanup`| | | | |`fftw_cleanup`|7.1.0| | | | | |
 |`fftw_cost`| | | | |`fftw_cost`|7.1.0| | | | | |
