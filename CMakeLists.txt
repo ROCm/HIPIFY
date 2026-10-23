@@ -258,8 +258,12 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     # from LLVM_LIBRARY_DIRS instead of assuming a fixed layout.
     #
     # $ORIGIN/../lib covers the flat layout; the versioned ROCm layout installs
-    # the binary in core-X.Y/bin and libLLVM in core-X.Y/lib/llvm/lib.
-    set(HIPIFY_INSTALL_RPATH "\$ORIGIN/../lib" "\$ORIGIN/../lib/llvm/lib")
+    # the binary in core-X.Y/bin and libLLVM in core-X.Y/lib/llvm/lib. ROCm
+    # keeps LLVM under lib even where CMAKE_INSTALL_LIBDIR is lib64, so both
+    # are listed; on lib layouts the duplicates are removed below.
+    set(HIPIFY_INSTALL_RPATH
+      "\$ORIGIN/../lib" "\$ORIGIN/../lib/llvm/lib"
+      "\$ORIGIN/../${CMAKE_INSTALL_LIBDIR}" "\$ORIGIN/../${CMAKE_INSTALL_LIBDIR}/llvm/lib")
     foreach(_llvm_lib_dir IN LISTS LLVM_LIBRARY_DIRS)
       file(RELATIVE_PATH _llvm_lib_rel "${CMAKE_INSTALL_PREFIX}" "${_llvm_lib_dir}")
       if(NOT _llvm_lib_rel OR IS_ABSOLUTE "${_llvm_lib_rel}" OR _llvm_lib_rel MATCHES "^\\.\\.")
@@ -285,8 +289,12 @@ if (NOT HIPIFY_CLANG_TESTS_ONLY)
     # flags that llvm_setup_rpath() appended from add_llvm_executable().
     # INSTALL_RPATH is a real list that CMake quotes and joins itself, and
     # setting it replaces the value llvm_setup_rpath() had installed.
-    set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "${HIPIFY_INSTALL_RPATH}")
-    target_link_options(hipify-clang PRIVATE "LINKER:--enable-new-dtags")
+    # $ORIGIN and --enable-new-dtags are ELF-only (macOS uses @loader_path and
+    # ld64 rejects the flag), so keep llvm_setup_rpath()'s default there.
+    if(NOT APPLE)
+      set_target_properties(hipify-clang PROPERTIES INSTALL_RPATH "${HIPIFY_INSTALL_RPATH}")
+      target_link_options(hipify-clang PRIVATE "LINKER:--enable-new-dtags")
+    endif()
 
     set(CPACK_PACKAGING_INSTALL_PREFIX "/opt/rocm" CACHE PATH "HIP Package Installation Path")
     set(BUILD_DIR ${CMAKE_CURRENT_BINARY_DIR}/packages/hipify-clang)
