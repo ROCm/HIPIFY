@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include <map>
 #include <set>
 #include <list>
+#include <vector>
 #include <llvm/ADT/StringRef.h>
 #include <llvm/Support/raw_ostream.h>
 #if LLVM_VERSION_MAJOR > 3
