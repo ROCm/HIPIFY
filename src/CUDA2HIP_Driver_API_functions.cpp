@@ -550,7 +550,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // no analogue
   m["cuPointerSetAttribute"]                                             = {"hipPointerSetAttribute",                                      "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
   // cudaMemPrefetchBatchAsync
-  m["cuMemPrefetchBatchAsync"]                                           = {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_EXPERIMENTAL};
+  m["cuMemPrefetchBatchAsync"]                                           = {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
   // cudaMemDiscardBatchAsync
   m["cuMemDiscardBatchAsync"]                                            = {"hipDrvMemDiscardBatchAsync",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
   // cudaMemDiscardAndPrefetchBatchAsync
