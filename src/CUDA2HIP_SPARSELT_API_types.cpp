@@ -36,6 +36,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
   m["CUSPARSELT_SPARSITY_50_PERCENT"]                                    = {"HIPSPARSELT_SPARSITY_50_PERCENT",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["cusparseComputeType"]                                               = {"hipsparseLtComputetype_t",                      "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSE_COMPUTE_16F"]                                              = {"HIPSPARSELT_COMPUTE_16F",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSE_COMPUTE_8I"]                                               = {"HIPSPARSE_COMPUTE_8I",                          "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
   m["CUSPARSE_COMPUTE_32I"]                                              = {"HIPSPARSELT_COMPUTE_32I",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSE_COMPUTE_TF32"]                                             = {"HIPSPARSELT_COMPUTE_TF32",                      "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSE_COMPUTE_TF32_FAST"]                                        = {"HIPSPARSELT_COMPUTE_TF32_FAST",                 "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
@@ -116,6 +117,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   m["CUSPARSELT_INVALID_MODE"]                                           = {CUSPARSELT_030, CUDA_0      , CUDA_0      };
   m["CUSPARSELT_SPLIT_K_MODE_ONE_KERNEL"]                                = {CUSPARSELT_030, CUDA_0      , CUDA_0      };
   m["CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS"]                               = {CUSPARSELT_030, CUDA_0      , CUDA_0      };
+  m["CUSPARSE_COMPUTE_8I"]                                               = {CUSPARSELT_050, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -170,11 +172,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP =
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSELT_TYPE_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
-  m["cusparseLtHandle_t"]                                                = { CUSPARSELT_020 };
-  m["cusparseLtMatDescriptor_t"]                                         = { CUSPARSELT_020 };
-  m["cusparseLtMatmulDescriptor_t"]                                      = { CUSPARSELT_020 };
-  m["cusparseLtMatmulAlgSelection_t"]                                    = { CUSPARSELT_020 };
-  m["cusparseLtMatmulPlan_t"]                                            = { CUSPARSELT_020 };
+  m["cusparseLtHandle_t"]                                                = { CUSPARSELT_020, CUSPARSELT_050 };
+  m["cusparseLtMatDescriptor_t"]                                         = { CUSPARSELT_020, CUSPARSELT_050 };
+  m["cusparseLtMatmulDescriptor_t"]                                      = { CUSPARSELT_020, CUSPARSELT_050 };
+  m["cusparseLtMatmulAlgSelection_t"]                                    = { CUSPARSELT_020, CUSPARSELT_050 };
+  m["cusparseLtMatmulPlan_t"]                                            = { CUSPARSELT_020, CUSPARSELT_050 };
 
   return m;
   }();
