@@ -53,7 +53,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGetDeviceCount
   m["cuDeviceGetCount"]                                                  = {"hipGetDeviceCount",                                           "", CONV_DEVICE, API_DRIVER, SEC::DEVICE};
   // no analogue
-  m["cuDeviceGetLuid"]                                                   = {"hipDeviceGetLuid",                                            "", CONV_DEVICE, API_DRIVER, SEC::DEVICE, HIP_UNSUPPORTED};
+  m["cuDeviceGetLuid"]                                                   = {"hipDeviceGetLuid",                                            "", CONV_DEVICE, API_DRIVER, SEC::DEVICE};
   // no analogue
   m["cuDeviceGetName"]                                                   = {"hipDeviceGetName",                                            "", CONV_DEVICE, API_DRIVER, SEC::DEVICE};
   // cudaDeviceGetNvSciSyncAttributes
@@ -505,7 +505,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaMemPoolImportPointer
   m["cuMemPoolImportPointer"]                                            = {"hipMemPoolImportPointer",                                     "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY};
   // cudaMemGetDefaultMemPool
-  m["cuMemGetDefaultMemPool"]                                            = {"hipMemGetDefaultMemPool",                                     "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cuMemGetDefaultMemPool"]                                            = {"hipMemGetDefaultMemPool",                                     "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY};
   // cudaMemGetMemPool
   m["cuMemGetMemPool"]                                                   = {"hipMemGetMemPool",                                            "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY};
   // cudaMemSetMemPool
@@ -550,7 +550,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // no analogue
   m["cuPointerSetAttribute"]                                             = {"hipPointerSetAttribute",                                      "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
   // cudaMemPrefetchBatchAsync
-  m["cuMemPrefetchBatchAsync"]                                           = {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_EXPERIMENTAL};
+  m["cuMemPrefetchBatchAsync"]                                           = {"hipMemPrefetchBatchAsync",                                    "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
   // cudaMemDiscardBatchAsync
   m["cuMemDiscardBatchAsync"]                                            = {"hipDrvMemDiscardBatchAsync",                                  "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
   // cudaMemDiscardAndPrefetchBatchAsync
@@ -1928,6 +1928,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_FUNCTION_VER_MAP = []
   m["hipExecutionCtxGetId"]                                              = {HIP_7140, HIP_0,    HIP_0   };
   m["hipDrvMemDiscardBatchAsync"]                                        = {HIP_7140, HIP_0,    HIP_0   };
   m["hipDrvMemDiscardAndPrefetchBatchAsync"]                             = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemGetDefaultMemPool"]                                           = {HIP_10000, HIP_0,   HIP_0   };
+  m["hipDeviceGetLuid"]                                                  = {HIP_10010, HIP_0,   HIP_0   };
 
   return m;
 }();

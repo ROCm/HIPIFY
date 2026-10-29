@@ -83,7 +83,7 @@
 |`CUDA_ERROR_ILLEGAL_INSTRUCTION`| | | | | | | | | | | |
 |`CUDA_ERROR_ILLEGAL_STATE`|10.0| | | |`hipErrorIllegalState`|5.0.0| | | | | |
 |`CUDA_ERROR_INVALID_ADDRESS_SPACE`| | | | | | | | | | | |
-|`CUDA_ERROR_INVALID_CLUSTER_SIZE`|11.8| | | |`hipErrorInvalidClusterSize`|7.13.0| | | | |7.14.0|
+|`CUDA_ERROR_INVALID_CLUSTER_SIZE`|11.8| | | |`hipErrorInvalidClusterSize`|7.13.0| | | | | |
 |`CUDA_ERROR_INVALID_CONTEXT`| | | | |`hipErrorInvalidContext`|1.6.0| | | | | |
 |`CUDA_ERROR_INVALID_DEVICE`| | | | |`hipErrorInvalidDevice`|1.6.0| | | | | |
 |`CUDA_ERROR_INVALID_GRAPHICS_CONTEXT`| | | | |`hipErrorInvalidGraphicsContext`|1.6.0| | | | | |
@@ -365,9 +365,9 @@
 |`CU_ATOMIC_OPERATION_MAX`|13.0| | | | | | | | | | |
 |`CU_ATOMIC_OPERATION_OR`|13.0| | | | | | | | | | |
 |`CU_ATOMIC_OPERATION_XOR`|13.0| | | | | | | | | | |
-|`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | |`hipClusterSchedulingPolicyDefault`|7.13.0| | | | |7.14.0|
-|`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | |`hipClusterSchedulingPolicyLoadBalancing`|7.13.0| | | | |7.14.0|
-|`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | |`hipClusterSchedulingPolicySpread`|7.13.0| | | | |7.14.0|
+|`CU_CLUSTER_SCHEDULING_POLICY_DEFAULT`|11.8| | | |`hipClusterSchedulingPolicyDefault`|7.13.0| | | | | |
+|`CU_CLUSTER_SCHEDULING_POLICY_LOAD_BALANCING`|11.8| | | |`hipClusterSchedulingPolicyLoadBalancing`|7.13.0| | | | | |
+|`CU_CLUSTER_SCHEDULING_POLICY_SPREAD`|11.8| | | |`hipClusterSchedulingPolicySpread`|7.13.0| | | | | |
 |`CU_COMPUTEMODE_DEFAULT`| | | | |`hipComputeModeDefault`|1.9.0| | | | | |
 |`CU_COMPUTEMODE_EXCLUSIVE`| | | |8.0|`hipComputeModeExclusive`|1.9.0| | | | | |
 |`CU_COMPUTEMODE_EXCLUSIVE_PROCESS`| | | | |`hipComputeModeExclusiveProcess`|2.0.0| | | | | |
@@ -377,12 +377,15 @@
 |`CU_COREDUMP_DEFAULT_FLAGS`|12.5| | | | | | | | | | |
 |`CU_COREDUMP_ENABLE_ON_EXCEPTION`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_ENABLE_USER_TRIGGER`|12.1| | | | | | | | | | |
+|`CU_COREDUMP_FAULTED_CONTEXTS_ONLY`|13.3| | | | | | | | | | |
 |`CU_COREDUMP_FILE`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_GENERATION_FLAGS`|12.5| | | | | | | | | | |
 |`CU_COREDUMP_GZIP_COMPRESS`|13.1| | | | | | | | | | |
 |`CU_COREDUMP_LIGHTWEIGHT`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_LIGHTWEIGHT_FLAGS`|12.5| | | | | | | | | | |
+|`CU_COREDUMP_LOG_ONLY`|13.3| | | | | | | | | | |
 |`CU_COREDUMP_MAX`|12.1| | | | | | | | | | |
+|`CU_COREDUMP_NO_ERRBAR_AT_EXIT`|13.3| | | | | | | | | | |
 |`CU_COREDUMP_PIPE`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_SKIP_ABORT`|12.5| | | | | | | | | | |
 |`CU_COREDUMP_SKIP_CONSTBANK_MEMORY`|12.6| | | | | | | | | | |
@@ -464,7 +467,7 @@
 |`CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH`| | | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS`|11.3| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED`|11.3| | | | | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED`|11.0| | | |`hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported`|7.13.0| | | | |7.14.0|
+|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED`|11.0| | | |`hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported`|7.13.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING`|11.3| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_OVERLAP`| |5.0| | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_DEVICE_ID`|12.8| | | | | | | | | | |
@@ -834,8 +837,12 @@
 |`CU_GRAPH_NODE_TYPE_MEM_FREE`|11.4| | | |`hipGraphNodeTypeMemFree`|5.5.0| | | | | |
 |`CU_GRAPH_NODE_TYPE_RESERVED_16`|13.3| | | | | | | | | | |
 |`CU_GRAPH_NODE_TYPE_WAIT_EVENT`|11.1| | | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | | | |
+|`CU_GRAPH_RECAPTURE_ELIGIBLE_FOR_UPDATE`|13.3| | | | | | | | | | |
+|`CU_GRAPH_RECAPTURE_ERROR`|13.3| | | | | | | | | | |
+|`CU_GRAPH_RECAPTURE_INELIGIBLE_FOR_UPDATE`|13.3| | | | | | | | | | |
 |`CU_GRAPH_USER_OBJECT_MOVE`|11.3| | | |`hipGraphUserObjectMove`|5.3.0| | | | | |
 |`CU_GREEN_CTX_DEFAULT_STREAM`|12.4| | | | | | | | | | |
+|`CU_GREEN_CTX_NONE`|13.3| | | | | | | | | | |
 |`CU_HOST_TASK_BLOCKING`|13.2| | | | | | | | | | |
 |`CU_HOST_TASK_SPINWAIT`|13.2| | | | | | | | | | |
 |`CU_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | | |
@@ -898,11 +905,11 @@
 |`CU_KERNEL_NODE_ATTRIBUTE_PREFERRED_SHARED_MEMORY_CARVEOUT`|12.5| | | | | | | | | | |
 |`CU_KERNEL_NODE_ATTRIBUTE_PRIORITY`|11.7| | | |`hipKernelNodeAttributePriority`|6.2.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_ACCESS_POLICY_WINDOW`|11.8| | | |`hipLaunchAttributeAccessPolicyWindow`|6.2.0| | | | | |
-|`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | |`hipLaunchAttributeClusterDimension`|7.13.0| | | | |7.14.0|
-|`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | |`hipLaunchAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | |7.14.0|
+|`CU_LAUNCH_ATTRIBUTE_CLUSTER_DIMENSION`|11.8| | | |`hipLaunchAttributeClusterDimension`|7.13.0| | | | | |
+|`CU_LAUNCH_ATTRIBUTE_CLUSTER_SCHEDULING_POLICY_PREFERENCE`|11.8| | | |`hipLaunchAttributeClusterSchedulingPolicyPreference`|7.13.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_COOPERATIVE`|11.8| | | |`hipLaunchAttributeCooperative`|6.2.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_DEVICE_UPDATABLE_KERNEL_NODE`|12.4| | | | | | | | | | |
-|`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | |`hipLaunchAttributeIgnore`|7.13.0| | | | |7.14.0|
+|`CU_LAUNCH_ATTRIBUTE_IGNORE`|11.8| | | |`hipLaunchAttributeIgnore`|7.13.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_LAUNCH_COMPLETION_EVENT`|12.3| | | | | | | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MAX`|12.1| | | |`hipLaunchAttributeMax`|7.0.0| | | | | |
 |`CU_LAUNCH_ATTRIBUTE_MEM_SYNC_DOMAIN`|12.0| | | |`hipLaunchAttributeMemSyncDomain`|7.1.0| | | | | |
@@ -942,6 +949,13 @@
 |`CU_LIMIT_PRINTF_FIFO_SIZE`| | | | |`hipLimitPrintfFifoSize`|4.5.0| | | | | |
 |`CU_LIMIT_SHMEM_SIZE`|12.5| | | | | | | | | | |
 |`CU_LIMIT_STACK_SIZE`| | | | |`hipLimitStackSize`|5.3.0| | | | | |
+|`CU_LOGICAL_ENDPOINT_FLAG_COUNTED_OPS`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_FLAG_NONE`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_IPC_HANDLE_TYPE_FABRIC`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_IPC_HANDLE_TYPE_NONE`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_TYPE_INVALID`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_TYPE_MULTICAST`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_TYPE_UNICAST`|13.3| | | | | | | | | | |
 |`CU_LOG_LEVEL_ERROR`|12.9| | | | | | | | | | |
 |`CU_LOG_LEVEL_WARNING`|12.9| | | | | | | | | | |
 |`CU_MEMCPY_FLAG_DEFAULT`|12.8| | | |`hipMemcpyFlagDefault`|7.1.0| | | | | |
@@ -1154,7 +1168,7 @@
 |`CU_STREAM_WAIT_VALUE_FLUSH`|8.0| | | | | | | | | | |
 |`CU_STREAM_WAIT_VALUE_GEQ`|8.0| | | |`hipStreamWaitValueGte`|4.2.0| | | | | |
 |`CU_STREAM_WAIT_VALUE_NOR`|9.0| | | |`hipStreamWaitValueNor`|4.2.0| | | | | |
-|`CU_STREAM_WRITE_VALUE_DEFAULT`|8.0| | | |`hipStreamWriteValueDefault`|7.13.0| | | | |7.14.0|
+|`CU_STREAM_WRITE_VALUE_DEFAULT`|8.0| | | |`hipStreamWriteValueDefault`|7.13.0| | | | | |
 |`CU_STREAM_WRITE_VALUE_NO_MEMORY_BARRIER`|8.0| | | | | | | | | | |
 |`CU_SYNC_POLICY_AUTO`|11.0| | | |`hipSyncPolicyAuto`|7.1.0| | | | | |
 |`CU_SYNC_POLICY_BLOCKING_SYNC`|11.0| | | |`hipSyncPolicyBlockingSync`|7.1.0| | | | | |
@@ -1294,8 +1308,8 @@
 |`CUcheckpointUnlockArgs_st`|12.8| | | | | | | | | | |
 |`CUcigDataType`|12.5| | | | | | | | | | |
 |`CUcigDataType_enum`|12.5| | | | | | | | | | |
-|`CUclusterSchedulingPolicy`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.14.0|
-|`CUclusterSchedulingPolicy_enum`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | |7.14.0|
+|`CUclusterSchedulingPolicy`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | | |
+|`CUclusterSchedulingPolicy_enum`|11.8| | | |`hipClusterSchedulingPolicy`|7.13.0| | | | | |
 |`CUcomputemode`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`CUcomputemode_enum`| | | | |`hipComputeMode`|1.9.0| | | | | |
 |`CUcontext`| | | | |`hipCtx_t`|1.6.0| | | | | |
@@ -1443,6 +1457,9 @@
 |`CUgraphNodeType`|10.0| | | |`hipGraphNodeType`|4.3.0| | | | | |
 |`CUgraphNodeType_enum`|10.0| | | |`hipGraphNodeType`|4.3.0| | | | | |
 |`CUgraphNode_st`|10.0| | | |`hipGraphNode`|4.3.0| | | | | |
+|`CUgraphRecaptureCallback`|13.3| | | | | | | | | | |
+|`CUgraphRecaptureStatus`|13.3| | | | | | | | | | |
+|`CUgraphRecaptureStatus_enum`|13.3| | | | | | | | | | |
 |`CUgraph_st`|10.0| | | |`ihipGraph`|4.3.0| | | | | |
 |`CUgraphicsMapResourceFlags`| | | | | | | | | | | |
 |`CUgraphicsMapResourceFlags_enum`| | | | | | | | | | | |
@@ -1508,7 +1525,17 @@
 |`CUlogIterator`|12.9| | | | | | | | | | |
 |`CUlogLevel`|12.9| | | | | | | | | | |
 |`CUlogLevel_enum`|12.9| | | | | | | | | | |
+|`CUlogicalEndpointFabricHandle`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointFabricHandle_st`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointFlag`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointFlag_enum`|13.3| | | | | | | | | | |
 |`CUlogicalEndpointId`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointIpcHandleType`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointIpcHandleType_enum`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointProp`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointProp_struct`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointType`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointType_enum`|13.3| | | | | | | | | | |
 |`CUlogsCallback`|12.9| | | | | | | | | | |
 |`CUlogsCallbackEntry_st`|12.9| | | | | | | | | | |
 |`CUlogsCallbackHandle`|12.9| | | | | | | | | | |
@@ -1729,7 +1756,7 @@
 |`cuDeviceGetDefaultMemPool`|11.2| | | |`hipDeviceGetDefaultMemPool`|5.2.0| | | | | |
 |`cuDeviceGetExecAffinitySupport`|11.4| | | | | | | | | | |
 |`cuDeviceGetHostAtomicCapabilities`|13.0| | | | | | | | | | |
-|`cuDeviceGetLuid`|10.0| | | | | | | | | | |
+|`cuDeviceGetLuid`|10.0| | | |`hipDeviceGetLuid`|10.1.0| | | | | |
 |`cuDeviceGetMemPool`|11.2| | | |`hipDeviceGetMemPool`|5.2.0| | | | | |
 |`cuDeviceGetName`| | | | |`hipDeviceGetName`|1.6.0| | | | | |
 |`cuDeviceGetNvSciSyncAttributes`|10.2| | | | | | | | | | |
@@ -2000,7 +2027,7 @@
 |`cuMemAllocAsync`|11.2| | | |`hipMallocAsync`|5.2.0| | | | | |
 |`cuMemAllocFromPoolAsync`|11.2| | | |`hipMallocFromPoolAsync`|5.2.0| | | | | |
 |`cuMemFreeAsync`|11.2| | | |`hipFreeAsync`|5.2.0| | | | | |
-|`cuMemGetDefaultMemPool`|13.0| | | | | | | | | | |
+|`cuMemGetDefaultMemPool`|13.0| | | |`hipMemGetDefaultMemPool`|10.0.0| | | | | |
 |`cuMemGetMemPool`|13.0| | | |`hipMemGetMemPool`|7.12.0| | | | | |
 |`cuMemPoolCreate`|11.2| | | |`hipMemPoolCreate`|5.2.0| | | | | |
 |`cuMemPoolDestroy`|11.2| | | |`hipMemPoolDestroy`|5.2.0| | | | | |
@@ -2038,7 +2065,7 @@
 |`cuMemDiscardBatchAsync`|13.0| | | |`hipDrvMemDiscardBatchAsync`|7.14.0| | | | | |
 |`cuMemPrefetchAsync`|8.0| |13.0| |`hipMemPrefetchAsync`|3.7.0| | | |13.0| |
 |`cuMemPrefetchAsync_v2`|12.2| | | | | | | | | | |
-|`cuMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | |7.14.0|
+|`cuMemPrefetchBatchAsync`|13.0| | | |`hipMemPrefetchBatchAsync`|7.13.0| | | | | |
 |`cuMemRangeGetAttribute`|8.0| | | |`hipMemRangeGetAttribute`|3.7.0| | | | | |
 |`cuMemRangeGetAttributes`|8.0| | | |`hipMemRangeGetAttributes`|3.7.0| | | | | |
 |`cuPointerGetAttribute`| | | | |`hipPointerGetAttribute`|5.0.0| | | | | |

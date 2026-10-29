@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include <map>
 #include <set>
 #include <list>
+#include <vector>
 #include <llvm/ADT/StringRef.h>
 #include <llvm/Support/raw_ostream.h>
 #if LLVM_VERSION_MAJOR > 3
@@ -262,6 +263,7 @@ enum cudaVersions {
   CUDA_131 = 13010,
   CUDA_132 = 13020,
   CUDA_133 = 13030,
+  CUDA_134 = 13040,
   CUDA_LATEST = CUDA_132,
   CUDA_PARTIALLY_SUPPORTED = CUDA_132,
   CUDNN_10 = 100,
@@ -501,7 +503,9 @@ enum hipVersions {
   HIP_7130 = 7130,
   HIP_7140 = 7140,
   HIP_8000 = 8000,
-  HIP_LATEST = HIP_7140,
+  HIP_10000 = 10000,
+  HIP_10010 = 10010,
+  HIP_LATEST = HIP_10010,
 };
 
 struct cudaAPIversions {

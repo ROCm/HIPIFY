@@ -543,6 +543,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDA_131: return "13.1";
     case CUDA_132: return "13.2";
     case CUDA_133: return "13.3";
+    case CUDA_134: return "13.4";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -879,6 +880,8 @@ std::string Statistics::getHipVersion(const hipVersions &ver) {
     case HIP_7130: return "7.13.0";
     case HIP_7140: return "7.14.0";
     case HIP_8000: return "8.0.0";
+    case HIP_10000: return "10.0.0";
+    case HIP_10010: return "10.1.0";
   }
   return "";
 }
@@ -933,6 +936,10 @@ cudaVersions Statistics::convertCudaToolkitVersion(const clang::CudaVersion &ver
     case clang::CudaVersion::CUDA_130: return CUDA_130;
     case clang::CudaVersion::CUDA_131: return CUDA_131;
     case clang::CudaVersion::CUDA_132: return CUDA_132;
+#if LLVM_VERSION_MAJOR > 23
+    case clang::CudaVersion::CUDA_133: return CUDA_133;
+    case clang::CudaVersion::CUDA_134: return CUDA_134;
+#endif
 #endif
 #endif
 #endif

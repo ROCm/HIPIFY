@@ -92,7 +92,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuDeviceGetMemPool
   m["cudaDeviceGetMemPool"]                                    = {"hipDeviceGetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE};
   //
-  m["cudaInitDevice"]                                          = {"hipInitDevice",                                          "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, HIP_UNSUPPORTED};
+  m["cudaInitDevice"]                                          = {"hipInitDevice",                                          "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE};
   // cuDeviceGetHostAtomicCapabilities
   m["cudaDeviceGetHostAtomicCapabilities"]                     = {"hipDeviceGetHostAtomicCapabilities",                     "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, HIP_UNSUPPORTED};
   // cuDeviceGetP2PAtomicCapabilities
@@ -271,7 +271,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // no analogue
   m["cudaOccupancyMaxPotentialBlockSizeVariableSMemWithFlags"] = {"hipOccupancyMaxPotentialBlockSizeVariableSMemWithFlags", "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY};
   // NOTE: cuOccupancyMaxPotentialClusterSize has a different type as the first argument (HIP_LAUNCH_CONFIG vs hipLaunchConfig_t)
-  m["cudaOccupancyMaxPotentialClusterSize"]                    = {"hipOccupancyMaxPotentialClusterSize",                    "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_EXPERIMENTAL};
+  m["cudaOccupancyMaxPotentialClusterSize"]                    = {"hipOccupancyMaxPotentialClusterSize",                    "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY};
   // cuOccupancyMaxActiveClusters
   m["cudaOccupancyMaxActiveClusters"]                          = {"hipOccupancyMaxActiveClusters",                          "", CONV_OCCUPANCY, API_RUNTIME, SEC::OCCUPANCY, HIP_UNSUPPORTED};
   // cuGraphNodeGetParams
@@ -423,7 +423,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuMemDiscardAndPrefetchBatchAsync
   m["cudaMemDiscardAndPrefetchBatchAsync"]                     = {"hipMemDiscardAndPrefetchBatchAsync",                     "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY};
   // cuMemPrefetchBatchAsync
-  m["cudaMemPrefetchBatchAsync"]                               = {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_EXPERIMENTAL};
+  m["cudaMemPrefetchBatchAsync"]                               = {"hipMemPrefetchBatchAsync",                               "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY};
   // cuMemcpyWithAttributesAsync
   m["cudaMemcpyWithAttributesAsync"]                           = {"hipMemcpyWithAttributesAsync",                           "", CONV_MEMORY, API_RUNTIME, SEC::MEMORY, HIP_UNSUPPORTED};
   // cuMemcpy3DWithAttributesAsync
@@ -475,7 +475,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuMemPoolImportPointer
   m["cudaMemPoolImportPointer"]                                = {"hipMemPoolImportPointer",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
   // cuMemGetDefaultMemPool
-  m["cudaMemGetDefaultMemPool"]                                = {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY, HIP_UNSUPPORTED};
+  m["cudaMemGetDefaultMemPool"]                                = {"hipMemGetDefaultMemPool",                                "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
   // cuMemGetMemPool
   m["cudaMemGetMemPool"]                                       = {"hipMemGetMemPool",                                       "", CONV_MEMORY, API_RUNTIME, SEC::ORDERED_MEMORY};
   // cuMemSetMemPool
@@ -1631,8 +1631,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [
   m["hipStreamCopyAttributes"]                                 = {HIP_7020, HIP_0,    HIP_0   };
   m["hipOccupancyAvailableDynamicSMemPerBlock"]                = {HIP_7020, HIP_0,    HIP_0   };
   m["hipLibraryEnumerateKernels"]                              = {HIP_7020, HIP_0,    HIP_0   };
-  m["hipMemPrefetchBatchAsync"]                                = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
-  m["hipOccupancyMaxPotentialClusterSize"]                     = {HIP_7130, HIP_0,    HIP_0,  HIP_LATEST};
+  m["hipMemPrefetchBatchAsync"]                                = {HIP_7130, HIP_0,    HIP_0   };
+  m["hipOccupancyMaxPotentialClusterSize"]                     = {HIP_7130, HIP_0,    HIP_0   };
   m["hipLibraryGetGlobal"]                                     = {HIP_7140, HIP_0,    HIP_0   };
   m["hipLibraryGetManaged"]                                    = {HIP_7140, HIP_0,    HIP_0   };
   m["hipDeviceGetDevResource"]                                 = {HIP_7140, HIP_0,    HIP_0   };
@@ -1652,6 +1652,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [
   m["hipDeviceGetExecutionCtx"]                                = {HIP_7140, HIP_0,    HIP_0   };
   m["hipMemDiscardBatchAsync"]                                 = {HIP_7140, HIP_0,    HIP_0   };
   m["hipMemDiscardAndPrefetchBatchAsync"]                      = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipMemGetDefaultMemPool"]                                 = {HIP_10000, HIP_0,   HIP_0   };
+  m["hipInitDevice"]                                           = {HIP_10010, HIP_0,   HIP_0   };
 
   return m;
 }();

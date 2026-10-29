@@ -1657,6 +1657,11 @@ int main() {
   // HIP: hipError_t hipStreamGetId(hipStream_t stream, unsigned long long* streamId);
   // CHECK: result = hipStreamGetId(stream, &ull_2);
   result = cudaStreamGetId(stream, &ull_2);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaInitDevice(int device, unsigned int deviceFlags, unsigned int flags);
+  // HIP: hipError_t hipInitDevice(int device, unsigned int deviceFlags, unsigned int flags);
+  // CHECK: result = hipInitDevice(deviceId, flags, hipInitDeviceFlagsAreValid);
+  result = cudaInitDevice(deviceId, flags, cudaInitDeviceFlagsAreValid);
 #endif
 
 #if CUDA_VERSION >= 12020
@@ -1753,6 +1758,11 @@ int main() {
   // HIP: hipError_t hipMemGetMemPool(hipMemPool_t* pool, hipMemLocation* location, hipMemAllocationType type);
   // CHECK: result = hipMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
   result = cudaMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
+
+  // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemGetDefaultMemPool(cudaMemPool_t *memPool, struct cudaMemLocation *location, enum cudaMemAllocationType type);
+  // HIP: hipError_t hipMemGetDefaultMemPool(hipMemPool_t* memPool, hipMemLocation* location, hipMemAllocationType type);
+  // CHECK: result = hipMemGetDefaultMemPool(&memPool_t, &memLocation, memAllocationType);
+  result = cudaMemGetDefaultMemPool(&memPool_t, &memLocation, memAllocationType);
 
   // CUDA: extern __host__ cudaError_t CUDARTAPI cudaMemPrefetchBatchAsync(void **dptrs, size_t *sizes, size_t count, struct cudaMemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, cudaStream_t stream);
   // HIP: hipError_t hipMemPrefetchBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, hipMemLocation* prefetch_locs, size_t* prefetch_loc_idxs, size_t num_prefetch_locs, unsigned long long flags, hipStream_t stream);
