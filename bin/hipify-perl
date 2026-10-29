@@ -1712,6 +1712,7 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cufftXtSetWorkArea" => "10.1.0",
     "cublasSgemmGroupedBatched_64" => "10.1.0",
     "cublasSgemmGroupedBatched" => "10.1.0",
     "cublasGemmGroupedBatchedEx_64" => "10.1.0",
@@ -6075,7 +6076,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cufftXtQueryType' => 1,
     'cufftXtQueryType_t' => 1,
     'cufftXtSetDistribution' => 1,
-    'cufftXtSetWorkArea' => 1,
     'cufftXtSetWorkAreaPolicy' => 1,
     'cufftXtWorkAreaPolicy' => 1,
     'cufftXtWorkAreaPolicy_t' => 1,
@@ -16418,6 +16418,7 @@ my %map_experimental = (
     'cublasGemmGroupedBatchedEx_64' => ['hipblasGemmGroupedBatchedEx_64', 'library'],
     'cublasSgemmGroupedBatched' => ['hipblasSgemmGroupedBatched', 'library'],
     'cublasSgemmGroupedBatched_64' => ['hipblasSgemmGroupedBatched_64', 'library'],
+    'cufftXtSetWorkArea' => ['hipfftXtSetWorkArea', 'library'],
 );
 
 my %map_roc = (
