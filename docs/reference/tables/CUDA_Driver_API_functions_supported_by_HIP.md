@@ -377,12 +377,15 @@
 |`CU_COREDUMP_DEFAULT_FLAGS`|12.5| | | | | | | | | | |
 |`CU_COREDUMP_ENABLE_ON_EXCEPTION`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_ENABLE_USER_TRIGGER`|12.1| | | | | | | | | | |
+|`CU_COREDUMP_FAULTED_CONTEXTS_ONLY`|13.3| | | | | | | | | | |
 |`CU_COREDUMP_FILE`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_GENERATION_FLAGS`|12.5| | | | | | | | | | |
 |`CU_COREDUMP_GZIP_COMPRESS`|13.1| | | | | | | | | | |
 |`CU_COREDUMP_LIGHTWEIGHT`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_LIGHTWEIGHT_FLAGS`|12.5| | | | | | | | | | |
+|`CU_COREDUMP_LOG_ONLY`|13.3| | | | | | | | | | |
 |`CU_COREDUMP_MAX`|12.1| | | | | | | | | | |
+|`CU_COREDUMP_NO_ERRBAR_AT_EXIT`|13.3| | | | | | | | | | |
 |`CU_COREDUMP_PIPE`|12.1| | | | | | | | | | |
 |`CU_COREDUMP_SKIP_ABORT`|12.5| | | | | | | | | | |
 |`CU_COREDUMP_SKIP_CONSTBANK_MEMORY`|12.6| | | | | | | | | | |
@@ -834,8 +837,12 @@
 |`CU_GRAPH_NODE_TYPE_MEM_FREE`|11.4| | | |`hipGraphNodeTypeMemFree`|5.5.0| | | | | |
 |`CU_GRAPH_NODE_TYPE_RESERVED_16`|13.3| | | | | | | | | | |
 |`CU_GRAPH_NODE_TYPE_WAIT_EVENT`|11.1| | | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | | | |
+|`CU_GRAPH_RECAPTURE_ELIGIBLE_FOR_UPDATE`|13.3| | | | | | | | | | |
+|`CU_GRAPH_RECAPTURE_ERROR`|13.3| | | | | | | | | | |
+|`CU_GRAPH_RECAPTURE_INELIGIBLE_FOR_UPDATE`|13.3| | | | | | | | | | |
 |`CU_GRAPH_USER_OBJECT_MOVE`|11.3| | | |`hipGraphUserObjectMove`|5.3.0| | | | | |
 |`CU_GREEN_CTX_DEFAULT_STREAM`|12.4| | | | | | | | | | |
+|`CU_GREEN_CTX_NONE`|13.3| | | | | | | | | | |
 |`CU_HOST_TASK_BLOCKING`|13.2| | | | | | | | | | |
 |`CU_HOST_TASK_SPINWAIT`|13.2| | | | | | | | | | |
 |`CU_IPC_HANDLE_SIZE`| | | | |`HIP_IPC_HANDLE_SIZE`|1.6.0| | | | | |
@@ -942,6 +949,13 @@
 |`CU_LIMIT_PRINTF_FIFO_SIZE`| | | | |`hipLimitPrintfFifoSize`|4.5.0| | | | | |
 |`CU_LIMIT_SHMEM_SIZE`|12.5| | | | | | | | | | |
 |`CU_LIMIT_STACK_SIZE`| | | | |`hipLimitStackSize`|5.3.0| | | | | |
+|`CU_LOGICAL_ENDPOINT_FLAG_COUNTED_OPS`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_FLAG_NONE`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_IPC_HANDLE_TYPE_FABRIC`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_IPC_HANDLE_TYPE_NONE`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_TYPE_INVALID`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_TYPE_MULTICAST`|13.3| | | | | | | | | | |
+|`CU_LOGICAL_ENDPOINT_TYPE_UNICAST`|13.3| | | | | | | | | | |
 |`CU_LOG_LEVEL_ERROR`|12.9| | | | | | | | | | |
 |`CU_LOG_LEVEL_WARNING`|12.9| | | | | | | | | | |
 |`CU_MEMCPY_FLAG_DEFAULT`|12.8| | | |`hipMemcpyFlagDefault`|7.1.0| | | | | |
@@ -1443,6 +1457,9 @@
 |`CUgraphNodeType`|10.0| | | |`hipGraphNodeType`|4.3.0| | | | | |
 |`CUgraphNodeType_enum`|10.0| | | |`hipGraphNodeType`|4.3.0| | | | | |
 |`CUgraphNode_st`|10.0| | | |`hipGraphNode`|4.3.0| | | | | |
+|`CUgraphRecaptureCallback`|13.3| | | | | | | | | | |
+|`CUgraphRecaptureStatus`|13.3| | | | | | | | | | |
+|`CUgraphRecaptureStatus_enum`|13.3| | | | | | | | | | |
 |`CUgraph_st`|10.0| | | |`ihipGraph`|4.3.0| | | | | |
 |`CUgraphicsMapResourceFlags`| | | | | | | | | | | |
 |`CUgraphicsMapResourceFlags_enum`| | | | | | | | | | | |
@@ -1508,7 +1525,17 @@
 |`CUlogIterator`|12.9| | | | | | | | | | |
 |`CUlogLevel`|12.9| | | | | | | | | | |
 |`CUlogLevel_enum`|12.9| | | | | | | | | | |
+|`CUlogicalEndpointFabricHandle`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointFabricHandle_st`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointFlag`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointFlag_enum`|13.3| | | | | | | | | | |
 |`CUlogicalEndpointId`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointIpcHandleType`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointIpcHandleType_enum`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointProp`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointProp_struct`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointType`|13.3| | | | | | | | | | |
+|`CUlogicalEndpointType_enum`|13.3| | | | | | | | | | |
 |`CUlogsCallback`|12.9| | | | | | | | | | |
 |`CUlogsCallbackEntry_st`|12.9| | | | | | | | | | |
 |`CUlogsCallbackHandle`|12.9| | | | | | | | | | |
