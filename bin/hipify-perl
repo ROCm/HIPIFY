@@ -1712,6 +1712,10 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
+    "cusolverStorevMode_t" => "10.1.0",
+    "cusolverDnXlarft_bufferSize" => "10.1.0",
+    "cusolverDnXlarft" => "10.1.0",
+    "cusolverDirectMode_t" => "10.1.0",
     "cufftXtSetWorkArea" => "10.1.0",
     "cublasSgemmGroupedBatched_64" => "10.1.0",
     "cublasSgemmGroupedBatched" => "10.1.0",
@@ -6125,7 +6129,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'curand_mtgp32_single' => 1,
     'curand_mtgp32_single_specific' => 1,
     'curand_mtgp32_specific' => 1,
-    'cusolverDirectMode_t' => 1,
     'cusolverDnCEgels' => 1,
     'cusolverDnCEgels_bufferSize' => 1,
     'cusolverDnCEgesv' => 1,
@@ -6252,8 +6255,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cusolverDnXgesvdp_bufferSize' => 1,
     'cusolverDnXgesvdr' => 1,
     'cusolverDnXgesvdr_bufferSize' => 1,
-    'cusolverDnXlarft' => 1,
-    'cusolverDnXlarft_bufferSize' => 1,
     'cusolverDnXpolar' => 1,
     'cusolverDnXpolar_bufferSize' => 1,
     'cusolverDnXstedc' => 1,
@@ -6484,7 +6485,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cusolverSpZcsrqrZeroPivotHost' => 1,
     'cusolverSpZcsrqrsvBatched' => 1,
     'cusolverSpZcsrzfdHost' => 1,
-    'cusolverStorevMode_t' => 1,
     'cusparseAlgMode_t' => 1,
     'cusparseBsrSetStridedBatch' => 1,
     'cusparseCbsric02_bufferSizeExt' => 1,
@@ -16446,6 +16446,10 @@ my %map_experimental = (
     'cublasSgemmGroupedBatched' => ['hipblasSgemmGroupedBatched', 'library'],
     'cublasSgemmGroupedBatched_64' => ['hipblasSgemmGroupedBatched_64', 'library'],
     'cufftXtSetWorkArea' => ['hipfftXtSetWorkArea', 'library'],
+    'cusolverDirectMode_t' => ['hipsolverDirectMode_t', 'type'],
+    'cusolverDnXlarft' => ['hipsolverDnXlarft', 'library'],
+    'cusolverDnXlarft_bufferSize' => ['hipsolverDnXlarft_bufferSize', 'library'],
+    'cusolverStorevMode_t' => ['hipsolverStorevMode_t', 'type'],
 );
 
 my %map_roc = (

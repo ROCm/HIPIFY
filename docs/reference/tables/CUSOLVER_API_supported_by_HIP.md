@@ -129,7 +129,7 @@
 |`cudaLibMgMatrixDesc_t`|10.1| | | | | | | | | | |
 |`cusolverAlgMode_t`|11.0| | | |`hipsolverAlgMode_t`|6.2.0| | | | | |
 |`cusolverDeterministicMode_t`|12.2| | | |`hipsolverDeterministicMode_t`|6.3.0| | | | | |
-|`cusolverDirectMode_t`|11.0| | | | | | | | | | |
+|`cusolverDirectMode_t`|11.0| | | |`hipsolverDirectMode_t`|10.1.0| | | | |10.1.0|
 |`cusolverDnContext`| | | | | | | | | | | |
 |`cusolverDnFunction_t`|11.0| | | |`hipsolverDnFunction_t`|6.2.0| | | | | |
 |`cusolverDnHandle_t`| | | | |`hipsolverHandle_t`|4.5.0| | | | | |
@@ -162,7 +162,7 @@
 |`cusolverSpContext`| | | | | | | | | | | |
 |`cusolverSpHandle_t`| | | | |`hipsolverSpHandle_t`|6.1.0| | | | | |
 |`cusolverStatus_t`| | | | |`hipsolverStatus_t`|4.5.0| | | | | |
-|`cusolverStorevMode_t`|11.0| | | | | | | | | | |
+|`cusolverStorevMode_t`|11.0| | | |`hipsolverStorevMode_t`|10.1.0| | | | |10.1.0|
 |`cusolver_int_t`|10.1| | | |`int`| | | | | | |
 |`gesvdjInfo`|9.0| | | | | | | | | | |
 |`gesvdjInfo_t`|9.0| | | |`hipsolverGesvdjInfo_t`|5.1.0| | | | | |
@@ -477,8 +477,8 @@
 |`cusolverDnXgetrf`|11.1| | | |`hipsolverDnXgetrf`|6.2.0| | | | | |
 |`cusolverDnXgetrf_bufferSize`|11.1| | | |`hipsolverDnXgetrf_bufferSize`|6.2.0| | | | | |
 |`cusolverDnXgetrs`|11.1| | | |`hipsolverDnXgetrs`|6.2.0| | | | | |
-|`cusolverDnXlarft`|12.4| | | | | | | | | | |
-|`cusolverDnXlarft_bufferSize`|12.4| | | | | | | | | | |
+|`cusolverDnXlarft`|12.4| | | |`hipsolverDnXlarft`|10.1.0| | | | |10.1.0|
+|`cusolverDnXlarft_bufferSize`|12.4| | | |`hipsolverDnXlarft_bufferSize`|10.1.0| | | | |10.1.0|
 |`cusolverDnXpolar`|13.2| | | | | | | | | | |
 |`cusolverDnXpolar_bufferSize`|13.2| | | | | | | | | | |
 |`cusolverDnXpotrf`|11.1| | | |`hipsolverDnXpotrf`|6.3.0| | | | | |

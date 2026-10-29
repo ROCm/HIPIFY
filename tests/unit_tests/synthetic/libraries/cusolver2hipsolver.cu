@@ -1738,6 +1738,23 @@ int main() {
   // CHECK: status = hipsolverDnXgetrf(handle, solverDnParams, m64, n64, dataTypeA, A, lda64, &devIpiv64, computeType, workOnDevice, lworkOnDevice, workOnHost, lworkOnHost, &devInfo);
   status = cusolverDnXgetrf(handle, solverDnParams, m64, n64, dataTypeA, A, lda64, &devIpiv64, computeType, workOnDevice, lworkOnDevice, workOnHost, lworkOnHost, &devInfo);
 
+#if CUDA_VERSION >= 12040
+  // CHECK: hipsolverDirectMode_t direct;
+  cusolverDirectMode_t direct;
+  // CHECK: hipsolverStorevMode_t storev;
+  cusolverStorevMode_t storev;
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXlarft_bufferSize(cusolverDnHandle_t handle, cusolverDnParams_t params, cusolverDirectMode_t direct, cusolverStorevMode_t storev, int64_t n, int64_t k, cudaDataType dataTypeV, const void * V, int64_t ldv, cudaDataType dataTypeTau, const void * tau, cudaDataType dataTypeT, void * T, int64_t ldt, cudaDataType computeType, size_t * workspaceInBytesOnDevice, size_t * workspaceInBytesOnHost);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXlarft_bufferSize(hipsolverDnHandle_t handle, hipsolverDnParams_t params, hipsolverDirectMode_t direct, hipsolverStorevMode_t storev, int64_t n, int64_t k, hipDataType dataTypeV, const void* V, int64_t ldv, hipDataType dataTypeTau, const void* tau, hipDataType dataTypeT, void* T, int64_t ldt, hipDataType computeType, size_t* lworkOnDevice, size_t* lworkOnHost);
+  // CHECK: status = hipsolverDnXlarft_bufferSize(handle, solverDnParams, direct, storev, n64, m64, dataTypeA, A, lda64, dataTypeTau, A, dataTypeA, A, ldb64, computeType, &lworkOnDevice, &lworkOnHost);
+  status = cusolverDnXlarft_bufferSize(handle, solverDnParams, direct, storev, n64, m64, dataTypeA, A, lda64, dataTypeTau, A, dataTypeA, A, ldb64, computeType, &lworkOnDevice, &lworkOnHost);
+
+  // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXlarft(cusolverDnHandle_t handle, cusolverDnParams_t params, cusolverDirectMode_t direct, cusolverStorevMode_t storev, int64_t n, int64_t k, cudaDataType dataTypeV, const void * V, int64_t ldv, cudaDataType dataTypeTau, const void * tau, cudaDataType dataTypeT, void * T, int64_t ldt, cudaDataType computeType, void * bufferOnDevice, size_t workspaceInBytesOnDevice, void * bufferOnHost, size_t workspaceInBytesOnHost);
+  // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXlarft(hipsolverDnHandle_t handle, hipsolverDnParams_t params, hipsolverDirectMode_t direct, hipsolverStorevMode_t storev, int64_t n, int64_t k, hipDataType dataTypeV, void* V, int64_t ldv, hipDataType dataTypeTau, void* tau, hipDataType dataTypeT, void* T, int64_t ldt, hipDataType computeType, void* workOnDevice, size_t lworkOnDevice, void* workOnHost, size_t lworkOnHost);
+  // CHECK: status = hipsolverDnXlarft(handle, solverDnParams, direct, storev, n64, m64, dataTypeA, A, lda64, dataTypeTau, A, dataTypeA, A, ldb64, computeType, workOnDevice, lworkOnDevice, workOnHost, lworkOnHost);
+  status = cusolverDnXlarft(handle, solverDnParams, direct, storev, n64, m64, dataTypeA, A, lda64, dataTypeTau, A, dataTypeA, A, ldb64, computeType, workOnDevice, lworkOnDevice, workOnHost, lworkOnHost);
+#endif
+
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXgetrf_bufferSize(cusolverDnHandle_t handle, cusolverDnParams_t params, int64_t m, int64_t n, cudaDataType dataTypeA, const void * A, int64_t lda, cudaDataType computeType, size_t * workspaceInBytesOnDevice, size_t * workspaceInBytesOnHost);
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXgetrf_bufferSize(hipsolverDnHandle_t handle, hipsolverDnParams_t params, int64_t m, int64_t n, hipDataType dataTypeA, const void* A, int64_t lda, hipDataType computeType, size_t* lworkOnDevice, size_t* lworkOnHost);
   // CHECK: status = hipsolverDnXgetrf_bufferSize(handle, solverDnParams, m64, n64, dataTypeA, A, lda64, computeType, &lworkOnDevice, &lworkOnDevice);
