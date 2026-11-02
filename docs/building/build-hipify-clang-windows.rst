@@ -1,4 +1,4 @@
-    .. meta::
+.. meta::
    :description: Tools to automatically translate CUDA source code into portable HIP C++
    :keywords: HIPIFY, ROCm, library, tool, CUDA, CUDA2HIP, hipify-clang, hipify-perl, Windows
 
@@ -78,9 +78,9 @@ Building HIPIFY
 
     # To ensure LLVM is found, or in the case of multiple LLVM instances, specify the path to the root folder containing the LLVM distribution.
 
-    cmake -G "Visual Studio 18 2026 " -A x64 -Thost=x64 -DCMAKE_PREFIX_PATH="..\dist" -DCMAKE_INSTALL_PREFIX="..\dist" -DCMAKE_BUILD_TYPE=Release ..\hipify
+    cmake -G "Visual Studio 18 2026" -A x64 -Thost=x64 -DCMAKE_PREFIX_PATH="..\dist" -DCMAKE_INSTALL_PREFIX="..\dist" -DCMAKE_BUILD_TYPE=Release ..\hipify
 
-    # Run Visual Studio 18 2026, open the generated LLVM.sln, build all, and build project "INSTALL".
+    # Run Visual Studio 18 2026, open the generated LLVM.slnx, build all, and build project "INSTALL".
     # Alternatively, you can build using "msbuild INSTALL.vcxproj /m" using the developer command prompt.
 
 You can find the binary at ``.\dist\bin\hipify-clang`` or at the folder specified by the ``-DCMAKE_INSTALL_PREFIX`` option.
@@ -95,7 +95,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
 - Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or greater.
 
-  In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
+  In case of multiple CUDA installations, specify the particular version using ``-DCUDA_TOOLKIT_ROOT_DIR`` option:
 
   .. code-block:: shell
 
@@ -127,7 +127,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
       -DCUDA_CUB_ROOT_DIR=D:\CUDA\CUB
 
 - [Optional] Download `cuFile <https://developer.download.nvidia.com/compute/cuda/redist/libcufile/linux-x86_64/libcufile-linux-x86_64-1.18.1.6-archive.tar.xz>`_ for ``CUDA >= 11.4`` only.
-  Then, extract the downloaded archive, extract it with ``tar``:
+  Then, extract the downloaded archive with ``tar``:
 
   .. code-block:: shell
 
@@ -264,7 +264,7 @@ Tested configurations:
     - ``2019.16.11.58, 2022.17.14.37, 2026.18.8.2``
     - ``4.4.2``
     - ``3.14.7``
-  * - ``23.0.0git``
+  * - ``23.1.0 - 23.1.4``
     - ``7.0 - 13.2.0``
     - ``8.0.5  - 9.25.0``
     - ``2019.16.11.58, 2022.17.14.37, 2026.18.8.2``
@@ -302,7 +302,7 @@ Building with testing support using ``Visual Studio 18 2026`` on ``Windows 11``:
     -DLLVM_EXTERNAL_LIT=%ROOT_DIR%\build\Release\bin\llvm-lit.py \
     ..\hipify
 
-The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8``):
+The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\23.1.4``):
 
 .. code-block:: shell
 
@@ -324,17 +324,17 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8`
     --    - Test hipify-clang     : ON
     --    - Is part of HIP SDK    : OFF
     --    - Install clang headers : ON
-    -- Found LLVM 22.1.8:
-    --    - CMake module path     : D:\LLVM\22.1.8\dist\lib\cmake\llvm
-    --    - Clang include path    : D:\LLVM\22.1.8\dist\include
-    --    - LLVM Include path     : D:\LLVM\22.1.8\dist\include
-    --    - Binary path           : D:\LLVM\22.1.8\dist\bin
+    -- Found LLVM 23.1.4:
+    --    - CMake module path     : D:\LLVM\23.1.4\dist\lib\cmake\llvm
+    --    - Clang include path    : D:\LLVM\23.1.4\dist\include
+    --    - LLVM Include path     : D:\LLVM\23.1.4\dist\include
+    --    - Binary path           : D:\LLVM\23.1.4\dist\bin
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS - Failed
     -- ---- The below configuring for hipify-clang testing only ----
     -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python314\python.exe (found suitable version "3.14.7", required range is "3.0...3.15") found components: Interpreter
     -- Found lit: C:\Users\TT\AppData\Local\Programs\Python\Python314\Scripts\lit.exe
-    -- Found FileCheck: D:\LLVM\22.1.8\dist\bin\FileCheck.exe
+    -- Found FileCheck: D:\LLVM\23.1.4\dist\bin\FileCheck.exe
     -- Initial CUDA to configure:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
     --    - CUDA Samples path     : C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9
