@@ -40,7 +40,7 @@
 |`CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS`|0.3.0| | | |`HIPSPARSELT_SPLIT_K_MODE_TWO_KERNELS`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_16F`|0.0.1| | | |`HIPSPARSELT_COMPUTE_16F`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_32I`|0.0.1| | | |`HIPSPARSELT_COMPUTE_32I`|7.10.0| | | | | |
-|`CUSPARSE_COMPUTE_8I`|0.5.0| | | | | | | | | | |
+|`CUSPARSE_COMPUTE_8I`|0.5.0| | |0.5.1| | | | | | | |
 |`CUSPARSE_COMPUTE_TF32`|0.1.0| | | |`HIPSPARSELT_COMPUTE_TF32`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_TF32_FAST`|0.1.0| | | |`HIPSPARSELT_COMPUTE_TF32_FAST`|7.10.0| | | | | |
 |`cusparseComputeType`|0.0.1| | | |`hipsparseLtComputetype_t`|7.10.0| | | | | |
