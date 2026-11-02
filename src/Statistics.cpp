@@ -679,6 +679,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUFILE_1171: return "1.17.1";
     case CUFILE_1180: return "1.18.0";
     case CUFILE_1181: return "1.18.1";
+    case CUFILE_1190: return "1.19.0";
     case CUSPARSELT_001: return "0.0.1";
     case CUSPARSELT_010: return "0.1.0";
     case CUSPARSELT_020: return "0.2.0";
