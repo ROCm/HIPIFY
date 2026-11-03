@@ -36,6 +36,7 @@
 |`CUFILE_PARAM_FORCE_COMPAT_MODE`|1.14.0| | | |`hipFileParamForceCompatMode`|7.2.0| | | | | |
 |`CUFILE_PARAM_FORCE_ODIRECT_MODE`|1.14.0| | | |`hipFileParamForceOdirectMode`|7.2.0| | | | | |
 |`CUFILE_PARAM_FS_MISC_API_CHECK_AGGRESSIVE`|1.14.0| | | |`hipFileParamFsMiscApiCheckAggressive`|7.2.0| | | | | |
+|`CUFILE_PARAM_GDS_FALLBACK_IO`|1.19.0| | | | | | | | | | |
 |`CUFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_COUNT`|1.17.0| | | | | | | | | | |
 |`CUFILE_PARAM_GPU_BOUNCE_BUFFER_SLAB_SIZE_KB`|1.17.0| | | | | | | | | | |
 |`CUFILE_PARAM_LOGGING_LEVEL`|1.14.0| | | |`hipFileParamLoggingLevel`|7.2.0| | | | | |
@@ -54,7 +55,9 @@
 |`CUFILE_PARAM_PROPERTIES_MAX_DEVICE_PINNED_MEM_SIZE_KB`|1.14.0| | | |`hipFileParamPropertiesMaxDevicePinnedMemSizeKB`|7.2.0| | | | | |
 |`CUFILE_PARAM_PROPERTIES_MAX_DIRECT_IO_SIZE_KB`|1.14.0| | | |`hipFileParamPropertiesMaxDirectIOSizeKB`|7.2.0| | | | | |
 |`CUFILE_PARAM_PROPERTIES_PER_BUFFER_CACHE_SIZE_KB`|1.14.0| | | |`hipFileParamPropertiesPerBufferCacheSizeKB`|7.2.0| | | | | |
+|`CUFILE_PARAM_PROPERTIES_POSIX_IO_MODE`|1.19.0| | | | | | | | | | |
 |`CUFILE_PARAM_PROPERTIES_USE_POLL_MODE`|1.14.0| | | |`hipFileParamPropertiesUsePollMode`|7.2.0| | | | | |
+|`CUFILE_PARAM_RDMA_TRANSPORT`|1.19.0| | | |`hipFileParamRdmaTransport`| | | | | | |
 |`CUFILE_PARAM_SKIP_TOPOLOGY_DETECTION`|1.14.0| | | |`hipFileParamSkipTopologyDetection`|7.2.0| | | | | |
 |`CUFILE_PARAM_STREAM_MEMOPS_BYPASS`|1.14.0| | | |`hipFileParamStreamMemopsBypass`|7.2.0| | | | | |
 |`CUFILE_PARAM_USE_PCIP2PDMA`|1.14.0| | | |`hipFileParamUsePcip2pdma`|7.2.0| | | | | |
@@ -128,8 +131,12 @@
 |`CU_FILE_PERMISSION_DENIED`|1.0.0| | | |`hipFilePermissionDenied`|7.2.0| | | | | |
 |`CU_FILE_PLATFORM_NOT_SUPPORTED`|1.0.0| | | |`hipFilePlatformNotSupported`|7.2.0| | | | | |
 |`CU_FILE_POSIX_IO_MODE`|1.17.0| | | | | | | | | | |
+|`CU_FILE_RDMA_ERR_BASE`|1.19.0| | | | | | | | | | |
 |`CU_FILE_RDMA_REGISTER`|1.0.0| | | |`HIPFILE_RDMA_REGISTER`|7.2.0| | | | | |
 |`CU_FILE_RDMA_RELAXED_ORDERING`|1.0.0| | | |`HIPFILE_RDMA_RELAXED_ORDERING`|7.2.0| | | | | |
+|`CU_FILE_RDMA_RESET_TOKEN`|1.19.0| | | | | | | | | | |
+|`CU_FILE_RDMA_RESET_TOKEN_FAILED`|1.19.0| | | | | | | | | | |
+|`CU_FILE_RDMA_SUCCESS`|1.19.0| | | | | | | | | | |
 |`CU_FILE_SCALEFLUX_CSD_SUPPORTED`|1.0.0| | | |`hipFileScaleFluxCSDSupported`|7.2.0| | | | | |
 |`CU_FILE_SCATEFS_SUPPORTED`|1.14.0| | | | | | | | | | |
 |`CU_FILE_SCSI_SUPPORTED`|1.0.0| | | |`hipFileSCSISupported`|7.2.0| | | | | |
@@ -140,6 +147,7 @@
 |`CU_FILE_STREAM_PAGE_ALIGNED_INPUTS`|1.7.0| | | |`HIPFILE_STREAM_PAGE_ALIGNED_INPUTS`|7.2.0| | | | | |
 |`CU_FILE_SUCCESS`|1.0.0| | | |`hipFileSuccess`|7.2.0| | | | | |
 |`CU_FILE_USE_POLL_MODE`|1.0.0| | | |`hipFileUsePollMode`|7.2.0| | | | | |
+|`CU_FILE_VANILLA_POSIX_IO_MODE`|1.19.0| | | | | | | | | | |
 |`CU_FILE_VIRTIOFS_SUPPORTED`|1.16.0| | | | | | | | | | |
 |`CU_FILE_WEKAFS_SUPPORTED`|1.0.0| | | |`hipFileWekaFSSupported`|7.2.0| | | | | |
 |`CUfileBatchHandle_t`|1.2.0| | | |`hipFileBatchHandle_t`|7.2.0| | | | | |
@@ -163,6 +171,8 @@
 |`CUfileIOEvents_t`|1.2.0| | | |`hipFileIOEvents_t`|7.2.0| | | | | |
 |`CUfileIOParams`|1.2.0| | | |`hipFileIOParams`|7.2.0| | | | | |
 |`CUfileIOParams_t`|1.2.0| | | |`hipFileIOParams_t`|7.2.0| | | | | |
+|`CUfileIOVec`|1.19.0| | | | | | | | | | |
+|`CUfileIOVec_t`|1.19.0| | | | | | | | | | |
 |`CUfileOpCounter`|1.15.0| | | | | | | | | | |
 |`CUfileOpCounter_t`|1.15.0| | | | | | | | | | |
 |`CUfileOpError`|1.0.0| | | |`hipFileOpError_t`|7.2.0| | | | | |
@@ -224,6 +234,7 @@
 |`cuFileHandleRegister`|1.0.0| | | |`hipFileHandleRegister`|7.2.0| | | | | |
 |`cuFileRead`|1.0.0| | | |`hipFileRead`|7.2.0| | | | | |
 |`cuFileReadAsync`|1.7.0| | | |`hipFileReadAsync`|7.2.0| | | | | |
+|`cuFileReadv`|1.19.0| | | | | | | | | | |
 |`cuFileSetParameterBool`|1.14.0| | | |`hipFileSetParameterBool`|7.2.0| | | | | |
 |`cuFileSetParameterGpuBounceBufferSlabArray`|1.17.0| | | | | | | | | | |
 |`cuFileSetParameterPosixPoolSlabArray`|1.15.0| | | | | | | | | | |
@@ -238,5 +249,6 @@
 |`cuFileUseCount`|1.4.0| | | |`hipFileUseCount`|7.2.0| | | | | |
 |`cuFileWrite`|1.0.0| | | |`hipFileWrite`|7.2.0| | | | | |
 |`cuFileWriteAsync`|1.7.0| | | |`hipFileWriteAsync`|7.2.0| | | | | |
+|`cuFileWritev`|1.19.0| | | | | | | | | | |
 |`cufileop_status_error`|1.0.0| | | |`hipFileOpStatusError`|7.2.0| | | | | |
 
