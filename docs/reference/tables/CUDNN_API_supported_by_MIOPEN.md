@@ -548,6 +548,10 @@
 |`CUDNN_FWD_MODE_INFERENCE`|8.0.1| | | |`miopenRNNInference`|6.0.0| | | | | |
 |`CUDNN_FWD_MODE_TRAINING`|8.0.1| | | |`miopenRNNTraining`|6.0.0| | | | | |
 |`CUDNN_GENSTATS_SUM_SQSUM`|8.0.1| | | | | | | | | | |
+|`CUDNN_GNN_AGG_MAX`|9.26.0| | | | | | | | | | |
+|`CUDNN_GNN_AGG_MEAN`|9.26.0| | | | | | | | | | |
+|`CUDNN_GNN_AGG_MIN`|9.26.0| | | | | | | | | | |
+|`CUDNN_GNN_AGG_SUM`|9.26.0| | | | | | | | | | |
 |`CUDNN_GROUP_NORM`|8.5.0| | | | | | | | | | |
 |`CUDNN_GRU`|5.0.0| | | |`miopenGRU`|2.1.0| | | | | |
 |`CUDNN_HEUR_MODES_COUNT`|8.0.1| | | |`MIOPEN_HEUR_MODES_COUNT`|6.2.0| | | | | |
@@ -1046,6 +1050,8 @@
 |`cudnnFusedOpsVariantParamStruct`|7.6.0|9.0.0| | | | | | | | | |
 |`cudnnFusedOps_t`|7.6.0|9.0.0| | | | | | | | | |
 |`cudnnGenStatsMode_t`|8.0.1| | | | | | | | | | |
+|`cudnnGnnAggOp_t`|9.26.0| | | | | | | | | | |
+|`cudnnGnnCscGraph_t`|9.26.0| | | | | | | | | | |
 |`cudnnHandle_t`|1.0.0| | | |`miopenHandle_t`|2.1.0| | | | | |
 |`cudnnIndicesType_t`|6.0.0|9.0.0| | |`miopenIndicesType_t`|3.9.0| | | | | |
 |`cudnnLRNDescriptor_t`|3.0.0| | | |`miopenLRNDescriptor_t`|2.1.0| | | | | |
@@ -1303,6 +1309,8 @@
 |`cudnnGetTensorSizeInBytes`|6.0.0| | | | | | | | | | |
 |`cudnnGetTensorTransformDescriptor`|7.5.0|9.0.0| | | | | | | | | |
 |`cudnnGetVersion`|2.0.0| | | | | | | | | | |
+|`cudnnGnnAggSimpleBackward`|9.26.0| | | | | | | | | | |
+|`cudnnGnnAggSimpleForward`|9.26.0| | | | | | | | | | |
 |`cudnnGraphVersionCheck`|9.0.0| | | | | | | | | | |
 |`cudnnIm2Col`|2.0.0|9.0.0| | | | | | | | | |
 |`cudnnInitTransformDest`|7.5.0|9.0.0| | | | | | | | | |
