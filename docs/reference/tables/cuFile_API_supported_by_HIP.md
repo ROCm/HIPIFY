@@ -127,6 +127,7 @@
 |`CU_FILE_P2P_FLAG_NVFS`|1.16.0| | | | | | | | | | |
 |`CU_FILE_P2P_FLAG_PCI_P2PDMA`|1.16.0| | | | | | | | | | |
 |`CU_FILE_P2P_SUPPORTED`|1.16.0| | | | | | | | | | |
+|`CU_FILE_PANFS_SUPPORTED`|1.19.1| | | | | | | | | | |
 |`CU_FILE_PARALLEL_IO_SUPPORTED`|1.8.0| | | |`hipFileParallelIOSupported`|7.2.0| | | | | |
 |`CU_FILE_PERMISSION_DENIED`|1.0.0| | | |`hipFilePermissionDenied`|7.2.0| | | | | |
 |`CU_FILE_PLATFORM_NOT_SUPPORTED`|1.0.0| | | |`hipFilePlatformNotSupported`|7.2.0| | | | | |

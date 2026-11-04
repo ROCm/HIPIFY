@@ -108,6 +108,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_TYPE_NAME_MAP = [] {
   m["CU_FILE_NVME_P2P_SUPPORTED"]                            = {"hipFileNVMeP2PSupported",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1};
   m["CU_FILE_SCATEFS_SUPPORTED"]                             = {"hipFileScateFsSupported",                        "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
   m["CU_FILE_VIRTIOFS_SUPPORTED"]                            = {"hipFileVirtioFsSupported",                       "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
+  m["CU_FILE_PANFS_SUPPORTED"]                               = {"hipFilePanfsSupported",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
   m["CU_FILE_MAX_TARGET_TYPES"]                              = {"hipFileMaxTargetTypes",                          "", CONV_NUMERIC_LITERAL, API_FILE, 1, UNSUPPORTED};
   m["CU_FILE_USE_POLL_MODE"]                                 = {"hipFileUsePollMode",                             "", CONV_NUMERIC_LITERAL, API_FILE, 1};
   m["CU_FILE_ALLOW_COMPAT_MODE"]                             = {"hipFileAllowCompatMode",                         "", CONV_NUMERIC_LITERAL, API_FILE, 1};
@@ -394,6 +395,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_TYPE_NAME_VER_MAP = [
   m["CUFILE_PARAM_PROPERTIES_POSIX_IO_MODE"]                 = {CUFILE_1190, CUDA_0, CUDA_0};
   m["CUFILE_PARAM_GDS_FALLBACK_IO"]                          = {CUFILE_1190, CUDA_0, CUDA_0};
   m["CUFILE_PARAM_RDMA_TRANSPORT"]                           = {CUFILE_1190, CUDA_0, CUDA_0};
+  m["CU_FILE_PANFS_SUPPORTED"]                               = {CUFILE_1191, CUDA_0, CUDA_0};
 
   return m;
 }();
