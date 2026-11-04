@@ -4628,6 +4628,7 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'CU_FILE_P2P_FLAG_NVFS' => 1,
     'CU_FILE_P2P_FLAG_PCI_P2PDMA' => 1,
     'CU_FILE_P2P_SUPPORTED' => 1,
+    'CU_FILE_PANFS_SUPPORTED' => 1,
     'CU_FILE_POSIX_IO_MODE' => 1,
     'CU_FILE_RDMA_ERR_BASE' => 1,
     'CU_FILE_RDMA_RESET_TOKEN' => 1,
