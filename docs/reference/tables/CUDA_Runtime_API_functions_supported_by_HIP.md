@@ -38,7 +38,7 @@
 |`cudaGetDeviceCount`| | | | |`hipGetDeviceCount`|1.6.0| | | | | |
 |`cudaGetDeviceFlags`| | | | |`hipGetDeviceFlags`|3.6.0| | | | | |
 |`cudaGetDeviceProperties`| | | | |`hipGetDeviceProperties`|1.6.0| | | | | |
-|`cudaInitDevice`|12.0| | | |`hipInitDevice`|10.1.0| | | | | |
+|`cudaInitDevice`|12.0| | | |`hipInitDevice`|10.1.0| | | | |10.1.0|
 |`cudaIpcCloseMemHandle`| | | | |`hipIpcCloseMemHandle`|1.6.0| | | | | |
 |`cudaIpcGetEventHandle`| | | | |`hipIpcGetEventHandle`|1.6.0| | | | | |
 |`cudaIpcGetMemHandle`| | | | |`hipIpcGetMemHandle`|1.6.0| | | | | |
@@ -1549,7 +1549,7 @@
 |`cudaHostTaskBlocking`|13.2| | | | | | | | | | |
 |`cudaHostTaskSpinWait`|13.2| | | | | | | | | | |
 |`cudaHostTaskSyncMode`|13.2| | | | | | | | | | |
-|`cudaInitDeviceFlagsAreValid`|12.0| | | |`hipInitDeviceFlagsAreValid`|10.1.0| | | | | |
+|`cudaInitDeviceFlagsAreValid`|12.0| | | |`hipInitDeviceFlagsAreValid`|10.1.0| | | | |10.1.0|
 |`cudaInvalidDeviceId`|8.0| | | |`hipInvalidDeviceId`|3.7.0| | | | | |
 |`cudaIpcEventHandle_st`| | | | |`hipIpcEventHandle_st`|3.5.0| | | | | |
 |`cudaIpcEventHandle_t`| | | | |`hipIpcEventHandle_t`|1.6.0| | | | | |
