@@ -217,7 +217,33 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuKernelGetLibrary"]                                                = {"hipKernelGetLibrary",                                         "", CONV_LIBRARY, API_DRIVER, SEC::LIBRARY};
 
-  // 13. Memory Management
+  // 13. Logical Endpoint
+  //
+  m["cuLogicalEndpointIdReserve"]                                        = {"hipLogicalEndpointIdReserve",                                 "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointIdRelease"]                                        = {"hipLogicalEndpointIdRelease",                                 "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointCreate"]                                           = {"hipLogicalEndpointCreate",                                    "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointAddDevice"]                                        = {"hipLogicalEndpointAddDevice",                                 "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointDestroy"]                                          = {"hipLogicalEndpointDestroy",                                   "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointBindAddr"]                                         = {"hipLogicalEndpointBindAddr",                                  "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointBindMem"]                                          = {"hipLogicalEndpointBindMem",                                   "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointUnbind"]                                           = {"hipLogicalEndpointUnbind",                                    "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointExport"]                                           = {"hipLogicalEndpointExport",                                    "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //  
+  m["cuLogicalEndpointImport"]                                           = {"hipLogicalEndpointImport",                                    "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointGetLimits"]                                        = {"hipLogicalEndpointGetLimits",                                 "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+  //
+  m["cuLogicalEndpointQuery"]                                            = {"hipLogicalEndpointQuery",                                     "", CONV_LOGICAL_ENDPOINT, API_DRIVER, SEC::LOGICAL_ENDPOINT, HIP_UNSUPPORTED};
+
+  // 14. Memory Management
   // no analogue
   m["cuArray3DCreate"]                                                   = {"hipArray3DCreate",                                            "", CONV_MEMORY, API_DRIVER, SEC::MEMORY};
   //
@@ -458,7 +484,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaMemcpy3DWithAttributesAsync
   m["cuMemcpy3DWithAttributesAsync"]                                     = {"hipMemcpy3DWithAttributesAsync",                              "", CONV_MEMORY, API_DRIVER, SEC::MEMORY, HIP_UNSUPPORTED};
 
-  // 14. Virtual Memory Management
+  // 15. Virtual Memory Management
   // no analogue
   m["cuMemAddressFree"]                                                  = {"hipMemAddressFree",                                           "", CONV_VIRTUAL_MEMORY, API_DRIVER, SEC::VIRTUAL_MEMORY};
   m["cuMemAddressReserve"]                                               = {"hipMemAddressReserve",                                        "", CONV_VIRTUAL_MEMORY, API_DRIVER, SEC::VIRTUAL_MEMORY};
@@ -475,7 +501,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuMemUnmap"]                                                        = {"hipMemUnmap",                                                 "", CONV_VIRTUAL_MEMORY, API_DRIVER, SEC::VIRTUAL_MEMORY};
   m["cuMemMapArrayAsync"]                                                = {"hipMemMapArrayAsync",                                         "", CONV_VIRTUAL_MEMORY, API_DRIVER, SEC::VIRTUAL_MEMORY};
 
-  // 15. Stream Ordered Memory Allocator
+  // 16. Stream Ordered Memory Allocator
   // cudaFreeAsync
   m["cuMemFreeAsync"]                                                    = {"hipFreeAsync",                                                "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY};
   // cudaMallocAsync
@@ -511,7 +537,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaMemSetMemPool
   m["cuMemSetMemPool"]                                                   = {"hipMemSetMemPool",                                            "", CONV_ORDERED_MEMORY, API_DRIVER, SEC::ORDERED_MEMORY};
 
-  // 16. Multicast Object Management
+  // 17. Multicast Object Management
   //
   m["cuMulticastCreate"]                                                 = {"hipMulticastCreate",                                          "", CONV_MULTICAST, API_DRIVER, SEC::MULTICAST, HIP_UNSUPPORTED};
   //
@@ -529,7 +555,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuMulticastGetGranularity"]                                         = {"hipMulticastGetGranularity",                                  "", CONV_MULTICAST, API_DRIVER, SEC::MULTICAST, HIP_UNSUPPORTED};
 
-  // 17. Unified Addressing
+  // 18. Unified Addressing
   // cudaMemAdvise
   m["cuMemAdvise"]                                                       = {"hipMemAdvise",                                                "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED, HIP_PARTIALLY_SUPPORTED};
   // cudaMemAdvise_v2
@@ -556,7 +582,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaMemDiscardAndPrefetchBatchAsync
   m["cuMemDiscardAndPrefetchBatchAsync"]                                 = {"hipDrvMemDiscardAndPrefetchBatchAsync",                       "", CONV_UNIFIED, API_DRIVER, SEC::UNIFIED};
 
-  // 18. Stream Management
+  // 19. Stream Management
   // cudaStreamAddCallback
   m["cuStreamAddCallback"]                                               = {"hipStreamAddCallback",                                        "", CONV_STREAM, API_DRIVER, SEC::STREAM};
   // cudaStreamAttachMemAsync
@@ -620,7 +646,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuStreamEndCaptureToCig"]                                           = {"hipStreamEndCaptureToCig",                                    "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED};
 
-  // 19. Event Management
+  // 20. Event Management
   // cudaEventCreateWithFlags
   m["cuEventCreate"]                                                     = {"hipEventCreateWithFlags",                                     "", CONV_EVENT, API_DRIVER, SEC::EVENT};
   // cudaEventDestroy
@@ -639,7 +665,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaEventRecordWithFlags
   m["cuEventRecordWithFlags"]                                            = {"hipEventRecordWithFlags",                                     "", CONV_EVENT, API_DRIVER, SEC::EVENT};
 
-  // 20. External Resource Interoperability
+  // 21. External Resource Interoperability
   // cudaDestroyExternalMemory
   m["cuDestroyExternalMemory"]                                           = {"hipDestroyExternalMemory",                                    "", CONV_EXTERNAL_RES, API_DRIVER, SEC::EXTERNAL_RES};
   // cudaDestroyExternalSemaphore
@@ -657,7 +683,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaWaitExternalSemaphoresAsync
   m["cuWaitExternalSemaphoresAsync"]                                     = {"hipWaitExternalSemaphoresAsync",                              "", CONV_EXTERNAL_RES, API_DRIVER, SEC::EXTERNAL_RES};
 
-  // 21. Stream Memory Operations
+  // 22. Stream Memory Operations
   // no analogues
   m["cuStreamBatchMemOp"]                                                = {"hipStreamBatchMemOp",                                         "", CONV_STREAM_MEMORY, API_DRIVER, SEC::STREAM_MEMORY};
   m["cuStreamBatchMemOp_v2"]                                             = {"hipStreamBatchMemOp",                                         "", CONV_STREAM_MEMORY, API_DRIVER, SEC::STREAM_MEMORY};
@@ -686,7 +712,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // hipError_t hipStreamWriteValue64(hipStream_t stream, void* ptr, int64_t value, unsigned int flags);
   m["cuStreamWriteValue64_v2"]                                           = {"hipStreamWriteValue64",                                       "", CONV_STREAM_MEMORY, API_DRIVER, SEC::STREAM_MEMORY};
 
-  // 22. Execution Control
+  // 23. Execution Control
   // no analogue
   m["cuFuncGetAttribute"]                                                = {"hipFuncGetAttribute",                                         "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION};
   // no analogue
@@ -727,7 +753,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaFuncGetParamCount
   m["cuFuncGetParamCount"]                                               = {"hipFuncGetParamCount",                                        "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION, HIP_UNSUPPORTED};
 
-  // 23. Execution Control [DEPRECATED]
+  // 24. Execution Control [DEPRECATED]
   // no analogue
   m["cuFuncSetBlockShape"]                                               = {"hipFuncSetBlockShape",                                        "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED};
   // no analogue
@@ -750,7 +776,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // no analogue
   m["cuParamSetv"]                                                       = {"hipParamSetv",                                                "", CONV_EXECUTION, API_DRIVER, SEC::EXECUTION_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED};
 
-  // 24. Graph Management
+  // 25. Graph Management
   // cudaGraphAddChildGraphNode
   m["cuGraphAddChildGraphNode"]                                          = {"hipGraphAddChildGraphNode",                                   "", CONV_GRAPH, API_DRIVER, SEC::GRAPH};
   // cudaGraphAddDependencies
@@ -949,7 +975,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGraphNodeGetContainingGraph
   m["cuGraphNodeGetContainingGraph"]                                     = {"hipGraphNodeGetContainingGraph",                              "", CONV_GRAPH, API_DRIVER, SEC::GRAPH, HIP_UNSUPPORTED};
 
-  // 25. Occupancy
+  // 26. Occupancy
   // cudaOccupancyAvailableDynamicSMemPerBlock
   m["cuOccupancyAvailableDynamicSMemPerBlock"]                           = {"hipOccupancyAvailableDynamicSMemPerBlock",                    "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY};
   // cudaOccupancyMaxActiveBlocksPerMultiprocessor
@@ -967,7 +993,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGraphNodeGetParams
   m["cuGraphNodeGetParams"]                                              = {"hipGraphNodeGetParams",                                       "", CONV_OCCUPANCY, API_DRIVER, SEC::OCCUPANCY, HIP_UNSUPPORTED};
 
-  // 26. Texture Reference Management [DEPRECATED]
+  // 27. Texture Reference Management [DEPRECATED]
   // no analogues
   m["cuTexRefGetAddress"]                                                = {"hipTexRefGetAddress",                                         "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, DEPRECATED};
   m["cuTexRefGetAddress_v2"]                                             = {"hipTexRefGetAddress",                                         "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, DEPRECATED};
@@ -1002,12 +1028,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuTexRefCreate"]                                                    = {"hipTexRefCreate",                                             "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED};
   m["cuTexRefDestroy"]                                                   = {"hipTexRefDestroy",                                            "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED};
 
-  // 27. Surface Reference Management [DEPRECATED]
+  // 28. Surface Reference Management [DEPRECATED]
   // no analogues
   m["cuSurfRefGetArray"]                                                 = {"hipSurfRefGetArray",                                          "", CONV_SURFACE, API_DRIVER, SEC::SURFACE_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED};
   m["cuSurfRefSetArray"]                                                 = {"hipSurfRefSetArray",                                          "", CONV_SURFACE, API_DRIVER, SEC::SURFACE_DEPRECATED, HIP_UNSUPPORTED | CUDA_DEPRECATED};
 
-  // 28. Texture Object Management
+  // 29. Texture Object Management
   // no analogue
   // NOTE: Not equal to cudaCreateTextureObject due to different signatures
   m["cuTexObjectCreate"]                                                 = {"hipTexObjectCreate",                                          "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE};
@@ -1022,7 +1048,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // NOTE: Not equal to cudaGetTextureObjectTextureDesc due to different signatures
   m["cuTexObjectGetTextureDesc"]                                         = {"hipTexObjectGetTextureDesc",                                  "", CONV_TEXTURE, API_DRIVER, SEC::TEXTURE};
 
-  // 29. Surface Object Management
+  // 30. Surface Object Management
   // no analogue
   // NOTE: Not equal to cudaCreateSurfaceObject due to different signatures
   m["cuSurfObjectCreate"]                                                = {"hipSurfObjectCreate",                                         "", CONV_TEXTURE, API_DRIVER, SEC::SURFACE, HIP_UNSUPPORTED};
@@ -1032,7 +1058,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // NOTE: Not equal to cudaGetSurfaceObjectResourceDesc due to different signatures
   m["cuSurfObjectGetResourceDesc"]                                       = {"hipSurfObjectGetResourceDesc",                                "", CONV_TEXTURE, API_DRIVER, SEC::SURFACE, HIP_UNSUPPORTED};
 
-  // 30. Tensor Map Object Managment
+  // 31. Tensor Map Object Managment
   //
   m["cuTensorMapEncodeTiled"]                                            = {"hipTensorMapEncodeTiled",                                     "", CONV_TENSOR, API_DRIVER, SEC::TENSOR, HIP_UNSUPPORTED};
   //
@@ -1042,7 +1068,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuTensorMapEncodeIm2colWide"]                                       = {"hipTensorMapEncodeIm2colWide",                                "", CONV_TENSOR, API_DRIVER, SEC::TENSOR, HIP_UNSUPPORTED};
 
-  // 31. Peer Context Memory Access
+  // 32. Peer Context Memory Access
   // no analogue
   // NOTE: Not equal to cudaDeviceEnablePeerAccess due to different signatures
   m["cuCtxEnablePeerAccess"]                                             = {"hipCtxEnablePeerAccess",                                      "", CONV_PEER, API_DRIVER, SEC::PEER, HIP_DEPRECATED};
@@ -1056,7 +1082,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaDeviceGetP2PAtomicCapabilities
   m["cuDeviceGetP2PAtomicCapabilities"]                                  = {"hipDeviceGetP2PAtomicCapabilities",                           "", CONV_PEER, API_DRIVER, SEC::PEER, HIP_UNSUPPORTED};
 
-  // 32. Graphics Interoperability
+  // 33. Graphics Interoperability
   // cudaGraphicsMapResources
   m["cuGraphicsMapResources"]                                            = {"hipGraphicsMapResources",                                     "", CONV_GRAPHICS, API_DRIVER, SEC::GRAPHICS};
   // cudaGraphicsResourceGetMappedMipmappedArray
@@ -1076,11 +1102,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGraphicsUnregisterResource
   m["cuGraphicsUnregisterResource"]                                      = {"hipGraphicsUnregisterResource",                               "", CONV_GRAPHICS, API_DRIVER, SEC::GRAPHICS};
 
-  // 33. Driver Entry Point Access
+  // 34. Driver Entry Point Access
   // cudaGetDriverEntryPoint
   m["cuGetProcAddress"]                                                  = {"hipGetProcAddress",                                           "", CONV_DRIVER_ENTRY_POINT, API_DRIVER, SEC::DRIVER_ENTRY_POINT};
 
-  // 34. Coredump Attributes Control API
+  // 35. Coredump Attributes Control API
   //
   m["cuCoredumpGetAttribute"]                                            = {"hipCoredumpGetAttribute",                                     "", CONV_COREDUMP, API_DRIVER, SEC::COREDUMP, HIP_UNSUPPORTED};
   //
@@ -1100,7 +1126,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuCoredumpDeregisterCompleteCallback"]                              = {"hipCoredumpDeregisterCompleteCallback",                       "", CONV_COREDUMP, API_DRIVER, SEC::COREDUMP, HIP_UNSUPPORTED};
 
-  // 35. Green Contexts
+  // 36. Green Contexts
   //
   m["cuGreenCtxCreate"]                                                  = {"hipGreenCtxCreate",                                           "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
   //
@@ -1132,7 +1158,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuStreamGetDevResource"]                                            = {"hipStreamGetDevResource",                                     "", CONV_GREEN_CONTEXT, API_DRIVER, SEC::GREEN_CONTEXT};
 
-  // 36. Error Log Management Functions
+  // 37. Error Log Management Functions
   // cudaLogsRegisterCallback
   m["cuLogsRegisterCallback"]                                            = {"hipLogsRegisterCallback",                                     "", CONV_ERROR_LOG, API_DRIVER, SEC::ERROR_LOG, HIP_UNSUPPORTED};
   // cudaLogsUnregisterCallback
@@ -1144,7 +1170,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaLogsDumpToMemory
   m["cuLogsDumpToMemory"]                                                = {"hipLogsDumpToMemory",                                         "", CONV_ERROR_LOG, API_DRIVER, SEC::ERROR_LOG, HIP_UNSUPPORTED};
 
-  // 37. Checkpointing
+  // 38. Checkpointing
   //
   m["cuCheckpointProcessGetRestoreThreadId"]                             = {"hipCheckpointProcessGetRestoreThreadId",                      "", CONV_COREDUMP, API_DRIVER, SEC::CHECKPOINTING, HIP_UNSUPPORTED};
   //
@@ -1158,17 +1184,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   //
   m["cuCheckpointProcessUnlock"]                                         = {"hipCheckpointProcessUnlock",                                  "", CONV_COREDUMP, API_DRIVER, SEC::CHECKPOINTING, HIP_UNSUPPORTED};
 
-  // 38. Profiler Control [DEPRECATED]
+  // 39. Profiler Control [DEPRECATED]
   // cudaProfilerInitialize
   m["cuProfilerInitialize"]                                              = {"hipProfilerInitialize",                                       "", CONV_PROFILER, API_DRIVER, SEC::PROFILER_DEPRECATED, HIP_UNSUPPORTED};
 
-  // 39. Profiler Control
+  // 40. Profiler Control
   // cudaProfilerStart
   m["cuProfilerStart"]                                                   = {"hipProfilerStart",                                            "", CONV_PROFILER, API_DRIVER, SEC::PROFILER};
   // cudaProfilerStop
   m["cuProfilerStop"]                                                    = {"hipProfilerStop",                                             "", CONV_PROFILER, API_DRIVER, SEC::PROFILER};
 
-  // 40. OpenGL Interoperability
+  // 41. OpenGL Interoperability
   // cudaGLGetDevices
   m["cuGLGetDevices"]                                                    = {"hipGLGetDevices",                                             "", CONV_OPENGL, API_DRIVER, SEC::OPENGL};
   // cudaGraphicsGLRegisterBuffer
@@ -1178,7 +1204,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaWGLGetDevice
   m["cuWGLGetDevice"]                                                    = {"hipWGLGetDevice",                                             "", CONV_OPENGL, API_DRIVER, SEC::OPENGL, HIP_UNSUPPORTED};
 
-  // 40. OpenGL Interoperability [DEPRECATED]
+  // 41. OpenGL Interoperability [DEPRECATED]
   // no analogue
   m["cuGLCtxCreate"]                                                     = {"hipGLCtxCreate",                                              "", CONV_OPENGL, API_DRIVER, SEC::OPENGL, HIP_UNSUPPORTED | CUDA_DEPRECATED};
   // no analogue
@@ -1200,7 +1226,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGLUnregisterBufferObject
   m["cuGLUnregisterBufferObject"]                                        = {"hipGLUnregisterBufferObject",                                 "", CONV_OPENGL, API_DRIVER, SEC::OPENGL, HIP_UNSUPPORTED | CUDA_DEPRECATED};
 
-  // 41. Direct3D 9 Interoperability
+  // 42. Direct3D 9 Interoperability
   // no analogue
   m["cuD3D9CtxCreate"]                                                   = {"hipD3D9CtxCreate",                                            "", CONV_D3D9, API_DRIVER, SEC::D3D9, HIP_UNSUPPORTED};
     // no analogue
@@ -1214,7 +1240,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGraphicsD3D9RegisterResource
   m["cuGraphicsD3D9RegisterResource"]                                    = {"hipGraphicsD3D9RegisterResource",                             "", CONV_D3D9, API_DRIVER, SEC::D3D9, HIP_UNSUPPORTED};
 
-  // 41. Direct3D 9 Interoperability [DEPRECATED]
+  // 42. Direct3D 9 Interoperability [DEPRECATED]
   // cudaD3D9MapResources
   m["cuD3D9MapResources"]                                                = {"hipD3D9MapResources",                                         "", CONV_D3D9, API_DRIVER, SEC::D3D9, HIP_UNSUPPORTED | CUDA_DEPRECATED};
   // cudaD3D9RegisterResource
@@ -1236,7 +1262,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaD3D9UnregisterResource
   m["cuD3D9UnregisterResource"]                                          = {"hipD3D9UnregisterResource",                                   "", CONV_D3D9, API_DRIVER, SEC::D3D9, HIP_UNSUPPORTED | CUDA_DEPRECATED};
 
-  // 42. Direct3D 10 Interoperability
+  // 43. Direct3D 10 Interoperability
   // cudaD3D10GetDevice
   m["cuD3D10GetDevice"]                                                  = {"hipD3D10GetDevice",                                           "", CONV_D3D10, API_DRIVER, SEC::D3D10, HIP_UNSUPPORTED};
   // cudaD3D10GetDevices
@@ -1244,7 +1270,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGraphicsD3D10RegisterResource
   m["cuGraphicsD3D10RegisterResource"]                                   = {"hipGraphicsD3D10RegisterResource",                            "", CONV_D3D10, API_DRIVER, SEC::D3D10, HIP_UNSUPPORTED};
 
-  // 42. Direct3D 10 Interoperability [DEPRECATED]
+  // 43. Direct3D 10 Interoperability [DEPRECATED]
   // no analogue
   m["cuD3D10CtxCreate"]                                                  = {"hipD3D10CtxCreate",                                           "", CONV_D3D10, API_DRIVER, SEC::D3D10, HIP_UNSUPPORTED | CUDA_DEPRECATED};
   // no analogue
@@ -1272,7 +1298,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaD3D10UnregisterResource
   m["cuD3D10UnregisterResource"]                                         = {"hipD3D10UnregisterResource",                                  "", CONV_D3D10, API_DRIVER, SEC::D3D10, HIP_UNSUPPORTED | CUDA_DEPRECATED};
 
-  // 43. Direct3D 11 Interoperability
+  // 44. Direct3D 11 Interoperability
   // cudaD3D11GetDevice
   m["cuD3D11GetDevice"]                                                  = {"hipD3D11GetDevice",                                           "", CONV_D3D11, API_DRIVER, SEC::D3D11, HIP_UNSUPPORTED};
   // cudaD3D11GetDevices
@@ -1280,7 +1306,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaGraphicsD3D11RegisterResource
   m["cuGraphicsD3D11RegisterResource"]                                   = {"hipGraphicsD3D11RegisterResource",                            "", CONV_D3D11, API_DRIVER, SEC::D3D11, HIP_UNSUPPORTED};
 
-  // 43. Direct3D 11 Interoperability [DEPRECATED]
+  // 44. Direct3D 11 Interoperability [DEPRECATED]
   // no analogue
   m["cuD3D11CtxCreate"]                                                  = {"hipD3D11CtxCreate",                                           "", CONV_D3D11, API_DRIVER, SEC::D3D11, HIP_UNSUPPORTED | CUDA_DEPRECATED};
   // no analogue
@@ -1288,7 +1314,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // cudaD3D11GetDirect3DDevice
   m["cuD3D11GetDirect3DDevice"]                                          = {"hipD3D11GetDirect3DDevice",                                   "", CONV_D3D11, API_DRIVER, SEC::D3D11, HIP_UNSUPPORTED | CUDA_DEPRECATED};
 
-  // 44. VDPAU Interoperability
+  // 45. VDPAU Interoperability
   // cudaGraphicsVDPAURegisterOutputSurface
   m["cuGraphicsVDPAURegisterOutputSurface"]                              = {"hipGraphicsVDPAURegisterOutputSurface",                       "", CONV_VDPAU, API_DRIVER, SEC::VDPAU, HIP_UNSUPPORTED};
   // cudaGraphicsVDPAURegisterVideoSurface
@@ -1298,7 +1324,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   // no analogue
   m["cuVDPAUCtxCreate"]                                                  = {"hipVDPAUCtxCreate",                                           "", CONV_VDPAU, API_DRIVER, SEC::VDPAU, HIP_UNSUPPORTED};
 
-  // 45. EGL Interoperability
+  // 46. EGL Interoperability
   // cudaEGLStreamConsumerAcquireFrame
   m["cuEGLStreamConsumerAcquireFrame"]                                   = {"hipEGLStreamConsumerAcquireFrame",                            "", CONV_EGL, API_DRIVER, SEC::EGL, HIP_UNSUPPORTED};
   // cudaEGLStreamConsumerConnect
@@ -1723,6 +1749,18 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP = 
   m["cuCoredumpRegisterCompleteCallback"]                                = {CUDA_132, CUDA_0,   CUDA_0  };
   m["cuCoredumpDeregisterStartCallback"]                                 = {CUDA_132, CUDA_0,   CUDA_0  };
   m["cuCoredumpDeregisterCompleteCallback"]                              = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointIdReserve"]                                        = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointIdRelease"]                                        = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointCreate"]                                           = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointAddDevice"]                                        = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointDestroy"]                                          = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointBindAddr"]                                         = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointBindMem"]                                          = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointUnbind"]                                           = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointExport"]                                           = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointImport"]                                           = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointGetLimits"]                                        = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuLogicalEndpointQuery"]                                            = {CUDA_133, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -2004,6 +2042,7 @@ const std::map<unsigned int, llvm::StringRef> CUDA_DRIVER_API_SECTION_MAP = [] {
   m[SEC::MODULE]                                                         = "Module Management";
   m[SEC::MODULE_DEPRECATED]                                              = "Module Management [DEPRECATED]";
   m[SEC::LIBRARY]                                                        = "Library Management";
+  m[SEC::LOGICAL_ENDPOINT]                                               = "Logical Endpoint";
   m[SEC::MEMORY]                                                         = "Memory Management";
   m[SEC::VIRTUAL_MEMORY]                                                 = "Virtual Memory Management";
   m[SEC::ORDERED_MEMORY]                                                 = "Stream Ordered Memory Allocator";
