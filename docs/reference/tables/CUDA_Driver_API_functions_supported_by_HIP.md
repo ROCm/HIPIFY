@@ -1756,7 +1756,7 @@
 |`cuDeviceGetDefaultMemPool`|11.2| | | |`hipDeviceGetDefaultMemPool`|5.2.0| | | | | |
 |`cuDeviceGetExecAffinitySupport`|11.4| | | | | | | | | | |
 |`cuDeviceGetHostAtomicCapabilities`|13.0| | | | | | | | | | |
-|`cuDeviceGetLuid`|10.0| | | |`hipDeviceGetLuid`|10.1.0| | | | | |
+|`cuDeviceGetLuid`|10.0| | | |`hipDeviceGetLuid`|10.1.0| | | | |10.1.0|
 |`cuDeviceGetMemPool`|11.2| | | |`hipDeviceGetMemPool`|5.2.0| | | | | |
 |`cuDeviceGetName`| | | | |`hipDeviceGetName`|1.6.0| | | | | |
 |`cuDeviceGetNvSciSyncAttributes`|10.2| | | | | | | | | | |

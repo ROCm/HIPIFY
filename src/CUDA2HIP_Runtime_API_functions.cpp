@@ -92,7 +92,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_FUNCTION_MAP = [] {
   // cuDeviceGetMemPool
   m["cudaDeviceGetMemPool"]                                    = {"hipDeviceGetMemPool",                                    "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE};
   //
-  m["cudaInitDevice"]                                          = {"hipInitDevice",                                          "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE};
+  m["cudaInitDevice"]                                          = {"hipInitDevice",                                          "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, HIP_EXPERIMENTAL};
   // cuDeviceGetHostAtomicCapabilities
   m["cudaDeviceGetHostAtomicCapabilities"]                     = {"hipDeviceGetHostAtomicCapabilities",                     "", CONV_DEVICE, API_RUNTIME, SEC::DEVICE, HIP_UNSUPPORTED};
   // cuDeviceGetP2PAtomicCapabilities
@@ -1653,7 +1653,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_RUNTIME_FUNCTION_VER_MAP = [
   m["hipMemDiscardBatchAsync"]                                 = {HIP_7140, HIP_0,    HIP_0   };
   m["hipMemDiscardAndPrefetchBatchAsync"]                      = {HIP_7140, HIP_0,    HIP_0   };
   m["hipMemGetDefaultMemPool"]                                 = {HIP_10000, HIP_0,   HIP_0   };
-  m["hipInitDevice"]                                           = {HIP_10010, HIP_0,   HIP_0   };
+  m["hipInitDevice"]                                           = {HIP_10010, HIP_0,   HIP_0, HIP_LATEST};
 
   return m;
 }();
