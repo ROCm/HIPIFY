@@ -1794,7 +1794,7 @@ push(@exclude_filelist, split(',', $exclude_files));
 %exclude_dirhash = map { $_ => 1 } @exclude_dirlist;
 %exclude_filehash = map { $_ => 1 } @exclude_filelist;
 
-@statNames = ("error", "init", "version", "device", "context", "module", "library", "memory", "virtual_memory", "ordered_memory", "multicast", "unified", "stream", "event", "external_resource", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "tensor", "peer", "graphics", "driver_entry_point", "cpp", "coredump", "green_context", "error_log", "driver_interact", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
+@statNames = ("error", "init", "version", "device", "context", "module", "library", "logical_endpoint", "memory", "virtual_memory", "ordered_memory", "multicast", "unified", "stream", "event", "external_resource", "stream_memory", "execution", "graph", "occupancy", "texture", "surface", "tensor", "peer", "graphics", "driver_entry_point", "cpp", "coredump", "green_context", "error_log", "driver_interact", "profiler", "openGL", "D3D9", "D3D10", "D3D11", "VDPAU", "EGL", "thread", "complex", "library", "device_library", "device_function", "device_type", "include", "include_cuda_main_header", "include_cuda_main_header_v2", "type", "literal", "numeric_literal", "define", "extern_shared", "kernel_launch");
 
 sub totalStats {
     my %count = %{shift()};
@@ -5279,6 +5279,18 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cuLaunchHostFunc_v2' => 1,
     'cuLibraryGetModule' => 1,
     'cuLibraryGetUnifiedFunction' => 1,
+    'cuLogicalEndpointAddDevice' => 1,
+    'cuLogicalEndpointBindAddr' => 1,
+    'cuLogicalEndpointBindMem' => 1,
+    'cuLogicalEndpointCreate' => 1,
+    'cuLogicalEndpointDestroy' => 1,
+    'cuLogicalEndpointExport' => 1,
+    'cuLogicalEndpointGetLimits' => 1,
+    'cuLogicalEndpointIdRelease' => 1,
+    'cuLogicalEndpointIdReserve' => 1,
+    'cuLogicalEndpointImport' => 1,
+    'cuLogicalEndpointQuery' => 1,
+    'cuLogicalEndpointUnbind' => 1,
     'cuLogsCurrent' => 1,
     'cuLogsDumpToFile' => 1,
     'cuLogsDumpToMemory' => 1,

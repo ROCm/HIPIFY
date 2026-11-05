@@ -60,6 +60,8 @@ enum ConvTypes {
   CONV_MODULE,
   //  driver::LIBRARY
   CONV_LIBRARY,
+  //  driver::LOGICAL_ENDPOINT
+  CONV_LOGICAL_ENDPOINT,
   //  driver::MEMORY
   // runtime::MEMORY
   // runtime::MEMORY_DEPRECATED
