@@ -554,6 +554,7 @@ extern const std::vector<cudaVersions> CUDA_130_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_131_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_132_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_133_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_134_cuFile_version;
 extern const std::vector<cudaVersions> Empty_vector;
 
 struct hipCounter {
