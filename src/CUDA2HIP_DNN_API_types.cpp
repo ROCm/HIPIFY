@@ -133,6 +133,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["CUDNN_DATA_COMPLEX_FP32"]                                         = {"HIPDNN_DATA_COMPLEX_FP32",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};  // 20
   m["CUDNN_DATA_COMPLEX_FP64"]                                         = {"HIPDNN_DATA_COMPLEX_FP64",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};  // 21
   m["CUDNN_DATA_BYTE_BOOLEAN"]                                         = {"HIPDNN_DATA_BYTE_BOOLEAN",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};  // 22
+  m["CUDNN_DATA_FP8_E5M3"]                                             = {"HIPDNN_DATA_FP8_E5M3",                                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};  // 23
   m["cudnnErrQueryMode_t"]                                             = {"hipdnnErrQueryMode_t",                                            "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_ERRQUERY_RAWCODE"]                                          = {"HIPDNN_ERRQUERY_RAWCODE",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};    // 0
   m["CUDNN_ERRQUERY_NONBLOCKING"]                                      = {"HIPDNN_ERRQUERY_NONBLOCKING",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};    // 1
@@ -2239,6 +2240,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP = []
   m["CUDNN_GNN_AGG_MAX"]                                               = {CUDNN_9260,CUDA_0,    CUDA_0   };
   m["CUDNN_GNN_AGG_MIN"]                                               = {CUDNN_9260,CUDA_0,    CUDA_0   };
   m["cudnnGnnCscGraph_t"]                                              = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["CUDNN_DATA_FP8_E5M3"]                                             = {CUDNN_9260,CUDA_0,    CUDA_0   };
 
   return m;
 }();

@@ -516,6 +516,7 @@
 |`CUDNN_DATA_FP4_E2M1`|9.7.0| | | | | | | | | | |
 |`CUDNN_DATA_FP8_E4M3`|8.6.0| | | |`miopenFloat8`|6.0.0| | | | | |
 |`CUDNN_DATA_FP8_E5M2`|8.6.0| | | |`miopenBFloat8`|6.0.0| | | | | |
+|`CUDNN_DATA_FP8_E5M3`|9.26.0| | | | | | | | | | |
 |`CUDNN_DATA_FP8_E8M0`|9.7.0| | | | | | | | | | |
 |`CUDNN_DATA_HALF`|3.0.0| | | |`miopenHalf`|2.1.0| | | | | |
 |`CUDNN_DATA_INT32`|6.0.0| | | |`miopenInt32`|2.1.0| | | | | |
@@ -1209,6 +1210,8 @@
 |`cudnnDropoutForward`|5.0.0| | | |`miopenDropoutForward`|2.8.0| | | | | |
 |`cudnnDropoutGetReserveSpaceSize`|5.0.0| | | |`miopenDropoutGetReserveSpaceSize`|2.8.0| | | | | |
 |`cudnnDropoutGetStatesSize`|5.0.0| | | |`miopenDropoutGetStatesSize`|2.8.0| | | | | |
+|`cudnnFFTCausalConv1dBackward`|9.26.0| | | | | | | | | | |
+|`cudnnFFTCausalConv1dForward`|9.26.0| | | | | | | | | | |
 |`cudnnFindConvolutionBackwardDataAlgorithm`|3.0.0|9.0.0| | | | | | | | | |
 |`cudnnFindConvolutionBackwardDataAlgorithmEx`|5.0.0|9.0.0| | | | | | | | | |
 |`cudnnFindConvolutionBackwardFilterAlgorithm`|3.0.0|9.0.0| | | | | | | | | |
@@ -1316,6 +1319,9 @@
 |`cudnnInitTransformDest`|7.5.0|9.0.0| | | | | | | | | |
 |`cudnnLRNCrossChannelBackward`|3.0.0| | | | | | | | | | |
 |`cudnnLRNCrossChannelForward`|3.0.0| | | | | | | | | | |
+|`cudnnLongFFTCausalConv1dBackward`|9.26.0| | | | | | | | | | |
+|`cudnnLongFFTCausalConv1dForward`|9.26.0| | | | | | | | | | |
+|`cudnnLongFFTCausalConv1dGetBufferSizes`|9.26.0| | | | | | | | | | |
 |`cudnnMakeFusedOpsPlan`|7.6.0|9.0.0| | | | | | | | | |
 |`cudnnMultiHeadAttnBackwardData`|7.5.0|9.0.0| | | | | | | | | |
 |`cudnnMultiHeadAttnBackwardWeights`|7.5.0|9.0.0| | | | | | | | | |
