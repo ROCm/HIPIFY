@@ -263,13 +263,13 @@ Tested configurations:
     - ``8.0.5  - 9.25.1``
     - ``2019.16.11.58, 2022.17.14.37, 2026.18.8.2``
     - ``4.4.2``
-    - ``3.14.7``
+    - ``3.15.2``
   * - ``23.1.0 - 23.1.5``
     - ``7.0 - 13.2.0``
     - ``8.0.5  - 9.25.1``
     - ``2019.16.11.58, 2022.17.14.37, 2026.18.8.2``
     - ``4.4.2``
-    - ``3.14.7``
+    - ``3.15.2``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 15 2017.
 
@@ -332,8 +332,8 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\23.1.5`
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS - Failed
     -- ---- The below configuring for hipify-clang testing only ----
-    -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python314\python.exe (found suitable version "3.14.7", required range is "3.0...3.15") found components: Interpreter
-    -- Found lit: C:\Users\TT\AppData\Local\Programs\Python\Python314\Scripts\lit.exe
+    -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python315\python.exe (found suitable version "3.15.2", required range is "3.0...3.16") found components: Interpreter
+    -- Found lit: C:\Users\TT\AppData\Local\Programs\Python\Python315\Scripts\lit.exe
     -- Found FileCheck: D:\LLVM\23.1.5\dist\bin\FileCheck.exe
     -- Initial CUDA to configure:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
