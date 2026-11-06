@@ -45,3 +45,5 @@ exclude_rule 'MD041'
 exclude_rule 'MD046'
 # File should end with a single newline character
 exclude_rule 'MD047'
+# Table has missing or invalid header separation (second row)
+exclude_rule 'MD057'

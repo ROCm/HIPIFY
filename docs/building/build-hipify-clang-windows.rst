@@ -1,4 +1,4 @@
-    .. meta::
+.. meta::
    :description: Tools to automatically translate CUDA source code into portable HIP C++
    :keywords: HIPIFY, ROCm, library, tool, CUDA, CUDA2HIP, hipify-clang, hipify-perl, Windows
 
@@ -78,9 +78,9 @@ Building HIPIFY
 
     # To ensure LLVM is found, or in the case of multiple LLVM instances, specify the path to the root folder containing the LLVM distribution.
 
-    cmake -G "Visual Studio 18 2026 " -A x64 -Thost=x64 -DCMAKE_PREFIX_PATH="..\dist" -DCMAKE_INSTALL_PREFIX="..\dist" -DCMAKE_BUILD_TYPE=Release ..\hipify
+    cmake -G "Visual Studio 18 2026" -A x64 -Thost=x64 -DCMAKE_PREFIX_PATH="..\dist" -DCMAKE_INSTALL_PREFIX="..\dist" -DCMAKE_BUILD_TYPE=Release ..\hipify
 
-    # Run Visual Studio 18 2026, open the generated LLVM.sln, build all, and build project "INSTALL".
+    # Run Visual Studio 18 2026, open the generated LLVM.slnx, build all, and build project "INSTALL".
     # Alternatively, you can build using "msbuild INSTALL.vcxproj /m" using the developer command prompt.
 
 You can find the binary at ``.\dist\bin\hipify-clang`` or at the folder specified by the ``-DCMAKE_INSTALL_PREFIX`` option.
@@ -95,7 +95,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
 - Install `CUDA <https://developer.nvidia.com/cuda-toolkit-archive>`_ version 7.0 or greater.
 
-  In case of multiple CUDA installations, specify the particular version using ``DCUDA_TOOLKIT_ROOT_DIR`` option:
+  In case of multiple CUDA installations, specify the particular version using ``-DCUDA_TOOLKIT_ROOT_DIR`` option:
 
   .. code-block:: shell
 
@@ -116,7 +116,7 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
   .. code-block:: shell
 
-      -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.25.0
+      -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.25.1
 
 - [Optional] Install `CUB 1.9.8 <https://github.com/NVIDIA/cub/releases/tag/1.9.8>`_ for 
   ``CUDA < 11.0`` only; for ``CUDA >= 11.0``, the CUB shipped with CUDA will be used for testing.
@@ -126,19 +126,19 @@ We recommend that you build ``LLVM+Clang`` from sources, as prebuilt binaries ar
 
       -DCUDA_CUB_ROOT_DIR=D:\CUDA\CUB
 
-- [Optional] Download `cuFile <https://developer.download.nvidia.com/compute/cuda/redist/libcufile/linux-x86_64/libcufile-linux-x86_64-1.18.1.6-archive.tar.xz>`_ for ``CUDA >= 11.4`` only.
-  Then, extract the downloaded archive, extract it with ``tar``:
+- [Optional] Download `cuFile <https://developer.download.nvidia.com/compute/cuda/redist/libcufile/linux-x86_64/libcufile-linux-x86_64-1.19.1.55-archive.tar.xz>`_ for ``CUDA >= 11.4`` only.
+  Then, extract the downloaded archive with ``tar``:
 
   .. code-block:: shell
 
-      tar -xf libcufile-linux-x86_64-1.18.1.6-archive.tar.xz
+      tar -xf libcufile-linux-x86_64-1.19.1.55-archive.tar.xz
 
-  Copy the extracted folder to a desired location, for example, ``D:\CUDA\cuFile\1.18.1``.
+  Copy the extracted folder to a desired location, for example, ``D:\CUDA\cuFile\1.19.1``.
   To specify the path to cuFile, use the ``CUDA_FILE_ROOT_DIR`` option:
 
   .. code-block:: shell
 
-      -DCUDA_FILE_ROOT_DIR=D:\CUDA\cuFile\1.18.1
+      -DCUDA_FILE_ROOT_DIR=D:\CUDA\cuFile\1.19.1
 
 - Install `Python <https://www.python.org/downloads>`_ version 3.0 or greater.
 
@@ -248,28 +248,28 @@ Tested configurations:
     - ``3.11.4``
   * - ``17.0.1`` :sup:`6` - ``18.1.8`` :sup:`7`
     - ``7.0 - 12.3.2``
-    - ``8.0.5  - 9.25.0``
+    - ``8.0.5  - 9.25.1``
     - ``2019.16.11.57, 2022.17.14.35, 2026.18.8.2``
     - ``4.4.2``
     - ``3.14.7``
   * - ``19.1.0 - 20.1.8``
     - ``7.0 - 12.8.1``
-    - ``8.0.5  - 9.25.0``
+    - ``8.0.5  - 9.25.1``
     - ``2019.16.11.58, 2022.17.14.37, 2026.18.8.2``
     - ``4.4.2``
     - ``3.14.7``
   * - ``21.1.0 - 22.1.8``
     - ``7.0 - 12.9.1``
-    - ``8.0.5  - 9.25.0``
+    - ``8.0.5  - 9.25.1``
     - ``2019.16.11.58, 2022.17.14.37, 2026.18.8.2``
     - ``4.4.2``
-    - ``3.14.7``
-  * - ``23.0.0git``
+    - ``3.15.2``
+  * - ``23.1.0 - 23.1.5``
     - ``7.0 - 13.2.0``
-    - ``8.0.5  - 9.25.0``
+    - ``8.0.5  - 9.25.1``
     - ``2019.16.11.58, 2022.17.14.37, 2026.18.8.2``
     - ``4.4.2``
-    - ``3.14.7``
+    - ``3.15.2``
 
 :sup:`5` LLVM 14.x.x is the latest major release supporting Visual Studio 15 2017.
 
@@ -297,12 +297,12 @@ Building with testing support using ``Visual Studio 18 2026`` on ``Windows 11``:
     -DCMAKE_PREFIX_PATH=%ROOT_DIR%\dist \
     -DCUDA_TOOLKIT_ROOT_DIR="C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9" \
     -DCUDA_SDK_ROOT_DIR="C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9" \
-    -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.25.0 \
+    -DCUDA_DNN_ROOT_DIR=D:\CUDA\cuDNN\9.25.1 \
     -DCUDA_TENSOR_ROOT_DIR=D:\CUDA\cuTensor\2.7.0.0 \
     -DLLVM_EXTERNAL_LIT=%ROOT_DIR%\build\Release\bin\llvm-lit.py \
     ..\hipify
 
-The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8``):
+The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\23.1.5``):
 
 .. code-block:: shell
 
@@ -324,32 +324,32 @@ The corresponding successful output is (assuming %ROOT_DIR% is ``D:\LLVM\22.1.8`
     --    - Test hipify-clang     : ON
     --    - Is part of HIP SDK    : OFF
     --    - Install clang headers : ON
-    -- Found LLVM 22.1.8:
-    --    - CMake module path     : D:\LLVM\22.1.8\dist\lib\cmake\llvm
-    --    - Clang include path    : D:\LLVM\22.1.8\dist\include
-    --    - LLVM Include path     : D:\LLVM\22.1.8\dist\include
-    --    - Binary path           : D:\LLVM\22.1.8\dist\bin
+    -- Found LLVM 23.1.5:
+    --    - CMake module path     : D:\LLVM\23.1.5\dist\lib\cmake\llvm
+    --    - Clang include path    : D:\LLVM\23.1.5\dist\include
+    --    - LLVM Include path     : D:\LLVM\23.1.5\dist\include
+    --    - Binary path           : D:\LLVM\23.1.5\dist\bin
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS
     -- Performing Test LLVM_LINKER_SUPPORTS_B_SYMBOLIC_FUNCTIONS - Failed
     -- ---- The below configuring for hipify-clang testing only ----
-    -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python314\python.exe (found suitable version "3.14.7", required range is "3.0...3.15") found components: Interpreter
-    -- Found lit: C:\Users\TT\AppData\Local\Programs\Python\Python314\Scripts\lit.exe
-    -- Found FileCheck: D:\LLVM\22.1.8\dist\bin\FileCheck.exe
+    -- Found Python: C:\Users\TT\AppData\Local\Programs\Python\Python315\python.exe (found suitable version "3.15.2", required range is "3.0...3.16") found components: Interpreter
+    -- Found lit: C:\Users\TT\AppData\Local\Programs\Python\Python315\Scripts\lit.exe
+    -- Found FileCheck: D:\LLVM\23.1.5\dist\bin\FileCheck.exe
     -- Initial CUDA to configure:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
     --    - CUDA Samples path     : C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9
-    --    - cuDNN path            : D:\CUDA\cuDNN\9.25.0
+    --    - cuDNN path            : D:\CUDA\cuDNN\9.25.1
     --    - cuTENSOR path         : D:\CUDA\cuTensor\2.7.0.0
     --    - CUB path              :
-    --    - cuFile path           : D:\CUDA\cuFile\1.18.1
+    --    - cuFile path           : D:\CUDA\cuFile\1.19.1
     -- Found CUDAToolkit: C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include (found version "12.9.86")
     -- Found CUDA config:
     --    - CUDA Toolkit path     : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9
     --    - CUDA Samples path     : C:\ProgramData\NVIDIA Corporation\CUDA Samples\v12.9
-    --    - cuDNN path            : D:\CUDA\cuDNN\9.25.0\include
+    --    - cuDNN path            : D:\CUDA\cuDNN\9.25.1\include
     --    - cuTENSOR path         : D:\CUDA\cuTensor\2.7.0.0\include
     --    - CUB path              : C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v12.9\include
-    --    - cuFile path           : D:\CUDA\cuFile\1.18.1\include
+    --    - cuFile path           : D:\CUDA\cuFile\1.19.1\include
     -- Configuring done (4.2s)
     -- Generating done (0.1s)
     -- Build files have been written to: D:\HIPIFY\build

@@ -42,7 +42,7 @@ Release Dependencies
 
 * `LLVM+Clang <http://releases.llvm.org>`_ version is determined at least partially by
   the CUDA version you are using, as shown in the table below. The recommended Clang release
-  is the latest stable release `22.1.8 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.8>`_,
+  is the latest stable release `23.1.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.5>`_,
   or at least version `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`_.
 
 .. list-table::
@@ -51,11 +51,17 @@ Release Dependencies
     - supported LLVM release versions
     - Windows
     - Linux
-  * - `13.2.0 <https://developer.nvidia.com/cuda-13-2-0-download-archive>`_
-    - `23.0.0git <https://github.com/llvm/llvm-project>`_
+  * - `13.2.0 <https://developer.nvidia.com/cuda-13-2-0-download-archive>`_ :sup:`1`
+    - `23.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.0>`_,
+      `23.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.1>`_,
+      `23.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.2>`_,
+      `23.1.3 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.3>`_,
+      `23.1.4 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.4>`_,
+      `23.1.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.5>`_ :sup:`1`,
+      `24.0.0git <https://github.com/llvm/llvm-project>`_
     - ✅
     - ✅
-  * - `12.9.1 <https://developer.nvidia.com/cuda-12-9-1-download-archive>`_:sup:`1`
+  * - `12.9.1 <https://developer.nvidia.com/cuda-12-9-1-download-archive>`_
     - `21.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.0>`_,
       `21.1.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.1>`_,
       `21.1.2 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-21.1.2>`_,
@@ -73,7 +79,7 @@ Release Dependencies
       `22.1.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.5>`_,
       `22.1.6 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.6>`_,
       `22.1.7 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.7>`_,
-      `22.1.8 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.8>`_:sup:`1`
+      `22.1.8 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-22.1.8>`_
     - ✅
     - ✅
   * - `12.8.1 <https://developer.nvidia.com/cuda-12-8-1-download-archive>`_
@@ -213,7 +219,7 @@ Release Dependencies
       |patch for 7.0.0| :sup:`2`
       |patch for 7.0.1| :sup:`2`
       |patch for 7.1.0| :sup:`2`
-    - ❌ due to Clang bug `36384 <https://bugs.llvm.org/show_bug.cgi?id=36384">`_
+    - ❌ due to Clang bug `36384 <https://bugs.llvm.org/show_bug.cgi?id=36384>`_
   * - `9.0 <https://developer.nvidia.com/cuda-90-download-archive>`_
     - `6.0.0 <http://releases.llvm.org/download.html#6.0.0>`_,
       `6.0.1 <http://releases.llvm.org/download.html#6.0.1>`_
@@ -273,7 +279,7 @@ Release Dependencies
 In most cases, you can get a suitable version of ``LLVM+Clang`` with your package manager. However, you can also
 `download a release archive <http://releases.llvm.org/>`_ and build or install it. In case of multiple versions of ``LLVM`` installed, set
 `CMAKE_PREFIX_PATH <https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html>`_ so that
-``CMake`` can find the desired version of ``LLVM``. For example, ``-DCMAKE_PREFIX_PATH=D:\LLVM\22.1.8\dist``.
+``CMake`` can find the desired version of ``LLVM``. For example, ``-DCMAKE_PREFIX_PATH=D:\LLVM\23.1.5\dist``.
 
 Usage
 =====
@@ -309,7 +315,7 @@ header files used during the hipification process:
 
 .. code:: shell
 
-  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.9 --clang-resource-directory=/usr/llvm/22.1.8/dist/lib/clang/22
+  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.9 --clang-resource-directory=/usr/llvm/23.1.5/dist/lib/clang/23
 
 For more information, refer to the `Clang manual for compiling CUDA <https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code>`_.
 
@@ -371,11 +377,6 @@ Print statistics
 
 .. code:: cpp
 
-  [HIPIFY] info: file 'intro.cu' statistics:
-  CONVERTED refs count: 40
-  UNCONVERTED refs count: 0
-  CONVERSION %: 100.0
-  REPLACED bytes: 604
   [HIPIFY] info: file 'intro.cu' statistics:
     CONVERTED refs count: 40
     UNCONVERTED refs count: 0

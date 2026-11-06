@@ -28,6 +28,7 @@ THE SOFTWARE.
 #include <map>
 #include <set>
 #include <list>
+#include <vector>
 #include <llvm/ADT/StringRef.h>
 #include <llvm/Support/raw_ostream.h>
 #if LLVM_VERSION_MAJOR > 3
@@ -59,6 +60,8 @@ enum ConvTypes {
   CONV_MODULE,
   //  driver::LIBRARY
   CONV_LIBRARY,
+  //  driver::LOGICAL_ENDPOINT
+  CONV_LOGICAL_ENDPOINT,
   //  driver::MEMORY
   // runtime::MEMORY
   // runtime::MEMORY_DEPRECATED
@@ -262,6 +265,7 @@ enum cudaVersions {
   CUDA_131 = 13010,
   CUDA_132 = 13020,
   CUDA_133 = 13030,
+  CUDA_134 = 13040,
   CUDA_LATEST = CUDA_132,
   CUDA_PARTIALLY_SUPPORTED = CUDA_132,
   CUDNN_10 = 100,
@@ -336,7 +340,8 @@ enum cudaVersions {
   CUDNN_9230 = 9230,
   CUDNN_9240 = 9240,
   CUDNN_9250 = 9250,
-  CUDNN_LATEST = CUDNN_9250,
+  CUDNN_9260 = 9260,
+  CUDNN_LATEST = CUDNN_9260,
   CUTENSOR_1010 = 100010,
   CUTENSOR_1100 = 100100,
   CUTENSOR_1200 = 100200,
@@ -401,7 +406,9 @@ enum cudaVersions {
   CUFILE_1171 = 1000171,
   CUFILE_1180 = 1000180,
   CUFILE_1181 = 1000181,
-  CUFILE_LATEST = CUFILE_1181,
+  CUFILE_1190 = 1000190,
+  CUFILE_1191 = 1000191,
+  CUFILE_LATEST = CUFILE_1191,
   CUSPARSELT_001 = 1,
   CUSPARSELT_010 = 10,
   CUSPARSELT_020 = 20,
@@ -501,7 +508,9 @@ enum hipVersions {
   HIP_7130 = 7130,
   HIP_7140 = 7140,
   HIP_8000 = 8000,
-  HIP_LATEST = HIP_7140,
+  HIP_10000 = 10000,
+  HIP_10010 = 10010,
+  HIP_LATEST = HIP_10010,
 };
 
 struct cudaAPIversions {
@@ -545,6 +554,7 @@ extern const std::vector<cudaVersions> CUDA_130_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_131_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_132_cuFile_version;
 extern const std::vector<cudaVersions> CUDA_133_cuFile_version;
+extern const std::vector<cudaVersions> CUDA_134_cuFile_version;
 extern const std::vector<cudaVersions> Empty_vector;
 
 struct hipCounter {

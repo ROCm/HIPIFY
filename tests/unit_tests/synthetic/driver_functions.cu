@@ -1206,6 +1206,12 @@ int main() {
   // CHECK: result = hipDeviceGetUuid(&uuid, device);
   result = cuDeviceGetUuid(&uuid, device);
 
+  char *luid = nullptr;
+  // CUDA: CUresult CUDAAPI cuDeviceGetLuid(char *luid, unsigned int *deviceNodeMask, CUdevice dev);
+  // HIP: hipError_t hipDeviceGetLuid(char* luid, unsigned int* deviceNodeMask, hipDevice_t device);
+  // CHECK: result = hipDeviceGetLuid(luid, &flags, device);
+  result = cuDeviceGetLuid(luid, &flags, device);
+
   // CHECK: hipHostFn_t hostFn;
   CUhostFn hostFn;
 
@@ -2224,6 +2230,11 @@ int main() {
   // CHECK: result = hipMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
   result = cuMemGetMemPool(&memPool_t, &memLocation, memAllocationType);
 
+  // CUDA: CUresult CUDAAPI cuMemGetDefaultMemPool(CUmemoryPool *pool_out, CUmemLocation *location, CUmemAllocationType type);
+  // HIP: hipError_t hipMemGetDefaultMemPool(hipMemPool_t* memPool, hipMemLocation* location, hipMemAllocationType type);
+  // CHECK: result = hipMemGetDefaultMemPool(&memPool_t, &memLocation, memAllocationType);
+  result = cuMemGetDefaultMemPool(&memPool_t, &memLocation, memAllocationType);
+
   // CUDA: CUresult CUDAAPI cuMemPrefetchBatchAsync(CUdeviceptr* dptrs, size_t* sizes, size_t count, CUmemLocation* prefetchLocs, size_t* prefetchLocIdxs, size_t numPrefetchLocs, unsigned long long flags, CUstream hStream);
   // HIP: hipError_t hipMemPrefetchBatchAsync(void** dev_ptrs, size_t* sizes, size_t count, hipMemLocation* prefetch_locs, size_t* prefetch_loc_idxs, size_t num_prefetch_locs, unsigned long long flags, hipStream_t stream);
     // CHECK: result = hipMemPrefetchBatchAsync(&deviceptr, &sizes, sizeCount, &memLocation, &sizePrefetchLocIdxs, sizeNumPrefetchLocs, ull_2, stream);
@@ -2241,8 +2252,8 @@ int main() {
 
   // CUDA: CUresult CUDAAPI cuGreenCtxGetId(CUgreenCtx greenCtx, unsigned long long *greenCtxId);
   // HIP: hipError_t hipExecutionCtxGetId(hipExecutionCtx_t ctx, unsigned long long* ctxId);
-  // CHECK: result = hipExecutionCtxGetId(greenCtx, &ull);
-  result = cuGreenCtxGetId(greenCtx, &ull);
+  // CHECK: result = hipExecutionCtxGetId(greenCtx, &ull_2);
+  result = cuGreenCtxGetId(greenCtx, &ull_2);
 #endif
 
 #if CUDA_VERSION >= 13010
