@@ -45,6 +45,7 @@ const char *counterNames[NUM_CONV_TYPES] = {
   "context", // CONV_CONTEXT
   "module", // CONV_MODULE
   "library", // CONV_LIBRARY
+  "logical_endpoint", // CONV_LOGICAL_ENDPOINT
   "memory", // CONV_MEMORY
   "virtual_memory", // CONV_VIRTUAL_MEMORY
   "ordered_memory", // CONV_ORDERED_MEMORY
@@ -100,6 +101,7 @@ const char *counterTypes[NUM_CONV_TYPES] = {
   "CONV_CONTEXT",
   "CONV_MODULE",
   "CONV_LIBRARY",
+  "CONV_LOGICAL_ENDPOINT",
   "CONV_MEMORY",
   "CONV_VIRTUAL_MEMORY",
   "CONV_ORDERED_MEMORY",
@@ -199,6 +201,7 @@ const std::vector<cudaVersions> CUDA_130_cuFile_version = { CUFILE_1150, CUFILE_
 const std::vector<cudaVersions> CUDA_131_cuFile_version = { CUFILE_1160, CUFILE_1161 };
 const std::vector<cudaVersions> CUDA_132_cuFile_version = { CUFILE_1170, CUFILE_1171 };
 const std::vector<cudaVersions> CUDA_133_cuFile_version = { CUFILE_1180, CUFILE_1181 };
+const std::vector<cudaVersions> CUDA_134_cuFile_version = { CUFILE_1190, CUFILE_1191 };
 const std::vector<cudaVersions> Empty_vector = {};
 
 namespace {
@@ -543,6 +546,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDA_131: return "13.1";
     case CUDA_132: return "13.2";
     case CUDA_133: return "13.3";
+    case CUDA_134: return "13.4";
     case CUDNN_10: return "1.0.0";
     case CUDNN_20: return "2.0.0";
     case CUDNN_30: return "3.0.0";
@@ -615,6 +619,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDNN_9230: return "9.23.0";
     case CUDNN_9240: return "9.24.0";
     case CUDNN_9250: return "9.25.0";
+    case CUDNN_9260: return "9.26.0";
     case CUTENSOR_1010: return "1.0.1.0";
     case CUTENSOR_1100: return "1.1.0.0";
     case CUTENSOR_1200: return "1.2.0.0";
@@ -678,6 +683,8 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUFILE_1171: return "1.17.1";
     case CUFILE_1180: return "1.18.0";
     case CUFILE_1181: return "1.18.1";
+    case CUFILE_1190: return "1.19.0";
+    case CUFILE_1191: return "1.19.1";
     case CUSPARSELT_001: return "0.0.1";
     case CUSPARSELT_010: return "0.1.0";
     case CUSPARSELT_020: return "0.2.0";
@@ -794,6 +801,8 @@ const std::vector<cudaVersions> &Statistics::getCuFileVersionsForCudaVersion(con
       return CUDA_132_cuFile_version;
     case CUDA_133:
       return CUDA_133_cuFile_version;
+    case CUDA_134:
+      return CUDA_134_cuFile_version;
     default:
       return Empty_vector;
   }
@@ -879,6 +888,8 @@ std::string Statistics::getHipVersion(const hipVersions &ver) {
     case HIP_7130: return "7.13.0";
     case HIP_7140: return "7.14.0";
     case HIP_8000: return "8.0.0";
+    case HIP_10000: return "10.0.0";
+    case HIP_10010: return "10.1.0";
   }
   return "";
 }
@@ -933,6 +944,10 @@ cudaVersions Statistics::convertCudaToolkitVersion(const clang::CudaVersion &ver
     case clang::CudaVersion::CUDA_130: return CUDA_130;
     case clang::CudaVersion::CUDA_131: return CUDA_131;
     case clang::CudaVersion::CUDA_132: return CUDA_132;
+#if LLVM_VERSION_MAJOR > 23
+    case clang::CudaVersion::CUDA_133: return CUDA_133;
+    case clang::CudaVersion::CUDA_134: return CUDA_134;
+#endif
 #endif
 #endif
 #endif

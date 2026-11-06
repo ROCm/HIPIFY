@@ -361,6 +361,17 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_FUNCTION_MAP = [] {
   m["cudnnB2BCausalConv1dForward"]                              = {"hipdnnB2BCausalConv1dForward",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
   m["cudnnB2BCausalConv1dBackward"]                             = {"hipdnnB2BCausalConv1dBackward",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
 
+  // cuDNN GNN (Graph Neural Network) functions
+  m["cudnnGnnAggSimpleForward"]                                 = {"hipdnnGnnAggSimpleForward",                                 "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnGnnAggSimpleBackward"]                                = {"hipdnnGnnAggSimpleBackward",                                "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+
+  // cuDNN FFT functions
+  m["cudnnFFTCausalConv1dForward"]                              = {"hipdnnFFTCausalConv1dForward",                              "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnFFTCausalConv1dBackward"]                             = {"hipdnnFFTCausalConv1dBackward",                             "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnLongFFTCausalConv1dGetBufferSizes"]                   = {"hipdnnLongFFTCausalConv1dGetBufferSizes",                   "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnLongFFTCausalConv1dForward"]                          = {"hipdnnLongFFTCausalConv1dForward",                          "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+  m["cudnnLongFFTCausalConv1dBackward"]                         = {"hipdnnLongFFTCausalConv1dBackward",                         "",                                                                   CONV_LIB_FUNC, API_DNN, 2, UNSUPPORTED};
+
   return m;
 }();
 
@@ -655,6 +666,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_FUNCTION_VER_MAP = [] 
   m["cudnnCausalConv1dNwhBackward"]                             = {CUDNN_9240,CUDA_0,    CUDA_0   };
   m["cudnnB2BCausalConv1dForward"]                              = {CUDNN_9240,CUDA_0,    CUDA_0   };
   m["cudnnB2BCausalConv1dBackward"]                             = {CUDNN_9240,CUDA_0,    CUDA_0   };
+  m["cudnnGnnAggSimpleForward"]                                 = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["cudnnGnnAggSimpleBackward"]                                = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["cudnnFFTCausalConv1dForward"]                              = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["cudnnFFTCausalConv1dBackward"]                             = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["cudnnLongFFTCausalConv1dGetBufferSizes"]                   = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["cudnnLongFFTCausalConv1dForward"]                          = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["cudnnLongFFTCausalConv1dBackward"]                         = {CUDNN_9260,CUDA_0,    CUDA_0   };
 
   return m;
 }();

@@ -133,6 +133,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["CUDNN_DATA_COMPLEX_FP32"]                                         = {"HIPDNN_DATA_COMPLEX_FP32",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};  // 20
   m["CUDNN_DATA_COMPLEX_FP64"]                                         = {"HIPDNN_DATA_COMPLEX_FP64",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};  // 21
   m["CUDNN_DATA_BYTE_BOOLEAN"]                                         = {"HIPDNN_DATA_BYTE_BOOLEAN",                                        "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};  // 22
+  m["CUDNN_DATA_FP8_E5M3"]                                             = {"HIPDNN_DATA_FP8_E5M3",                                            "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};  // 23
   m["cudnnErrQueryMode_t"]                                             = {"hipdnnErrQueryMode_t",                                            "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_ERRQUERY_RAWCODE"]                                          = {"HIPDNN_ERRQUERY_RAWCODE",                                         "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};    // 0
   m["CUDNN_ERRQUERY_NONBLOCKING"]                                      = {"HIPDNN_ERRQUERY_NONBLOCKING",                                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};    // 1
@@ -1013,8 +1014,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["CUDNN_TENSOR_REORDERING_F16x16"]                                  = {"HIPDNN_TENSOR_REORDERING_F16x16",                                 "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_TENSOR_REORDERING_F8_128x4"]                                = {"HIPDNN_TENSOR_REORDERING_F8_128x4",                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["cudnnPaddingMode_t"]                                              = {"hipdnnPaddingMode_t",                                             "miopenPaddingMode_t",                                             CONV_TYPE, API_DNN, 1};
-  m["CUDNN_ZERO_PAD"]                                                  = {"HIPDNN_ZERO_PAD",                                                 "miopenPaddingDefault",                                            CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};
-  m["CUDNN_NEG_INF_PAD"]                                               = {"HIPDNN_NEG_INF_PAD",                                              "miopenPaddingSame",                                               CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};
+  m["CUDNN_ZERO_PAD"]                                                  = {"HIPDNN_PADDING_ZERO_PAD",                                         "miopenPaddingDefault",                                            CONV_NUMERIC_LITERAL, API_DNN, 1};
+  m["CUDNN_NEG_INF_PAD"]                                               = {"HIPDNN_PADDING_NEG_INF_PAD",                                      "miopenPaddingSame",                                               CONV_NUMERIC_LITERAL, API_DNN, 1};
   m["CUDNN_EDGE_VAL_PAD"]                                              = {"HIPDNN_EDGE_VAL_PAD",                                             "miopenPaddingValid",                                              CONV_NUMERIC_LITERAL, API_DNN, 1, HIP_UNSUPPORTED};
   m["cudnnBackendNormMode_t"]                                          = {"hipdnnBackendNormMode_t",                                         "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_LAYER_NORM"]                                                = {"HIPDNN_LAYER_NORM",                                               "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
@@ -1061,6 +1062,12 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["CUDNN_OPERATIONGRAPH_MODE_SDPA_BWD"]                              = {"HIPDNN_OPERATIONGRAPH_MODE_SDPA_BWD",                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_OPERATIONGRAPH_MODE_UNIFIED_SDPA_FWD"]                      = {"HIPDNN_OPERATIONGRAPH_MODE_UNIFIED_SDPA_FWD",                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
   m["CUDNN_OPERATIONGRAPH_MODE_UNIFIED_SDPA_BWD"]                      = {"HIPDNN_OPERATIONGRAPH_MODE_UNIFIED_SDPA_BWD",                     "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
+
+  m["cudnnGnnAggOp_t"]                                                 = {"hipdnnGnnAggOp_t",                                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED};
+  m["CUDNN_GNN_AGG_SUM"]                                               = {"HIPDNN_GNN_AGG_SUM",                                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
+  m["CUDNN_GNN_AGG_MEAN"]                                              = {"HIPDNN_GNN_AGG_MEAN",                                             "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
+  m["CUDNN_GNN_AGG_MAX"]                                               = {"HIPDNN_GNN_AGG_MAX",                                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
+  m["CUDNN_GNN_AGG_MIN"]                                               = {"HIPDNN_GNN_AGG_MIN",                                              "",                                                                CONV_NUMERIC_LITERAL, API_DNN, 1, UNSUPPORTED};
 
   // cuDNN types
   m["cudnnContext"]                                                    = {"hipdnnContext",                                                   "miopenHandle",                                                    CONV_TYPE, API_DNN, 1, HIP_UNSUPPORTED};
@@ -1126,6 +1133,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DNN_TYPE_NAME_MAP = [] {
   m["libraryPropertyType_t"]                                           = {"hipdnnLibraryPropertyType_t",                                     "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED | CUDA_REMOVED};
   m["cudnnFractionStruct"]                                             = {"hipdnnFractionStruct",                                            "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED};
   m["cudnnFraction_t"]                                                 = {"hipdnnFraction_t",                                                "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED};
+  m["cudnnGnnCscGraph_t"]                                              = {"hipdnnGnnCscGraph_t",                                             "",                                                                CONV_TYPE, API_DNN, 1, UNSUPPORTED};
 
   return m;
 }();
@@ -2226,6 +2234,13 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DNN_TYPE_NAME_VER_MAP = []
   m["CUDNN_ATTR_OPERATION_ROPE_BWD_OUTPUT_SCALE"]                      = {CUDNN_9250,CUDA_0,    CUDA_0   };
   m["CUDNN_ATTR_OPERATION_ROPE_BWD_ROPE_DIM"]                          = {CUDNN_9250,CUDA_0,    CUDA_0   };
   m["CUDNN_BACKEND_OPERATION_ROPE_BWD_DESCRIPTOR"]                     = {CUDNN_9250,CUDA_0,    CUDA_0   };
+  m["cudnnGnnAggOp_t"]                                                 = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["CUDNN_GNN_AGG_SUM"]                                               = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["CUDNN_GNN_AGG_MEAN"]                                              = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["CUDNN_GNN_AGG_MAX"]                                               = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["CUDNN_GNN_AGG_MIN"]                                               = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["cudnnGnnCscGraph_t"]                                              = {CUDNN_9260,CUDA_0,    CUDA_0   };
+  m["CUDNN_DATA_FP8_E5M3"]                                             = {CUDNN_9260,CUDA_0,    CUDA_0   };
 
   return m;
 }();

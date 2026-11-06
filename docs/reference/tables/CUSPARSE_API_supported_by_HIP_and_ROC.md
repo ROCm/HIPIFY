@@ -839,9 +839,9 @@
 |`cusparseCooSetPointers`|11.1| | | |`hipsparseCooSetPointers`|4.2.0| | | | | |`rocsparse_coo_set_pointers`|4.1.0| | | | |
 |`cusparseCooSetStridedBatch`|11.0| | | |`hipsparseCooSetStridedBatch`|5.2.0| | | | | |`rocsparse_coo_set_strided_batch`|5.2.0| | | | |
 |`cusparseCreateBlockedEll`|11.2| | | |`hipsparseCreateBlockedEll`|4.5.0| | | | | |`rocsparse_create_bell_descr`|4.5.0| | | | |
-|`cusparseCreateBsr`|12.1| | | | | | | | | | | | | | | | |
+|`cusparseCreateBsr`|12.1| | | |`hipsparseCreateBsr`|7.14.0| | | | | | | | | | | |
 |`cusparseCreateConstBlockedEll`|12.0| | | |`hipsparseCreateConstBlockedEll`|6.0.0| | | | | |`rocsparse_create_const_bell_descr`|6.0.0| | | | |
-|`cusparseCreateConstBsr`|12.1| | | | | | | | | | | | | | | | |
+|`cusparseCreateConstBsr`|12.1| | | |`hipsparseCreateConstBsr`|7.14.0| | | | | | | | | | | |
 |`cusparseCreateConstCoo`|12.0| | | |`hipsparseCreateConstCoo`|6.0.0| | | | | |`rocsparse_create_const_coo_descr`|6.0.0| | | | |
 |`cusparseCreateConstCsc`|12.0| | | |`hipsparseCreateConstCsc`|6.0.0| | | | | |`rocsparse_create_const_csc_descr`|6.0.0| | | | |
 |`cusparseCreateConstCsr`|12.0| | | |`hipsparseCreateConstCsr`|6.0.0| | | | | |`rocsparse_create_const_csr_descr`|6.0.0| | | | |

@@ -74,6 +74,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP = [] {
   m["cuFileExportPCIeTopology"]                             = {"hipFileExportPCIeTopology",                    "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
   m["cuFileSetParameterGpuBounceBufferSlabArray"]           = {"hipFileSetParameterGpuBounceBufferSlabArray",  "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
   m["cuFileGetParameterGpuBounceBufferSlabArray"]           = {"hipFileGetParameterGpuBounceBufferSlabArray",  "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
+  m["cuFileReadv"]                                          = {"hipFileReadv",                                 "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
+  m["cuFileWritev"]                                         = {"hipFileWritev",                                "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
 
   return m;
 }();
@@ -130,6 +132,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_FILE_FUNCTION_VER_MAP = []
   m["cuFileExportPCIeTopology"]                             = {CUFILE_1170, CUDA_0, CUDA_0};
   m["cuFileSetParameterGpuBounceBufferSlabArray"]           = {CUFILE_1170, CUDA_0, CUDA_0};
   m["cuFileGetParameterGpuBounceBufferSlabArray"]           = {CUFILE_1170, CUDA_0, CUDA_0};
+  m["cuFileReadv"]                                          = {CUFILE_1190, CUDA_0, CUDA_0};
+  m["cuFileWritev"]                                         = {CUFILE_1190, CUDA_0, CUDA_0};
 
   return m;
 }();

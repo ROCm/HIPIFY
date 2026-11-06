@@ -101,6 +101,12 @@ int main() {
   // CHECK: fftResult = hipfftXtSetGPUs(fftHandle, count, &iGPU);
   fftResult = cufftXtSetGPUs(fftHandle, count, &iGPU);
 
+  void** workArea = nullptr;
+  // CUDA: cufftResult CUFFTAPI cufftXtSetWorkArea(cufftHandle plan, void** workArea);
+  // HIP: HIPFFT_EXPORT hipfftResult hipfftXtSetWorkArea(hipfftHandle plan, void** workArea);
+  // CHECK: fftResult = hipfftXtSetWorkArea(fftHandle, workArea);
+  fftResult = cufftXtSetWorkArea(fftHandle, workArea);
+
   // CUDA: cufftResult CUFFTAPI cufftXtMalloc(cufftHandle plan, cudaLibXtDesc ** descriptor, cufftXtSubFormat format);
   // HIP: HIPFFT_EXPORT hipfftResult hipfftXtMalloc(hipfftHandle plan, hipLibXtDesc** desc, hipfftXtSubFormat format);
   // CHECK: fftResult = hipfftXtMalloc(fftHandle, &desc_ptr, fftXtSubFormat);

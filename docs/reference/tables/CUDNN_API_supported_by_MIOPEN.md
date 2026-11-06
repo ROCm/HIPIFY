@@ -516,6 +516,7 @@
 |`CUDNN_DATA_FP4_E2M1`|9.7.0| | | | | | | | | | |
 |`CUDNN_DATA_FP8_E4M3`|8.6.0| | | |`miopenFloat8`|6.0.0| | | | | |
 |`CUDNN_DATA_FP8_E5M2`|8.6.0| | | |`miopenBFloat8`|6.0.0| | | | | |
+|`CUDNN_DATA_FP8_E5M3`|9.26.0| | | | | | | | | | |
 |`CUDNN_DATA_FP8_E8M0`|9.7.0| | | | | | | | | | |
 |`CUDNN_DATA_HALF`|3.0.0| | | |`miopenHalf`|2.1.0| | | | | |
 |`CUDNN_DATA_INT32`|6.0.0| | | |`miopenInt32`|2.1.0| | | | | |
@@ -548,6 +549,10 @@
 |`CUDNN_FWD_MODE_INFERENCE`|8.0.1| | | |`miopenRNNInference`|6.0.0| | | | | |
 |`CUDNN_FWD_MODE_TRAINING`|8.0.1| | | |`miopenRNNTraining`|6.0.0| | | | | |
 |`CUDNN_GENSTATS_SUM_SQSUM`|8.0.1| | | | | | | | | | |
+|`CUDNN_GNN_AGG_MAX`|9.26.0| | | | | | | | | | |
+|`CUDNN_GNN_AGG_MEAN`|9.26.0| | | | | | | | | | |
+|`CUDNN_GNN_AGG_MIN`|9.26.0| | | | | | | | | | |
+|`CUDNN_GNN_AGG_SUM`|9.26.0| | | | | | | | | | |
 |`CUDNN_GROUP_NORM`|8.5.0| | | | | | | | | | |
 |`CUDNN_GRU`|5.0.0| | | |`miopenGRU`|2.1.0| | | | | |
 |`CUDNN_HEUR_MODES_COUNT`|8.0.1| | | |`MIOPEN_HEUR_MODES_COUNT`|6.2.0| | | | | |
@@ -1046,6 +1051,8 @@
 |`cudnnFusedOpsVariantParamStruct`|7.6.0|9.0.0| | | | | | | | | |
 |`cudnnFusedOps_t`|7.6.0|9.0.0| | | | | | | | | |
 |`cudnnGenStatsMode_t`|8.0.1| | | | | | | | | | |
+|`cudnnGnnAggOp_t`|9.26.0| | | | | | | | | | |
+|`cudnnGnnCscGraph_t`|9.26.0| | | | | | | | | | |
 |`cudnnHandle_t`|1.0.0| | | |`miopenHandle_t`|2.1.0| | | | | |
 |`cudnnIndicesType_t`|6.0.0|9.0.0| | |`miopenIndicesType_t`|3.9.0| | | | | |
 |`cudnnLRNDescriptor_t`|3.0.0| | | |`miopenLRNDescriptor_t`|2.1.0| | | | | |
@@ -1203,6 +1210,8 @@
 |`cudnnDropoutForward`|5.0.0| | | |`miopenDropoutForward`|2.8.0| | | | | |
 |`cudnnDropoutGetReserveSpaceSize`|5.0.0| | | |`miopenDropoutGetReserveSpaceSize`|2.8.0| | | | | |
 |`cudnnDropoutGetStatesSize`|5.0.0| | | |`miopenDropoutGetStatesSize`|2.8.0| | | | | |
+|`cudnnFFTCausalConv1dBackward`|9.26.0| | | | | | | | | | |
+|`cudnnFFTCausalConv1dForward`|9.26.0| | | | | | | | | | |
 |`cudnnFindConvolutionBackwardDataAlgorithm`|3.0.0|9.0.0| | | | | | | | | |
 |`cudnnFindConvolutionBackwardDataAlgorithmEx`|5.0.0|9.0.0| | | | | | | | | |
 |`cudnnFindConvolutionBackwardFilterAlgorithm`|3.0.0|9.0.0| | | | | | | | | |
@@ -1303,11 +1312,16 @@
 |`cudnnGetTensorSizeInBytes`|6.0.0| | | | | | | | | | |
 |`cudnnGetTensorTransformDescriptor`|7.5.0|9.0.0| | | | | | | | | |
 |`cudnnGetVersion`|2.0.0| | | | | | | | | | |
+|`cudnnGnnAggSimpleBackward`|9.26.0| | | | | | | | | | |
+|`cudnnGnnAggSimpleForward`|9.26.0| | | | | | | | | | |
 |`cudnnGraphVersionCheck`|9.0.0| | | | | | | | | | |
 |`cudnnIm2Col`|2.0.0|9.0.0| | | | | | | | | |
 |`cudnnInitTransformDest`|7.5.0|9.0.0| | | | | | | | | |
 |`cudnnLRNCrossChannelBackward`|3.0.0| | | | | | | | | | |
 |`cudnnLRNCrossChannelForward`|3.0.0| | | | | | | | | | |
+|`cudnnLongFFTCausalConv1dBackward`|9.26.0| | | | | | | | | | |
+|`cudnnLongFFTCausalConv1dForward`|9.26.0| | | | | | | | | | |
+|`cudnnLongFFTCausalConv1dGetBufferSizes`|9.26.0| | | | | | | | | | |
 |`cudnnMakeFusedOpsPlan`|7.6.0|9.0.0| | | | | | | | | |
 |`cudnnMultiHeadAttnBackwardData`|7.5.0|9.0.0| | | | | | | | | |
 |`cudnnMultiHeadAttnBackwardWeights`|7.5.0|9.0.0| | | | | | | | | |

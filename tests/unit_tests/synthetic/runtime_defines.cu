@@ -432,7 +432,7 @@ int main() {
   int GRAPH_KERNEL_NODE_PORT_PROGRAMMATIC = cudaGraphKernelNodePortProgrammatic;
 #endif
 
-#if CUDA_VERSION >= 13010
+#if CUDA_VERSION >= 13010 && CUDA_VERSION < 13040
   // CHECK: int ResourceAbiBytes = HIP_RESOURCE_ABI_BYTES;
   int ResourceAbiBytes = RESOURCE_ABI_BYTES;
 #endif
