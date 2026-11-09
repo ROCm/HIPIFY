@@ -14,10 +14,10 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
-|`CUBLAS_DIRECT_BACKWARD`|11.0| | | | | | | | | | |
-|`CUBLAS_DIRECT_FORWARD`|11.0| | | | | | | | | | |
-|`CUBLAS_STOREV_COLUMNWISE`|11.0| | | | | | | | | | |
-|`CUBLAS_STOREV_ROWWISE`|11.0| | | | | | | | | | |
+|`CUBLAS_DIRECT_BACKWARD`|11.0| | | |`HIPBLAS_DIRECT_BACKWARD`|10.1.0| | | | |10.1.0|
+|`CUBLAS_DIRECT_FORWARD`|11.0| | | |`HIPBLAS_DIRECT_FORWARD`|10.1.0| | | | |10.1.0|
+|`CUBLAS_STOREV_COLUMNWISE`|11.0| | | |`HIPBLAS_STOREV_COLUMNWISE`|10.1.0| | | | |10.1.0|
+|`CUBLAS_STOREV_ROWWISE`|11.0| | | |`HIPBLAS_STOREV_ROWWISE`|10.1.0| | | | |10.1.0|
 |`CUDALIBMG_GRID_MAPPING_COL_MAJOR`|10.1| | | | | | | | | | |
 |`CUDALIBMG_GRID_MAPPING_ROW_MAJOR`|10.1| | | | | | | | | | |
 |`CUSOLVERDN_GEQRF`|13.2| | | | | | | | | | |
