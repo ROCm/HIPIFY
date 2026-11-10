@@ -254,5 +254,10 @@ int main() {
   status = cusparseLtMatmulGetWorkspace(&handle, &plan, &workspaceSize);
 #endif
 
+#if CUSPARSELT_VERSION >= 520
+  // CHECK: hipsparseLtComputetype_t COMPUTE_32F = HIPSPARSELT_COMPUTE_32F;
+  cusparseComputeType COMPUTE_32F = CUSPARSE_COMPUTE_32F;
+#endif
+
   return 0;
 }
