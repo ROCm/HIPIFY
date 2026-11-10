@@ -645,6 +645,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_FUNCTION_MAP = [] {
   m["cuStreamBeginCaptureToCig"]                                         = {"hipStreamBeginCaptureToCig",                                  "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED};
   //
   m["cuStreamEndCaptureToCig"]                                           = {"hipStreamEndCaptureToCig",                                    "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED};
+  //
+  m["cuStreamBeginRecaptureToGraph"]                                     = {"hipStreamBeginRecaptureToGraph",                              "", CONV_STREAM, API_DRIVER, SEC::STREAM, HIP_UNSUPPORTED};
 
   // 20. Event Management
   // cudaEventCreateWithFlags
@@ -1761,6 +1763,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_DRIVER_FUNCTION_VER_MAP = 
   m["cuLogicalEndpointImport"]                                           = {CUDA_133, CUDA_0,   CUDA_0  };
   m["cuLogicalEndpointGetLimits"]                                        = {CUDA_133, CUDA_0,   CUDA_0  };
   m["cuLogicalEndpointQuery"]                                            = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cuStreamBeginRecaptureToGraph"]                                     = {CUDA_133, CUDA_0,   CUDA_0  };
 
   return m;
 }();
