@@ -5331,6 +5331,7 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cuProfilerInitialize' => 1,
     'cuStreamBeginCaptureToCig' => 1,
     'cuStreamBeginCapture_ptsz' => 1,
+    'cuStreamBeginRecaptureToGraph' => 1,
     'cuStreamEndCaptureToCig' => 1,
     'cuStreamGetCaptureInfo_v3' => 1,
     'cuStreamGetCtx' => 1,
