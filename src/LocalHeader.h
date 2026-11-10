@@ -39,6 +39,10 @@ struct IncludeEntry {
   bool isFromMainFile = false;
 };
 
+extern bool appendArgumentsAdjusters(ct::RefactoringTool &Tool,
+                                     const std::string &sSourceAbsPath,
+                                     const char *hipify_exe);
+
 extern bool hipifySingleSource(const std::string &srcPath,
                                const std::string &dstPath,
                                const ct::CompilationDatabase *compDB,

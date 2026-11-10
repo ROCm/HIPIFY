@@ -100,6 +100,8 @@ public:
     Entry.isFromMainFile = IncluderID == SM.getMainFileID();
 #if LLVM_VERSION_MAJOR > 6
     Entry.isSystem = FileType != clang::SrcMgr::C_User;
+#else
+    Entry.isSystem = IsAngled;
 #endif
 
     if (File) {
@@ -201,10 +203,6 @@ buildIncludeContext(const std::vector<IncludeEntry> &entries,
 }
 
 } // namespace
-
-bool appendArgumentsAdjusters(ct::RefactoringTool &Tool,
-                              const std::string &sSourceAbsPath,
-                              const char *hipify_exe);
 
 bool collectIncludeTree(const std::string &srcPath,
                         const ct::CompilationDatabase *compDB,
