@@ -28,6 +28,8 @@ const std::string sHIP_version = Statistics::getHipVersion(HIP_LATEST);
 
 // Maps CUDA header names to HIP header names
 extern const std::map<llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP;
+// Lists libcu++ headers (<cuda/...>) that have no libhipcxx equivalent
+extern const std::set<llvm::StringRef> CUDA_LIBCUDACXX_UNSUPPORTED_INCLUDES;
 // Maps the names of CUDA DRIVER API types to the corresponding HIP types
 extern const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP;
 // Maps the names of CUDA DRIVER API functions to the corresponding HIP functions

@@ -10253,6 +10253,30 @@ my %hash_HipDNNOnlyUnsupportedFunctions = (
     'cudnnWgradMode_t' => 1,
 );
 
+my %hash_UnsupportedLibcxxIncludes = (
+    'cuda/annotated_ptr' => 1,
+    'cuda/argument' => 1,
+    'cuda/barrier' => 1,
+    'cuda/buffer' => 1,
+    'cuda/execution.guarantee.h' => 1,
+    'cuda/execution.tie_break.h' => 1,
+    'cuda/fabric' => 1,
+    'cuda/fpemu' => 1,
+    'cuda/fpmp' => 1,
+    'cuda/fptool' => 1,
+    'cuda/latch' => 1,
+    'cuda/logical_endpoint' => 1,
+    'cuda/pipeline' => 1,
+    'cuda/ptx' => 1,
+    'cuda/semaphore' => 1,
+    'cuda/simd' => 1,
+    'cuda/std/barrier' => 1,
+    'cuda/std/execution' => 1,
+    'cuda/std/latch' => 1,
+    'cuda/std/semaphore' => 1,
+    'cuda/tma' => 1,
+);
+
 
 # Global Comment Masking to protect lit tests and documentation
 my @masked_comments;
@@ -18357,6 +18381,10 @@ while (@ARGV) {
                 my $line_num = 0;
                 foreach (@lines) {
                     $line_num++;
+                    if (m/^\s*#\s*include\s*[<"]([^>"]+)[>"]/ && exists $hash_UnsupportedLibcxxIncludes{$1}) {
+                        print STDERR "  $fileName:$line_num: warning: unsupported libhipcxx header: $1\n";
+                        $warnings++;
+                    }
                     my %unique_words = map { $_ => 1 } m/\b([a-zA-Z_]\w*)\b/g;
                     foreach my $func (keys %unique_words) {
                         if (!$experimental && exists $experimental_funcs{$func}) {

@@ -94,6 +94,7 @@ namespace perl {
   const string sHipDNNOnlyUnsupportedFunctions = "HipDNNOnlyUnsupportedFunctions";
   const string sUnsupportedDeviceFunctions = "UnsupportedDeviceFunctions";
   const string sUnsupportedDeviceDataTypes = "UnsupportedDeviceDataTypes";
+  const string sUnsupportedLibcxxIncludes = "UnsupportedLibcxxIncludes";
   const string sSimpleIncludes = "simpleIncludes";
   const string sRocIncludes = "rocIncludes";
   const string sMIOpenIncludes = "MIOpenIncludes";
@@ -563,6 +564,14 @@ namespace perl {
     TranslateToMIOpen = bTranslateToMIOpen;
   }
 
+  void generateUnsupportedLibcxxIncludes(ostream &out) {
+    out << "my %hash_" << sUnsupportedLibcxxIncludes << " = (" << endl;
+    for (const auto &name : CUDA_LIBCUDACXX_UNSUPPORTED_INCLUDES) {
+      out << tab << "'" << name.str() << "' => 1," << endl;
+    }
+    out << ");" << endl_2;
+  }
+
   void generateDeviceFunctions(ostream &out) {
     out << "my %hash_" << sSupportedDeviceFunctions << " = (" << endl;
     for (auto ma = CUDA_DEVICE_FUNCTION_MAP.begin(); ma != CUDA_DEVICE_FUNCTION_MAP.end(); ++ma) {
@@ -690,6 +699,7 @@ my $master_regex = qr/\b([a-zA-Z_]\w*)\b/;
     generateHostFunctions(out);
     generateDeviceFunctions(out);
     generateDeprecatedAndUnsupportedFunctions(out);
+    generateUnsupportedLibcxxIncludes(out);
     generateCommentMasking(out);
     generateStaticDictionaries(out);
     out << endl << "# Count of transforms in all files" << endl;
@@ -761,6 +771,10 @@ my $master_regex = qr/\b([a-zA-Z_]\w*)\b/;
     out << tab_4 << my << "$line_num = 0;" << endl;
     out << tab_4 << foreach << "(@lines) {" << endl;
     out << tab_5 << "$line_num++;" << endl;
+    out << tab_5 << "if (m/^\\s*#\\s*include\\s*[<\"]([^>\"]+)[>\"]/ && exists $hash_" << sUnsupportedLibcxxIncludes << "{$1}) {" << endl;
+    out << tab_6 << "print STDERR \"  " << warning << "unsupported libhipcxx header: $1\\n\";" << endl;
+    out << tab_6 << "$warnings++;" << endl;
+    out << tab_5 << "}" << endl;
 
     out << tab_5 << "my %unique_words = map { $_ => 1 } m/\\b([a-zA-Z_]\\w*)\\b/g;" << endl;
     out << tab_5 << "foreach my $func (keys %unique_words) {" << endl;

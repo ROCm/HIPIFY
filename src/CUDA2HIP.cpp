@@ -102,6 +102,34 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"cufile.h",                                              {"hipfile.h",                                             "",                                                               CONV_INCLUDE, API_FILE, 0}},
 };
 
+// libcu++ headers (<cuda/...> and <cuda/std/...>) that libhipcxx documents as unsupported or does not ship.
+// All other <cuda/...> headers are provided by libhipcxx under the same names and are left untouched.
+const std::set<llvm::StringRef> CUDA_LIBCUDACXX_UNSUPPORTED_INCLUDES {
+  // Listed as unsupported in the libhipcxx limitations
+  "cuda/annotated_ptr",
+  "cuda/barrier",
+  "cuda/buffer",
+  "cuda/latch",
+  "cuda/pipeline",
+  "cuda/ptx",
+  "cuda/semaphore",
+  "cuda/tma",
+  "cuda/std/barrier",
+  "cuda/std/execution",
+  "cuda/std/latch",
+  "cuda/std/semaphore",
+  // Public libcu++ headers that libhipcxx does not provide
+  "cuda/argument",
+  "cuda/execution.guarantee.h",
+  "cuda/execution.tie_break.h",
+  "cuda/fabric",
+  "cuda/fpemu",
+  "cuda/fpmp",
+  "cuda/fptool",
+  "cuda/logical_endpoint",
+  "cuda/simd",
+};
+
 const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
   static std::map<llvm::StringRef, hipCounter> ret;
   if (!ret.empty())
