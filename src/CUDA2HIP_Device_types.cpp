@@ -33,10 +33,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DEVICE_TYPE_NAME_MAP = [] {
   m["__half2_raw"]                         = {"__half2_raw",                           "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
   // Bfloat16 Precision Device types
   m["__nv_bfloat16"]                       = {"__hip_bfloat16",                        "rocblas_bfloat16",                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
-  m["nv_bfloat16"]                         = {"hip_bfloat16",                          "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
+  m["nv_bfloat16"]                         = {"__hip_bfloat16",                        "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
   m["__nv_bfloat16_raw"]                   = {"__hip_bfloat16_raw",                    "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
   m["__nv_bfloat162"]                      = {"__hip_bfloat162",                       "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
-  m["nv_bfloat162"]                        = {"hip_bfloat162",                         "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2, UNSUPPORTED};
+  m["nv_bfloat162"]                        = {"__hip_bfloat162",                       "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
   m["__nv_bfloat162_raw"]                  = {"__hip_bfloat162_raw",                   "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
   // float8 Precision Device types
   m["__nv_fp8_storage_t"]                  = {"__hip_fp8_storage_t",                   "",                                        CONV_DEVICE_TYPE, API_RUNTIME, 2};
