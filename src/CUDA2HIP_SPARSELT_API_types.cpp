@@ -35,7 +35,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
   m["cusparseLtSparsity_t"]                                              = {"hipsparseLtSparsity_t",                         "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_SPARSITY_50_PERCENT"]                                    = {"HIPSPARSELT_SPARSITY_50_PERCENT",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["cusparseComputeType"]                                               = {"hipsparseLtComputetype_t",                      "", CONV_TYPE, API_SPARSELT, 1};
-  m["CUSPARSE_COMPUTE_16F"]                                              = {"HIPSPARSELT_COMPUTE_16F",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, CUDA_REMOVED};
+  // TODO: Add support for accounting for and displaying the removed-then-restored API.
+  //       For example, CUSPARSE_COMPUTE_16F was removed in CUSPARSELT_052 and restored in CUSPARSELT_060.
+  m["CUSPARSE_COMPUTE_16F"]                                              = {"HIPSPARSELT_COMPUTE_16F",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSE_COMPUTE_8I"]                                               = {"HIPSPARSE_COMPUTE_8I",                          "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED | CUDA_REMOVED};
   m["CUSPARSE_COMPUTE_32I"]                                              = {"HIPSPARSELT_COMPUTE_32I",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSE_COMPUTE_32F"]                                              = {"HIPSPARSELT_COMPUTE_32F",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
@@ -85,7 +87,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   m["cusparseLtSparsity_t"]                                              = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSELT_SPARSITY_50_PERCENT"]                                    = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["cusparseComputeType"]                                               = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
-  m["CUSPARSE_COMPUTE_16F"]                                              = {CUSPARSELT_001, CUDA_0      , CUSPARSELT_052 };
+  m["CUSPARSE_COMPUTE_16F"]                                              = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_32I"]                                              = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_TF32"]                                             = {CUSPARSELT_010, CUDA_0      , CUSPARSELT_052 };
   m["CUSPARSE_COMPUTE_TF32_FAST"]                                        = {CUSPARSELT_010, CUDA_0      , CUSPARSELT_052 };

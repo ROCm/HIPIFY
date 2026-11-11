@@ -1686,7 +1686,6 @@ my %removed_funcs = (
     "CUSPARSE_COMPUTE_TF32_FAST" => "0.5.2",
     "CUSPARSE_COMPUTE_TF32" => "0.5.2",
     "CUSPARSE_COMPUTE_8I" => "0.5.1",
-    "CUSPARSE_COMPUTE_16F" => "0.5.2",
     "CUSPARSE_ALG_NAIVE" => "11.0",
     "CUSPARSE_ALG_MERGE_PATH" => "12.0",
     "CUSPARSE_ALG1" => "11.0",
