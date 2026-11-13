@@ -2569,6 +2569,12 @@ void HipifyAction::InclusionDirective(clang::SourceLocation hash_loc,
     firstHeader = true;
     firstHeaderLoc = hash_loc;
   }
+  if (CUDA_LIBCUDACXX_UNSUPPORTED_INCLUDES.count(file_name)) {
+    clang::DiagnosticsEngine &DE = getCompilerInstance().getDiagnostics();
+    const auto ID = DE.getCustomDiagID(clang::DiagnosticsEngine::Warning, "'%0' is unsupported header in '%1'.");
+    DE.Report(filename_range.getBegin(), ID) << file_name << "libhipcxx";
+    return;
+  }
   const auto found = CUDA_INCLUDE_MAP.find(file_name);
   if (found == CUDA_INCLUDE_MAP.end()) return;
   bool exclude = Exclude(found->second);
