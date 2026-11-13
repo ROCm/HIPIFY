@@ -293,21 +293,21 @@ with ``Clang``:
 
 .. code:: shell
 
-  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.9 -I /usr/local/cuda-12.9/samples/common/inc
+  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-13.2 -I /usr/local/cuda-13.2/samples/common/inc
 
 ``hipify-clang`` arguments are supplied first, followed by a separator ``--`` and the arguments to be
 passed to Clang for compiling the input file:
 
 .. code:: shell
 
-  ./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-12.9 -- -std=c++17
+  ./hipify-clang cpp17.cu --cuda-path=/usr/local/cuda-13.2 -- -std=c++17
 
 ``hipify-clang`` also supports the hipification of multiple files that can be specified in a single
 command with absolute or relative paths:
 
 .. code:: shell
 
-  ./hipify-clang cpp17.cu ../../square.cu /home/user/cuda/intro.cu --cuda-path=/usr/local/cuda-12.9 -- -std=c++17
+  ./hipify-clang cpp17.cu ../../square.cu /home/user/cuda/intro.cu --cuda-path=/usr/local/cuda-13.2 -- -std=c++17
 
 To use a specific version of LLVM during hipification, specify the ``hipify-clang`` option
 ``--clang-resource-directory=`` to point to the Clang resource directory, which is the
@@ -316,7 +316,7 @@ header files used during the hipification process:
 
 .. code:: shell
 
-  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-12.9 --clang-resource-directory=/usr/llvm/23.1.5/dist/lib/clang/23
+  ./hipify-clang square.cu --cuda-path=/usr/local/cuda-13.2 --clang-resource-directory=/usr/llvm/23.1.5/dist/lib/clang/23
 
 For more information, refer to the `Clang manual for compiling CUDA <https://llvm.org/docs/CompileCudaWithLLVM.html#compiling-cuda-code>`__.
 
@@ -376,7 +376,7 @@ Print statistics
 
 .. code:: shell
 
-  hipify-clang intro.cu --cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9" --print-stats
+  hipify-clang intro.cu --cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.2" --print-stats
 
 .. code:: text
 
@@ -429,7 +429,7 @@ Print CSV statistics
 
 .. code:: shell
 
-  hipify-clang intro.cu --cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v12.9" --print-stats-csv
+  hipify-clang intro.cu --cuda-path="C:/Program Files/NVIDIA GPU Computing Toolkit/CUDA/v13.2" --print-stats-csv
 
 This generates an ``intro.cu.csv`` file with statistics:
 
