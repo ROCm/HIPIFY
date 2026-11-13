@@ -1300,7 +1300,7 @@ int main() {
   __nv_bfloat16 bf16a = { 0.0f };
   __nv_bfloat16 bf16b = { 0.0f };
 
-  // CHECK: hip_bfloat16 bf16 = { 0 };
+  // CHECK: __hip_bfloat16 bf16 = { 0 };
   nv_bfloat16 bf16 = { 0 };
 
   // CHECK: __hip_bfloat16_raw bf16r = { 0 };
@@ -1312,6 +1312,9 @@ int main() {
   __nv_bfloat162 bf162 = { 0, 0 };
   __nv_bfloat162 bf162a = { 0, 0 };
   __nv_bfloat162 bf162b = { 0, 0 };
+
+  // CHECK: __hip_bfloat162 bf162c = { 0, 0 };
+  nv_bfloat162 bf162c = { 0, 0 };
 
   // CHECK: __hip_bfloat162_raw bf162r = { 0, 0 };
   __nv_bfloat162_raw bf162r = { 0, 0 };
