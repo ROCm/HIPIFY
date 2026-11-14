@@ -156,7 +156,7 @@ Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 24.04.02``
     -DCMAKE_BUILD_TYPE=Release \
     -DCMAKE_INSTALL_PREFIX=../dist \
     -DCMAKE_PREFIX_PATH=$ROOT_DIR/dist \
-    -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-12.9.1 \
+    -DCUDA_TOOLKIT_ROOT_DIR=/usr/local/cuda-13.2.0 \
     -DCUDA_DNN_ROOT_DIR=/usr/local/cudnn-9.25.1 \
     -DCUDA_TENSOR_ROOT_DIR=/usr/local/cutensor-2.7.0.0 \
     -DLLVM_EXTERNAL_LIT=$ROOT_DIR/build/bin/llvm-lit \
@@ -195,21 +195,21 @@ The corresponding successful output is (assuming ROOT_DIR is ``/usr/llvm/23.1.5`
   -- Found lit: /usr/local/bin/lit
   -- Found FileCheck: /GIT/LLVM/trunk/dist/FileCheck
   -- Initial CUDA to configure:
-  --    - CUDA Toolkit path     : /usr/local/cuda-12.9.1
+  --    - CUDA Toolkit path     : /usr/local/cuda-13.2.0
   --    - CUDA Samples path     :
   --    - cuDNN path            : /usr/local/cudnn-9.25.1
   --    - cuTENSOR path         : /usr/local/cuTensor/2.7.0.0
   --    - CUB path              :
-  -- Found CUDAToolkit: /usr/local/cuda-12.9.1/targets/x86_64-linux/include (found version "12.9.86")
+  -- Found CUDAToolkit: /usr/local/cuda-13.2.0/targets/x86_64-linux/include (found version "13.2.51")
   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD
   -- Performing Test CMAKE_HAVE_LIBC_PTHREAD - Success
   -- Found Threads: TRUE
   -- Found CUDA config:
-  --    - CUDA Toolkit path     : /usr/local/cuda-12.9.1
+  --    - CUDA Toolkit path     : /usr/local/cuda-13.2.0
   --    - CUDA Samples path     : OFF
   --    - cuDNN path            : /usr/local/cudnn-9.25.1/include
   --    - cuTENSOR path         : /usr/local/cuTensor/2.7.0.0/include
-  --    - CUB path              : /usr/local/cuda-12.9.1/include/cub
+  --    - CUB path              : /usr/local/cuda-13.2.0/include/cub
   -- Configuring done (0.6s)
   -- Generating done (0.0s)
   -- Build files have been written to: /usr/hipify/build
@@ -224,7 +224,7 @@ The corresponding successful output is:
 
   Running HIPify regression tests
   ===============================================================
-  CUDA 12.9.86 - will be used for testing
+  CUDA 13.2.51 - will be used for testing
   LLVM 23.1.5 - will be used for testing
   x86_64 - Platform architecture
   Linux 6.5.0-15-generic - Platform OS
