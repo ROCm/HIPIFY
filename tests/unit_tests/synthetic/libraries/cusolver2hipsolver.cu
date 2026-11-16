@@ -1744,6 +1744,16 @@ int main() {
   // CHECK: hipsolverStorevMode_t storev;
   cusolverStorevMode_t storev;
 
+  // CHECK: hipsolverDirectMode_t DIRECT_FORWARD = HIPBLAS_DIRECT_FORWARD;
+  // CHECK-NEXT: hipsolverDirectMode_t DIRECT_BACKWARD = HIPBLAS_DIRECT_BACKWARD;
+  cusolverDirectMode_t DIRECT_FORWARD = CUBLAS_DIRECT_FORWARD;
+  cusolverDirectMode_t DIRECT_BACKWARD = CUBLAS_DIRECT_BACKWARD;
+
+  // CHECK: hipsolverStorevMode_t STOREV_COLUMNWISE = HIPBLAS_STOREV_COLUMNWISE;
+  // CHECK-NEXT: hipsolverStorevMode_t STOREV_ROWWISE = HIPBLAS_STOREV_ROWWISE;
+  cusolverStorevMode_t STOREV_COLUMNWISE = CUBLAS_STOREV_COLUMNWISE;
+  cusolverStorevMode_t STOREV_ROWWISE = CUBLAS_STOREV_ROWWISE;
+
   // CUDA: cusolverStatus_t CUSOLVERAPI cusolverDnXlarft_bufferSize(cusolverDnHandle_t handle, cusolverDnParams_t params, cusolverDirectMode_t direct, cusolverStorevMode_t storev, int64_t n, int64_t k, cudaDataType dataTypeV, const void * V, int64_t ldv, cudaDataType dataTypeTau, const void * tau, cudaDataType dataTypeT, void * T, int64_t ldt, cudaDataType computeType, size_t * workspaceInBytesOnDevice, size_t * workspaceInBytesOnHost);
   // HIP: HIPSOLVER_EXPORT hipsolverStatus_t hipsolverDnXlarft_bufferSize(hipsolverDnHandle_t handle, hipsolverDnParams_t params, hipsolverDirectMode_t direct, hipsolverStorevMode_t storev, int64_t n, int64_t k, hipDataType dataTypeV, const void* V, int64_t ldv, hipDataType dataTypeTau, const void* tau, hipDataType dataTypeT, void* T, int64_t ldt, hipDataType computeType, size_t* lworkOnDevice, size_t* lworkOnHost);
   // CHECK: status = hipsolverDnXlarft_bufferSize(handle, solverDnParams, direct, storev, n64, m64, dataTypeA, A, lda64, dataTypeTau, A, dataTypeA, A, ldb64, computeType, &lworkOnDevice, &lworkOnHost);
