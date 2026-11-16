@@ -39,10 +39,11 @@
 |`CUSPARSELT_SPLIT_K_MODE_ONE_KERNEL`|0.3.0| | | |`HIPSPARSELT_SPLIT_K_MODE_ONE_KERNEL`|7.10.0| | | | | |
 |`CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS`|0.3.0| | | |`HIPSPARSELT_SPLIT_K_MODE_TWO_KERNELS`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_16F`|0.0.1| | | |`HIPSPARSELT_COMPUTE_16F`|7.10.0| | | | | |
+|`CUSPARSE_COMPUTE_32F`|0.5.2| | | |`HIPSPARSELT_COMPUTE_32F`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_32I`|0.0.1| | | |`HIPSPARSELT_COMPUTE_32I`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_8I`|0.5.0| | |0.5.1| | | | | | | |
-|`CUSPARSE_COMPUTE_TF32`|0.1.0| | | |`HIPSPARSELT_COMPUTE_TF32`|7.10.0| | | | | |
-|`CUSPARSE_COMPUTE_TF32_FAST`|0.1.0| | | |`HIPSPARSELT_COMPUTE_TF32_FAST`|7.10.0| | | | | |
+|`CUSPARSE_COMPUTE_TF32`|0.1.0| | |0.5.2|`HIPSPARSELT_COMPUTE_TF32`|7.10.0| | | | | |
+|`CUSPARSE_COMPUTE_TF32_FAST`|0.1.0| | |0.5.2|`HIPSPARSELT_COMPUTE_TF32_FAST`|7.10.0| | | | | |
 |`cusparseComputeType`|0.0.1| | | |`hipsparseLtComputetype_t`|7.10.0| | | | | |
 |`cusparseLtHandle_t`|0.0.1| |0.2.0, 0.5.0| |`hipsparseLtHandle_t`|7.10.0| | | | | |
 |`cusparseLtMatDescAttribute_t`|0.2.0| | | |`hipsparseLtMatDescAttribute_t`|7.10.0| | | | | |

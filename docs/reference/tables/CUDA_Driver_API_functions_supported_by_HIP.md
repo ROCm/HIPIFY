@@ -2100,6 +2100,7 @@
 |`cuStreamBeginCaptureToGraph`|12.3| | | |`hipStreamBeginCaptureToGraph`|6.2.0| | | | | |
 |`cuStreamBeginCapture_ptsz`|10.1| | | | | | | | | | |
 |`cuStreamBeginCapture_v2`|10.1| | | |`hipStreamBeginCapture`|4.3.0| | | | | |
+|`cuStreamBeginRecaptureToGraph`|13.3| | | | | | | | | | |
 |`cuStreamCopyAttributes`|11.0| | | |`hipStreamCopyAttributes`|7.2.0| | | | | |
 |`cuStreamCreate`| | | | |`hipStreamCreateWithFlags`|1.6.0| | | | | |
 |`cuStreamCreateWithPriority`| | | | |`hipStreamCreateWithPriority`|2.0.0| | | | | |
