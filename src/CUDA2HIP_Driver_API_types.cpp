@@ -2127,7 +2127,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUDA_ERROR_KEY_ROTATION"]                                           = {"hipErrorKeyRotation",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 916
   // cudaErrorStreamDetached
   m["CUDA_ERROR_STREAM_DETACHED"]                                        = {"hipErrorStreamDetached",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 917
-  //
+  // cudaErrorGraphRecaptureFailure
   m["CUDA_ERROR_GRAPH_RECAPTURE_FAILURE"]                                = {"hipErrorGraphRecaptureFailure",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 918
   // cudaErrorUnknown
   m["CUDA_ERROR_UNKNOWN"]                                                = {"hipErrorUnknown",                                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 999
@@ -3333,16 +3333,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_LOGICAL_ENDPOINT_FLAG_COUNTED_OPS"]                              = {"hipLogicalEndpointFlagCountedOps",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaGraphRecaptureStatus
   m["CUgraphRecaptureStatus"]                                            = {"hipGraphRecaptureStatus",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaGraphRecaptureStatus
   m["CUgraphRecaptureStatus_enum"]                                       = {"hipGraphRecaptureStatus",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUgraphRecaptureStatus enum values
-  //
+  // cudaGraphRecaptureEligibleForUpdate
   m["CU_GRAPH_RECAPTURE_ELIGIBLE_FOR_UPDATE"]                            = {"hipGraphRecaptureEligibleForUpdate",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaGraphRecaptureIneligibleForUpdate
   m["CU_GRAPH_RECAPTURE_INELIGIBLE_FOR_UPDATE"]                          = {"hipGraphRecaptureIneligibleForUpdate",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaGraphRecaptureError
   m["CU_GRAPH_RECAPTURE_ERROR"]                                          = {"hipGraphRecaptureError",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // 4. Typedefs
