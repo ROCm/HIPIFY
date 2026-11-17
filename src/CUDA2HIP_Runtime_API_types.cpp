@@ -406,6 +406,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaChannelFormatKindUnsignedBlockCompressed7"]            = {"hipChannelFormatKindUnsignedBlockCompressed7",             "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 29
   m["cudaChannelFormatKindUnsignedBlockCompressed7SRGB"]        = {"hipChannelFormatKindUnsignedBlockCompressed7SRGB",         "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 30
   m["cudaChannelFormatKindUnsignedNormalized1010102"]           = {"hipChannelFormatKindUnsignedNormalized1010102",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 31
+  m["cudaChannelFormatKindUnsigned8Packed422"]                  = {"hipChannelFormatKindUnsigned8Packed422",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 32
+  m["cudaChannelFormatKindUnsigned8Packed444"]                  = {"hipChannelFormatKindUnsigned8Packed444",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 33
+  m["cudaChannelFormatKindUnsigned8SemiPlanar420"]              = {"hipChannelFormatKindUnsigned8SemiPlanar420",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 34
+  m["cudaChannelFormatKindUnsigned16SemiPlanar420"]             = {"hipChannelFormatKindUnsigned16SemiPlanar420",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 35
+  m["cudaChannelFormatKindUnsigned8SemiPlanar422"]              = {"hipChannelFormatKindUnsigned8SemiPlanar422",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 36
+  m["cudaChannelFormatKindUnsigned16SemiPlanar422"]             = {"hipChannelFormatKindUnsigned16SemiPlanar422",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 37
+  m["cudaChannelFormatKindUnsigned8SemiPlanar444"]              = {"hipChannelFormatKindUnsigned8SemiPlanar444",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 38
+  m["cudaChannelFormatKindUnsigned16SemiPlanar444"]             = {"hipChannelFormatKindUnsigned16SemiPlanar444",              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 39
+  m["cudaChannelFormatKindUnsigned8Planar420"]                  = {"hipChannelFormatKindUnsigned8Planar420",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 40
+  m["cudaChannelFormatKindUnsigned16Planar420"]                 = {"hipChannelFormatKindUnsigned16Planar420",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 41
+  m["cudaChannelFormatKindUnsigned8Planar422"]                  = {"hipChannelFormatKindUnsigned8Planar422",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 42
+  m["cudaChannelFormatKindUnsigned16Planar422"]                 = {"hipChannelFormatKindUnsigned16Planar422",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 43
+  m["cudaChannelFormatKindUnsigned8Planar444"]                  = {"hipChannelFormatKindUnsigned8Planar444",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 44
+  m["cudaChannelFormatKindUnsigned16Planar444"]                 = {"hipChannelFormatKindUnsigned16Planar444",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 45
 
   // CUcomputemode
   m["cudaComputeMode"]                                          = {"hipComputeMode",                                           "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES};
@@ -1292,6 +1306,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaErrorInvalidResourceConfiguration"]                    = {"hipErrorInvalidResourceConfiguration",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 915
   // CUDA_ERROR_STREAM_DETACHED
   m["cudaErrorStreamDetached"]                                  = {"hipErrorStreamDetached",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 917
+  // CUDA_ERROR_GRAPH_RECAPTURE_FAILURE
+  m["cudaErrorGraphRecaptureFailure"]                           = {"hipErrorGraphRecaptureFailure",                            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 918
   // CUDA_ERROR_UNKNOWN
   m["cudaErrorUnknown"]                                         = {"hipErrorUnknown",                                          "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 999
   // Deprecated since CUDA 4.1
@@ -2423,6 +2439,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_SHARED_MEMORY_MODE_ALLOW_NON_PORTABLE
   m["cudaSharedMemoryModeAllowNonPortable"]                     = {"hipSharedMemoryModeAllowNonPortable",                      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
+  // CUgraphRecaptureStatus
+  m["cudaGraphRecaptureStatus"]                                 = {"hipGraphRecaptureStatus",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaGraphRecaptureStatus enum values
+  // CU_GRAPH_RECAPTURE_ELIGIBLE_FOR_UPDATE
+  m["cudaGraphRecaptureEligibleForUpdate"]                      = {"hipGraphRecaptureEligibleForUpdate",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_GRAPH_RECAPTURE_INELIGIBLE_FOR_UPDATE
+  m["cudaGraphRecaptureIneligibleForUpdate"]                    = {"hipGraphRecaptureIneligibleForUpdate",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // CU_GRAPH_RECAPTURE_ERROR
+  m["cudaGraphRecaptureError"]                                  = {"hipGraphRecaptureError",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
   // 4. Typedefs
 
   // CUhostFn
@@ -3532,6 +3558,25 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   m["cudaSharedMemoryModeAllowNonPortable"]                     = {CUDA_132, CUDA_0,   CUDA_0  };
   m["cudaLaunchAttributePortableClusterSizeMode"]               = {CUDA_132, CUDA_0,   CUDA_0  };
   m["cudaLaunchAttributeSharedMemoryMode"]                      = {CUDA_132, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned8Packed422"]                  = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned8Packed444"]                  = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned8SemiPlanar420"]              = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned16SemiPlanar420"]             = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned8SemiPlanar422"]              = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned16SemiPlanar422"]             = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned8SemiPlanar444"]              = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned16SemiPlanar444"]             = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned8Planar420"]                  = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned16Planar420"]                 = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned8Planar422"]                  = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned16Planar422"]                 = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned8Planar444"]                  = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaChannelFormatKindUnsigned16Planar444"]                 = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaErrorGraphRecaptureFailure"]                           = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaGraphRecaptureStatus"]                                 = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaGraphRecaptureEligibleForUpdate"]                      = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaGraphRecaptureIneligibleForUpdate"]                    = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaGraphRecaptureError"]                                  = {CUDA_133, CUDA_0,   CUDA_0  };
 
   return m;
 }();
