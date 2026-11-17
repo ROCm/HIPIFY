@@ -1,4 +1,3 @@
-
 .. meta::
    :description: Tools to automatically translate CUDA source code into portable HIP C++
    :keywords: HIPIFY, ROCm, library, tool, CUDA, CUDA2HIP, hipify-clang, hipify-perl
@@ -28,7 +27,7 @@ matchers. After applying all the matchers, the output HIP source is produced.
 **Disadvantages:**
 
 - You must ensure that the input CUDA code is correct, as incorrect code can't be translated to HIP.
-- You must install CUDA, and in case of multiple installations specify the needed version using the ``--cuda-path`` option.
+- You must install CUDA, and in case of multiple installations, specify the needed version using the ``--cuda-path`` option.
 - You must provide all the ``includes`` and ``defines`` to successfully translate the code.
 
 Release Dependencies
@@ -40,10 +39,10 @@ Release Dependencies
   `7.0 <https://developer.nvidia.com/cuda-toolkit-70>`__ or later (the latest supported version is
   `13.2.0 <https://developer.nvidia.com/cuda-13-2-0-download-archive>`__).
 
-* `LLVM+Clang <http://releases.llvm.org>`__ version is determined at least partially by
+* `LLVM+Clang <https://releases.llvm.org>`__ version is determined at least partially by
   the CUDA version you are using, as shown in the table below. The recommended Clang release
   is the latest stable release `23.1.5 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-23.1.5>`__,
-  or at least version `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`__.
+  or at least version `4.0.0 <https://releases.llvm.org/download.html#4.0.0>`__.
 
 .. list-table::
   :header-rows: 1
@@ -167,7 +166,7 @@ Release Dependencies
       `13.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-13.0.1>`__
     - ✅
     - ✅
-  * - `11.2.2 <https://developer.nvidia.com/cuda-11-2-2-download-archive>`__
+  * - `11.2.2 <https://developer.nvidia.com/cuda-11.2.2-download-archive>`__
     - `11.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.1>`__,
       `11.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.1.0>`__
     - ✅
@@ -176,9 +175,9 @@ Release Dependencies
       `11.1.0 <https://developer.nvidia.com/cuda-11.1.0-download-archive>`__,
       `11.1.1 <https://developer.nvidia.com/cuda-11.1.1-download-archive>`__
     - `11.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.0>`__
-    - Works only with patch due to Clang bug `47332 <https://bugs.llvm.org/show_bug.cgi?id=47332>`__
+    - Works only with patch due to Clang bug `46676 <https://github.com/llvm/llvm-project/issues/46676>`__
       |patch for 11.0.0| :sup:`3`
-    - Works only with patch due to Clang bug `47332 <https://bugs.llvm.org/show_bug.cgi?id=47332>`__
+    - Works only with patch due to Clang bug `46676 <https://github.com/llvm/llvm-project/issues/46676>`__
       |patch for 11.0.0| :sup:`3`
   * - `11.0.0 <https://developer.nvidia.com/cuda-11.0-download-archive>`__
     - `11.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-11.0.0>`__
@@ -189,10 +188,10 @@ Release Dependencies
       `11.1.1 <https://developer.nvidia.com/cuda-11.1.1-download-archive>`__
     - `10.0.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.0>`__,
       `10.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-10.0.1>`__
-    - Works only with patch due to Clang bug `47332 <https://bugs.llvm.org/show_bug.cgi?id=47332>`__
+    - Works only with patch due to Clang bug `46676 <https://github.com/llvm/llvm-project/issues/46676>`__
       |patch for 10.0.0| :sup:`3`
       |patch for 10.0.1| :sup:`3`
-    - Works only with patch due to Clang bug `47332 <https://bugs.llvm.org/show_bug.cgi?id=47332>`__
+    - Works only with patch due to Clang bug `46676 <https://github.com/llvm/llvm-project/issues/46676>`__
       |patch for 10.0.0| :sup:`3`
       |patch for 10.0.1| :sup:`3`
   * - `11.0.0 <https://developer.nvidia.com/cuda-11.0-download-archive>`__
@@ -201,63 +200,63 @@ Release Dependencies
     - ✅
     - ✅
   * - `10.1 <https://developer.nvidia.com/cuda-10.1-download-archive-update2>`__
-    - `9.0.0 <http://releases.llvm.org/download.html#9.0.0>`__,
-      `9.0.1 <http://releases.llvm.org/download.html#9.0.1>`__
+    - `9.0.0 <https://releases.llvm.org/download.html#9.0.0>`__,
+      `9.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-9.0.1>`__
     - ✅
     - ✅
   * - `10.0 <https://developer.nvidia.com/cuda-10.0-download-archive>`__
-    - `8.0.0 <http://releases.llvm.org/download.html#8.0.0>`__,
-      `8.0.1 <http://releases.llvm.org/download.html#8.0.1>`__
-    - Works only with patch due to Clang bug `38811 <https://bugs.llvm.org/show_bug.cgi?id=38811>`__
+    - `8.0.0 <https://releases.llvm.org/download.html#8.0.0>`__,
+      `8.0.1 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-8.0.1>`__
+    - Works only with patch due to Clang bug `38159 <https://github.com/llvm/llvm-project/issues/38159>`__
       |patch for 8.0.0| :sup:`2`
       |patch for 8.0.1| :sup:`2`
     - ✅
   * - `9.2 <https://developer.nvidia.com/cuda-92-download-archive>`__
-    - `7.0.0 <http://releases.llvm.org/download.html#7.0.0>`__,
-      `7.0.1 <http://releases.llvm.org/download.html#7.0.1>`__,
-      `7.1.0 <http://releases.llvm.org/download.html#7.1.0>`__
-    - Works only with patch due to Clang bug `38811 <https://bugs.llvm.org/show_bug.cgi?id=38811>`__
+    - `7.0.0 <https://releases.llvm.org/download.html#7.0.0>`__,
+      `7.0.1 <https://releases.llvm.org/download.html#7.0.1>`__,
+      `7.1.0 <https://github.com/llvm/llvm-project/releases/tag/llvmorg-7.1.0>`__
+    - Works only with patch due to Clang bug `38159 <https://github.com/llvm/llvm-project/issues/38159>`__
       |patch for 7.0.0| :sup:`2`
       |patch for 7.0.1| :sup:`2`
       |patch for 7.1.0| :sup:`2`
-    - ❌ due to Clang bug `36384 <https://bugs.llvm.org/show_bug.cgi?id=36384>`__
+    - ❌ due to Clang bug `35732 <https://github.com/llvm/llvm-project/issues/35732>`__
   * - `9.0 <https://developer.nvidia.com/cuda-90-download-archive>`__
-    - `6.0.0 <http://releases.llvm.org/download.html#6.0.0>`__,
-      `6.0.1 <http://releases.llvm.org/download.html#6.0.1>`__
+    - `6.0.0 <https://releases.llvm.org/download.html#6.0.0>`__,
+      `6.0.1 <https://releases.llvm.org/download.html#6.0.1>`__
     - ✅
     - ✅
   * - `8.0 <https://developer.nvidia.com/cuda-80-ga2-download-archive>`__
-    - `4.0.0 <http://releases.llvm.org/download.html#4.0.0>`__,
-      `4.0.1 <http://releases.llvm.org/download.html#4.0.1>`__,
-      `5.0.0 <http://releases.llvm.org/download.html#5.0.0>`__,
-      `5.0.1 <http://releases.llvm.org/download.html#5.0.1>`__,
-      `5.0.2 <http://releases.llvm.org/download.html#5.0.2>`__
+    - `4.0.0 <https://releases.llvm.org/download.html#4.0.0>`__,
+      `4.0.1 <https://releases.llvm.org/download.html#4.0.1>`__,
+      `5.0.0 <https://releases.llvm.org/download.html#5.0.0>`__,
+      `5.0.1 <https://releases.llvm.org/download.html#5.0.1>`__,
+      `5.0.2 <https://releases.llvm.org/download.html#5.0.2>`__
     - ✅
     - ✅
   * - `7.5 <https://developer.nvidia.com/cuda-75-downloads-archive>`__
-    - `3.8.0 <http://releases.llvm.org/download.html#3.8.0>`__ :sup:`4`,
-      `3.8.1 <http://releases.llvm.org/download.html#3.8.1>`__ :sup:`4`,
-      `3.9.0 <http://releases.llvm.org/download.html#3.9.0>`__ :sup:`4`,
-      `3.9.1 <http://releases.llvm.org/download.html#3.9.1>`__ :sup:`4`
+    - `3.8.0 <https://releases.llvm.org/download.html#3.8.0>`__ :sup:`4`,
+      `3.8.1 <https://releases.llvm.org/download.html#3.8.1>`__ :sup:`4`,
+      `3.9.0 <https://releases.llvm.org/download.html#3.9.0>`__ :sup:`4`,
+      `3.9.1 <https://releases.llvm.org/download.html#3.9.1>`__ :sup:`4`
     - ✅
     - ✅
 
 .. |patch for 7.0.0| replace::
-  :download:`patch for 7.0.0 <../data/patches/patch_for_clang_7.0.0_bug_38811.zip>`
+  :download:`patch for 7.0.0 <../data/patches/patch_for_clang_7.0.0_bug_38159.zip>`
 .. |patch for 7.0.1| replace::
-  :download:`patch for 7.0.1 <../data/patches/patch_for_clang_7.0.1_bug_38811.zip>`
+  :download:`patch for 7.0.1 <../data/patches/patch_for_clang_7.0.1_bug_38159.zip>`
 .. |patch for 7.1.0| replace::
-  :download:`patch for 7.1.0 <../data/patches/patch_for_clang_7.1.0_bug_38811.zip>`
+  :download:`patch for 7.1.0 <../data/patches/patch_for_clang_7.1.0_bug_38159.zip>`
 .. |patch for 8.0.0| replace::
-  :download:`patch for 8.0.0 <../data/patches/patch_for_clang_8.0.0_bug_38811.zip>`
+  :download:`patch for 8.0.0 <../data/patches/patch_for_clang_8.0.0_bug_38159.zip>`
 .. |patch for 8.0.1| replace::
-  :download:`patch for 8.0.1 <../data/patches/patch_for_clang_8.0.1_bug_38811.zip>`
+  :download:`patch for 8.0.1 <../data/patches/patch_for_clang_8.0.1_bug_38159.zip>`
 .. |patch for 10.0.0| replace::
-  :download:`patch for 10.0.0 <../data/patches/patch_for_clang_10.0.0_bug_47332.zip>`
+  :download:`patch for 10.0.0 <../data/patches/patch_for_clang_10.0.0_bug_46676.zip>`
 .. |patch for 10.0.1| replace::
-  :download:`patch for 10.0.1 <../data/patches/patch_for_clang_10.0.1_bug_47332.zip>`
+  :download:`patch for 10.0.1 <../data/patches/patch_for_clang_10.0.1_bug_46676.zip>`
 .. |patch for 11.0.0| replace::
-  :download:`patch for 11.0.0 <../data/patches/patch_for_clang_11.0.0_bug_47332.zip>`
+  :download:`patch for 11.0.0 <../data/patches/patch_for_clang_11.0.0_bug_46676.zip>`
 .. |patch for 14.0.0| replace::
   :download:`patch for 14.0.0 <../data/patches/patch_for_clang_14.0.0_bug_54609.zip>`
 .. |patch for 14.0.1| replace::
@@ -278,7 +277,7 @@ Release Dependencies
 :sup:`4` ``LLVM 3.x`` is no longer supported (but might still work).
 
 In most cases, you can get a suitable version of ``LLVM+Clang`` with your package manager. However, you can also
-`download a release archive <http://releases.llvm.org/>`__ and build or install it. In case of multiple versions of ``LLVM`` installed, set
+`download a release archive <https://releases.llvm.org/>`__ and build or install it. In case of multiple versions of ``LLVM`` installed, set
 `CMAKE_PREFIX_PATH <https://cmake.org/cmake/help/latest/variable/CMAKE_PREFIX_PATH.html>`__ so that
 ``CMake`` can find the desired version of ``LLVM``. For example, ``-DCMAKE_PREFIX_PATH=D:\LLVM\23.1.5\dist``.
 
@@ -286,6 +285,7 @@ Usage
 =====
 
 .. note::
+
   For additional details on the following ``hipify-clang`` command options, see :ref:`hipify-clang-cmd`.
 
 To process a file, ``hipify-clang`` needs access to the same headers that are required to compile it
@@ -369,6 +369,7 @@ Hipification statistics
 The options ``--print-stats`` and ``--print-stats-csv`` provide an overview of what is hipified and what is not, as well as the hipification statistics. Use the ``--print-stats`` option to return the statistics as text to the terminal, or the ``--print-stats-csv`` option to create a CSV file to open in a spreadsheet.
 
 .. note::
+
   When multiple source files are specified on the command line, the statistics are provided per file and in total.
 
 Print statistics
