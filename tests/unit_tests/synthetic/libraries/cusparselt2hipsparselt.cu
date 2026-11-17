@@ -254,5 +254,15 @@ int main() {
   status = cusparseLtMatmulGetWorkspace(&handle, &plan, &workspaceSize);
 #endif
 
+#if CUSPARSELT_VERSION >= 520
+  // CHECK: hipsparseLtComputetype_t COMPUTE_32F = HIPSPARSELT_COMPUTE_32F;
+  cusparseComputeType COMPUTE_32F = CUSPARSE_COMPUTE_32F;
+#endif
+
+#if CUSPARSELT_VERSION >= 620
+  // CHECK: hipsparseLtMatmulDescAttribute_t SPARSELT_MATMUL_SPARSE_MAT_POINTER = HIPSPARSELT_MATMUL_SPARSE_MAT_POINTER;
+  cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_SPARSE_MAT_POINTER = CUSPARSELT_MATMUL_SPARSE_MAT_POINTER;
+#endif
+
   return 0;
 }
