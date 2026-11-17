@@ -35,11 +35,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
   m["cusparseLtSparsity_t"]                                              = {"hipsparseLtSparsity_t",                         "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_SPARSITY_50_PERCENT"]                                    = {"HIPSPARSELT_SPARSITY_50_PERCENT",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["cusparseComputeType"]                                               = {"hipsparseLtComputetype_t",                      "", CONV_TYPE, API_SPARSELT, 1};
+  // TODO: Add support for accounting for and displaying the removed-then-restored API.
+  //       For example, CUSPARSE_COMPUTE_16F was removed in CUSPARSELT_052 and restored in CUSPARSELT_060.
   m["CUSPARSE_COMPUTE_16F"]                                              = {"HIPSPARSELT_COMPUTE_16F",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSE_COMPUTE_8I"]                                               = {"HIPSPARSE_COMPUTE_8I",                          "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED | CUDA_REMOVED};
   m["CUSPARSE_COMPUTE_32I"]                                              = {"HIPSPARSELT_COMPUTE_32I",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
-  m["CUSPARSE_COMPUTE_TF32"]                                             = {"HIPSPARSELT_COMPUTE_TF32",                      "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
-  m["CUSPARSE_COMPUTE_TF32_FAST"]                                        = {"HIPSPARSELT_COMPUTE_TF32_FAST",                 "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSE_COMPUTE_32F"]                                              = {"HIPSPARSELT_COMPUTE_32F",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSE_COMPUTE_TF32"]                                             = {"HIPSPARSELT_COMPUTE_TF32",                      "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1,  CUDA_REMOVED};
+  m["CUSPARSE_COMPUTE_TF32_FAST"]                                        = {"HIPSPARSELT_COMPUTE_TF32_FAST",                 "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, CUDA_REMOVED};
   m["cusparseLtMatmulAlg_t"]                                             = {"hipsparseLtMatmulAlg_t",                        "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_MATMUL_ALG_DEFAULT"]                                     = {"HIPSPARSELT_MATMUL_ALG_DEFAULT",                "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["cusparseLtMatmulAlgAttribute_t"]                                    = {"hipsparseLtMatmulAlgAttribute_t",               "", CONV_TYPE, API_SPARSELT, 1};
@@ -62,6 +65,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
   m["CUSPARSELT_MATMUL_BETA_VECTOR_SCALING"]                             = {"HIPSPARSELT_MATMUL_BETA_VECTOR_SCALING",        "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MATMUL_BIAS_STRIDE"]                                     = {"HIPSPARSELT_MATMUL_BIAS_STRIDE",                "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MATMUL_BIAS_POINTER"]                                    = {"HIPSPARSELT_MATMUL_BIAS_POINTER",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                              = {"HIPSPARSELT_MATMUL_SPARSE_MAT_POINTER",         "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["cusparseLtMatDescAttribute_t"]                                      = {"hipsparseLtMatDescAttribute_t",                 "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_MAT_NUM_BATCHES"]                                        = {"HIPSPARSELT_MAT_NUM_BATCHES",                   "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MAT_BATCH_STRIDE"]                                       = {"HIPSPARSELT_MAT_BATCH_STRIDE",                  "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
@@ -86,8 +90,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   m["cusparseComputeType"]                                               = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_16F"]                                              = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_32I"]                                              = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
-  m["CUSPARSE_COMPUTE_TF32"]                                             = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
-  m["CUSPARSE_COMPUTE_TF32_FAST"]                                        = {CUSPARSELT_010, CUDA_0      , CUDA_0      };
+  m["CUSPARSE_COMPUTE_TF32"]                                             = {CUSPARSELT_010, CUDA_0      , CUSPARSELT_052 };
+  m["CUSPARSE_COMPUTE_TF32_FAST"]                                        = {CUSPARSELT_010, CUDA_0      , CUSPARSELT_052 };
   m["cusparseLtMatmulAlg_t"]                                             = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["CUSPARSELT_MATMUL_ALG_DEFAULT"]                                     = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
   m["cusparseLtMatmulAlgAttribute_t"]                                    = {CUSPARSELT_001, CUDA_0      , CUDA_0      };
@@ -118,6 +122,8 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   m["CUSPARSELT_SPLIT_K_MODE_ONE_KERNEL"]                                = {CUSPARSELT_030, CUDA_0      , CUDA_0      };
   m["CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS"]                               = {CUSPARSELT_030, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_8I"]                                               = {CUSPARSELT_050, CUDA_0      , CUSPARSELT_051 };
+  m["CUSPARSE_COMPUTE_32F"]                                              = {CUSPARSELT_052, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                              = {CUSPARSELT_062, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -165,6 +171,8 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP =
   m["hipsparseLtSplitKMode_t"]                                           = {HIP_7100, HIP_0,    HIP_0    };
   m["HIPSPARSELT_SPLIT_K_MODE_ONE_KERNEL"]                               = {HIP_7100, HIP_0,    HIP_0    };
   m["HIPSPARSELT_SPLIT_K_MODE_TWO_KERNELS"]                              = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_COMPUTE_32F"]                                           = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                             = {HIP_7100, HIP_0,    HIP_0    };
 
   return m;
 }();

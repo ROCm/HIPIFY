@@ -812,6 +812,20 @@
 |`cudaChannelFormatKindSignedNormalized8X2`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindSignedNormalized8X4`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindUnsigned`| | | | |`hipChannelFormatKindUnsigned`|1.6.0| | | | | |
+|`cudaChannelFormatKindUnsigned16Planar420`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16Planar422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16Planar444`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16SemiPlanar420`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16SemiPlanar422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16SemiPlanar444`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Packed422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Packed444`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Planar420`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Planar422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Planar444`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8SemiPlanar420`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8SemiPlanar422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8SemiPlanar444`|13.3| | | | | | | | | | |
 |`cudaChannelFormatKindUnsignedBlockCompressed1`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindUnsignedBlockCompressed1SRGB`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindUnsignedBlockCompressed2`|11.5| | | | | | | | | | |
@@ -1223,6 +1237,7 @@
 |`cudaErrorFileNotFound`|10.1| | | |`hipErrorFileNotFound`|1.6.0| | | | | |
 |`cudaErrorFunctionNotLoaded`|12.6| | | | | | | | | | |
 |`cudaErrorGraphExecUpdateFailure`|10.2| | | |`hipErrorGraphExecUpdateFailure`|5.0.0| | | | | |
+|`cudaErrorGraphRecaptureFailure`|13.3| | | | | | | | | | |
 |`cudaErrorHardwareStackError`| | | | | | | | | | | |
 |`cudaErrorHostMemoryAlreadyRegistered`| | | | |`hipErrorHostMemoryAlreadyRegistered`|1.6.0| | | | | |
 |`cudaErrorHostMemoryNotRegistered`| | | | |`hipErrorHostMemoryNotRegistered`|1.6.0| | | | | |
@@ -1513,6 +1528,10 @@
 |`cudaGraphNodeTypeMemset`|10.0| | | |`hipGraphNodeTypeMemset`|4.3.0| | | | | |
 |`cudaGraphNodeTypeWaitEvent`|11.1| | | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | | | |
 |`cudaGraphNode_t`|10.0| | | |`hipGraphNode_t`|4.3.0| | | | | |
+|`cudaGraphRecaptureEligibleForUpdate`|13.3| | | | | | | | | | |
+|`cudaGraphRecaptureError`|13.3| | | | | | | | | | |
+|`cudaGraphRecaptureIneligibleForUpdate`|13.3| | | | | | | | | | |
+|`cudaGraphRecaptureStatus`|13.3| | | | | | | | | | |
 |`cudaGraphUserObjectMove`|11.3| | | |`hipGraphUserObjectMove`|5.3.0| | | | | |
 |`cudaGraph_t`|10.0| | | |`hipGraph_t`|4.3.0| | | | | |
 |`cudaGraphicsCubeFace`| | | | | | | | | | | |
