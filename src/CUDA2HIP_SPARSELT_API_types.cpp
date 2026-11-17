@@ -65,6 +65,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
   m["CUSPARSELT_MATMUL_BETA_VECTOR_SCALING"]                             = {"HIPSPARSELT_MATMUL_BETA_VECTOR_SCALING",        "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MATMUL_BIAS_STRIDE"]                                     = {"HIPSPARSELT_MATMUL_BIAS_STRIDE",                "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MATMUL_BIAS_POINTER"]                                    = {"HIPSPARSELT_MATMUL_BIAS_POINTER",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                              = {"HIPSPARSELT_MATMUL_SPARSE_MAT_POINTER",         "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["cusparseLtMatDescAttribute_t"]                                      = {"hipsparseLtMatDescAttribute_t",                 "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_MAT_NUM_BATCHES"]                                        = {"HIPSPARSELT_MAT_NUM_BATCHES",                   "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MAT_BATCH_STRIDE"]                                       = {"HIPSPARSELT_MAT_BATCH_STRIDE",                  "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
@@ -122,6 +123,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   m["CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS"]                               = {CUSPARSELT_030, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_8I"]                                               = {CUSPARSELT_050, CUDA_0      , CUSPARSELT_051 };
   m["CUSPARSE_COMPUTE_32F"]                                              = {CUSPARSELT_052, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                              = {CUSPARSELT_062, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -170,6 +172,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP =
   m["HIPSPARSELT_SPLIT_K_MODE_ONE_KERNEL"]                               = {HIP_7100, HIP_0,    HIP_0    };
   m["HIPSPARSELT_SPLIT_K_MODE_TWO_KERNELS"]                              = {HIP_7100, HIP_0,    HIP_0    };
   m["HIPSPARSELT_COMPUTE_32F"]                                           = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                             = {HIP_7100, HIP_0,    HIP_0    };
 
   return m;
 }();
