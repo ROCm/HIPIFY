@@ -885,9 +885,11 @@
 |`cudaD3D9RegisterFlagsArray`| | | | | | | | | | | |
 |`cudaD3D9RegisterFlagsNone`| | | | | | | | | | | |
 |`cudaDevAttrAsyncEngineCount`| | | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
+|`cudaDevAttrAtomicReductionSupported`|13.3| | | | | | | | | | |
 |`cudaDevAttrCanFlushRemoteWrites`|9.2| | | | | | | | | | |
 |`cudaDevAttrCanMapHostMemory`| | | | |`hipDeviceAttributeCanMapHostMemory`|2.10.0| | | | | |
 |`cudaDevAttrCanUseHostPointerForRegisteredMem`|8.0| | | |`hipDeviceAttributeCanUseHostPointerForRegisteredMem`|4.3.0| | | | | |
+|`cudaDevAttrCigStreamsSupported`|13.3| | | | | | | | | | |
 |`cudaDevAttrClockRate`| | | | |`hipDeviceAttributeClockRate`|1.6.0| | | | | |
 |`cudaDevAttrClusterLaunch`|11.8| | | | | | | | | | |
 |`cudaDevAttrComputeCapabilityMajor`| | | | |`hipDeviceAttributeComputeCapabilityMajor`|1.6.0| | | | | |
@@ -1398,6 +1400,9 @@
 |`cudaExternalSemaphoreWaitParams_v1`|11.2|11.2| |11.3|`hipExternalSemaphoreWaitParams`|4.4.0| | | | | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | | | | | |
 |`cudaExternalSemaphore_t`|10.0| | | |`hipExternalSemaphore_t`|4.4.0| | | | | |
+|`cudaFabricOpStatusSource`|13.3| | | | | | | | | | |
+|`cudaFabricOpStatusSourceMax`|13.3| | | | | | | | | | |
+|`cudaFabricOpStatusSourceMbarrierV1`|13.3| | | | | | | | | | |
 |`cudaFilterModeLinear`| | | | |`hipFilterModeLinear`|1.7.0| | | | | |
 |`cudaFilterModePoint`| | | | |`hipFilterModePoint`|1.6.0| | | | | |
 |`cudaFlushGPUDirectRDMAWritesOptionHost`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionHost`|6.1.0| | | | | |
@@ -1420,7 +1425,7 @@
 |`cudaFuncAttributeRequiredClusterDepth`|11.8| | | |`hipFuncAttributeRequiredClusterDepth`|7.13.0| | | | | |
 |`cudaFuncAttributeRequiredClusterHeight`|11.8| | | |`hipFuncAttributeRequiredClusterHeight`|7.13.0| | | | | |
 |`cudaFuncAttributeRequiredClusterWidth`|11.8| | | |`hipFuncAttributeRequiredClusterWidth`|7.13.0| | | | | |
-|`cudaFuncAttributes`| | | | |`hipFuncAttributes`|1.9.0| | | | | |
+|`cudaFuncAttributes`| | |13.3| |`hipFuncAttributes`|1.9.0| | | | | |
 |`cudaFuncCache`| | | | |`hipFuncCache_t`|1.6.0| | | | | |
 |`cudaFuncCachePreferEqual`| | | | |`hipFuncCachePreferEqual`|1.6.0| | | | | |
 |`cudaFuncCachePreferL1`| | | | |`hipFuncCachePreferL1`|1.6.0| | | | | |
@@ -1526,6 +1531,7 @@
 |`cudaGraphNodeTypeMemFree`|11.4| | | |`hipGraphNodeTypeMemFree`|5.5.0| | | | | |
 |`cudaGraphNodeTypeMemcpy`|10.0| | | |`hipGraphNodeTypeMemcpy`|4.3.0| | | | | |
 |`cudaGraphNodeTypeMemset`|10.0| | | |`hipGraphNodeTypeMemset`|4.3.0| | | | | |
+|`cudaGraphNodeTypeReserved16`|13.3| | | | | | | | | | |
 |`cudaGraphNodeTypeWaitEvent`|11.1| | | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | | | |
 |`cudaGraphNode_t`|10.0| | | |`hipGraphNode_t`|4.3.0| | | | | |
 |`cudaGraphRecaptureEligibleForUpdate`|13.3| | | | | | | | | | |

@@ -751,6 +751,10 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaDevAttrReserved145"]                                   = {"hipDevAttrReserved145",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 145
   // CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED
   m["cudaDevAttrOnlyPartialHostNativeAtomicSupported"]          = {"hipDevAttributeOnlyPartialHostNativeAtomicSupported",      "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 147
+  // CU_DEVICE_ATTRIBUTE_ATOMIC_REDUCTION_SUPPORTED
+  m["cudaDevAttrAtomicReductionSupported"]                      = {"hipDeviceAttributeAtomicReductionSupported",               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 148
+  // CU_DEVICE_ATTRIBUTE_D3D12_CIG_STREAMS_SUPPORTED
+  m["cudaDevAttrCigStreamsSupported"]                           = {"hipDeviceAttributeCigStreamsSupported",                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 151
   // CU_DEVICE_ATTRIBUTE_MAX
   m["cudaDevAttrMax"]                                           = {"hipDeviceAttributeMax",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
@@ -1462,6 +1466,8 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaGraphNodeTypeMemFree"]                                 = {"hipGraphNodeTypeMemFree",                                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 0x0b
   // CU_GRAPH_NODE_TYPE_CONDITIONAL = 13
   m["cudaGraphNodeTypeConditional"]                             = {"hipGraphNodeTypeConditional",                              "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 0x0d
+  // CU_GRAPH_NODE_TYPE_RESERVED_16 = 16
+  m["cudaGraphNodeTypeReserved16"]                              = {"hipGraphNodeTypeReserved16",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES,HIP_UNSUPPORTED}; // 0x10
   // CU_GRAPH_NODE_TYPE_COUNT
   m["cudaGraphNodeTypeCount"]                                   = {"hipGraphNodeTypeCount",                                    "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES};
 
@@ -2448,6 +2454,14 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaGraphRecaptureIneligibleForUpdate"]                    = {"hipGraphRecaptureIneligibleForUpdate",                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CU_GRAPH_RECAPTURE_ERROR
   m["cudaGraphRecaptureError"]                                  = {"hipGraphRecaptureError",                                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+
+  //  no analogues
+  m["cudaFabricOpStatusSource"]                                 = {"hipFabricOpStatusSource",                                  "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  // cudaFabricOpStatusSource enum values
+  //
+  m["cudaFabricOpStatusSourceMbarrierV1"]                       = {"hipFabricOpStatusSourceMbarrierV1",                        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  //
+  m["cudaFabricOpStatusSourceMax"]                              = {"hipFabricOpStatusSourceMax",                               "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // 4. Typedefs
 
@@ -3577,6 +3591,12 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_RUNTIME_TYPE_NAME_VER_MAP 
   m["cudaGraphRecaptureEligibleForUpdate"]                      = {CUDA_133, CUDA_0,   CUDA_0  };
   m["cudaGraphRecaptureIneligibleForUpdate"]                    = {CUDA_133, CUDA_0,   CUDA_0  };
   m["cudaGraphRecaptureError"]                                  = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaDevAttrAtomicReductionSupported"]                      = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaDevAttrCigStreamsSupported"]                           = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaGraphNodeTypeReserved16"]                              = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaFabricOpStatusSource"]                                 = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaFabricOpStatusSourceMbarrierV1"]                       = {CUDA_133, CUDA_0,   CUDA_0  };
+  m["cudaFabricOpStatusSourceMax"]                              = {CUDA_133, CUDA_0,   CUDA_0  };
 
   return m;
 }();
@@ -3593,6 +3613,7 @@ const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_RUNTIME_TYPE_CHANGE
   m["cudaMemsetParamsV2"]                                       = {CUDA_131};
   m["cudaHostNodeParamsV2"]                                     = {CUDA_132};
   m["cudaPointerAttributes"]                                    = {CUDA_132};
+  m["cudaFuncAttributes"]                                       = {CUDA_133};
 
   return m;
 }();
