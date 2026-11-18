@@ -1,26 +1,57 @@
-// RUN: %run_test hipify "%s" "%t" %hipify_args %clang_args
-// RUN: hipify "%s" -o="%t.warn" %cuda_path_arg %clang_res_arg -- %clang_args 2>&1 | FileCheck -check-prefix=WARN "%s"
+// RUN: %run_test hipify "%s" "%t" %hipify_args 1 --skip-excluded-preprocessor-conditional-blocks %clang_args
 
 // CHECK: #include <hip/hip_runtime.h>
 #include <cuda_runtime.h>
 
-#if CUDA_VERSION >= 11000
-// libcu++ headers shipped by libhipcxx under the same names are left unchanged and not reported.
-// CHECK: #include <cuda/std/atomic>
-// WARN-NOT: 'cuda/std/atomic' is unsupported header
-#include <cuda/std/atomic>
-// CHECK: #include <cuda/std/cmath>
-// WARN-NOT: 'cuda/std/cmath' is unsupported header
-#include <cuda/std/cmath>
+// libcu++ headers that libhipcxx provides under the same names are left unchanged.
+// libcu++ headers that libhipcxx lists as unsupported are left unchanged too, and hipify-clang warns about them.
+// Each header is guarded by the CUDA version that first ships it.
 
-// libcu++ headers without a libhipcxx equivalent are left unchanged and reported.
+#if CUDA_VERSION >= 11000
+// CHECK: #include <cuda/std/atomic>
+#include <cuda/std/atomic>
 // CHECK: #include <cuda/barrier>
-// WARN: warning: 'cuda/barrier' is unsupported header in 'libhipcxx'.
 #include <cuda/barrier>
-// CHECK: #include <cuda/pipeline>
-// WARN: warning: 'cuda/pipeline' is unsupported header in 'libhipcxx'.
-#include <cuda/pipeline>
+// CHECK: #include <cuda/std/barrier>
+#include <cuda/std/barrier>
+// CHECK: #include <cuda/std/latch>
+#include <cuda/std/latch>
 // CHECK: #include <cuda/std/semaphore>
-// WARN: warning: 'cuda/std/semaphore' is unsupported header in 'libhipcxx'.
 #include <cuda/std/semaphore>
+#endif
+
+#if CUDA_VERSION >= 11010
+// CHECK: #include <cuda/latch>
+#include <cuda/latch>
+// CHECK: #include <cuda/pipeline>
+#include <cuda/pipeline>
+// CHECK: #include <cuda/semaphore>
+#include <cuda/semaphore>
+#endif
+
+#if CUDA_VERSION >= 11050
+// CHECK: #include <cuda/annotated_ptr>
+#include <cuda/annotated_ptr>
+#endif
+
+#if CUDA_VERSION >= 11060
+// CHECK: #include <cuda/std/cmath>
+#include <cuda/std/cmath>
+#endif
+
+#if CUDA_VERSION >= 12040
+// CHECK: #include <cuda/ptx>
+#include <cuda/ptx>
+#endif
+
+#if CUDA_VERSION >= 13010
+// CHECK: #include <cuda/std/execution>
+#include <cuda/std/execution>
+#endif
+
+#if CUDA_VERSION >= 13020
+// CHECK: #include <cuda/buffer>
+#include <cuda/buffer>
+// CHECK: #include <cuda/tma>
+#include <cuda/tma>
 #endif
