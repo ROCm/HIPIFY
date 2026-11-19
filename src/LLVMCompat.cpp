@@ -28,6 +28,8 @@ THE SOFTWARE.
 #include "clang/Lex/PreprocessorOptions.h"
 #include "clang/Frontend/CompilerInstance.h"
 
+using namespace llvm;
+
 const std::string sHipify = "[HIPIFY] ", sConflict = "conflict: ", sError = "error: ", sWarning = "warning: ", sInformation = "info: ";
 
 namespace llcompat {
@@ -36,9 +38,9 @@ void PrintStackTraceOnErrorSignal() {
   // The signature of PrintStackTraceOnErrorSignal changed in llvm 3.9. We don't support
   // anything older than 3.8, so let's specifically detect the one old version we support.
 #if (LLVM_VERSION_MAJOR == 3) && (LLVM_VERSION_MINOR == 8)
-  llvm::sys::PrintStackTraceOnErrorSignal();
+  sys::PrintStackTraceOnErrorSignal();
 #else
-  llvm::sys::PrintStackTraceOnErrorSignal(StringRef());
+  sys::PrintStackTraceOnErrorSignal(StringRef());
 #endif
 }
 
@@ -55,7 +57,7 @@ ct::Replacements &getReplacements(ct::RefactoringTool &Tool, StringRef file) {
 void insertReplacement(ct::Replacements &replacements, const ct::Replacement &rep) {
 #if LLVM_VERSION_MAJOR > 3
   // New clang added error checking to Replacements, and *insists* that you explicitly check it.
-  llvm::consumeError(replacements.add(rep));
+  consumeError(replacements.add(rep));
 #else
   // In older versions, it's literally an std::set<Replacement>
   replacements.insert(rep);
@@ -145,10 +147,10 @@ void RetainExcludedConditionalBlocks(clang::CompilerInstance &CI) {
 bool CheckCompatibility() {
 #if LLVM_VERSION_MAJOR < 10
   if (SkipExcludedPPConditionalBlocks) {
-    llvm::errs() << "\n" << sHipify << sWarning << "Option '" << SkipExcludedPPConditionalBlocks.ArgStr.str() << "' is supported starting from LLVM version 10.0\n";
+    errs() << "\n" << sHipify << sWarning << "Option '" << SkipExcludedPPConditionalBlocks.ArgStr.str() << "' is supported starting from LLVM version 10.0\n";
   }
   if (DefaultPreprocessor) {
-    llvm::errs() << "\n" << sHipify << sWarning << "Option '" << DefaultPreprocessor.ArgStr.str() << "' is supported starting from LLVM version 10.0\n";
+    errs() << "\n" << sHipify << sWarning << "Option '" << DefaultPreprocessor.ArgStr.str() << "' is supported starting from LLVM version 10.0\n";
   }
 #endif
   return true;
