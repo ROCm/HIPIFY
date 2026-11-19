@@ -63,9 +63,9 @@ const std::map<llvm::StringRef, hipCounter> CUDA_FILE_FUNCTION_MAP = [] {
   m["cuFileStatsStart"]                                     = {"hipFileStatsStart",                            "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
   m["cuFileStatsStop"]                                      = {"hipFileStatsStop",                             "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
   m["cuFileStatsReset"]                                     = {"hipFileStatsReset",                            "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
-  m["cuFileGetStatsL1"]                                     = {"hipFileGetStatsL1",                            "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
-  m["cuFileGetStatsL2"]                                     = {"hipFileGetStatsL2",                            "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
-  m["cuFileGetStatsL3"]                                     = {"hipFileGetStatsL3",                            "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
+  m["cuFileGetStatsL1"]                                     = {"hipFileGetStatsL1",                            "", CONV_LIB_FUNC, API_FILE, 2, HIP_EXPERIMENTAL};
+  m["cuFileGetStatsL2"]                                     = {"hipFileGetStatsL2",                            "", CONV_LIB_FUNC, API_FILE, 2, HIP_EXPERIMENTAL};
+  m["cuFileGetStatsL3"]                                     = {"hipFileGetStatsL3",                            "", CONV_LIB_FUNC, API_FILE, 2, HIP_EXPERIMENTAL};
   m["cuFileGetBARSizeInKB"]                                 = {"hipFileGetBARSizeInKB",                        "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
   m["cuFileSetParameterPosixPoolSlabArray"]                 = {"hipFileSetParameterPosixPoolSlabArray",        "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
   m["cuFileGetParameterPosixPoolSlabArray"]                 = {"hipFileGetParameterPosixPoolSlabArray",        "", CONV_LIB_FUNC, API_FILE, 2, UNSUPPORTED};
@@ -171,6 +171,9 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_FILE_FUNCTION_VER_MAP = [] {
   m["hipFileSetParameterSizeT"]                             = {HIP_7020, HIP_0, HIP_0};
   m["hipFileSetParameterBool"]                              = {HIP_7020, HIP_0, HIP_0};
   m["hipFileSetParameterString"]                            = {HIP_7020, HIP_0, HIP_0};
+  m["hipFileGetStatsL1"]                                    = {HIP_10010, HIP_0, HIP_0, HIP_LATEST};
+  m["hipFileGetStatsL2"]                                    = {HIP_10010, HIP_0, HIP_0, HIP_LATEST};
+  m["hipFileGetStatsL3"]                                    = {HIP_10010, HIP_0, HIP_0, HIP_LATEST};
 
   return m;
 }();
