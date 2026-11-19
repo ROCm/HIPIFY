@@ -55,6 +55,8 @@ THE SOFTWARE.
 
 constexpr auto DEBUG_TYPE = "cuda2hip";
 
+using namespace llvm;
+
 namespace ct = clang::tooling;
 
 void cleanupHipifyOptions(std::vector<const char*> &args) {
@@ -86,26 +88,26 @@ void cleanupHipifyOptions(std::vector<const char*> &args) {
 void DetectCUDA(const std::unique_ptr<clang::driver::Compilation> &C) {
 #if LLVM_VERSION_MAJOR >= 22
   const clang::driver::Driver &driver = C->getDriver();
-  clang::driver::CudaInstallationDetector CudaInstallation(driver, llvm::Triple(driver.getTargetTriple()), C->getArgs());
+  clang::driver::CudaInstallationDetector CudaInstallation(driver, Triple(driver.getTargetTriple()), C->getArgs());
   auto& FS = driver.getVFS();
   if (auto cuda_h_file = FS.getBufferForFile(CudaInstallation.getInstallPath() + "/include/cuda.h"))
     Statistics::setCudaVersion((*cuda_h_file)->getBuffer());
-  llvm::errs() << "\n" << sHipify << "CUDA Installation Path: " << CudaInstallation.getInstallPath();
-  llvm::errs() << "\n" << sHipify << "CUDA_VERSION: " << Statistics::getCudaVersion() << "\n";
+  errs() << "\n" << sHipify << "CUDA Installation Path: " << CudaInstallation.getInstallPath();
+  errs() << "\n" << sHipify << "CUDA_VERSION: " << Statistics::getCudaVersion() << "\n";
 #endif
 }
 
 void Init(int argc, const char **argv, std::vector<std::string> &files) {
 #if LLVM_VERSION_MAJOR >= 21
   clang::DiagnosticOptions diagOpts;
-  clang::TextDiagnosticPrinter diagClient(llvm::errs(), diagOpts);
+  clang::TextDiagnosticPrinter diagClient(errs(), diagOpts);
   clang::DiagnosticsEngine Diagnostics(IntrusiveRefCntPtr<clang::DiagnosticIDs>(new clang::DiagnosticIDs()), diagOpts, &diagClient, false);
 #else
   IntrusiveRefCntPtr<clang::DiagnosticOptions> diagOpts(new clang::DiagnosticOptions());
-  clang::TextDiagnosticPrinter diagClient(llvm::errs(), &*diagOpts);
+  clang::TextDiagnosticPrinter diagClient(errs(), &*diagOpts);
   clang::DiagnosticsEngine Diagnostics(IntrusiveRefCntPtr<clang::DiagnosticIDs>(new clang::DiagnosticIDs()), &*diagOpts, &diagClient, false);
 #endif
-  std::unique_ptr<clang::driver::Driver> driver(new clang::driver::Driver("", llvm::sys::getDefaultTargetTriple(), Diagnostics));
+  std::unique_ptr<clang::driver::Driver> driver(new clang::driver::Driver("", sys::getDefaultTargetTriple(), Diagnostics));
   std::vector<const char*> Args(argv, argv + argc);
   cleanupHipifyOptions(Args);
   std::unique_ptr<clang::driver::Compilation> C(driver->BuildCompilation(Args));
@@ -133,18 +135,18 @@ bool checkLLVM(std::string &path_to_check) {
   const std::string file_name_to_check_2 = "algorithm";
   const std::string cuda_wrappers_dir = "cuda_wrappers";
   std::string fileToCheck = path_to_check + "/" + file_name_to_check;
-  bool bExist = llvm::sys::fs::exists(llvm::Twine(fileToCheck.c_str()));
+  bool bExist = sys::fs::exists(Twine(fileToCheck.c_str()));
   if (bExist) {
     fileToCheck = path_to_check + "/" + cuda_wrappers_dir + "/" + file_name_to_check_2;
-    bExist = llvm::sys::fs::exists(llvm::Twine(fileToCheck.c_str()));
+    bExist = sys::fs::exists(Twine(fileToCheck.c_str()));
   }
   return bExist;
 }
 
 bool setLLVM(ct::RefactoringTool &Tool, const char *hipify_exe) {
   static int Dummy;
-  std::string hipify = llvm::sys::fs::getMainExecutable(hipify_exe, (void*)&Dummy);
-  std::string hipify_parent_path = std::string(llvm::sys::path::parent_path(hipify));
+  std::string hipify = sys::fs::getMainExecutable(hipify_exe, (void*)&Dummy);
+  std::string hipify_parent_path = std::string(sys::path::parent_path(hipify));
   std::string clang_ver = STRINGIFY_EXPANDED(LIB_CLANG_RES);
   std::string clang_res_path, clang_inc_path, fileToCheck;
   const std::string include_dir = "include";
@@ -190,7 +192,7 @@ bool setLLVM(ct::RefactoringTool &Tool, const char *hipify_exe) {
 
 bool appendArgumentsAdjusters(ct::RefactoringTool &Tool, const std::string &sSourceAbsPath, const char *hipify_exe) {
   if (!setLLVM(Tool, hipify_exe)) {
-    llvm::errs() << "\n" << sHipify << sError << "LLVM to work with not found. Hipification is impossible. Exiting. To provide hipify-clang with LLVM to work with, please specify the `--clang-resource-directory` option." << "\n";
+    errs() << "\n" << sHipify << sError << "LLVM to work with not found. Hipification is impossible. Exiting. To provide hipify-clang with LLVM to work with, please specify the `--clang-resource-directory` option." << "\n";
     return false;
   }
   if (!IncludeDirs.empty()) {
@@ -248,14 +250,14 @@ bool hipifySingleSource(const std::string &srcPath,
 
   EC = sys::fs::createTemporaryFile(srcFileName, "hip", tmpFile);
   if (EC) {
-    llvm::errs() << "\n" << sHipify << sError << "Failed to create temporary file: " << EC.message() << "\n";
+    errs() << "\n" << sHipify << sError << "Failed to create temporary file: " << EC.message() << "\n";
     return false;
   }
 
   // Copy source to temp
   EC = sys::fs::copy_file(srcPath, tmpFile);
   if (EC) {
-    llvm::errs() << "\n" << sHipify << sError << EC.message() 
+    errs() << "\n" << sHipify << sError << EC.message() 
                  << ": while copying " << srcPath << " to " << tmpFile << "\n";
     if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
     return false;
@@ -270,7 +272,7 @@ bool hipifySingleSource(const std::string &srcPath,
   ReplacementsFrontendActionFactory<HipifyAction> actionFactory(&replacementsToUse);
 
   if (!appendArgumentsAdjusters(Tool, mainContextPath, hipify_exe_path)) {
-    llvm::errs() << "\n" << sHipify << sError 
+    errs() << "\n" << sHipify << sError 
                  << "LLVM/resource config failed for: " << srcPath << "\n";
     if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
     return false;
@@ -278,7 +280,7 @@ bool hipifySingleSource(const std::string &srcPath,
 
   // Hipify _all_ the things!
   if (Tool.runAndSave(&actionFactory)) {
-    llvm::errs() << "\n" << sHipify << sError 
+    errs() << "\n" << sHipify << sError 
                  << "Hipifying failed: " << srcPath << "\n";
     if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
     return false;
@@ -288,7 +290,7 @@ bool hipifySingleSource(const std::string &srcPath,
   if (!dstPath.empty()) {
     EC = sys::fs::copy_file(tmpFile, dstPath);
     if (EC) {
-      llvm::errs() << "\n" << sHipify << sError << EC.message() 
+      errs() << "\n" << sHipify << sError << EC.message() 
                    << ": while copying " << tmpFile << " to " << dstPath << "\n";
       if (!SaveTemps && !preserveTemp) sys::fs::remove(tmpFile);
       return false;
@@ -312,9 +314,9 @@ bool generatePython() {
 }
 
 void printVersions() {
-  llvm::errs() << "\n" << sHipify << "Supports ROCm HIP from " << Statistics::getHipVersion(hipVersions::HIP_5000) << " up to " << Statistics::getHipVersion(hipVersions::HIP_LATEST);
-  llvm::errs() << "\n" << sHipify << "Supports CUDA Toolkit from " << Statistics::getCudaVersion(cudaVersions::CUDA_70) << " up to " << Statistics::getCudaVersion(cudaVersions::CUDA_LATEST);
-  llvm::errs() << "\n" << sHipify << "Supports cuDNN from " << Statistics::getCudaVersion(cudaVersions::CUDNN_705) << " up to " << Statistics::getCudaVersion(cudaVersions::CUDNN_LATEST) << " \n";
+  errs() << "\n" << sHipify << "Supports ROCm HIP from " << Statistics::getHipVersion(hipVersions::HIP_5000) << " up to " << Statistics::getHipVersion(hipVersions::HIP_LATEST);
+  errs() << "\n" << sHipify << "Supports CUDA Toolkit from " << Statistics::getCudaVersion(cudaVersions::CUDA_70) << " up to " << Statistics::getCudaVersion(cudaVersions::CUDA_LATEST);
+  errs() << "\n" << sHipify << "Supports cuDNN from " << Statistics::getCudaVersion(cudaVersions::CUDNN_705) << " up to " << Statistics::getCudaVersion(cudaVersions::CUDNN_LATEST) << " \n";
 }
 
 int main(int argc, const char **argv) {
@@ -340,7 +342,7 @@ int main(int argc, const char **argv) {
     }
   }
   if (bCompilationDatabase && bNoCompilationDatabaseDir) {
-    llvm::errs() << "\n" << sHipify << sError << "Must specify compilation database directory" << "\n";
+    errs() << "\n" << sHipify << sError << "Must specify compilation database directory" << "\n";
     return 1;
   }
   if (!bCompilationDatabase && std::find(new_argv.begin(), new_argv.end(), std::string("--")) == new_argv.end()) {
@@ -353,7 +355,7 @@ int main(int argc, const char **argv) {
 #if LLVM_VERSION_MAJOR > 12
   auto cop = ct::CommonOptionsParser::create(argc, argv, ToolTemplateCategory, llvm::cl::ZeroOrMore);
   if (!cop) {
-    llvm::errs() << "\n" << sHipify << sError << cop.takeError() << "\n";
+    errs() << "\n" << sHipify << sError << cop.takeError() << "\n";
     return 1;
   }
   ct::CommonOptionsParser &OptionsParser = cop.get();
@@ -369,7 +371,7 @@ int main(int argc, const char **argv) {
     std::string serr;
     compilationDatabase = ct::CompilationDatabase::loadFromDirectory(sCompilationDatabaseDir, serr);
     if (nullptr == compilationDatabase.get()) {
-      llvm::errs() << "\n" << sHipify << sError << "loading Compilation Database from \"" << sCompilationDatabaseDir << "compile_commands.json\" failed\n";
+      errs() << "\n" << sHipify << sError << "loading Compilation Database from \"" << sCompilationDatabaseDir << "compile_commands.json\" failed\n";
       return 1;
     }
     fileSources = compilationDatabase->getAllFiles();
@@ -377,24 +379,24 @@ int main(int argc, const char **argv) {
     fileSources = OptionsParser.getSourcePathList();
   }
   if (fileSources.empty() && !GeneratePerl && !GeneratePython && !GenerateMarkdown && !GenerateCSV && !Versions) {
-    llvm::errs() << "\n" << sHipify << sError << "Must specify at least 1 positional argument for source file" << "\n";
+    errs() << "\n" << sHipify << sError << "Must specify at least 1 positional argument for source file" << "\n";
     return 1;
   }
   if (Versions) printVersions();
   if (!GenerateMarkdown && !GenerateCSV && !DocFormat.empty()) {
-    llvm::errs() << "\n" << sHipify << sError << "Must specify a document type to generate: \"md\" and | or \"csv\"" << "\n";
+    errs() << "\n" << sHipify << sError << "Must specify a document type to generate: \"md\" and | or \"csv\"" << "\n";
     return 1;
   }
   if (!perl::generate(GeneratePerl)) {
-    llvm::errs() << "\n" << sHipify << sError << "hipify-perl generating failed" << "\n";
+    errs() << "\n" << sHipify << sError << "hipify-perl generating failed" << "\n";
     return 1;
   }
   if (!generatePython()) {
-    llvm::errs() << "\n" << sHipify << sError << "hipify-python generating failed" << "\n";
+    errs() << "\n" << sHipify << sError << "hipify-python generating failed" << "\n";
     return 1;
   }
   if (!doc::generate(GenerateMarkdown, GenerateCSV)) {
-    llvm::errs() << "\n" << sHipify << sError << "Documentation generating failed" << "\n";
+    errs() << "\n" << sHipify << sError << "Documentation generating failed" << "\n";
     return 1;
   }
   if (fileSources.empty()) {
@@ -408,15 +410,15 @@ int main(int argc, const char **argv) {
   }
   if (!dst.empty()) {
     if (fileSources.size() > 1) {
-      llvm::errs() << sHipify << sConflict << "-o and multiple source files are specified\n";
+      errs() << sHipify << sConflict << "-o and multiple source files are specified\n";
       return 1;
     }
     if (Inplace) {
-      llvm::errs() << sHipify << sConflict << "both -o and -inplace options are specified\n";
+      errs() << sHipify << sConflict << "both -o and -inplace options are specified\n";
       return 1;
     }
     if (NoOutput) {
-      llvm::errs() << sHipify << sConflict << "both -no-output and -o options are specified\n";
+      errs() << sHipify << sConflict << "both -no-output and -o options are specified\n";
       return 1;
     }
     if (!dstDir.empty()) {
@@ -424,11 +426,11 @@ int main(int argc, const char **argv) {
     }
   }
   if (NoOutput && Inplace) {
-    llvm::errs() << sHipify << sConflict << "both -no-output and -inplace options are specified\n";
+    errs() << sHipify << sConflict << "both -no-output and -inplace options are specified\n";
     return 1;
   }
   if (!dstDir.empty() && Inplace) {
-    llvm::errs() << sHipify << sConflict << "both -o-dir and -inplace options are specified\n";
+    errs() << sHipify << sConflict << "both -o-dir and -inplace options are specified\n";
     return 1;
   }
   if (Examine) {
@@ -446,7 +448,7 @@ int main(int argc, const char **argv) {
   }
   // Arguments for the Statistics print routines.
   std::unique_ptr<std::ostream> csv = nullptr;
-  llvm::raw_ostream *statPrint = nullptr;
+  raw_ostream *statPrint = nullptr;
   bool create_csv = false;
   if (!OutputStatsFilename.empty()) {
     PrintStatsCSV = true;
@@ -464,7 +466,7 @@ int main(int argc, const char **argv) {
     csv = std::unique_ptr<std::ostream>(new std::ofstream(OutputStatsFilename, std::ios_base::trunc));
   }
   if (PrintStats) {
-    statPrint = &llvm::errs();
+    statPrint = &errs();
   }
   Init(argc, argv, fileSources);
   for (const auto &src : fileSources) {
@@ -489,7 +491,7 @@ int main(int argc, const char **argv) {
     if (TemporaryDir.empty()) {
       EC = sys::fs::createTemporaryFile(sourceFileName, ext, tmpFile);
       if (EC) {
-        llvm::errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
+        errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
         Result = 1;
         continue;
       }
@@ -499,7 +501,7 @@ int main(int argc, const char **argv) {
     }
     EC = sys::fs::copy_file(src, tmpFile);
     if (EC) {
-      llvm::errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << src << " to " << tmpFile << "\n";
+      errs() << "\n" << sHipify << sError << EC.message() << ": while copying " << src << " to " << tmpFile << "\n";
       Result = 1;
       continue;
     }
@@ -524,7 +526,7 @@ int main(int argc, const char **argv) {
                               argv[0],
                               OptLocalHeadersRecursive)) {
         Statistics::current().hasErrors = true;
-        LLVM_DEBUG(llvm::dbgs() << "Local header hipification failed for: " << sSourceAbsPath << "\n");
+        LLVM_DEBUG(dbgs() << "Local header hipification failed for: " << sSourceAbsPath << "\n");
         Result = 1;
       }
     }
@@ -538,7 +540,7 @@ int main(int argc, const char **argv) {
                             false)) {
       Statistics::current().hasErrors = true;
       Result = 1;
-      LLVM_DEBUG(llvm::dbgs() << "Hipification failed for: " << src << "\n");
+      LLVM_DEBUG(dbgs() << "Hipification failed for: " << src << "\n");
     }
 
     Statistics::current().markCompletion();

@@ -16,13 +16,12 @@
 using namespace clang;
 using namespace clang::tooling;
 using namespace llvm;
-using namespace std;
 
 static std::string normalizeSmallStringPath(SmallString<256> &p) {
-  llvm::sys::path::remove_dots(p, true);
+  sys::path::remove_dots(p, true);
 
   SmallString<256> realBuf;
-  std::error_code ec = llvm::sys::fs::real_path(p, realBuf);
+  std::error_code ec = sys::fs::real_path(p, realBuf);
   if (!ec) {
     return std::string(realBuf.str());
   }
@@ -34,12 +33,12 @@ static bool pathExists(const std::string &p) {
   SmallString<256> in(p.begin(), p.end());
 
   SmallString<256> realBuf;
-  std::error_code ec = llvm::sys::fs::real_path(in, realBuf);
+  std::error_code ec = sys::fs::real_path(in, realBuf);
   if (!ec) return true;
 
   SmallString<256> norm = in;
-  llvm::sys::path::remove_dots(norm, true);
-  return llvm::sys::fs::exists(norm);
+  sys::path::remove_dots(norm, true);
+  return sys::fs::exists(norm);
 }
 
 namespace {
@@ -47,7 +46,7 @@ namespace {
       R"(^\s*#\s*include\s*\"([^\"\n]+)\"\s*(?://.*)?$)", std::regex::ECMAScript);
 
   bool readFile(const std::string &path, std::string &out) {
-    auto MBOrErr = llvm::MemoryBuffer::getFile(path);
+    auto MBOrErr = MemoryBuffer::getFile(path);
     if (!MBOrErr) return false;
     out = MBOrErr->get()->getBuffer().str();
     return true;
