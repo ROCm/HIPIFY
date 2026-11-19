@@ -32,7 +32,6 @@ THE SOFTWARE.
 
 namespace ct = clang::tooling;
 namespace mat = clang::ast_matchers;
-using namespace llvm;
 
 /**
   * A FrontendAction that hipifies CUDA programs.
@@ -68,7 +67,7 @@ private:
   clang::SourceLocation firstHeaderLoc;
   clang::SourceLocation pragmaOnceLoc;
   // Rewrite a string literal to refer to hip, not CUDA.
-  void RewriteString(StringRef s, clang::SourceLocation start);
+  void RewriteString(llvm::StringRef s, clang::SourceLocation start);
   // Replace a CUDA identifier with the corresponding hip identifier, if applicable.
   void RewriteToken(const clang::Token &t);
   // Calculate str's SourceLocation in SourceRange sr
@@ -91,12 +90,12 @@ public:
   // Called by the preprocessor for each include directive during the non-raw lexing pass.
   void InclusionDirective(clang::SourceLocation hash_loc,
                           const clang::Token &include_token,
-                          StringRef file_name,
+                          llvm::StringRef file_name,
                           bool is_angled,
                           clang::CharSourceRange filename_range,
                           const clang::FileEntry *file,
-                          StringRef search_path,
-                          StringRef relative_path,
+                          llvm::StringRef search_path,
+                          llvm::StringRef relative_path,
                           const clang::Module *imported);
   // Called by the preprocessor for each pragma directive during the non-raw lexing pass.
   void PragmaDirective(clang::SourceLocation Loc, clang::PragmaIntroducerKind Introducer);
@@ -117,7 +116,7 @@ protected:
   void EndSourceFileAction() override;
   // MatchCallback API entry point. Called by the AST visitor while searching the AST for things we registered an interest for.
   void run(const mat::MatchFinder::MatchResult &Result) override;
-  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, StringRef InFile) override;
+  std::unique_ptr<clang::ASTConsumer> CreateASTConsumer(clang::CompilerInstance &CI, llvm::StringRef InFile) override;
   bool Exclude(const hipCounter &hipToken);
-  void FindAndReplace(StringRef name, clang::SourceLocation sl, const std::map<StringRef, hipCounter> &repMap, bool bReplace = true);
+  void FindAndReplace(llvm::StringRef name, clang::SourceLocation sl, const std::map<llvm::StringRef, hipCounter> &repMap, bool bReplace = true);
 };
