@@ -1443,6 +1443,9 @@ int main() {
 
   // CHECK: hipMemAllocationType MemAllocationTypeManaged = hipMemAllocationTypeManaged;
   CUmemAllocationType MemAllocationTypeManaged = CU_MEM_ALLOCATION_TYPE_MANAGED;
+
+  // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED = hipDeviceAttributeHostAllocDmaBufSupported;
+  CUdevice_attribute DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED = CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED;
 #endif
 
 #if CUDA_VERSION >= 13010
