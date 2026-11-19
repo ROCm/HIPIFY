@@ -223,7 +223,7 @@
 |`cufftSetPlanPropertyInt64`|12.4| | | | | | | | | | |
 |`cufftSetStream`| | | | |`hipfftSetStream`|1.7.0| | | | | |
 |`cufftSetWorkArea`| | | | |`hipfftSetWorkArea`|1.7.0| | | | | |
-|`cufftXtClearCallback`| | | | |`hipfftXtClearCallback`|4.3.0| | | | | |
+|`cufftXtClearCallback`| | | | |`hipfftXtClearCallback`|4.3.0|10.1.0| | | | |
 |`cufftXtExec`|8.0| | | |`hipfftXtExec`|5.6.0| | | | | |
 |`cufftXtExecDescriptor`|8.0| | | |`hipfftXtExecDescriptor`|6.0.0| | | | | |
 |`cufftXtExecDescriptorC2C`| | | | |`hipfftXtExecDescriptorC2C`|6.0.0| | | | | |
@@ -238,7 +238,7 @@
 |`cufftXtMalloc`| | | | |`hipfftXtMalloc`|6.0.0| | | | | |
 |`cufftXtMemcpy`| | | | |`hipfftXtMemcpy`|6.0.0| | | | | |
 |`cufftXtQueryPlan`| | | | | | | | | | | |
-|`cufftXtSetCallback`| | | | |`hipfftXtSetCallback`|4.3.0| | | | | |
+|`cufftXtSetCallback`| | | | |`hipfftXtSetCallback`|4.3.0|10.1.0| | | | |
 |`cufftXtSetCallbackSharedSize`| | | | |`hipfftXtSetCallbackSharedSize`|4.3.0| | | | | |
 |`cufftXtSetDistribution`|11.8| | | | | | | | | | |
 |`cufftXtSetGPUs`| | | | |`hipfftXtSetGPUs`|6.0.0| | | | | |
