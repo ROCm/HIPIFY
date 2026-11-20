@@ -1109,7 +1109,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_DEVICE_ATTRIBUTE_HOST_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED"]      = {"hipDeviceAttributeHostVirtualMemoryManagementSupported",     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 145
   //
-  m["CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED"]                  = {"hipDeviceAttributeHostHostAllocDmaBufSupported",             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 146
+  m["CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED"]                  = {"hipDeviceAttributeHostAllocDmaBufSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 146
   // cudaDevAttrOnlyPartialHostNativeAtomicSupported
   m["CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED"]     = {"hipDeviceAttributeOnlyPartialHostNativeAtomicSupported",     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 147
   // cudaDevAttrAtomicReductionSupported
@@ -5278,6 +5278,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [
   m["hipErrorStreamDetached"]                                            = {HIP_7140, HIP_0,    HIP_0   };
   m["hipExecutionCtx_t"]                                                 = {HIP_7140, HIP_0,    HIP_0   };
   m["ihipExecutionCtx_t"]                                                = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDeviceAttributeHostAllocDmaBufSupported"]                        = {HIP_10010, HIP_0,   HIP_0, HIP_LATEST};
 
   return m;
 }();

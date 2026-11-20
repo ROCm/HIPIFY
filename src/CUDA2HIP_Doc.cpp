@@ -28,7 +28,17 @@ THE SOFTWARE.
 
 namespace doc {
 
-  using namespace std;
+  using std::string;
+  using std::map;
+  using std::vector;
+  using std::unique_ptr;
+  using std::ostream;
+  using std::ofstream;
+  using std::stringstream;
+  using std::error_code;
+  using std::make_pair;
+  using std::endl;
+  using std::ios_base;
   using namespace llvm;
 
   typedef map<unsigned int, StringRef> sectionMap;
@@ -36,9 +46,9 @@ namespace doc {
   typedef functionMap typeMap;
   typedef map<StringRef, cudaAPIversions> versionMap;
   typedef map<StringRef, hipAPIversions> hipVersionMap;
-  typedef map<llvm::StringRef, hipAPIChangedVersions> hipChangedVersionMap;
-  typedef map<llvm::StringRef, cudaAPIChangedVersions> cudaChangedVersionMap;
-  typedef map<llvm::StringRef, cudaAPIUnsupportedVersions> cudaUnsupportedVersionMap;
+  typedef map<StringRef, hipAPIChangedVersions> hipChangedVersionMap;
+  typedef map<StringRef, cudaAPIChangedVersions> cudaChangedVersionMap;
+  typedef map<StringRef, cudaAPIUnsupportedVersions> cudaUnsupportedVersionMap;
 
   const string tab = "    ";
   const string endl_tab = "\n" + tab;
@@ -1041,7 +1051,7 @@ namespace doc {
       if (DocFormat == "compact") docFormat = compact;
       else if (DocFormat == "strict") docFormat = strict;
       else if (DocFormat != "full") {
-        llvm::errs() << "\n" << sHipify << sError << "Unsupported documentation format: '" << DocFormat << "'; supported formats: 'full', 'strict', 'compact'\n";
+        errs() << "\n" << sHipify << sError << "Unsupported documentation format: '" << DocFormat << "'; supported formats: 'full', 'strict', 'compact'\n";
         return false;
       }
     }
@@ -1050,7 +1060,7 @@ namespace doc {
       if (DocRoc == "separate") docRoc = separate;
       else if (DocRoc == "joint") docRoc = joint;
       else if (DocRoc != "skip") {
-        llvm::errs() << "\n" << sHipify << sError << "Unsupported ROC documentation format: '" << DocRoc << "'; supported formats: 'skip', 'separate', 'joint'\n";
+        errs() << "\n" << sHipify << sError << "Unsupported ROC documentation format: '" << DocRoc << "'; supported formats: 'skip', 'separate', 'joint'\n";
         return false;
       }
     }
