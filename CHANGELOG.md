@@ -3,11 +3,57 @@
 Documentation for HIPIFY is available at
 [https://rocmdocs.amd.com/projects/HIPIFY/en/latest/](https://rocmdocs.amd.com/projects/HIPIFY/en/latest/).
 
+## HIPIFY for TheRock 10.2.0
+
+### Added
+
+* cuSparseLt 0.4.0 support
+* [#2448](https://github.com/ROCm/HIPIFY/issues/2448) Cooperative_groups reduce and scan support
+
+## HIPIFY for TheRock 10.1.0
+
+### Added
+
+* Partial support for CUDA 13.2.0
+* cuDNN 9.25.0 support
+* cuTENSOR 2.7.0.0 support
+* cuFile 1.18.1 support
+* Initial cuSparseLt support
+* LLVM 22.1.8 support
+* [Windows] Visual Studio 2026 support
+
+## HIPIFY for ROCm 7.14.0
+
+### Added
+
+* cuDNN 9.20.0 support
+* cuTENSOR 2.6.0.0 support
+* cuFile 1.17.0 support
+* LLVM 22.1.3 support
+
+## HIPIFY for ROCm 7.13.0
+
+### Added
+
+* cuDNN 9.19.1 support
+* [#2418](https://github.com/ROCm/HIPIFY/issues/2418) hipify-perl: Major performance optimization (up to 50 times faster) and correctness fixes via O(1) Hash
+
+## HIPIFY for ROCm 7.12.0
+
+### Added
+
+* Partial support for CUDA 13.1.0
+* cuDNN 9.19.0 support
+* cuTENSOR 2.5.0.0 support
+* LLVM 21.1.8 support
+* Initial cuFile support
+* [#2340](https://github.com/ROCm/HIPIFY/issues/2340) Implement nvcc behavior with implicit CUDA headers
+
 ## HIPIFY for ROCm 7.2.0
 
 ### Added
 
-* Partial support for CUDA 13.0.0 support
+* Partial support for CUDA 13.0.0
 * cuDNN 9.14.0 support
 * cuTENSOR 2.3.1.0 support
 * LLVM 21.1.6 support
