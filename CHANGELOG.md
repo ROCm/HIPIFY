@@ -46,7 +46,7 @@ Documentation for HIPIFY is available at
 * cuDNN 9.19.0 support
 * cuTENSOR 2.5.0.0 support
 * LLVM 21.1.8 support
-* Initial cuFile support for
+* Initial cuFile support
 * [#2340](https://github.com/ROCm/HIPIFY/issues/2340) Implement nvcc behavior with implicit CUDA headers
 
 ## HIPIFY for ROCm 7.2.0
