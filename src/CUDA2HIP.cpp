@@ -100,6 +100,29 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   // RTC includes
   {"nvrtc.h",                                               {"hip/hiprtc.h",                                          "",                                                               CONV_INCLUDE_CUDA_MAIN_H, API_RTC, 0}},
   {"cufile.h",                                              {"hipfile.h",                                             "",                                                               CONV_INCLUDE, API_FILE, 0}},
+  // libcu++ includes listed as unsupported in the libhipcxx limitations
+  {"cuda/annotated_ptr",                                    {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/barrier",                                          {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/buffer",                                           {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/latch",                                            {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/pipeline",                                         {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/ptx",                                              {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/semaphore",                                        {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/tma",                                              {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/std/barrier",                                      {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/std/execution",                                    {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/std/latch",                                        {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/std/semaphore",                                    {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  // libcu++ includes that libhipcxx does not provide
+  {"cuda/argument",                                         {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/execution.guarantee.h",                            {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/execution.tie_break.h",                            {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/fabric",                                           {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/fpemu",                                            {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/fpmp",                                             {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/fptool",                                           {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/logical_endpoint",                                 {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/simd",                                             {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
