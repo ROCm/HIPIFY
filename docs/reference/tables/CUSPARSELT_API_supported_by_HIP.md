@@ -14,6 +14,8 @@
 
 |**CUDA**|**A**|**D**|**C**|**R**|**HIP**|**A**|**D**|**C**|**R**|**U**|**E**|
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
+|`CUSPARSELT_DATAPARALLEL`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_HEURISTIC`|0.7.0| | | | | | | | | | |
 |`CUSPARSELT_INVALID_MODE`|0.3.0| | | | | | | | | | |
 |`CUSPARSELT_MATMUL_ACTIVATION_GELU`|0.2.0| | | |`HIPSPARSELT_MATMUL_ACTIVATION_GELU`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_ACTIVATION_GELU_SCALING`|0.3.0| | | |`HIPSPARSELT_MATMUL_ACTIVATION_GELU_SCALING`|7.10.0| | | | | |
@@ -24,9 +26,23 @@
 |`CUSPARSELT_MATMUL_ALG_CONFIG_MAX_ID`|0.0.1| | | |`HIPSPARSELT_MATMUL_ALG_CONFIG_MAX_ID`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_ALG_DEFAULT`|0.0.1| | | |`HIPSPARSELT_MATMUL_ALG_DEFAULT`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_ALPHA_VECTOR_SCALING`|0.3.0| | | |`HIPSPARSELT_MATMUL_ALPHA_VECTOR_SCALING`|7.10.0| | | | | |
+|`CUSPARSELT_MATMUL_A_SCALE_MODE`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_A_SCALE_POINTER`|0.7.0| | | | | | | | | | |
 |`CUSPARSELT_MATMUL_BETA_VECTOR_SCALING`|0.3.0| | | |`HIPSPARSELT_MATMUL_BETA_VECTOR_SCALING`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_BIAS_POINTER`|0.2.0| | | |`HIPSPARSELT_MATMUL_BIAS_POINTER`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_BIAS_STRIDE`|0.2.0| | | |`HIPSPARSELT_MATMUL_BIAS_STRIDE`|7.10.0| | | | | |
+|`CUSPARSELT_MATMUL_B_SCALE_MODE`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_B_SCALE_POINTER`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_C_SCALE_MODE`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_C_SCALE_POINTER`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_D_OUT_SCALE_MODE`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_D_OUT_SCALE_POINTER`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_D_SCALE_MODE`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_D_SCALE_POINTER`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_MATRIX_SCALE_SCALAR_32F`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_MATRIX_SCALE_VEC32_UE4M3`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_MATRIX_SCALE_VEC64_UE8M0`|0.7.0| | | | | | | | | | |
+|`CUSPARSELT_MATMUL_SCALE_NONE`|0.7.0| | | | | | | | | | |
 |`CUSPARSELT_MATMUL_SEARCH_ITERATIONS`|0.0.1| | | |`HIPSPARSELT_MATMUL_SEARCH_ITERATIONS`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_SPARSE_MAT_POINTER`|0.6.2| | | |`HIPSPARSELT_MATMUL_SPARSE_MAT_POINTER`|7.10.0| | | | | |
 |`CUSPARSELT_MATMUL_SPLIT_K`|0.3.0| | | |`HIPSPARSELT_MATMUL_SPLIT_K`|7.10.0| | | | | |
@@ -37,8 +53,10 @@
 |`CUSPARSELT_PRUNE_SPMMA_STRIP`|0.0.1| | | |`HIPSPARSELT_PRUNE_SPMMA_STRIP`|7.10.0| | | | | |
 |`CUSPARSELT_PRUNE_SPMMA_TILE`|0.0.1| | | |`HIPSPARSELT_PRUNE_SPMMA_TILE`|7.10.0| | | | | |
 |`CUSPARSELT_SPARSITY_50_PERCENT`|0.0.1| | | |`HIPSPARSELT_SPARSITY_50_PERCENT`|7.10.0| | | | | |
+|`CUSPARSELT_SPLITK`|0.7.0| | | | | | | | | | |
 |`CUSPARSELT_SPLIT_K_MODE_ONE_KERNEL`|0.3.0| | | |`HIPSPARSELT_SPLIT_K_MODE_ONE_KERNEL`|7.10.0| | | | | |
 |`CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS`|0.3.0| | | |`HIPSPARSELT_SPLIT_K_MODE_TWO_KERNELS`|7.10.0| | | | | |
+|`CUSPARSELT_STREAMK`|0.7.0| | | | | | | | | | |
 |`CUSPARSE_COMPUTE_16F`|0.0.1| | | |`HIPSPARSELT_COMPUTE_16F`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_32F`|0.5.2| | | |`HIPSPARSELT_COMPUTE_32F`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_32I`|0.0.1| | | |`HIPSPARSELT_COMPUTE_32I`|7.10.0| | | | | |
@@ -46,15 +64,16 @@
 |`CUSPARSE_COMPUTE_TF32`|0.1.0| | |0.5.2|`HIPSPARSELT_COMPUTE_TF32`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_TF32_FAST`|0.1.0| | |0.5.2|`HIPSPARSELT_COMPUTE_TF32_FAST`|7.10.0| | | | | |
 |`cusparseComputeType`|0.0.1| | | |`hipsparseLtComputetype_t`|7.10.0| | | | | |
-|`cusparseLtHandle_t`|0.0.1| |0.2.0, 0.5.0| |`hipsparseLtHandle_t`|7.10.0| | | | | |
+|`cusparseLtHandle_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtHandle_t`|7.10.0| | | | | |
 |`cusparseLtMatDescAttribute_t`|0.2.0| | | |`hipsparseLtMatDescAttribute_t`|7.10.0| | | | | |
-|`cusparseLtMatDescriptor_t`|0.0.1| |0.2.0, 0.5.0| |`hipsparseLtMatDescriptor_t`|7.10.0| | | | | |
+|`cusparseLtMatDescriptor_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtMatDescriptor_t`|7.10.0| | | | | |
 |`cusparseLtMatmulAlgAttribute_t`|0.0.1| | | |`hipsparseLtMatmulAlgAttribute_t`|7.10.0| | | | | |
-|`cusparseLtMatmulAlgSelection_t`|0.0.1| |0.2.0, 0.5.0| |`hipsparseLtMatmulAlgSelection_t`|7.10.0| | | | | |
+|`cusparseLtMatmulAlgSelection_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtMatmulAlgSelection_t`|7.10.0| | | | | |
 |`cusparseLtMatmulAlg_t`|0.0.1| | | |`hipsparseLtMatmulAlg_t`|7.10.0| | | | | |
 |`cusparseLtMatmulDescAttribute_t`|0.2.0| | | |`hipsparseLtMatmulDescAttribute_t`|7.10.0| | | | | |
-|`cusparseLtMatmulDescriptor_t`|0.0.1| |0.2.0, 0.5.0| |`hipsparseLtMatmulDescriptor_t`|7.10.0| | | | | |
-|`cusparseLtMatmulPlan_t`|0.0.1| |0.2.0, 0.5.0| |`hipsparseLtMatmulPlan_t`|7.10.0| | | | | |
+|`cusparseLtMatmulDescriptor_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtMatmulDescriptor_t`|7.10.0| | | | | |
+|`cusparseLtMatmulMatrixScale_t`|0.7.0| | | | | | | | | | |
+|`cusparseLtMatmulPlan_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtMatmulPlan_t`|7.10.0| | | | | |
 |`cusparseLtPruneAlg_t`|0.0.1| | | |`hipsparseLtPruneAlg_t`|7.10.0| | | | | |
 |`cusparseLtSparsity_t`|0.0.1| | | |`hipsparseLtSparsity_t`|7.10.0| | | | | |
 |`cusparseLtSplitKMode_t`|0.3.0| | | |`hipsparseLtSplitKMode_t`|7.10.0| | | | | |
@@ -65,6 +84,8 @@
 |:--|:-:|:-:|:-:|:-:|:--|:-:|:-:|:-:|:-:|:-:|:-:|
 |`cusparseLtDenseDescriptorInit`|0.0.1| | | |`hipsparseLtDenseDescriptorInit`|7.10.0| | | | | |
 |`cusparseLtDestroy`|0.0.1| | | |`hipsparseLtDestroy`|7.10.0| | | | | |
+|`cusparseLtGetErrorName`|0.7.0| | | | | | | | | | |
+|`cusparseLtGetErrorString`|0.7.0| | | | | | | | | | |
 |`cusparseLtGetProperty`|0.4.0| | | |`hipsparseLtGetProperty`|7.10.0| | | | | |
 |`cusparseLtGetVersion`|0.4.0| | | |`hipsparseLtGetVersion`|7.10.0| | | | | |
 |`cusparseLtInit`|0.0.1| | | |`hipsparseLtInit`|7.10.0| | | | | |
