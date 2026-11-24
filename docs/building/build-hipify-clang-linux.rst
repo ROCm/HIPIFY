@@ -143,7 +143,7 @@ Minimum build system requirements for the above configurations:
 
 Recommended build system requirements:
 
-* CMake 4.4.2, GNU C/C++ 13.3, Python 3.15.2.
+* CMake 4.5.1, GNU C/C++ 16.2, Python 3.15.2.
 
 Here's how to build ``hipify-clang`` with testing support on ``Ubuntu 24.04.02``:
 
