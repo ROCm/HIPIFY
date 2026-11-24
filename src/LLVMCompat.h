@@ -25,6 +25,7 @@ THE SOFTWARE.
 #include <clang/Tooling/Core/Replacement.h>
 #include <clang/Tooling/Refactoring.h>
 #include <llvm/Support/Signals.h>
+#include "llvm/Support/FileSystem.h"
 #include <clang/Lex/Token.h>
 #include <clang/Lex/Preprocessor.h>
 
@@ -47,6 +48,12 @@ namespace llcompat {
 
 #if LLVM_VERSION_MAJOR < 7
   #define LLVM_DEBUG(X) DEBUG(X)
+#endif
+
+#if LLVM_VERSION_MAJOR >= 13
+  const llvm::sys::fs::OpenFlags OF_TextWithCRLF = llvm::sys::fs::OF_TextWithCRLF;
+#else
+  const llvm::sys::fs::OpenFlags OF_TextWithCRLF = llvm::sys::fs::F_Text;
 #endif
 
 clang::SourceLocation getBeginLoc(const clang::Stmt *stmt);

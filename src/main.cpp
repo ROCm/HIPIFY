@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <fstream>
 #include "CUDA2HIP.h"
 #include "CUDA2HIP_Scripting.h"
 #include "LLVMCompat.h"
@@ -313,6 +312,16 @@ bool generatePython() {
   return bToPython;
 }
 
+static std::unique_ptr<raw_fd_ostream> openStatsFile(StringRef Filename) {
+  std::error_code EC;
+  std::unique_ptr<raw_fd_ostream> OS(new raw_fd_ostream(Filename, EC, llcompat::OF_TextWithCRLF));
+  if (EC) {
+    errs() << "\n" << sHipify << sError << EC.message() << ": " << Filename << "\n";
+    return nullptr;
+  }
+  return OS;
+}
+
 void printVersions() {
   errs() << "\n" << sHipify << "Supports ROCm HIP from " << Statistics::getHipVersion(hipVersions::HIP_5000) << " up to " << Statistics::getHipVersion(hipVersions::HIP_LATEST);
   errs() << "\n" << sHipify << "Supports CUDA Toolkit from " << Statistics::getCudaVersion(cudaVersions::CUDA_70) << " up to " << Statistics::getCudaVersion(cudaVersions::CUDA_LATEST);
@@ -447,7 +456,7 @@ int main(int argc, const char **argv) {
     return 1;
   }
   // Arguments for the Statistics print routines.
-  std::unique_ptr<std::ostream> csv = nullptr;
+  std::unique_ptr<raw_fd_ostream> csv = nullptr;
   raw_ostream *statPrint = nullptr;
   bool create_csv = false;
   if (!OutputStatsFilename.empty()) {
@@ -463,7 +472,11 @@ int main(int argc, const char **argv) {
     if (!OutputDir.empty()) {
       OutputStatsFilename = sOutputDirAbsPath + "/" + OutputStatsFilename;
     }
-    csv = std::unique_ptr<std::ostream>(new std::ofstream(OutputStatsFilename, std::ios_base::trunc));
+    csv = openStatsFile(OutputStatsFilename);
+    if (!csv) {
+      PrintStatsCSV = false;
+      Result = 1;
+    }
   }
   if (PrintStats) {
     statPrint = &errs();
@@ -513,7 +526,11 @@ int main(int argc, const char **argv) {
         }
       }
       if (!csv) {
-        csv = std::unique_ptr<std::ostream>(new std::ofstream(OutputStatsFilename, std::ios_base::trunc));
+        csv = openStatsFile(OutputStatsFilename);
+        if (!csv) {
+          PrintStatsCSV = false;
+          Result = 1;
+        }
       }
     }
     // Initialise the statistics counters for this file.
