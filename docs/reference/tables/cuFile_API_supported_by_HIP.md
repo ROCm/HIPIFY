@@ -22,7 +22,7 @@
 |`CUFILE_DMABUF`|1.16.0| | | | | | | | | | |
 |`CUFILE_ERRSTR`|1.0.0| | | |`HIPFILE_ERRSTR`|7.2.0| | | | | |
 |`CUFILE_FAILED`|1.2.0| | | |`hipFileFailed`|7.2.0| | | | | |
-|`CUFILE_GPU_UUID_LEN`|1.15.0| | | |`HIPFILE_GPU_UUID_LEN`|10.1.0| | | | |10.1.0|
+|`CUFILE_GPU_UUID_LEN`|1.15.0| | | |`HIPFILE_GPU_UUID_LEN`|10.1.0| | | | | |
 |`CUFILE_INVALID`|1.2.0| | | |`hipFileInvalid`|7.2.0| | | | | |
 |`CUFILE_NVFS`|1.16.0| | | | | | | | | | |
 |`CUFILE_NVIDIA_PEERMEM`|1.16.0| | | | | | | | | | |
@@ -174,21 +174,21 @@
 |`CUfileIOParams_t`|1.2.0| | | |`hipFileIOParams_t`|7.2.0| | | | | |
 |`CUfileIOVec`|1.19.0| | | | | | | | | | |
 |`CUfileIOVec_t`|1.19.0| | | | | | | | | | |
-|`CUfileOpCounter`|1.15.0| | | |`hipFileOpCounter_t`|10.1.0| | | | |10.1.0|
-|`CUfileOpCounter_t`|1.15.0| | | |`hipFileOpCounter_t`|10.1.0| | | | |10.1.0|
+|`CUfileOpCounter`|1.15.0| | | |`hipFileOpCounter_t`|10.1.0| | | | | |
+|`CUfileOpCounter_t`|1.15.0| | | |`hipFileOpCounter_t`|10.1.0| | | | | |
 |`CUfileOpError`|1.0.0| | | |`hipFileOpError_t`|7.2.0| | | | | |
 |`CUfileOpcode`|1.0.0| | | |`hipFileOpcode`|7.2.0| | | | | |
 |`CUfileOpcode_t`|1.2.0| | | |`hipFileOpcode_t`|7.2.0| | | | | |
 |`CUfileP2PFlags`|1.16.0| | | | | | | | | | |
 |`CUfileP2PFlags_t`|1.16.0| | | | | | | | | | |
-|`CUfilePerGpuStats`|1.15.0| | | |`hipFilePerGpuStats_t`|10.1.0| | | | |10.1.0|
-|`CUfilePerGpuStats_t`|1.15.0| | | |`hipFilePerGpuStats_t`|10.1.0| | | | |10.1.0|
-|`CUfileStatsLevel1`|1.15.0| | | |`hipFileStatsLevel1_t`|10.1.0| | | | |10.1.0|
-|`CUfileStatsLevel1_t`|1.15.0| | | |`hipFileStatsLevel1_t`|10.1.0| | | | |10.1.0|
-|`CUfileStatsLevel2`|1.15.0| | | |`hipFileStatsLevel2_t`|10.1.0| | | | |10.1.0|
-|`CUfileStatsLevel2_t`|1.15.0| | | |`hipFileStatsLevel2_t`|10.1.0| | | | |10.1.0|
-|`CUfileStatsLevel3`|1.15.0| | | |`hipFileStatsLevel3_t`|10.1.0| | | | |10.1.0|
-|`CUfileStatsLevel3_t`|1.15.0| | | |`hipFileStatsLevel3_t`|10.1.0| | | | |10.1.0|
+|`CUfilePerGpuStats`|1.15.0| | | |`hipFilePerGpuStats_t`|10.1.0| | | | | |
+|`CUfilePerGpuStats_t`|1.15.0| | | |`hipFilePerGpuStats_t`|10.1.0| | | | | |
+|`CUfileStatsLevel1`|1.15.0| | | |`hipFileStatsLevel1_t`|10.1.0| | | | | |
+|`CUfileStatsLevel1_t`|1.15.0| | | |`hipFileStatsLevel1_t`|10.1.0| | | | | |
+|`CUfileStatsLevel2`|1.15.0| | | |`hipFileStatsLevel2_t`|10.1.0| | | | | |
+|`CUfileStatsLevel2_t`|1.15.0| | | |`hipFileStatsLevel2_t`|10.1.0| | | | | |
+|`CUfileStatsLevel3`|1.15.0| | | |`hipFileStatsLevel3_t`|10.1.0| | | | | |
+|`CUfileStatsLevel3_t`|1.15.0| | | |`hipFileStatsLevel3_t`|10.1.0| | | | | |
 |`CUfileStatus_t`|1.2.0| | | |`hipFileStatus_t`|7.2.0| | | | | |
 |`IS_CUDA_ERR`|1.0.0| | | |`IS_HIP_DRV_ERR`|7.2.0| | | | | |
 |`IS_CUFILE_ERR`|1.0.0| | | |`IS_HIPFILE_ERR`|7.2.0| | | | | |
@@ -226,9 +226,9 @@
 |`cuFileGetParameterPosixPoolSlabArray`|1.15.0| | | | | | | | | | |
 |`cuFileGetParameterSizeT`|1.14.0| | | |`hipFileGetParameterSizeT`|7.2.0| | | | | |
 |`cuFileGetParameterString`|1.14.0| | | |`hipFileGetParameterString`|7.2.0| | | | | |
-|`cuFileGetStatsL1`|1.15.0| | | |`hipFileGetStatsL1`|10.1.0| | | | |10.1.0|
-|`cuFileGetStatsL2`|1.15.0| | | |`hipFileGetStatsL2`|10.1.0| | | | |10.1.0|
-|`cuFileGetStatsL3`|1.15.0| | | |`hipFileGetStatsL3`|10.1.0| | | | |10.1.0|
+|`cuFileGetStatsL1`|1.15.0| | | |`hipFileGetStatsL1`|10.1.0| | | | | |
+|`cuFileGetStatsL2`|1.15.0| | | |`hipFileGetStatsL2`|10.1.0| | | | | |
+|`cuFileGetStatsL3`|1.15.0| | | |`hipFileGetStatsL3`|10.1.0| | | | | |
 |`cuFileGetStatsLevel`|1.15.0| | | | | | | | | | |
 |`cuFileGetVersion`|1.8.0| | | | | | | | | | |
 |`cuFileHandleDeregister`|1.0.0| | | |`hipFileHandleDeregister`|7.2.0| | | | | |
