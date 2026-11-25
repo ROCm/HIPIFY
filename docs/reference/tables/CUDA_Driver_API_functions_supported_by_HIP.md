@@ -116,7 +116,7 @@
 |`CUDA_ERROR_NOT_MAPPED`| | | | |`hipErrorNotMapped`|1.6.0| | | | | |
 |`CUDA_ERROR_NOT_MAPPED_AS_ARRAY`| | | | |`hipErrorNotMappedAsArray`|1.6.0| | | | | |
 |`CUDA_ERROR_NOT_MAPPED_AS_POINTER`| | | | |`hipErrorNotMappedAsPointer`|1.6.0| | | | | |
-|`CUDA_ERROR_NOT_PERMITTED`| | | | | | | | | | | |
+|`CUDA_ERROR_NOT_PERMITTED`| | | | |`hipErrorNotPermitted`|10.2.0| | | | |10.2.0|
 |`CUDA_ERROR_NOT_READY`| | | | |`hipErrorNotReady`|1.6.0| | | | | |
 |`CUDA_ERROR_NOT_SUPPORTED`| | | | |`hipErrorNotSupported`|1.6.0| | | | | |
 |`CUDA_ERROR_NO_BINARY_FOR_GPU`| | | | |`hipErrorNoBinaryForGpu`|1.6.0| | | | | |
@@ -465,10 +465,10 @@
 |`CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED`|11.0| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GLOBAL_L1_CACHE_SUPPORTED`| | | | |`hipDeviceAttributeGlobalL1CacheSupported`|4.3.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GLOBAL_MEMORY_BUS_WIDTH`| | | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | | | | |
-|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS`|11.3| | | | | | | | | | |
-|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED`|11.3| | | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS`|11.3| | | |`hipDeviceAttributeGPUDirectRDMAFlushWritesOptions`|10.2.0| | | | |10.2.0|
+|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED`|11.3| | | |`hipDeviceAttributeGPUDirectRDMASupported`|10.2.0| | | | |10.2.0|
 |`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WITH_CUDA_VMM_SUPPORTED`|11.0| | | |`hipDeviceAttributeGPUDirectRDMAWithHipVMMSupported`|7.13.0| | | | | |
-|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING`|11.3| | | | | | | | | | |
+|`CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING`|11.3| | | |`hipDeviceAttributeGPUDirectRDMAWritesOrdering`|10.2.0| | | | |10.2.0|
 |`CU_DEVICE_ATTRIBUTE_GPU_OVERLAP`| |5.0| | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_DEVICE_ID`|12.8| | | | | | | | | | |
 |`CU_DEVICE_ATTRIBUTE_GPU_PCI_SUBSYSTEM_ID`|12.8| | | | | | | | | | |
@@ -729,9 +729,9 @@
 |`CU_EXTERNAL_SEMAPHORE_HANDLE_TYPE_TIMELINE_SEMAPHORE_WIN32`|11.2| | | | | | | | | | |
 |`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_HOST`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionHost`|6.1.0| | | | | |
 |`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_OPTION_MEMOPS`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionMemOps`|6.1.0| | | | | |
-|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX`|11.3| | | | | | | | | | |
-|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES`|11.3| | | | | | | | | | |
-|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER`|11.3| | | | | | | | | | |
+|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX`|11.3| | | |`hipFlushGPUDirectRDMAWritesTargetCurrentDevice`|10.2.0| | | | |10.2.0|
+|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES`|11.3| | | |`hipFlushGPUDirectRDMAWritesToAllDevices`|10.2.0| | | | |10.2.0|
+|`CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER`|11.3| | | |`hipFlushGPUDirectRDMAWritesToOwner`|10.2.0| | | | |10.2.0|
 |`CU_FUNCTION_LOADING_STATE_LOADED`|12.4| | | | | | | | | | |
 |`CU_FUNCTION_LOADING_STATE_MAX`|12.4| | | | | | | | | | |
 |`CU_FUNCTION_LOADING_STATE_UNLOADED`|12.4| | | | | | | | | | |
@@ -1412,10 +1412,10 @@
 |`CUfilter_mode_enum`| | | | |`HIPfilter_mode_enum`|3.5.0| | | | | |
 |`CUflushGPUDirectRDMAWritesOptions`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptions`|6.1.0| | | | | |
 |`CUflushGPUDirectRDMAWritesOptions_enum`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptions`|6.1.0| | | | | |
-|`CUflushGPUDirectRDMAWritesScope`|11.3| | | | | | | | | | |
-|`CUflushGPUDirectRDMAWritesScope_enum`|11.3| | | | | | | | | | |
-|`CUflushGPUDirectRDMAWritesTarget`|11.3| | | | | | | | | | |
-|`CUflushGPUDirectRDMAWritesTarget_enum`|11.3| | | | | | | | | | |
+|`CUflushGPUDirectRDMAWritesScope`|11.3| | | |`hipFlushGPUDirectRDMAWritesScope`|10.2.0| | | | |10.2.0|
+|`CUflushGPUDirectRDMAWritesScope_enum`|11.3| | | |`hipFlushGPUDirectRDMAWritesScope`|10.2.0| | | | |10.2.0|
+|`CUflushGPUDirectRDMAWritesTarget`|11.3| | | |`hipFlushGPUDirectRDMAWritesTarget`|10.2.0| | | | |10.2.0|
+|`CUflushGPUDirectRDMAWritesTarget_enum`|11.3| | | |`hipFlushGPUDirectRDMAWritesTarget`|10.2.0| | | | |10.2.0|
 |`CUfunc_cache`| | | | |`hipFuncCache_t`|1.6.0| | | | | |
 |`CUfunc_cache_enum`| | | | |`hipFuncCache_t`|1.6.0| | | | | |
 |`CUfunc_st`| | | | |`ihipModuleSymbol_t`|1.6.0| | | | | |

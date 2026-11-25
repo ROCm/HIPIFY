@@ -239,6 +239,7 @@ int main() {
   // CHECK-NEXT: hipError_t ErrorHostMemoryAlreadyRegistered = hipErrorHostMemoryAlreadyRegistered;
   // CHECK-NEXT: hipError_t ErrorHostMemoryNotRegistered = hipErrorHostMemoryNotRegistered;
   // CHECK-NEXT: hipError_t ErrorLaunchFailure = hipErrorLaunchFailure;
+  // CHECK-NEXT: hipError_t ErrorNotPermitted = hipErrorNotPermitted;
   // CHECK-NEXT: hipError_t ErrorNotSupported = hipErrorNotSupported;
   // CHECK-NEXT: hipError_t ErrorInvalidTexture = hipErrorInvalidTexture;
   // CHECK-NEXT: hipError_t ErrorInvalidChannelDescriptor = hipErrorInvalidChannelDescriptor;
@@ -289,6 +290,7 @@ int main() {
   cudaError_t ErrorHostMemoryAlreadyRegistered = cudaErrorHostMemoryAlreadyRegistered;
   cudaError_t ErrorHostMemoryNotRegistered = cudaErrorHostMemoryNotRegistered;
   cudaError_t ErrorLaunchFailure = cudaErrorLaunchFailure;
+  cudaError_t ErrorNotPermitted = cudaErrorNotPermitted;
   cudaError_t ErrorNotSupported = cudaErrorNotSupported;
   cudaError_t ErrorInvalidTexture = cudaErrorInvalidTexture;
   cudaError_t ErrorInvalidChannelDescriptor = cudaErrorInvalidChannelDescriptor;
@@ -905,6 +907,25 @@ int main() {
   int EnableDefault = cudaEnableDefault;
   int EnableLegacyStream = cudaEnableLegacyStream;
   int EnablePerThreadDefaultStream = cudaEnablePerThreadDefaultStream;
+
+  // CHECK: hipDeviceAttribute_t DevAttrGPUDirectRDMASupported = hipDeviceAttributeGPUDirectRDMASupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrGPUDirectRDMAFlushWritesOptions = hipDeviceAttributeGPUDirectRDMAFlushWritesOptions;
+  // CHECK-NEXT: hipDeviceAttribute_t DevAttrGPUDirectRDMAWritesOrdering = hipDeviceAttributeGPUDirectRDMAWritesOrdering;
+  cudaDeviceAttr DevAttrGPUDirectRDMASupported = cudaDevAttrGPUDirectRDMASupported;
+  cudaDeviceAttr DevAttrGPUDirectRDMAFlushWritesOptions = cudaDevAttrGPUDirectRDMAFlushWritesOptions;
+  cudaDeviceAttr DevAttrGPUDirectRDMAWritesOrdering = cudaDevAttrGPUDirectRDMAWritesOrdering;
+
+  // CHECK: hipFlushGPUDirectRDMAWritesTarget FlushGPUDirectRDMAWritesTarget;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesTarget FlushGPUDirectRDMAWritesTargetCurrentDevice = hipFlushGPUDirectRDMAWritesTargetCurrentDevice;
+  cudaFlushGPUDirectRDMAWritesTarget FlushGPUDirectRDMAWritesTarget;
+  cudaFlushGPUDirectRDMAWritesTarget FlushGPUDirectRDMAWritesTargetCurrentDevice = cudaFlushGPUDirectRDMAWritesTargetCurrentDevice;
+
+  // CHECK: hipFlushGPUDirectRDMAWritesScope FlushGPUDirectRDMAWritesScope;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesScope FlushGPUDirectRDMAWritesToOwner = hipFlushGPUDirectRDMAWritesToOwner;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesScope FlushGPUDirectRDMAWritesToAllDevices = hipFlushGPUDirectRDMAWritesToAllDevices;
+  cudaFlushGPUDirectRDMAWritesScope FlushGPUDirectRDMAWritesScope;
+  cudaFlushGPUDirectRDMAWritesScope FlushGPUDirectRDMAWritesToOwner = cudaFlushGPUDirectRDMAWritesToOwner;
+  cudaFlushGPUDirectRDMAWritesScope FlushGPUDirectRDMAWritesToAllDevices = cudaFlushGPUDirectRDMAWritesToAllDevices;
 #endif
 
 #if CUDA_VERSION >= 11040

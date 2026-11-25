@@ -694,11 +694,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED
   m["cudaDevAttrMemoryPoolsSupported"]                          = {"hipDeviceAttributeMemoryPoolsSupported",                   "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 115
   // CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED
-  m["cudaDevAttrGPUDirectRDMASupported"]                        = {"hipDeviceAttributeGPUDirectRDMASupported",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 116
+  m["cudaDevAttrGPUDirectRDMASupported"]                        = {"hipDeviceAttributeGPUDirectRDMASupported",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 116
   // CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS
-  m["cudaDevAttrGPUDirectRDMAFlushWritesOptions"]               = {"hipDeviceAttributeGpuDirectRdmaFlushWritesOptions",        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 117
+  m["cudaDevAttrGPUDirectRDMAFlushWritesOptions"]               = {"hipDeviceAttributeGPUDirectRDMAFlushWritesOptions",        "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 117
   // CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING
-  m["cudaDevAttrGPUDirectRDMAWritesOrdering"]                   = {"hipDeviceAttributeGpuDirectRdmaWritesOrdering",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 118
+  m["cudaDevAttrGPUDirectRDMAWritesOrdering"]                   = {"hipDeviceAttributeGPUDirectRDMAWritesOrdering",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 118
   // CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES
   m["cudaDevAttrMemoryPoolSupportedHandleTypes"]                = {"hipDeviceAttributeMempoolSupportedHandleTypes",            "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 119
   // CU_DEVICE_ATTRIBUTE_CLUSTER_LAUNCH
@@ -1251,7 +1251,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   // CUDA_ERROR_TENSOR_MEMORY_LEAK
   m["cudaErrorTensorMemoryLeak"]                                = {"hipErrorTensorMemoryLeak",                                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 721
   // CUDA_ERROR_NOT_PERMITTED
-  m["cudaErrorNotPermitted"]                                    = {"hipErrorNotPermitted",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 800
+  m["cudaErrorNotPermitted"]                                    = {"hipErrorNotPermitted",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 800
   // CUDA_ERROR_NOT_SUPPORTED
   m["cudaErrorNotSupported"]                                    = {"hipErrorNotSupported",                                     "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 801
   // CUDA_ERROR_SYSTEM_NOT_READY
@@ -1981,18 +1981,18 @@ const std::map<llvm::StringRef, hipCounter> CUDA_RUNTIME_TYPE_NAME_MAP = [] {
   m["cudaGPUDirectRDMAWritesOrderingAllDevices"]                = {"hipGPUDirectRDMAWritesOrderingAllDevices",                 "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES}; // 200
 
   // CUflushGPUDirectRDMAWritesScope
-  m["cudaFlushGPUDirectRDMAWritesScope"]                        = {"hipFlushGPUDirectRDMAWritesScope",                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaFlushGPUDirectRDMAWritesScope"]                        = {"hipFlushGPUDirectRDMAWritesScope",                         "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // cudaFlushGPUDirectRDMAWritesScope enum values
   // CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER
-  m["cudaFlushGPUDirectRDMAWritesToOwner"]                      = {"hipFlushGPUDirectRDMAWritesToOwner",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 100
+  m["cudaFlushGPUDirectRDMAWritesToOwner"]                      = {"hipFlushGPUDirectRDMAWritesToOwner",                       "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 100
   // CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES
-  m["cudaFlushGPUDirectRDMAWritesToAllDevices"]                 = {"hipFlushGPUDirectRDMAWritesToAllDevices",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 200
+  m["cudaFlushGPUDirectRDMAWritesToAllDevices"]                 = {"hipFlushGPUDirectRDMAWritesToAllDevices",                  "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 200
 
   // CUflushGPUDirectRDMAWritesTarget
-  m["cudaFlushGPUDirectRDMAWritesTarget"]                       = {"hipFlushGPUDirectRDMAWritesTarget",                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaFlushGPUDirectRDMAWritesTarget"]                       = {"hipFlushGPUDirectRDMAWritesTarget",                        "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // cudaFlushGPUDirectRDMAWritesTarget enum values
   // CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX
-  m["cudaFlushGPUDirectRDMAWritesTargetCurrentDevice"]          = {"hipFlushGPUDirectRDMAWritesTargetCurrentDevice",           "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["cudaFlushGPUDirectRDMAWritesTargetCurrentDevice"]          = {"hipFlushGPUDirectRDMAWritesTargetCurrentDevice",           "", CONV_NUMERIC_LITERAL, API_RUNTIME, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
 
   // CUdriverProcAddress_flags
   m["cudaGetDriverEntryPointFlags"]                             = {"hipGetDriverEntryPointFlags",                              "", CONV_TYPE, API_RUNTIME, SEC::DATA_TYPES, HIP_UNSUPPORTED};
