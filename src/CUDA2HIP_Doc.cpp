@@ -1092,8 +1092,8 @@ namespace doc {
       docs.addDoc(&rocsparse);
       docs.addDoc(&rocsolver);
     }
+    DNN dnn(sOut);
     if (HipDnnSupport) {
-      DNN dnn(sOut);
       docs.addDoc(&dnn);
     }
     FFT fft(sOut);
