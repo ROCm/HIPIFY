@@ -907,7 +907,7 @@ namespace doc {
 
   class HIPFILE: public DOC {
     public:
-      HIPFILE(const string &outDir): DOC(outDir) { hasROC = true; }
+      HIPFILE(const string &outDir): DOC(outDir) {}
       virtual ~HIPFILE() {}
     protected:
       const string sMetaKeywords = "hipFile, cuFile";
