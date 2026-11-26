@@ -904,9 +904,9 @@
 |`cudaDevAttrDeferredMappingCudaArraySupported`|11.6| | | | | | | | | | |
 |`cudaDevAttrDirectManagedMemAccessFromHost`|9.2| | | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | | | |
 |`cudaDevAttrEccEnabled`| | | | |`hipDeviceAttributeEccEnabled`|2.10.0| | | | | |
-|`cudaDevAttrGPUDirectRDMAFlushWritesOptions`|11.3| | | | | | | | | | |
-|`cudaDevAttrGPUDirectRDMASupported`|11.3| | | | | | | | | | |
-|`cudaDevAttrGPUDirectRDMAWritesOrdering`|11.3| | | | | | | | | | |
+|`cudaDevAttrGPUDirectRDMAFlushWritesOptions`|11.3| | | |`hipDeviceAttributeGPUDirectRDMAFlushWritesOptions`|10.2.0| | | | |10.2.0|
+|`cudaDevAttrGPUDirectRDMASupported`|11.3| | | |`hipDeviceAttributeGPUDirectRDMASupported`|10.2.0| | | | |10.2.0|
+|`cudaDevAttrGPUDirectRDMAWritesOrdering`|11.3| | | |`hipDeviceAttributeGPUDirectRDMAWritesOrdering`|10.2.0| | | | |10.2.0|
 |`cudaDevAttrGlobalL1CacheSupported`| | | | |`hipDeviceAttributeGlobalL1CacheSupported`|4.3.0| | | | | |
 |`cudaDevAttrGlobalMemoryBusWidth`| | | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | | | | |
 |`cudaDevAttrGpuOverlap`| | | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
@@ -1302,7 +1302,7 @@
 |`cudaErrorNotMapped`|10.1| | | |`hipErrorNotMapped`|1.6.0| | | | | |
 |`cudaErrorNotMappedAsArray`|10.1| | | |`hipErrorNotMappedAsArray`|1.6.0| | | | | |
 |`cudaErrorNotMappedAsPointer`|10.1| | | |`hipErrorNotMappedAsPointer`|1.6.0| | | | | |
-|`cudaErrorNotPermitted`| | | | | | | | | | | |
+|`cudaErrorNotPermitted`| | | | |`hipErrorNotPermitted`|10.2.0| | | | |10.2.0|
 |`cudaErrorNotReady`| | | | |`hipErrorNotReady`|1.6.0| | | | | |
 |`cudaErrorNotSupported`| | | | |`hipErrorNotSupported`|1.6.0| | | | | |
 |`cudaErrorNotYetImplemented`| |4.1| | | | | | | | | |
@@ -1408,11 +1408,11 @@
 |`cudaFlushGPUDirectRDMAWritesOptionHost`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionHost`|6.1.0| | | | | |
 |`cudaFlushGPUDirectRDMAWritesOptionMemOps`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionMemOps`|6.1.0| | | | | |
 |`cudaFlushGPUDirectRDMAWritesOptions`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptions`|6.1.0| | | | | |
-|`cudaFlushGPUDirectRDMAWritesScope`|11.3| | | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesTarget`|11.3| | | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesTargetCurrentDevice`|11.3| | | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesToAllDevices`|11.3| | | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesToOwner`|11.3| | | | | | | | | | |
+|`cudaFlushGPUDirectRDMAWritesScope`|11.3| | | |`hipFlushGPUDirectRDMAWritesScope`|10.2.0| | | | |10.2.0|
+|`cudaFlushGPUDirectRDMAWritesTarget`|11.3| | | |`hipFlushGPUDirectRDMAWritesTarget`|10.2.0| | | | |10.2.0|
+|`cudaFlushGPUDirectRDMAWritesTargetCurrentDevice`|11.3| | | |`hipFlushGPUDirectRDMAWritesTargetCurrentDevice`|10.2.0| | | | |10.2.0|
+|`cudaFlushGPUDirectRDMAWritesToAllDevices`|11.3| | | |`hipFlushGPUDirectRDMAWritesToAllDevices`|10.2.0| | | | |10.2.0|
+|`cudaFlushGPUDirectRDMAWritesToOwner`|11.3| | | |`hipFlushGPUDirectRDMAWritesToOwner`|10.2.0| | | | |10.2.0|
 |`cudaFormatModeAuto`| | | | | | | | | | | |
 |`cudaFormatModeForced`| | | | | | | | | | | |
 |`cudaFuncAttribute`|9.0| | | |`hipFuncAttribute`|3.9.0| | | | | |

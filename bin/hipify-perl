@@ -1715,7 +1715,26 @@ my %removed_funcs = (
 );
 
 my %experimental_funcs = (
-
+    "cudaFlushGPUDirectRDMAWritesToOwner" => "10.2.0",
+    "cudaFlushGPUDirectRDMAWritesToAllDevices" => "10.2.0",
+    "cudaFlushGPUDirectRDMAWritesTargetCurrentDevice" => "10.2.0",
+    "cudaFlushGPUDirectRDMAWritesTarget" => "10.2.0",
+    "cudaFlushGPUDirectRDMAWritesScope" => "10.2.0",
+    "cudaErrorNotPermitted" => "10.2.0",
+    "cudaDevAttrGPUDirectRDMAWritesOrdering" => "10.2.0",
+    "cudaDevAttrGPUDirectRDMASupported" => "10.2.0",
+    "cudaDevAttrGPUDirectRDMAFlushWritesOptions" => "10.2.0",
+    "CUflushGPUDirectRDMAWritesTarget_enum" => "10.2.0",
+    "CUflushGPUDirectRDMAWritesTarget" => "10.2.0",
+    "CUflushGPUDirectRDMAWritesScope_enum" => "10.2.0",
+    "CUflushGPUDirectRDMAWritesScope" => "10.2.0",
+    "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER" => "10.2.0",
+    "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES" => "10.2.0",
+    "CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX" => "10.2.0",
+    "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING" => "10.2.0",
+    "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED" => "10.2.0",
+    "CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS" => "10.2.0",
+    "CUDA_ERROR_NOT_PERMITTED" => "10.2.0"
 );
 
 $print_stats = 1 if $examine;
@@ -4103,7 +4122,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'CUDA_ERROR_MPS_MAX_CONNECTIONS_REACHED' => 1,
     'CUDA_ERROR_MPS_RPC_FAILURE' => 1,
     'CUDA_ERROR_MPS_SERVER_NOT_READY' => 1,
-    'CUDA_ERROR_NOT_PERMITTED' => 1,
     'CUDA_ERROR_NVLINK_UNCORRECTABLE' => 1,
     'CUDA_ERROR_STUB_LIBRARY' => 1,
     'CUDA_ERROR_SYSTEM_DRIVER_MISMATCH' => 1,
@@ -4483,9 +4501,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'CU_DEVICE_ATTRIBUTE_DEFERRED_MAPPING_CUDA_ARRAY_SUPPORTED' => 1,
     'CU_DEVICE_ATTRIBUTE_DMA_BUF_MMAP_SUPPORTED' => 1,
     'CU_DEVICE_ATTRIBUTE_GENERIC_COMPRESSION_SUPPORTED' => 1,
-    'CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS' => 1,
-    'CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED' => 1,
-    'CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING' => 1,
     'CU_DEVICE_ATTRIBUTE_GPU_PCI_DEVICE_ID' => 1,
     'CU_DEVICE_ATTRIBUTE_GPU_PCI_SUBSYSTEM_ID' => 1,
     'CU_DEVICE_ATTRIBUTE_HANDLE_TYPE_POSIX_FILE_DESCRIPTOR_SUPPORTED' => 1,
@@ -4641,9 +4656,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'CU_FILE_SCATEFS_SUPPORTED' => 1,
     'CU_FILE_VANILLA_POSIX_IO_MODE' => 1,
     'CU_FILE_VIRTIOFS_SUPPORTED' => 1,
-    'CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX' => 1,
-    'CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES' => 1,
-    'CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER' => 1,
     'CU_FUNCTION_LOADING_STATE_LOADED' => 1,
     'CU_FUNCTION_LOADING_STATE_MAX' => 1,
     'CU_FUNCTION_LOADING_STATE_UNLOADED' => 1,
@@ -4962,10 +4974,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'CUfileIOVec_t' => 1,
     'CUfileP2PFlags' => 1,
     'CUfileP2PFlags_t' => 1,
-    'CUflushGPUDirectRDMAWritesScope' => 1,
-    'CUflushGPUDirectRDMAWritesScope_enum' => 1,
-    'CUflushGPUDirectRDMAWritesTarget' => 1,
-    'CUflushGPUDirectRDMAWritesTarget_enum' => 1,
     'CUfunctionLoadingState' => 1,
     'CUfunctionLoadingState_enum' => 1,
     'CUgraphChildGraphNodeOwnership' => 1,
@@ -5637,9 +5645,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cudaDevAttrClusterLaunch' => 1,
     'cudaDevAttrD3D12CigSupported' => 1,
     'cudaDevAttrDeferredMappingCudaArraySupported' => 1,
-    'cudaDevAttrGPUDirectRDMAFlushWritesOptions' => 1,
-    'cudaDevAttrGPUDirectRDMASupported' => 1,
-    'cudaDevAttrGPUDirectRDMAWritesOrdering' => 1,
     'cudaDevAttrGpuPciDeviceId' => 1,
     'cudaDevAttrGpuPciSubsystemId' => 1,
     'cudaDevAttrHostMemoryPoolsSupported' => 1,
@@ -5875,7 +5880,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cudaErrorMpsMaxConnectionsReached' => 1,
     'cudaErrorMpsRpcFailure' => 1,
     'cudaErrorMpsServerNotReady' => 1,
-    'cudaErrorNotPermitted' => 1,
     'cudaErrorNotYetImplemented' => 1,
     'cudaErrorNvlinkUncorrectable' => 1,
     'cudaErrorSoftwareValidityNotEstablished' => 1,
@@ -5913,11 +5917,6 @@ my %hash_HipOnlyUnsupportedFunctions = (
     'cudaFabricOpStatusSource' => 1,
     'cudaFabricOpStatusSourceMax' => 1,
     'cudaFabricOpStatusSourceMbarrierV1' => 1,
-    'cudaFlushGPUDirectRDMAWritesScope' => 1,
-    'cudaFlushGPUDirectRDMAWritesTarget' => 1,
-    'cudaFlushGPUDirectRDMAWritesTargetCurrentDevice' => 1,
-    'cudaFlushGPUDirectRDMAWritesToAllDevices' => 1,
-    'cudaFlushGPUDirectRDMAWritesToOwner' => 1,
     'cudaFormatModeAuto' => 1,
     'cudaFormatModeForced' => 1,
     'cudaFuncGetName' => 1,
@@ -16571,6 +16570,26 @@ my %map_core = (
 );
 
 my %map_experimental = (
+    'CUDA_ERROR_NOT_PERMITTED' => ['hipErrorNotPermitted', 'numeric_literal'],
+    'CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS' => ['hipDeviceAttributeGPUDirectRDMAFlushWritesOptions', 'numeric_literal'],
+    'CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED' => ['hipDeviceAttributeGPUDirectRDMASupported', 'numeric_literal'],
+    'CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING' => ['hipDeviceAttributeGPUDirectRDMAWritesOrdering', 'numeric_literal'],
+    'CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX' => ['hipFlushGPUDirectRDMAWritesTargetCurrentDevice', 'numeric_literal'],
+    'CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES' => ['hipFlushGPUDirectRDMAWritesToAllDevices', 'numeric_literal'],
+    'CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER' => ['hipFlushGPUDirectRDMAWritesToOwner', 'numeric_literal'],
+    'CUflushGPUDirectRDMAWritesScope' => ['hipFlushGPUDirectRDMAWritesScope', 'type'],
+    'CUflushGPUDirectRDMAWritesScope_enum' => ['hipFlushGPUDirectRDMAWritesScope', 'type'],
+    'CUflushGPUDirectRDMAWritesTarget' => ['hipFlushGPUDirectRDMAWritesTarget', 'type'],
+    'CUflushGPUDirectRDMAWritesTarget_enum' => ['hipFlushGPUDirectRDMAWritesTarget', 'type'],
+    'cudaDevAttrGPUDirectRDMAFlushWritesOptions' => ['hipDeviceAttributeGPUDirectRDMAFlushWritesOptions', 'numeric_literal'],
+    'cudaDevAttrGPUDirectRDMASupported' => ['hipDeviceAttributeGPUDirectRDMASupported', 'numeric_literal'],
+    'cudaDevAttrGPUDirectRDMAWritesOrdering' => ['hipDeviceAttributeGPUDirectRDMAWritesOrdering', 'numeric_literal'],
+    'cudaErrorNotPermitted' => ['hipErrorNotPermitted', 'numeric_literal'],
+    'cudaFlushGPUDirectRDMAWritesScope' => ['hipFlushGPUDirectRDMAWritesScope', 'type'],
+    'cudaFlushGPUDirectRDMAWritesTarget' => ['hipFlushGPUDirectRDMAWritesTarget', 'type'],
+    'cudaFlushGPUDirectRDMAWritesTargetCurrentDevice' => ['hipFlushGPUDirectRDMAWritesTargetCurrentDevice', 'numeric_literal'],
+    'cudaFlushGPUDirectRDMAWritesToAllDevices' => ['hipFlushGPUDirectRDMAWritesToAllDevices', 'numeric_literal'],
+    'cudaFlushGPUDirectRDMAWritesToOwner' => ['hipFlushGPUDirectRDMAWritesToOwner', 'numeric_literal'],
 );
 
 my %map_roc = (
@@ -18343,7 +18362,7 @@ if ($help) {
     print STDERR "$USAGE\n";
 }
 if ($version) {
-    print STDERR "HIP version 10.1.0\n";
+    print STDERR "HIP version 10.2.0\n";
 }
 
 my %mappings = %map_core;
