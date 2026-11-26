@@ -64,16 +64,16 @@
 |`CUSPARSE_COMPUTE_TF32`|0.1.0| | |0.5.2|`HIPSPARSELT_COMPUTE_TF32`|7.10.0| | | | | |
 |`CUSPARSE_COMPUTE_TF32_FAST`|0.1.0| | |0.5.2|`HIPSPARSELT_COMPUTE_TF32_FAST`|7.10.0| | | | | |
 |`cusparseComputeType`|0.0.1| | | |`hipsparseLtComputetype_t`|7.10.0| | | | | |
-|`cusparseLtHandle_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtHandle_t`|7.10.0| | | | | |
+|`cusparseLtHandle_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0, 0.7.1| |`hipsparseLtHandle_t`|7.10.0| | | | | |
 |`cusparseLtMatDescAttribute_t`|0.2.0| | | |`hipsparseLtMatDescAttribute_t`|7.10.0| | | | | |
-|`cusparseLtMatDescriptor_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtMatDescriptor_t`|7.10.0| | | | | |
+|`cusparseLtMatDescriptor_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0, 0.7.1| |`hipsparseLtMatDescriptor_t`|7.10.0| | | | | |
 |`cusparseLtMatmulAlgAttribute_t`|0.0.1| | | |`hipsparseLtMatmulAlgAttribute_t`|7.10.0| | | | | |
-|`cusparseLtMatmulAlgSelection_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtMatmulAlgSelection_t`|7.10.0| | | | | |
+|`cusparseLtMatmulAlgSelection_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0, 0.7.1| |`hipsparseLtMatmulAlgSelection_t`|7.10.0| | | | | |
 |`cusparseLtMatmulAlg_t`|0.0.1| | | |`hipsparseLtMatmulAlg_t`|7.10.0| | | | | |
 |`cusparseLtMatmulDescAttribute_t`|0.2.0| | | |`hipsparseLtMatmulDescAttribute_t`|7.10.0| | | | | |
-|`cusparseLtMatmulDescriptor_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtMatmulDescriptor_t`|7.10.0| | | | | |
+|`cusparseLtMatmulDescriptor_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0, 0.7.1| |`hipsparseLtMatmulDescriptor_t`|7.10.0| | | | | |
 |`cusparseLtMatmulMatrixScale_t`|0.7.0| | | | | | | | | | |
-|`cusparseLtMatmulPlan_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0| |`hipsparseLtMatmulPlan_t`|7.10.0| | | | | |
+|`cusparseLtMatmulPlan_t`|0.0.1| |0.2.0, 0.5.0, 0.7.0, 0.7.1| |`hipsparseLtMatmulPlan_t`|7.10.0| | | | | |
 |`cusparseLtPruneAlg_t`|0.0.1| | | |`hipsparseLtPruneAlg_t`|7.10.0| | | | | |
 |`cusparseLtSparsity_t`|0.0.1| | | |`hipsparseLtSparsity_t`|7.10.0| | | | | |
 |`cusparseLtSplitKMode_t`|0.3.0| | | |`hipsparseLtSplitKMode_t`|7.10.0| | | | | |
