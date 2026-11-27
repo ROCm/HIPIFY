@@ -22,6 +22,8 @@ THE SOFTWARE.
 
 #include "Statistics.h"
 #include "llvm/Support/Format.h"
+#include "llvm/Support/MemoryBuffer.h"
+#include "llvm/Support/raw_ostream.h"
 #include <assert.h>
 
 #if defined(__has_include) && __has_include(<optional>)
@@ -288,15 +290,11 @@ void StatCounter::print(llvm::raw_ostream *csv, llvm::raw_ostream *printOut, con
 
 Statistics::Statistics(const std::string &name): fileName(name) {
   // Compute the total bytes/lines in the input file.
-  std::ifstream src_file(name, std::ios::binary | std::ios::ate);
-  if (src_file.good()) {
-    src_file.clear();
-    src_file.seekg(0);
-    totalLines = (unsigned)std::count(std::istreambuf_iterator<char>(src_file), std::istreambuf_iterator<char>(), '\n');
-    totalBytes = (unsigned)src_file.tellg();
-    if (totalBytes < 0) {
-      totalBytes = 0;
-    }
+  auto FileOrErr = llvm::MemoryBuffer::getFile(name);
+  if (FileOrErr) {
+    llvm::StringRef Content = (*FileOrErr)->getBuffer();
+    totalLines = (unsigned)Content.count('\n');
+    totalBytes = (unsigned)Content.size();
   }
   startTime = chr::steady_clock::now();
 }

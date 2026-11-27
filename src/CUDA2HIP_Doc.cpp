@@ -21,6 +21,7 @@ THE SOFTWARE.
 */
 
 #include <vector>
+#include "llvm/Support/raw_ostream.h"
 #include "CUDA2HIP.h"
 #include "ArgParse.h"
 #include "LLVMCompat.h"

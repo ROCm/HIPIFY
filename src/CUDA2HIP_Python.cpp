@@ -20,8 +20,8 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <fstream>
 #include "llvm/ADT/SmallString.h"
+#include "llvm/Support/raw_ostream.h"
 #include "CUDA2HIP.h"
 #include "ArgParse.h"
 #include "LLVMCompat.h"
@@ -50,7 +50,11 @@ namespace python {
       llvm::errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
       return false;
     }
-    std::unique_ptr<std::ostream> pythonStreamPtr = std::unique_ptr<std::ostream>(new std::ofstream(tmpFile.c_str(), std::ios_base::trunc));
+    std::unique_ptr<raw_fd_ostream> pythonStreamPtr(new raw_fd_ostream(tmpFile, EC, llcompat::OF_TextWithCRLF));
+    if (EC) {
+      llvm::errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
+      return false;
+    }
     *pythonStreamPtr.get() << "import collections\n\n";
     *pythonStreamPtr.get() << "from pyHIPIFY.constants import *\n\n";
     *pythonStreamPtr.get() << "CUDA_RENAMES_MAP = collections.OrderedDict([\n";

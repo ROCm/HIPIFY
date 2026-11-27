@@ -24,17 +24,19 @@ THE SOFTWARE.
 
 #include <chrono>
 #include <string>
-#include <fstream>
 #include <map>
 #include <set>
 #include <list>
 #include <vector>
 #include <llvm/ADT/StringRef.h>
-#include <llvm/Support/raw_ostream.h>
 #if LLVM_VERSION_MAJOR > 3
 #include "clang/Basic/Cuda.h"
 #endif
 #include "StringUtils.h"
+
+namespace llvm {
+class raw_ostream;
+} // namespace llvm
 
 namespace chr = std::chrono;
 
