@@ -4,15 +4,17 @@
 
 .. _installation:
 
-**************
+**************************************************************************
 Install HIPIFY
-**************
+**************************************************************************
 
 Before you begin, verify that your system is supported. For more information,
 see :ref:`ROCm Core SDK components <rocm:release-components>`.
 
 For advanced workflows, source builds, or custom configurations, see
-:doc:`./building/build-hipify-clang-linux` or :doc:`./building/build-hipify-clang-windows`.
+:doc:`./building/build-hipify-clang-linux`,
+:doc:`./building/build-hipify-clang-windows`, or
+:doc:`./building/build-hipify-perl`.
 
 .. _install-rocm:
 
@@ -20,8 +22,7 @@ Install the ROCm Core SDK
 =========================
 
 HIPIFY is included with the ROCm Core SDK on Linux and Windows. For the most
-complete installation, we recommend that developers use the
-``amdrocm-core-sdk`` meta package.
+complete installation, install the ``amdrocm-core-sdk`` metapackage.
 
 For instructions, see :doc:`Install AMD ROCm <rocm:install/rocm>`. Use the
 selector panel on that page to view instructions appropriate for your system
@@ -36,14 +37,14 @@ Alternatively, if you want to install HIPIFY without additional ROCm libraries
 and tools, install the ``amdrocm-hipify`` package.
 
 1. Complete the :doc:`ROCm installation prerequisites <rocm:install/rocm>` to
-   install dependencies and configure GPU access permissions.
+   configure the package repositories and install required dependencies.
 
 2. Install the HIPIFY package that matches your desired ROCm version.
    Package names use the following format:
 
-   .. code-block:: shell-session
+   .. code:: text
 
-      amdrocm-hipify<rocm_version>
+     amdrocm-hipify<rocm_version>
 
    ``<rocm_version>`` represents the ROCm Core SDK version to install. Omit
    this suffix to install the latest available version.
@@ -52,30 +53,30 @@ and tools, install the ``amdrocm-hipify`` package.
 
    .. tab-set::
 
-      .. tab-item:: Debian-based distros
+     .. tab-item:: Debian-based distros
 
-         .. code-block:: bash
+       .. code:: shell
 
-            sudo apt install amdrocm-hipify
+         sudo apt install amdrocm-hipify
 
-      .. tab-item:: RHEL-based distros
+     .. tab-item:: RHEL-based distros
 
-         .. code-block:: bash
+       .. code:: shell
 
-            sudo dnf install amdrocm-hipify
+         sudo dnf install amdrocm-hipify
 
-      .. tab-item:: SLES
+     .. tab-item:: SLES
 
-         .. code-block:: bash
+       .. code:: shell
 
-            sudo zypper install amdrocm-hipify
+         sudo zypper install amdrocm-hipify
 
 .. _install-nightly:
 
 Install a nightly build
 =======================
 
-The `TheRock <https://github.com/ROCm/TheRock>`__ build system also publishes
-nightly builds for the ROCm Core SDK and its components, including HIPIFY
-tools. See `Nightly release status
+The `ROCm/TheRock <https://github.com/ROCm/TheRock>`__ build system also
+publishes nightly builds for the ROCm Core SDK and its components, including
+HIPIFY tools. See `Nightly release status
 <https://github.com/ROCm/TheRock#nightly-release-status>`__ for details.
