@@ -56,6 +56,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_FUNCTION_MAP = [] {
   m["cusparseLtGetProperty"]                                          = {"hipsparseLtGetProperty",                             "", CONV_LIB_FUNC, API_SPARSELT, 2};
   m["cusparseLtGetErrorName"]                                         = {"hipsparseLtGetErrorName",                            "", CONV_LIB_FUNC, API_SPARSELT, 2, UNSUPPORTED};
   m["cusparseLtGetErrorString"]                                       = {"hipsparseLtGetErrorString",                          "", CONV_LIB_FUNC, API_SPARSELT, 2, UNSUPPORTED};
+  m["cusparseLtMatmulAlgSelectionDestroy"]                            = {"hipsparseLtMatmulAlgSelectionDestroy",               "", CONV_LIB_FUNC, API_SPARSELT, 2};
 
   return m;
 }();
@@ -93,6 +94,7 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_FUNCTION_VER_MAP 
   m["cusparseLtGetProperty"]                                          = {CUSPARSELT_040, CUDA_0      , CUDA_0      };
   m["cusparseLtGetErrorName"]                                         = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
   m["cusparseLtGetErrorString"]                                       = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatmulAlgSelectionDestroy"]                            = {CUSPARSELT_080, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -128,6 +130,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_FUNCTION_VER_MAP = 
   m["hipsparseLtMatmulDescGetAttribute"]                              = {HIP_7100, HIP_0,    HIP_0   };
   m["hipsparseLtGetVersion"]                                          = {HIP_7100, HIP_0,    HIP_0   };
   m["hipsparseLtGetProperty"]                                         = {HIP_7100, HIP_0,    HIP_0   };
+  m["hipsparseLtMatmulAlgSelectionDestroy"]                           = {HIP_7140, HIP_0,    HIP_0   };
 
   return m;
 }();
