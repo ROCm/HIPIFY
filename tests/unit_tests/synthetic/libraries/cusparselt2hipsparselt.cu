@@ -264,5 +264,12 @@ int main() {
   cusparseLtMatmulDescAttribute_t SPARSELT_MATMUL_SPARSE_MAT_POINTER = CUSPARSELT_MATMUL_SPARSE_MAT_POINTER;
 #endif
 
+#if CUSPARSELT_VERSION >= 800
+  // CUDA: cusparseStatus_t CUSPARSELT_API cusparseLtMatmulAlgSelectionDestroy(const cusparseLtMatmulAlgSelection_t* algSelection);
+  // HIP: HIPSPARSELT_EXPORT hipsparseStatus_t hipsparseLtMatmulAlgSelectionDestroy(const hipsparseLtMatmulAlgSelection_t* algSelection);
+  // CHECK: status = hipsparseLtMatmulAlgSelectionDestroy(&algSelection);
+  status = cusparseLtMatmulAlgSelectionDestroy(&algSelection);
+#endif
+
   return 0;
 }

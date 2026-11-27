@@ -15818,6 +15818,7 @@ my %map_core = (
     'cusparseLtMatmul' => ['hipsparseLtMatmul', 'library'],
     'cusparseLtMatmulAlgAttribute_t' => ['hipsparseLtMatmulAlgAttribute_t', 'type'],
     'cusparseLtMatmulAlgGetAttribute' => ['hipsparseLtMatmulAlgGetAttribute', 'library'],
+    'cusparseLtMatmulAlgSelectionDestroy' => ['hipsparseLtMatmulAlgSelectionDestroy', 'library'],
     'cusparseLtMatmulAlgSelectionInit' => ['hipsparseLtMatmulAlgSelectionInit', 'library'],
     'cusparseLtMatmulAlgSelection_t' => ['hipsparseLtMatmulAlgSelection_t', 'type'],
     'cusparseLtMatmulAlgSetAttribute' => ['hipsparseLtMatmulAlgSetAttribute', 'library'],

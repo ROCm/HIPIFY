@@ -218,11 +218,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP =
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSELT_TYPE_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
-  m["cusparseLtHandle_t"]                                                = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
-  m["cusparseLtMatDescriptor_t"]                                         = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
-  m["cusparseLtMatmulDescriptor_t"]                                      = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
-  m["cusparseLtMatmulAlgSelection_t"]                                    = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
-  m["cusparseLtMatmulPlan_t"]                                            = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
+  m["cusparseLtHandle_t"]                                                = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071, CUSPARSELT_080};
+  m["cusparseLtMatDescriptor_t"]                                         = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071, CUSPARSELT_080};
+  m["cusparseLtMatmulDescriptor_t"]                                      = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071, CUSPARSELT_080};
+  m["cusparseLtMatmulAlgSelection_t"]                                    = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071, CUSPARSELT_080};
+  m["cusparseLtMatmulPlan_t"]                                            = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071, CUSPARSELT_080};
 
   return m;
   }();
