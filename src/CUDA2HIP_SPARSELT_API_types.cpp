@@ -65,13 +65,33 @@ const std::map<llvm::StringRef, hipCounter> CUDA_SPARSELT_TYPE_NAME_MAP = [] {
   m["CUSPARSELT_MATMUL_BETA_VECTOR_SCALING"]                             = {"HIPSPARSELT_MATMUL_BETA_VECTOR_SCALING",        "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MATMUL_BIAS_STRIDE"]                                     = {"HIPSPARSELT_MATMUL_BIAS_STRIDE",                "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MATMUL_BIAS_POINTER"]                                    = {"HIPSPARSELT_MATMUL_BIAS_POINTER",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                              = {"HIPSPARSELT_MATMUL_SPARSE_MAT_POINTER",         "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_MATMUL_A_SCALE_MODE"]                                    = {"HIPSPARSELT_MATMUL_A_SCALE_MODE",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_B_SCALE_MODE"]                                    = {"HIPSPARSELT_MATMUL_B_SCALE_MODE",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_C_SCALE_MODE"]                                    = {"HIPSPARSELT_MATMUL_C_SCALE_MODE",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_D_SCALE_MODE"]                                    = {"HIPSPARSELT_MATMUL_D_SCALE_MODE",               "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_D_OUT_SCALE_MODE"]                                = {"HIPSPARSELT_MATMUL_D_OUT_SCALE_MODE",           "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_A_SCALE_POINTER"]                                 = {"HIPSPARSELT_MATMUL_A_SCALE_POINTER",            "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_B_SCALE_POINTER"]                                 = {"HIPSPARSELT_MATMUL_B_SCALE_POINTER",            "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_C_SCALE_POINTER"]                                 = {"HIPSPARSELT_MATMUL_C_SCALE_POINTER",            "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_D_SCALE_POINTER"]                                 = {"HIPSPARSELT_MATMUL_D_SCALE_POINTER",            "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_D_OUT_SCALE_POINTER"]                             = {"HIPSPARSELT_MATMUL_D_OUT_SCALE_POINTER",        "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
   m["cusparseLtMatDescAttribute_t"]                                      = {"hipsparseLtMatDescAttribute_t",                 "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_MAT_NUM_BATCHES"]                                        = {"HIPSPARSELT_MAT_NUM_BATCHES",                   "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_MAT_BATCH_STRIDE"]                                       = {"HIPSPARSELT_MAT_BATCH_STRIDE",                  "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
-  m["cusparseLtSplitKMode_t"]                                            = {"hipsparseLtSplitKMode_t",                       "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["cusparseLtSplitKMode_t"]                                            = {"hipsparseLtSplitKMode_t",                       "", CONV_TYPE, API_SPARSELT, 1};
   m["CUSPARSELT_INVALID_MODE"]                                           = {"HIPSPARSELT_INVALID_MODE",                      "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
   m["CUSPARSELT_SPLIT_K_MODE_ONE_KERNEL"]                                = {"HIPSPARSELT_SPLIT_K_MODE_ONE_KERNEL",           "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
   m["CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS"]                               = {"HIPSPARSELT_SPLIT_K_MODE_TWO_KERNELS",          "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1};
+  m["CUSPARSELT_HEURISTIC"]                                              = {"HIPSPARSELT_HEURISTIC",                         "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_DATAPARALLEL"]                                           = {"HIPSPARSELT_DATAPARALLEL",                      "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_SPLITK"]                                                 = {"HIPSPARSELT_SPLITK",                            "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_STREAMK"]                                                = {"HIPSPARSELT_STREAMK",                           "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["cusparseLtMatmulMatrixScale_t"]                                     = {"hipsparseLtMatmulMatrixScale_t",                "", CONV_TYPE, API_SPARSELT, 1,UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_SCALE_NONE"]                                      = {"HIPSPARSELT_MATMUL_SCALE_NONE",                 "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_MATRIX_SCALE_SCALAR_32F"]                         = {"HIPSPARSELT_MATMUL_MATRIX_SCALE_SCALAR_32F",    "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_MATRIX_SCALE_VEC32_UE4M3"]                        = {"HIPSPARSELT_MATMUL_MATRIX_SCALE_VEC32_UE4M3",   "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
+  m["CUSPARSELT_MATMUL_MATRIX_SCALE_VEC64_UE8M0"]                        = {"HIPSPARSELT_MATMUL_MATRIX_SCALE_VEC64_UE8M0",   "", CONV_NUMERIC_LITERAL, API_SPARSELT, 1, UNSUPPORTED};
 
   return m;
 }();
@@ -122,6 +142,26 @@ const std::map<llvm::StringRef, cudaAPIversions> CUDA_SPARSELT_TYPE_NAME_VER_MAP
   m["CUSPARSELT_SPLIT_K_MODE_TWO_KERNELS"]                               = {CUSPARSELT_030, CUDA_0      , CUDA_0      };
   m["CUSPARSE_COMPUTE_8I"]                                               = {CUSPARSELT_050, CUDA_0      , CUSPARSELT_051 };
   m["CUSPARSE_COMPUTE_32F"]                                              = {CUSPARSELT_052, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                              = {CUSPARSELT_062, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_A_SCALE_MODE"]                                    = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_B_SCALE_MODE"]                                    = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_C_SCALE_MODE"]                                    = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_D_SCALE_MODE"]                                    = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_D_OUT_SCALE_MODE"]                                = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_A_SCALE_POINTER"]                                 = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_B_SCALE_POINTER"]                                 = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_C_SCALE_POINTER"]                                 = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_D_SCALE_POINTER"]                                 = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_D_OUT_SCALE_POINTER"]                             = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["cusparseLtMatmulMatrixScale_t"]                                     = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_SCALE_NONE"]                                      = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_MATRIX_SCALE_SCALAR_32F"]                         = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_MATRIX_SCALE_VEC32_UE4M3"]                        = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_MATMUL_MATRIX_SCALE_VEC64_UE8M0"]                        = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_HEURISTIC"]                                              = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_DATAPARALLEL"]                                           = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_SPLITK"]                                                 = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
+  m["CUSPARSELT_STREAMK"]                                                = {CUSPARSELT_070, CUDA_0      , CUDA_0      };
 
   return m;
 }();
@@ -170,6 +210,7 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP =
   m["HIPSPARSELT_SPLIT_K_MODE_ONE_KERNEL"]                               = {HIP_7100, HIP_0,    HIP_0    };
   m["HIPSPARSELT_SPLIT_K_MODE_TWO_KERNELS"]                              = {HIP_7100, HIP_0,    HIP_0    };
   m["HIPSPARSELT_COMPUTE_32F"]                                           = {HIP_7100, HIP_0,    HIP_0    };
+  m["HIPSPARSELT_MATMUL_SPARSE_MAT_POINTER"]                             = {HIP_7100, HIP_0,    HIP_0    };
 
   return m;
 }();
@@ -177,11 +218,11 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_SPARSELT_TYPE_NAME_VER_MAP =
 const std::map<llvm::StringRef, cudaAPIChangedVersions> CUDA_SPARSELT_TYPE_CHANGED_VER_MAP = [] {
   std::map<llvm::StringRef, cudaAPIChangedVersions> m;
 
-  m["cusparseLtHandle_t"]                                                = { CUSPARSELT_020, CUSPARSELT_050 };
-  m["cusparseLtMatDescriptor_t"]                                         = { CUSPARSELT_020, CUSPARSELT_050 };
-  m["cusparseLtMatmulDescriptor_t"]                                      = { CUSPARSELT_020, CUSPARSELT_050 };
-  m["cusparseLtMatmulAlgSelection_t"]                                    = { CUSPARSELT_020, CUSPARSELT_050 };
-  m["cusparseLtMatmulPlan_t"]                                            = { CUSPARSELT_020, CUSPARSELT_050 };
+  m["cusparseLtHandle_t"]                                                = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
+  m["cusparseLtMatDescriptor_t"]                                         = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
+  m["cusparseLtMatmulDescriptor_t"]                                      = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
+  m["cusparseLtMatmulAlgSelection_t"]                                    = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
+  m["cusparseLtMatmulPlan_t"]                                            = { CUSPARSELT_020, CUSPARSELT_050, CUSPARSELT_070, CUSPARSELT_071 };
 
   return m;
   }();

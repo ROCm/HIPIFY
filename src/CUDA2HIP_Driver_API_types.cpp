@@ -1049,11 +1049,11 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaDevAttrMemoryPoolsSupported
   m["CU_DEVICE_ATTRIBUTE_MEMORY_POOLS_SUPPORTED"]                        = {"hipDeviceAttributeMemoryPoolsSupported",                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 115
   // cudaDevAttrGPUDirectRDMASupported
-  m["CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED"]                     = {"hipDeviceAttributeGpuDirectRdmaSupported",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 116
+  m["CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED"]                     = {"hipDeviceAttributeGPUDirectRDMASupported",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 116
   // cudaDevAttrGPUDirectRDMAFlushWritesOptions
-  m["CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS"]          = {"hipDeviceAttributeGpuDirectRdmaFlushWritesOptions",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 117
+  m["CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS"]          = {"hipDeviceAttributeGPUDirectRDMAFlushWritesOptions",          "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 117
   // cudaDevAttrGPUDirectRDMAWritesOrdering
-  m["CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING"]               = {"hipDeviceAttributeGpuDirectRdmaWritesOrdering",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 118
+  m["CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING"]               = {"hipDeviceAttributeGPUDirectRDMAWritesOrdering",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 118
   // cudaDevAttrMemoryPoolSupportedHandleTypes
   m["CU_DEVICE_ATTRIBUTE_MEMPOOL_SUPPORTED_HANDLE_TYPES"]                = {"hipDeviceAttributeMempoolSupportedHandleTypes",              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 119
   // cudaDevAttrClusterLaunch
@@ -1109,13 +1109,13 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_DEVICE_ATTRIBUTE_HOST_VIRTUAL_MEMORY_MANAGEMENT_SUPPORTED"]      = {"hipDeviceAttributeHostVirtualMemoryManagementSupported",     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 145
   //
-  m["CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED"]                  = {"hipDeviceAttributeHostHostAllocDmaBufSupported",             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 146
+  m["CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED"]                  = {"hipDeviceAttributeHostAllocDmaBufSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 146
   // cudaDevAttrOnlyPartialHostNativeAtomicSupported
   m["CU_DEVICE_ATTRIBUTE_ONLY_PARTIAL_HOST_NATIVE_ATOMIC_SUPPORTED"]     = {"hipDeviceAttributeOnlyPartialHostNativeAtomicSupported",     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 147
-  //
+  // cudaDevAttrAtomicReductionSupported
   m["CU_DEVICE_ATTRIBUTE_ATOMIC_REDUCTION_SUPPORTED"]                    = {"hipDeviceAttributeAtomicReductionSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 148
-  //
-  m["CU_DEVICE_ATTRIBUTE_D3D12_CIG_STREAMS_SUPPORTED"]                   = {"hipDeviceAttributeD3D12CigStreamsSupported",                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 151
+  // cudaDevAttrCigStreamsSupported
+  m["CU_DEVICE_ATTRIBUTE_D3D12_CIG_STREAMS_SUPPORTED"]                   = {"hipDeviceAttributeCigStreamsSupported",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 151
   //
   m["CU_DEVICE_ATTRIBUTE_DMA_BUF_MMAP_SUPPORTED"]                        = {"hipDeviceAttributeDmaBufNmapSupported",                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 152
   //
@@ -1503,7 +1503,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_GRAPH_NODE_TYPE_BATCH_MEM_OP"]                                   = {"hipGraphNodeTypeBatchMemOp",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 12
   // cudaGraphNodeTypeConditional
   m["CU_GRAPH_NODE_TYPE_CONDITIONAL"]                                    = {"hipGraphNodeTypeConditional",                                "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 13
-  //
+  // cudaGraphNodeTypeReserved16
   m["CU_GRAPH_NODE_TYPE_RESERVED_16"]                                    = {"hipGraphNodeTypeReserved16",                                 "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 16
   // cudaGraphNodeTypeCount
   m["CU_GRAPH_NODE_TYPE_COUNT"]                                          = {"hipGraphNodeTypeCount",                                      "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, CUDA_REMOVED};
@@ -2066,7 +2066,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   // cudaErrorTensorMemoryLeak
   m["CUDA_ERROR_TENSOR_MEMORY_LEAK"]                                     = {"hipErrorTensorMemoryLeak",                                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 721
   // cudaErrorNotPermitted
-  m["CUDA_ERROR_NOT_PERMITTED"]                                          = {"hipErrorNotPermitted",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 800
+  m["CUDA_ERROR_NOT_PERMITTED"]                                          = {"hipErrorNotPermitted",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 800
   // cudaErrorNotSupported
   m["CUDA_ERROR_NOT_SUPPORTED"]                                          = {"hipErrorNotSupported",                                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 801
   // cudaErrorSystemNotReady
@@ -2127,7 +2127,7 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CUDA_ERROR_KEY_ROTATION"]                                           = {"hipErrorKeyRotation",                                        "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 916
   // cudaErrorStreamDetached
   m["CUDA_ERROR_STREAM_DETACHED"]                                        = {"hipErrorStreamDetached",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 917
-  //
+  // cudaErrorGraphRecaptureFailure
   m["CUDA_ERROR_GRAPH_RECAPTURE_FAILURE"]                                = {"hipErrorGraphRecaptureFailure",                              "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 918
   // cudaErrorUnknown
   m["CUDA_ERROR_UNKNOWN"]                                                = {"hipErrorUnknown",                                            "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 999
@@ -2561,20 +2561,20 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   m["CU_GPU_DIRECT_RDMA_WRITES_ORDERING_ALL_DEVICES"]                    = {"hipGPUDirectRDMAWritesOrderingAllDevices",                   "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES}; // 200
 
   // cudaFlushGPUDirectRDMAWritesScope
-  m["CUflushGPUDirectRDMAWritesScope"]                                   = {"hipFlushGPUDirectRDMAWritesScope",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  m["CUflushGPUDirectRDMAWritesScope_enum"]                              = {"hipFlushGPUDirectRDMAWritesScope",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CUflushGPUDirectRDMAWritesScope"]                                   = {"hipFlushGPUDirectRDMAWritesScope",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
+  m["CUflushGPUDirectRDMAWritesScope_enum"]                              = {"hipFlushGPUDirectRDMAWritesScope",                           "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // CUflushGPUDirectRDMAWritesScope enum values
   // cudaFlushGPUDirectRDMAWritesToOwner
-  m["CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER"]                          = {"hipFlushGPUDirectRDMAWritesToOwner",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 100
+  m["CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER"]                          = {"hipFlushGPUDirectRDMAWritesToOwner",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 100
   // cudaFlushGPUDirectRDMAWritesToAllDevices
-  m["CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES"]                    = {"hipFlushGPUDirectRDMAWritesToAllDevices",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED}; // 200
+  m["CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES"]                    = {"hipFlushGPUDirectRDMAWritesToAllDevices",                    "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL}; // 200
 
   // cudaFlushGPUDirectRDMAWritesTarget
-  m["CUflushGPUDirectRDMAWritesTarget"]                                  = {"hipFlushGPUDirectRDMAWritesTarget",                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  m["CUflushGPUDirectRDMAWritesTarget_enum"]                             = {"hipFlushGPUDirectRDMAWritesTarget",                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CUflushGPUDirectRDMAWritesTarget"]                                  = {"hipFlushGPUDirectRDMAWritesTarget",                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
+  m["CUflushGPUDirectRDMAWritesTarget_enum"]                             = {"hipFlushGPUDirectRDMAWritesTarget",                          "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
   // CUflushGPUDirectRDMAWritesTarget enum values
   // cudaFlushGPUDirectRDMAWritesTargetCurrentDevice
-  m["CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX"]                = {"hipFlushGPUDirectRDMAWritesTargetCurrentDevice",             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
+  m["CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX"]                = {"hipFlushGPUDirectRDMAWritesTargetCurrentDevice",             "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_EXPERIMENTAL};
 
   // cudaGraphDebugDotFlags
   m["CUgraphDebugDot_flags"]                                             = {"hipGraphDebugDotFlags",                                      "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES};
@@ -3333,16 +3333,16 @@ const std::map<llvm::StringRef, hipCounter> CUDA_DRIVER_TYPE_NAME_MAP = [] {
   //
   m["CU_LOGICAL_ENDPOINT_FLAG_COUNTED_OPS"]                              = {"hipLogicalEndpointFlagCountedOps",                           "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
-  //
+  // cudaGraphRecaptureStatus
   m["CUgraphRecaptureStatus"]                                            = {"hipGraphRecaptureStatus",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaGraphRecaptureStatus
   m["CUgraphRecaptureStatus_enum"]                                       = {"hipGraphRecaptureStatus",                                    "", CONV_TYPE, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
   // CUgraphRecaptureStatus enum values
-  //
+  // cudaGraphRecaptureEligibleForUpdate
   m["CU_GRAPH_RECAPTURE_ELIGIBLE_FOR_UPDATE"]                            = {"hipGraphRecaptureEligibleForUpdate",                         "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaGraphRecaptureIneligibleForUpdate
   m["CU_GRAPH_RECAPTURE_INELIGIBLE_FOR_UPDATE"]                          = {"hipGraphRecaptureIneligibleForUpdate",                       "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
-  //
+  // cudaGraphRecaptureError
   m["CU_GRAPH_RECAPTURE_ERROR"]                                          = {"hipGraphRecaptureError",                                     "", CONV_NUMERIC_LITERAL, API_DRIVER, SEC::DATA_TYPES, HIP_UNSUPPORTED};
 
   // 4. Typedefs
@@ -5278,6 +5278,16 @@ const std::map<llvm::StringRef, hipAPIversions> HIP_DRIVER_TYPE_NAME_VER_MAP = [
   m["hipErrorStreamDetached"]                                            = {HIP_7140, HIP_0,    HIP_0   };
   m["hipExecutionCtx_t"]                                                 = {HIP_7140, HIP_0,    HIP_0   };
   m["ihipExecutionCtx_t"]                                                = {HIP_7140, HIP_0,    HIP_0   };
+  m["hipDeviceAttributeHostAllocDmaBufSupported"]                        = {HIP_10010, HIP_0,   HIP_0   };
+  m["hipErrorNotPermitted"]                                              = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
+  m["hipDeviceAttributeGPUDirectRDMASupported"]                          = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
+  m["hipDeviceAttributeGPUDirectRDMAFlushWritesOptions"]                 = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
+  m["hipDeviceAttributeGPUDirectRDMAWritesOrdering"]                     = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
+  m["hipFlushGPUDirectRDMAWritesTarget"]                                 = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
+  m["hipFlushGPUDirectRDMAWritesTargetCurrentDevice"]                    = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
+  m["hipFlushGPUDirectRDMAWritesScope"]                                  = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
+  m["hipFlushGPUDirectRDMAWritesToOwner"]                                = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
+  m["hipFlushGPUDirectRDMAWritesToAllDevices"]                           = {HIP_10020, HIP_0,   HIP_0,  HIP_LATEST};
 
   return m;
 }();

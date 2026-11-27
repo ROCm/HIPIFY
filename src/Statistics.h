@@ -341,7 +341,8 @@ enum cudaVersions {
   CUDNN_9240 = 9240,
   CUDNN_9250 = 9250,
   CUDNN_9260 = 9260,
-  CUDNN_LATEST = CUDNN_9260,
+  CUDNN_9270 = 9270,
+  CUDNN_LATEST = CUDNN_9270,
   CUTENSOR_1010 = 100010,
   CUTENSOR_1100 = 100100,
   CUTENSOR_1200 = 100200,
@@ -507,10 +508,10 @@ enum hipVersions {
   HIP_7120 = 7120,
   HIP_7130 = 7130,
   HIP_7140 = 7140,
-  HIP_8000 = 8000,
   HIP_10000 = 10000,
   HIP_10010 = 10010,
-  HIP_LATEST = HIP_10010,
+  HIP_10020 = 10020,
+  HIP_LATEST = HIP_10020,
 };
 
 struct cudaAPIversions {
@@ -581,7 +582,7 @@ public:
   // Add the counters from `other` onto the counters of this object.
   void add(const StatCounter &other);
   int getConvSum();
-  void print(std::ostream *csv, llvm::raw_ostream *printOut, const std::string &prefix);
+  void print(llvm::raw_ostream *csv, llvm::raw_ostream *printOut, const std::string &prefix);
 };
 
 /**
@@ -621,9 +622,9 @@ public:
     * @param printOut Pointer to an output stream to print human-readable textual stats to. If null, no
     *                 such stats are produced.
     */
-  void print(std::ostream *csv, llvm::raw_ostream *printOut, bool skipHeader = false);
+  void print(llvm::raw_ostream *csv, llvm::raw_ostream *printOut, bool skipHeader = false);
   // Print aggregated statistics for all registered counters.
-  static void printAggregate(std::ostream *csv, llvm::raw_ostream *printOut);
+  static void printAggregate(llvm::raw_ostream *csv, llvm::raw_ostream *printOut);
   // The Statistics for each input file.
   static std::map<std::string, Statistics> stats;
   // The Statistics objects for the currently-being-processed input file.

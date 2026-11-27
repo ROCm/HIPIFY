@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <sstream>
 #include <vector>
 #include "CUDA2HIP.h"
 #include "ArgParse.h"
@@ -28,7 +27,12 @@ THE SOFTWARE.
 
 namespace doc {
 
-  using namespace std;
+  using std::string;
+  using std::map;
+  using std::vector;
+  using std::unique_ptr;
+  using std::error_code;
+  using std::make_pair;
   using namespace llvm;
 
   typedef map<unsigned int, StringRef> sectionMap;
@@ -36,11 +40,12 @@ namespace doc {
   typedef functionMap typeMap;
   typedef map<StringRef, cudaAPIversions> versionMap;
   typedef map<StringRef, hipAPIversions> hipVersionMap;
-  typedef map<llvm::StringRef, hipAPIChangedVersions> hipChangedVersionMap;
-  typedef map<llvm::StringRef, cudaAPIChangedVersions> cudaChangedVersionMap;
-  typedef map<llvm::StringRef, cudaAPIUnsupportedVersions> cudaUnsupportedVersionMap;
+  typedef map<StringRef, hipAPIChangedVersions> hipChangedVersionMap;
+  typedef map<StringRef, cudaAPIChangedVersions> cudaChangedVersionMap;
+  typedef map<StringRef, cudaAPIUnsupportedVersions> cudaUnsupportedVersionMap;
 
   const string tab = "    ";
+  const char endl = '\n';
   const string endl_tab = "\n" + tab;
   const string endl_2 = "\n\n";
 
@@ -244,7 +249,7 @@ namespace doc {
       unsigned int format;
       map<docType, string> files;
       map<docType, string> tmpFiles;
-      map<docType, unique_ptr<ostream>> streams;
+      map<docType, unique_ptr<raw_fd_ostream>> streams;
 
       bool init(docType t) {
         string file = (dir.empty() ? getFileName(t) : dir + "/" + getFileName(t));
@@ -254,9 +259,14 @@ namespace doc {
           errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
           return false;
         }
+        unique_ptr<raw_fd_ostream> stream(new raw_fd_ostream(tmpFile, EC, llcompat::OF_TextWithCRLF));
+        if (EC) {
+          errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
+          return false;
+        }
         files.insert({ t, file });
         tmpFiles.insert({ t, tmpFile.str().str() });
-        streams.insert(make_pair(t, unique_ptr<ostream>(new ofstream(tmpFile.c_str(), ios_base::trunc))));
+        streams.insert(make_pair(t, std::move(stream)));
         return true;
       }
 
@@ -306,7 +316,8 @@ namespace doc {
               }
             }
             string sS = (doc == md) ? "|" : ",";
-            stringstream rows;
+            string RowsStr;
+            raw_string_ostream rows(RowsStr);
             for (auto &f : fMap) {
               string a, d, c, r, ha, hd, hc, hr, hu, he, ra, rd, rc, rr, re, cc;
               for (auto &v : vMap) {
@@ -429,7 +440,8 @@ namespace doc {
               }
             }
             sS = (doc == md) ? "**|**" : ",";
-            stringstream section, section_header;
+            string SectionStr, SectionHeaderStr;
+            raw_string_ostream section(SectionStr), section_header(SectionHeaderStr);
             section_header << (doc == md ? "## **" : "") << (format != compact ? s.first : compact_only_cur_sec_num) << ". " << string(s.second) << (doc == md ? "**" : "") << endl << endl;
             section << (doc == md ? "|**" : "") << sCUDA << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
               sD << sS << (format == full ? sC : "") << (format == full ? sS : "") << (format == full ? sR : "") << (format == full ? sS : "") << getAPI() << sS << (format == full ? sA : "") << (format == full ? sS : "") <<
@@ -897,7 +909,7 @@ namespace doc {
 
   class HIPFILE: public DOC {
     public:
-      HIPFILE(const string &outDir): DOC(outDir) { hasROC = true; }
+      HIPFILE(const string &outDir): DOC(outDir) {}
       virtual ~HIPFILE() {}
     protected:
       const string sMetaKeywords = "hipFile, cuFile";
@@ -1041,7 +1053,7 @@ namespace doc {
       if (DocFormat == "compact") docFormat = compact;
       else if (DocFormat == "strict") docFormat = strict;
       else if (DocFormat != "full") {
-        llvm::errs() << "\n" << sHipify << sError << "Unsupported documentation format: '" << DocFormat << "'; supported formats: 'full', 'strict', 'compact'\n";
+        errs() << "\n" << sHipify << sError << "Unsupported documentation format: '" << DocFormat << "'; supported formats: 'full', 'strict', 'compact'\n";
         return false;
       }
     }
@@ -1050,7 +1062,7 @@ namespace doc {
       if (DocRoc == "separate") docRoc = separate;
       else if (DocRoc == "joint") docRoc = joint;
       else if (DocRoc != "skip") {
-        llvm::errs() << "\n" << sHipify << sError << "Unsupported ROC documentation format: '" << DocRoc << "'; supported formats: 'skip', 'separate', 'joint'\n";
+        errs() << "\n" << sHipify << sError << "Unsupported ROC documentation format: '" << DocRoc << "'; supported formats: 'skip', 'separate', 'joint'\n";
         return false;
       }
     }
@@ -1082,8 +1094,8 @@ namespace doc {
       docs.addDoc(&rocsparse);
       docs.addDoc(&rocsolver);
     }
+    DNN dnn(sOut);
     if (HipDnnSupport) {
-      DNN dnn(sOut);
       docs.addDoc(&dnn);
     }
     FFT fft(sOut);

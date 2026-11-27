@@ -340,6 +340,36 @@ int main() {
   CUFileStringConfigParameter_t PARAM_LOG_DIR = CUFILE_PARAM_LOG_DIR;
 #endif
 
+#if CUDA_VERSION >= 13000
+  // CHECK: hipFileOpCounter_t opCounter;
+  // CHECK-NEXT: hipFileOpCounter_t opCounter_t;
+  CUfileOpCounter opCounter;
+  CUfileOpCounter_t opCounter_t;
+
+  // CHECK: hipFileStatsLevel1_t statsLevel1;
+  // CHECK-NEXT: hipFileStatsLevel1_t statsLevel1_t;
+  CUfileStatsLevel1 statsLevel1;
+  CUfileStatsLevel1_t statsLevel1_t;
+
+  // CHECK: hipFileStatsLevel2_t statsLevel2;
+  // CHECK-NEXT: hipFileStatsLevel2_t statsLevel2_t;
+  CUfileStatsLevel2 statsLevel2;
+  CUfileStatsLevel2_t statsLevel2_t;
+
+  // CHECK: hipFileStatsLevel3_t statsLevel3;
+  // CHECK-NEXT: hipFileStatsLevel3_t statsLevel3_t;
+  CUfileStatsLevel3 statsLevel3;
+  CUfileStatsLevel3_t statsLevel3_t;
+
+  // CHECK: hipFilePerGpuStats_t perGpuStats;
+  // CHECK-NEXT: hipFilePerGpuStats_t perGpuStats_t;
+  CUfilePerGpuStats perGpuStats;
+  CUfilePerGpuStats_t perGpuStats_t;
+
+  // CHECK: char gpuUuid[HIPFILE_GPU_UUID_LEN];
+  char gpuUuid[CUFILE_GPU_UUID_LEN];
+#endif
+
   // Test error checking macros
   CUfileError_t testErr;
   testErr.err = CU_FILE_SUCCESS;

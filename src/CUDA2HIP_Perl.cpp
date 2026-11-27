@@ -20,7 +20,6 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 THE SOFTWARE.
 */
 
-#include <sstream>
 #include <regex>
 #include "llvm/ADT/SmallString.h"
 #include "CUDA2HIP.h"
@@ -68,6 +67,7 @@ namespace perl {
   const string tab_8 = tab_7 + tab;
   const string tab_9 = tab_8 + tab;
 
+  const char endl = '\n';
   const string endl_2 = "\n\n";
   const string endl_tab = "\n" + tab;
   const string endl_tab_2 = "\n" + tab_2;
@@ -161,7 +161,7 @@ namespace perl {
     {sCudaInGauge}, {sCudaSpinorOut}, {sCudaSpinor}, {sCudaColorSpinorField}, {sCudaSiteLink}, {sCudaFatLink}, {sCudaStaple}, {sCudaCloverField}, {sCudaParam}, {sCudaOutForce}, {sCudaGaugeTemp}, {sCudaResult}, {sCudaForce}, {sCudaInForce}, {sCudaForce_ex}, {sCudaOprod_ex}, {sCudaOutGauge}, {sCudaULink}, {sCudaOprod}, {sCudaGauge_ex}, {sCudaQuark}, {sCudaLongLinkOprod_ex}, {sCudaInGaugeEx}, {sCudaLongLink}, {sCudaUnitarizedLink}, {sCudaQdpGauge}, {sCudaCpsGauge}, {sCudaInLink}, {sCudaInLinkEx}, {sCudaGaugeField}, {sCudaMemcpys}, {sCudaRitzVectors}, {sCudaEigValueSet}, {sCudaLongLinkOprod}, {sCudaEigVecSet}
   };
 
-  void generateHeader(ostream &out) {
+  void generateHeader(raw_ostream &out) {
     out << "#!/usr/bin/env perl" << endl_2;
     out << sCopyright << endl;
     out << sImportant << endl_2;
@@ -223,7 +223,8 @@ namespace perl {
     out << tab << ", \"whitelist=s\" => \\$whitelist                                      # Whitelist of identifiers" << endl;
     out << ");" << endl_2;
     out << "$cuda_kernel_execution_syntax = 1;" << endl_2;
-    stringstream deprecated, removed, experimental, common;
+    string DeprecatedStr, RemovedStr, ExperimentalStr, CommonStr;
+    raw_string_ostream deprecated(DeprecatedStr), removed(RemovedStr), experimental(ExperimentalStr), common(CommonStr);
     deprecated << my << "%deprecated_funcs = (" << endl;
     removed << my << "%removed_funcs = (" << endl;
     experimental << my << "%experimental_funcs = (" << endl;
@@ -279,7 +280,7 @@ namespace perl {
     out << "%exclude_filehash = map { $_ => 1 } @exclude_filelist;" << endl_2;
   }
 
-  void generateStatFunctions(ostream &out) {
+  void generateStatFunctions(raw_ostream &out) {
     out << endl << sub << "totalStats" << " {" << endl;
     out << tab << my << "%count = %{shift()};" << endl;
     out << tab << my << "$total = 0;" << endl;
@@ -317,7 +318,7 @@ namespace perl {
     }
   }
 
-  void generateSubstFunction(ostream &out) {
+  void generateSubstFunction(raw_ostream &out) {
     out << endl << sub << sSubst << " {" << endl;
     out << tab << my << "$a = shift();" << endl;
     out << tab << my << "$b = shift();" << endl;
@@ -338,7 +339,7 @@ namespace perl {
     out << "}" << endl;
   }
 
-  void generateExperimentalSubstitutions(ostream &out) {
+  void generateExperimentalSubstitutions(raw_ostream &out) {
     out << endl << sub << sExperimentalIncludes << " {" << endl;
     for (auto &ma : CUDA_INCLUDE_MAP) {
       if (!Statistics::isHipExperimental(ma.second)) continue;
@@ -353,7 +354,7 @@ namespace perl {
     out << "}" << endl;
   }
 
-  void generateRocSubstitutions(ostream &out, bool bMIOpenOnly = false) {
+  void generateRocSubstitutions(raw_ostream &out, bool bMIOpenOnly = false) {
     out << endl << sub << (bMIOpenOnly ? sMIOpenIncludes : sRocIncludes) << " {" << endl;
     bool bTranslateToRoc = TranslateToRoc;
     bool bTranslateToMIOpen = TranslateToMIOpen;
@@ -379,7 +380,7 @@ namespace perl {
     out << "}" << endl;
   }
 
-  void generateSimpleSubstitutions(ostream &out) {
+  void generateSimpleSubstitutions(raw_ostream &out) {
     out << endl << sub << sSimpleIncludes << " {" << endl;
     for (auto &ma : CUDA_INCLUDE_MAP) {
       if (Statistics::isUnsupported(ma.second) || Statistics::isHipExperimental(ma.second)) continue;
@@ -394,7 +395,7 @@ namespace perl {
     out << "}" << endl;
   }
 
-  void generateKernelLaunch(ostream &out) {
+  void generateKernelLaunch(raw_ostream &out) {
     out << endl << "# CUDA Kernel Launch Syntax" << endl << sub << sTransformKernelLaunch << " {" << endl;
     out << tab << no_warns << endl << tab << my_k << endl_2;
     out << tab << "$k += s{([a-zA-Z_0-9:]+(?:\\s*<[^>]+>)?)\\s*<<<\\s*(.+?)\\s*>>>\\s*(\\(\\s*\\)|\\()}{do {" << endl;
@@ -418,13 +419,13 @@ namespace perl {
     out << "}" << endl;
   }
 
-  void generateCubNamespace(ostream &out) {
+  void generateCubNamespace(raw_ostream &out) {
     out << endl << sub << sTransformCubNamespace << " {" << endl;
     out << tab << "s/using\\s*namespace\\s*cub/using namespace hipcub/g;" << endl;
     out << tab << "s/\\bcub::\\b/hipcub::/g;" << endl << "}" << endl;
   }
 
-  void generateHostFunctions(ostream &out) {
+  void generateHostFunctions(raw_ostream &out) {
     out << endl << sub << "transformHostFunctions" << " {" << endl;
     out << tab << "my $process_args = sub {" << endl;
     out << tab_2 << "my ($f, $args_str, $argIdx, $actionType, $cast) = @_;" << endl;
@@ -524,7 +525,7 @@ namespace perl {
     out << "}" << endl_2;
   }
 
-  void generateDeprecatedAndUnsupportedFunctions(ostream &out) {
+  void generateDeprecatedAndUnsupportedFunctions(raw_ostream &out) {
     bool bTranslateToRoc = TranslateToRoc;
     bool bTranslateToMIOpen = TranslateToMIOpen;
     TranslateToRoc = false;
@@ -564,7 +565,7 @@ namespace perl {
     TranslateToMIOpen = bTranslateToMIOpen;
   }
 
-  void generateUnsupportedLibcudacxxIncludes(ostream &out) {
+  void generateUnsupportedLibcudacxxIncludes(raw_ostream &out) {
     out << "my %hash_" << sUnsupportedLibcudacxxIncludes << " = (" << endl;
     for (const auto &ma : CUDA_INCLUDE_MAP) {
       if (ma.first.str().rfind("cuda/", 0) == 0 && Statistics::isUnsupported(ma.second)) {
@@ -574,7 +575,7 @@ namespace perl {
     out << ");" << endl_2;
   }
 
-  void generateDeviceFunctions(ostream &out) {
+  void generateDeviceFunctions(raw_ostream &out) {
     out << "my %hash_" << sSupportedDeviceFunctions << " = (" << endl;
     for (auto ma = CUDA_DEVICE_FUNCTION_MAP.begin(); ma != CUDA_DEVICE_FUNCTION_MAP.end(); ++ma) {
       if (!Statistics::isUnsupported(ma->second)) out << tab << "'" << ma->first.str() << "' => 1," << endl;
@@ -597,7 +598,7 @@ namespace perl {
     out << ");" << endl_2;
   }
 
-  void generateCommentMasking(ostream &out) {
+  void generateCommentMasking(raw_ostream &out) {
     out << endl << "# Global Comment Masking to protect lit tests and documentation" << endl;
     out << "my @masked_comments;" << endl;
     out << sub << "maskComments {" << endl;
@@ -618,8 +619,9 @@ namespace perl {
     out << "}" << endl_2;
   }
 
-  void generateStaticDictionaries(ostream &out) {
-    stringstream map_core, map_experimental, map_roc, map_miopen;
+  void generateStaticDictionaries(raw_ostream &out) {
+    string MapCoreStr, MapExperimentalStr, MapRocStr, MapMIOpenStr;
+    raw_string_ostream map_core(MapCoreStr), map_experimental(MapExperimentalStr), map_roc(MapRocStr), map_miopen(MapMIOpenStr);
     map_core << "my %map_core = (" << endl;
     map_experimental << "my %map_experimental = (" << endl;
     map_roc << "my %map_roc = (" << endl;
@@ -647,7 +649,7 @@ namespace perl {
     out << map_core.str() << ");" << endl_2 << map_experimental.str() << ");" << endl_2 << map_roc.str() << ");" << endl_2 << map_miopen.str() << ");" << endl_2;
   }
 
-  void generateDictionaryMerge(ostream &out) {
+  void generateDictionaryMerge(raw_ostream &out) {
     out << R"PERL(
 my %mappings = %map_core;
 if ($roc) {
@@ -678,7 +680,11 @@ my $master_regex = qr/\b([a-zA-Z_]\w*)\b/;
       llvm::errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
       return false;
     }
-    ofstream out(tmpFile.c_str(), ios_base::trunc);
+    raw_fd_ostream out(tmpFile, EC, llcompat::OF_TextWithCRLF);
+    if (EC) {
+      llvm::errs() << "\n" << sHipify << sError << EC.message() << ": " << tmpFile << "\n";
+      return false;
+    }
     generateHeader(out);
     string sConv = my + "$apiCalls   = ";
     unsigned int exclude[3] = { CONV_DEVICE_FUNC, CONV_EXTERN_SHARED, CONV_KERNEL_LAUNCH };

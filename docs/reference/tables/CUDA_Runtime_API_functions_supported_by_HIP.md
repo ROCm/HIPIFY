@@ -38,7 +38,7 @@
 |`cudaGetDeviceCount`| | | | |`hipGetDeviceCount`|1.6.0| | | | | |
 |`cudaGetDeviceFlags`| | | | |`hipGetDeviceFlags`|3.6.0| | | | | |
 |`cudaGetDeviceProperties`| | | | |`hipGetDeviceProperties`|1.6.0| | | | | |
-|`cudaInitDevice`|12.0| | | |`hipInitDevice`|10.1.0| | | | |10.1.0|
+|`cudaInitDevice`|12.0| | | |`hipInitDevice`|10.1.0| | | | | |
 |`cudaIpcCloseMemHandle`| | | | |`hipIpcCloseMemHandle`|1.6.0| | | | | |
 |`cudaIpcGetEventHandle`| | | | |`hipIpcGetEventHandle`|1.6.0| | | | | |
 |`cudaIpcGetMemHandle`| | | | |`hipIpcGetMemHandle`|1.6.0| | | | | |
@@ -812,6 +812,20 @@
 |`cudaChannelFormatKindSignedNormalized8X2`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindSignedNormalized8X4`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindUnsigned`| | | | |`hipChannelFormatKindUnsigned`|1.6.0| | | | | |
+|`cudaChannelFormatKindUnsigned16Planar420`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16Planar422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16Planar444`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16SemiPlanar420`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16SemiPlanar422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned16SemiPlanar444`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Packed422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Packed444`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Planar420`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Planar422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8Planar444`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8SemiPlanar420`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8SemiPlanar422`|13.3| | | | | | | | | | |
+|`cudaChannelFormatKindUnsigned8SemiPlanar444`|13.3| | | | | | | | | | |
 |`cudaChannelFormatKindUnsignedBlockCompressed1`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindUnsignedBlockCompressed1SRGB`|11.5| | | | | | | | | | |
 |`cudaChannelFormatKindUnsignedBlockCompressed2`|11.5| | | | | | | | | | |
@@ -871,9 +885,11 @@
 |`cudaD3D9RegisterFlagsArray`| | | | | | | | | | | |
 |`cudaD3D9RegisterFlagsNone`| | | | | | | | | | | |
 |`cudaDevAttrAsyncEngineCount`| | | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
+|`cudaDevAttrAtomicReductionSupported`|13.3| | | | | | | | | | |
 |`cudaDevAttrCanFlushRemoteWrites`|9.2| | | | | | | | | | |
 |`cudaDevAttrCanMapHostMemory`| | | | |`hipDeviceAttributeCanMapHostMemory`|2.10.0| | | | | |
 |`cudaDevAttrCanUseHostPointerForRegisteredMem`|8.0| | | |`hipDeviceAttributeCanUseHostPointerForRegisteredMem`|4.3.0| | | | | |
+|`cudaDevAttrCigStreamsSupported`|13.3| | | | | | | | | | |
 |`cudaDevAttrClockRate`| | | | |`hipDeviceAttributeClockRate`|1.6.0| | | | | |
 |`cudaDevAttrClusterLaunch`|11.8| | | | | | | | | | |
 |`cudaDevAttrComputeCapabilityMajor`| | | | |`hipDeviceAttributeComputeCapabilityMajor`|1.6.0| | | | | |
@@ -888,9 +904,9 @@
 |`cudaDevAttrDeferredMappingCudaArraySupported`|11.6| | | | | | | | | | |
 |`cudaDevAttrDirectManagedMemAccessFromHost`|9.2| | | |`hipDeviceAttributeDirectManagedMemAccessFromHost`|3.10.0| | | | | |
 |`cudaDevAttrEccEnabled`| | | | |`hipDeviceAttributeEccEnabled`|2.10.0| | | | | |
-|`cudaDevAttrGPUDirectRDMAFlushWritesOptions`|11.3| | | | | | | | | | |
-|`cudaDevAttrGPUDirectRDMASupported`|11.3| | | | | | | | | | |
-|`cudaDevAttrGPUDirectRDMAWritesOrdering`|11.3| | | | | | | | | | |
+|`cudaDevAttrGPUDirectRDMAFlushWritesOptions`|11.3| | | |`hipDeviceAttributeGPUDirectRDMAFlushWritesOptions`|10.2.0| | | | |10.2.0|
+|`cudaDevAttrGPUDirectRDMASupported`|11.3| | | |`hipDeviceAttributeGPUDirectRDMASupported`|10.2.0| | | | |10.2.0|
+|`cudaDevAttrGPUDirectRDMAWritesOrdering`|11.3| | | |`hipDeviceAttributeGPUDirectRDMAWritesOrdering`|10.2.0| | | | |10.2.0|
 |`cudaDevAttrGlobalL1CacheSupported`| | | | |`hipDeviceAttributeGlobalL1CacheSupported`|4.3.0| | | | | |
 |`cudaDevAttrGlobalMemoryBusWidth`| | | | |`hipDeviceAttributeMemoryBusWidth`|1.6.0| | | | | |
 |`cudaDevAttrGpuOverlap`| | | | |`hipDeviceAttributeAsyncEngineCount`|4.3.0| | | | | |
@@ -1223,6 +1239,7 @@
 |`cudaErrorFileNotFound`|10.1| | | |`hipErrorFileNotFound`|1.6.0| | | | | |
 |`cudaErrorFunctionNotLoaded`|12.6| | | | | | | | | | |
 |`cudaErrorGraphExecUpdateFailure`|10.2| | | |`hipErrorGraphExecUpdateFailure`|5.0.0| | | | | |
+|`cudaErrorGraphRecaptureFailure`|13.3| | | | | | | | | | |
 |`cudaErrorHardwareStackError`| | | | | | | | | | | |
 |`cudaErrorHostMemoryAlreadyRegistered`| | | | |`hipErrorHostMemoryAlreadyRegistered`|1.6.0| | | | | |
 |`cudaErrorHostMemoryNotRegistered`| | | | |`hipErrorHostMemoryNotRegistered`|1.6.0| | | | | |
@@ -1285,7 +1302,7 @@
 |`cudaErrorNotMapped`|10.1| | | |`hipErrorNotMapped`|1.6.0| | | | | |
 |`cudaErrorNotMappedAsArray`|10.1| | | |`hipErrorNotMappedAsArray`|1.6.0| | | | | |
 |`cudaErrorNotMappedAsPointer`|10.1| | | |`hipErrorNotMappedAsPointer`|1.6.0| | | | | |
-|`cudaErrorNotPermitted`| | | | | | | | | | | |
+|`cudaErrorNotPermitted`| | | | |`hipErrorNotPermitted`|10.2.0| | | | |10.2.0|
 |`cudaErrorNotReady`| | | | |`hipErrorNotReady`|1.6.0| | | | | |
 |`cudaErrorNotSupported`| | | | |`hipErrorNotSupported`|1.6.0| | | | | |
 |`cudaErrorNotYetImplemented`| |4.1| | | | | | | | | |
@@ -1383,16 +1400,19 @@
 |`cudaExternalSemaphoreWaitParams_v1`|11.2|11.2| |11.3|`hipExternalSemaphoreWaitParams`|4.4.0| | | | | |
 |`cudaExternalSemaphoreWaitSkipNvSciBufMemSync`|10.2| | | | | | | | | | |
 |`cudaExternalSemaphore_t`|10.0| | | |`hipExternalSemaphore_t`|4.4.0| | | | | |
+|`cudaFabricOpStatusSource`|13.3| | | | | | | | | | |
+|`cudaFabricOpStatusSourceMax`|13.3| | | | | | | | | | |
+|`cudaFabricOpStatusSourceMbarrierV1`|13.3| | | | | | | | | | |
 |`cudaFilterModeLinear`| | | | |`hipFilterModeLinear`|1.7.0| | | | | |
 |`cudaFilterModePoint`| | | | |`hipFilterModePoint`|1.6.0| | | | | |
 |`cudaFlushGPUDirectRDMAWritesOptionHost`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionHost`|6.1.0| | | | | |
 |`cudaFlushGPUDirectRDMAWritesOptionMemOps`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptionMemOps`|6.1.0| | | | | |
 |`cudaFlushGPUDirectRDMAWritesOptions`|11.3| | | |`hipFlushGPUDirectRDMAWritesOptions`|6.1.0| | | | | |
-|`cudaFlushGPUDirectRDMAWritesScope`|11.3| | | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesTarget`|11.3| | | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesTargetCurrentDevice`|11.3| | | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesToAllDevices`|11.3| | | | | | | | | | |
-|`cudaFlushGPUDirectRDMAWritesToOwner`|11.3| | | | | | | | | | |
+|`cudaFlushGPUDirectRDMAWritesScope`|11.3| | | |`hipFlushGPUDirectRDMAWritesScope`|10.2.0| | | | |10.2.0|
+|`cudaFlushGPUDirectRDMAWritesTarget`|11.3| | | |`hipFlushGPUDirectRDMAWritesTarget`|10.2.0| | | | |10.2.0|
+|`cudaFlushGPUDirectRDMAWritesTargetCurrentDevice`|11.3| | | |`hipFlushGPUDirectRDMAWritesTargetCurrentDevice`|10.2.0| | | | |10.2.0|
+|`cudaFlushGPUDirectRDMAWritesToAllDevices`|11.3| | | |`hipFlushGPUDirectRDMAWritesToAllDevices`|10.2.0| | | | |10.2.0|
+|`cudaFlushGPUDirectRDMAWritesToOwner`|11.3| | | |`hipFlushGPUDirectRDMAWritesToOwner`|10.2.0| | | | |10.2.0|
 |`cudaFormatModeAuto`| | | | | | | | | | | |
 |`cudaFormatModeForced`| | | | | | | | | | | |
 |`cudaFuncAttribute`|9.0| | | |`hipFuncAttribute`|3.9.0| | | | | |
@@ -1405,7 +1425,7 @@
 |`cudaFuncAttributeRequiredClusterDepth`|11.8| | | |`hipFuncAttributeRequiredClusterDepth`|7.13.0| | | | | |
 |`cudaFuncAttributeRequiredClusterHeight`|11.8| | | |`hipFuncAttributeRequiredClusterHeight`|7.13.0| | | | | |
 |`cudaFuncAttributeRequiredClusterWidth`|11.8| | | |`hipFuncAttributeRequiredClusterWidth`|7.13.0| | | | | |
-|`cudaFuncAttributes`| | | | |`hipFuncAttributes`|1.9.0| | | | | |
+|`cudaFuncAttributes`| | |13.3| |`hipFuncAttributes`|1.9.0| | | | | |
 |`cudaFuncCache`| | | | |`hipFuncCache_t`|1.6.0| | | | | |
 |`cudaFuncCachePreferEqual`| | | | |`hipFuncCachePreferEqual`|1.6.0| | | | | |
 |`cudaFuncCachePreferL1`| | | | |`hipFuncCachePreferL1`|1.6.0| | | | | |
@@ -1511,8 +1531,13 @@
 |`cudaGraphNodeTypeMemFree`|11.4| | | |`hipGraphNodeTypeMemFree`|5.5.0| | | | | |
 |`cudaGraphNodeTypeMemcpy`|10.0| | | |`hipGraphNodeTypeMemcpy`|4.3.0| | | | | |
 |`cudaGraphNodeTypeMemset`|10.0| | | |`hipGraphNodeTypeMemset`|4.3.0| | | | | |
+|`cudaGraphNodeTypeReserved16`|13.3| | | | | | | | | | |
 |`cudaGraphNodeTypeWaitEvent`|11.1| | | |`hipGraphNodeTypeWaitEvent`|4.3.0| | | | | |
 |`cudaGraphNode_t`|10.0| | | |`hipGraphNode_t`|4.3.0| | | | | |
+|`cudaGraphRecaptureEligibleForUpdate`|13.3| | | | | | | | | | |
+|`cudaGraphRecaptureError`|13.3| | | | | | | | | | |
+|`cudaGraphRecaptureIneligibleForUpdate`|13.3| | | | | | | | | | |
+|`cudaGraphRecaptureStatus`|13.3| | | | | | | | | | |
 |`cudaGraphUserObjectMove`|11.3| | | |`hipGraphUserObjectMove`|5.3.0| | | | | |
 |`cudaGraph_t`|10.0| | | |`hipGraph_t`|4.3.0| | | | | |
 |`cudaGraphicsCubeFace`| | | | | | | | | | | |
@@ -1549,7 +1574,7 @@
 |`cudaHostTaskBlocking`|13.2| | | | | | | | | | |
 |`cudaHostTaskSpinWait`|13.2| | | | | | | | | | |
 |`cudaHostTaskSyncMode`|13.2| | | | | | | | | | |
-|`cudaInitDeviceFlagsAreValid`|12.0| | | |`hipInitDeviceFlagsAreValid`|10.1.0| | | | |10.1.0|
+|`cudaInitDeviceFlagsAreValid`|12.0| | | |`hipInitDeviceFlagsAreValid`|10.1.0| | | | | |
 |`cudaInvalidDeviceId`|8.0| | | |`hipInvalidDeviceId`|3.7.0| | | | | |
 |`cudaIpcEventHandle_st`| | | | |`hipIpcEventHandle_st`|3.5.0| | | | | |
 |`cudaIpcEventHandle_t`| | | | |`hipIpcEventHandle_t`|1.6.0| | | | | |

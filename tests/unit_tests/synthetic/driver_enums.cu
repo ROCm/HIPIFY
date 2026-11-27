@@ -532,6 +532,7 @@ int main() {
   // CHECK-NEXT: hipError_t ERROR_HOST_MEMORY_ALREADY_REGISTERED = hipErrorHostMemoryAlreadyRegistered;
   // CHECK-NEXT: hipError_t ERROR_HOST_MEMORY_NOT_REGISTERED = hipErrorHostMemoryNotRegistered;
   // CHECK-NEXT: hipError_t ERROR_LAUNCH_FAILED = hipErrorLaunchFailure;
+  // CHECK-NEXT: hipError_t ERROR_NOT_PERMITTED = hipErrorNotPermitted;
   // CHECK-NEXT: hipError_t ERROR_NOT_SUPPORTED_ = hipErrorNotSupported;
   CUresult result;
   cudaError_enum Error_enum;
@@ -583,6 +584,7 @@ int main() {
   CUresult ERROR_HOST_MEMORY_ALREADY_REGISTERED = CUDA_ERROR_HOST_MEMORY_ALREADY_REGISTERED;
   CUresult ERROR_HOST_MEMORY_NOT_REGISTERED = CUDA_ERROR_HOST_MEMORY_NOT_REGISTERED;
   CUresult ERROR_LAUNCH_FAILED = CUDA_ERROR_LAUNCH_FAILED;
+  CUresult ERROR_NOT_PERMITTED = CUDA_ERROR_NOT_PERMITTED;
   CUresult ERROR_NOT_SUPPORTED_ = CUDA_ERROR_NOT_SUPPORTED;
 
   // CHECK: hipError_t ERROR_UNKNOWN = hipErrorUnknown;
@@ -1168,6 +1170,29 @@ int main() {
   int EnableDefault = CU_GET_PROC_ADDRESS_DEFAULT;
   int EnableLegacyStream = CU_GET_PROC_ADDRESS_LEGACY_STREAM;
   int EnablePerThreadDefaultStream = CU_GET_PROC_ADDRESS_PER_THREAD_DEFAULT_STREAM;
+
+  // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED = hipDeviceAttributeGPUDirectRDMASupported;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS = hipDeviceAttributeGPUDirectRDMAFlushWritesOptions;
+  // CHECK-NEXT: hipDeviceAttribute_t DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING = hipDeviceAttributeGPUDirectRDMAWritesOrdering;
+  CUdevice_attribute DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED = CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_SUPPORTED;
+  CUdevice_attribute DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS = CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_FLUSH_WRITES_OPTIONS;
+  CUdevice_attribute DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING = CU_DEVICE_ATTRIBUTE_GPU_DIRECT_RDMA_WRITES_ORDERING;
+
+  // CHECK: hipFlushGPUDirectRDMAWritesTarget flushGPUDirectRDMAWritesTarget;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesTarget flushGPUDirectRDMAWritesTarget_enum;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesTarget FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX = hipFlushGPUDirectRDMAWritesTargetCurrentDevice;
+  CUflushGPUDirectRDMAWritesTarget flushGPUDirectRDMAWritesTarget;
+  CUflushGPUDirectRDMAWritesTarget_enum flushGPUDirectRDMAWritesTarget_enum;
+  CUflushGPUDirectRDMAWritesTarget FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX = CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TARGET_CURRENT_CTX;
+
+  // CHECK: hipFlushGPUDirectRDMAWritesScope flushGPUDirectRDMAWritesScope;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesScope flushGPUDirectRDMAWritesScope_enum;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesScope FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER = hipFlushGPUDirectRDMAWritesToOwner;
+  // CHECK-NEXT: hipFlushGPUDirectRDMAWritesScope FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES = hipFlushGPUDirectRDMAWritesToAllDevices;
+  CUflushGPUDirectRDMAWritesScope flushGPUDirectRDMAWritesScope;
+  CUflushGPUDirectRDMAWritesScope_enum flushGPUDirectRDMAWritesScope_enum;
+  CUflushGPUDirectRDMAWritesScope FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER = CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_OWNER;
+  CUflushGPUDirectRDMAWritesScope FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES = CU_FLUSH_GPU_DIRECT_RDMA_WRITES_TO_ALL_DEVICES;
 #endif
 
 #if CUDA_VERSION >= 11040
@@ -1443,6 +1468,9 @@ int main() {
 
   // CHECK: hipMemAllocationType MemAllocationTypeManaged = hipMemAllocationTypeManaged;
   CUmemAllocationType MemAllocationTypeManaged = CU_MEM_ALLOCATION_TYPE_MANAGED;
+
+  // CHECK: hipDeviceAttribute_t DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED = hipDeviceAttributeHostAllocDmaBufSupported;
+  CUdevice_attribute DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED = CU_DEVICE_ATTRIBUTE_HOST_ALLOC_DMA_BUF_SUPPORTED;
 #endif
 
 #if CUDA_VERSION >= 13010

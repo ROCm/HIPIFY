@@ -235,5 +235,29 @@ int main() {
   fileError = cuFileSetParameterString(stringParam, stringValue);
 #endif
 
+#if CUDA_VERSION >= 13000
+  // CHECK: hipFileStatsLevel1_t statsL1;
+  // CHECK-NEXT: hipFileStatsLevel2_t statsL2;
+  // CHECK-NEXT: hipFileStatsLevel3_t statsL3;
+  CUfileStatsLevel1_t statsL1;
+  CUfileStatsLevel2_t statsL2;
+  CUfileStatsLevel3_t statsL3;
+
+  // CUDA: CUfileError_t cuFileGetStatsL1(CUfileStatsLevel1_t *stats);
+  // HIP: hipFileError_t hipFileGetStatsL1(hipFileStatsLevel1_t *stats);
+  // CHECK: fileError = hipFileGetStatsL1(&statsL1);
+  fileError = cuFileGetStatsL1(&statsL1);
+
+  // CUDA: CUfileError_t cuFileGetStatsL2(CUfileStatsLevel2_t *stats);
+  // HIP: hipFileError_t hipFileGetStatsL2(hipFileStatsLevel2_t *stats);
+  // CHECK: fileError = hipFileGetStatsL2(&statsL2);
+  fileError = cuFileGetStatsL2(&statsL2);
+
+  // CUDA: CUfileError_t cuFileGetStatsL3(CUfileStatsLevel3_t *stats);
+  // HIP: hipFileError_t hipFileGetStatsL3(hipFileStatsLevel3_t *stats);
+  // CHECK: fileError = hipFileGetStatsL3(&statsL3);
+  fileError = cuFileGetStatsL3(&statsL3);
+#endif
+
   return 0;
 }

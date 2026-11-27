@@ -21,9 +21,8 @@ THE SOFTWARE.
 */
 
 #include "Statistics.h"
+#include "llvm/Support/Format.h"
 #include <assert.h>
-#include <sstream>
-#include <iomanip>
 
 #if defined(__has_include) && __has_include(<optional>)
 #include <optional>
@@ -217,7 +216,7 @@ void conditionalPrint(ST *stream1,
 
 // Print a named stat value to both the terminal and the CSV file.
 template<typename T>
-void printStat(std::ostream *csv, llvm::raw_ostream *printOut, const std::string &name, T value) {
+void printStat(llvm::raw_ostream *csv, llvm::raw_ostream *printOut, const std::string &name, T value) {
   if (printOut)
     *printOut << "  " << name << ": " << value << "\n";
   if (csv)
@@ -225,6 +224,14 @@ void printStat(std::ostream *csv, llvm::raw_ostream *printOut, const std::string
 }
 
 } // Anonymous namespace
+
+static std::string formatFixed(double Value, int Precision) {
+  std::string Result;
+  llvm::raw_string_ostream OS(Result);
+  OS << llvm::format("%.*f", Precision, Value);
+  OS.flush();
+  return Result;
+}
 
 void StatCounter::incrementCounter(const hipCounter &counter, const std::string &name) {
   counters[name]++;
@@ -248,7 +255,7 @@ int StatCounter::getConvSum() {
   return acc;
 }
 
-void StatCounter::print(std::ostream *csv, llvm::raw_ostream *printOut, const std::string &prefix) {
+void StatCounter::print(llvm::raw_ostream *csv, llvm::raw_ostream *printOut, const std::string &prefix) {
   for (int i = 0; i < NUM_CONV_TYPES; ++i) {
     if (convTypeCounters[i] > 0) {
       conditionalPrint(csv, printOut, "\nCUDA ref type;Count\n", "[HIPIFY] info: " + prefix + " refs by type:\n");
@@ -330,7 +337,7 @@ void Statistics::markCompletion() {
 
 ///////// Output functions //////////
 
-void Statistics::print(std::ostream *csv, llvm::raw_ostream *printOut, bool skipHeader) {
+void Statistics::print(llvm::raw_ostream *csv, llvm::raw_ostream *printOut, bool skipHeader) {
   if (!skipHeader) {
     std::string str = "file \'" + fileName + "\' statistics:\n";
     conditionalPrint(csv, printOut, "\n" + str, "\n[HIPIFY] info: " + str);
@@ -339,35 +346,30 @@ void Statistics::print(std::ostream *csv, llvm::raw_ostream *printOut, bool skip
     std::string str = "\n  ERROR: Statistics is invalid due to failed hipification.\n\n";
     conditionalPrint(csv, printOut, str, str);
   }
-  std::stringstream stream;
   // Total number of (un)supported refs that were converted.
   int supportedSum = supported.getConvSum();
   int unsupportedSum = unsupported.getConvSum();
   int allSum = supportedSum + unsupportedSum;
   printStat(csv, printOut, "CONVERTED refs count", supportedSum);
   printStat(csv, printOut, "UNCONVERTED refs count", unsupportedSum);
-  stream << std::fixed << std::setprecision(1) << 100 - (0 == allSum ? 100 : double(unsupportedSum) / double(allSum) * 100);
-  printStat(csv, printOut, "CONVERSION %", stream.str());
-  stream.str("");
+  double ConversionPercent = 100 - (0 == allSum ? 100 : double(unsupportedSum) / double(allSum) * 100);
+  printStat(csv, printOut, "CONVERSION %", formatFixed(ConversionPercent, 1));
   printStat(csv, printOut, "REPLACED bytes", touchedBytes);
   printStat(csv, printOut, "TOTAL bytes", totalBytes);
   printStat(csv, printOut, "CHANGED lines of code", touchedLines);
   printStat(csv, printOut, "TOTAL lines of code", totalLines);
-  stream << std::fixed << std::setprecision(1) << (0 == totalBytes ? 0 : double(touchedBytes) / double(totalBytes) * 100);
-  printStat(csv, printOut, "CODE CHANGED (in bytes) %", stream.str());
-  stream.str("");
-  stream << std::fixed << std::setprecision(1) << (0 == totalBytes ? 0 : double(touchedLines) / double(totalLines) * 100);
-  printStat(csv, printOut, "CODE CHANGED (in lines) %", stream.str());
-  stream.str("");
+  double ChangedBytesPercent = 0 == totalBytes ? 0 : double(touchedBytes) / double(totalBytes) * 100;
+  printStat(csv, printOut, "CODE CHANGED (in bytes) %", formatFixed(ChangedBytesPercent, 1));
+  double ChangedLinesPercent = 0 == totalBytes ? 0 : double(touchedLines) / double(totalLines) * 100;
+  printStat(csv, printOut, "CODE CHANGED (in lines) %", formatFixed(ChangedLinesPercent, 1));
   typedef std::chrono::duration<double, std::milli> duration;
   duration elapsed = completionTime - startTime;
-  stream << std::fixed << std::setprecision(2) << elapsed.count() / 1000;
-  printStat(csv, printOut, "TIME ELAPSED s", stream.str());
+  printStat(csv, printOut, "TIME ELAPSED s", formatFixed(elapsed.count() / 1000, 2));
   supported.print(csv, printOut, "CONVERTED");
   unsupported.print(csv, printOut, "UNCONVERTED");
 }
 
-void Statistics::printAggregate(std::ostream *csv, llvm::raw_ostream *printOut) {
+void Statistics::printAggregate(llvm::raw_ostream *csv, llvm::raw_ostream *printOut) {
   Statistics globalStats = getAggregate();
   // A file is considered "converted" if we made any changes to it.
   int convertedFiles = 0;
@@ -620,6 +622,7 @@ std::string Statistics::getCudaVersion(const cudaVersions &ver) {
     case CUDNN_9240: return "9.24.0";
     case CUDNN_9250: return "9.25.0";
     case CUDNN_9260: return "9.26.0";
+    case CUDNN_9270: return "9.27.0";
     case CUTENSOR_1010: return "1.0.1.0";
     case CUTENSOR_1100: return "1.1.0.0";
     case CUTENSOR_1200: return "1.2.0.0";
@@ -887,9 +890,9 @@ std::string Statistics::getHipVersion(const hipVersions &ver) {
     case HIP_7120: return "7.12.0";
     case HIP_7130: return "7.13.0";
     case HIP_7140: return "7.14.0";
-    case HIP_8000: return "8.0.0";
     case HIP_10000: return "10.0.0";
     case HIP_10010: return "10.1.0";
+    case HIP_10020: return "10.2.0";
   }
   return "";
 }
