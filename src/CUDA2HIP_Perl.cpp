@@ -22,6 +22,7 @@ THE SOFTWARE.
 
 #include <regex>
 #include "llvm/ADT/SmallString.h"
+#include "llvm/Support/raw_ostream.h"
 #include "CUDA2HIP.h"
 #include "CUDA2HIP_Scripting.h"
 #include "ArgParse.h"
