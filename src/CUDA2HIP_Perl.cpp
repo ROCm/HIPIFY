@@ -30,7 +30,17 @@ THE SOFTWARE.
 
 namespace perl {
 
-  using namespace std;
+  using std::string;
+  using std::ostream;
+  using std::ofstream;
+  using std::stringstream;
+  using std::error_code;
+  using std::endl;
+  using std::ios_base;
+  using std::set;
+  using std::regex;
+  using std::regex_replace;
+  using std::any_of;
   using namespace llvm;
   using namespace hipify;
 
