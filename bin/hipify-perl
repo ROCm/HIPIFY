@@ -10309,6 +10309,7 @@ my %hash_UnsupportedLibcudacxxIncludes = (
     'cuda/std/execution' => 1,
     'cuda/std/latch' => 1,
     'cuda/std/semaphore' => 1,
+    'cuda/std/simd' => 1,
     'cuda/tma' => 1,
 );
 

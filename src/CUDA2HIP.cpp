@@ -123,6 +123,7 @@ const std::map <llvm::StringRef, hipCounter> CUDA_INCLUDE_MAP {
   {"cuda/fptool",                                           {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
   {"cuda/logical_endpoint",                                 {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
   {"cuda/simd",                                             {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
+  {"cuda/std/simd",                                         {"",                                                      "",                                                               CONV_INCLUDE,                API_RUNTIME, 0, UNSUPPORTED}},
 };
 
 const std::map<llvm::StringRef, hipCounter> &CUDA_RENAMES_MAP() {
